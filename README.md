@@ -6,14 +6,31 @@ Internal team documentation for the One Earth Film Festival.
 
 ```
 oeff-docs/
-├── index.html          # Landing page with nav
-├── styles.css          # Shared design system
-├── setup-guide.html    # Shared inbox setup (public)
-├── team-guide.html     # How we work together (public)
-└── team/               # Unlisted admin docs
-    ├── admin-guide.html
-    └── design-dna.html
+├── index.html              # Multi-gate landing (new/returning → role → path)
+├── styles.css              # Shared design system (v4)
+├── setup-guide.html        # Shared inbox setup
+├── team-guide.html         # Communication norms
+└── team/                   # Unlisted support & admin docs
+    ├── admin-guide.html        # Google Groups admin setup
+    ├── auto-reply.html         # Domain email auto-reply config
+    ├── design-dna.html         # Visual patterns reference
+    ├── escalation.html         # 🟢🟡🔴 escalation triggers
+    ├── support-onboarding.html # Day 1 checklist for support person
+    ├── support-system.html     # 4-layer support system overview
+    └── templates.html          # Copy-paste email templates (H1-H6, F1-F4, V1-V4, I1-I3)
 ```
+
+## User Flows
+
+**New team member:**
+1. Land on index → "I'm new"
+2. Select role (Support / Team / Admin)
+3. Follow role-specific onboarding steps
+
+**Returning visitor:**
+1. Land on index → "I know what I need"
+2. Quick reference with pill navigation (Guides / Cheat Sheet / FAQ)
+3. LocalStorage remembers returning visitors
 
 ## Deployment to Cloudflare Pages
 

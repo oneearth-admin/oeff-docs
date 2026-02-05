@@ -18,76 +18,385 @@
 
 <main id="main">
 
-  <!-- Gate Pattern -->
-  <section class="gate" aria-label="Choose your path">
-    <p class="gate-prompt">What brings you here?</p>
+  <!-- GATE 1: New vs Returning -->
+  <section class="gate gate-1" id="gate-start" aria-label="Choose your path">
+    <p class="gate-prompt">Welcome! What brings you here?</p>
     <div class="gate-buttons">
-      <button class="gate-btn" data-target="onboarding" id="gate-new">
+      <button class="gate-btn" data-action="show-relationship-gate" id="gate-new">
         <span class="gate-btn-title">I'm new to the team</span>
-        <span class="gate-btn-desc">Get set up step by step</span>
+        <span class="gate-btn-desc">Get set up for your role</span>
       </button>
-      <button class="gate-btn" data-target="reference" id="gate-returning">
+      <button class="gate-btn" data-action="show-reference" id="gate-returning">
         <span class="gate-btn-title">I know what I need</span>
         <span class="gate-btn-desc">Jump to a specific guide</span>
       </button>
     </div>
   </section>
 
-  <!-- Onboarding Section -->
-  <section id="onboarding" class="content-section">
-    <h2>Getting Started</h2>
-    <p>Welcome to the team. Here's what you need to do, in order:</p>
+  <!-- GATE 2: Relationship Type -->
+  <section class="gate gate-2 hidden" id="gate-relationship" aria-label="Select your relationship">
+    <button class="gate-back" data-action="back-to-start">← Back</button>
+    <p class="gate-prompt">What's your relationship with OEFF?</p>
+    <div class="gate-buttons gate-buttons-vertical">
+      <button class="gate-btn gate-btn-role" data-relationship="seasonal">
+        <span class="gate-btn-title">Seasonal Support</span>
+        <span class="gate-btn-desc">Intern, volunteer, or short-term contractor handling communications</span>
+      </button>
+      <button class="gate-btn gate-btn-role" data-relationship="contractor">
+        <span class="gate-btn-title">Project Contractor</span>
+        <span class="gate-btn-desc">Specific deliverables (creative, technical, etc.)</span>
+      </button>
+      <button class="gate-btn gate-btn-role" data-relationship="coordinator">
+        <span class="gate-btn-title">Area Coordinator</span>
+        <span class="gate-btn-desc">Ongoing ownership of films, venues, programming, etc.</span>
+      </button>
+      <button class="gate-btn gate-btn-role" data-relationship="leadership">
+        <span class="gate-btn-title">Leadership / Board</span>
+        <span class="gate-btn-desc">Executive Director, Tech Coordinator, board member</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- GATE 3: Role within Relationship (for seasonal) -->
+  <section class="gate gate-3 hidden" id="gate-seasonal-role" aria-label="Select your focus">
+    <button class="gate-back" data-action="back-to-relationship">← Back</button>
+    <p class="gate-prompt">What will you be doing?</p>
+    <div class="gate-buttons gate-buttons-vertical">
+      <button class="gate-btn gate-btn-role" data-role="support">
+        <span class="gate-btn-title">Email Support</span>
+        <span class="gate-btn-desc">Monitoring shared inboxes, responding to hosts/filmmakers</span>
+      </button>
+      <button class="gate-btn gate-btn-role" data-role="event">
+        <span class="gate-btn-title">Event Support</span>
+        <span class="gate-btn-desc">Day-of help during festival week</span>
+      </button>
+      <button class="gate-btn gate-btn-role" data-role="general">
+        <span class="gate-btn-title">General Support</span>
+        <span class="gate-btn-desc">Various tasks as assigned</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ONBOARDING: Email Support (Seasonal) -->
+  <section id="onboarding-support" class="content-section hidden">
+    <div class="section-header">
+      <h2>Email Support Onboarding</h2>
+      <button class="change-path" data-action="back-to-seasonal">Change role →</button>
+    </div>
+    <p>Your job: Handle the 80% that's routine so leadership can focus on the 20% that needs them.</p>
 
     <div class="onboarding-steps">
       <div class="step" data-step="1">
-        <div class="step-marker">
-          <span class="step-number">1</span>
-          <span class="step-line"></span>
-        </div>
+        <div class="step-marker"><span class="step-number">1</span><span class="step-line"></span></div>
         <div class="step-content">
-          <h3>Set up shared inboxes</h3>
-          <p>Add films@ and hosts@ to your Gmail so you can send and receive team emails.</p>
-          <a href="setup-guide.html" class="step-link">Setup Guide →</a>
+          <h3>Get access</h3>
+          <p>You need: Gmail access to shared inboxes, Google Drive (OEFF 2026 folder), the tracker spreadsheet.</p>
+          <p class="step-note">Ask Tech Coordinator if you're missing any of these.</p>
         </div>
       </div>
 
       <div class="step" data-step="2">
-        <div class="step-marker">
-          <span class="step-number">2</span>
-          <span class="step-line"></span>
-        </div>
+        <div class="step-marker"><span class="step-number">2</span><span class="step-line"></span></div>
         <div class="step-content">
-          <h3>Learn how we communicate</h3>
-          <p>Our shared channels, when to use what, and how to hand things off.</p>
+          <h3>Set up shared inboxes</h3>
+          <p>Add films@ and hosts@ to your Gmail so you can send and receive as the team.</p>
+          <a href="setup-guide.html" class="step-link">Setup Guide →</a>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-marker"><span class="step-number">3</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Learn the escalation rules</h3>
+          <p>Know what you handle vs. what you forward. This is your daily reference.</p>
+          <a href="team/escalation.html" class="step-link">Escalation Triggers →</a>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="step-marker"><span class="step-number">4</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Skim the response templates</h3>
+          <p>Know what exists — you don't need to memorize them yet.</p>
+          <a href="team/templates.html" class="step-link">Response Templates →</a>
+        </div>
+      </div>
+
+      <div class="step" data-step="5">
+        <div class="step-marker"><span class="step-number">5</span></div>
+        <div class="step-content">
+          <h3>Read the full onboarding guide</h3>
+          <p>Includes practice messages and your first week schedule.</p>
+          <a href="team/support-onboarding.html" class="step-link">Support Onboarding Guide →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Golden rule:</strong> Escalation is not failure. Silence is failure. When in doubt, forward with context.
+    </div>
+  </section>
+
+  <!-- ONBOARDING: Event Support (Seasonal) -->
+  <section id="onboarding-event" class="content-section hidden">
+    <div class="section-header">
+      <h2>Event Support Onboarding</h2>
+      <button class="change-path" data-action="back-to-seasonal">Change role →</button>
+    </div>
+    <p>Thank you for helping during festival week! Here's what you need to know.</p>
+
+    <div class="onboarding-steps">
+      <div class="step" data-step="1">
+        <div class="step-marker"><span class="step-number">1</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Know your assignment</h3>
+          <p>You should have received: venue name, date, time, and your role (greeter, tech assist, etc.)</p>
+          <p class="step-note">If unclear, contact your venue coordinator.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="step-marker"><span class="step-number">2</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Review the run of show</h3>
+          <p>Each screening has a run of show document with timing and responsibilities.</p>
+          <p class="step-note">Your venue host should share this with you.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-marker"><span class="step-number">3</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Save the hotline number</h3>
+          <p>For day-of emergencies only. Available 9am-10pm during festival week.</p>
+          <p class="step-note">Hotline: <span class="template-var">[HOTLINE_NUMBER]</span></p>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="step-marker"><span class="step-number">4</span></div>
+        <div class="step-content">
+          <h3>Know what to escalate</h3>
+          <p>Technical issues → call hotline. Attendee questions → check FAQ or ask venue host.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Day-of mindset:</strong> Be welcoming, stay calm, ask for help early. Most issues have simple fixes.
+    </div>
+  </section>
+
+  <!-- ONBOARDING: General Support (Seasonal) -->
+  <section id="onboarding-general" class="content-section hidden">
+    <div class="section-header">
+      <h2>General Support Onboarding</h2>
+      <button class="change-path" data-action="back-to-seasonal">Change role →</button>
+    </div>
+    <p>Welcome! Here's the baseline everyone needs.</p>
+
+    <div class="onboarding-steps">
+      <div class="step" data-step="1">
+        <div class="step-marker"><span class="step-number">1</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Get access</h3>
+          <p>You should have: Google Drive access (OEFF 2026 folder) and any task-specific tools.</p>
+          <p class="step-note">Ask your supervisor if you're missing access to something.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="step-marker"><span class="step-number">2</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Understand the basics</h3>
+          <p>How OEFF communicates, where things live, who to ask.</p>
           <a href="team-guide.html" class="step-link">Team Guide →</a>
         </div>
       </div>
 
       <div class="step" data-step="3">
-        <div class="step-marker">
-          <span class="step-number">3</span>
-        </div>
+        <div class="step-marker"><span class="step-number">3</span></div>
         <div class="step-content">
-          <h3>You're ready</h3>
-          <p>Start responding from shared inboxes. Ask questions in the Team Space.</p>
+          <h3>Get your specific assignment</h3>
+          <p>Your supervisor will give you task-specific instructions. This doc covers the foundation.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Quick Reference Section -->
-  <section id="reference" class="content-section">
-    <h2>Quick Reference</h2>
+  <!-- ONBOARDING: Project Contractor -->
+  <section id="onboarding-contractor" class="content-section hidden">
+    <div class="section-header">
+      <h2>Project Contractor Onboarding</h2>
+      <button class="change-path" data-action="back-to-relationship">Change path →</button>
+    </div>
+    <p>Welcome! Here's what you need to deliver great work.</p>
+
+    <div class="onboarding-steps">
+      <div class="step" data-step="1">
+        <div class="step-marker"><span class="step-number">1</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Review your scope</h3>
+          <p>You should have a Statement of Work or scope document defining deliverables, timeline, and payment.</p>
+          <p class="step-note">If you don't have this in writing, ask before starting work.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="step-marker"><span class="step-number">2</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Get access to what you need</h3>
+          <p>Google Drive folder with source materials, brand guidelines, any relevant history.</p>
+          <p class="step-note">Your primary contact should share this. Ask if you don't have it.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-marker"><span class="step-number">3</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Know your contacts</h3>
+          <ul>
+            <li><strong>Primary contact:</strong> Who reviews your work and answers questions</li>
+            <li><strong>Final approver:</strong> Who signs off (often Executive Director)</li>
+            <li><strong>Technical questions:</strong> Tech Coordinator if your work involves systems</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="step-marker"><span class="step-number">4</span></div>
+        <div class="step-content">
+          <h3>Understand handoff expectations</h3>
+          <p>Where do final files go? What format? Who needs to be notified?</p>
+          <p class="step-note">Clarify this before you finish, not after.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Communication tip:</strong> Async is fine for most things. Flag blockers early. If you're stuck for more than a day, ask.
+    </div>
+  </section>
+
+  <!-- ONBOARDING: Area Coordinator -->
+  <section id="onboarding-coordinator" class="content-section hidden">
+    <div class="section-header">
+      <h2>Coordinator Onboarding</h2>
+      <button class="change-path" data-action="back-to-relationship">Change path →</button>
+    </div>
+    <p>Welcome to the core team. Here's the full picture.</p>
+
+    <div class="onboarding-steps">
+      <div class="step" data-step="1">
+        <div class="step-marker"><span class="step-number">1</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Set up communications</h3>
+          <p>Add all relevant shared inboxes to your Gmail. You need visibility into cross-team threads.</p>
+          <a href="setup-guide.html" class="step-link">Setup Guide →</a>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="step-marker"><span class="step-number">2</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Learn how we work together</h3>
+          <p>Communication norms, handoff patterns, who owns what.</p>
+          <a href="team-guide.html" class="step-link">Team Guide →</a>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-marker"><span class="step-number">3</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Understand the support system</h3>
+          <p>How questions get routed, what gets escalated to you, what you can delegate.</p>
+          <a href="team/support-system.html" class="step-link">Support System Overview →</a>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="step-marker"><span class="step-number">4</span></div>
+        <div class="step-content">
+          <h3>Review your area's docs</h3>
+          <p>Templates, escalation triggers, and any area-specific guides relevant to your domain.</p>
+          <a href="team/escalation.html" class="step-link">Escalation Triggers →</a>
+          <a href="team/templates.html" class="step-link">Response Templates →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Coordinator mindset:</strong> You own your area, but you're not alone. Flag cross-functional issues early. Document decisions for the next person.
+    </div>
+  </section>
+
+  <!-- ONBOARDING: Leadership -->
+  <section id="onboarding-leadership" class="content-section hidden">
+    <div class="section-header">
+      <h2>Leadership / Admin</h2>
+      <button class="change-path" data-action="back-to-relationship">Change path →</button>
+    </div>
+    <p>System configuration and infrastructure documentation.</p>
+
+    <nav aria-label="Admin documentation">
+      <ul>
+        <li>
+          <a href="team/admin-guide.html">
+            <span class="nav-title">Google Groups Admin</span>
+            <span class="nav-desc">Setting up and managing shared inbox groups</span>
+          </a>
+        </li>
+        <li>
+          <a href="team/support-system.html">
+            <span class="nav-title">Support System Overview</span>
+            <span class="nav-desc">How the 4-layer support system works</span>
+          </a>
+        </li>
+        <li>
+          <a href="team/auto-reply.html">
+            <span class="nav-title">Auto-Reply Configuration</span>
+            <span class="nav-desc">Domain email auto-reply text and setup</span>
+          </a>
+        </li>
+        <li>
+          <a href="team/escalation.html">
+            <span class="nav-title">Escalation Triggers</span>
+            <span class="nav-desc">What support handles vs. forwards</span>
+          </a>
+        </li>
+        <li>
+          <a href="team/templates.html">
+            <span class="nav-title">Response Templates</span>
+            <span class="nav-desc">All email templates (H1-H6, F1-F4, V1-V4, I1-I3)</span>
+          </a>
+        </li>
+        <li>
+          <a href="team/design-dna.html">
+            <span class="nav-title">Design DNA</span>
+            <span class="nav-desc">Visual patterns from hosts.oneearthfilmfest.org</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </section>
+
+  <!-- QUICK REFERENCE (for returning visitors) -->
+  <section id="reference" class="content-section hidden">
+    <div class="section-header">
+      <h2>Quick Reference</h2>
+      <button class="change-path" data-action="back-to-start">Start over →</button>
+    </div>
     
     <nav class="pill-nav" aria-label="Quick reference navigation">
-      <button class="pill active" data-section="guides">Guides</button>
+      <button class="pill active" data-section="all-guides">All Guides</button>
       <button class="pill" data-section="cheatsheet">Cheat Sheet</button>
       <button class="pill" data-section="faq">FAQ</button>
     </nav>
 
-    <!-- Guides -->
-    <div class="pill-content active" id="guides">
-      <nav aria-label="Documentation guides">
+    <!-- All Guides -->
+    <div class="pill-content active" id="all-guides">
+      <h3 class="guide-section-title">Getting Started</h3>
+      <nav aria-label="Setup guides">
         <ul>
           <li>
             <a href="setup-guide.html">
@@ -103,6 +412,51 @@
           </li>
         </ul>
       </nav>
+
+      <h3 class="guide-section-title">Support Resources</h3>
+      <nav aria-label="Support guides">
+        <ul>
+          <li>
+            <a href="team/escalation.html">
+              <span class="nav-title">Escalation Triggers</span>
+              <span class="nav-desc">What to handle vs. what to forward</span>
+            </a>
+          </li>
+          <li>
+            <a href="team/templates.html">
+              <span class="nav-title">Response Templates</span>
+              <span class="nav-desc">Copy-paste emails for common situations</span>
+            </a>
+          </li>
+          <li>
+            <a href="team/support-onboarding.html">
+              <span class="nav-title">Support Onboarding</span>
+              <span class="nav-desc">Day 1 checklist and first week schedule</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <h3 class="guide-section-title">Admin / System Docs</h3>
+      <nav aria-label="Admin guides">
+        <ul class="admin-links">
+          <li>
+            <a href="team/admin-guide.html">
+              <span class="nav-title">Google Groups Admin</span>
+            </a>
+          </li>
+          <li>
+            <a href="team/support-system.html">
+              <span class="nav-title">Support System Overview</span>
+            </a>
+          </li>
+          <li>
+            <a href="team/auto-reply.html">
+              <span class="nav-title">Auto-Reply Configuration</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
     <!-- Cheat Sheet -->
@@ -113,6 +467,7 @@
           <ul>
             <li><strong>films@</strong> — Filmmaker communications</li>
             <li><strong>hosts@</strong> — Host/venue communications</li>
+            <li><strong>tech@</strong> — Technical support</li>
           </ul>
         </div>
         <div class="cheat-group">
@@ -125,12 +480,19 @@
           </ul>
         </div>
         <div class="cheat-group">
-          <h4>Key Habits</h4>
+          <h4>Escalation Quick Check</h4>
           <ul>
-            <li>Always reply FROM the shared address</li>
-            <li>Confirm receipt: "Got it — will review by Thursday"</li>
-            <li>Close loops: "Resolved — closing thread"</li>
-            <li>Point to forms, don't collect info in email</li>
+            <li><span class="level-dot green"></span> <strong>Handle:</strong> FAQ questions, template fits</li>
+            <li><span class="level-dot yellow"></span> <strong>Try first:</strong> Troubleshooting, clarification</li>
+            <li><span class="level-dot red"></span> <strong>Forward:</strong> Money, schedule, cancellation, &lt;48hrs</li>
+          </ul>
+        </div>
+        <div class="cheat-group">
+          <h4>Key Contacts</h4>
+          <ul>
+            <li><strong>Technical:</strong> Tech Coordinator</li>
+            <li><strong>Schedule/Budget:</strong> Executive Director</li>
+            <li><strong>Programming:</strong> Programming Lead</li>
           </ul>
         </div>
       </div>
@@ -142,51 +504,35 @@
         <details class="faq-item">
           <summary>How do I switch the "From" address when replying?</summary>
           <div class="faq-answer">
-            <p>Click reply, then click the <strong>From</strong> field at the top of the compose window. Select <strong>films@oneearthfilmfest.org</strong> or <strong>hosts@</strong> from the dropdown.</p>
+            <p>Click reply, then click the <strong>From</strong> field at the top of the compose window. Select the shared address from the dropdown.</p>
           </div>
         </details>
         <details class="faq-item">
-          <summary>What if a reply goes to my personal inbox?</summary>
+          <summary>What if I'm not sure whether to escalate?</summary>
           <div class="faq-answer">
-            <p>Forward the thread to the shared inbox, then reply FROM the shared address. This pulls the conversation into shared space.</p>
+            <p>Escalate. A quick "hey, should I handle this?" takes 30 seconds and prevents problems. Silence is worse than asking.</p>
           </div>
         </details>
         <details class="faq-item">
-          <summary>Where do I see all shared inbox threads?</summary>
+          <summary>Where are the email templates?</summary>
           <div class="faq-answer">
-            <p>Go to <strong>groups.google.com</strong> → click <strong>OEFF Films</strong> or <strong>OEFF Hosts</strong> → click <strong>Conversations</strong> in the sidebar. Bookmark this for quick access.</p>
+            <p>See the <a href="team/templates.html">Response Templates</a> page. Templates are organized by audience: Hosts (H1-H6), Venues (V1-V4), Filmmakers (F1-F4).</p>
           </div>
         </details>
         <details class="faq-item">
           <summary>How do I hand off a thread to someone else?</summary>
           <div class="faq-answer">
-            <p>No need to forward — it's already in the shared inbox. Just tag in the Team Space if it's urgent or needs specific attention.</p>
+            <p>No need to forward — it's already in the shared inbox. Tag in Team Space if urgent, or use the escalation format to add context.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between hosts@ and tech@?</summary>
+          <div class="faq-answer">
+            <p><strong>hosts@</strong> is for venue coordination, hosting questions, and logistics. <strong>tech@</strong> is for file delivery, playback issues, and technical support.</p>
           </div>
         </details>
       </div>
     </div>
-  </section>
-
-  <!-- Admin Section (unlisted) -->
-  <section id="admin" class="content-section admin-section">
-    <h2>Admin Resources <span class="internal-marker">Unlisted</span></h2>
-    <p>Reference docs for specific admin tasks. Share URLs directly with people who need them.</p>
-    <nav aria-label="Admin documentation">
-      <ul>
-        <li>
-          <a href="team/admin-guide.html">
-            <span class="nav-title">Google Groups Admin</span>
-            <span class="nav-desc">Setting up and managing shared inbox groups</span>
-          </a>
-        </li>
-        <li>
-          <a href="team/design-dna.html">
-            <span class="nav-title">Design DNA</span>
-            <span class="nav-desc">Visual patterns from hosts.oneearthfilmfest.org</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
   </section>
 
 </main>
@@ -196,56 +542,143 @@
 </footer>
 
 <script>
-  // Gate functionality
-  const gate = document.querySelector('.gate');
-  const gateButtons = document.querySelectorAll('.gate-btn');
-  const STORAGE_KEY = 'oeff-docs-returning';
-
-  // Check if returning visitor
-  if (localStorage.getItem(STORAGE_KEY)) {
-    // Scroll to reference section on load
-    document.getElementById('reference').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    gate.classList.add('gate-minimal');
+  // State management
+  const STORAGE_KEY = 'oeff-docs-visitor';
+  
+  // Elements
+  const gateStart = document.getElementById('gate-start');
+  const gateRelationship = document.getElementById('gate-relationship');
+  const gateSeasonalRole = document.getElementById('gate-seasonal-role');
+  const reference = document.getElementById('reference');
+  const onboardingSupport = document.getElementById('onboarding-support');
+  const onboardingEvent = document.getElementById('onboarding-event');
+  const onboardingGeneral = document.getElementById('onboarding-general');
+  const onboardingContractor = document.getElementById('onboarding-contractor');
+  const onboardingCoordinator = document.getElementById('onboarding-coordinator');
+  const onboardingLeadership = document.getElementById('onboarding-leadership');
+  
+  const allSections = [
+    gateStart, gateRelationship, gateSeasonalRole, reference,
+    onboardingSupport, onboardingEvent, onboardingGeneral,
+    onboardingContractor, onboardingCoordinator, onboardingLeadership
+  ];
+  
+  // Hide all sections
+  function hideAll() {
+    allSections.forEach(el => el.classList.add('hidden'));
   }
-
-  gateButtons.forEach(btn => {
+  
+  // Show a section
+  function show(el) {
+    el.classList.remove('hidden');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  // Show minimal gate
+  function showMinimalGate() {
+    gateStart.classList.remove('hidden');
+    gateStart.classList.add('gate-minimal');
+  }
+  
+  // Check returning visitor
+  const visitor = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  if (visitor.returning) {
+    hideAll();
+    show(reference);
+    showMinimalGate();
+  }
+  
+  // Gate 1: New vs Returning
+  document.getElementById('gate-new').addEventListener('click', () => {
+    hideAll();
+    show(gateRelationship);
+  });
+  
+  document.getElementById('gate-returning').addEventListener('click', () => {
+    hideAll();
+    show(reference);
+    showMinimalGate();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ returning: true }));
+  });
+  
+  // Gate 2: Relationship type
+  document.querySelectorAll('[data-relationship]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const target = btn.dataset.target;
-      const section = document.getElementById(target);
+      const relationship = btn.dataset.relationship;
+      hideAll();
       
-      // Remember returning visitors
-      if (target === 'reference') {
-        localStorage.setItem(STORAGE_KEY, 'true');
+      if (relationship === 'seasonal') {
+        show(gateSeasonalRole);
+      } else if (relationship === 'contractor') {
+        show(onboardingContractor);
+        showMinimalGate();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship, returning: true }));
+      } else if (relationship === 'coordinator') {
+        show(onboardingCoordinator);
+        showMinimalGate();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship, returning: true }));
+      } else if (relationship === 'leadership') {
+        show(onboardingLeadership);
+        showMinimalGate();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship, returning: true }));
       }
-      
-      // Scroll to section
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Minimize gate after selection
-      setTimeout(() => {
-        gate.classList.add('gate-minimal');
-      }, 300);
     });
   });
-
+  
+  // Gate 3: Seasonal role
+  document.querySelectorAll('[data-role]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const role = btn.dataset.role;
+      hideAll();
+      
+      if (role === 'support') {
+        show(onboardingSupport);
+      } else if (role === 'event') {
+        show(onboardingEvent);
+      } else if (role === 'general') {
+        show(onboardingGeneral);
+      }
+      
+      showMinimalGate();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship: 'seasonal', role, returning: true }));
+    });
+  });
+  
+  // Back buttons
+  document.querySelectorAll('[data-action="back-to-start"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      hideAll();
+      gateStart.classList.remove('gate-minimal');
+      show(gateStart);
+    });
+  });
+  
+  document.querySelectorAll('[data-action="back-to-relationship"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      hideAll();
+      show(gateRelationship);
+    });
+  });
+  
+  document.querySelectorAll('[data-action="back-to-seasonal"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      hideAll();
+      show(gateSeasonalRole);
+    });
+  });
+  
   // Pill navigation
   const pills = document.querySelectorAll('.pill');
   const pillContents = document.querySelectorAll('.pill-content');
-
+  
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       const section = pill.dataset.section;
-      
-      // Update active pill
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      
-      // Update visible content
       pillContents.forEach(content => {
         content.classList.remove('active');
-        if (content.id === section) {
-          content.classList.add('active');
-        }
+        if (content.id === section) content.classList.add('active');
       });
     });
   });

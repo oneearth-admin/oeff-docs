@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OEFF Host/Venue Support System — how the 4-layer support system works.">
+  <title>Support System Overview — OEFF 2026</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .system-diagram {
+      background: var(--ground-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+    .layer {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-md);
+      margin: var(--space-md) 0;
+    }
+    .layer-header {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--sage-deep);
+      margin-bottom: var(--space-sm);
+    }
+    .layer-result {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px dashed var(--border);
+    }
+    .arrow-down {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      margin: var(--space-xs) 0;
+    }
+    .doc-table {
+      font-size: 0.9rem;
+    }
+    .doc-table td:first-child {
+      font-weight: 600;
+    }
+    .success-comparison {
+      display: grid;
+      gap: var(--space-md);
+    }
+    @media (min-width: 600px) {
+      .success-comparison {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .comparison-box {
+      padding: var(--space-md);
+      border-radius: var(--radius);
+    }
+    .comparison-box.before {
+      background: var(--level-red-bg);
+      border: 1px solid var(--level-red);
+    }
+    .comparison-box.after {
+      background: var(--level-green-bg);
+      border: 1px solid var(--level-green);
+    }
+    .comparison-box h4 {
+      margin-bottom: var(--space-sm);
+    }
+    .comparison-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header>
+  <p style="margin-bottom: 0.5rem;"><a href="../" style="text-decoration: none; color: var(--text-muted);">← Back to Docs</a></p>
+  <h1>Host/Venue Support System</h1>
+  <p class="subtitle">A connected set of tools to reduce email chaos and enable delegation</p>
+</header>
+
+<main id="main">
+
+  <div class="callout">
+    <strong>The goal:</strong> Hosts find answers themselves. When they can't, anyone on the team can respond consistently. Tech Coordinator/Executive Director only see escalations.
+  </div>
+
+  <h2>The Four Layers</h2>
+
+  <div class="layer">
+    <div class="layer-header">Layer 1: Self-Service</div>
+    <p><strong>Host Portal</strong> (Google Site) → Schedule, film list, resources, quick links</p>
+    <p><strong>FAQ</strong> (embedded in portal) → Answers to common questions</p>
+    <p><strong>Checklists</strong> (embedded docs) → "What should I be doing now?"</p>
+    <div class="layer-result">Result: 50-60% of questions never become emails</div>
+  </div>
+
+  <div class="arrow-down">↓ (if not answered)</div>
+
+  <div class="layer">
+    <div class="layer-header">Layer 2: Email with Auto-Reply</div>
+    <p>Host emails <strong>tech@</strong> / <strong>venues@</strong> / <strong>films@</strong></p>
+    <p>Auto-reply fires immediately: "Thanks! While you wait, check the FAQ: [link]"</p>
+    <div class="layer-result">Result: Some hosts find answer in FAQ, don't need response</div>
+  </div>
+
+  <div class="arrow-down">↓ (if still needs help)</div>
+
+  <div class="layer">
+    <div class="layer-header">Layer 3: Support Response</div>
+    <p>Support person (intern, volunteer, contractor) sees email</p>
+    <p>Checks <strong>Escalation Triggers</strong> doc:</p>
+    <ul>
+      <li><span class="level-badge green">GREEN</span> → Handle with template</li>
+      <li><span class="level-badge yellow">YELLOW</span> → Try template, escalate if stuck</li>
+      <li><span class="level-badge red">RED</span> → Forward immediately</li>
+    </ul>
+    <p>Uses <strong>Response Templates</strong> doc → Copy template, customize [bracketed items], send</p>
+    <div class="layer-result">Result: 80% of remaining emails handled in &lt;5 min</div>
+  </div>
+
+  <div class="arrow-down">↓ (if escalation needed)</div>
+
+  <div class="layer">
+    <div class="layer-header">Layer 4: Escalation</div>
+    <p>Support forwards to Tech Coordinator (technical) or Executive Director (schedule/$$)</p>
+    <p>Escalation format includes: From, Issue, What I tried, Urgency</p>
+    <div class="layer-result">Result: Tech Coordinator/Executive Director see ~10-15% of original volume</div>
+  </div>
+
+  <hr>
+
+  <h2>The Documents</h2>
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th>Document</th>
+        <th>Purpose</th>
+        <th>Who Uses It</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Host FAQ</td>
+        <td>Answer common questions</td>
+        <td>Hosts (self-service)</td>
+      </tr>
+      <tr>
+        <td>Response Templates</td>
+        <td>Copy-paste email replies</td>
+        <td>Support person</td>
+      </tr>
+      <tr>
+        <td>Escalation Triggers</td>
+        <td>What to handle vs. forward</td>
+        <td>Support person</td>
+      </tr>
+      <tr>
+        <td>Auto-Reply Config</td>
+        <td>Setup text for domain emails</td>
+        <td>Tech Coordinator (one-time setup)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Quick Start for Support Person</h2>
+  
+  <h3>Day 1</h3>
+  <ol>
+    <li>Read the FAQ — know what hosts can find themselves</li>
+    <li>Read the <a href="escalation.html">Escalation Triggers</a> — know your boundaries</li>
+    <li>Skim the <a href="templates.html">Response Templates</a> — know what's available</li>
+  </ol>
+
+  <h3>When email arrives</h3>
+  <ol>
+    <li>Check: Is this answered in FAQ? → Reply with link</li>
+    <li>Check: Does a template fit? → Copy, customize, send</li>
+    <li>Check: Is this <span class="level-badge red">RED</span> in escalation doc? → Forward immediately</li>
+    <li>Stuck for >15 minutes? → Escalate with context</li>
+  </ol>
+
+  <div class="callout">
+    <strong>Golden rules:</strong><br>
+    • Escalation is not failure. Silence is failure.<br>
+    • When in doubt, escalate.<br>
+    • If you improve a template, tell us.
+  </div>
+
+  <hr>
+
+  <h2>What Success Looks Like</h2>
+  
+  <div class="success-comparison">
+    <div class="comparison-box before">
+      <h4>Before</h4>
+      <ul>
+        <li>Every email requires Tech Coordinator or Executive Director</li>
+        <li>Same questions answered repeatedly</li>
+        <li>No one else can help</li>
+        <li>Emails pile up during busy periods</li>
+      </ul>
+    </div>
+    <div class="comparison-box after">
+      <h4>After</h4>
+      <ul>
+        <li>Hosts find 50%+ of answers themselves</li>
+        <li>Support person handles 80% of remaining emails</li>
+        <li>Tech Coordinator/Executive Director see escalations only</li>
+        <li>Email manageable even during festival week</li>
+        <li>System improves based on feedback</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>The Investment</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Setup Item</th>
+        <th>Time</th>
+        <th>Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Domain emails</td>
+        <td>1-2 hrs</td>
+        <td>Team can see all comms</td>
+      </tr>
+      <tr>
+        <td>Auto-replies</td>
+        <td>30 min</td>
+        <td>Immediate deflection</td>
+      </tr>
+      <tr>
+        <td>FAQ live on portal</td>
+        <td>2-3 hrs</td>
+        <td>Self-service</td>
+      </tr>
+      <tr>
+        <td>Templates in shared Drive</td>
+        <td>30 min</td>
+        <td>Consistent responses</td>
+      </tr>
+      <tr>
+        <td>Escalation doc in shared Drive</td>
+        <td>30 min</td>
+        <td>Clear boundaries</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p><strong>Total: ~6-8 hours → saves 50+ hours over festival season</strong></p>
+
+  <hr>
+
+  <h2>Feedback Welcome</h2>
+  <p>If you notice:</p>
+  <ul>
+    <li>A question hosts keep asking that isn't in FAQ → Tell us, we'll add it</li>
+    <li>A template that doesn't fit real situations → Tell us, we'll fix it</li>
+    <li>An escalation that should/shouldn't have been → Tell us, we'll adjust</li>
+    <li>A faster way to do something → Tell us, we'll adopt it</li>
+  </ul>
+
+  <h3>How to share feedback</h3>
+  <ul>
+    <li>Comment directly in the Google Doc</li>
+    <li>Email Tech Coordinator</li>
+    <li>Bring to weekly check-in</li>
+    <li>Add to the "Improvements" section at the bottom of any doc</li>
+  </ul>
+
+</main>
+
+<footer>
+  One Earth Film Festival · April 22–26, 2026 · Last updated: January 2026
+</footer>
+
+</body>
+</html>

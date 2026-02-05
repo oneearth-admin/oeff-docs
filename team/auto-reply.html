@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OEFF Auto-Reply Configuration — text for each domain email auto-reply.">
+  <title>Auto-Reply Configuration — OEFF 2026</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .auto-reply-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin: var(--space-lg) 0;
+      overflow: hidden;
+    }
+    .auto-reply-header {
+      background: var(--sage-whisper);
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--border);
+    }
+    .auto-reply-address {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--sage-deep);
+      font-size: 1rem;
+    }
+    .auto-reply-subject {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      margin-top: var(--space-xs);
+    }
+    .auto-reply-body {
+      padding: var(--space-md);
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      background: var(--ground-soft);
+    }
+    .setup-checklist {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .setup-checklist h3 {
+      margin-bottom: var(--space-md);
+    }
+    .setup-checklist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .setup-checklist li {
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .setup-checklist li:last-child {
+      border-bottom: none;
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .placeholder-note {
+      background: var(--level-yellow-bg);
+      border: 1px solid var(--level-yellow);
+      border-radius: var(--radius);
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.85rem;
+      margin: var(--space-md) 0;
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header>
+  <p style="margin-bottom: 0.5rem;"><a href="../" style="text-decoration: none; color: var(--text-muted);">← Back to Docs</a></p>
+  <h1>Auto-Reply Configuration</h1>
+  <p class="subtitle">Text for each domain email auto-reply</p>
+</header>
+
+<main id="main">
+
+  <div class="callout">
+    <strong>Purpose:</strong> Auto-replies acknowledge receipt immediately and deflect common questions to self-service resources. This buys time for support person to respond while reducing repeat "did you get my email?" follow-ups.
+  </div>
+
+  <div class="placeholder-note">
+    <strong>Note:</strong> Replace all <span class="template-var">[bracketed items]</span> with actual URLs before configuring. FAQ must be live before auto-reply is effective.
+  </div>
+
+  <hr>
+
+  <!-- TECH@ -->
+  <div class="auto-reply-card">
+    <div class="auto-reply-header">
+      <div class="auto-reply-address">tech@oneearthfilmfest.org</div>
+      <div class="auto-reply-subject">Subject: Thanks for contacting OEFF Tech Support</div>
+    </div>
+    <div class="auto-reply-body">Hi there,
+
+Thanks for reaching out to OEFF Tech Support! We've received your message and will respond within 24-48 hours (often faster).
+
+WHILE YOU WAIT — MANY QUESTIONS ARE ANSWERED HERE:
+→ Host FAQ: <span class="template-var">[FAQ_URL]</span>
+→ Troubleshooting guide: <span class="template-var">[TROUBLESHOOTING_URL]</span>
+
+COMMON QUICK FIXES:
+• File won't play? → Try VLC Player (free at videolan.org)
+• Captions not showing? → Check FAQ under "Captions"
+• Need your packet? → Check email for download link, or reply with venue name
+
+SCREENING WITHIN 48 HOURS?
+Call the Tech Hotline: <span class="template-var">[HOTLINE_NUMBER]</span>
+Available 9am-10pm during festival week (April 22-27)
+
+We'll be in touch soon.
+
+---
+OEFF Tech Team</div>
+  </div>
+
+  <!-- VENUES@ -->
+  <div class="auto-reply-card">
+    <div class="auto-reply-header">
+      <div class="auto-reply-address">venues@oneearthfilmfest.org</div>
+      <div class="auto-reply-subject">Subject: Thanks for contacting OEFF — Venue Inquiry</div>
+    </div>
+    <div class="auto-reply-body">Hi there,
+
+Thanks for reaching out about hosting or venue coordination! We've received your message and will respond within 24-48 hours.
+
+WHILE YOU WAIT:
+→ Hosting FAQ (what's involved, time, fees): <span class="template-var">[FAQ_URL]</span>
+→ Already a confirmed host? Check your Host Helper
+
+QUICK ANSWERS:
+• Want to host? Complete our interest form: <span class="template-var">[INTEREST_FORM_URL]</span>
+• Already registered? Reply with your venue name and question
+• Need to update contact info? Reply with new details
+
+We appreciate your partnership!
+
+---
+OEFF Venue Coordination</div>
+  </div>
+
+  <!-- FILMS@ -->
+  <div class="auto-reply-card">
+    <div class="auto-reply-header">
+      <div class="auto-reply-address">films@oneearthfilmfest.org</div>
+      <div class="auto-reply-subject">Subject: Thanks for contacting OEFF — Film Inquiry</div>
+    </div>
+    <div class="auto-reply-body">Hi there,
+
+Thanks for reaching out to OEFF about films and media. We've received your message and will respond within 24-48 hours.
+
+FILMMAKER FILE DELIVERY:
+→ Specs: H.264 MP4, 1920×1080, stereo audio
+→ Captions: Include .srt if not burned in
+→ Upload instructions: <span class="template-var">[UPLOAD_INSTRUCTIONS_URL]</span>
+
+FILM SELECTION QUESTIONS:
+Contact: programming@oneearthfilmfest.org
+
+MEDIA/PRESS INQUIRIES:
+Contact: <span class="template-var">[PRESS_CONTACT]</span>
+
+We'll be in touch soon.
+
+---
+OEFF Film & Media Team</div>
+  </div>
+
+  <hr>
+
+  <h2>Setup Instructions</h2>
+
+  <h3>Google Groups Auto-Reply Setup</h3>
+  <ol>
+    <li>Go to <a href="https://groups.google.com" target="_blank">groups.google.com</a></li>
+    <li>Select the group (e.g., OEFF Tech)</li>
+    <li>Click <strong>Group settings</strong> (gear icon) → <strong>Email options</strong></li>
+    <li>Find <strong>Auto-reply to incoming emails</strong></li>
+    <li>Toggle ON</li>
+    <li>Paste the appropriate auto-reply text</li>
+    <li>Save changes</li>
+    <li>Send a test email to verify</li>
+  </ol>
+
+  <h3>Gmail Vacation Responder (Alternative)</h3>
+  <p>If using Gmail directly instead of Groups:</p>
+  <ol>
+    <li>Go to Gmail → Settings → See all settings</li>
+    <li>Scroll to <strong>Vacation responder</strong></li>
+    <li>Turn ON</li>
+    <li>Set subject and message</li>
+    <li>Check "Only send to people in my contacts" if desired</li>
+    <li>Save</li>
+  </ol>
+
+  <hr>
+
+  <div class="setup-checklist">
+    <h3>Setup Checklist</h3>
+    <ul>
+      <li><span class="checkbox"></span> tech@oneearthfilmfest.org auto-reply configured</li>
+      <li><span class="checkbox"></span> venues@oneearthfilmfest.org auto-reply configured</li>
+      <li><span class="checkbox"></span> films@oneearthfilmfest.org auto-reply configured</li>
+      <li><span class="checkbox"></span> All links tested and working</li>
+      <li><span class="checkbox"></span> FAQ is live at linked URL</li>
+      <li><span class="checkbox"></span> Test emails sent to each address to verify</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <h2>When to Update Auto-Replies</h2>
+  <ul>
+    <li><strong>Before festival week:</strong> Add/update hotline number</li>
+    <li><strong>During festival week:</strong> Consider shorter response time commitment</li>
+    <li><strong>After festival:</strong> Update to off-season message</li>
+    <li><strong>If FAQ URL changes:</strong> Update all three auto-replies</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Remember:</strong> Auto-replies only work if the FAQ is actually helpful. Keep FAQ updated based on questions that come in.
+  </div>
+
+</main>
+
+<footer>
+  One Earth Film Festival · April 22–26, 2026 · Last updated: January 2026
+</footer>
+
+</body>
+</html>
