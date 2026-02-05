@@ -1111,3 +1111,16 @@ th {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ===================
+   HEADER NAVIGATION
+   =================== */
+
+header h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header h1 a:hover {
+  color: var(--oeff-sage);
+}
