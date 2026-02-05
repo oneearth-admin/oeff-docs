@@ -1,5 +1,8 @@
 # OEFF Docs Changelog
 
+## v5.4 — Feb 5, 2026
+- Fixed breadcrumb styling (removed pill/button appearance)
+
 ## v5.3 — Feb 5, 2026
 - Replaced title links with proper "← OEFF Docs" breadcrumb
 - Breadcrumb uses muted text, sage on hover (no blue links)
