@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF Design DNA — Extracted Patterns</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text: #231F20;
+      --text-soft: #4a4542;
+      --text-muted: #7a746f;
+      --ground: #FAFAF8;
+      --ground-soft: #F5F8F6;
+      --border: #e5e2dc;
+      --radius: 8px;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-ui: 'Source Sans 3', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--ground);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #231F20;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle { color: var(--text-soft); font-size: 0.95rem; }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    p { margin-bottom: 1rem; }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .color-swatch {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: white;
+    }
+
+    .color-sample {
+      height: 60px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.5rem;
+    }
+
+    .color-info {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .color-name {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .color-value {
+      color: var(--text-muted);
+      font-family: monospace;
+      font-size: 0.75rem;
+    }
+
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .token-table th,
+    .token-table td {
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .token-table th {
+      background: var(--ground-soft);
+      font-weight: 600;
+      color: var(--text-soft);
+      font-size: 0.8rem;
+    }
+
+    .token-table code {
+      background: #f0eeea;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+    }
+
+    .pattern-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .pattern-card h4 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .pattern-card ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .pattern-card li { margin-bottom: 0.25rem; }
+
+    .example-box {
+      background: var(--ground-soft);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .code-block {
+      background: #231F20;
+      color: #f0eeea;
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-family: monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, #EEF3F0 0%, #F5F8F6 100%);
+      border-left: 3px solid #92BEAA;
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1rem 0;
+    }
+
+    .callout strong { color: var(--text); }
+
+    .demo-organic {
+      display: flex;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .demo-box {
+      width: 80px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: white;
+      background: #92BEAA;
+    }
+
+    .demo-box.standard { border-radius: 6px; }
+    .demo-box.organic { border-radius: 10px 12px 9px 11px; }
+    .demo-box.organic-sm { border-radius: 5px 7px 6px 8px; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>OEFF Design DNA</h1>
+  <p class="subtitle">Extracted from hosts.oneearthfilmfest.org — tokens, patterns, and principles</p>
+</header>
+
+<h2>Color Palette</h2>
+
+<h3>Brand Colors</h3>
+<div class="color-grid">
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #231F20;"></div>
+    <div class="color-info">
+      <div class="color-name">OEFF Black</div>
+      <div class="color-value">#231F20</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #3960AC;"></div>
+    <div class="color-info">
+      <div class="color-name">OEFF Blue</div>
+      <div class="color-value">#3960AC</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #42A7C2;"></div>
+    <div class="color-info">
+      <div class="color-name">OEFF Aqua</div>
+      <div class="color-value">#42A7C2</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #BAE1E2;"></div>
+    <div class="color-info">
+      <div class="color-name">Light Aqua</div>
+      <div class="color-value">#BAE1E2</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #92BEAA;"></div>
+    <div class="color-info">
+      <div class="color-name">OEFF Sage</div>
+      <div class="color-value">#92BEAA</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #FFF3DF;"></div>
+    <div class="color-info">
+      <div class="color-name">OEFF Ivory</div>
+      <div class="color-value">#FFF3DF</div>
+    </div>
+  </div>
+</div>
+
+<h3>Extended Palette</h3>
+<div class="color-grid">
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #2d4a8a;"></div>
+    <div class="color-info">
+      <div class="color-name">Blue Deep</div>
+      <div class="color-value">#2d4a8a</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #6a9a84;"></div>
+    <div class="color-info">
+      <div class="color-name">Sage Deep</div>
+      <div class="color-value">#6a9a84</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #c8ddd2;"></div>
+    <div class="color-info">
+      <div class="color-name">Sage Light</div>
+      <div class="color-value">#c8ddd2</div>
+    </div>
+  </div>
+</div>
+
+<h3>Neutrals (Sage-Tinted)</h3>
+<div class="color-grid">
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #FAFAF8;"></div>
+    <div class="color-info">
+      <div class="color-name">Warm White</div>
+      <div class="color-value">#FAFAF8</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #F5F8F6;"></div>
+    <div class="color-info">
+      <div class="color-name">Sage Mist</div>
+      <div class="color-value">#F5F8F6</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #EEF3F0;"></div>
+    <div class="color-info">
+      <div class="color-name">Sage Whisper</div>
+      <div class="color-value">#EEF3F0</div>
+    </div>
+  </div>
+  <div class="color-swatch">
+    <div class="color-sample" style="background: #e5e2dc;"></div>
+    <div class="color-info">
+      <div class="color-name">Border</div>
+      <div class="color-value">#e5e2dc</div>
+    </div>
+  </div>
+</div>
+
+<h3>Text Colors</h3>
+<table class="token-table">
+  <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+  <tr><td><code>--color-text</code></td><td>#231F20</td><td>Primary text</td></tr>
+  <tr><td><code>--color-text-soft</code></td><td>#4a4542</td><td>Secondary text</td></tr>
+  <tr><td><code>--color-text-muted</code></td><td>#7a746f</td><td>Tertiary / labels</td></tr>
+</table>
+
+<div class="callout">
+  <strong>Key insight:</strong> Neutrals have a subtle sage/green tint — not pure gray. This creates warmth and connects to the environmental theme.
+</div>
+
+<h2>Typography</h2>
+
+<table class="token-table">
+  <tr><th>Role</th><th>Font Stack</th><th>Use</th></tr>
+  <tr>
+    <td><code>--font-display</code></td>
+    <td>'Avenir Next', 'Avenir', 'Segoe UI', system-ui, sans-serif</td>
+    <td>Headlines, labels, nav, buttons, tables</td>
+  </tr>
+  <tr>
+    <td><code>--font-body</code></td>
+    <td>Georgia, 'Times New Roman', serif</td>
+    <td>Body text, paragraphs, quotes</td>
+  </tr>
+</table>
+
+<h3>Type Settings</h3>
+<table class="token-table">
+  <tr><th>Property</th><th>Body</th><th>Headlines</th></tr>
+  <tr><td>line-height</td><td>1.7</td><td>1.2-1.3</td></tr>
+  <tr><td>letter-spacing</td><td>0.01em</td><td>-0.02em (tighter)</td></tr>
+  <tr><td>word-spacing</td><td>0.02em</td><td>normal</td></tr>
+  <tr><td>font-feature-settings</td><td colspan="2">'kern' 1, 'liga' 1, 'onum' 1</td></tr>
+</table>
+
+<div class="callout">
+  <strong>Pattern:</strong> Sans-serif (Avenir) for functional UI; Serif (Georgia) for reading. This creates clear hierarchy with 0KB web font overhead.
+</div>
+
+<h2>Spacing Scale</h2>
+
+<table class="token-table">
+  <tr><th>Token</th><th>Value</th><th>Px @ 17px base</th></tr>
+  <tr><td><code>--space-2xs</code></td><td>0.25rem</td><td>4.25px</td></tr>
+  <tr><td><code>--space-xs</code></td><td>0.5rem</td><td>8.5px</td></tr>
+  <tr><td><code>--space-sm</code></td><td>0.75rem</td><td>12.75px</td></tr>
+  <tr><td><code>--space-md</code></td><td>1rem</td><td>17px</td></tr>
+  <tr><td><code>--space-lg</code></td><td>1.5rem</td><td>25.5px</td></tr>
+  <tr><td><code>--space-xl</code></td><td>2rem</td><td>34px</td></tr>
+  <tr><td><code>--space-2xl</code></td><td>3rem</td><td>51px</td></tr>
+  <tr><td><code>--space-3xl</code></td><td>4rem</td><td>68px</td></tr>
+</table>
+
+<p><strong>Base font size:</strong> 17px (desktop), 16px (mobile)</p>
+
+<h2>Border Radius</h2>
+
+<h3>Organic Radius Pattern</h3>
+<p>OEFF uses <strong>asymmetric border-radius</strong> for a hand-crafted, organic feel:</p>
+
+<div class="demo-organic">
+  <div class="demo-box standard">Standard<br>6px</div>
+  <div class="demo-box organic">Organic<br>10-12-9-11</div>
+  <div class="demo-box organic-sm">Organic SM<br>5-7-6-8</div>
+</div>
+
+<div class="code-block">--radius: 6px;
+--radius-lg: 10px;
+--radius-organic: 10px 12px 9px 11px;
+--radius-organic-sm: 5px 7px 6px 8px;</div>
+
+<div class="callout">
+  <strong>When to use:</strong> Organic radius on cards, buttons, callouts — anything that should feel "natural." Standard radius on tables, inputs, small UI elements.
+</div>
+
+<h2>Shadows</h2>
+
+<p>Shadows are <strong>sage-tinted</strong>, not gray — this is distinctive:</p>
+
+<div class="code-block">--shadow-soft:
+  0 1px 2px rgba(146, 190, 170, 0.08),
+  0 4px 8px rgba(146, 190, 170, 0.06),
+  0 8px 16px rgba(35, 31, 32, 0.03);
+
+--shadow-elevated:
+  0 2px 4px rgba(146, 190, 170, 0.10),
+  0 8px 16px rgba(146, 190, 170, 0.08),
+  0 16px 32px rgba(35, 31, 32, 0.04);</div>
+
+<p>The <code>rgba(146, 190, 170, ...)</code> is sage (#92BEAA). This creates warmth even in shadows.</p>
+
+<h2>Motion</h2>
+
+<table class="token-table">
+  <tr><th>Easing</th><th>Value</th><th>Use</th></tr>
+  <tr>
+    <td>Standard ease</td>
+    <td><code>cubic-bezier(0.4, 0, 0.2, 1)</code></td>
+    <td>General transitions</td>
+  </tr>
+  <tr>
+    <td>Spring (interactive)</td>
+    <td><code>cubic-bezier(0.34, 1.4, 0.64, 1)</code></td>
+    <td>Buttons, pills, hover states — slight overshoot</td>
+  </tr>
+</table>
+
+<h3>Animations</h3>
+<table class="token-table">
+  <tr><th>Name</th><th>Duration</th><th>Use</th></tr>
+  <tr><td>logo-breathe</td><td>continuous</td><td>Subtle logo rotation (1.5deg)</td></tr>
+  <tr><td>gentle-pulse</td><td>4s</td><td>Carbon dot, status indicators</td></tr>
+  <tr><td>timeline-pulse</td><td>3s</td><td>Current timeline marker glow</td></tr>
+  <tr><td>fade-in-up</td><td>0.3s</td><td>FAQ answers, content reveal</td></tr>
+</table>
+
+<h2>Texture</h2>
+
+<p>The site uses <strong>layered grain overlays</strong> (SVG noise patterns) for organic texture:</p>
+
+<div class="pattern-card">
+  <h4>Grain Implementation</h4>
+  <ul>
+    <li><strong>Fine grain:</strong> 128px tile, 0.08 opacity</li>
+    <li><strong>Medium grain:</strong> 256px tile, 0.04 opacity, multiply blend</li>
+    <li>Applied via <code>::before</code> and <code>::after</code> on body</li>
+    <li>Fixed position, pointer-events: none</li>
+  </ul>
+</div>
+
+<h2>Component Patterns</h2>
+
+<div class="pattern-card">
+  <h4>Gate Pattern (User Routing)</h4>
+  <ul>
+    <li>Two-button choice: "Curious" vs "Already committed"</li>
+    <li>Scrolls to relevant section rather than hiding content</li>
+    <li>All content remains accessible regardless of choice</li>
+    <li>LocalStorage remembers returning visitors</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>Stage Navigation Pills</h4>
+  <ul>
+    <li>Horizontal scrolling pill navigation</li>
+    <li>Background: sage-whisper, text: sage-deep</li>
+    <li>Hover: spring easing scale (1.05) + translateY(-1px)</li>
+    <li>Used for in-page section jumping</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>Timeline</h4>
+  <ul>
+    <li>Vertical with connecting line (light-aqua)</li>
+    <li>Circular markers with month abbreviations</li>
+    <li>States: complete (faded), current (pulsing glow), upcoming</li>
+    <li>Current marker: aqua with animated box-shadow</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>FAQ Accordion</h4>
+  <ul>
+    <li>+ / − toggle indicator</li>
+    <li>Question has hover state (sage background)</li>
+    <li>Answer fades in with fade-in-up animation</li>
+    <li>Some items default open</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>Next Step Callout</h4>
+  <ul>
+    <li>Gradient background (sage-whisper → sage-light)</li>
+    <li>Left border accent (3px sage)</li>
+    <li>Small marker dot</li>
+    <li>Label + content structure</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>Carbon Badge</h4>
+  <ul>
+    <li>Top-right corner, subtle</li>
+    <li>Pulsing green dot + "~0.02g CO₂"</li>
+    <li>Links to expandable detail in footer</li>
+    <li>Signals sustainability values</li>
+  </ul>
+</div>
+
+<h2>Accessibility</h2>
+
+<table class="token-table">
+  <tr><th>Feature</th><th>Implementation</th></tr>
+  <tr><td>Skip link</td><td>Hidden until focused, jumps to #main</td></tr>
+  <tr><td>Focus visible</td><td>2px solid aqua, 2px offset</td></tr>
+  <tr><td>Reduced motion</td><td>@media query disables animations</td></tr>
+  <tr><td>ARIA</td><td>Expandable sections have aria-expanded, aria-controls</td></tr>
+  <tr><td>Keyboard</td><td>All interactive elements support Enter/Space</td></tr>
+</table>
+
+<h2>Design Principles (Inferred)</h2>
+
+<div class="pattern-card">
+  <h4>1. Warm but Professional</h4>
+  <ul>
+    <li>Sage-tinted everything (shadows, backgrounds, borders)</li>
+    <li>Serif body text for reading comfort</li>
+    <li>Organic radii soften edges</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>2. Sustainability-First</h4>
+  <ul>
+    <li>~55KB total page weight</li>
+    <li>No external scripts (except Cloudflare)</li>
+    <li>No web fonts (system stacks)</li>
+    <li>Carbon badge as visible signal</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>3. Progressive Disclosure</h4>
+  <ul>
+    <li>Gate routes users to relevant content</li>
+    <li>FAQ expands on demand</li>
+    <li>Webinars in collapsible details</li>
+    <li>Carbon detail hidden until clicked</li>
+  </ul>
+</div>
+
+<div class="pattern-card">
+  <h4>4. Nature-Inspired</h4>
+  <ul>
+    <li>Sage as dominant accent (not blue)</li>
+    <li>Organic, asymmetric shapes</li>
+    <li>Grain texture like paper</li>
+    <li>Breathing/pulsing animations</li>
+  </ul>
+</div>
+
+<h2>Integration with CogCommons</h2>
+
+<p>To add OEFF as a domain theme in the design system:</p>
+
+<div class="code-block">/* themes/oeff.css */
+[data-domain="oeff"] {
+  --accent-primary: #92BEAA;      /* sage */
+  --accent-secondary: #42A7C2;    /* aqua */
+  --accent-tertiary: #3960AC;     /* blue */
+
+  --surface-warm: #FAFAF8;
+  --surface-tinted: #F5F8F6;
+  --surface-accent: #EEF3F0;
+
+  --shadow-color: 146, 190, 170;  /* sage RGB for shadows */
+
+  --radius-organic: 10px 12px 9px 11px;
+
+  --font-display: 'Avenir Next', system-ui, sans-serif;
+  --font-body: Georgia, serif;
+}</div>
+
+<footer>
+  OEFF Design DNA · Extracted from hosts.oneearthfilmfest.org · February 2026
+</footer>
+
+</body>
+</html>

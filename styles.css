@@ -1,0 +1,293 @@
+/* OEFF Documentation Design System
+   Extracted from hosts.oneearthfilmfest.org
+   ========================================= */
+
+:root {
+  /* Brand Colors */
+  --oeff-black: #231F20;
+  --oeff-blue: #3960AC;
+  --oeff-aqua: #42A7C2;
+  --oeff-aqua-light: #BAE1E2;
+  --oeff-sage: #92BEAA;
+  --oeff-ivory: #FFF3DF;
+  
+  /* Extended */
+  --sage-deep: #6a9a84;
+  --sage-whisper: #EEF3F0;
+  
+  /* Text */
+  --text: #231F20;
+  --text-soft: #4a4542;
+  --text-muted: #7a746f;
+  
+  /* Surfaces */
+  --ground: #FAFAF8;
+  --ground-soft: #F5F8F6;
+  --border: #e5e2dc;
+  
+  /* Typography */
+  --font-display: 'Avenir Next', 'Avenir', 'Segoe UI', system-ui, sans-serif;
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  
+  /* Radius */
+  --radius: 6px;
+  --radius-lg: 10px;
+  --radius-organic: 10px 12px 9px 11px;
+  
+  /* Shadows (sage-tinted) */
+  --shadow-soft: 
+    0 1px 2px rgba(146, 190, 170, 0.08),
+    0 4px 8px rgba(146, 190, 170, 0.06),
+    0 8px 16px rgba(35, 31, 32, 0.03);
+}
+
+/* Reset & Base */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--ground);
+  margin: 0;
+  padding: var(--space-xl);
+  max-width: 800px;
+  margin: 0 auto;
+  letter-spacing: 0.01em;
+  word-spacing: 0.02em;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: var(--space-2xl) 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+p {
+  margin: 0 0 var(--space-md);
+}
+
+.subtitle {
+  font-family: var(--font-display);
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+
+/* Header */
+header {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 2px solid var(--oeff-black);
+}
+
+/* Horizontal Rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-xl) 0;
+}
+
+/* Lists */
+ul, ol {
+  margin: 0 0 var(--space-md);
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+li ul, li ol {
+  margin-top: var(--space-xs);
+  margin-bottom: 0;
+}
+
+/* Links */
+a {
+  color: var(--oeff-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--sage-deep);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0 var(--space-lg);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: var(--ground-soft);
+  font-weight: 600;
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Code */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: #f0eeea;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+}
+
+/* Blockquotes / Callouts */
+blockquote {
+  background: var(--sage-whisper);
+  border-left: 3px solid var(--oeff-sage);
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-md) 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-style: italic;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Strong / Bold */
+strong, b {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Footer */
+footer {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Navigation (for index page) */
+nav {
+  margin: var(--space-lg) 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  margin-bottom: var(--space-sm);
+}
+
+nav a {
+  display: block;
+  padding: var(--space-md) var(--space-lg);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-organic);
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+nav a:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 2px 4px rgba(146, 190, 170, 0.10),
+    0 8px 16px rgba(146, 190, 170, 0.08);
+}
+
+nav .nav-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+nav .nav-desc {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* Section marker for team/internal docs */
+.internal-marker {
+  display: inline-block;
+  background: var(--oeff-aqua-light);
+  color: var(--text-soft);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+/* Print styles */
+@media print {
+  body {
+    padding: 1rem;
+    font-size: 12pt;
+  }
+  
+  nav a {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  nav a {
+    transition: none;
+  }
+}
