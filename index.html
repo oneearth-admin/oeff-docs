@@ -18,51 +18,238 @@
 
 <main id="main">
 
-  <h2>Shared Inboxes</h2>
-  <p>We use shared inboxes (films@ and hosts@) so anyone on the team can help with filmmaker and host communications.</p>
+  <!-- Gate Pattern -->
+  <section class="gate" aria-label="Choose your path">
+    <p class="gate-prompt">What brings you here?</p>
+    <div class="gate-buttons">
+      <button class="gate-btn" data-target="onboarding" id="gate-new">
+        <span class="gate-btn-title">I'm new to the team</span>
+        <span class="gate-btn-desc">Get set up step by step</span>
+      </button>
+      <button class="gate-btn" data-target="reference" id="gate-returning">
+        <span class="gate-btn-title">I know what I need</span>
+        <span class="gate-btn-desc">Jump to a specific guide</span>
+      </button>
+    </div>
+  </section>
 
-  <nav aria-label="Shared inbox documentation">
-    <ul>
-      <li>
-        <a href="setup-guide.html">
-          <span class="nav-title">Setup Guide</span>
-          <span class="nav-desc">Add shared addresses to your Gmail and start using them</span>
-        </a>
-      </li>
-      <li>
-        <a href="team-guide.html">
-          <span class="nav-title">How We Work Together</span>
-          <span class="nav-desc">Shared channels, communication patterns, and team norms</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <!-- Onboarding Section -->
+  <section id="onboarding" class="content-section">
+    <h2>Getting Started</h2>
+    <p>Welcome to the team. Here's what you need to do, in order:</p>
 
-  <h2>Team Resources <span class="internal-marker">Unlisted</span></h2>
-  <p>Admin and reference documentation. Not linked publicly—share URLs directly with team members who need them.</p>
+    <div class="onboarding-steps">
+      <div class="step" data-step="1">
+        <div class="step-marker">
+          <span class="step-number">1</span>
+          <span class="step-line"></span>
+        </div>
+        <div class="step-content">
+          <h3>Set up shared inboxes</h3>
+          <p>Add films@ and hosts@ to your Gmail so you can send and receive team emails.</p>
+          <a href="setup-guide.html" class="step-link">Setup Guide →</a>
+        </div>
+      </div>
 
-  <nav aria-label="Internal team resources">
-    <ul>
-      <li>
-        <a href="team/admin-guide.html">
-          <span class="nav-title">Admin Guide: Google Groups</span>
-          <span class="nav-desc">For whoever has Google Admin access — setting up and managing groups</span>
-        </a>
-      </li>
-      <li>
-        <a href="team/design-dna.html">
-          <span class="nav-title">Design DNA</span>
-          <span class="nav-desc">Extracted design tokens and patterns from hosts.oneearthfilmfest.org</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+      <div class="step" data-step="2">
+        <div class="step-marker">
+          <span class="step-number">2</span>
+          <span class="step-line"></span>
+        </div>
+        <div class="step-content">
+          <h3>Learn how we communicate</h3>
+          <p>Our shared channels, when to use what, and how to hand things off.</p>
+          <a href="team-guide.html" class="step-link">Team Guide →</a>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-marker">
+          <span class="step-number">3</span>
+        </div>
+        <div class="step-content">
+          <h3>You're ready</h3>
+          <p>Start responding from shared inboxes. Ask questions in the Team Space.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Reference Section -->
+  <section id="reference" class="content-section">
+    <h2>Quick Reference</h2>
+    
+    <nav class="pill-nav" aria-label="Quick reference navigation">
+      <button class="pill active" data-section="guides">Guides</button>
+      <button class="pill" data-section="cheatsheet">Cheat Sheet</button>
+      <button class="pill" data-section="faq">FAQ</button>
+    </nav>
+
+    <!-- Guides -->
+    <div class="pill-content active" id="guides">
+      <nav aria-label="Documentation guides">
+        <ul>
+          <li>
+            <a href="setup-guide.html">
+              <span class="nav-title">Shared Inbox Setup</span>
+              <span class="nav-desc">Add films@ and hosts@ to your Gmail</span>
+            </a>
+          </li>
+          <li>
+            <a href="team-guide.html">
+              <span class="nav-title">How We Work Together</span>
+              <span class="nav-desc">Shared channels, communication patterns, norms</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Cheat Sheet -->
+    <div class="pill-content" id="cheatsheet">
+      <div class="cheatsheet">
+        <div class="cheat-group">
+          <h4>Shared Addresses</h4>
+          <ul>
+            <li><strong>films@</strong> — Filmmaker communications</li>
+            <li><strong>hosts@</strong> — Host/venue communications</li>
+          </ul>
+        </div>
+        <div class="cheat-group">
+          <h4>Subject Prefixes</h4>
+          <ul>
+            <li><strong>[Action by DATE]</strong> — Need them to do something</li>
+            <li><strong>[Q:]</strong> — Asking a question</li>
+            <li><strong>[FYI]</strong> — No action needed</li>
+            <li><strong>[Confirmed]</strong> — Closing the loop</li>
+          </ul>
+        </div>
+        <div class="cheat-group">
+          <h4>Key Habits</h4>
+          <ul>
+            <li>Always reply FROM the shared address</li>
+            <li>Confirm receipt: "Got it — will review by Thursday"</li>
+            <li>Close loops: "Resolved — closing thread"</li>
+            <li>Point to forms, don't collect info in email</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="pill-content" id="faq">
+      <div class="faq">
+        <details class="faq-item">
+          <summary>How do I switch the "From" address when replying?</summary>
+          <div class="faq-answer">
+            <p>Click reply, then click the <strong>From</strong> field at the top of the compose window. Select <strong>films@oneearthfilmfest.org</strong> or <strong>hosts@</strong> from the dropdown.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>What if a reply goes to my personal inbox?</summary>
+          <div class="faq-answer">
+            <p>Forward the thread to the shared inbox, then reply FROM the shared address. This pulls the conversation into shared space.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Where do I see all shared inbox threads?</summary>
+          <div class="faq-answer">
+            <p>Go to <strong>groups.google.com</strong> → click <strong>OEFF Films</strong> or <strong>OEFF Hosts</strong> → click <strong>Conversations</strong> in the sidebar. Bookmark this for quick access.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I hand off a thread to someone else?</summary>
+          <div class="faq-answer">
+            <p>No need to forward — it's already in the shared inbox. Just tag in the Team Space if it's urgent or needs specific attention.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admin Section (unlisted) -->
+  <section id="admin" class="content-section admin-section">
+    <h2>Admin Resources <span class="internal-marker">Unlisted</span></h2>
+    <p>Reference docs for specific admin tasks. Share URLs directly with people who need them.</p>
+    <nav aria-label="Admin documentation">
+      <ul>
+        <li>
+          <a href="team/admin-guide.html">
+            <span class="nav-title">Google Groups Admin</span>
+            <span class="nav-desc">Setting up and managing shared inbox groups</span>
+          </a>
+        </li>
+        <li>
+          <a href="team/design-dna.html">
+            <span class="nav-title">Design DNA</span>
+            <span class="nav-desc">Visual patterns from hosts.oneearthfilmfest.org</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </section>
 
 </main>
 
 <footer>
   One Earth Film Festival · April 22–26, 2026 · Chicago area
 </footer>
+
+<script>
+  // Gate functionality
+  const gate = document.querySelector('.gate');
+  const gateButtons = document.querySelectorAll('.gate-btn');
+  const STORAGE_KEY = 'oeff-docs-returning';
+
+  // Check if returning visitor
+  if (localStorage.getItem(STORAGE_KEY)) {
+    // Scroll to reference section on load
+    document.getElementById('reference').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    gate.classList.add('gate-minimal');
+  }
+
+  gateButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      const section = document.getElementById(target);
+      
+      // Remember returning visitors
+      if (target === 'reference') {
+        localStorage.setItem(STORAGE_KEY, 'true');
+      }
+      
+      // Scroll to section
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Minimize gate after selection
+      setTimeout(() => {
+        gate.classList.add('gate-minimal');
+      }, 300);
+    });
+  });
+
+  // Pill navigation
+  const pills = document.querySelectorAll('.pill');
+  const pillContents = document.querySelectorAll('.pill-content');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const section = pill.dataset.section;
+      
+      // Update active pill
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      
+      // Update visible content
+      pillContents.forEach(content => {
+        content.classList.remove('active');
+        if (content.id === section) {
+          content.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
