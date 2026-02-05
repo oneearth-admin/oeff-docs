@@ -741,6 +741,96 @@ nav .nav-desc {
 }
 
 /* ===================
+   HOST QUICK LINKS
+   =================== */
+
+.quicklinks-intro {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin-bottom: var(--space-lg);
+}
+
+.quicklinks-section {
+  margin-bottom: var(--space-xl);
+}
+
+.quicklinks-heading {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border);
+}
+
+.quicklinks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.quicklink-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+
+.quicklink-item:nth-child(even) {
+  background: var(--ground-soft);
+}
+
+.quicklink-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 5rem;
+  flex-shrink: 0;
+}
+
+.quicklink-label {
+  flex: 1;
+}
+
+.quicklink-links {
+  flex-shrink: 0;
+  font-size: 0.8rem;
+}
+
+.quicklink-links a {
+  color: var(--oeff-sage);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.quicklink-links a:hover {
+  text-decoration: underline;
+}
+
+.quicklink-placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.quicklinks-dates .quicklink-item {
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.quicklinks-footer {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* ===================
    AREA SECTIONS
    =================== */
 
