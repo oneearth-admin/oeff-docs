@@ -1,5 +1,9 @@
 # OEFF Docs Changelog
 
+## v5.3 — Feb 5, 2026
+- Replaced title links with proper "← OEFF Docs" breadcrumb
+- Breadcrumb uses muted text, sage on hover (no blue links)
+
 ## v5.2 — Feb 5, 2026
 - Added CHANGELOG.md
 - Changelog link in footer
