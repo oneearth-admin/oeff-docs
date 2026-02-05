@@ -6,8 +6,8 @@ Internal team documentation for the One Earth Film Festival.
 
 ```
 oeff-docs/
-├── index.html              # Multi-gate landing (new/returning → role → path)
-├── styles.css              # Shared design system (v4)
+├── index.html              # Multi-gate landing
+├── styles.css              # Shared design system (v4.1)
 ├── setup-guide.html        # Shared inbox setup
 ├── team-guide.html         # Communication norms
 └── team/                   # Unlisted support & admin docs
@@ -20,12 +20,41 @@ oeff-docs/
     └── templates.html          # Copy-paste email templates (H1-H6, F1-F4, V1-V4, I1-I3)
 ```
 
-## User Flows
+## Gate Flow (v4.1)
+
+```
+Gate 1: New vs Returning
+         │
+         ▼
+Gate 2: Relationship Type
+         ├── Seasonal Support ──────┐
+         ├── Project Contractor ────┤
+         ├── Area Coordinator ──────┼──► Coordinator Onboarding
+         └── Leadership ────────────┼──► Admin Docs
+                                    │
+                                    ▼
+Gate 3a: Area Selection (Seasonal + Contractor)
+         ├── Hosts / Venues
+         ├── Films / Content
+         ├── Programs
+         └── Tech / AV
+                │
+                ▼ (Seasonal only)
+Gate 3b: Role Selection
+         ├── Email Support
+         ├── Event Support
+         └── General Support
+                │
+                ▼
+    Area-specific Resources + Role Onboarding
+```
 
 **New team member:**
 1. Land on index → "I'm new"
-2. Select role (Support / Team / Admin)
-3. Follow role-specific onboarding steps
+2. Select relationship (Seasonal / Contractor / Coordinator / Leadership)
+3. Select area (Hosts, Films, Programs, Tech)
+4. Select role if seasonal (Email / Event / General support)
+5. See role-specific onboarding + area resources
 
 **Returning visitor:**
 1. Land on index → "I know what I need"

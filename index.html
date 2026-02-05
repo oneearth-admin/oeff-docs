@@ -57,14 +57,42 @@
     </div>
   </section>
 
-  <!-- GATE 3: Role within Relationship (for seasonal) -->
-  <section class="gate gate-3 hidden" id="gate-seasonal-role" aria-label="Select your focus">
+  <!-- GATE 3a: Area Selection (for seasonal + contractor) -->
+  <section class="gate gate-3 hidden" id="gate-area" aria-label="Select your area">
     <button class="gate-back" data-action="back-to-relationship">← Back</button>
+    <p class="gate-prompt">What area are you working on?</p>
+    <div class="gate-buttons gate-buttons-grid">
+      <button class="gate-btn gate-btn-area" data-area="hosts">
+        <span class="gate-btn-icon">🏛</span>
+        <span class="gate-btn-title">Hosts / Venues</span>
+        <span class="gate-btn-desc">Venue coordination, host communications</span>
+      </button>
+      <button class="gate-btn gate-btn-area" data-area="films">
+        <span class="gate-btn-icon">🎬</span>
+        <span class="gate-btn-title">Films / Content</span>
+        <span class="gate-btn-desc">Media files, QC, filmmaker liaison</span>
+      </button>
+      <button class="gate-btn gate-btn-area" data-area="programs">
+        <span class="gate-btn-icon">📋</span>
+        <span class="gate-btn-title">Programs</span>
+        <span class="gate-btn-desc">Event programming, scheduling</span>
+      </button>
+      <button class="gate-btn gate-btn-area" data-area="tech">
+        <span class="gate-btn-icon">🔧</span>
+        <span class="gate-btn-title">Tech / AV</span>
+        <span class="gate-btn-desc">Equipment, delivery, troubleshooting</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- GATE 3b: Role within Seasonal (after area) -->
+  <section class="gate gate-3 hidden" id="gate-seasonal-role" aria-label="Select your focus">
+    <button class="gate-back" data-action="back-to-area">← Back</button>
     <p class="gate-prompt">What will you be doing?</p>
     <div class="gate-buttons gate-buttons-vertical">
       <button class="gate-btn gate-btn-role" data-role="support">
-        <span class="gate-btn-title">Email Support</span>
-        <span class="gate-btn-desc">Monitoring shared inboxes, responding to hosts/filmmakers</span>
+        <span class="gate-btn-title">Email / Phone Support</span>
+        <span class="gate-btn-desc">Monitoring inboxes, responding to inquiries</span>
       </button>
       <button class="gate-btn gate-btn-role" data-role="event">
         <span class="gate-btn-title">Event Support</span>
@@ -221,6 +249,329 @@
           <p>Your supervisor will give you task-specific instructions. This doc covers the foundation.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ==================== AREA-SPECIFIC SECTIONS ==================== -->
+
+  <!-- AREA: Hosts/Venues -->
+  <section id="area-hosts" class="content-section hidden">
+    <div class="section-header">
+      <h2>Hosts & Venues</h2>
+      <button class="change-path" data-action="back-to-area">Change area →</button>
+    </div>
+    
+    <div class="area-intro">
+      <p>You're supporting the ~30 venues that host OEFF screenings. Your job is to help hosts feel prepared and supported.</p>
+    </div>
+
+    <div class="area-resources">
+      <h3>Key Resources</h3>
+      <nav class="resource-list">
+        <a href="team/templates.html" class="resource-card">
+          <span class="resource-icon">📝</span>
+          <div>
+            <span class="resource-title">Host Templates (H1-H6)</span>
+            <span class="resource-desc">Email templates for host communications</span>
+          </div>
+        </a>
+        <a href="team/escalation.html" class="resource-card">
+          <span class="resource-icon">🚦</span>
+          <div>
+            <span class="resource-title">Escalation Triggers</span>
+            <span class="resource-desc">When to handle vs. forward to leadership</span>
+          </div>
+        </a>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">📊</span>
+          <div>
+            <span class="resource-title">Host Tracker</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">❓</span>
+          <div>
+            <span class="resource-title">Host FAQ</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">📞</span>
+          <div>
+            <span class="resource-title">Contact Directory</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="area-tasks">
+      <h3>Common Tasks</h3>
+      <ul>
+        <li><strong>Discovery calls</strong> — Understanding venue capabilities, needs, concerns</li>
+        <li><strong>Email triage</strong> — Responding to host questions using templates</li>
+        <li><strong>Follow-up</strong> — Checking in on hosts who haven't responded</li>
+        <li><strong>Webinar support</strong> — Helping hosts during prep webinars</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <strong>Remember:</strong> Hosts are volunteers. They're doing us a favor by participating. Be patient, be helpful, be grateful.
+    </div>
+  </section>
+
+  <!-- AREA: Films/Content -->
+  <section id="area-films" class="content-section hidden">
+    <div class="section-header">
+      <h2>Films & Content</h2>
+      <button class="change-path" data-action="back-to-area">Change area →</button>
+    </div>
+    
+    <div class="area-intro">
+      <p>You're supporting the content pipeline — getting films from filmmakers, validated, and ready for delivery to venues.</p>
+    </div>
+
+    <div class="area-resources">
+      <h3>Key Resources</h3>
+      <nav class="resource-list">
+        <a href="team/templates.html" class="resource-card">
+          <span class="resource-icon">📝</span>
+          <div>
+            <span class="resource-title">Filmmaker Templates (F1-F4)</span>
+            <span class="resource-desc">Email templates for filmmaker communications</span>
+          </div>
+        </a>
+        <a href="team/escalation.html" class="resource-card">
+          <span class="resource-icon">🚦</span>
+          <div>
+            <span class="resource-title">Escalation Triggers</span>
+            <span class="resource-desc">When to handle vs. forward</span>
+          </div>
+        </a>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">📊</span>
+          <div>
+            <span class="resource-title">Asset Tracker</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">✅</span>
+          <div>
+            <span class="resource-title">QC Checklist</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">📤</span>
+          <div>
+            <span class="resource-title">File Upload Portal</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="area-tasks">
+      <h3>Common Tasks</h3>
+      <ul>
+        <li><strong>File requests</strong> — Following up with filmmakers for missing files</li>
+        <li><strong>QC review</strong> — Checking files meet specs (resolution, audio, captions)</li>
+        <li><strong>Asset logging</strong> — Updating tracker with received files</li>
+        <li><strong>Delivery prep</strong> — Organizing files for venue packets</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <strong>Quality matters:</strong> A bad file discovered during a screening is a disaster. Take QC seriously.
+    </div>
+  </section>
+
+  <!-- AREA: Programs -->
+  <section id="area-programs" class="content-section hidden">
+    <div class="section-header">
+      <h2>Programs</h2>
+      <button class="change-path" data-action="back-to-area">Change area →</button>
+    </div>
+    
+    <div class="area-intro">
+      <p>You're supporting event programming — film selection, scheduling, and coordination with hosts and filmmakers.</p>
+    </div>
+
+    <div class="area-resources">
+      <h3>Key Resources</h3>
+      <nav class="resource-list">
+        <a href="team-guide.html" class="resource-card">
+          <span class="resource-icon">📖</span>
+          <div>
+            <span class="resource-title">Team Guide</span>
+            <span class="resource-desc">How we communicate and coordinate</span>
+          </div>
+        </a>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">📅</span>
+          <div>
+            <span class="resource-title">Program Calendar</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">🎬</span>
+          <div>
+            <span class="resource-title">Film Lineup</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">🔗</span>
+          <div>
+            <span class="resource-title">Film ↔ Venue Assignments</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="area-tasks">
+      <h3>Common Tasks</h3>
+      <ul>
+        <li><strong>Schedule coordination</strong> — Matching films to venues and time slots</li>
+        <li><strong>Filmmaker coordination</strong> — Q&A logistics, virtual attendance</li>
+        <li><strong>Host preferences</strong> — Tracking and honoring venue film preferences</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <strong>Note:</strong> Programming resources are still being developed. Check with Josh (Programming Lead) for current processes.
+    </div>
+  </section>
+
+  <!-- AREA: Tech/AV -->
+  <section id="area-tech" class="content-section hidden">
+    <div class="section-header">
+      <h2>Tech & AV</h2>
+      <button class="change-path" data-action="back-to-area">Change area →</button>
+    </div>
+    
+    <div class="area-intro">
+      <p>You're supporting technical operations — equipment, file delivery, and troubleshooting for venues.</p>
+    </div>
+
+    <div class="area-resources">
+      <h3>Key Resources</h3>
+      <nav class="resource-list">
+        <a href="team/escalation.html" class="resource-card">
+          <span class="resource-icon">🚦</span>
+          <div>
+            <span class="resource-title">Escalation Triggers</span>
+            <span class="resource-desc">Technical issue routing</span>
+          </div>
+        </a>
+        <a href="team/templates.html" class="resource-card">
+          <span class="resource-icon">📝</span>
+          <div>
+            <span class="resource-title">Response Templates</span>
+            <span class="resource-desc">Technical support responses</span>
+          </div>
+        </a>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">🔌</span>
+          <div>
+            <span class="resource-title">Equipment Inventory</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">🛠</span>
+          <div>
+            <span class="resource-title">Troubleshooting Guide</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+        <div class="resource-card resource-coming">
+          <span class="resource-icon">📦</span>
+          <div>
+            <span class="resource-title">Packet Delivery Workflow</span>
+            <span class="resource-desc coming-badge">Link coming soon</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="area-tasks">
+      <h3>Common Tasks</h3>
+      <ul>
+        <li><strong>Equipment prep</strong> — Testing and organizing loaner equipment</li>
+        <li><strong>Packet assembly</strong> — USB drives with venue-specific content</li>
+        <li><strong>Tech support</strong> — Answering venue technical questions</li>
+        <li><strong>Day-of troubleshooting</strong> — Festival week support calls</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <strong>Festival week hotline:</strong> <span class="template-var">[HOTLINE_NUMBER]</span> — Available 9am-10pm during April 22-26.
+    </div>
+  </section>
+
+  <!-- AREA: Contractor by Area -->
+  <section id="area-contractor" class="content-section hidden">
+    <div class="section-header">
+      <h2>Project Contractor</h2>
+      <button class="change-path" data-action="back-to-area">Change area →</button>
+    </div>
+    
+    <div class="area-intro">
+      <p>Welcome! Here's what you need to deliver great work in your area.</p>
+    </div>
+
+    <div class="onboarding-steps">
+      <div class="step" data-step="1">
+        <div class="step-marker"><span class="step-number">1</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Review your scope</h3>
+          <p>You should have a Statement of Work defining deliverables, timeline, and payment.</p>
+          <p class="step-note">If you don't have this in writing, ask before starting work.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="2">
+        <div class="step-marker"><span class="step-number">2</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Get access to your area's resources</h3>
+          <p>Check the area-specific resources below. Your primary contact should share Drive access.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step="3">
+        <div class="step-marker"><span class="step-number">3</span><span class="step-line"></span></div>
+        <div class="step-content">
+          <h3>Know your contacts</h3>
+          <ul>
+            <li><strong>Primary contact:</strong> Who reviews your work</li>
+            <li><strong>Final approver:</strong> Who signs off (often Ana)</li>
+            <li><strong>Technical questions:</strong> Tech Coordinator</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step" data-step="4">
+        <div class="step-marker"><span class="step-number">4</span></div>
+        <div class="step-content">
+          <h3>Understand handoff expectations</h3>
+          <p>Where do final files go? What format? Who needs to be notified?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="area-resources" id="contractor-area-resources">
+      <h3>Area Resources</h3>
+      <p class="step-note">Based on your area selection, relevant resources will appear here.</p>
+      <!-- Populated dynamically based on area selection -->
+    </div>
+
+    <div class="callout">
+      <strong>Communication tip:</strong> Async is fine for most things. Flag blockers early. If you're stuck for more than a day, ask.
     </div>
   </section>
 
@@ -544,12 +895,16 @@
 <script>
   // State management
   const STORAGE_KEY = 'oeff-docs-visitor';
+  let currentState = { relationship: null, area: null, role: null };
   
   // Elements
   const gateStart = document.getElementById('gate-start');
   const gateRelationship = document.getElementById('gate-relationship');
+  const gateArea = document.getElementById('gate-area');
   const gateSeasonalRole = document.getElementById('gate-seasonal-role');
   const reference = document.getElementById('reference');
+  
+  // Onboarding sections
   const onboardingSupport = document.getElementById('onboarding-support');
   const onboardingEvent = document.getElementById('onboarding-event');
   const onboardingGeneral = document.getElementById('onboarding-general');
@@ -557,27 +912,56 @@
   const onboardingCoordinator = document.getElementById('onboarding-coordinator');
   const onboardingLeadership = document.getElementById('onboarding-leadership');
   
+  // Area sections
+  const areaHosts = document.getElementById('area-hosts');
+  const areaFilms = document.getElementById('area-films');
+  const areaPrograms = document.getElementById('area-programs');
+  const areaTech = document.getElementById('area-tech');
+  const areaContractor = document.getElementById('area-contractor');
+  
   const allSections = [
-    gateStart, gateRelationship, gateSeasonalRole, reference,
+    gateStart, gateRelationship, gateArea, gateSeasonalRole, reference,
     onboardingSupport, onboardingEvent, onboardingGeneral,
-    onboardingContractor, onboardingCoordinator, onboardingLeadership
+    onboardingContractor, onboardingCoordinator, onboardingLeadership,
+    areaHosts, areaFilms, areaPrograms, areaTech, areaContractor
   ];
   
   // Hide all sections
   function hideAll() {
-    allSections.forEach(el => el.classList.add('hidden'));
+    allSections.forEach(el => el && el.classList.add('hidden'));
   }
   
   // Show a section
   function show(el) {
-    el.classList.remove('hidden');
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (el) {
+      el.classList.remove('hidden');
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
   
   // Show minimal gate
   function showMinimalGate() {
     gateStart.classList.remove('hidden');
     gateStart.classList.add('gate-minimal');
+  }
+  
+  // Get area section by name
+  function getAreaSection(area) {
+    const areaMap = {
+      'hosts': areaHosts,
+      'films': areaFilms,
+      'programs': areaPrograms,
+      'tech': areaTech
+    };
+    return areaMap[area];
+  }
+  
+  // Save state
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ 
+      ...currentState, 
+      returning: true 
+    }));
   }
   
   // Check returning visitor
@@ -605,32 +989,73 @@
   document.querySelectorAll('[data-relationship]').forEach(btn => {
     btn.addEventListener('click', () => {
       const relationship = btn.dataset.relationship;
+      currentState.relationship = relationship;
       hideAll();
       
-      if (relationship === 'seasonal') {
-        show(gateSeasonalRole);
-      } else if (relationship === 'contractor') {
-        show(onboardingContractor);
-        showMinimalGate();
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship, returning: true }));
+      if (relationship === 'seasonal' || relationship === 'contractor') {
+        // Both seasonal and contractor go to area selection
+        show(gateArea);
       } else if (relationship === 'coordinator') {
         show(onboardingCoordinator);
         showMinimalGate();
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship, returning: true }));
+        saveState();
       } else if (relationship === 'leadership') {
         show(onboardingLeadership);
         showMinimalGate();
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship, returning: true }));
+        saveState();
       }
     });
   });
   
-  // Gate 3: Seasonal role
+  // Gate 3a: Area selection
+  document.querySelectorAll('[data-area]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const area = btn.dataset.area;
+      currentState.area = area;
+      hideAll();
+      
+      if (currentState.relationship === 'seasonal') {
+        // Seasonal goes to role selection, then sees area content
+        show(gateSeasonalRole);
+      } else if (currentState.relationship === 'contractor') {
+        // Contractor sees contractor onboarding with area context
+        show(areaContractor);
+        showMinimalGate();
+        saveState();
+        
+        // Update contractor section with area-specific note
+        const resourcesDiv = document.getElementById('contractor-area-resources');
+        if (resourcesDiv) {
+          const areaNames = {
+            'hosts': 'Hosts & Venues',
+            'films': 'Films & Content',
+            'programs': 'Programs',
+            'tech': 'Tech & AV'
+          };
+          resourcesDiv.innerHTML = `
+            <h3>${areaNames[area]} Resources</h3>
+            <p>See the <a href="#" class="area-link" data-target="${area}">full ${areaNames[area]} resource page</a> for templates, trackers, and guides relevant to your work.</p>
+          `;
+          // Add click handler
+          resourcesDiv.querySelector('.area-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            hideAll();
+            show(getAreaSection(area));
+            showMinimalGate();
+          });
+        }
+      }
+    });
+  });
+  
+  // Gate 3b: Seasonal role selection
   document.querySelectorAll('[data-role]').forEach(btn => {
     btn.addEventListener('click', () => {
       const role = btn.dataset.role;
+      currentState.role = role;
       hideAll();
       
+      // Show role-specific onboarding first
       if (role === 'support') {
         show(onboardingSupport);
       } else if (role === 'event') {
@@ -640,7 +1065,35 @@
       }
       
       showMinimalGate();
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ relationship: 'seasonal', role, returning: true }));
+      saveState();
+      
+      // Add area-specific resources link to the onboarding section
+      const currentSection = role === 'support' ? onboardingSupport : 
+                            role === 'event' ? onboardingEvent : onboardingGeneral;
+      
+      // Check if we already added the area link
+      if (currentSection && !currentSection.querySelector('.area-resources-link')) {
+        const areaNames = {
+          'hosts': 'Hosts & Venues',
+          'films': 'Films & Content',
+          'programs': 'Programs',
+          'tech': 'Tech & AV'
+        };
+        const areaLink = document.createElement('div');
+        areaLink.className = 'area-resources-link callout';
+        areaLink.innerHTML = `
+          <strong>Your area:</strong> ${areaNames[currentState.area]}. 
+          <a href="#" class="area-jump" data-target="${currentState.area}">View area-specific resources →</a>
+        `;
+        currentSection.appendChild(areaLink);
+        
+        areaLink.querySelector('.area-jump').addEventListener('click', (e) => {
+          e.preventDefault();
+          hideAll();
+          show(getAreaSection(currentState.area));
+          showMinimalGate();
+        });
+      }
     });
   });
   
@@ -650,6 +1103,7 @@
       hideAll();
       gateStart.classList.remove('gate-minimal');
       show(gateStart);
+      currentState = { relationship: null, area: null, role: null };
     });
   });
   
@@ -657,6 +1111,16 @@
     btn.addEventListener('click', () => {
       hideAll();
       show(gateRelationship);
+      currentState.area = null;
+      currentState.role = null;
+    });
+  });
+  
+  document.querySelectorAll('[data-action="back-to-area"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      hideAll();
+      show(gateArea);
+      currentState.role = null;
     });
   });
   

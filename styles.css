@@ -329,6 +329,40 @@ footer {
   max-width: 350px;
 }
 
+/* Gate buttons grid (for 4 areas) */
+.gate-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+@media (max-width: 500px) {
+  .gate-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gate-btn-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.gate-btn-area {
+  text-align: center;
+  padding: var(--space-md);
+  min-width: auto;
+  max-width: none;
+}
+
+.gate-btn-area .gate-btn-title {
+  display: block;
+}
+
+.gate-btn-area .gate-btn-desc {
+  font-size: 0.75rem;
+}
+
 .gate-btn-title {
   display: block;
   font-family: var(--font-display);
@@ -704,6 +738,113 @@ nav .nav-desc {
 
 .callout strong {
   color: var(--text);
+}
+
+/* ===================
+   AREA SECTIONS
+   =================== */
+
+.area-intro {
+  font-size: 1rem;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.area-resources {
+  margin-bottom: var(--space-xl);
+}
+
+.area-resources h3,
+.area-tasks h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  color: var(--text);
+}
+
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.resource-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
+}
+
+.resource-card:hover {
+  border-color: var(--oeff-sage);
+  background: var(--sage-whisper);
+}
+
+.resource-card.resource-coming {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.resource-card.resource-coming:hover {
+  border-color: var(--border);
+  background: white;
+}
+
+.resource-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  width: 2rem;
+  text-align: center;
+}
+
+.resource-title {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.resource-desc {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.coming-badge {
+  color: var(--oeff-sage);
+  font-style: italic;
+}
+
+.area-tasks {
+  margin-bottom: var(--space-lg);
+}
+
+.area-tasks ul {
+  margin-left: var(--space-lg);
+}
+
+.area-tasks li {
+  margin-bottom: var(--space-xs);
+  font-size: 0.9rem;
+}
+
+.area-resources-link {
+  margin-top: var(--space-lg);
+}
+
+.area-resources-link a,
+.area-jump {
+  color: var(--oeff-sage);
+  font-weight: 500;
 }
 
 /* ===================
