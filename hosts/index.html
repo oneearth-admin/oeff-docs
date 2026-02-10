@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <!--
-  OEFF Host Guide — v11.8 Full Review Integration
+  OEFF Host Guide — v11.9 Photo Integration
+
+  Changes from v11.8:
+  ✓ Added organic photo framing (border-radius, sage-tinted shadows, hover effects)
+  ✓ Integrated 3 optimized screening photos (314KB total)
+  ✓ Hero image in opening section (89KB)
+  ✓ Two example images in "What does a screening look like?" (225KB)
+  ✓ Snapshot rotation style for visual variety
+  ✓ Maintained lightweight page design (~370KB total with images)
+
+  Changes from v11.8:
 
   Changes from v11.7:
   ✓ Applied all tracked changes from .docx review
@@ -823,6 +833,76 @@
       border-radius: 50%;
     }
 
+    /* Photo containers — OEFF organic framing */
+    .photo-container {
+      position: relative;
+      margin: var(--space-xl) 0;
+    }
+
+    .photo-hero {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 18px 80px 18px 80px;
+      box-shadow:
+        0 2px 8px rgba(146, 190, 170, 0.12),
+        0 8px 24px rgba(146, 190, 170, 0.08);
+      transition: transform 0.3s var(--ease);
+    }
+    .photo-hero:hover {
+      transform: scale(1.01);
+    }
+    .photo-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .photo-accent {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 20px 28px 16px 32px;
+      box-shadow:
+        0 4px 16px rgba(146, 190, 170, 0.15),
+        0 2px 4px rgba(35, 31, 32, 0.05);
+      transition: all 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
+      max-width: 500px;
+      margin: var(--space-lg) auto;
+    }
+    .photo-accent:hover {
+      transform: rotate(-1deg) scale(1.02);
+      box-shadow:
+        0 8px 24px rgba(146, 190, 170, 0.2),
+        0 4px 8px rgba(35, 31, 32, 0.08);
+    }
+    .photo-accent img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .photo-accent:hover img {
+      transform: scale(1.04);
+    }
+
+    .photo-snapshot {
+      transform: rotate(-1.5deg);
+      border-radius: 12px;
+    }
+    .photo-snapshot:hover {
+      transform: rotate(0.5deg) scale(1.02);
+    }
+
+    .photo-caption {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      padding: var(--space-sm) var(--space-md);
+      margin-top: var(--space-xs);
+    }
+
     .timeline { margin: var(--space-lg) 0; }
 
     .timeline-item {
@@ -1161,6 +1241,12 @@
           You bring your community. We bring the films. Together, we build a
           distributed festival that reaches neighborhoods a single theater never could.
         </p>
+        <div class="photo-container">
+          <div class="photo-hero">
+            <img src="screening-hero.jpg" alt="OEFF screening with engaged audience watching environmental film">
+          </div>
+          <p class="photo-caption">OEFF brings communities together through film</p>
+        </div>
         <div class="host-quote">
           <blockquote>
             "Hosting an OEFF yearly is a bright light for our community and engages people in a way that is relatable and applicable. This experience gives (attendees) context and connections to keep from getting too depressed and more empowered to love where you live by taking action."
@@ -1311,12 +1397,24 @@
             <div class="faq-question">What does a screening look like in practice?<span class="faq-chevron"></span></div>
             <div class="faq-answer">
               <p>Every host shapes their event differently. A few examples from past years:</p>
+              <div class="photo-container">
+                <div class="photo-accent photo-snapshot">
+                  <img src="screening-example-1.jpg" alt="Community members engaged in post-film discussion">
+                </div>
+                <p class="photo-caption">Post-screening dialogue brings stories to action</p>
+              </div>
               <ul class="benefit-list">
                 <li><span class="benefit-label">Women of Carbon</span> — Chicago Architecture Center hosted a panel with Studio Gang architects and women leaders in green building</li>
                 <li><span class="benefit-label">Going Circular</span> — Loyola set up a lobby action fair with Collective Resource before the film, followed by faculty-led discussion</li>
                 <li><span class="benefit-label">A Plastic Ocean</span> — Chicago Cultural Center opened with two environmental artists in the rotunda, then WBEZ's Shannon Heffernan facilitated discussion with Shedd Aquarium</li>
                 <li><span class="benefit-label">Bike films</span> — Local cycling groups led community rides to the venue; CDOT and Divvy joined the post-film panel</li>
               </ul>
+              <div class="photo-container">
+                <div class="photo-accent">
+                  <img src="screening-example-2.jpg" alt="OEFF host venue with audience seating and screening setup">
+                </div>
+                <p class="photo-caption">Every venue creates its own atmosphere</p>
+              </div>
               <p style="margin-top: 1rem; color: var(--color-text-soft);">These range from simple (film + Q&A) to elaborate (pre-event activities + panel + action tables). Start where you're comfortable — we'll help you build from there.</p>
             </div>
           </div>
