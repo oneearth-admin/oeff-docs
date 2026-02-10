@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<!--
+  OEFF Host Guide — v11.6 Review Integration
+
+  Changes from v11.5:
+  ✓ Updated time commitment: 15-20 hours (was 3-5)
+  ✓ Updated setup time: 60 min (was 30 min)
+  ✓ Added "one-hour" specificity to webinar description
+  ✓ Expanded Timeline section with granular phase descriptions
+  ✓ Added full email domains (@oneearthcollective.org, @oneearthfilmfest.org)
+
+  Changes from v11.4:
+  ✓ Reordered DOM: curious content → committed content (matches gate scroll)
+  ✓ Flattened single-item accordions (Timeline, Day-of Support)
+  ✓ Simplified nav to 5 items: Overview, Timeline, Tech Specs, Packet, Contact
+  ✓ Moved webinars into committed host section (collapsible details)
+  ✓ Added inline CTA after "What's Involved" section
+  ✓ Renamed "Becoming a Host" section to "What's Involved"
+
+  Changes from v11.3:
+  ✓ Body text: looser line-height (1.7), subtle letter/word spacing
+  ✓ Headings: tighter tracking (-0.02em) for visual weight
+  ✓ Font features: kerning, ligatures, old-style numerals
+  ✓ Micro-animations: carbon dot pulse, timeline marker glow, FAQ fade-in
+  ✓ Interactive spring easing on pills and gate buttons
+
+  Changes from v11.2:
+  ✓ Sans-serif (Avenir) for functional UI: nav, tables, labels, pills, callouts, steps
+  ✓ Serif (Georgia) for body text: paragraphs, quotes, explanatory content
+  ✓ Clear hierarchy: display font for structure, body font for reading
+
+  Changes from v11.1:
+  ✓ Switched body font to Georgia (warm serif) — 0KB added
+  ✓ Flattened navigation (removed section collapse)
+  ✓ Sections always visible, only FAQ items expand/collapse
+
+  Changes from v11:
+  ✓ Gate now scrolls to sections instead of hiding content
+  ✓ All content visible regardless of audience choice
+  ✓ Added stage-nav pills for committed hosts (Planning, Tech prep, Packet, Day-of)
+  ✓ Changed "Now" label to "Your focus"
+  ✓ Replaced 🎬 emoji with ★ brand marker
+  ✓ Renamed "Troubleshooting" to "Day-of Support"
+  ✓ Added organic hover states with spring easing
+  ✓ Varied section spacing rhythm (3n pattern)
+  ✓ Softened section dividers (gradient fade)
+  ✓ Combined bottom CTAs into unified call-to-action
+  ✓ Removed audience-specific hiding classes
+
+  Previous (v11):
+  ✓ Sage-mist tones, full viewport flex, organic wave divider
+  ✓ Radial warmth, sage-tinted shadows, layered grain
+  ✓ Organic border-radius, logo breathe animation
+-->
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Everything you need to know about hosting an OEFF 2026 screening — venue requirements, technical specs, time commitment, and support resources.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>OEFF 2026 Host Guide</title>
+  <style>
+    :root {
+      --font-display: 'Avenir Next', 'Avenir', 'Segoe UI', system-ui, sans-serif;
+      --font-body: Georgia, 'Times New Roman', serif;
+
+      /* OEFF Brand Colors */
+      --oeff-black: #231F20;
+      --oeff-blue: #3960AC;
+      --oeff-aqua: #42A7C2;
+      --oeff-light-aqua: #BAE1E2;
+      --oeff-sage: #92BEAA;
+      --oeff-ivory: #FFF3DF;
+
+      /* Softer neutrals */
+      --oeff-warm-white: #FAFAF8;
+      --oeff-sage-mist: #F5F8F6;
+      --oeff-sage-whisper: #EEF3F0;
+
+      /* Extended */
+      --oeff-blue-deep: #2d4a8a;
+      --oeff-sage-deep: #6a9a84;
+      --oeff-sage-light: #c8ddd2;
+
+      /* Semantic */
+      --color-text: var(--oeff-black);
+      --color-text-soft: #4a4542;
+      --color-text-muted: #7a746f;
+      --color-bg: var(--oeff-warm-white);
+      --color-bg-soft: var(--oeff-sage-mist);
+      --color-border: #e5e2dc;
+
+      /* Spacing */
+      --space-2xs: 0.25rem;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+
+      --radius: 6px;
+      --radius-lg: 10px;
+      --radius-organic: 10px 12px 9px 11px;
+      --radius-organic-sm: 5px 7px 6px 8px;
+
+      /* Layered grain */
+      --grain-fine: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      --grain-medium: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g2)'/%3E%3C/svg%3E");
+
+      /* Sage-tinted shadows */
+      --shadow-soft:
+        0 1px 2px rgba(146, 190, 170, 0.08),
+        0 4px 8px rgba(146, 190, 170, 0.06),
+        0 8px 16px rgba(35, 31, 32, 0.03);
+      --shadow-elevated:
+        0 2px 4px rgba(146, 190, 170, 0.10),
+        0 8px 16px rgba(146, 190, 170, 0.08),
+        0 16px 32px rgba(35, 31, 32, 0.04);
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      word-spacing: 0.02em;
+      font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Layered grain overlay */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    body::before {
+      background: var(--grain-fine);
+      background-size: 128px 128px;
+      opacity: 0.08;
+    }
+    body::after {
+      background: var(--grain-medium);
+      background-size: 256px 256px;
+      opacity: 0.04;
+      mix-blend-mode: multiply;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--oeff-blue-deep);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0 0 var(--radius) var(--radius);
+      text-decoration: none;
+      font-weight: 500;
+      z-index: 10000;
+    }
+    .skip-link:focus { top: 0; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--oeff-aqua);
+      outline-offset: 2px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    a { color: var(--oeff-blue); transition: color 0.15s var(--ease); }
+    a:hover { color: var(--oeff-blue-deep); }
+
+    .marker {
+      width: 10px;
+      height: 10px;
+      background: var(--oeff-sage);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .marker--aqua { background: var(--oeff-aqua); }
+    .marker--blue { background: var(--oeff-blue); }
+
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    /* HEADER — extra top padding */
+    .header {
+      background: #000;
+      color: white;
+      padding: calc(var(--space-3xl) + 2rem) var(--space-lg) var(--space-2xl);
+      text-align: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* Simple fade divider instead of wave */
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(146, 190, 170, 0.3), transparent);
+    }
+
+    @keyframes logo-breathe {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(1.5deg) scale(1.01); }
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-logo {
+      max-width: 200px;
+      height: auto;
+      margin-bottom: var(--space-md);
+    }
+
+    .carbon-badge {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 12px;
+      transition: all 0.2s var(--ease);
+    }
+    .carbon-badge:hover {
+      color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.1);
+    }
+    .carbon-badge-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--oeff-sage);
+      border-radius: 50%;
+      animation: gentle-pulse 4s ease-in-out infinite;
+    }
+
+    .header-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* GATE */
+    .gate {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 40%, rgba(146, 190, 170, 0.08) 0%, transparent 70%),
+        linear-gradient(180deg, var(--oeff-sage-mist) 0%, var(--oeff-warm-white) 100%);
+      padding: calc(var(--space-3xl) + 30px) var(--space-lg) var(--space-3xl);
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+    }
+
+    .gate-prompt {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      margin: 0 0 var(--space-xl);
+    }
+
+    .gate-options {
+      display: flex;
+      gap: var(--space-lg);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .gate-btn {
+      background: white;
+      border: 1px solid var(--color-border);
+      padding: var(--space-lg) var(--space-xl);
+      border-radius: var(--radius-organic);
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      text-align: left;
+      min-width: 260px;
+      font-family: inherit;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gate-btn:hover {
+      border-color: var(--oeff-sage);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--shadow-elevated);
+    }
+    .gate-btn:active {
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    .gate-btn.selected {
+      border-color: var(--oeff-sage);
+      background: var(--oeff-sage-whisper);
+    }
+
+    .gate-btn-label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .gate-btn-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .gate-help {
+      margin-top: var(--space-xl);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .main-content { display: block; }
+
+    .intro {
+      padding: var(--space-3xl) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .intro-headline {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0 0 var(--space-md);
+      letter-spacing: -0.02em;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--color-text-soft);
+      max-width: 600px;
+      margin-bottom: var(--space-md);
+    }
+    .intro-text strong {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .intro-status {
+      font-size: 0.95rem !important;
+      color: var(--color-text-soft) !important;
+    }
+
+    .host-quote {
+      margin: var(--space-xl) 0 0;
+      padding-left: var(--space-lg);
+      border-left: 3px solid var(--oeff-sage);
+    }
+    .host-quote blockquote {
+      margin: 0;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--color-text);
+    }
+    .host-quote cite {
+      display: block;
+      margin-top: var(--space-sm);
+      font-style: normal;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Stage mini-nav pills */
+    .stage-nav {
+      font-family: var(--font-display);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      align-items: center;
+      margin: var(--space-lg) 0;
+    }
+    .stage-nav-label {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-right: var(--space-xs);
+    }
+    .stage-pill {
+      display: inline-block;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--oeff-sage-whisper);
+      color: var(--oeff-sage-deep);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .stage-pill:hover {
+      background: var(--oeff-sage-light);
+      color: var(--oeff-sage-deep);
+      transform: scale(1.05) translateY(-1px);
+    }
+    .stage-pill:active {
+      transform: scale(0.98);
+    }
+
+    .next-step {
+      font-family: var(--font-display);
+      margin-top: var(--space-lg);
+      padding: var(--space-md) var(--space-lg);
+      background: linear-gradient(135deg, var(--oeff-sage-whisper) 0%, var(--oeff-sage-light) 100%);
+      border-left: 3px solid var(--oeff-sage);
+      border-radius: 0 8px 6px 0;
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+    .next-step-body { flex-grow: 1; }
+    .next-step-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--oeff-sage-deep);
+      font-weight: 600;
+      margin-bottom: var(--space-2xs);
+    }
+    .next-step-content {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .next-step { flex-direction: column; gap: var(--space-sm); }
+    }
+
+    .inline-cta {
+      font-family: var(--font-display);
+      background: linear-gradient(135deg, var(--oeff-sage-mist) 0%, var(--oeff-warm-white) 100%);
+      padding: var(--space-lg) var(--space-xl);
+      border-radius: var(--radius-organic);
+      margin: var(--space-xl) 0;
+      text-align: center;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-soft);
+    }
+    .inline-cta p { margin: 0; font-size: 1rem; }
+    .inline-cta.hidden { display: none; }
+
+    .webinar-banner {
+      background: linear-gradient(135deg, var(--oeff-sage-light) 0%, var(--oeff-sage-whisper) 100%);
+      border: 1px solid var(--oeff-sage);
+      border-radius: var(--radius-organic);
+      padding: var(--space-xl);
+      margin: var(--space-xl) 0;
+      display: flex;
+      gap: var(--space-lg);
+      scroll-margin-top: 4rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .webinar-marker { padding-top: 0.25rem; }
+
+    .webinar-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0 0 var(--space-xs);
+      color: var(--oeff-blue-deep);
+    }
+    .webinar-content > p {
+      margin: 0 0 var(--space-md);
+      color: var(--color-text-soft);
+      font-size: 0.95rem;
+    }
+
+    .webinar-schedule {
+      display: grid;
+      gap: var(--space-xs);
+      margin: var(--space-md) 0;
+      padding: var(--space-md);
+      background: rgba(255,255,255,0.7);
+      border-radius: var(--radius);
+    }
+
+    .webinar-item {
+      display: flex;
+      gap: var(--space-md);
+      align-items: baseline;
+      font-size: 0.9rem;
+    }
+    .webinar-date {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+      min-width: 4.5rem;
+    }
+    .webinar-topic { color: var(--color-text); }
+
+    .webinar-cta {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-top: var(--space-sm);
+    }
+
+    /* Webinar details (collapsible) */
+    .webinar-details {
+      margin-top: var(--space-xl);
+      background: linear-gradient(135deg, var(--oeff-sage-whisper) 0%, var(--oeff-sage-light) 100%);
+      border: 1px solid var(--oeff-sage);
+      border-radius: var(--radius-organic);
+      overflow: hidden;
+    }
+    .webinar-summary {
+      font-family: var(--font-display);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-lg);
+      cursor: pointer;
+      list-style: none;
+    }
+    .webinar-summary::-webkit-details-marker { display: none; }
+    .webinar-summary::after {
+      content: '+';
+      margin-left: auto;
+      font-size: 1.2rem;
+      color: var(--oeff-sage-deep);
+    }
+    .webinar-details[open] .webinar-summary::after { content: '−'; }
+    .webinar-details .webinar-schedule {
+      padding: 0 var(--space-lg) var(--space-md);
+      background: rgba(255,255,255,0.5);
+      margin: 0;
+    }
+    .webinar-details .webinar-cta {
+      padding: 0 var(--space-lg) var(--space-lg);
+    }
+
+    @media (max-width: 600px) {
+      .webinar-banner {
+        flex-direction: column;
+        gap: var(--space-md);
+        padding: var(--space-lg);
+      }
+      .webinar-item {
+        flex-direction: column;
+        gap: var(--space-2xs);
+      }
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      background: rgba(250, 250, 248, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-sm) 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: var(--space-sm);
+      overflow-x: auto;
+      padding: 0 var(--space-xl);
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    .nav-link {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius);
+      transition: all 0.15s var(--ease);
+    }
+    .nav-link:hover {
+      color: var(--color-text);
+      background: rgba(146, 190, 170, 0.15);
+    }
+
+    .section {
+      padding: var(--space-3xl) 0;
+      border-bottom: 1px solid transparent;
+      border-image: linear-gradient(90deg, transparent, var(--color-border), transparent) 1;
+      scroll-margin-top: 4rem;
+    }
+
+    /* Rhythm variation in spacing */
+    .section:nth-of-type(3n+1) { padding: 3.5rem 0; }
+    .section:nth-of-type(3n+2) { padding: 4rem 0; }
+    .section:nth-of-type(3n) { padding: 3.75rem 0; }
+
+    .section:nth-of-type(even) {
+      background: linear-gradient(180deg, var(--oeff-sage-mist) 0%, var(--oeff-warm-white) 100%);
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding-left: calc(50vw - 50%);
+      padding-right: calc(50vw - 50%);
+    }
+    .section:nth-of-type(even) > .section-header,
+    .section:nth-of-type(even) > .section-content {
+      max-width: 740px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--space-xl);
+      padding-right: var(--space-xl);
+    }
+
+    .section:last-of-type { border-bottom: none; }
+
+    .section-header {
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+    }
+
+    .faq-item {
+      margin-bottom: var(--space-md);
+      border-radius: var(--radius);
+    }
+    .faq-item.open {
+      background: rgba(255,255,255,0.5);
+      margin-left: calc(-1 * var(--space-md));
+      margin-right: calc(-1 * var(--space-md));
+      padding: 0 var(--space-md);
+    }
+
+    .faq-question {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      cursor: pointer;
+      padding: var(--space-md) var(--space-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: var(--radius);
+      margin: 0 calc(-1 * var(--space-sm));
+      transition: all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .faq-question:hover {
+      color: var(--oeff-sage-deep);
+      background: rgba(146, 190, 170, 0.1);
+    }
+
+    .faq-chevron {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      width: 1.5rem;
+      text-align: center;
+    }
+    .faq-chevron::after { content: '+'; }
+    .faq-item.open .faq-chevron::after { content: '−'; }
+
+    .faq-answer {
+      display: none;
+      padding: var(--space-sm) var(--space-sm) var(--space-xl);
+      color: var(--color-text-soft);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-answer {
+      display: block;
+      animation: fade-in-up 0.3s ease-out;
+    }
+    .faq-answer p { margin: 0 0 var(--space-md); }
+
+    .benefit-list {
+      list-style: none;
+      margin: var(--space-md) 0;
+      padding: 0;
+    }
+    .benefit-list li {
+      padding: var(--space-sm) 0 var(--space-sm) var(--space-xl);
+      position: relative;
+      line-height: 1.6;
+    }
+    .benefit-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      width: 8px;
+      height: 8px;
+      background: var(--oeff-sage);
+      border-radius: 50%;
+    }
+    .benefit-label {
+      font-family: var(--font-display);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      margin: var(--space-md) 0;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    .col-box {
+      font-family: var(--font-display);
+    }
+    .col-box h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+      margin: 0 0 var(--space-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .col-box ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .col-box li {
+      padding: var(--space-xs) 0 var(--space-xs) var(--space-md);
+      color: var(--color-text-soft);
+      position: relative;
+    }
+    .col-box li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 5px;
+      height: 5px;
+      background: var(--oeff-light-aqua);
+      border-radius: 50%;
+    }
+
+    .timeline { margin: var(--space-lg) 0; }
+
+    .timeline-item {
+      display: flex;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-lg);
+      position: relative;
+    }
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 1.25rem;
+      top: 3rem;
+      bottom: 0;
+      width: 2px;
+      background: var(--oeff-light-aqua);
+    }
+
+    .timeline-marker {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--oeff-sage);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .timeline-marker.complete {
+      background: var(--oeff-sage);
+      opacity: 0.6;
+    }
+    @keyframes timeline-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(66, 167, 194, 0.2); }
+      50% { box-shadow: 0 0 0 8px rgba(66, 167, 194, 0.1); }
+    }
+    .timeline-marker.current {
+      background: var(--oeff-aqua);
+      box-shadow: 0 0 0 4px rgba(66, 167, 194, 0.2);
+      animation: timeline-pulse 3s ease-in-out infinite;
+    }
+    .timeline-marker.upcoming {
+      background: var(--oeff-light-aqua);
+      color: var(--oeff-blue-deep);
+    }
+
+    .timeline-content h4 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.05rem;
+      margin: 0 0 var(--space-2xs);
+      color: var(--color-text);
+    }
+    .timeline-content p {
+      margin: 0;
+      color: var(--color-text-soft);
+      font-size: 0.95rem;
+    }
+
+    .spec-table {
+      font-family: var(--font-display);
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0;
+    }
+    .spec-table th, .spec-table td {
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .spec-table th {
+      font-weight: 600;
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .spec-table td:first-child {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .venue-toggle {
+      display: inline-flex;
+      gap: var(--space-2xs);
+      background: var(--oeff-sage-whisper);
+      padding: var(--space-2xs);
+      border-radius: var(--radius);
+      margin-bottom: var(--space-md);
+    }
+    .venue-toggle-btn {
+      padding: var(--space-xs) var(--space-md);
+      border: none;
+      background: transparent;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--oeff-blue-deep);
+      cursor: pointer;
+      transition: all 0.15s var(--ease);
+    }
+    .venue-toggle-btn.active {
+      background: white;
+      color: var(--color-text);
+      box-shadow: var(--shadow-soft);
+    }
+    .venue-specs { display: none; }
+    .venue-specs.visible { display: block; }
+
+    .alert {
+      background: linear-gradient(135deg, var(--oeff-sage-mist) 0%, var(--oeff-warm-white) 100%);
+      border-left: 3px solid var(--oeff-sage);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: 0 7px 5px 0;
+      margin: var(--space-md) 0;
+    }
+    .alert-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-2xs);
+    }
+    .alert p { margin: 0; font-size: 0.95rem; }
+
+    .steps {
+      font-family: var(--font-display);
+      list-style: none;
+      counter-reset: step;
+      margin: var(--space-md) 0;
+      padding: 0;
+    }
+    .steps li {
+      counter-increment: step;
+      padding: var(--space-sm) 0 var(--space-sm) var(--space-2xl);
+      position: relative;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: var(--oeff-sage-whisper);
+      color: var(--oeff-sage-deep);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .contact-card {
+      font-family: var(--font-display);
+      padding: var(--space-lg);
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-organic);
+      box-shadow: var(--shadow-soft);
+    }
+    .contact-card h4 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.05rem;
+      margin: 0 0 var(--space-sm);
+      color: var(--color-text);
+    }
+    .contact-card p { margin: var(--space-2xs) 0; font-size: 0.95rem; }
+    .contact-card .subtext {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+
+    .cta {
+      text-align: center;
+      padding: var(--space-3xl) var(--space-lg);
+      background: linear-gradient(180deg, var(--oeff-warm-white) 0%, var(--oeff-sage-mist) 100%);
+      margin-top: var(--space-2xl);
+      border-top: 1px solid var(--color-border);
+    }
+    .cta h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 0 0 var(--space-xs);
+      color: var(--color-text);
+    }
+    .cta p {
+      margin: 0 0 var(--space-lg);
+      color: var(--color-text-soft);
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--oeff-sage);
+      color: white;
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-organic-sm);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.2s var(--ease);
+      box-shadow: var(--shadow-soft);
+    }
+    .btn-primary:hover {
+      background: var(--oeff-sage-deep);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elevated);
+      color: white;
+    }
+
+    .footer {
+      background: var(--oeff-blue-deep);
+      color: var(--oeff-light-aqua);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .footer a { color: var(--oeff-sage-light); text-decoration: none; }
+    .footer a:hover { color: white; }
+
+    .footer-main { margin-bottom: var(--space-lg); }
+
+    .carbon-aside {
+      border-top: 1px solid rgba(186, 225, 226, 0.2);
+      padding-top: var(--space-md);
+      font-size: 0.8rem;
+      color: rgba(186, 225, 226, 0.7);
+    }
+
+    .carbon-summary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      cursor: pointer;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius);
+      transition: background 0.15s var(--ease);
+    }
+    .carbon-summary:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .carbon-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--oeff-sage);
+      border-radius: 50%;
+      animation: gentle-pulse 4s ease-in-out infinite;
+    }
+
+    .carbon-detail {
+      display: none;
+      margin-top: var(--space-md);
+      text-align: left;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(0,0,0,0.2);
+      padding: var(--space-md);
+      border-radius: var(--radius);
+      line-height: 1.6;
+      scroll-margin-top: 2rem;
+    }
+    .carbon-detail.open { display: block; }
+    .carbon-detail:target { display: block; }
+    .carbon-detail p { margin: 0 0 var(--space-sm); }
+    .carbon-detail p:last-child { margin-bottom: 0; }
+
+    .carbon-stat {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--oeff-sage-light);
+    }
+
+    @media (max-width: 600px) {
+      html { font-size: 16px; }
+      .header-title { font-size: 0.9rem; }
+      .gate-options {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gate-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="header">
+    <a href="#carbon-detail" class="carbon-badge" title="This page produces ~0.02g CO₂ per visit">
+      <span class="carbon-badge-dot"></span>
+      <span>~0.02g CO₂</span>
+    </a>
+    <img src="OEFF_Logo_Reverse_Stacked.png" alt="One Earth Film Festival" class="header-logo">
+    <h1 class="header-title">2026 Host Guide</h1>
+  </header>
+
+  <div class="gate">
+    <p class="gate-prompt">What brings you here?</p>
+    <div class="gate-options">
+      <button class="gate-btn" data-scroll="#becoming-host">
+        <span class="gate-btn-label">Curious about hosting</span>
+        <span class="gate-btn-desc">Learn what's involved</span>
+      </button>
+      <button class="gate-btn" data-scroll="#host-welcome">
+        <span class="gate-btn-label">Already a host</span>
+        <span class="gate-btn-desc">Jump to logistics and tech specs</span>
+      </button>
+    </div>
+    <p class="gate-help">Questions? <a href="mailto:hosts@oneearthcollective.org">hosts@oneearthcollective.org</a></p>
+  </div>
+
+  <div class="main-content">
+    <!-- CURIOUS PATH: Overview + Becoming a Host -->
+    <div class="container">
+      <div class="intro" id="becoming-host">
+        <p class="intro-text">
+          One Earth Film Fest happens in <strong>30+ venues across Chicagoland</strong> —
+          libraries, churches, schools, community centers, backyards. Each screening
+          is hosted by people who believe environmental stories deserve to be shared,
+          discussed, and acted on together.
+        </p>
+        <p class="intro-text">
+          You bring your community. We bring the films. Together, we build a
+          distributed festival that reaches neighborhoods a single theater never could.
+        </p>
+        <div class="host-quote">
+          <blockquote>
+            "Our screening brought out people we'd never seen at the library before.
+            The film gave us something real to talk about."
+          </blockquote>
+          <cite>— Branch coordinator, Oak Park Public Library (3rd year hosting)</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMITTED PATH: Host Welcome + Webinars -->
+    <div class="container">
+      <div class="intro" id="host-welcome">
+        <h2 class="intro-headline">Thanks for hosting with us</h2>
+        <p class="intro-text">
+          This page has everything you need: timeline, technical specs, information about your screening packet, and how to reach us if anything comes up.
+        </p>
+        <p class="intro-text intro-status">
+          <strong>Where we are now:</strong> Film selections are complete. In February, we're working with you on program design. Marketing materials coming soon.
+        </p>
+        <div class="stage-nav">
+          <span class="stage-nav-label">Jump to:</span>
+          <a href="#timeline" class="stage-pill">Planning</a>
+          <a href="#technical" class="stage-pill">Tech prep</a>
+          <a href="#packet" class="stage-pill">Screening packet</a>
+          <a href="#day-of-support" class="stage-pill">Day-of</a>
+        </div>
+        <div class="next-step">
+          <div class="next-step-body">
+            <div class="next-step-label">Your focus</div>
+            <div class="next-step-content"><strong>Design your screening experience</strong> — panels, discussions, action tables. <a href="mailto:hosts@oneearthcollective.org">Schedule your visioning meeting</a> to shape the event.</div>
+          </div>
+        </div>
+
+        <!-- Webinars integrated into committed host section -->
+        <details class="webinar-details" id="webinars">
+          <summary class="webinar-summary">
+            <span class="marker marker--aqua"></span>
+            <span><strong>Host Webinars</strong> — 10 sessions, Feb–Apr</span>
+          </summary>
+          <div class="webinar-schedule">
+            <div class="webinar-item">
+              <span class="webinar-date">Week 1</span>
+              <span class="webinar-topic">Background, Logistics, Host Helpers, Team Support</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 2</span>
+              <span class="webinar-topic">Programming (+ separate per-film calls)</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 3</span>
+              <span class="webinar-topic">Marketing</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 4</span>
+              <span class="webinar-topic">Volunteer Recruitment + Training</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 5</span>
+              <span class="webinar-topic" style="font-style: italic; color: var(--color-text-muted);">Skip week</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 6</span>
+              <span class="webinar-topic">Volunteer Training</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 7</span>
+              <span class="webinar-topic">AV/Tech — media testing & verification</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 8</span>
+              <span class="webinar-topic">Volunteer Training (evening option)</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 9</span>
+              <span class="webinar-topic">Programming Check-In / Final Confirmations</span>
+            </div>
+            <div class="webinar-item">
+              <span class="webinar-date">Week 10</span>
+              <span class="webinar-topic">Zoom Office Hours — questions & troubleshooting</span>
+            </div>
+          </div>
+          <p class="webinar-cta"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeWQp1FJ9rtVl4sSZCwByJd47wv1reOHuX8MvqPMHSyQuZzEQ/viewform" target="_blank" rel="noopener">Register for webinars</a> — we'll send dates and Zoom links once finalized.</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- Simplified nav: 5 items, clearer labels -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#hosting-details" class="nav-link">Overview</a>
+        <a href="#timeline" class="nav-link">Timeline</a>
+        <a href="#technical" class="nav-link">Tech Specs</a>
+        <a href="#packet" class="nav-link">Packet</a>
+        <a href="#help" class="nav-link">Contact</a>
+      </div>
+    </nav>
+
+    <main id="main" class="container">
+
+      <section class="section" id="hosting-details">
+        <div class="section-header">
+          <h2 class="section-title">What's Involved</h2>
+        </div>
+        <div class="section-content">
+          <div class="faq-item open">
+            <div class="faq-question">What does hosting involve?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <div class="two-col">
+                <div class="col-box">
+                  <h4>You handle</h4>
+                  <ul>
+                    <li>Venue and seating</li>
+                    <li>Promote to your community</li>
+                    <li>Run the screening</li>
+                    <li>Optional: discussion, refreshments</li>
+                  </ul>
+                </div>
+                <div class="col-box">
+                  <h4>We provide</h4>
+                  <ul>
+                    <li>Film file + pre-show content</li>
+                    <li>Marketing templates</li>
+                    <li>Technical support</li>
+                    <li>Festival-wide promotion</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">Why host a screening?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <p>OEFF uses a <strong>head-heart-hands</strong> model — films educate, stories create connection, and programming moves people toward action.</p>
+              <ul class="benefit-list">
+                <li><span class="benefit-label">Lift up your goals</span> — Use the screening to launch or bolster your environmental or climate justice work</li>
+                <li><span class="benefit-label">Activate your community</span> — Draw new visitors and deepen engagement with existing members</li>
+                <li><span class="benefit-label">Shared reach</span> — Your screening joins festival-wide marketing to 10,000+ residents</li>
+                <li><span class="benefit-label">Action, not just entertainment</span> — "Wrap" the film in discussions, panels, action tables — before, during, after</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">What kinds of venues host?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <p>Past hosts include universities (Loyola, Northwestern, UIC), museums (Shedd, MSI, Peggy Notebaert), churches and faith communities, public libraries (Oak Park, Waukegan, CPL branches), theaters (Wilmette, Pickwick, Lake), breweries, community centers, nature centers, and school auditoriums.</p>
+              <p>If you have a space where 60+ people can watch a film together, we'd like to hear from you. Hosts can be located within or outside the Chicago region. First-time hosts are especially welcome.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">What does a screening look like in practice?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <p>Every host shapes their event differently. A few examples from past years:</p>
+              <ul class="benefit-list">
+                <li><span class="benefit-label">Women of Carbon</span> — Chicago Architecture Center hosted a panel with Studio Gang architects and women leaders in green building</li>
+                <li><span class="benefit-label">Going Circular</span> — Loyola set up a lobby action fair with Collective Resource before the film, followed by faculty-led discussion</li>
+                <li><span class="benefit-label">A Plastic Ocean</span> — Chicago Cultural Center opened with two environmental artists in the rotunda, then WBEZ's Shannon Heffernan facilitated discussion with Shedd Aquarium</li>
+                <li><span class="benefit-label">Bike films</span> — Local cycling groups led community rides to the venue; CDOT and Divvy joined the post-film panel</li>
+              </ul>
+              <p style="margin-top: 1rem; color: var(--color-text-soft);">These range from simple (film + Q&A) to elaborate (pre-event activities + panel + action tables). Start where you're comfortable — we'll help you build from there.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">What's the time commitment?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <p><strong>Before the festival:</strong> 15-20 hours total — coordinating dates, promoting, reviewing tech setup. Plus 4 one-hour host webinars (Feb-Apr).</p>
+              <p><strong>Day of:</strong> 60 min setup, 90-120 min screening, 15 min wrap-up.</p>
+              <div class="next-step">
+                <span class="marker" aria-hidden="true"></span>
+                <div class="next-step-body">
+                  <div class="next-step-label">Your next step</div>
+                  <div class="next-step-content">Fill out the <a href="https://bit.ly/oeff2026hostinterestform" target="_blank" rel="noopener">host interest form</a> — it takes about 5 minutes and gets the conversation started.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inline CTA for curious users -->
+        <div class="inline-cta">
+          <p><strong>Ready to explore hosting?</strong> <a href="https://bit.ly/oeff2026hostinterestform" target="_blank" rel="noopener">Tell us about your venue</a> — we'll follow up within a few days.</p>
+        </div>
+      </section>
+
+      <section class="section" id="timeline">
+        <div class="section-header">
+          <h2 class="section-title">Timeline</h2>
+        </div>
+        <div class="section-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker complete">Jan</div>
+              <div class="timeline-content" style="opacity: 0.7;">
+                <h4>Commit + select film ✓</h4>
+                <p>Confirmed host kickoff (1/20), film selection deadline (1/30). <em style="color: var(--color-text);">Just joining? It's not too late — <a href="mailto:hosts@oneearthcollective.org">reach out</a>.</em></p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker current">Feb</div>
+              <div class="timeline-content">
+                <h4>Program design ← You are here</h4>
+                <p>Visioning meeting, shape your event format — panels, discussions, action tables. Host webinars begin.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker upcoming">Mar</div>
+              <div class="timeline-content">
+                <h4>Marketing + schedule launch</h4>
+                <p>Public schedule announced mid-month, heavy promotion begins. Screening packets delivered late March.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker upcoming">Apr</div>
+              <div class="timeline-content">
+                <h4>Supplies + materials delivery, QC + final prep (Apr 1–21)</h4>
+                <p>Test your packet, verify playback works, recruit volunteers. Heavy marketing and promotion. Office hours available mid-April.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker upcoming festival">★</div>
+              <div class="timeline-content">
+                <h4>Festival week (Apr 22–26)</h4>
+                <p>Earth Day launch party (22), hosted screenings Thu–Sat (23–25), Cultural Center closing (26)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="technical">
+        <div class="section-header">
+          <h2 class="section-title">Technical Requirements</h2>
+        </div>
+        <div class="section-content">
+          <div class="faq-item open">
+            <div class="faq-question">What equipment do I need?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <div class="venue-toggle">
+                <button class="venue-toggle-btn active" data-venue="community">Community venue</button>
+                <button class="venue-toggle-btn" data-venue="cinema">Cinema</button>
+              </div>
+              <div class="venue-specs visible" data-venue="community">
+                <table class="spec-table">
+                  <tr><th>Component</th><th>Requirement</th></tr>
+                  <tr><td>Playback</td><td>Laptop with HDMI output</td></tr>
+                  <tr><td>Display</td><td>Projector or large TV (55"+)</td></tr>
+                  <tr><td>Audio</td><td>Speakers adequate for room size</td></tr>
+                  <tr><td>Software</td><td>VLC Player (free)</td></tr>
+                </table>
+                <p>Most libraries and community spaces already have this setup. We don't provide equipment, but we're happy to connect you with our preferred vendors.</p>
+              </div>
+              <div class="venue-specs" data-venue="cinema">
+                <table class="spec-table">
+                  <tr><th>Component</th><th>Requirement</th></tr>
+                  <tr><td>Playback</td><td>DCP server or ProRes-compatible system</td></tr>
+                  <tr><td>Display</td><td>Cinema projector (existing)</td></tr>
+                  <tr><td>Audio</td><td>Theater sound system (existing)</td></tr>
+                  <tr><td>File format</td><td>DCP or ProRes — we'll match your setup</td></tr>
+                </table>
+                <p>Files delivered via hard drive or secure download, 2 weeks prior. We'll coordinate with your projectionist.</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">What about internet access?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <p><strong>Not required for playback.</strong> All films play from local files — no streaming, no buffering worries.</p>
+              <p>Internet is only needed to download your screening packet ahead of time.</p>
+              <div class="next-step">
+                <span class="marker" aria-hidden="true"></span>
+                <div class="next-step-body">
+                  <div class="next-step-label">Your next step</div>
+                  <div class="next-step-content">Confirm your AV setup meets the requirements above. If you're unsure, email <a href="mailto:hosts@oneearthcollective.org">hosts@oneearthcollective.org</a> with details about your space.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="packet">
+        <div class="section-header">
+          <h2 class="section-title">Your Screening Packet</h2>
+        </div>
+        <div class="section-content">
+          <div class="faq-item open">
+            <div class="faq-question">What's included?<span class="faq-chevron"></span></div>
+            <div class="faq-answer">
+              <ul class="benefit-list">
+                <li><span class="benefit-label">Film file(s)</span> — Your feature film (MP4 for community venues, DCP/ProRes for cinemas)</li>
+                <li><span class="benefit-label">Pre-show content</span> — Young filmmakers winner, fest trailer, sponsor acknowledgments (~3-5 min)</li>
+                <li><span class="benefit-label">Readme file</span> — Setup guide, day-of checklist, troubleshooting steps</li>
+                <li><span class="benefit-label">VLC playlist</span> — Pre-built to run pre-show → film automatically</li>
+                <li><span class="benefit-label">Emergency contacts</span> — Phone hotline staffed during festival week</li>
+              </ul>
+              <div class="alert">
+                <p class="alert-title">Delivery + Testing</p>
+                <p>Your packet arrives late March via secure download link (password-protected, venue-specific). <strong>Test playback before your screening</strong> — run the full file, not just the first 30 seconds. If something's wrong, we have time to troubleshoot or send a replacement.</p>
+              </div>
+              <div class="next-step">
+                <span class="marker" aria-hidden="true"></span>
+                <div class="next-step-body">
+                  <div class="next-step-label">When you get your packet</div>
+                  <div class="next-step-content">Download everything to one folder. Open the playlist in VLC. Run a full test. Email us to confirm it works — or call the hotline if it doesn't.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="day-of-support">
+        <div class="section-header">
+          <h2 class="section-title">Day-of Support</h2>
+        </div>
+        <div class="section-content">
+          <p><strong>Most issues have quick fixes:</strong></p>
+          <ol class="steps">
+            <li>Close and reopen the player. Restart laptop if needed.</li>
+            <li>Try VLC — it's the most reliable fallback.</li>
+            <li>Check connections — unplug and replug cables.</li>
+            <li>Call us — during festival week we have a staffed hotline. Number will be in your screening packet.</li>
+          </ol>
+          <p style="margin-top: 1rem; font-style: italic; color: var(--color-text-muted);">Worst case: We can provide a backup streaming link for emergency use.</p>
+        </div>
+      </section>
+
+      <section class="section" id="help">
+        <div class="section-header">
+          <h2 class="section-title">Contact</h2>
+        </div>
+        <div class="section-content">
+          <div class="two-col">
+            <div class="contact-card">
+              <h4>Before Festival Week</h4>
+              <p><a href="mailto:hosts@oneearthcollective.org">hosts@oneearthcollective.org</a></p>
+              <p class="subtext">Response within 24-48 hours</p>
+            </div>
+            <div class="contact-card">
+              <h4>During Festival Week</h4>
+              <p><a href="mailto:tech@oneearthfilmfest.org">tech@oneearthfilmfest.org</a></p>
+              <p class="subtext">April 22–26 · Phone number shared during host meeting</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="cta">
+      <h3>Questions or ready to start?</h3>
+      <p>We're here to help — whether you're exploring or already committed.</p>
+      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+        <a href="https://bit.ly/oeff2026hostinterestform" target="_blank" rel="noopener" class="btn-primary">Become a Host</a>
+        <a href="mailto:hosts@oneearthcollective.org" class="btn-primary" style="background: var(--oeff-blue); ">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-main">
+      <p><a href="https://oneearthfilmfest.org" target="_blank" rel="noopener">One Earth Film Fest 2026</a></p>
+    </div>
+    <div class="carbon-aside">
+      <div class="carbon-summary" id="carbon-toggle" role="button" tabindex="0" aria-expanded="false">
+        <span class="carbon-dot"></span>
+        <span>~0.02g CO₂ per visit</span>
+      </div>
+      <div class="carbon-detail" id="carbon-detail">
+        <p><span class="carbon-stat">~55 KB</span> total page weight — lighter than 95% of websites.</p>
+        <p>No external scripts, no tracking, no web fonts to download. Just HTML, CSS, and one logo.</p>
+        <p>The median webpage produces ~0.5g CO₂ per view. This page produces roughly <strong>0.02g</strong> — about 25× cleaner.</p>
+        <p style="font-size: 0.75rem; opacity: 0.7;">Methodology: <a href="https://www.websitecarbon.com/how-does-it-work/" target="_blank" rel="noopener">Website Carbon Calculator</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Gate: scroll to relevant section
+    document.querySelectorAll('.gate-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const scrollTarget = btn.dataset.scroll;
+        document.querySelectorAll('.gate-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.querySelector('.gate').style.flex = '0';
+        document.querySelector('.gate').style.minHeight = 'auto';
+        try { localStorage.setItem('oeff-host-faq-visited', Date.now().toString()); } catch(e) {}
+        setTimeout(() => {
+          const target = document.querySelector(scrollTarget);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      });
+    });
+
+    document.querySelectorAll('.faq-question').forEach((q, i) => {
+      const answer = q.nextElementSibling;
+      const id = `faq-${i}`;
+      answer.id = id;
+      q.setAttribute('role', 'button');
+      q.setAttribute('tabindex', '0');
+      q.setAttribute('aria-expanded', q.parentElement.classList.contains('open'));
+      q.setAttribute('aria-controls', id);
+      const toggle = () => {
+        const isOpen = q.parentElement.classList.toggle('open');
+        q.setAttribute('aria-expanded', isOpen);
+      };
+      q.addEventListener('click', (e) => { e.stopPropagation(); toggle(); });
+      q.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+
+    document.querySelectorAll('.venue-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const venue = btn.dataset.venue;
+        document.querySelectorAll('.venue-toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.venue-specs').forEach(spec => {
+          spec.classList.toggle('visible', spec.dataset.venue === venue);
+        });
+      });
+    });
+
+    try {
+      if (localStorage.getItem('oeff-host-faq-visited')) {
+        document.getElementById('interest-gate')?.classList.add('hidden');
+      }
+    } catch(e) {}
+
+    const carbonToggle = document.getElementById('carbon-toggle');
+    const carbonDetail = document.getElementById('carbon-detail');
+    carbonToggle?.addEventListener('click', () => {
+      const isOpen = carbonDetail.classList.toggle('open');
+      carbonToggle.setAttribute('aria-expanded', isOpen);
+    });
+    carbonToggle?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const isOpen = carbonDetail.classList.toggle('open');
+        carbonToggle.setAttribute('aria-expanded', isOpen);
+      }
+    });
+  </script>
+</body>
+</html>
