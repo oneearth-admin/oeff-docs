@@ -5,7 +5,7 @@
   Changes from v11.8:
   ✓ Added organic photo framing (border-radius, sage-tinted shadows, hover effects)
   ✓ Integrated 3 optimized screening photos (289KB total)
-  ✓ Hero image: Lake Theatre (170KB, portrait cropped to 16:9)
+  ✓ Hero image: Lake Theatre (321KB, 895×1200, 90% quality, positioned to show marquee)
   ✓ Two example images in "What does a screening look like?" (225KB)
   ✓ Snapshot rotation style for visual variety
   ✓ Maintained lightweight page design (~370KB total with images)
@@ -855,7 +855,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center 35%; /* Show top/marquee area */
     }
 
     .photo-accent {
