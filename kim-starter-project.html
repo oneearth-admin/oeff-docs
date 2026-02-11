@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF 2026 — Starter Project Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap');
+
+  :root {
+    --forest-50: #f0f4f2;
+    --forest-100: #dce5df;
+    --forest-200: #b8ccbf;
+    --forest-400: #7fa68d;
+    --forest-500: #5c7c6b;
+    --forest-600: #4a6356;
+    --forest-700: #3a4e44;
+    --forest-800: #2d3d35;
+    --forest-900: #1e2b24;
+    --cream-50: #fdfcfa;
+    --cream-100: #f7f5f2;
+    --cream-200: #ede9e3;
+    --cream-300: #ddd7ce;
+    --ember-400: #c4704b;
+
+    --color-ground: var(--cream-100);
+    --color-surface: var(--cream-50);
+    --color-surface-raised: #ffffff;
+    --color-primary: var(--forest-500);
+    --color-primary-hover: var(--forest-600);
+    --color-primary-subtle: var(--forest-100);
+    --color-text: var(--forest-900);
+    --color-text-secondary: var(--forest-700);
+    --color-text-tertiary: var(--forest-600);
+    --color-accent: var(--ember-400);
+    --color-border: var(--cream-300);
+    --color-border-light: var(--cream-200);
+    --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.06);
+    --shadow-medium: 0 4px 16px hsla(25, 40%, 30%, 0.08);
+    --radius-s: 6px;
+    --radius-m: 10px;
+    --radius-l: 14px;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-ground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: var(--color-primary);
+    color: var(--cream-50);
+    padding: 36px 44px 32px;
+  }
+
+  .header-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  .header h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+
+  .content { padding: 32px 44px 52px; }
+
+  .section { margin-bottom: 28px; }
+
+  .section h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .section p { margin-bottom: 10px; font-size: 14.5px; }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .meta-item {
+    background: var(--forest-50);
+    border: 1px solid var(--forest-200);
+    border-radius: var(--radius-s);
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  .meta-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 4px;
+  }
+
+  .meta-value {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--forest-600);
+  }
+
+  .scope-block {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-m);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .scope-block h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+
+  .scope-list {
+    list-style: none;
+    font-size: 14px;
+  }
+
+  .scope-list li {
+    padding: 5px 0 5px 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .scope-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary-subtle);
+    border: 2px solid var(--color-primary);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 24px 0;
+  }
+
+  .highlight {
+    background: linear-gradient(135deg, var(--forest-50), var(--cream-100));
+    border: 1px solid var(--forest-200);
+    border-radius: var(--radius-m);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .highlight h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--forest-600);
+    margin-bottom: 8px;
+  }
+
+  .highlight p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .step-list {
+    list-style: none;
+    counter-reset: steps;
+    margin: 12px 0;
+  }
+
+  .step-list li {
+    counter-increment: steps;
+    padding: 12px 0 12px 44px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .step-list li:last-child { border-bottom: none; }
+
+  .step-list li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-list li strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .note {
+    background: var(--cream-100);
+    border-left: 3px solid var(--color-border);
+    border-radius: var(--radius-s);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 12px 0;
+    line-height: 1.55;
+  }
+
+  .footer {
+    padding: 20px 44px;
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  @media print {
+    body { background: white; }
+    .page { max-width: none; box-shadow: none; }
+    .header { padding: 24px 32px 20px; }
+    .content { padding: 20px 32px 36px; }
+    @page { margin: 0.5in; size: letter; }
+  }
+
+  @media screen {
+    .page {
+      box-shadow: var(--shadow-medium);
+      margin: 24px auto;
+      border-radius: var(--radius-l);
+      overflow: hidden;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">OEFF 2026 — Starter Project</div>
+    <h1>Fresh-Eyes Audit:<br>Host Communications & Process Documentation</h1>
+    <div class="header-sub">A first project for Kim — self-contained, clear deliverable, doubles as onboarding</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ── META ── -->
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-label">Hours</div>
+        <div class="meta-value">8–10</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Timeline</div>
+        <div class="meta-value">2 weeks</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Working Style</div>
+        <div class="meta-value">Async + 1 sync</div>
+      </div>
+    </div>
+
+    <!-- ── WHY THIS PROJECT ── -->
+    <div class="section">
+      <h2>Why this project</h2>
+
+      <p>OEFF has been building documentation, communication templates, and host-facing resources at speed — but almost entirely from the inside. Everything was written by people who already know the org. We've never had someone with fresh eyes and a process background look at what we've built and tell us what's clear, what's confusing, and what's missing.</p>
+
+      <p>This project gives Kim a defined first contribution with a real deliverable, while also getting her oriented to OEFF's model, team, and workflows. She learns the org by reading the org.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── WHAT SHE'LL REVIEW ── -->
+    <div class="section">
+      <h2>What she'll review</h2>
+
+      <div class="scope-block">
+        <h3>Primary materials</h3>
+        <ul class="scope-list">
+          <li><strong>Host Guide</strong> (hosts.oneearthfilmfest.org) — the main resource hosts receive for screening logistics, setup, and support</li>
+          <li><strong>Team Documentation site</strong> (docs.oneearthfilmfest.org) — internal team reference, processes, and onboarding info</li>
+          <li><strong>Host communication templates</strong> — email scripts and outreach language currently in use or in draft</li>
+        </ul>
+      </div>
+
+      <div class="scope-block">
+        <h3>Secondary context (provided by Garen)</h3>
+        <ul class="scope-list">
+          <li>Venue tier system overview — how OEFF classifies and supports different venue types</li>
+          <li>Brief team roster — who does what, in broad strokes</li>
+          <li>The shared mailbox migration plan — where email communication is heading</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── THE ASK ── -->
+    <div class="section">
+      <h2>The ask</h2>
+
+      <p>Review each resource as if you're encountering OEFF for the first time. Write up your observations in whatever format feels natural — a doc, a set of notes, an annotated list. The goal is honest signal, not a polished report.</p>
+
+      <div class="highlight">
+        <h3>Three questions to anchor the audit</h3>
+        <p><strong>1. What's unclear?</strong> Where would a new host, volunteer, or team member get stuck? What assumes context they don't have?</p>
+        <p style="margin-top: 8px"><strong>2. What's missing?</strong> Are there obvious gaps — steps that aren't documented, decisions that aren't explained, resources that are referenced but don't exist yet?</p>
+        <p style="margin-top: 8px"><strong>3. What could be systematized?</strong> Where do you see repeated patterns that could become templates, checklists, or standard sequences? This is where your process background is the most valuable.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── HOW IT WORKS ── -->
+    <div class="section">
+      <h2>How it works</h2>
+
+      <ol class="step-list">
+        <li>
+          <strong>Kickoff (30 min sync with Garen)</strong>
+          Walk through the materials, answer initial questions, share context on where things stand. Garen provides access and any login credentials needed.
+        </li>
+        <li>
+          <strong>Independent review (6-8 hours over ~10 days)</strong>
+          Kim works through the materials at her own pace. Deep focus work — evenings and weekends as described on the call. Questions can go to Garen via text/email async.
+        </li>
+        <li>
+          <strong>Deliverable: Audit summary</strong>
+          A written summary organized around the three anchor questions. Doesn't need to be long or polished. Honest observations are the deliverable.
+        </li>
+        <li>
+          <strong>Debrief (30 min sync with Garen)</strong>
+          Walk through findings together. Identify which observations are quick fixes, which are systemic, and which point to the next piece of work.
+        </li>
+      </ol>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── WHAT SUCCESS LOOKS LIKE ── -->
+    <div class="section">
+      <h2>What success looks like</h2>
+
+      <div class="scope-block">
+        <h3>For Kim</h3>
+        <ul class="scope-list">
+          <li>Understands OEFF's model, team, and current state</li>
+          <li>Has a concrete deliverable she can point to</li>
+          <li>Gets a feel for the working relationship before committing to more</li>
+        </ul>
+      </div>
+
+      <div class="scope-block">
+        <h3>For OEFF</h3>
+        <ul class="scope-list">
+          <li>Gets a process-trained outside perspective on its documentation</li>
+          <li>Identifies gaps before hosts encounter them during festival prep</li>
+          <li>Evaluates fit and working style with low stakes</li>
+        </ul>
+      </div>
+
+      <div class="scope-block">
+        <h3>For Garen</h3>
+        <ul class="scope-list">
+          <li>Sees how Kim thinks — does she flag surface issues or structural ones?</li>
+          <li>Gets signal on whether the change management skills are active and applicable</li>
+          <li>Low onboarding cost — the review <em>is</em> the onboarding</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── COMPENSATION ── -->
+    <div class="section">
+      <h2>Compensation</h2>
+
+      <p>This is a paid project. Rate and total to be confirmed with Kim before kickoff, drawn from the collaborator pool within the OEFF technical budget.</p>
+
+      <div class="note">
+        Keeping the first project paid — even at a modest rate — sets the right precedent. It signals that OEFF values people's time and avoids the dynamic where volunteer work quietly becomes the expectation.
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── WHAT COMES AFTER ── -->
+    <div class="section">
+      <h2>What could come after this</h2>
+
+      <p>If the audit goes well and both sides want to continue, natural next projects include:</p>
+
+      <ul class="scope-list">
+        <li><strong>Host communication sequence design</strong> — building the outreach cadence and templates for the shared mailbox</li>
+        <li><strong>Onboarding pathway documentation</strong> — creating a repeatable process so the next new person doesn't start from scratch</li>
+        <li><strong>Festival week venue coordination</strong> — on-the-ground support during April 22-28, leveraging her weekend availability</li>
+        <li><strong>Post-festival retrospective facilitation</strong> — using her change management lens to run a structured debrief</li>
+      </ul>
+
+      <p>None of these are committed. They're visible possibilities that give shape to what a longer collaboration could look like.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    OEFF 2026 — Internal planning document
+  </div>
+
+</div>
+</body>
+</html>

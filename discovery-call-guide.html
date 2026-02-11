@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF Discovery Call Guide</title>
+<style>
+  /* ── Fonts ── */
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap');
+
+  /* ── Primitives (Forest / OEFF) ── */
+  :root {
+    --forest-50: #f0f4f2;
+    --forest-100: #dce5df;
+    --forest-200: #b8ccbf;
+    --forest-400: #7fa68d;
+    --forest-500: #5c7c6b;
+    --forest-600: #4a6356;
+    --forest-700: #3a4e44;
+    --forest-800: #2d3d35;
+    --forest-900: #1e2b24;
+
+    --cream-50: #fdfcfa;
+    --cream-100: #f7f5f2;
+    --cream-200: #ede9e3;
+    --cream-300: #ddd7ce;
+
+    --ember-400: #c4704b;
+    --ember-500: #a85d3e;
+
+    /* ── Semantic Tokens ── */
+    --color-ground: var(--cream-100);
+    --color-surface: var(--cream-50);
+    --color-surface-raised: #ffffff;
+    --color-primary: var(--forest-500);
+    --color-primary-hover: var(--forest-600);
+    --color-primary-subtle: var(--forest-100);
+    --color-text: var(--forest-900);
+    --color-text-secondary: var(--forest-700);
+    --color-text-tertiary: var(--forest-600);
+    --color-accent: var(--ember-400);
+    --color-border: var(--cream-300);
+    --color-border-light: var(--cream-200);
+
+    --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.06);
+    --shadow-medium: 0 4px 16px hsla(25, 40%, 30%, 0.08);
+    --radius-s: 6px;
+    --radius-m: 10px;
+    --radius-l: 14px;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+  }
+
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-ground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Page Container ── */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--color-primary);
+    color: var(--cream-50);
+    padding: 40px 48px 36px;
+  }
+
+  .header-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+
+  /* ── Content ── */
+  .content {
+    padding: 36px 48px 60px;
+  }
+
+  /* ── Section ── */
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-number {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+
+  .section h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .section-time {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 14px;
+  }
+
+  .section p {
+    margin-bottom: 12px;
+  }
+
+  /* ── Script Block ── */
+  .script {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-light);
+    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-s);
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  /* ── Stage Direction ── */
+  .direction {
+    background: var(--forest-50);
+    border-radius: var(--radius-s);
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--color-primary-hover);
+    line-height: 1.55;
+  }
+
+  .direction strong {
+    font-weight: 600;
+    color: var(--forest-700);
+  }
+
+  /* ── Questions List ── */
+  .questions {
+    list-style: none;
+    margin: 12px 0;
+  }
+
+  .questions li {
+    padding: 10px 0 10px 20px;
+    border-bottom: 1px solid var(--color-border-light);
+    position: relative;
+    font-size: 14px;
+  }
+
+  .questions li:last-child {
+    border-bottom: none;
+  }
+
+  .questions li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary-subtle);
+    border: 2px solid var(--color-primary);
+  }
+
+  .questions .listen-for {
+    display: block;
+    font-size: 12.5px;
+    color: var(--color-text-tertiary);
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 32px 0;
+  }
+
+  /* ── Worksheet ── */
+  .worksheet-header {
+    background: var(--forest-50);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-m) var(--radius-m) 0 0;
+    padding: 20px 24px 16px;
+  }
+
+  .worksheet-header h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .worksheet-header p {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+  }
+
+  .worksheet-body {
+    border: 1px solid var(--color-border-light);
+    border-top: none;
+    border-radius: 0 0 var(--radius-m) var(--radius-m);
+    padding: 0;
+  }
+
+  .ws-section {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .ws-section:last-child {
+    border-bottom: none;
+  }
+
+  .ws-section h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+
+  .ws-field {
+    margin-bottom: 14px;
+  }
+
+  .ws-field:last-child {
+    margin-bottom: 0;
+  }
+
+  .ws-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .ws-input {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-s);
+    min-height: 48px;
+    background: var(--color-surface-raised);
+  }
+
+  .ws-input-tall {
+    min-height: 72px;
+  }
+
+  /* ── Spectrum ── */
+  .spectrum {
+    display: flex;
+    gap: 0;
+    margin-top: 6px;
+  }
+
+  .spectrum-option {
+    flex: 1;
+    text-align: center;
+    padding: 10px 6px;
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-raised);
+    line-height: 1.3;
+  }
+
+  .spectrum-option:first-child {
+    border-radius: var(--radius-s) 0 0 var(--radius-s);
+  }
+
+  .spectrum-option:last-child {
+    border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  }
+
+  .spectrum-option + .spectrum-option {
+    border-left: none;
+  }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+  }
+
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 3px;
+    background: var(--color-surface-raised);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 24px 48px;
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  /* ── Two-column layout for sharing guide ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 12px 0;
+  }
+
+  .col-card {
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-s);
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+
+  .col-card h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .col-card.col-share {
+    background: var(--forest-50);
+    border-color: var(--forest-200);
+  }
+
+  .col-card.col-share h4 { color: var(--forest-600); }
+
+  .col-card.col-hold {
+    background: var(--cream-50);
+    border-color: var(--cream-300);
+  }
+
+  .col-card.col-hold h4 { color: var(--color-text-tertiary); }
+
+  .col-card ul {
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .col-card ul li {
+    padding: 3px 0;
+  }
+
+  /* ── Transition Prompt ── */
+  .transition-prompt {
+    background: linear-gradient(135deg, var(--forest-50), var(--cream-100));
+    border: 1px solid var(--forest-200);
+    border-radius: var(--radius-m);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .transition-prompt h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--forest-600);
+    margin-bottom: 8px;
+  }
+
+  .transition-prompt p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: white; }
+    .page {
+      max-width: none;
+      box-shadow: none;
+    }
+    .header { padding: 28px 36px 24px; }
+    .content { padding: 24px 36px 40px; }
+    .section { page-break-inside: avoid; }
+    .worksheet-header, .worksheet-body { page-break-inside: avoid; }
+    .ws-input { border-style: dotted; }
+    .footer { padding: 16px 36px; }
+
+    @page {
+      margin: 0.5in;
+      size: letter;
+    }
+  }
+
+  /* ── Screen shadow ── */
+  @media screen {
+    .page {
+      box-shadow: var(--shadow-medium);
+      margin: 24px auto;
+      border-radius: var(--radius-l);
+      overflow: hidden;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <div class="header">
+    <div class="header-label">One Earth Film Festival 2026</div>
+    <h1>Discovery Call Guide</h1>
+    <div class="header-sub">Collaborator conversation — not an interview, not a pitch</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ── FRAMING NOTE ── -->
+    <div class="section">
+      <div class="section-number">Before you start</div>
+      <h2>The framing that matters</h2>
+      <p>This person is looking for AV and events experience — that's what they told you, and that's real. OEFF has genuine AV/Ops work to offer. Start there.</p>
+      <p>They also happen to carry change management and strategic consulting skills from Deloitte. You don't need to name that or steer toward it. If the conversation goes well, that value will surface on its own — and you can open the door gently.</p>
+      <p>Your job on this call: understand what they want, share what OEFF actually is, and see if there's a natural overlap. Nothing needs to be decided today.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SECTION 1 ── -->
+    <div class="section">
+      <div class="section-number">01</div>
+      <h2>Set the table</h2>
+      <div class="section-time">2–3 minutes</div>
+
+      <div class="script">
+        "Thanks for making time for this. I want to be upfront — I don't have a formal job description to hand you. What I have is a real organization doing real work, and I'm trying to figure out where there's a natural fit. So this is genuinely a discovery conversation for both of us."
+      </div>
+
+      <div class="direction">
+        <strong>Why this matters:</strong> You're naming the ambiguity early so neither of you has to pretend there's a polished role waiting. This gives you both permission to explore honestly.
+      </div>
+    </div>
+
+    <!-- ── SECTION 2 ── -->
+    <div class="section">
+      <div class="section-number">02</div>
+      <h2>What OEFF actually is</h2>
+      <div class="section-time">3–5 minutes</div>
+
+      <p>Tell them in your own words, but hit these points:</p>
+
+      <ul class="questions">
+        <li><strong>The model:</strong> Distributed film festival across ~30 community venues — libraries, churches, cultural centers, plus professional cinemas like Music Box and Gene Siskel. Not one big event, a network of screenings.
+          <span class="listen-for">This is the thing that surprises people and hooks the right ones.</span>
+        </li>
+        <li><strong>The range:</strong> Some venues are turnkey (projector, sound, staff). Some need full AV support. A venue tier system governs which get what level of production.
+          <span class="listen-for">If they light up at the logistics complexity, that's a signal.</span>
+        </li>
+        <li><strong>The team:</strong> Small. Ana is the Executive Director and only full-time staff. Everyone else is part-time, contractor, or volunteer. You've been Technical Coordinator for six years.</li>
+        <li><strong>The season:</strong> 12th year. Festival is in April. Planning is happening now.</li>
+      </ul>
+    </div>
+
+    <!-- ── SECTION 3 ── -->
+    <div class="section">
+      <div class="section-number">03</div>
+      <h2>Learn what they're looking for</h2>
+      <div class="section-time">8–10 minutes</div>
+
+      <ul class="questions">
+        <li>"What's drawing you to events and AV work specifically?"
+          <span class="listen-for">Listen for: curiosity vs. credential-seeking. Both are fine, but they lead to different placements.</span>
+        </li>
+        <li>"When you picture yourself doing this kind of work, what does a good day look like?"
+          <span class="listen-for">Listen for: do they describe being on-site at events, or do they describe behind-the-scenes coordination? Both are needed.</span>
+        </li>
+        <li>"You mentioned being open to any positions. If you could design your own learning path, what would you want to walk away knowing how to do?"
+          <span class="listen-for">Let them paint the picture. Don't correct or redirect yet.</span>
+        </li>
+        <li>"How do you feel about ambiguity? A lot of what we do is figure-it-out-as-we-go, especially with a small team."
+          <span class="listen-for">Deloitte people are trained in structured ambiguity. See if they frame this as comfortable or as something they'd want to bring structure to — both answers are useful.</span>
+        </li>
+        <li>"Walk me through a typical week right now — when do you have bandwidth, and how do you prefer to work?"
+          <span class="listen-for">Confirm the April weekends and weekday evening availability from your earlier exchange.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ── SECTION 4 ── -->
+    <div class="section">
+      <div class="section-number">04</div>
+      <h2>Share the real problems</h2>
+      <div class="section-time">5–7 minutes</div>
+
+      <p>Frame these as the landscape, not as job requirements. You're showing them where the work lives.</p>
+
+      <div class="script">
+        "Let me tell you where we actually need help, and you can tell me what resonates."
+      </div>
+
+      <ul class="questions">
+        <li><strong>April coverage:</strong> "I have a full-time job that makes me largely unavailable during festival month. The festival is in April. So we need people who can hold things during that stretch."</li>
+        <li><strong>Venue coordination:</strong> "30 venues, each with different technical capabilities and needs. The coordination between hosts, films, and logistics is where things fall through cracks."</li>
+        <li><strong>Institutional knowledge:</strong> "A lot of how this festival runs lives in people's heads — mostly mine and Ana's. We've never been great at documenting our own processes."</li>
+        <li><strong>Onboarding:</strong> "Every time we bring someone new on, we're kind of rebuilding the wheel. We don't have a repeatable system for getting people up to speed."</li>
+      </ul>
+
+      <div class="direction">
+        <strong>Note:</strong> The last two points — process documentation and onboarding — are where their change management skills naturally apply. You're not asking them to consult. You're describing real problems. If they hear those and start thinking structurally, that tells you something.
+      </div>
+    </div>
+
+    <!-- ── SECTION 5 ── -->
+    <div class="section">
+      <div class="section-number">05</div>
+      <h2>The organizational context</h2>
+      <div class="section-time">3–5 minutes — only if the conversation is going well</div>
+
+      <p>If they seem engaged and you trust the vibe, share the dynamics that would help a change-minded person understand the terrain:</p>
+
+      <div class="script">
+        "I want to be honest about where we are organizationally, because it's relevant to anyone coming in."
+      </div>
+
+      <ul class="questions">
+        <li>"We've tried system rollouts before — Slack, Google Studio — that were well-intentioned but didn't stick because they lacked upfront strategy. I'm trying not to repeat that pattern."</li>
+        <li>"Role ownership is still fuzzy in some areas. People do good work, but who owns what and where handoffs happen isn't always clear."</li>
+        <li>"The org is founder-driven with a volunteer board. Decisions move through relationships and trust more than formal process."</li>
+        <li>"We're mid-transition from me doing most of the technical work solo to building systems other people can run. That shift is ongoing and imperfect."</li>
+      </ul>
+
+      <div class="direction">
+        <strong>What you're doing here:</strong> Giving them real organizational signal without assigning blame or asking them to fix it. A change management person hearing this will understand the landscape immediately. Watch whether they ask follow-up questions about these dynamics — that's the strongest signal that this dimension of their skills could be activated.
+      </div>
+    </div>
+
+    <!-- ── SECTION 6 ── -->
+    <div class="section">
+      <div class="section-number">06</div>
+      <h2>The gentle door-open</h2>
+      <div class="section-time">2–3 minutes</div>
+
+      <p>This is where you acknowledge their broader skill set without reframing the whole conversation around it.</p>
+
+      <div class="transition-prompt">
+        <h4>The bridge line</h4>
+        <p>"I know you're looking to build experience in events and AV, and there's real work here for that. But I also want to name — your background in change management is something we don't have anywhere else on this team. If there are moments where that thinking feels useful to you, I'd want to make space for it. Not as a separate consulting engagement, just as part of how you show up."</p>
+      </div>
+
+      <div class="direction">
+        <strong>Why this works:</strong> It honors what they asked for (events experience), validates what they bring (strategic skills), and doesn't create pressure to perform in a lane they didn't sign up for. It also signals that you see them as more than a task-doer — which matters for retention.
+      </div>
+    </div>
+
+    <!-- ── SECTION 7 ── -->
+    <div class="section">
+      <div class="section-number">07</div>
+      <h2>The honest conversation about compensation</h2>
+      <div class="section-time">2–3 minutes</div>
+
+      <div class="script">
+        "I want to be transparent about the budget reality. This is a small nonprofit. We have some contractor budget but it's modest — not consulting rates. Some of the early work might be volunteer-level while we figure out scope together. I don't want to waste your time if that doesn't work for where you are right now."
+      </div>
+
+      <div class="direction">
+        <strong>Let them respond.</strong> They told you they're trying to build experience. Many career-changers accept below-market rates for the right learning opportunity. But let them name their own comfort level — don't assume.
+      </div>
+    </div>
+
+    <!-- ── SECTION 8 ── -->
+    <div class="section">
+      <div class="section-number">08</div>
+      <h2>Close and next steps</h2>
+      <div class="section-time">2–3 minutes</div>
+
+      <div class="script">
+        "Here's what I'd like to do: take what we talked about, think on it, talk to Ana about where this fits, and come back to you with something more concrete — even if it's a small starting project to see how we work together. Does that timeline work for you?"
+      </div>
+
+      <p>If appropriate, offer to share:</p>
+      <div class="two-col">
+        <div class="col-card col-share">
+          <h4>Safe to share</h4>
+          <ul>
+            <li>The venue tier system overview</li>
+            <li>Team welcome packet / org overview</li>
+            <li>General team structure (names + roles)</li>
+            <li>The distributed model explanation</li>
+          </ul>
+        </div>
+        <div class="col-card col-hold">
+          <h4>Hold for now</h4>
+          <ul>
+            <li>Specific budget numbers</li>
+            <li>Data infrastructure details (V7)</li>
+            <li>Personal history / burnout context</li>
+            <li>Internal interpersonal dynamics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- ── WORKSHEET ── -->
+    <!-- ══════════════════════════════════════ -->
+
+    <div class="worksheet-header">
+      <h2>Discovery Worksheet</h2>
+      <p>Fill during or immediately after the call. This becomes your brief to Ana.</p>
+    </div>
+
+    <div class="worksheet-body">
+
+      <div class="ws-section">
+        <h3>Their motivation</h3>
+        <div class="ws-field">
+          <div class="ws-label">What's drawing them to events/AV? (their words, not yours)</div>
+          <div class="ws-input ws-input-tall"></div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">What does "success in 6 months" look like for them?</div>
+          <div class="ws-input"></div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Learning opportunity, portfolio piece, paid work, or a mix?</div>
+          <div class="ws-input"></div>
+        </div>
+      </div>
+
+      <div class="ws-section">
+        <h3>Skills and working style</h3>
+        <div class="ws-field">
+          <div class="ws-label">How did they describe their Deloitte work? (what verbs did they use?)</div>
+          <div class="ws-input ws-input-tall"></div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Self-directed vs. needs structure</div>
+          <div class="spectrum">
+            <div class="spectrum-option">Very<br>self-directed</div>
+            <div class="spectrum-option">Mostly<br>independent</div>
+            <div class="spectrum-option">Likes clear<br>tasks</div>
+            <div class="spectrum-option">Needs<br>structure</div>
+          </div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Comfort with ambiguity</div>
+          <div class="spectrum">
+            <div class="spectrum-option">Thrives<br>in it</div>
+            <div class="spectrum-option">Comfortable<br>enough</div>
+            <div class="spectrum-option">Wants to<br>structure it</div>
+            <div class="spectrum-option">Needs<br>clarity first</div>
+          </div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Preferred async tools (docs, email, Slack, etc.)</div>
+          <div class="ws-input"></div>
+        </div>
+      </div>
+
+      <div class="ws-section">
+        <h3>Availability</h3>
+        <div class="ws-field">
+          <div class="ws-label">Confirmed availability (days, times, especially April)</div>
+          <div class="ws-input"></div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Hard constraints or conflicts</div>
+          <div class="ws-input"></div>
+        </div>
+      </div>
+
+      <div class="ws-section">
+        <h3>What lit up</h3>
+        <div class="ws-field">
+          <div class="ws-label">Which problems got the strongest reaction? (venue coordination, documentation, onboarding, AV, other)</div>
+          <div class="ws-input ws-input-tall"></div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Did they engage with the organizational dynamics? (Section 05)</div>
+          <div class="spectrum">
+            <div class="spectrum-option">Didn't<br>get there</div>
+            <div class="spectrum-option">Listened<br>politely</div>
+            <div class="spectrum-option">Asked<br>follow-ups</div>
+            <div class="spectrum-option">Started<br>diagnosing</div>
+          </div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">How did they respond to the "gentle door-open" about change management?</div>
+          <div class="ws-input ws-input-tall"></div>
+        </div>
+      </div>
+
+      <div class="ws-section">
+        <h3>Compensation and expectations</h3>
+        <div class="ws-field">
+          <div class="ws-label">How did they respond to the budget reality?</div>
+          <div class="ws-input"></div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Willing to start as volunteer? Mixed? Need paid from day one?</div>
+          <div class="ws-input"></div>
+        </div>
+      </div>
+
+      <div class="ws-section">
+        <h3>Your gut read</h3>
+        <div class="ws-field">
+          <div class="ws-label">Best-fit lane (check all that apply)</div>
+          <ul class="checklist">
+            <li>Event-day AV/Ops support (April weekends)</li>
+            <li>Venue coordination and host communication</li>
+            <li>Process documentation and systems thinking</li>
+            <li>Onboarding pathway design</li>
+            <li>Data entry and coordination support</li>
+            <li>Something else entirely</li>
+          </ul>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">Starter project idea (small, self-contained, low onboarding cost)</div>
+          <div class="ws-input ws-input-tall"></div>
+        </div>
+        <div class="ws-field">
+          <div class="ws-label">What do you need to talk to Ana about before next step?</div>
+          <div class="ws-input ws-input-tall"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Footer ── -->
+  </div>
+
+  <div class="footer">
+    OEFF 2026 — Internal planning document — Not for distribution
+  </div>
+
+</div>
+</body>
+</html>

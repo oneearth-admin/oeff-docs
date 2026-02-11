@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF 2026 — Contractor Agreement: Technical Coordinator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap');
+
+  :root {
+    --forest-50: #f0f4f2;
+    --forest-100: #dce5df;
+    --forest-200: #b8ccbf;
+    --forest-400: #7fa68d;
+    --forest-500: #5c7c6b;
+    --forest-600: #4a6356;
+    --forest-700: #3a4e44;
+    --forest-800: #2d3d35;
+    --forest-900: #1e2b24;
+    --cream-50: #fdfcfa;
+    --cream-100: #f7f5f2;
+    --cream-200: #ede9e3;
+    --cream-300: #ddd7ce;
+    --ember-400: #c4704b;
+
+    --color-ground: var(--cream-100);
+    --color-surface: var(--cream-50);
+    --color-surface-raised: #ffffff;
+    --color-primary: var(--forest-500);
+    --color-primary-hover: var(--forest-600);
+    --color-primary-subtle: var(--forest-100);
+    --color-text: var(--forest-900);
+    --color-text-secondary: var(--forest-700);
+    --color-text-tertiary: var(--forest-600);
+    --color-accent: var(--ember-400);
+    --color-border: var(--cream-300);
+    --color-border-light: var(--cream-200);
+
+    --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.06);
+    --shadow-medium: 0 4px 16px hsla(25, 40%, 30%, 0.08);
+    --radius-s: 6px;
+    --radius-m: 10px;
+    --radius-l: 14px;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-ground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: var(--color-primary);
+    color: var(--cream-50);
+    padding: 40px 48px 36px;
+  }
+
+  .header-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+
+  .content { padding: 36px 48px 60px; }
+
+  .section { margin-bottom: 32px; }
+
+  .section h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--color-text);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .section h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    margin-top: 20px;
+  }
+
+  .section h3:first-child { margin-top: 0; }
+
+  .section p { margin-bottom: 10px; font-size: 14.5px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .field {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-s);
+    padding: 12px 16px;
+  }
+
+  .field-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .field-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .field-value.editable {
+    color: var(--color-accent);
+    font-style: italic;
+  }
+
+  .scope-block {
+    background: var(--forest-50);
+    border: 1px solid var(--forest-200);
+    border-radius: var(--radius-m);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .scope-block h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--forest-600);
+    margin-bottom: 10px;
+  }
+
+  .scope-list {
+    list-style: none;
+    font-size: 14px;
+  }
+
+  .scope-list li {
+    padding: 5px 0 5px 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .scope-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary-subtle);
+    border: 2px solid var(--color-primary);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 28px 0;
+  }
+
+  .hours-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+    margin: 12px 0;
+    border-radius: var(--radius-s);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
+  }
+
+  .hours-table th {
+    background: var(--forest-50);
+    font-weight: 500;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .hours-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-border-light);
+    background: var(--color-surface-raised);
+  }
+
+  .hours-table tr:last-child td { border-bottom: none; }
+
+  .hours-table .phase-label { font-weight: 500; }
+  .hours-table .dates { color: var(--color-text-tertiary); font-size: 13px; }
+  .hours-table .hours-col { text-align: right; font-family: var(--font-mono); font-size: 13px; }
+
+  .hours-table tfoot td {
+    background: var(--forest-50);
+    font-weight: 600;
+    border-top: 2px solid var(--forest-200);
+  }
+
+  .note {
+    background: var(--cream-100);
+    border-left: 3px solid var(--color-border);
+    border-radius: var(--radius-s);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 12px 0;
+    line-height: 1.55;
+  }
+
+  .note.important {
+    background: #fef9f0;
+    border-left-color: var(--color-accent);
+  }
+
+  .sig-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .sig-line {
+    border-bottom: 1px solid var(--color-text);
+    height: 40px;
+    margin-bottom: 6px;
+  }
+
+  .sig-label {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+  }
+
+  .footer {
+    padding: 24px 48px;
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  @media print {
+    body { background: white; }
+    .page { max-width: none; box-shadow: none; }
+    .header { padding: 28px 36px 24px; }
+    .content { padding: 24px 36px 40px; }
+    .section { page-break-inside: avoid; }
+    .footer { padding: 16px 36px; }
+    @page { margin: 0.5in; size: letter; }
+  }
+
+  @media screen {
+    .page {
+      box-shadow: var(--shadow-medium);
+      margin: 24px auto;
+      border-radius: var(--radius-l);
+      overflow: hidden;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">One Earth Film Festival 2026</div>
+    <h1>Contractor Agreement<br>Technical Coordinator</h1>
+    <div class="header-sub">Garen Hudson — Amended scope reflecting actual work</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ── PARTIES ── -->
+    <div class="section">
+      <h2>Agreement Overview</h2>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Contractor</div>
+          <div class="field-value">Garen Hudson</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Organization</div>
+          <div class="field-value">One Earth Film Festival</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Role</div>
+          <div class="field-value">Technical Coordinator</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Reports To</div>
+          <div class="field-value">Ana Garcia Doyle, Executive Director</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Term</div>
+          <div class="field-value">November 2025 — May 2026</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Rate</div>
+          <div class="field-value">$70 / hour</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Budget Cap</div>
+          <div class="field-value">$10,000</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Availability</div>
+          <div class="field-value">Evenings & weekends; remote during fest</div>
+        </div>
+      </div>
+
+      <p>This agreement formalizes the scope of work Garen Hudson has been performing for OEFF 2026 since November 2025, in ongoing coordination with the Executive Director. Both parties acknowledge that work began prior to formal contract execution and agree that pre-contract work is compensable under the same terms outlined here.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SCOPE ── -->
+    <div class="section">
+      <h2>Scope of Work</h2>
+
+      <p>The Technical Coordinator role spans two areas that have evolved together through OEFF's shift to a distributed contractor model. Both are part of this agreement.</p>
+
+      <div class="scope-block">
+        <h4>Area 1: Technical Operations</h4>
+        <ul class="scope-list">
+          <li>Venue technical assessment and tier classification</li>
+          <li>AV planning and vendor coordination across venue tiers</li>
+          <li>Film file management, QC, and accessibility compliance</li>
+          <li>Day-of technical support coordination (remote)</li>
+          <li>Equipment and rental budgeting</li>
+        </ul>
+      </div>
+
+      <div class="scope-block">
+        <h4>Area 2: Systems & Coordination</h4>
+        <ul class="scope-list">
+          <li>Data architecture and spreadsheet infrastructure (V7 maintenance)</li>
+          <li>Communication platform migration (shared mailbox setup, adoption)</li>
+          <li>Team onboarding design (intake surveys, welcome materials, guides)</li>
+          <li>Process documentation and institutional knowledge capture</li>
+          <li>Host Guide and Docs Site development and maintenance</li>
+          <li>Contractor and volunteer recruitment, evaluation, and onboarding</li>
+          <li>Cross-team coordination and workflow design</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        Area 2 reflects work that emerged organically as OEFF transitioned from a single-person technical role to a distributed team. This scope was previously unformalized. Naming it here ensures visibility and prevents future scope ambiguity.
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── HOURS ── -->
+    <div class="section">
+      <h2>Hour Allocation by Phase</h2>
+
+      <table class="hours-table">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Dates</th>
+            <th style="text-align:right">Est. Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="phase-label">Pre-contract planning</td>
+            <td class="dates">Nov — Dec 2025</td>
+            <td class="hours-col">20</td>
+          </tr>
+          <tr>
+            <td class="phase-label">Infrastructure & onboarding</td>
+            <td class="dates">Jan — Feb 2026</td>
+            <td class="hours-col">40</td>
+          </tr>
+          <tr>
+            <td class="phase-label">Pre-festival coordination</td>
+            <td class="dates">Mar — mid-Apr 2026</td>
+            <td class="hours-col">45</td>
+          </tr>
+          <tr>
+            <td class="phase-label">Festival week (remote)</td>
+            <td class="dates">Apr 22 — 28, 2026</td>
+            <td class="hours-col">15</td>
+          </tr>
+          <tr>
+            <td class="phase-label">Post-festival wrap</td>
+            <td class="dates">May 2026</td>
+            <td class="hours-col">10</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">Estimated total</td>
+            <td class="hours-col">~130 hrs</td>
+          </tr>
+          <tr>
+            <td colspan="2">At $70/hr, estimated total</td>
+            <td class="hours-col">~$9,100</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="note important">
+        Hours reflect budgeted allocation, not a cap on engagement. Garen anticipates contributing additional time beyond these estimates as part of ongoing organizational investment in OEFF's infrastructure and capacity. Compensable hours are tracked against the budget cap; contributed hours beyond the cap are at Garen's discretion and reflect the collaborative, mission-aligned nature of this work.
+      </div>
+
+      <p>Weekly hours fluctuate by phase. Current estimate is 6-10 hours/week through pre-festival, tapering to remote availability during festival week due to primary employment constraints. Hours in the Pre-contract and Infrastructure phases reflect work already performed and will be invoiced upon contract execution.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── BOUNDARIES ── -->
+    <div class="section">
+      <h2>Scope Boundaries</h2>
+
+      <h3>Included</h3>
+      <p>All work described above in Areas 1 and 2, including coordination with other OEFF contractors and volunteers in the technical domain.</p>
+
+      <h3>Not included</h3>
+      <ul class="scope-list">
+        <li>On-site AV operation during festival week (covered by day-of team)</li>
+        <li>External marketing, social media, or public communications</li>
+        <li>Fundraising, grant writing, or donor management</li>
+        <li>Direct supervision of interns (coordination and onboarding support only)</li>
+      </ul>
+
+      <h3>Scope change process</h3>
+      <p>If new work arises beyond this scope, Garen will flag it before beginning. If it can be absorbed within the budget cap, a brief acknowledgment from Ana via text, email, or verbal confirmation is sufficient. If it requires additional budget, both parties will discuss before work begins.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── COLLABORATION MODEL ── -->
+    <div class="section">
+      <h2>Collaboration Model</h2>
+
+      <h3>Availability</h3>
+      <p>Garen holds full-time AV employment during weekday business hours. OEFF work happens on evenings (after 5pm) and weekends, with brief async check-ins possible during the workday. Garen will attend the Wednesday 11:45am squad meeting when schedule permits but cannot guarantee weekly attendance.</p>
+
+      <h3>Communication</h3>
+      <p>Primary channels: email and text for async coordination, with scheduled calls for decision-making. Live calls are preferred over document review for items requiring Ana's input or approval.</p>
+
+      <h3>Delegation</h3>
+      <p>Part of this role involves identifying work that can be delegated to other contractors or volunteers. When Garen recommends bringing in additional support, a brief conversation with Ana is the approval mechanism — not a formal proposal process. Subcontractor compensation is managed separately by OEFF from the collaborator pool and does not draw from this agreement's budget cap. Garen remains the primary point of coordination for any delegated work within the technical domain.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── COMPENSATION ── -->
+    <div class="section">
+      <h2>Compensation & Invoicing</h2>
+
+      <h3>Rate</h3>
+      <p>$70 per hour, all work types. No distinction between Area 1 and Area 2 work.</p>
+
+      <h3>Budget cap</h3>
+      <p>$10,000 total for the contract term. When 75% of the cap ($7,500) has been invoiced, both parties will check in to review remaining scope and determine whether to adjust the cap, prioritize remaining work, or wind down the engagement.</p>
+
+      <h3>Back-pay</h3>
+      <p>Work performed from November 2025 through contract execution date is compensable at the agreed rate. Garen will submit an itemized hour log for this period within two weeks of signing.</p>
+
+      <h3>Invoicing</h3>
+      <p>Monthly invoices with brief descriptions of work completed, submitted by the 5th of the following month. Payment within 30 days of invoice receipt.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── GENERAL TERMS ── -->
+    <div class="section">
+      <h2>General Terms</h2>
+
+      <h3>Independent contractor status</h3>
+      <p>Garen Hudson operates as an independent contractor, not an employee of One Earth Film Festival or One Earth Collective. Garen is responsible for their own taxes, insurance, and benefits. Nothing in this agreement creates an employer-employee relationship.</p>
+
+      <h3>Work product</h3>
+      <p>Deliverables created specifically for OEFF — including configured systems, organizational documentation, and data architecture containing OEFF data — are the property of One Earth Film Festival. Garen retains all rights to pre-existing tools, methodologies, frameworks, and generalized knowledge developed during the engagement. Garen may reference this work in professional portfolio materials, case studies, and future consulting engagements, provided that confidential organizational data (donor information, financial details, internal communications) is not disclosed. OEFF may be referenced by name as a client with prior approval of specific materials.</p>
+
+      <h3>Termination</h3>
+      <p>Either party may end this agreement with two weeks written notice. In the event of early termination, Garen will be compensated for all hours worked through the termination date, including any outstanding back-pay. Garen will provide reasonable transition support during the notice period.</p>
+
+      <h3>Confidentiality</h3>
+      <p>Garen will treat OEFF's internal data, donor information, and organizational communications as confidential. This does not restrict Garen from discussing general methodologies, approaches, or publicly available information about OEFF.</p>
+
+      <h3>Transition</h3>
+      <p>In the event this engagement concludes, Garen will ensure all systems and processes are documented sufficiently for another person to maintain them, and will transfer any credentials or access within 14 days. Reasonable transition support is included within the notice period.</p>
+
+      <h3>Governing law</h3>
+      <p>This agreement is governed by the laws of the State of Illinois. This engagement has been authorized within OEFF's board-approved budget for the 2026 festival season.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── PILOT YEAR ── -->
+    <div class="section">
+      <h2>Pilot Year Acknowledgment</h2>
+
+      <p>OEFF 2026 is operating under a new distributed contractor model. This is a pilot year. Both parties acknowledge that:</p>
+
+      <ul class="scope-list">
+        <li>Roles and workflows are still being defined and may shift</li>
+        <li>This agreement reflects best current understanding of the work</li>
+        <li>Flexibility is expected and valued — but flexibility goes both directions</li>
+        <li>A post-festival retrospective will inform whether and how this role continues</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SIGNATURES ── -->
+    <div class="section">
+      <h2>Agreement</h2>
+
+      <p>By signing below, both parties agree to the terms described in this document.</p>
+
+      <div class="sig-block">
+        <div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Garen Hudson, Technical Coordinator</div>
+          <div class="sig-label" style="margin-top: 24px;">Date: _______________</div>
+        </div>
+        <div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Ana Garcia Doyle, Executive Director</div>
+          <div class="sig-label" style="margin-top: 24px;">Date: _______________</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    OEFF 2026 — Contractor Agreement — Confidential
+  </div>
+
+</div>
+</body>
+</html>
