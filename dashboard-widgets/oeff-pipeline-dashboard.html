@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF 2026 Pipeline Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       BEAUTIFUL-FIRST DESIGN SYSTEM
+       Domain: OEFF (Forest Palette)
+       ======================================== */
+
+    :root {
+      --forest-canopy: #1a2e22;
+      --forest-understory: #2d4a3a;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #5c7c6b;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+
+      --color-ink: #2c2825;
+      --color-ink-soft: #5c5550;
+      --color-ink-muted: #8a8580;
+      --color-cream: #f7f5f2;
+      --color-paper: #faf9f7;
+      --color-linen: #f0ede8;
+
+      --signal-critical: #c44b4b;
+      --signal-warning: #996622;
+      --signal-success: #5c8c4b;
+      --signal-info: #4b7c8c;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+      --font-mono: 'Source Code Pro', monospace;
+    }
+
+    :root {
+      --color-ground: var(--color-cream);
+      --color-surface: var(--color-paper);
+      --color-surface-raised: #ffffff;
+      --color-surface-inset: var(--color-linen);
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-light: var(--forest-mist);
+      --color-text: var(--color-ink);
+      --color-text-soft: var(--color-ink-soft);
+      --color-text-muted: var(--color-ink-muted);
+      --shadow-color: hsla(30, 20%, 20%, 0.08);
+      --shadow-soft: 0 2px 8px var(--shadow-color);
+      --shadow-medium: 0 4px 16px var(--shadow-color);
+      --radius-default: 12px;
+      --radius-sm: 8px;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-ground);
+      padding: var(--space-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+      font-optical-sizing: auto;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      margin-bottom: var(--space-xl);
+    }
+
+    .card {
+      background: var(--color-surface-raised);
+      border-radius: var(--radius-default);
+      box-shadow: var(--shadow-medium);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-xs);
+      border-bottom: 2px solid var(--color-primary-light);
+    }
+
+    /* ── Metrics Grid ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .metric-card {
+      background: var(--color-surface-raised);
+      border-radius: var(--radius-default);
+      box-shadow: var(--shadow-soft);
+      padding: var(--space-lg);
+      text-align: center;
+      border-top: 3px solid var(--color-primary-light);
+    }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-primary-deep);
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      font-size: 0.875rem;
+      color: var(--color-text-soft);
+      margin-top: var(--space-xs);
+    }
+
+    /* ── Progress Rings ── */
+    .rings-row {
+      display: flex;
+      gap: var(--space-xl);
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: var(--space-md) 0;
+    }
+
+    .ring-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .ring-svg {
+      width: 120px;
+      height: 120px;
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: var(--color-surface-inset);
+      stroke-width: 10;
+    }
+
+    .ring-fill {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .ring-fill.primary { stroke: var(--color-primary); }
+    .ring-fill.success { stroke: var(--signal-success); }
+    .ring-fill.warning { stroke: var(--signal-warning); }
+    .ring-fill.info { stroke: var(--signal-info); }
+    .ring-fill.critical { stroke: var(--signal-critical); }
+
+    .ring-center {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      fill: var(--color-text);
+      text-anchor: middle;
+      dominant-baseline: central;
+      transform: rotate(90deg);
+      transform-origin: center;
+    }
+
+    .ring-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .ring-sublabel {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Pipeline Funnel ── */
+    .funnel {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: var(--space-md) 0;
+    }
+
+    .funnel-stage {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-sm);
+      min-height: 44px;
+      transition: background 0.2s;
+    }
+
+    .funnel-stage:hover {
+      background: var(--color-surface-inset);
+    }
+
+    .funnel-bar {
+      height: 28px;
+      border-radius: 14px;
+      transition: width 0.8s ease;
+    }
+
+    .funnel-count {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      min-width: 40px;
+      text-align: right;
+      color: var(--color-text);
+    }
+
+    .funnel-label {
+      font-size: 0.9rem;
+      color: var(--color-text-soft);
+      flex: 1;
+    }
+
+    /* ── Action Items ── */
+    .action-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .action-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--color-surface-inset);
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--signal-warning);
+      min-height: 44px;
+    }
+
+    .action-count {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--signal-warning);
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .action-label {
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+
+    .action-zero {
+      border-left-color: var(--signal-success);
+    }
+
+    .action-zero .action-count {
+      color: var(--signal-success);
+    }
+
+    /* ── Data Notice ── */
+    .data-notice {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      padding: var(--space-md);
+      border-top: 1px solid var(--color-surface-inset);
+      margin-top: var(--space-md);
+    }
+
+    .data-notice a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .data-notice a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      body { padding: var(--space-md); }
+      h1 { font-size: 1.5rem; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+      .metric-value { font-size: 2rem; }
+      .rings-row { gap: var(--space-md); }
+      .ring-svg { width: 100px; height: 100px; }
+      .funnel-count { font-size: 1.1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+      .rings-row { flex-direction: column; align-items: center; }
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>OEFF 2026 Pipeline Dashboard</h1>
+<p class="subtitle">One Eleven Film Festival — event pipeline overview</p>
+
+<!-- ── Top-Level Metrics ── -->
+<div class="metrics-grid" aria-label="Key metrics" role="region">
+  <div class="metric-card">
+    <div class="metric-value" id="m-hosts">100</div>
+    <div class="metric-label">Total Hosts</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="m-events">31</div>
+    <div class="metric-label">Events 2026</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="m-films">12</div>
+    <div class="metric-label">Films 2026</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="m-intake">14</div>
+    <div class="metric-label">Intake Responses</div>
+  </div>
+</div>
+
+<!-- ── Progress Rings ── -->
+<div class="card">
+  <div class="card-title">Completion Progress</div>
+  <div class="rings-row" aria-label="Progress indicators" role="region">
+
+    <div class="ring-item">
+      <svg class="ring-svg" viewBox="0 0 120 120" aria-label="Pipeline: 48% scheduled">
+        <circle class="ring-bg" cx="60" cy="60" r="50" />
+        <circle class="ring-fill primary" cx="60" cy="60" r="50"
+          stroke-dasharray="314.16"
+          stroke-dashoffset="163" />
+        <text class="ring-center" x="60" y="60">48%</text>
+      </svg>
+      <span class="ring-label">Pipeline</span>
+      <span class="ring-sublabel">15 of 31 scheduled</span>
+    </div>
+
+    <div class="ring-item">
+      <svg class="ring-svg" viewBox="0 0 120 120" aria-label="Film intake: 75% received">
+        <circle class="ring-bg" cx="60" cy="60" r="50" />
+        <circle class="ring-fill success" cx="60" cy="60" r="50"
+          stroke-dasharray="314.16"
+          stroke-dashoffset="79" />
+        <text class="ring-center" x="60" y="60">75%</text>
+      </svg>
+      <span class="ring-label">Film Intake</span>
+      <span class="ring-sublabel">9 of 12 received</span>
+    </div>
+
+    <div class="ring-item">
+      <svg class="ring-svg" viewBox="0 0 120 120" aria-label="Intake matching: 36% matched">
+        <circle class="ring-bg" cx="60" cy="60" r="50" />
+        <circle class="ring-fill warning" cx="60" cy="60" r="50"
+          stroke-dasharray="314.16"
+          stroke-dashoffset="201" />
+        <text class="ring-center" x="60" y="60">36%</text>
+      </svg>
+      <span class="ring-label">Intake Matching</span>
+      <span class="ring-sublabel">5 of 14 matched</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Pipeline Funnel ── -->
+<div class="card">
+  <div class="card-title">Event Pipeline</div>
+  <div class="funnel" aria-label="Pipeline funnel" role="list">
+
+    <div class="funnel-stage" role="listitem">
+      <span class="funnel-count">15</span>
+      <div class="funnel-bar" style="width: 100%; background: var(--color-primary);"></div>
+      <span class="funnel-label">Scheduled</span>
+    </div>
+
+    <div class="funnel-stage" role="listitem">
+      <span class="funnel-count">5</span>
+      <div class="funnel-bar" style="width: 33%; background: var(--color-primary-light);"></div>
+      <span class="funnel-label">Confirmed Interest</span>
+    </div>
+
+    <div class="funnel-stage" role="listitem">
+      <span class="funnel-count">9</span>
+      <div class="funnel-bar" style="width: 60%; background: var(--forest-lichen);"></div>
+      <span class="funnel-label">Interested</span>
+    </div>
+
+    <div class="funnel-stage" role="listitem">
+      <span class="funnel-count">2</span>
+      <div class="funnel-bar" style="width: 13%; background: var(--color-text-muted);"></div>
+      <span class="funnel-label">Other / Unassigned</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Film Status ── -->
+<div class="card">
+  <div class="card-title">Film Readiness</div>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value" style="color: var(--signal-success);">9</div>
+      <div class="metric-label">Intake Complete</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" style="color: var(--signal-warning);">3</div>
+      <div class="metric-label">Intake Missing</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" id="m-contacts">9</div>
+      <div class="metric-label">Film Contacts</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" style="color: var(--signal-info);">7</div>
+      <div class="metric-label">Coming Soon Slots</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Action Items ── -->
+<div class="card">
+  <div class="card-title">Action Items</div>
+  <ul class="action-list" aria-label="Items needing attention" role="list">
+    <li class="action-item" id="action-dates">
+      <span class="action-count">--</span>
+      <span class="action-label">Events without confirmed dates</span>
+    </li>
+    <li class="action-item" id="action-contacts">
+      <span class="action-count">--</span>
+      <span class="action-label">Events without contact assigned</span>
+    </li>
+    <li class="action-item" id="action-intake">
+      <span class="action-count">3</span>
+      <span class="action-label">Films missing intake forms</span>
+    </li>
+    <li class="action-item" id="action-unmatched">
+      <span class="action-count">9</span>
+      <span class="action-label">Unmatched intake responses</span>
+    </li>
+  </ul>
+</div>
+
+<div class="data-notice">
+  Data shown is from the V7 data snapshot. Connect to live Google Sheets by publishing named ranges and configuring the fetch URL below.
+  See <a href="../Google-Sheets-Quick-Start.md">Quick Start Guide</a> for setup instructions.
+</div>
+
+<script>
+  // ── GOOGLE SHEETS INTEGRATION ──
+  // To connect live data:
+  // 1. Publish 'pipeline_summary' named range in V7 (File > Share > Publish to web)
+  // 2. Set the URL below to the published CSV URL
+  // 3. Uncomment fetchLiveData() call at the bottom
+
+  const PUBLISHED_CSV_URL = ''; // YOUR_PUBLISHED_CSV_URL_HERE
+
+  // Mock data from V7 snapshot (used until live connection configured)
+  const MOCK_DATA = {
+    hosts: 100,
+    events2026: 31,
+    films2026: 12,
+    filmContacts: 9,
+    intakeResponses: 14,
+    unmatchedIntake: 9,
+    pipelineScheduled: 15,
+    pipelineConfirmedInterest: 5,
+    pipelineInterested: 9,
+    filmsIntakeComplete: 9,
+    filmsIntakeMissing: 3,
+    comingSoonSlots: 7
+  };
+
+  function updateDashboard(data) {
+    // Top metrics
+    document.getElementById('m-hosts').textContent = data.hosts;
+    document.getElementById('m-events').textContent = data.events2026;
+    document.getElementById('m-films').textContent = data.films2026;
+    document.getElementById('m-intake').textContent = data.intakeResponses;
+    document.getElementById('m-contacts').textContent = data.filmContacts;
+
+    // Progress rings
+    updateRing(0, data.pipelineScheduled, data.events2026);
+    updateRing(1, data.filmsIntakeComplete, data.films2026);
+    updateRing(2, data.intakeResponses - data.unmatchedIntake, data.intakeResponses);
+
+    // Funnel bars
+    var maxPipeline = Math.max(data.pipelineScheduled, data.pipelineConfirmedInterest, data.pipelineInterested, 1);
+    var bars = document.querySelectorAll('.funnel-bar');
+    var counts = [data.pipelineScheduled, data.pipelineConfirmedInterest, data.pipelineInterested];
+    var funnelCounts = document.querySelectorAll('.funnel-count');
+    for (var i = 0; i < counts.length && i < bars.length; i++) {
+      bars[i].style.width = Math.round((counts[i] / maxPipeline) * 100) + '%';
+      funnelCounts[i].textContent = counts[i];
+    }
+    // "Other" = total minus known pipeline stages
+    var other = data.events2026 - data.pipelineScheduled - data.pipelineConfirmedInterest - data.pipelineInterested;
+    if (other < 0) other = 0;
+    if (bars[3]) bars[3].style.width = Math.round((other / maxPipeline) * 100) + '%';
+    if (funnelCounts[3]) funnelCounts[3].textContent = other;
+
+    // Action items
+    updateAction('action-intake', data.filmsIntakeMissing);
+    updateAction('action-unmatched', data.unmatchedIntake);
+  }
+
+  function updateRing(index, value, total) {
+    var rings = document.querySelectorAll('.ring-fill');
+    var centers = document.querySelectorAll('.ring-center');
+    var sublabels = document.querySelectorAll('.ring-sublabel');
+
+    if (!rings[index] || total === 0) return;
+
+    var pct = Math.round((value / total) * 100);
+    var circumference = 314.16;
+    var offset = circumference - (circumference * pct / 100);
+
+    rings[index].setAttribute('stroke-dashoffset', offset);
+    if (centers[index]) centers[index].textContent = pct + '%';
+    if (sublabels[index]) sublabels[index].textContent = value + ' of ' + total;
+  }
+
+  function updateAction(id, count) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var countEl = el.querySelector('.action-count');
+    if (countEl) countEl.textContent = count;
+    if (count === 0) {
+      el.classList.add('action-zero');
+    } else {
+      el.classList.remove('action-zero');
+    }
+  }
+
+  // async function fetchLiveData() {
+  //   if (!PUBLISHED_CSV_URL) return;
+  //   try {
+  //     var resp = await fetch(PUBLISHED_CSV_URL);
+  //     var text = await resp.text();
+  //     var rows = text.split('\n').map(function(r) { return r.split(','); });
+  //     var data = {};
+  //     rows.forEach(function(row) {
+  //       if (row.length >= 2) {
+  //         var key = row[0].trim().toLowerCase().replace(/\s+/g, '_');
+  //         var val = parseInt(row[1].trim(), 10);
+  //         if (!isNaN(val)) data[key] = val;
+  //       }
+  //     });
+  //     updateDashboard(data);
+  //   } catch (e) {
+  //     // Silent fail — keep mock data
+  //   }
+  // }
+
+  // Initialize with mock data
+  updateDashboard(MOCK_DATA);
+
+  // Uncomment to enable live data:
+  // fetchLiveData();
+  // setInterval(fetchLiveData, 5 * 60 * 1000); // Refresh every 5 minutes
+</script>
+
+</body>
+</html>
