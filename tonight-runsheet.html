@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tonight's Screening — OEFF Presenter Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Source+Code+Pro:wght@400;600&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Primitives (from tokens-primitives.css) ===== */
+    :root {
+      /* Forest scale — OEFF primary ground */
+      --forest-canopy: #1a2e22;
+      --forest-understory: #2d4a3a;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #5c7c6b;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+
+      /* Anchors — stable across all domains */
+      --color-ink: #2c2825;
+      --color-ink-soft: #5c5550;
+      --color-ink-muted: #8a8580;
+      --color-cream: #f7f5f2;
+      --color-paper: #faf9f7;
+      --color-linen: #f0ede8;
+
+      /* Signals — status only, never decoration */
+      --signal-critical: #c44b4b;
+      --signal-warning: #c4944b;
+      --signal-success: #5c8c4b;
+      --signal-info: #4b7c8c;
+
+      /* ===== Semantic Layer (OEFF template) ===== */
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-light: var(--forest-mist);
+      --color-accent: var(--forest-sage);
+      --color-accent-deep: var(--forest-deep);
+      --color-accent-light: var(--forest-mist);
+      --color-primary-darkest: var(--forest-canopy);
+
+      --color-ground: var(--color-cream);
+      --color-surface: #ffffff;
+      --color-surface-inset: var(--color-linen);
+
+      --color-text: var(--color-ink);
+      --color-text-soft: var(--color-ink-soft);
+      --color-text-muted: var(--color-ink-muted);
+
+      --color-border: #e8e4e0;
+
+      /* Derived surfaces (signal-tinted for callouts) */
+      --surface-tip: #e8f0eb;
+      --surface-warning: #f5ede0;
+      --surface-important: #f5e0e0;
+
+      /* App tag surfaces (Forest depth variants) */
+      --surface-tag-slides: var(--forest-mist);
+      --surface-tag-vlc: #dce8e0;
+
+      /* ===== Typography ===== */
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+      --font-mono: 'Source Code Pro', monospace;
+
+      /* Fluid type scale */
+      --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+      --text-base: clamp(1rem, 0.925rem + 0.375vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+      --text-xl: clamp(1.25rem, 1.1rem + 0.625vw, 1.5rem);
+      --text-2xl: clamp(1.5rem, 1.3rem + 0.875vw, 1.875rem);
+      --text-3xl: clamp(1.875rem, 1.6rem + 1.25vw, 2.5rem);
+
+      /* Fluid spacing */
+      --space-1: clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem);
+      --space-2: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
+      --space-3: clamp(0.75rem, 0.6rem + 0.75vw, 1.125rem);
+      --space-4: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+      --space-5: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+      --space-6: clamp(2rem, 1.6rem + 2vw, 3rem);
+
+      /* Radii (from warm-stack tokens) */
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+
+      /* Shadows — forest-green tinted per OEFF template */
+      --shadow-color: hsla(150, 20%, 30%, 0.1);
+      --shadow-warm: 0 2px 12px var(--shadow-color);
+      --shadow-soft: 0 2px 8px var(--shadow-color);
+
+      /* Component tokens */
+      --card-radius: var(--radius-lg);
+      --card-shadow: var(--shadow-soft);
+      --card-border: var(--color-border);
+      --table-header-bg: var(--color-linen);
+      --table-border: #f0f2f5;
+      --table-row-hover: var(--color-cream);
+    }
+
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--color-text);
+      background: var(--color-ground);
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: var(--space-5) var(--space-4);
+    }
+
+    /* ===== Skip Link ===== */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-3);
+      background: var(--color-primary);
+      color: #fff;
+      padding: var(--space-2) var(--space-3);
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body-sans);
+      font-size: var(--text-sm);
+      z-index: 100;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: var(--space-2); }
+
+    /* ===== Typography ===== */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      line-height: 1.2;
+      color: var(--color-text);
+    }
+
+    h1 {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+    }
+
+    h2 {
+      font-size: var(--text-2xl);
+      font-weight: 600;
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-2);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    h3 {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-top: var(--space-5);
+      margin-bottom: var(--space-2);
+    }
+
+    p { margin-bottom: var(--space-3); }
+
+    /* ===== Header ===== */
+    header {
+      margin-bottom: var(--space-6);
+    }
+
+    .subtitle {
+      font-family: var(--font-body-sans);
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    /* ===== The Big Picture box ===== */
+    .big-picture {
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-5);
+      box-shadow: var(--shadow-warm);
+    }
+
+    .big-picture h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      color: var(--color-primary);
+      font-size: var(--text-xl);
+    }
+
+    .big-picture ol {
+      margin: var(--space-3) 0 0 var(--space-4);
+      font-size: var(--text-lg);
+    }
+
+    .big-picture li {
+      margin-bottom: var(--space-2);
+    }
+
+    .big-picture li strong {
+      color: var(--color-primary);
+    }
+
+    /* ===== Cards ===== */
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--card-radius);
+      padding: var(--space-4) var(--space-5);
+      margin-bottom: var(--space-4);
+      box-shadow: var(--card-shadow);
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .card--alt {
+      border-left-color: var(--color-primary-deep);
+    }
+
+    .card--alt h3 {
+      color: var(--color-primary-deep);
+    }
+
+    /* ===== Step Lists ===== */
+    .steps {
+      list-style: none;
+      counter-reset: step;
+      padding-left: 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 3.25rem;
+      margin-bottom: var(--space-4);
+      min-height: 2.5rem;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      width: 2.25rem;
+      height: 2.25rem;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-body-sans);
+      font-weight: 600;
+      font-size: var(--text-base);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .steps li strong {
+      display: block;
+      font-family: var(--font-body-sans);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    /* ===== Keyboard Shortcuts ===== */
+    kbd {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      background: var(--color-ground);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 0.1em 0.5em;
+      box-shadow: 0 1px 0 var(--shadow-color);
+      white-space: nowrap;
+    }
+
+    /* ===== Callout Boxes ===== */
+    .callout {
+      border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-4);
+      margin: var(--space-4) 0;
+      font-family: var(--font-body-sans);
+      font-size: var(--text-base);
+      line-height: 1.5;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: var(--space-1);
+    }
+
+    .callout--tip {
+      background: var(--surface-tip);
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .callout--warning {
+      background: var(--surface-warning);
+      border-left: 4px solid var(--signal-warning);
+    }
+
+    .callout--important {
+      background: var(--surface-important);
+      border-left: 4px solid var(--signal-critical);
+    }
+
+    /* ===== Two-column layout for keyboard ref ===== */
+    .key-ref {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      margin: var(--space-3) 0;
+    }
+
+    .key-ref dt {
+      font-family: var(--font-body-sans);
+      font-weight: 600;
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-1);
+    }
+
+    .key-ref dd {
+      margin: 0 0 var(--space-3) 0;
+    }
+
+    @media (max-width: 600px) {
+      .key-ref { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Show Flow Table ===== */
+    .flow-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: var(--space-4) 0;
+      font-family: var(--font-body-sans);
+      font-size: var(--text-base);
+    }
+
+    .flow-table th {
+      text-align: left;
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .flow-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+    .flow-table th:last-child { border-radius: 0 var(--radius-sm) 0 0; }
+
+    .flow-table td {
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--table-border);
+      vertical-align: top;
+    }
+
+    .flow-table tr:last-child td { border-bottom: none; }
+
+    .flow-table tr:nth-child(even) td {
+      background: var(--table-row-hover);
+    }
+
+    .flow-table .app-tag {
+      display: inline-block;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      padding: 0.1em 0.6em;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    .app-tag--slides {
+      background: var(--surface-tag-slides);
+      color: var(--color-primary-deep);
+    }
+
+    .app-tag--vlc {
+      background: var(--surface-tag-vlc);
+      color: var(--color-primary-darkest);
+    }
+
+    /* ===== Troubleshooting ===== */
+    .trouble-item {
+      margin-bottom: var(--space-4);
+    }
+
+    .trouble-item dt {
+      font-family: var(--font-body-sans);
+      font-weight: 600;
+      color: var(--signal-critical);
+      margin-bottom: var(--space-1);
+    }
+
+    .trouble-item dd {
+      margin: 0;
+      padding-left: var(--space-4);
+      border-left: 2px solid var(--color-border);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+      font-family: var(--font-body-sans);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    /* ===== Print ===== */
+    @media print {
+      body {
+        max-width: 100%;
+        padding: 0.5in;
+        font-size: 11pt;
+        background: #fff;
+      }
+      .card, .big-picture, .callout {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+      h2 { break-after: avoid; }
+      .skip-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to guide</a>
+
+<header>
+  <h1>Tonight's Screening</h1>
+  <p class="subtitle">A presenter guide for running slides and trailers</p>
+</header>
+
+<main id="main">
+
+  <!-- ===== THE BIG PICTURE ===== -->
+  <div class="big-picture">
+    <h2>The Big Picture</h2>
+    <p>You will use two apps tonight — and <em>only</em> two apps. Close everything else on the computer before you begin. No extra browser tabs, no email, no Slack. A clean screen means fewer surprises.</p>
+    <ol>
+      <li><strong>Google Slides</strong> (in Chrome) — for the presentation deck</li>
+      <li><strong>VLC</strong> — for the opening and closing trailers</li>
+    </ol>
+    <p>Slides run in your browser. VLC runs in its own window. You will switch between them with <kbd>Cmd</kbd> + <kbd>Tab</kbd>.</p>
+  </div>
+
+  <!-- ===== WELL BEFORE THE SHOW ===== -->
+  <h2>Well Before the Show</h2>
+
+  <div class="callout callout--important">
+    <strong>Download VLC in advance</strong>
+    VLC is free and available at <a href="https://www.videolan.org" style="color: inherit; font-weight: 600;">videolan.org</a>. Download and install it on the presenting computer before the event — not the night of. Venue Wi-Fi can be slow or unreliable, and you do not want to depend on it.
+  </div>
+
+  <div class="callout callout--tip">
+    <strong>Clear the desktop</strong>
+    Before you set anything up, close every open app, tab, and window on the computer. You want only two things running: Chrome with the Google Slides tab, and VLC. Notifications, too — turn on Do Not Disturb (<kbd>Control</kbd> + <kbd>Click</kbd> the clock in the menu bar, or open System Settings &rarr; Focus &rarr; Do Not Disturb) so nothing pops up mid-presentation.
+  </div>
+
+  <!-- ===== BEFORE THE SHOW ===== -->
+  <h2>15 Minutes Before</h2>
+  <p>Do these steps at least 15 minutes before the audience arrives.</p>
+
+  <div class="card">
+    <h3>Set Up VLC</h3>
+    <ol class="steps">
+      <li>
+        <strong>Open VLC</strong>
+        Find VLC in your Applications folder (or Spotlight: <kbd>Cmd</kbd> + <kbd>Space</kbd>, type "VLC").
+      </li>
+      <li>
+        <strong>Load the trailer playlist</strong>
+        Go to <kbd>File</kbd> &rarr; <kbd>Open File</kbd>. Select the playlist file that contains the opening and closing trailers. If you have individual files instead of a playlist, drag them into the VLC window in the correct order: opening trailer first, closing trailer second.
+      </li>
+      <li>
+        <strong>Confirm the order</strong>
+        Open the playlist panel: <kbd>View</kbd> &rarr; <kbd>Playlist</kbd>. You should see two items — opening trailer on top, closing trailer below. Drag to reorder if needed.
+      </li>
+      <li>
+        <strong>Pause immediately</strong>
+        Press <kbd>Space</kbd> to start playback, then <kbd>Space</kbd> again to pause. This loads the first frame of the opening trailer so it is ready to go.
+      </li>
+      <li>
+        <strong>Do not go fullscreen yet</strong>
+        Leave VLC windowed for now. You will go fullscreen right before you play each trailer.
+      </li>
+    </ol>
+  </div>
+
+  <div class="card card--alt">
+    <h3>Set Up Google Slides</h3>
+    <ol class="steps">
+      <li>
+        <strong>Open the slide deck</strong>
+        Open Chrome (or your browser) and navigate to the Google Slides presentation.
+      </li>
+      <li>
+        <strong>Enter presenter mode</strong>
+        Click the <kbd>Slideshow</kbd> button in the top right, or press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> to present from the first slide.
+      </li>
+      <li>
+        <strong>Verify it fills the screen</strong>
+        The slides should take over the full display. If you see browser chrome, press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> to toggle browser fullscreen.
+      </li>
+      <li>
+        <strong>Exit presenter mode for now</strong>
+        Press <kbd>Esc</kbd> to leave slideshow mode. You will re-enter it when the show starts.
+      </li>
+    </ol>
+  </div>
+
+  <div class="callout callout--tip">
+    <strong>Sound check</strong>
+    Play a few seconds of the opening trailer with the room's speakers before anyone arrives. Adjust volume in VLC and on the room's audio system until it sounds right. Then pause the trailer and scrub back to the beginning (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Left Arrow</kbd> to jump to start, or just press <kbd>Home</kbd>).
+  </div>
+
+  <!-- ===== THE SHOW ===== -->
+  <h2>Running the Show</h2>
+  <p>Here is the order of events and exactly what to do at each step.</p>
+
+  <table class="flow-table">
+    <thead>
+      <tr>
+        <th>Moment</th>
+        <th>What to Do</th>
+        <th>App</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Opening trailer</td>
+        <td>Switch to VLC (<kbd>Cmd</kbd> + <kbd>Tab</kbd>). Press <kbd>F</kbd> to go fullscreen. Press <kbd>Space</kbd> to play.</td>
+        <td><span class="app-tag app-tag--vlc">VLC</span></td>
+      </tr>
+      <tr>
+        <td>Trailer ends</td>
+        <td>Press <kbd>F</kbd> to exit fullscreen. Switch to Chrome (<kbd>Cmd</kbd> + <kbd>Tab</kbd>).</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Slides begin</td>
+        <td>Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> to start slideshow from slide 1. Advance slides with <kbd>Right Arrow</kbd> or <kbd>Space</kbd>.</td>
+        <td><span class="app-tag app-tag--slides">Slides</span></td>
+      </tr>
+      <tr>
+        <td>Slides end</td>
+        <td>Press <kbd>Esc</kbd> to exit slideshow mode.</td>
+        <td><span class="app-tag app-tag--slides">Slides</span></td>
+      </tr>
+      <tr>
+        <td>Closing trailer</td>
+        <td>Switch to VLC (<kbd>Cmd</kbd> + <kbd>Tab</kbd>). The closing trailer should be next in the playlist. Press <kbd>F</kbd> for fullscreen. Press <kbd>N</kbd> to skip to the next track, or <kbd>Space</kbd> if it is already queued. Then <kbd>Space</kbd> to play.</td>
+        <td><span class="app-tag app-tag--vlc">VLC</span></td>
+      </tr>
+      <tr>
+        <td>Closing trailer ends</td>
+        <td>Press <kbd>F</kbd> to exit fullscreen. You are done.</td>
+        <td><span class="app-tag app-tag--vlc">VLC</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout--warning">
+    <strong>Keep it simple</strong>
+    Between each transition, take a breath. The audience does not notice a two-second pause — they notice a wrong screen. Slow is smooth, smooth is fast.
+  </div>
+
+  <!-- ===== KEY REFERENCE ===== -->
+  <h2>Keyboard Quick Reference</h2>
+
+  <div class="card">
+    <h3>VLC</h3>
+    <dl class="key-ref">
+      <div>
+        <dt>Play / Pause</dt>
+        <dd><kbd>Space</kbd></dd>
+      </div>
+      <div>
+        <dt>Fullscreen on / off</dt>
+        <dd><kbd>F</kbd></dd>
+      </div>
+      <div>
+        <dt>Next track in playlist</dt>
+        <dd><kbd>N</kbd></dd>
+      </div>
+      <div>
+        <dt>Jump to start of track</dt>
+        <dd><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd></dd>
+      </div>
+      <div>
+        <dt>Volume up / down</dt>
+        <dd><kbd>Cmd</kbd> + <kbd>Up</kbd> / <kbd>Down</kbd></dd>
+      </div>
+      <div>
+        <dt>Mute</dt>
+        <dd><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd></dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="card card--alt">
+    <h3>Google Slides</h3>
+    <dl class="key-ref">
+      <div>
+        <dt>Start slideshow</dt>
+        <dd><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></dd>
+      </div>
+      <div>
+        <dt>Next slide</dt>
+        <dd><kbd>Right Arrow</kbd> or <kbd>Space</kbd></dd>
+      </div>
+      <div>
+        <dt>Previous slide</dt>
+        <dd><kbd>Left Arrow</kbd></dd>
+      </div>
+      <div>
+        <dt>Exit slideshow</dt>
+        <dd><kbd>Esc</kbd></dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="card">
+    <h3>Switching Apps</h3>
+    <dl class="key-ref">
+      <div>
+        <dt>Switch between apps</dt>
+        <dd><kbd>Cmd</kbd> + <kbd>Tab</kbd></dd>
+      </div>
+      <div>
+        <dt>Hide current app</dt>
+        <dd><kbd>Cmd</kbd> + <kbd>H</kbd></dd>
+      </div>
+    </dl>
+  </div>
+
+  <!-- ===== TROUBLESHOOTING ===== -->
+  <h2>If Something Goes Wrong</h2>
+
+  <dl>
+    <div class="trouble-item">
+      <dt>VLC plays the wrong trailer</dt>
+      <dd>Press <kbd>Space</kbd> to pause. Press <kbd>N</kbd> to skip to the next track, or open the playlist (<kbd>View</kbd> &rarr; <kbd>Playlist</kbd>) and double-click the correct file.</dd>
+    </div>
+
+    <div class="trouble-item">
+      <dt>No sound from VLC</dt>
+      <dd>Check three things in order: (1) Is VLC muted? Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd> to toggle. (2) Is Mac volume up? Use the physical volume keys. (3) Is the room audio system on and set to the right input?</dd>
+    </div>
+
+    <div class="trouble-item">
+      <dt>Google Slides won't go fullscreen</dt>
+      <dd>Try <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> to toggle browser fullscreen first, then click the Slideshow button. If presenter view opens on the wrong monitor, go to <kbd>View</kbd> &rarr; <kbd>Presenter View</kbd> and swap displays.</dd>
+    </div>
+
+    <div class="trouble-item">
+      <dt>VLC is behind the browser and you can't find it</dt>
+      <dd>Press <kbd>Cmd</kbd> + <kbd>Tab</kbd> and look for the VLC cone icon. Click it to bring VLC forward.</dd>
+    </div>
+
+    <div class="trouble-item">
+      <dt>The trailer ended and VLC jumped to the next file automatically</dt>
+      <dd>By default, VLC plays the next item in the playlist when a track finishes. If you want to prevent this, pause VLC as soon as the trailer ends. If VLC already started the closing trailer too early, press <kbd>Space</kbd> to pause immediately.</dd>
+    </div>
+
+    <div class="trouble-item">
+      <dt>Everything froze</dt>
+      <dd>Press <kbd>Esc</kbd> to exit fullscreen or slideshow mode. If an app is unresponsive, press <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>Esc</kbd> to force-quit it, then reopen.</dd>
+    </div>
+  </dl>
+
+  <div class="callout callout--important">
+    <strong>The golden rule</strong>
+    If you are unsure what is happening, press <kbd>Esc</kbd>. It exits fullscreen, exits slideshow mode, and closes most dialogs. It always brings you back to a safe state.
+  </div>
+
+</main>
+
+<footer>
+  <p>OEFF Presenter Guide &middot; February 2026</p>
+</footer>
+
+</body>
+</html>
