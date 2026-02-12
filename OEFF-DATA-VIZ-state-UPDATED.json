@@ -1,0 +1,169 @@
+{
+  "project": "OEFF Data Visualization & Docs Integration",
+  "version": "1.2.0",
+  "lastUpdated": "2026-02-05",
+  "currentPhase": 1,
+  "phaseStatus": {
+    "phase0_discovery": "complete",
+    "phase1_views_dashboard": "implementation_ready",
+    "phase2_docs_integration": "ready_to_start",
+    "phase3_enhanced_viz": "not_started"
+  },
+  "deliverables": {
+    "implementation_guide": {
+      "file": "OEFF-Dashboard-Implementation.md",
+      "status": "complete",
+      "description": "Comprehensive guide with formulas, filtered view specs, HTML widgets, and CSS"
+    },
+    "html_dashboard": {
+      "file": "oeff-pipeline-dashboard.html",
+      "status": "complete",
+      "description": "Interactive standalone dashboard with Beautiful-First design system, progress rings, funnel visualization"
+    },
+    "quick_start_guide": {
+      "file": "Google-Sheets-Quick-Start.md",
+      "status": "complete",
+      "description": "Step-by-step instructions for Ana and support staff to implement filtered views, formulas, and publishing"
+    }
+  },
+  "nextAction": {
+    "task": "Implement Dashboard_V2 in actual V7 Google Sheet",
+    "instructions": [
+      "Open V7 in Google Sheets (not the Excel file)",
+      "Create new sheet called Dashboard_V2",
+      "Follow Google-Sheets-Quick-Start.md Part 1 to add formulas",
+      "Test that formulas update when data changes",
+      "Create at least 2 filtered views (Ana Pipeline View, Film Status View)",
+      "Publish pipeline_summary named range",
+      "Embed in docs site using HTML widgets from implementation guide"
+    ],
+    "phase": 1,
+    "stepId": "1b-1d"
+  },
+  "implementationSummary": {
+    "phase1_ready": {
+      "dashboard_formulas": "24 copy-paste formulas ready (COUNTIF, COUNTIFS, COUNTA, SUM)",
+      "filtered_views": "5 view specifications with filter conditions and sort orders",
+      "named_ranges": "4 ranges defined for publishing (pipeline_summary, film_status_2026, host_pipeline, action_items)",
+      "conditional_formatting": "Yellow highlight rule for action items > 0"
+    },
+    "phase2_ready": {
+      "html_widgets": "4 embeddable widgets with Beautiful-First design (Pipeline Status, Film Intake, Action Badge, Full Host Tracker)",
+      "standalone_dashboard": "Full interactive HTML dashboard with progress rings, funnel, real-time updates",
+      "css_components": "Google-embed, resource-card, action-badge classes ready to add to docs site",
+      "auto_refresh": "JavaScript configured for 5-minute auto-refresh (when published URLs configured)"
+    }
+  },
+  "dataSnapshot": {
+    "hosts": 100,
+    "events2026": 31,
+    "films2026": 12,
+    "filmContacts": 9,
+    "intakeResponses": 14,
+    "unmatchedIntake": 9,
+    "pipelineScheduled": 15,
+    "pipelineConfirmedInterest": 5,
+    "pipelineInterested": 9,
+    "filmsIntakeComplete": 9,
+    "filmsIntakeMissing": 3,
+    "comingSoonSlots": 7
+  },
+  "dataSource": "Google Sheets V7 (live)",
+  "technicalNotes": {
+    "design_system": "Beautiful-First (Fraunces display, Source Sans 3 body, warm amber palette)",
+    "color_palette": {
+      "primary": "#c4704b (warm-500)",
+      "accent": "#d4846a (warm-300)",
+      "dark": "#9a5438 (warm-700)",
+      "background": "#f7f5f2 (ground)",
+      "action": "#5c7c6b (earth-sage)"
+    },
+    "formula_types_used": [
+      "COUNTIF - count cells matching text criteria",
+      "COUNTIFS - count with multiple conditions",
+      "COUNTA - count non-empty cells",
+      "SUM - total numeric values"
+    ],
+    "publishing_method": "Google Sheets Publish to Web (named ranges as iframe embeds)",
+    "update_frequency": "Auto-refresh every 5 minutes (Google Sheets published ranges)",
+    "accessibility": "WCAG 2.1 compliant - color never sole signal, text labels on all metrics"
+  },
+  "decisions": [
+    {
+      "date": "2026-02-05",
+      "decision": "Google Sheets as primary visualization layer",
+      "rationale": "Low-code, OEFF already uses Google Workspace, publish-to-web is built-in"
+    },
+    {
+      "date": "2026-02-05",
+      "decision": "Static docs site preserved (no build step added)",
+      "rationale": "Current Cloudflare Pages deploy is zero-config"
+    },
+    {
+      "date": "2026-02-05",
+      "decision": "No migration needed — V7 already in Google Sheets",
+      "rationale": "Eliminates migration risk; jump straight to views and dashboard work"
+    },
+    {
+      "date": "2026-02-05",
+      "decision": "Beautiful-First design system for HTML dashboard",
+      "rationale": "Matches existing OEFF brand, warm/accessible, validated patterns (progress rings not bars)"
+    },
+    {
+      "date": "2026-02-05",
+      "decision": "Both implementation guide + quick start guide",
+      "rationale": "Implementation guide for Garen (technical), Quick Start for Ana/support (non-technical)"
+    }
+  ],
+  "validationChecklist": {
+    "formulas_tested": false,
+    "filtered_views_created": false,
+    "published_ranges_working": false,
+    "docs_site_embeds_live": false,
+    "mobile_responsive_tested": false,
+    "historical_sheets_locked": false,
+    "team_can_use_without_help": false
+  },
+  "blockersAndRisks": {
+    "current_blockers": [],
+    "potential_risks": [
+      "V7 sheet names may not match exactly (case-sensitive) - formulas will return #REF!",
+      "Publishing permissions may need adjustment if sheet isn't shared with 'Anyone with link'",
+      "Iframe embeds may be blocked by Content Security Policy (CSP) on docs site - test first",
+      "Team may need training on creating/using filtered views - Quick Start guide addresses this"
+    ]
+  },
+  "whatWasImplemented": {
+    "complete": [
+      "Formula-driven dashboard with 24 auto-calculating metrics",
+      "Filtered view specifications for 5 user roles (Ana, Support, Films, Hosts, Participants)",
+      "Named range definitions for 4 publishable data subsets",
+      "4 HTML widgets for docs site embedding (Pipeline, Films, Action Items, Full Tracker)",
+      "Standalone interactive HTML dashboard with progress rings and funnel visualization",
+      "CSS components for docs site integration",
+      "Step-by-step Quick Start guide for non-technical users",
+      "Comprehensive implementation guide with troubleshooting"
+    ],
+    "pending": [
+      "Actually creating Dashboard_V2 in live Google Sheet (requires access to V7 in Google Sheets)",
+      "Creating and testing filtered views in live sheet",
+      "Publishing named ranges and obtaining URLs",
+      "Embedding widgets in actual docs site HTML",
+      "Locking historical sheets",
+      "User acceptance testing with Ana and support staff"
+    ]
+  },
+  "files": {
+    "guides": [
+      "OEFF-Dashboard-Implementation.md - Main technical implementation guide",
+      "Google-Sheets-Quick-Start.md - Non-technical step-by-step guide"
+    ],
+    "artifacts": [
+      "oeff-pipeline-dashboard.html - Standalone interactive dashboard"
+    ],
+    "source_data": [
+      "V7.xlsx - Original Excel file (for reference)",
+      "V7 Google Sheet - Live canonical data source (URL needed)"
+    ]
+  }
+}

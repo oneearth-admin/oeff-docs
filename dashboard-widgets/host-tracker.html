@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF 2026 Host & Venue Pipeline Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       BEAUTIFUL-FIRST DESIGN SYSTEM
+       Domain: OEFF (Forest Palette)
+       ======================================== */
+
+    /* Primitives from tokens.css */
+    :root {
+      /* Forest Scale (OEFF domain) */
+      --forest-canopy: #1a2e22;
+      --forest-understory: #2d4a3a;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #5c7c6b;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+
+      /* Anchors (stable across domains) */
+      --color-ink: #2c2825;
+      --color-ink-soft: #5c5550;
+      --color-ink-muted: #8a8580;
+      --color-cream: #f7f5f2;
+      --color-paper: #faf9f7;
+      --color-linen: #f0ede8;
+
+      /* Signal Colors (status only, WCAG AA compliant) */
+      --signal-critical: #c44b4b;
+      --signal-warning: #996622;
+      --signal-success: #5c8c4b;
+      --signal-info: #4b7c8c;
+
+      /* Typography */
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+    }
+
+    /* Semantic Layer (Required - Never use primitives directly) */
+    :root {
+      --color-ground: var(--color-cream);
+      --color-surface: var(--color-paper);
+      --color-surface-raised: #ffffff;
+      --color-surface-inset: var(--color-linen);
+
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-light: var(--forest-mist);
+
+      --color-text: var(--color-ink);
+      --color-text-soft: var(--color-ink-soft);
+      --color-text-muted: var(--color-ink-muted);
+
+      /* Warm-tinted shadows (never pure black) */
+      --shadow-color: hsla(30, 20%, 20%, 0.08);
+      --shadow-soft: 0 2px 8px var(--shadow-color);
+      --shadow-medium: 0 4px 16px var(--shadow-color);
+
+      --radius-default: 12px;
+      --radius-sm: 8px;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+    }
+
+    /* Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-ground);
+      padding: var(--space-lg);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+      font-optical-sizing: auto;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Card Component */
+    .card {
+      background: var(--color-surface-raised);
+      border-radius: var(--radius-default);
+      box-shadow: var(--shadow-medium);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Search & Filter Bar */
+    .controls {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-soft);
+      margin-bottom: var(--space-xs);
+    }
+
+    .input {
+      width: 100%;
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-body-sans);
+      font-size: 1rem;
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: 1px solid var(--color-linen);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-light);
+    }
+
+    /* Status Filter Pills */
+    .filter-pills {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      padding: var(--space-sm) var(--space-md);
+      min-height: 44px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 2px solid var(--color-linen);
+      border-radius: 22px;
+      background: var(--color-surface);
+      color: var(--color-text-soft);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+
+    .filter-pill.active {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .filter-pill:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* Table Component (data.css pattern) */
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-linen);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--color-surface-raised);
+    }
+
+    .table thead {
+      background: var(--color-surface-inset);
+      border-bottom: 2px solid var(--color-linen);
+    }
+
+    .table th {
+      padding: var(--space-md);
+      min-height: 44px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--color-text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+
+    .table th:hover {
+      background: var(--color-linen);
+    }
+
+    .table th::after {
+      content: '⇅';
+      position: absolute;
+      right: var(--space-sm);
+      opacity: 0.3;
+      font-size: 0.75rem;
+    }
+
+    .table th.sorted-asc::after {
+      content: '↑';
+      opacity: 1;
+    }
+
+    .table th.sorted-desc::after {
+      content: '↓';
+      opacity: 1;
+    }
+
+    .table td {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--color-linen);
+      font-size: 0.95rem;
+    }
+
+    .table tbody tr {
+      transition: background-color 0.15s ease;
+    }
+
+    .table tbody tr:hover {
+      background: var(--color-surface);
+    }
+
+    .table tbody tr:focus-within {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -2px;
+    }
+
+    /* Badge Component (data.css pattern) */
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 16px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* Status-specific badges (signal colors) */
+    .badge-scheduled {
+      background: #e8f5e8;
+      color: var(--signal-success);
+      border: 1px solid var(--signal-success);
+    }
+
+    .badge-confirmed {
+      background: #fff5e6;
+      color: var(--signal-warning);
+      border: 1px solid var(--signal-warning);
+    }
+
+    .badge-interested {
+      background: #e6f3f7;
+      color: var(--signal-info);
+      border: 1px solid var(--signal-info);
+    }
+
+    .badge-exploring {
+      background: var(--color-linen);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-ink-muted);
+    }
+
+    /* Summary Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .stat-card {
+      background: var(--color-surface);
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--color-primary);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--color-text-soft);
+      margin-bottom: var(--space-xs);
+    }
+
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: var(--space-md);
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .table th,
+      .table td {
+        padding: var(--space-sm);
+        font-size: 0.875rem;
+      }
+    }
+
+    /* Accessibility - Screen reader only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-xl);
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* Data Source Notice */
+    .data-notice {
+      margin-top: var(--space-lg);
+      padding: var(--space-md);
+      background: var(--color-surface-inset);
+      border-left: 3px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      color: var(--color-text-soft);
+    }
+
+    .data-notice strong {
+      color: var(--color-text);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>OEFF 2026 Host & Venue Pipeline</h1>
+  <p class="subtitle">Track venue onboarding status, event scheduling, and regional distribution</p>
+
+  <!-- Summary Statistics -->
+  <div class="stats-grid" aria-live="polite">
+    <div class="stat-card">
+      <div class="stat-label">Total Venues</div>
+      <div class="stat-value" id="stat-total">100</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Scheduled</div>
+      <div class="stat-value" id="stat-scheduled">15</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Confirmed Interest</div>
+      <div class="stat-value" id="stat-confirmed">20</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Interested</div>
+      <div class="stat-value" id="stat-interested">35</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Exploring</div>
+      <div class="stat-value" id="stat-exploring">30</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <!-- Search & Filter Controls -->
+    <div class="controls">
+      <div class="search-box">
+        <label for="search" class="form-label">Search Venues</label>
+        <input
+          type="search"
+          id="search"
+          class="input"
+          placeholder="Search by venue name, region, or contact..."
+          aria-label="Search venues by name, region, or contact"
+        >
+      </div>
+
+      <div>
+        <div class="form-label">Filter by Status</div>
+        <div class="filter-pills" role="group" aria-label="Filter by pipeline status">
+          <button class="filter-pill active" data-status="all" aria-pressed="true">All</button>
+          <button class="filter-pill" data-status="Scheduled" aria-pressed="false">Scheduled</button>
+          <button class="filter-pill" data-status="Confirmed Interest" aria-pressed="false">Confirmed</button>
+          <button class="filter-pill" data-status="Interested" aria-pressed="false">Interested</button>
+          <button class="filter-pill" data-status="Exploring" aria-pressed="false">Exploring</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue Table -->
+    <div class="table-container">
+      <table class="table" role="table" aria-label="Host venue pipeline tracker">
+        <thead>
+          <tr>
+            <th data-column="venue" role="columnheader" aria-sort="none" tabindex="0">
+              Venue Name
+            </th>
+            <th data-column="region" role="columnheader" aria-sort="none" tabindex="0">
+              Region
+            </th>
+            <th data-column="status" role="columnheader" aria-sort="none" tabindex="0">
+              Pipeline Status
+            </th>
+            <th data-column="date" role="columnheader" aria-sort="none" tabindex="0">
+              Event Date
+            </th>
+            <th data-column="contact" role="columnheader" aria-sort="none" tabindex="0">
+              Team Contact
+            </th>
+          </tr>
+        </thead>
+        <tbody id="table-body" aria-live="polite" aria-atomic="false">
+          <!-- Data populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="data-notice">
+      <strong>Data Source:</strong> This is a mock data preview with 100 realistic venues.
+      <br>
+      <strong>To connect live data:</strong> Replace the <code>mockData</code> array in the JavaScript section with a fetch call to your Google Sheets published range URL (File &gt; Share &gt; Publish to web &gt; Select range &gt; Copy link).
+      <br>
+      Example: <code>fetch('https://docs.google.com/spreadsheets/d/e/.../pub?output=csv').then(r => r.text()).then(parseCSV)</code>
+    </div>
+  </div>
+
+  <script>
+    /* ========================================
+       DATA LAYER
+       ======================================== */
+
+    // MOCK DATA - Replace this section with Google Sheets fetch
+    //
+    // TO USE LIVE DATA:
+    // 1. In Google Sheets V7: Data > Named ranges > Create "host_status_2026"
+    // 2. Select columns: Venue Name, Region, Pipeline Status, Event Date, Team Contact
+    // 3. File > Share > Publish to web > Select named range > Publish
+    // 4. Copy the published URL (CSV format recommended)
+    // 5. Replace mockData with: fetch(publishedURL).then(r => r.text()).then(parseCSV)
+    //
+    const mockData = [
+      // Scheduled (15 venues)
+      { venue: 'Logan Square Auditorium', region: 'Central', status: 'Scheduled', date: '2026-04-22', contact: 'Ana Martinez' },
+      { venue: 'Pilsen Community Center', region: 'South', status: 'Scheduled', date: '2026-04-22', contact: 'Taylor Brooks' },
+      { venue: 'Wicker Park Arts Collective', region: 'North', status: 'Scheduled', date: '2026-04-23', contact: 'Jordan Lee' },
+      { venue: 'Hyde Park Cultural Hub', region: 'South', status: 'Scheduled', date: '2026-04-23', contact: 'Ana Martinez' },
+      { venue: 'Andersonville Theater', region: 'North', status: 'Scheduled', date: '2026-04-24', contact: 'Casey Smith' },
+      { venue: 'Bridgeport Film Space', region: 'South', status: 'Scheduled', date: '2026-04-24', contact: 'Taylor Brooks' },
+      { venue: 'Humboldt Park Pavilion', region: 'West', status: 'Scheduled', date: '2026-04-25', contact: 'Jordan Lee' },
+      { venue: 'Evanston Arts Center', region: 'Suburbs', status: 'Scheduled', date: '2026-04-25', contact: 'Ana Martinez' },
+      { venue: 'Lincoln Park Conservatory', region: 'Central', status: 'Scheduled', date: '2026-04-26', contact: 'Casey Smith' },
+      { venue: 'Rogers Park Commons', region: 'North', status: 'Scheduled', date: '2026-04-26', contact: 'Jordan Lee' },
+      { venue: 'Bronzeville Cultural Center', region: 'South', status: 'Scheduled', date: '2026-04-26', contact: 'Taylor Brooks' },
+      { venue: 'Oak Park Library Theater', region: 'Suburbs', status: 'Scheduled', date: '2026-04-22', contact: 'Ana Martinez' },
+      { venue: 'Uptown Poetry Slam Venue', region: 'North', status: 'Scheduled', date: '2026-04-23', contact: 'Casey Smith' },
+      { venue: 'Little Village Arts Hall', region: 'West', status: 'Scheduled', date: '2026-04-24', contact: 'Jordan Lee' },
+      { venue: 'South Shore Cultural Hub', region: 'South', status: 'Scheduled', date: '2026-04-25', contact: 'Taylor Brooks' },
+
+      // Confirmed Interest (20 venues)
+      { venue: 'Bucktown Gallery Space', region: 'Central', status: 'Confirmed Interest', date: '', contact: 'Ana Martinez' },
+      { venue: 'Albany Park Community Hall', region: 'North', status: 'Confirmed Interest', date: '', contact: 'Jordan Lee' },
+      { venue: 'McKinley Park Arts Center', region: 'South', status: 'Confirmed Interest', date: '', contact: 'Taylor Brooks' },
+      { venue: 'Austin Neighborhood Cinema', region: 'West', status: 'Confirmed Interest', date: '', contact: 'Casey Smith' },
+      { venue: 'Berwyn Cultural Center', region: 'Suburbs', status: 'Confirmed Interest', date: '', contact: 'Ana Martinez' },
+      { venue: 'Edgewater Arts Collective', region: 'North', status: 'Confirmed Interest', date: '', contact: 'Jordan Lee' },
+      { venue: 'Chinatown Cultural Hub', region: 'South', status: 'Confirmed Interest', date: '', contact: 'Taylor Brooks' },
+      { venue: 'Ukrainian Village Theater', region: 'West', status: 'Confirmed Interest', date: '', contact: 'Casey Smith' },
+      { venue: 'Cicero Community Center', region: 'Suburbs', status: 'Confirmed Interest', date: '', contact: 'Ana Martinez' },
+      { venue: 'Lakeview Arts Space', region: 'North', status: 'Confirmed Interest', date: '', contact: 'Jordan Lee' },
+      { venue: 'Englewood Cultural Exchange', region: 'South', status: 'Confirmed Interest', date: '', contact: 'Taylor Brooks' },
+      { venue: 'Garfield Park Cinema', region: 'West', status: 'Confirmed Interest', date: '', contact: 'Casey Smith' },
+      { venue: 'Skokie Public Library', region: 'Suburbs', status: 'Confirmed Interest', date: '', contact: 'Ana Martinez' },
+      { venue: 'Ravenswood Arts Hall', region: 'North', status: 'Confirmed Interest', date: '', contact: 'Jordan Lee' },
+      { venue: 'Beverly Arts Center', region: 'South', status: 'Confirmed Interest', date: '', contact: 'Taylor Brooks' },
+      { venue: 'Near West Side Gallery', region: 'West', status: 'Confirmed Interest', date: '', contact: 'Casey Smith' },
+      { venue: 'Des Plaines Theater', region: 'Suburbs', status: 'Confirmed Interest', date: '', contact: 'Ana Martinez' },
+      { venue: 'Buena Park Community Room', region: 'North', status: 'Confirmed Interest', date: '', contact: 'Jordan Lee' },
+      { venue: 'Pullman Cultural Center', region: 'South', status: 'Confirmed Interest', date: '', contact: 'Taylor Brooks' },
+      { venue: 'West Loop Film Space', region: 'Central', status: 'Confirmed Interest', date: '', contact: 'Casey Smith' },
+
+      // Interested (35 venues)
+      { venue: 'Irving Park Library', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Canaryville Community Hall', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'West Town Arts Collective', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Park Ridge Cultural Center', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'Roscoe Village Theater', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Chatham Arts Space', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'East Garfield Park Hall', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Wilmette Arts Center', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'Northcenter Community Room', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Greater Grand Crossing Hub', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'East Village Arts Space', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Niles Cultural Center', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'Bowmanville Theater', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Washington Heights Hall', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'West Humboldt Park Center', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Morton Grove Library', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'Budlong Woods Community Space', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Roseland Cultural Hub', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'North Lawndale Arts Center', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Lincolnwood Cultural Center', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'Mayfair Community Hall', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Auburn Gresham Theater', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'Hermosa Arts Collective', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Glenview Arts Center', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'North Park Community Room', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'West Lawn Cultural Space', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'Belmont Cragin Hall', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Arlington Heights Theater', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'Portage Park Arts Space', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Ashburn Community Center', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'Montclare Cultural Hub', region: 'West', status: 'Interested', date: '', contact: '' },
+      { venue: 'Schaumburg Library Theater', region: 'Suburbs', status: 'Interested', date: '', contact: '' },
+      { venue: 'Old Irving Park Hall', region: 'North', status: 'Interested', date: '', contact: '' },
+      { venue: 'Morgan Park Arts Center', region: 'South', status: 'Interested', date: '', contact: '' },
+      { venue: 'Galewood Community Space', region: 'West', status: 'Interested', date: '', contact: '' },
+
+      // Exploring (30 venues)
+      { venue: 'Edison Park Library', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Mount Greenwood Hall', region: 'South', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Dunning Arts Space', region: 'West', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Palatine Cultural Center', region: 'Suburbs', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Forest Glen Community Room', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Hegewisch Theater', region: 'South', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Belmont Heights Hall', region: 'West', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Wheeling Arts Center', region: 'Suburbs', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Sauganash Community Space', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'West Pullman Cultural Hub', region: 'South', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Cragin Arts Collective', region: 'West', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Northbrook Library Theater', region: 'Suburbs', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Norwood Park Hall', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Riverdale Community Center', region: 'South', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Kelvyn Park Arts Space', region: 'West', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Hoffman Estates Theater', region: 'Suburbs', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Wildwood Community Room', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'West Englewood Cultural Hub', region: 'South', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Clearing Arts Center', region: 'West', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Buffalo Grove Cultural Center', region: 'Suburbs', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Big Oaks Community Space', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Burnside Theater', region: 'South', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Hanson Park Hall', region: 'West', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Deerfield Arts Center', region: 'Suburbs', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Peterson Park Community Room', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Calumet Heights Cultural Hub', region: 'South', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Portage Cragin Arts Space', region: 'West', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Mount Prospect Theater', region: 'Suburbs', status: 'Exploring', date: '', contact: '' },
+      { venue: 'Hollywood Park Hall', region: 'North', status: 'Exploring', date: '', contact: '' },
+      { venue: 'East Side Arts Center', region: 'South', status: 'Exploring', date: '', contact: '' }
+    ];
+
+    /* ========================================
+       APPLICATION STATE & LOGIC
+       ======================================== */
+
+    let allData = [...mockData];
+    let filteredData = [...allData];
+    let currentSort = { column: null, direction: 'asc' };
+    let currentFilter = 'all';
+
+    // DOM Elements
+    const searchInput = document.getElementById('search');
+    const tableBody = document.getElementById('table-body');
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const tableHeaders = document.querySelectorAll('.table th[data-column]');
+
+    // Initialize
+    function init() {
+      renderTable();
+      updateStats();
+      attachEventListeners();
+    }
+
+    // Render table rows
+    function renderTable() {
+      if (filteredData.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-state">
+              No venues match your search or filter criteria.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tableBody.innerHTML = filteredData.map(row => {
+        const statusClass = row.status.toLowerCase().replace(/\s+/g, '-');
+        const displayDate = row.date ? new Date(row.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
+        const displayContact = row.contact || '—';
+
+        return `
+          <tr tabindex="0">
+            <td><strong>${row.venue}</strong></td>
+            <td>${row.region}</td>
+            <td>
+              <span class="badge badge-${statusClass}" role="status">
+                ${row.status}
+              </span>
+            </td>
+            <td>${displayDate}</td>
+            <td>${displayContact}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Update summary statistics
+    function updateStats() {
+      const stats = {
+        total: allData.length,
+        scheduled: allData.filter(r => r.status === 'Scheduled').length,
+        confirmed: allData.filter(r => r.status === 'Confirmed Interest').length,
+        interested: allData.filter(r => r.status === 'Interested').length,
+        exploring: allData.filter(r => r.status === 'Exploring').length
+      };
+
+      document.getElementById('stat-total').textContent = stats.total;
+      document.getElementById('stat-scheduled').textContent = stats.scheduled;
+      document.getElementById('stat-confirmed').textContent = stats.confirmed;
+      document.getElementById('stat-interested').textContent = stats.interested;
+      document.getElementById('stat-exploring').textContent = stats.exploring;
+    }
+
+    // Filter data by search term
+    function applySearch(term) {
+      const searchTerm = term.toLowerCase().trim();
+
+      if (!searchTerm) {
+        filteredData = currentFilter === 'all'
+          ? [...allData]
+          : allData.filter(row => row.status === currentFilter);
+      } else {
+        const baseData = currentFilter === 'all'
+          ? allData
+          : allData.filter(row => row.status === currentFilter);
+
+        filteredData = baseData.filter(row =>
+          row.venue.toLowerCase().includes(searchTerm) ||
+          row.region.toLowerCase().includes(searchTerm) ||
+          row.contact.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      renderTable();
+    }
+
+    // Filter by status
+    function applyStatusFilter(status) {
+      currentFilter = status;
+
+      // Update pill states
+      filterPills.forEach(pill => {
+        const isActive = pill.dataset.status === status;
+        pill.classList.toggle('active', isActive);
+        pill.setAttribute('aria-pressed', isActive);
+      });
+
+      // Re-apply search with new filter
+      applySearch(searchInput.value);
+    }
+
+    // Sort table by column
+    function sortTable(column) {
+      // Toggle direction if same column, otherwise default to asc
+      if (currentSort.column === column) {
+        currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSort.column = column;
+        currentSort.direction = 'asc';
+      }
+
+      // Update header attributes
+      tableHeaders.forEach(header => {
+        const col = header.dataset.column;
+        header.classList.remove('sorted-asc', 'sorted-desc');
+        if (col === column) {
+          header.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+          header.setAttribute('aria-sort', currentSort.direction === 'asc' ? 'ascending' : 'descending');
+        } else {
+          header.setAttribute('aria-sort', 'none');
+        }
+      });
+
+      // Sort data
+      filteredData.sort((a, b) => {
+        let valA, valB;
+
+        switch (column) {
+          case 'venue':
+            valA = a.venue;
+            valB = b.venue;
+            break;
+          case 'region':
+            valA = a.region;
+            valB = b.region;
+            break;
+          case 'status':
+            // Custom order: Scheduled > Confirmed Interest > Interested > Exploring
+            const statusOrder = { 'Scheduled': 1, 'Confirmed Interest': 2, 'Interested': 3, 'Exploring': 4 };
+            valA = statusOrder[a.status];
+            valB = statusOrder[b.status];
+            break;
+          case 'date':
+            valA = a.date || '9999-12-31'; // Empty dates sort last
+            valB = b.date || '9999-12-31';
+            break;
+          case 'contact':
+            valA = a.contact || 'zzz'; // Empty contacts sort last
+            valB = b.contact || 'zzz';
+            break;
+        }
+
+        if (valA < valB) return currentSort.direction === 'asc' ? -1 : 1;
+        if (valA > valB) return currentSort.direction === 'asc' ? 1 : -1;
+        return 0;
+      });
+
+      renderTable();
+    }
+
+    // Event Listeners
+    function attachEventListeners() {
+      // Search input
+      searchInput.addEventListener('input', (e) => {
+        applySearch(e.target.value);
+      });
+
+      // Filter pills
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          applyStatusFilter(pill.dataset.status);
+        });
+
+        // Keyboard accessibility
+        pill.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            applyStatusFilter(pill.dataset.status);
+          }
+        });
+      });
+
+      // Table headers (sorting)
+      tableHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          sortTable(header.dataset.column);
+        });
+
+        // Keyboard accessibility
+        header.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            sortTable(header.dataset.column);
+          }
+        });
+      });
+    }
+
+    // Initialize on page load
+    init();
+
+    /* ========================================
+       GOOGLE SHEETS INTEGRATION (COMMENTED)
+       ======================================== */
+
+    // Uncomment and modify this section to fetch live data from Google Sheets
+    /*
+    async function fetchGoogleSheetsData() {
+      try {
+        // Step 1: Publish your named range in Google Sheets
+        // - In V7: Data > Named ranges > Create "host_status_2026"
+        // - Select columns: Venue Name, Region, Pipeline Status, Event Date, Team Contact
+        // - File > Share > Publish to web > Select "host_status_2026" > Publish
+        // - Choose CSV format for easier parsing
+
+        const PUBLISHED_URL = 'YOUR_GOOGLE_SHEETS_PUBLISHED_CSV_URL_HERE';
+
+        // Step 2: Fetch the published data
+        const response = await fetch(PUBLISHED_URL);
+        const csvText = await response.text();
+
+        // Step 3: Parse CSV (simple parser, assumes no commas in data)
+        const rows = csvText.split('\n').filter(row => row.trim());
+        const headers = rows[0].split(',');
+
+        allData = rows.slice(1).map(row => {
+          const values = row.split(',');
+          return {
+            venue: values[0]?.trim() || '',
+            region: values[1]?.trim() || '',
+            status: values[2]?.trim() || '',
+            date: values[3]?.trim() || '',
+            contact: values[4]?.trim() || ''
+          };
+        });
+
+        filteredData = [...allData];
+        renderTable();
+        updateStats();
+
+      } catch (error) {
+        console.error('Error fetching Google Sheets data:', error);
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-state" style="color: var(--signal-critical);">
+              Error loading data from Google Sheets. Please check the published URL.
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    // Replace init() call with:
+    // fetchGoogleSheetsData();
+
+    // Optional: Auto-refresh every 5 minutes
+    // setInterval(fetchGoogleSheetsData, 5 * 60 * 1000);
+    */
+  </script>
+
+</body>
+</html>
