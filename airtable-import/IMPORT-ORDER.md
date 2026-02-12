@@ -8,7 +8,7 @@ This document lists all CSV files for Airtable import in the required dependency
 |---|------|------|------|-----------------|------------|--------|
 | 1 | 01-venues.csv | 100 | 9 | Venues | Venue ID | Ready (Previous Contacts field pending) |
 | 2 | 02-films.csv | 12 | 14 | Films | Film ID | Ready (Runtime, Filmmakers pending) |
-| 3 | 03-events.csv | 217 | 32 | Events | Event ID | **Updated 2026-02-11** — enriched with tier, pricing, host fees, licensing pipeline, volunteer needs |
+| 3 | 03-events.csv | 175 | 32 | Events | Event ID | **Updated 2026-02-11** — enriched, cleaned (dropped 1 dupe + 41 placeholders) |
 | 4 | 04-film-contacts.csv | 9 | 15 | Film Contacts | Contact ID | **Updated 2026-02-11** — added Is Primary, Secondary Contact, Formats, Caption/AD/Spanish, Timestamp |
 | 5 | 05-host-intake.csv | 28 | 26 | Host Intake | Intake ID | Ready |
 | 6 | 06-sponsors.csv | 23 | 36 | Sponsors | Sponsor ID | **Updated 2026-02-11** — added Commitment Date + full 29-field benefits matrix |
@@ -128,7 +128,7 @@ After all CSVs are imported, create these linked record fields:
 - Original Export Date: 2026-02-06
 - **Updated: 2026-02-11** (schema v1.1 compliance update)
 - Source: OEFF V7 Workbook Suite + ACTIVE_Roadmap OEFF2026Films-Schedule-Programs.xlsx + Benefits Tracking 2026.xlsx
-- Total Records Exported: 781
+- Total Records Exported: 739
 - Files updated in v1.1: 03-events.csv (12→32 columns), 04-film-contacts.csv (7→15 columns), 06-sponsors.csv (6→36 columns)
 
 ## Enrichment Notes (v1.1)
@@ -138,7 +138,10 @@ After all CSVs are imported, create these linked record fields:
 - 2026 pipeline events (E26-015 to E26-020) have Event Tier from rows 18-25
 - 2026 pipeline events (E26-021 to E26-029) matched to rows 66-77 where possible
 - 2025/2024 events carry empty values for new columns (no retroactive enrichment)
-- 2 metadata rows removed (empty Event ID, "LINK CHECK" row) — row count 219→217
+- 2 metadata rows removed (empty Event ID, "LINK CHECK" row)
+- E26-026 dropped (duplicate pipeline entry for Columbia College)
+- 41 empty V-014 (Chicago Cultural Center) placeholder rows dropped from 2025 events
+- Row count: 219 → 175 (28 for 2026, 139 for 2025, 8 for 2024)
 
 ### 04-film-contacts.csv
 - Re-exported from V7 Film_Contacts sheet with all 15 columns
