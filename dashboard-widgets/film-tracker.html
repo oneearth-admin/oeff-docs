@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF 2026 Film Asset Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       BEAUTIFUL-FIRST DESIGN SYSTEM
+       Domain: OEFF (Forest Palette)
+       ======================================== */
+
+    :root {
+      /* Forest Scale */
+      --forest-canopy: #1a2e22;
+      --forest-understory: #2d4a3a;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #5c7c6b;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+
+      /* Anchors */
+      --color-ink: #2c2825;
+      --color-ink-soft: #5c5550;
+      --color-ink-muted: #8a8580;
+      --color-cream: #f7f5f2;
+      --color-paper: #faf9f7;
+      --color-linen: #f0ede8;
+
+      /* Signal Colors */
+      --signal-critical: #c44b4b;
+      --signal-warning: #996622;
+      --signal-success: #5c8c4b;
+      --signal-info: #4b7c8c;
+
+      /* Typography */
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+
+      /* Semantic Layer */
+      --color-ground: var(--color-cream);
+      --color-surface: var(--color-paper);
+      --color-surface-raised: #ffffff;
+      --color-surface-inset: var(--color-linen);
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-light: var(--forest-mist);
+      --color-text: var(--color-ink);
+      --color-text-soft: var(--color-ink-soft);
+      --color-text-muted: var(--color-ink-muted);
+
+      --shadow-color: hsla(30, 20%, 20%, 0.08);
+      --shadow-soft: 0 2px 8px var(--shadow-color);
+      --shadow-medium: 0 4px 16px var(--shadow-color);
+
+      --radius-default: 12px;
+      --radius-sm: 8px;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-ground);
+      padding: var(--space-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+      font-optical-sizing: auto;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .stat-card {
+      background: var(--color-surface-raised);
+      border-radius: var(--radius-default);
+      box-shadow: var(--shadow-soft);
+      padding: var(--space-md) var(--space-lg);
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--color-primary-deep);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: var(--space-xs);
+    }
+
+    .stat-card.alert .stat-value {
+      color: var(--signal-warning);
+    }
+
+    /* Card Component */
+    .card {
+      background: var(--color-surface-raised);
+      border-radius: var(--radius-default);
+      box-shadow: var(--shadow-medium);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box { flex: 1; min-width: 250px; }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-soft);
+      margin-bottom: var(--space-xs);
+    }
+
+    .input {
+      width: 100%;
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-body-sans);
+      font-size: 1rem;
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: 1px solid var(--color-linen);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-light);
+    }
+
+    /* Filter Pills */
+    .filter-pills {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      padding: var(--space-sm) var(--space-md);
+      min-height: 44px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 2px solid var(--color-linen);
+      border-radius: 22px;
+      background: var(--color-surface);
+      color: var(--color-text-soft);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--color-primary-light);
+      background: var(--color-cream);
+    }
+
+    .filter-pill.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+
+    .filter-pill .count {
+      margin-left: 6px;
+      opacity: 0.7;
+    }
+
+    /* Film Table */
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      text-align: left;
+      padding: var(--space-sm) var(--space-md);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid var(--color-linen);
+      min-height: 44px;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    thead th:hover {
+      color: var(--color-primary-deep);
+    }
+
+    thead th .sort-arrow {
+      margin-left: 4px;
+      opacity: 0.3;
+    }
+
+    thead th.sorted .sort-arrow {
+      opacity: 1;
+      color: var(--color-primary);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--color-linen);
+      transition: background-color 0.15s ease;
+    }
+
+    tbody tr:hover {
+      background-color: var(--color-surface-inset);
+    }
+
+    td {
+      padding: var(--space-sm) var(--space-md);
+      vertical-align: middle;
+    }
+
+    .film-title {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* Status Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-complete {
+      background: hsla(110, 30%, 45%, 0.12);
+      color: var(--signal-success);
+    }
+
+    .badge-pending {
+      background: hsla(40, 50%, 55%, 0.12);
+      color: var(--signal-warning);
+    }
+
+    .badge-missing {
+      background: hsla(0, 40%, 55%, 0.12);
+      color: var(--signal-critical);
+    }
+
+    .badge-info {
+      background: hsla(195, 35%, 45%, 0.12);
+      color: var(--signal-info);
+    }
+
+    /* Topic Tags */
+    .topic-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .topic-tag {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: var(--color-surface-inset);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+    }
+
+    /* Asset Checklist */
+    .asset-cell {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .asset-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .asset-dot.yes {
+      background: var(--signal-success);
+    }
+
+    .asset-dot.no {
+      background: var(--signal-critical);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-xl) var(--space-lg);
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* Results Count */
+    .results-count {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body { padding: var(--space-md); }
+      h1 { font-size: 1.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .search-box { min-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-value { font-size: 1.5rem; }
+    }
+
+    /* Print */
+    @media print {
+      body { padding: 0; background: white; }
+      .controls { display: none; }
+      .filter-pills { display: none; }
+      .card { box-shadow: none; border: 1px solid #ddd; }
+      .stat-card { box-shadow: none; border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Film Asset Tracker</h1>
+  <p class="subtitle">OEFF 2026 — Film intake, captions, and readiness status</p>
+
+  <!-- Stats -->
+  <div class="stats-grid" role="region" aria-label="Film statistics">
+    <div class="stat-card">
+      <div class="stat-value" id="stat-total">0</div>
+      <div class="stat-label">Total Films</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-intake">0</div>
+      <div class="stat-label">Intake Received</div>
+    </div>
+    <div class="stat-card alert">
+      <div class="stat-value" id="stat-missing-intake">0</div>
+      <div class="stat-label">Missing Intake</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-captions">0</div>
+      <div class="stat-label">Captions Ready</div>
+    </div>
+    <div class="stat-card alert">
+      <div class="stat-value" id="stat-missing-captions">0</div>
+      <div class="stat-label">Missing Captions</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="search-box">
+      <label class="form-label" for="search">Search films</label>
+      <input type="text" id="search" class="input" placeholder="Filter by title, filmmaker, or topic..." aria-label="Search films by title, filmmaker, or topic">
+    </div>
+  </div>
+
+  <div class="filter-pills" role="group" aria-label="Filter by asset status">
+    <button class="filter-pill active" data-filter="all" aria-pressed="true">All <span class="count" id="count-all"></span></button>
+    <button class="filter-pill" data-filter="ready" aria-pressed="false">Ready <span class="count" id="count-ready"></span></button>
+    <button class="filter-pill" data-filter="intake-missing" aria-pressed="false">Missing Intake <span class="count" id="count-intake-missing"></span></button>
+    <button class="filter-pill" data-filter="captions-missing" aria-pressed="false">Missing Captions <span class="count" id="count-captions-missing"></span></button>
+    <button class="filter-pill" data-filter="action-needed" aria-pressed="false">Action Needed <span class="count" id="count-action-needed"></span></button>
+  </div>
+
+  <!-- Film Table -->
+  <div class="card" style="margin-top: var(--space-lg);">
+    <p class="results-count" id="results-count" aria-live="polite"></p>
+    <div class="table-container">
+      <table role="table" aria-label="Film asset status">
+        <thead>
+          <tr>
+            <th data-sort="title" class="sorted" role="columnheader" aria-sort="ascending">Title <span class="sort-arrow">&#9650;</span></th>
+            <th data-sort="filmmaker" role="columnheader">Filmmaker <span class="sort-arrow">&#9650;</span></th>
+            <th data-sort="topics" role="columnheader">Topics <span class="sort-arrow">&#9650;</span></th>
+            <th data-sort="intake" role="columnheader">Intake <span class="sort-arrow">&#9650;</span></th>
+            <th data-sort="captions" role="columnheader">Captions <span class="sort-arrow">&#9650;</span></th>
+            <th data-sort="delivery" role="columnheader">Delivery <span class="sort-arrow">&#9650;</span></th>
+            <th data-sort="runtime" role="columnheader">Runtime <span class="sort-arrow">&#9650;</span></th>
+          </tr>
+        </thead>
+        <tbody id="film-table-body" aria-live="polite">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // ── Mock Film Data (V7 snapshot) ──
+    // Replace with live Google Sheets data via fetchLiveData() when ready
+    const MOCK_FILMS = [
+      {
+        id: "F001",
+        title: "The Last Glacier",
+        filmmaker: "Maria Chen",
+        topics: ["Climate", "Water"],
+        intake: true,
+        captions: true,
+        delivery: "Digital",
+        runtime: 42
+      },
+      {
+        id: "F002",
+        title: "Seeds of Tomorrow",
+        filmmaker: "David Okafor",
+        topics: ["Agriculture", "Community"],
+        intake: true,
+        captions: true,
+        delivery: "Digital",
+        runtime: 28
+      },
+      {
+        id: "F003",
+        title: "Wind and Wire",
+        filmmaker: "Samantha Brooks",
+        topics: ["Energy", "Rural"],
+        intake: true,
+        captions: false,
+        delivery: "Digital",
+        runtime: 35
+      },
+      {
+        id: "F004",
+        title: "Below the Surface",
+        filmmaker: "James Whitehawk",
+        topics: ["Water", "Indigenous"],
+        intake: true,
+        captions: true,
+        delivery: "DCP",
+        runtime: 67
+      },
+      {
+        id: "F005",
+        title: "Concrete Jungle",
+        filmmaker: "Lisa Park",
+        topics: ["Urban", "Wildlife"],
+        intake: false,
+        captions: false,
+        delivery: null,
+        runtime: 52
+      },
+      {
+        id: "F006",
+        title: "The Pollinator's Path",
+        filmmaker: "Robert Gonzalez",
+        topics: ["Wildlife", "Agriculture"],
+        intake: true,
+        captions: true,
+        delivery: "Digital",
+        runtime: 24
+      },
+      {
+        id: "F007",
+        title: "Burning Season",
+        filmmaker: "Aisha Mensah",
+        topics: ["Climate", "Community"],
+        intake: true,
+        captions: false,
+        delivery: "Digital",
+        runtime: 44
+      },
+      {
+        id: "F008",
+        title: "Salt Marsh Chronicles",
+        filmmaker: "Tom Reeves",
+        topics: ["Water", "Conservation"],
+        intake: true,
+        captions: true,
+        delivery: "Digital",
+        runtime: 31
+      },
+      {
+        id: "F009",
+        title: "The Carbon Question",
+        filmmaker: "Elena Volkov",
+        topics: ["Climate", "Energy"],
+        intake: false,
+        captions: false,
+        delivery: null,
+        runtime: 58
+      },
+      {
+        id: "F010",
+        title: "Forest Floor",
+        filmmaker: "Michael Torres",
+        topics: ["Conservation", "Indigenous"],
+        intake: true,
+        captions: false,
+        delivery: "Digital",
+        runtime: 39
+      },
+      {
+        id: "F011",
+        title: "Upstream",
+        filmmaker: "Karen Blackwood",
+        topics: ["Water", "Rural"],
+        intake: true,
+        captions: true,
+        delivery: "DCP",
+        runtime: 71
+      },
+      {
+        id: "F012",
+        title: "A Quiet Revolution",
+        filmmaker: "Daniel Yuen",
+        topics: ["Agriculture", "Community", "Urban"],
+        intake: false,
+        captions: false,
+        delivery: null,
+        runtime: 46
+      }
+    ];
+
+    // ── State ──
+    let films = [...MOCK_FILMS];
+    let currentFilter = "all";
+    let currentSort = { key: "title", ascending: true };
+    let searchQuery = "";
+
+    // ── Stats ──
+    function updateStats(data) {
+      const total = data.length;
+      const intake = data.filter(f => f.intake).length;
+      const captions = data.filter(f => f.captions).length;
+
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-intake").textContent = intake;
+      document.getElementById("stat-missing-intake").textContent = total - intake;
+      document.getElementById("stat-captions").textContent = captions;
+      document.getElementById("stat-missing-captions").textContent = total - captions;
+    }
+
+    // ── Filter Counts ──
+    function updateFilterCounts(data) {
+      const ready = data.filter(f => f.intake && f.captions).length;
+      const intakeMissing = data.filter(f => !f.intake).length;
+      const captionsMissing = data.filter(f => !f.captions).length;
+      const actionNeeded = data.filter(f => !f.intake || !f.captions).length;
+
+      document.getElementById("count-all").textContent = `(${data.length})`;
+      document.getElementById("count-ready").textContent = `(${ready})`;
+      document.getElementById("count-intake-missing").textContent = `(${intakeMissing})`;
+      document.getElementById("count-captions-missing").textContent = `(${captionsMissing})`;
+      document.getElementById("count-action-needed").textContent = `(${actionNeeded})`;
+    }
+
+    // ── Filter + Search ──
+    function getFilteredData() {
+      let data = [...films];
+
+      // Search
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        data = data.filter(f =>
+          f.title.toLowerCase().includes(q) ||
+          f.filmmaker.toLowerCase().includes(q) ||
+          f.topics.some(t => t.toLowerCase().includes(q))
+        );
+      }
+
+      // Filter
+      switch (currentFilter) {
+        case "ready":
+          data = data.filter(f => f.intake && f.captions);
+          break;
+        case "intake-missing":
+          data = data.filter(f => !f.intake);
+          break;
+        case "captions-missing":
+          data = data.filter(f => !f.captions);
+          break;
+        case "action-needed":
+          data = data.filter(f => !f.intake || !f.captions);
+          break;
+      }
+
+      // Sort
+      data.sort((a, b) => {
+        let valA, valB;
+        switch (currentSort.key) {
+          case "title": valA = a.title; valB = b.title; break;
+          case "filmmaker": valA = a.filmmaker; valB = b.filmmaker; break;
+          case "topics": valA = a.topics.join(", "); valB = b.topics.join(", "); break;
+          case "intake": valA = a.intake ? 1 : 0; valB = b.intake ? 1 : 0; break;
+          case "captions": valA = a.captions ? 1 : 0; valB = b.captions ? 1 : 0; break;
+          case "delivery": valA = a.delivery || ""; valB = b.delivery || ""; break;
+          case "runtime": valA = a.runtime || 0; valB = b.runtime || 0; break;
+          default: valA = a.title; valB = b.title;
+        }
+        if (typeof valA === "string") {
+          const cmp = valA.localeCompare(valB);
+          return currentSort.ascending ? cmp : -cmp;
+        }
+        return currentSort.ascending ? valA - valB : valB - valA;
+      });
+
+      return data;
+    }
+
+    // ── Render Table ──
+    function renderTable() {
+      const data = getFilteredData();
+      const tbody = document.getElementById("film-table-body");
+      const countEl = document.getElementById("results-count");
+
+      updateStats(films);
+      updateFilterCounts(films);
+
+      countEl.textContent = data.length === films.length
+        ? `Showing all ${data.length} films`
+        : `Showing ${data.length} of ${films.length} films`;
+
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No films match your current filters.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = data.map(film => {
+        const intakeBadge = film.intake
+          ? '<span class="badge badge-complete">Received</span>'
+          : '<span class="badge badge-missing">Missing</span>';
+
+        const captionBadge = film.captions
+          ? '<span class="badge badge-complete">Complete</span>'
+          : '<span class="badge badge-pending">Pending</span>';
+
+        const deliveryBadge = film.delivery
+          ? `<span class="badge badge-info">${escapeHtml(film.delivery)}</span>`
+          : '<span class="badge badge-missing">TBD</span>';
+
+        const topicTags = film.topics.map(t =>
+          `<span class="topic-tag">${escapeHtml(t)}</span>`
+        ).join("");
+
+        return `<tr>
+          <td class="film-title">${escapeHtml(film.title)}</td>
+          <td>${escapeHtml(film.filmmaker)}</td>
+          <td><div class="topic-tags">${topicTags}</div></td>
+          <td>${intakeBadge}</td>
+          <td>${captionBadge}</td>
+          <td>${deliveryBadge}</td>
+          <td>${film.runtime ? film.runtime + " min" : "TBD"}</td>
+        </tr>`;
+      }).join("");
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // ── Event Listeners ──
+
+    // Search
+    document.getElementById("search").addEventListener("input", function (e) {
+      searchQuery = e.target.value;
+      renderTable();
+    });
+
+    // Filter Pills
+    document.querySelectorAll(".filter-pill").forEach(pill => {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll(".filter-pill").forEach(p => {
+          p.classList.remove("active");
+          p.setAttribute("aria-pressed", "false");
+        });
+        this.classList.add("active");
+        this.setAttribute("aria-pressed", "true");
+        currentFilter = this.dataset.filter;
+        renderTable();
+      });
+    });
+
+    // Column Sort
+    document.querySelectorAll("thead th[data-sort]").forEach(th => {
+      th.addEventListener("click", function () {
+        const key = this.dataset.sort;
+        if (currentSort.key === key) {
+          currentSort.ascending = !currentSort.ascending;
+        } else {
+          currentSort.key = key;
+          currentSort.ascending = true;
+        }
+
+        // Update header styles
+        document.querySelectorAll("thead th").forEach(h => {
+          h.classList.remove("sorted");
+          const arrow = h.querySelector(".sort-arrow");
+          if (arrow) arrow.innerHTML = "&#9650;";
+        });
+        this.classList.add("sorted");
+        const arrow = this.querySelector(".sort-arrow");
+        if (arrow) arrow.innerHTML = currentSort.ascending ? "&#9650;" : "&#9660;";
+        this.setAttribute("aria-sort", currentSort.ascending ? "ascending" : "descending");
+
+        renderTable();
+      });
+    });
+
+    // ── Google Sheets Integration (uncomment when ready) ──
+    // async function fetchLiveData() {
+    //   const FILMS_URL = "YOUR_PUBLISHED_FILMS_2026_CSV_URL";
+    //   const CONTACTS_URL = "YOUR_PUBLISHED_FILM_CONTACTS_CSV_URL";
+    //   try {
+    //     const [filmsRes, contactsRes] = await Promise.all([
+    //       fetch(FILMS_URL).then(r => r.text()),
+    //       fetch(CONTACTS_URL).then(r => r.text()),
+    //     ]);
+    //     // Parse CSV and merge into films array
+    //     // films = parseCsvToFilms(filmsRes, contactsRes);
+    //     // renderTable();
+    //   } catch (err) {
+    //     console.warn("Live data fetch failed, using mock data:", err);
+    //   }
+    // }
+
+    // ── Initialize ──
+    renderTable();
+  </script>
+
+</body>
+</html>
