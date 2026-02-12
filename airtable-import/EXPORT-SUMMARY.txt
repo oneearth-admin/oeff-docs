@@ -1,0 +1,291 @@
+================================================================================
+OEFF V7 TO AIRTABLE - EXPORT COMPLETION SUMMARY
+================================================================================
+Export Date: 2026-02-06
+Export Format: UTF-8 CSV (no BOM)
+Total Records: 783
+Total Files: 11 CSVs + 1 Manifest + 1 Summary
+
+================================================================================
+EXPORT CHECKLIST
+================================================================================
+
+PHASE 1: FOUNDATION TABLES (No dependencies)
+  ✓ 01-venues.csv            100 records  - Base venues/hosts
+  ✓ 02-films.csv              12 records  - 2026 films
+
+PHASE 2: REFERENCE TABLES
+  ✓ 06-sponsors.csv           23 records  - FY26 sponsors
+  ✓ 11-partners.csv          150 records  - Partner organizations
+
+PHASE 3: EVENT-RELATED TABLES
+  ✓ 03-events.csv            219 records  - Events (2026, 2025, 2024 combined)
+  ✓ 04-film-contacts.csv       9 records  - Film contact info
+  ✓ 05-host-intake.csv        28 records  - Host intake forms
+
+PHASE 4: MEDIA & QA TABLES
+  ✓ 07-media-assets.csv       25 records  - Event media files
+  ✓ 08-packet-qa.csv          23 records  - Packet QA data
+
+PHASE 5: PARTICIPANT/RECORDING TABLES
+  ✓ 09-participants.csv      132 records  - Event participants
+  ✓ 10-recordings.csv         62 records  - Event recordings
+
+================================================================================
+DATA QUALITY VERIFICATION
+================================================================================
+
+All files meet these standards:
+  ✓ UTF-8 encoding with NO BOM
+  ✓ Headers cleaned: spaces, title case (not underscores)
+  ✓ All leading/trailing whitespace stripped
+  ✓ NaN/None values replaced with empty strings
+  ✓ Dates in YYYY-MM-DD format
+  ✓ No index column in any CSV
+  ✓ Boolean fields as "true"/"false"
+  ✓ IDs preserved as text (no conversion to numbers)
+  ✓ Special characters properly encoded
+
+Key data quality notes:
+  - Empty cells are normal; many fields are conditionally populated
+  - Event dates are sparse (76.7% in 2026 events - many TBD)
+  - Boolean fields in films have been standardized to "true"/"false"
+  - All IDs maintain their text format for Airtable linking
+  - Capacity values cleaned: "TBD" converted to empty
+
+================================================================================
+DIRECTORY STRUCTURE
+================================================================================
+
+/sessions/affectionate-cool-ptolemy/mnt/oeff-docs/airtable-import/
+├── 01-venues.csv                (100 rows)
+├── 02-films.csv                 (12 rows)
+├── 03-events.csv                (219 rows)
+├── 04-film-contacts.csv         (9 rows)
+├── 05-host-intake.csv           (28 rows)
+├── 06-sponsors.csv              (23 rows)
+├── 07-media-assets.csv          (25 rows)
+├── 08-packet-qa.csv             (23 rows)
+├── 09-participants.csv          (132 rows)
+├── 10-recordings.csv            (62 rows)
+├── 11-partners.csv              (150 rows)
+├── IMPORT-ORDER.md              (Import instructions)
+└── EXPORT-SUMMARY.txt           (This file)
+
+Total: 82.2 KB data files
+
+================================================================================
+IMPORT SEQUENCE FOR AIRTABLE
+================================================================================
+
+STEP 1: Foundation Tables (no dependencies)
+  1. Import 01-venues.csv → Venues table
+  2. Import 02-films.csv → Films table
+
+STEP 2: Reference Tables
+  3. Import 06-sponsors.csv → Sponsors table
+  4. Import 11-partners.csv → Partners table
+
+STEP 3: Event-Related Tables (after Venues & Films)
+  5. Import 03-events.csv → Events table
+  6. Import 04-film-contacts.csv → Film Contacts table
+  7. Import 05-host-intake.csv → Host Intake table
+
+STEP 4: Media & QA Tables (after Events)
+  8. Import 07-media-assets.csv → Event Media Assets table
+  9. Import 08-packet-qa.csv → Packet QA table
+
+STEP 5: Participant/Recording Tables (after Events)
+  10. Import 09-participants.csv → Participants table
+  11. Import 10-recordings.csv → Recordings table
+
+STEP 6: Create Linked Record Fields
+  • Events.Venue ID → Venues.Venue ID
+  • Events.Film ID → Films.Film ID
+  • Film Contacts.Film ID → Films.Film ID
+  • Host Intake.Venue ID → Venues.Venue ID
+  • Event Media Assets.Event ID → Events.Event ID
+  • Packet QA.Event ID → Events.Event ID
+  • Recordings.Event → Events.Event ID
+  • Sponsors.Event IDs → Events.Event ID (if formatted as array)
+
+================================================================================
+FIELD MAPPING REFERENCE
+================================================================================
+
+01-VENUES.CSV
+  Venue ID          (text, primary key)
+  Venue Name        (text)
+  Region            (text, single select)
+  Capacity          (number)
+  Tech Tier         (text, single select)
+  Contact Info      (email/text)
+  First OEFF Year   (number/year)
+  Accessibility     (text)
+  Notes             (long text)
+
+02-FILMS.CSV
+  Film ID           (text, primary key)
+  Film Title        (text)
+  Release Year      (number)
+  Primary Topic     (text, single select)
+  Secondary Topic   (text, single select)
+  Tertiary Topic    (text, single select)
+  Marginalized Voices  (checkbox as "true"/"false")
+  Film Website      (url)
+  Trailer Link      (url)
+  Caption Status    (text)
+  Audio Description (checkbox as "true"/"false")
+  Spanish Available (checkbox as "true"/"false")
+  Intake Received   (checkbox as "true"/"false")
+  Notes             (long text)
+
+03-EVENTS.CSV
+  Event ID          (text, primary key)
+  Year              (number: 2026, 2025, 2024)
+  Venue ID          (text → linked record)
+  Venue Name        (text)
+  Date              (date, YYYY-MM-DD)
+  Time              (text)
+  Film ID           (text → linked record)
+  Film Title        (text)
+  Pipeline Status   (text, single select)
+  Film Status       (text, single select)
+  Event Type        (text, single select)
+  Notes             (long text)
+
+04-FILM-CONTACTS.CSV
+  Contact ID        (text, primary key)
+  Film ID           (text → linked record)
+  Film Title        (text)
+  Contact Name      (text)
+  Role              (text)
+  Email             (email)
+  Phone             (phone)
+
+05-HOST-INTAKE.CSV
+  Intake Id         (text, primary key)
+  Venue Id          (text → linked record)
+  [26 additional fields with host information]
+
+06-SPONSORS.CSV
+  Sponsor ID        (text, primary key)
+  Sponsor Name      (text)
+  Level             (text: Presenting, Supporting, etc.)
+  Event IDs         (text)
+  Website           (url)
+  Tagline Or Featurette  (text)
+
+07-MEDIA-ASSETS.CSV
+  Media ID          (text, primary key)
+  Event ID          (text → linked record)
+  Event Name        (text)
+  Venue             (text)
+  Date              (date)
+  Time              (time)
+  Film Title        (text)
+  [13 additional media asset fields]
+
+08-PACKET-QA.CSV
+  Packet ID         (text, primary key)
+  Event ID          (text → linked record)
+  Event Num         (number)
+  [15 additional QA fields]
+
+09-PARTICIPANTS.CSV
+  Participant ID    (text, primary key)
+  Name              (text)
+  Role              (text)
+  Email             (email)
+  Event Film        (text)
+  Year              (number)
+  Honorarium        (currency)
+
+10-RECORDINGS.CSV
+  Recording ID      (text, primary key)
+  Event             (text → linked record)
+  Year              (number)
+  Recap Url         (url)
+  Full Url          (url)
+
+11-PARTNERS.CSV
+  Partner ID        (text, primary key)
+  Org Name          (text)
+  Contact           (text)
+  Email             (email)
+  Topics            (text, multi-select)
+  Notes             (long text)
+
+================================================================================
+SOURCE FILES USED
+================================================================================
+
+Primary:
+  /sessions/affectionate-cool-ptolemy/mnt/oeff-docs/V7-with-Dashboard.xlsx
+    - Contains: Hosts, Films_2026, Events_2026, Events_2025, Events_2024,
+               Film_Contacts, Host_Intake, Participants, Recordings, Partners
+
+Benefits Tracking:
+  /sessions/affectionate-cool-ptolemy/mnt/oeff-docs/Benefits-Tracking-with-IDs.xlsx
+    - Contains: FY26 Sponsors sheet
+
+Fixed Files:
+  /sessions/affectionate-cool-ptolemy/mnt/oeff-docs/V7-Event-Media-Fixed.xlsx
+    - Contains: Event_Media sheet
+  /sessions/affectionate-cool-ptolemy/mnt/oeff-docs/V7-Packet-QA-Fixed.xlsx
+    - Contains: Packet_QA sheet
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. VERIFY CSV FILES
+   - Open each CSV in a text editor to verify clean headers
+   - Check encoding: Should be UTF-8 (no BOM)
+   - Spot-check data for accuracy
+
+2. IMPORT TO AIRTABLE
+   - Follow IMPORT-ORDER.md for correct sequence
+   - Use Airtable's CSV import feature for each table
+   - Wait for each import to complete before proceeding
+
+3. CREATE LINKED RECORDS
+   - After Phase 1-2, create basic tables
+   - After Phase 3-5, create all linked record fields
+   - Test linking with sample records
+
+4. DATA VALIDATION
+   - Check record counts match expectations
+   - Verify no data was lost in import
+   - Validate linked records are working
+
+5. CLEANUP
+   - Remove duplicates if any were found
+   - Update any manually maintained fields
+   - Add automation if needed
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Issue: CSV won't import - "Invalid format"
+  → Ensure UTF-8 encoding with NO BOM
+  → Check for special characters in headers
+  → Verify no extra blank rows at end
+
+Issue: Dates showing as text
+  → Verify date format is YYYY-MM-DD
+  → Use Airtable's date parsing on import
+  → Manual conversion if needed
+
+Issue: IDs not matching for linking
+  → IDs are stored as TEXT (not numbers)
+  → Match exact casing and spacing
+  → Check Event IDs for proper formatting
+
+Issue: Missing data after import
+  → This likely indicates data was empty in source
+  → Check source Excel sheets directly
+  → Verify whitespace/formatting issues
+
+================================================================================

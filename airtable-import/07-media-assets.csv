@@ -1,0 +1,78 @@
+Event ID,Media ID,Event Name,Venue,Date,Time,Film Title,Feature Link,English Subs,Spanish Subs,Dropbox Link,Intro Link,Trailer Link,Yfc Promo Link,Preshow Reel Link,Has Captions,Needs Merge,Merge Status,Verified By,Notes
+E25-001,M26-001,Sarabande_2025-04-22,"Sarabande, 2718 W. Roscoe St., Chicago, IL 60618",2025-04-22,6:30-9P,"Ocean Monologue, Bohdana Bihdan (3 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-001,M26-002,Sarabande_2025-04-22,"Sarabande, 2718 W. Roscoe St., Chicago, IL 60618",2025-04-22,6:30-9P,"Ocean Monologue, Bohdana Bihdan (3 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-002,M26-003,Illinois_Institute_of_Technology_2025-04-23–,"Illinois Institute of Technology, 10 West 35th Street, Chicago IL 60616",2025-04-23,"6-9P
+*Doors open 5:30P","The Atlantis Mussels, Rachmat Kurniawan Idrus and Azyd Aqsha",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,Yes,Yes,,System Prep,
+E25-004,M26-004,"Uncommon_Ground_(Lakeview)
+3800_N_Clark_St_2025-04-23","Uncommon Ground (Lakeview)
+3800 N Clark St, Chicago, IL 60613",2025-04-23,"6-9P
+*Doors open 5:30P",Does Uncommon Ground still have a charging station onsite? O,,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-003,M26-005,Village_of_Oak_Park_at_Oak_Park_Village_Hall_2025-04-23,"Village of Oak Park at Oak Park Village Hall, 123 Madison St, Oak Park, IL 60302",2025-04-23,"6-9P
+*Doors open 5:45P","The Most Wonderful Choice of the Year, Young Filmmakers atte",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-005,M26-006,"Epiphany_Center_for_the_Arts
+201_S_Ashland_Ave_2025-04-24","Epiphany Center for the Arts
+201 S Ashland Ave, Chicago, IL 60607",2025-04-24,"5:30-9P
+*Doors open at 5P","The Kiribati Project, Loyola University Chicago students Mic",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-006,M26-007,Dominican_University_2025-04-24,"Dominican University, Parmer Hall
+7900 Division St, River Forest, IL 60305",2025-04-24,"6:30-9P
+*Should say 6P (not 6:30P) for doors open-registration/seating time default","The Kiribati Project, Loyola University Chicago students Mic",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-007,M26-008,"Three_Brothers_Theatre
+221_N_Genesee_St_2025-04-24","Three Brothers Theatre
+221 N Genesee St, Waukegan, IL 60085.",2025-04-24,"5:45-9P
+Doors open 5:45P for X.....","The Kiribati Project, Loyola University Chicago students Mic",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-008,M26-009,"Triton_College
+2000_5th_Ave_2025-04-24","Triton College
+2000 5th Ave, River Grove, IL 60171.",2025-04-24,"6-9P
+*Doors open 5:30P for refreshments, check-in
+Pre-film trash fashion show by Triton College Fashion Club at 6P","Black Tide, Chloe Ban (3.5 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-009,M26-010,"The_Plant
+1400_W_46th_St_2025-04-25","The Plant
+1400 W 46th St, Chicago, IL 60609",2025-04-25,"6-8:30P
+*Doors open 5:15P for check-in + tours for the first 30 guests, purchase of food + beverage (1 free drink w ticket)","Throwaway Living, Laura Malatos & Helen Sun, Graduates from",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-011,"Alt_Space_Chicago
+5645_W_Corcoran_Pl_2025-04-25","Alt Space Chicago
+5645 W Corcoran Pl, Chicago, IL 60644.",2025-04-25,"5:30-9P
+*Doors open 5:30P for check-in + Redemptive Plastics exhibition","Throwaway Living, Laura Malatos & Helen Sun, Graduates from",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-011,M26-012,"Institute_of_Cultural_Affairs
+4750_N_Sheridan_Rd_2025-04-25","Institute of Cultural Affairs
+4750 N Sheridan Rd, Chicago, IL 60640.",2025-04-25,"6-9P
+*Doors open?","Throwaway Living, Laura Malatos & Helen Sun, Graduates from",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-012,M26-013,"Broadway_United_Methodist_Church
+3338_N_Broadway_2025-04-25","Broadway United Methodist Church
+3338 N Broadway, Chicago, IL 60657.",2025-04-25,"5:45-9P
+*Doors open 5:45 for check-in, refreshments + action fair","A Dark Future, Riley Adler, Curran Randhawa, Dylan Wilson, a",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-013,M26-014,"Gary_United_Methodist_Church
+224_N_Main_St_2025-04-25","Gary United Methodist Church
+224 N Main St, Wheaton, IL 60187",2025-04-25,"6-9P
+*Doors open?","A Dark Future, Riley Adler, Curran Randhawa, Dylan Wilson, a",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-015,"BUILD_Chicago
+5100_W_Harrison_St_2025-04-26","BUILD Chicago
+5100 W Harrison St, Chicago, IL 60644",2025-04-26,10:45A-1P,"If I Could, Saron Bahre (4 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-016,"Academy_for_Global_Citizenship_with_Cultivate_Collective
+494","Academy for Global Citizenship with Cultivate Collective
+4942 W 44th St, Chicago",2025-04-26,10:30A-1:30P,"Monarchs in Motion, Mason Mirabile (8 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-015,M26-017,Oak_Park_Public_Library_2025-04-26,Oak Park Public Library,2025-04-26,10:30A-1P,"If I Could, Saron Bahre (4 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-016,M26-018,Three_Brothers_Theatre_2025-04-26,"Three Brothers Theatre, 221 N Genesee St, Waukegan, IL 60085",2025-04-26,10:30A-1:30P,"If I Could, Saron Bahre (4 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-019,"Chicago_Filmmakers
+1326_W_Hollywood_AveChicago_2025-04-26","Chicago Filmmakers
+1326 W Hollywood AveChicago, IL 60660",2025-04-26,5:45-9P,"Monarchs in Motion, Mason Mirabile (8 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-020,"Palos_Heights_Rec_Center
+6601_W._127th_St._Palos_Heights_202","Palos Heights Rec Center
+6601 W. 127th St. Palos Heights, IL 60463",2025-04-26,5:45-9P,"Monarchs in Motion, Mason Mirabile (8 min)",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-019,M26-021,"Kehrein_Center_for_the_Arts
+5628_W_Washington_Blvd_2025-04-2","Kehrein Center for the Arts
+5628 W Washington Blvd, Chicago, IL 60644",2025-04-26,"5:30-8:30P
+*Doors open for check-in, action fair, purchase of food + beverages (alcoholic and NA); possible pre-film ride at 5P from Garfield Park to Kehrein Center","A Dark Future, Riley Adler, Curran Randhawa, Dylan Wilson, a",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+E25-020,M26-022,"Park_Ridge_Community_Church
+100_Courtland_Ave_2025-04-26","Park Ridge Community Church
+100 Courtland Ave, Park Ridge, IL 60068",2025-04-26,"6-9P
+*Doors open earlier for engagements?","Understorey by Claire Riverland, Lily Newcombe, Isabella San",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-023,"Chicago_Cultural_Center:_Claudia_Cassidy_Theater
+78_E_Washin","Chicago Cultural Center: Claudia Cassidy Theater
+78 E Washington St, Chicago, IL",2025-04-27,1-4:15P,"Foundation, Jack Hinz (7 min)
+*Honorable Mention winner",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-024,Chicago_Architecture_Center_2025-04-28,"Chicago Architecture Center, 
+111 E Wacker Dr, Chicago, IL 60601",2025-04-28,"5:30-8:30P
+*Doors open 5:30P for pre-reception and networking?","Two Level House, Arfiyan Dewa Purnama (5 min)
+*2024 Post-Gra",,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
+NEEDS_REVIEW,M26-025,TestVenue_2025-04-99,,,,,,,,,https://example.com/universal/intro.mp4,https://example.com/universal/trailer.mp4,https://example.com/universal/yfc_promo.mp4,https://vimeo.com/1033668562/ab1355ea21,,,,,
