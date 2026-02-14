@@ -1,0 +1,26 @@
+{
+  "date": "2026-02-14",
+  "metrics": {
+    "hosts_total": 100,
+    "events_total": 28,
+    "events_scheduled": 15,
+    "events_confirmed_interest": 5,
+    "events_interested": 8,
+    "events_with_film": 12,
+    "events_missing_film": 16,
+    "events_with_date": 14,
+    "events_missing_date": 14,
+    "films_total": 12,
+    "films_intake_yes": 9,
+    "films_intake_no": 3,
+    "film_contacts_total": 9,
+    "captions_complete": 2,
+    "captions_any_response": 9,
+    "film_contacts_columns": 15,
+    "intake_responses": 28,
+    "intake_matched": 19,
+    "intake_unmatched": 9,
+    "pipeline_active_rate": 71.4,
+    "film_intake_rate": 75.0
+  }
+}
