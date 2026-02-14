@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<!--
+  OEFF 2026 Host Communications Plan
+  Garen Hudson | Feb 12, 2026
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Host Comms Plan — OEFF 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+      --font-mono: 'Source Code Pro', monospace;
+      --color-bg: #FAFAF8;
+      --color-surface: #FFFFFF;
+      --color-text: #231F20;
+      --color-text-soft: #4a4a4a;
+      --color-text-muted: #7a7a7a;
+      --color-primary: #92BEAA;
+      --color-primary-deep: #5c7c6b;
+      --color-accent: #42A7C2;
+      --color-blue: #3960AC;
+      --color-blue-deep: #2d4a8a;
+      --color-sage-whisper: #eef4f0;
+      --color-sage-light: #d4e5db;
+      --color-divider: hsla(25, 20%, 70%, 0.2);
+      --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.06);
+      --radius: 8px;
+      --radius-lg: 12px;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      font-size: 17px;
+      padding: var(--space-xl);
+    }
+    .container { max-width: 820px; margin: 0 auto; }
+    header { margin-bottom: var(--space-2xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-divider); }
+    h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--color-blue-deep); letter-spacing: -0.02em; margin-bottom: var(--space-xs); }
+    .subtitle { font-family: var(--font-body-sans); color: var(--color-text-muted); font-size: 0.95rem; }
+    h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--color-primary-deep); margin-top: var(--space-2xl); margin-bottom: var(--space-md); }
+    h3 { font-family: var(--font-body-sans); font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-top: var(--space-lg); margin-bottom: var(--space-sm); }
+    h4 { font-family: var(--font-body-sans); font-size: 0.95rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: var(--space-lg); margin-bottom: var(--space-sm); }
+    p { margin-bottom: var(--space-md); }
+    a { color: var(--color-blue); text-decoration: none; }
+    a:hover { color: var(--color-blue-deep); text-decoration: underline; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: var(--space-md); }
+    li { margin-bottom: var(--space-xs); }
+    strong { color: var(--color-text); }
+    hr { border: none; border-top: 1px solid var(--color-divider); margin: var(--space-2xl) 0; }
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--color-divider);
+    }
+    .callout {
+      background: var(--color-sage-whisper);
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      font-size: 0.95rem;
+    }
+    .callout strong { color: var(--color-primary-deep); }
+    .warn {
+      background: #fef8f0;
+      border-left: 3px solid #d4a04a;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      font-size: 0.95rem;
+    }
+    .warn strong { color: #8a6530; }
+    .badge {
+      font-family: var(--font-body-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .badge--yamm { background: #e3f2fd; color: var(--color-blue-deep); }
+    .badge--guide { background: var(--color-sage-whisper); color: var(--color-primary-deep); }
+    .badge--form { background: #fce4ec; color: #8a3040; }
+    .badge--ai { background: #f3e5f5; color: #6a3080; }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: var(--space-md) 0;
+    }
+    .schedule-table th {
+      font-family: var(--font-body-sans);
+      font-weight: 600;
+      text-align: left;
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 2px solid var(--color-divider);
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .schedule-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--color-divider);
+      vertical-align: top;
+    }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .date-col { font-family: var(--font-mono); font-size: 0.85rem; white-space: nowrap; color: var(--color-blue); }
+    .tool-stack {
+      display: flex;
+      gap: var(--space-xs);
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .file-list {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: #f5f5f3;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius);
+      margin: var(--space-md) 0;
+      line-height: 1.9;
+    }
+    @media (max-width: 600px) {
+      body { padding: var(--space-md); font-size: 16px; }
+      h1 { font-size: 1.6rem; }
+      .schedule-table { font-size: 0.8rem; }
+      .schedule-table td, .schedule-table th { padding: var(--space-xs); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Host Communications Plan</h1>
+    <p class="subtitle">OEFF 2026 &mdash; Garen Hudson &mdash; Feb 12, 2026</p>
+  </header>
+
+  <!-- PRINCIPLES -->
+  <h2>Guiding Principles</h2>
+
+  <p>Research on nonprofit event communication cadence consistently finds three things:</p>
+  <ol>
+    <li><strong>Anticipate needs, don't react to them.</strong> Hosts should receive information before they realize they need it. Reminders 2 days before a webinar, not the morning of.</li>
+    <li><strong>Ramp frequency as the event approaches.</strong> Monthly in planning phase, weekly in the month before, daily in festival week. (<a href="https://www.schoolauction.net/blog/how-to-build-an-effective-supporter-communication-cadence/">SchoolAuction research</a>)</li>
+    <li><strong>Separate channels by purpose.</strong> Email for scheduled communications. Host guide for reference. Google Form for data collection. Don't make hosts hunt. (<a href="https://www.thrivewithcloud9.com/blog/designing-a-communication-cadence-that-builds-loyalty">Cloud Nine research</a>)</li>
+  </ol>
+
+  <div class="callout">
+    <strong>The rule:</strong> Every email should either (a) tell hosts to do something specific, or (b) give them something they'll need soon. No emails that are just "updates." If there's nothing actionable, don't send.
+  </div>
+
+  <hr>
+
+  <!-- TOOL STACK -->
+  <h2>Tool Stack</h2>
+
+  <div class="card">
+    <h3>What we're using and why</h3>
+    <table class="schedule-table">
+      <thead><tr><th>Tool</th><th>Role</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>YAMM</strong></td>
+          <td>Scheduled email sends from hosts@ Gmail</td>
+          <td>Can schedule up to 2 weeks out. One scheduled merge at a time. Manual trigger for each send. Merge fields from Google Sheet ({{First Name}}, {{Film Title}}, {{Screening Date}}, etc.)</td>
+        </tr>
+        <tr>
+          <td><strong>Google Sheets</strong></td>
+          <td>Mailing lists + merge data</td>
+          <td>Warm host list, cool host list. Columns: First Name, Email, Film Title, Screening Date, Venue, Tier. YAMM reads directly from these.</td>
+        </tr>
+        <tr>
+          <td><strong>Host guide</strong></td>
+          <td>Persistent reference (hosts.oneearthfilmfest.org)</td>
+          <td>Updated as recordings and materials become available. Emails point here, not to attachments.</td>
+        </tr>
+        <tr>
+          <td><strong>Google Forms</strong></td>
+          <td>Data collection from hosts</td>
+          <td>AV confirmation, volunteer info, post-screening debrief, t-shirt sizing. Responses feed back into Sheets.</td>
+        </tr>
+        <tr>
+          <td><strong>Claude</strong></td>
+          <td>Draft emails, analyze responses, personalize</td>
+          <td>Use Claude to draft each email template. Use it to analyze form responses and flag issues. Use it to generate per-host personalized notes when needed.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn">
+    <strong>YAMM limitation:</strong> You can only schedule one mail merge at a time, up to 2 weeks in advance. This means you can't queue up the whole calendar at once. You'll need to schedule each send individually, ideally on a weekly batch rhythm (e.g., every Monday morning, schedule that week's sends). (<a href="https://support.yet-another-mail-merge.com/hc/en-us/articles/211869705-Schedule-mail-merges-for-later-delivery">YAMM docs</a>)
+  </div>
+
+  <hr>
+
+  <!-- COMMUNICATION STREAMS -->
+  <h2>Communication Streams</h2>
+  <p>There are five distinct streams of host communication, each with its own rhythm and tooling.</p>
+
+  <!-- STREAM 1: WEBINAR -->
+  <h3>Stream 1: Webinar Reminders + Recording Follow-ups</h3>
+  <h4>Cadence</h4>
+  <p>For each of the 5 webinars + 2 optional office hours:</p>
+  <ul>
+    <li><strong>2 days before:</strong> Reminder email via YAMM. Subject: "Reminder: Host Webinar this Monday at noon &mdash; {{Topic}}"</li>
+    <li><strong>1 day after:</strong> Follow-up email with recording link + key takeaways. Subject: "Recording + notes from {{Topic}} webinar"</li>
+    <li><strong>Same day as follow-up:</strong> Update host guide with recording link (add to the "Past recordings" section)</li>
+  </ul>
+
+  <h4>Implementation</h4>
+  <ol>
+    <li><strong>Create a "Webinar Comms" Google Sheet</strong> with columns: First Name, Email, Webinar Date, Topic, Recording Link, Status</li>
+    <li><strong>Draft 2 email templates</strong> (reminder + follow-up) using Claude. Keep them short &mdash; 3-4 sentences max.</li>
+    <li><strong>Batch rhythm:</strong> Every Thursday, schedule the following Monday's reminder (2 days before). Every Tuesday after a webinar, send the recording follow-up.</li>
+    <li><strong>Host guide update:</strong> After each webinar, add the recording link to the next-step block in index.html. Commit, drag-drop to Cloudflare.</li>
+  </ol>
+
+  <h4>AI support</h4>
+  <p>Use Claude to draft a 2-3 sentence recap of each webinar's key points for the follow-up email. Feed it the recording or your notes; it generates the summary. This saves 15-20 min per follow-up.</p>
+
+  <table class="schedule-table">
+    <thead><tr><th>Date</th><th>Action</th><th>Tool</th></tr></thead>
+    <tbody>
+      <tr><td class="date-col">Feb 21 (Fri)</td><td>Schedule Feb 23 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Feb 23 (Mon)</td><td>Webinar 1: Background, Logistics</td><td></td></tr>
+      <tr><td class="date-col">Feb 24 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Feb 28 (Fri)</td><td>Schedule Mar 2 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 2 (Mon)</td><td>Webinar 2: Programming</td><td></td></tr>
+      <tr><td class="date-col">Mar 3 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Mar 14 (Fri)</td><td>Schedule Mar 16 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 16 (Mon)</td><td>Webinar 3: Marketing/Promotion</td><td></td></tr>
+      <tr><td class="date-col">Mar 17 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Mar 21 (Fri)</td><td>Schedule Mar 23 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 23 (Mon)</td><td>Webinar 4: Volunteer Recruitment</td><td></td></tr>
+      <tr><td class="date-col">Mar 24 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Mar 28 (Fri)</td><td>Schedule Mar 30 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 30 (Mon)</td><td>Webinar 5: AV/Tech</td><td></td></tr>
+      <tr><td class="date-col">Mar 31 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Apr 4 (Fri)</td><td>Schedule Apr 6 office hours reminder (mark as optional)</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Apr 11 (Fri)</td><td>Schedule Apr 13 office hours reminder (mark as optional)</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- STREAM 2: DELIVERABLES OUT -->
+  <h3>Stream 2: Deliverables Shipping (OEFF &rarr; Hosts)</h3>
+  <h4>What ships and when</h4>
+  <table class="schedule-table">
+    <thead><tr><th>Deliverable</th><th>When</th><th>Method</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Promotional materials</strong> (poster PDF, social graphics, event description)</td><td>3 weeks before screening (~Apr 1)</td><td>Email with download links</td></tr>
+      <tr><td><strong>Film file</strong> (MP4/DCP via secure download or USB)</td><td>3 weeks before screening (~Apr 1)</td><td>Secure download link, password-protected, per-host</td></tr>
+      <tr><td><strong>Google Slides deck + trailers</strong></td><td>1 week before screening (~Apr 15)</td><td>Shared Google Drive link</td></tr>
+      <tr><td><strong>Presenter guide</strong> (tonight-runsheet.html)</td><td>2 weeks before screening (~Apr 8)</td><td>Link in email + on host guide</td></tr>
+      <tr><td><strong>T-shirts</strong> (if applicable)</td><td>1-2 weeks before screening</td><td>Shipped or hand-delivered. Need sizes first (see Stream 4).</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Implementation</h4>
+  <ol>
+    <li><strong>Add columns to the warm host sheet:</strong> Film Delivered (Y/N), Promo Sent (Y/N), Slides Sent (Y/N), Presenter Guide Sent (Y/N), T-shirt Size, T-shirt Shipped (Y/N)</li>
+    <li><strong>Draft 3 YAMM templates:</strong>
+      <ul>
+        <li>"Your screening packet is ready" &mdash; film file + promo materials (3 weeks out)</li>
+        <li>"Slides and trailers for your screening" &mdash; Google Slides deck (1 week out)</li>
+        <li>"Final check-in before your screening" &mdash; day-of logistics confirmation (day before)</li>
+      </ul>
+    </li>
+    <li><strong>Personalize with merge fields:</strong> {{Film Title}}, {{Screening Date}}, {{Download Link}}, {{Venue Name}}</li>
+    <li><strong>Use YAMM's tracking</strong> to confirm opens. If a host doesn't open the screening packet email within 48 hours, follow up individually.</li>
+  </ol>
+
+  <h4>AI support</h4>
+  <p>Use Claude to generate per-host download instructions based on their venue tier. Tier 1 (full-service) gets different instructions than Tier 3 (self-sufficient). Feed Claude the tier and venue details; it generates the right version.</p>
+
+  <!-- STREAM 3: MILESTONE COMMS -->
+  <h3>Stream 3: Milestone Communications</h3>
+  <p>Broader updates that go to all hosts at key moments. Not every week &mdash; only when there's something genuinely useful.</p>
+
+  <table class="schedule-table">
+    <thead><tr><th>Date</th><th>Email</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td class="date-col">Feb 12</td><td>Host guide launch + webinar registration</td><td>Done (sent today via YAMM)</td></tr>
+      <tr><td class="date-col">~Mar 9</td><td>"Your film is confirmed" (per-host)</td><td>Film matching complete, confirm assignment. Include film synopsis + trailer link.</td></tr>
+      <tr><td class="date-col">~Mar 23</td><td>Marketing kit ready</td><td>Promo materials available. Link to download. Social media copy suggestions.</td></tr>
+      <tr><td class="date-col">~Apr 1</td><td>Screening packet shipped</td><td>Film file + everything they need. Instructions for testing.</td></tr>
+      <tr><td class="date-col">~Apr 15</td><td>One week out</td><td>Final logistics. Slides/trailers. Day-of emergency contacts. "You're ready."</td></tr>
+      <tr><td class="date-col">~Apr 21</td><td>Eve of festival</td><td>Short, warm. "We're excited. Call this number if anything comes up."</td></tr>
+      <tr><td class="date-col">~Apr 29</td><td>Thank you + debrief survey</td><td>Gratitude first. Then link to post-screening form (Stream 4).</td></tr>
+    </tbody>
+  </table>
+
+  <!-- STREAM 4: DATA COLLECTION -->
+  <h3>Stream 4: Collecting From Hosts (Surveys)</h3>
+  <p>Three Google Forms at different stages. Keep each under 3 minutes. Responses flow into Google Sheets for tracking.</p>
+
+  <div class="card">
+    <h3>Form 1: Pre-Event Readiness (send ~3 weeks before)</h3>
+    <p>Purpose: Confirm logistics and collect what you need for deliverables.</p>
+    <ul>
+      <li>Confirm screening date and time</li>
+      <li>Venue contact name + phone for day-of</li>
+      <li>AV setup confirmation: "Have you tested the film file?" (Y/N/Not yet received)</li>
+      <li>T-shirt sizes (dropdown: S/M/L/XL, quantity)</li>
+      <li>Number of volunteers expected</li>
+      <li>Any special needs or questions (open text)</li>
+    </ul>
+    <div class="tool-stack">
+      <span class="badge badge--form">Google Form</span>
+      <span class="badge badge--yamm">Sent via YAMM</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Form 2: Day-Of Confirmation (send 2 days before)</h3>
+    <p>Purpose: Final gut-check. Extremely short.</p>
+    <ul>
+      <li>Film plays correctly? (Y/N/Having issues)</li>
+      <li>Presenter/moderator confirmed? (Y/N/Need help)</li>
+      <li>Anything we should know? (open text)</li>
+    </ul>
+    <div class="tool-stack">
+      <span class="badge badge--form">Google Form</span>
+      <span class="badge badge--yamm">Sent via YAMM</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Form 3: Post-Screening Debrief (send 2 days after)</h3>
+    <p>Purpose: Capture what happened for next year. Gratitude first, data second.</p>
+    <ul>
+      <li>Estimated attendance</li>
+      <li>What went well? (open text)</li>
+      <li>What would you change? (open text)</li>
+      <li>Any technical issues? (Y/N + description)</li>
+      <li>Would you host again next year? (Yes / Maybe / No)</li>
+      <li>Photos to share? (file upload or link)</li>
+      <li>Anything else? (open text)</li>
+    </ul>
+    <div class="tool-stack">
+      <span class="badge badge--form">Google Form</span>
+      <span class="badge badge--yamm">Sent via YAMM</span>
+      <span class="badge badge--ai">Claude analysis</span>
+    </div>
+  </div>
+
+  <h4>AI support for surveys</h4>
+  <p>After the festival, export all Form 3 responses to a CSV. Feed it to Claude and ask for:</p>
+  <ul>
+    <li>Themes in "what went well" and "what would you change" (cluster analysis)</li>
+    <li>Technical issues by venue tier (are Tier 1 venues having different problems than Tier 3?)</li>
+    <li>A draft "lessons learned" summary for the team</li>
+    <li>Flag any hosts who said "No" to hosting again &mdash; with their feedback, for Ana to follow up personally</li>
+  </ul>
+
+  <!-- STREAM 5: COOL HOST PIPELINE -->
+  <h3>Stream 5: Cool Host Conversion</h3>
+  <p>Separate from the warm host streams. These are venues that expressed interest but haven't committed or selected a film.</p>
+
+  <div class="card">
+    <h3>The conversion email (next week)</h3>
+    <p>Short, clear, one ask: fill out this form.</p>
+    <ul>
+      <li>Acknowledge the gap since last contact ("We know it's been a few weeks")</li>
+      <li>Link to a film selection form (Google Form with embedded film list PDF link)</li>
+      <li>Offer a quick call if they want help choosing</li>
+      <li>Link to host guide for reference</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Film selection form</h3>
+    <ul>
+      <li>Your name + venue name</li>
+      <li>Link to film list PDF (view trailers, read synopses)</li>
+      <li>Top 1-2 film choices (text field &mdash; they type the title)</li>
+      <li>"Do you need to see the full film before deciding?" (Y/N)</li>
+      <li>Preferred screening date (date picker or text)</li>
+      <li>Any questions? (open text)</li>
+    </ul>
+    <div class="tool-stack">
+      <span class="badge badge--form">Google Form</span>
+      <span class="badge badge--yamm">Sent via YAMM</span>
+    </div>
+    <p style="margin-top: var(--space-sm); font-size: 0.9rem; color: var(--color-text-muted);">When a cool host fills out this form and selects a film, move them to the warm host sheet. They now enter the regular communication streams.</p>
+  </div>
+
+  <hr>
+
+  <!-- MASTER CALENDAR -->
+  <h2>Master Calendar</h2>
+  <p>Every scheduled communication from now through post-festival. This is the single source of truth for what gets sent when.</p>
+
+  <table class="schedule-table">
+    <thead><tr><th>Week of</th><th>Sends</th><th>Also</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Feb 17</td>
+        <td>Cool host conversion email + film selection form<br>Feb 23 webinar reminder (Fri)</td>
+        <td>Kim onboarding call</td>
+      </tr>
+      <tr>
+        <td class="date-col">Feb 24</td>
+        <td>Feb 23 recording follow-up (Tue)<br>Mar 2 webinar reminder (Fri)</td>
+        <td>Update host guide with recording</td>
+      </tr>
+      <tr>
+        <td class="date-col">Mar 3</td>
+        <td>Mar 2 recording follow-up (Tue)<br>"Your film is confirmed" per-host emails (as matching completes)</td>
+        <td>Update host guide with recording</td>
+      </tr>
+      <tr>
+        <td class="date-col">Mar 10</td>
+        <td>Mar 16 webinar reminder (Fri)</td>
+        <td>Kim delivers knowledge base audit</td>
+      </tr>
+      <tr>
+        <td class="date-col">Mar 17</td>
+        <td>Mar 16 recording follow-up (Tue)<br>Mar 23 webinar reminder (Fri)<br>Marketing kit ready email</td>
+        <td>Update host guide</td>
+      </tr>
+      <tr>
+        <td class="date-col">Mar 24</td>
+        <td>Mar 23 recording follow-up (Tue)<br>Mar 30 webinar reminder (Fri)</td>
+        <td>Update host guide</td>
+      </tr>
+      <tr>
+        <td class="date-col">Mar 31</td>
+        <td>Mar 30 recording follow-up (Tue)<br>Screening packet email (film file + promo)<br>Pre-event readiness form (Form 1)<br>Apr 6 office hours reminder (Fri)</td>
+        <td>Update host guide. Begin film delivery.</td>
+      </tr>
+      <tr>
+        <td class="date-col">Apr 7</td>
+        <td>Presenter guide email<br>Apr 13 office hours reminder (Fri)</td>
+        <td>AV test follow-ups for hosts who haven't confirmed</td>
+      </tr>
+      <tr>
+        <td class="date-col">Apr 14</td>
+        <td>Slides + trailers email<br>"One week out" email</td>
+        <td>Final logistics confirmation calls</td>
+      </tr>
+      <tr>
+        <td class="date-col">Apr 21</td>
+        <td>Day-of confirmation form (Form 2, Tue/Wed)<br>"Eve of festival" email (Mon)</td>
+        <td>Flag any Form 2 issues immediately</td>
+      </tr>
+      <tr>
+        <td class="date-col">Apr 22-28</td>
+        <td>Festival week &mdash; no mass emails. Individual support only.</td>
+        <td>Day-of texts/calls as needed</td>
+      </tr>
+      <tr>
+        <td class="date-col">Apr 29</td>
+        <td>Thank you + debrief survey (Form 3)</td>
+        <td>Feed responses to Claude for analysis</td>
+      </tr>
+      <tr>
+        <td class="date-col">May 5</td>
+        <td>Follow-up on non-respondents to Form 3</td>
+        <td>Draft "lessons learned" from responses</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- IMPLEMENTATION -->
+  <h2>Implementation Plan</h2>
+
+  <h3>Phase 1: Infrastructure (this week + next)</h3>
+  <ol>
+    <li><strong>Warm host sheet</strong> &mdash; add columns: Film Title, Screening Date, Venue Tier, Film Delivered, Promo Sent, Slides Sent, T-shirt Size, T-shirt Shipped</li>
+    <li><strong>Cool host sheet</strong> &mdash; create separate sheet. Columns: Name, Email, Venue, Status (Contacted / Form Sent / Responded / Converted)</li>
+    <li><strong>Draft all email templates</strong> &mdash; use Claude to generate drafts, then refine for tone. Templates needed:
+      <ul>
+        <li>Webinar reminder (reusable, swap {{Topic}} and {{Date}})</li>
+        <li>Webinar recording follow-up (reusable, swap recording link + summary)</li>
+        <li>Cool host conversion email</li>
+        <li>Film confirmation (per-host)</li>
+        <li>Marketing kit ready</li>
+        <li>Screening packet delivery</li>
+        <li>Slides/trailers delivery</li>
+        <li>One week out</li>
+        <li>Eve of festival</li>
+        <li>Thank you + debrief</li>
+      </ul>
+    </li>
+    <li><strong>Build 3 Google Forms</strong> &mdash; pre-event readiness, day-of confirmation, post-screening debrief</li>
+    <li><strong>Build film selection form</strong> for cool hosts</li>
+  </ol>
+
+  <h3>Phase 2: Weekly rhythm (ongoing Feb-Apr)</h3>
+  <ol>
+    <li><strong>Monday AM:</strong> Check the calendar. What goes out this week?</li>
+    <li><strong>Monday AM:</strong> Schedule that week's YAMM sends (reminders, follow-ups)</li>
+    <li><strong>Tuesday after webinar:</strong> Record, upload, send follow-up, update host guide, commit + deploy</li>
+    <li><strong>Friday:</strong> Schedule next Monday's webinar reminder</li>
+    <li><strong>Weekly:</strong> Check warm host sheet for any missing confirmations or deliverables. Follow up individually.</li>
+  </ol>
+
+  <h3>Phase 3: Post-festival (late Apr - May)</h3>
+  <ol>
+    <li>Send debrief survey (Form 3)</li>
+    <li>Export responses, feed to Claude for theme analysis</li>
+    <li>Draft lessons-learned doc for the team</li>
+    <li>Update the runbook with anything new</li>
+    <li>Archive the 2026 comms calendar as a template for 2027</li>
+  </ol>
+
+  <div class="callout" style="margin-top: var(--space-2xl);">
+    <strong>Where AI fits in this plan:</strong> Claude drafts every email template (saves ~30 min each, 10 templates = 5 hours saved). Claude summarizes webinar recordings for follow-ups. Claude analyzes post-screening survey data. Claude generates per-host personalized instructions based on venue tier. Total AI-assisted time savings: ~10-15 hours across the festival cycle.
+  </div>
+
+  <div class="warn">
+    <strong>What YAMM can't do:</strong> True automation (no "send this email every Monday at 9am forever"). No conditional logic ("if host hasn't opened in 48 hours, send reminder"). No drip sequences. Each send is manual or scheduled up to 2 weeks out. The weekly rhythm in Phase 2 compensates for this &mdash; it's a human-in-the-loop system, not an autopilot.
+  </div>
+
+  <hr>
+
+  <h2>What Kim Could Own</h2>
+  <p>If Kim's onboarding goes well, she could take over significant parts of this system by Phase 2 of her engagement:</p>
+  <ul>
+    <li><strong>Weekly YAMM scheduling</strong> &mdash; she follows the calendar, preps and schedules sends</li>
+    <li><strong>Form response monitoring</strong> &mdash; flags issues from pre-event readiness forms</li>
+    <li><strong>Host follow-ups</strong> &mdash; individual outreach for non-responders or hosts with issues</li>
+    <li><strong>Cool host pipeline</strong> &mdash; manages the conversion flow from interest to commitment</li>
+  </ul>
+  <p>This is exactly the kind of delegatable, system-following work that her organizational strategy background is built for &mdash; and it frees you and Ana to focus on the parts that require institutional judgment.</p>
+
+</div>
+</body>
+</html>
