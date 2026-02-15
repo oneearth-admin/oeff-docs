@@ -1,0 +1,160 @@
+{
+  "date": "2026-02-15",
+  "source": "live",
+  "sheets_read": [
+    "2026HostVenues"
+  ],
+  "metrics": {
+    "hosts_total": 201,
+    "events_total": 21,
+    "events_with_film": 19,
+    "events_missing_film": 2,
+    "events_with_date": 15,
+    "events_missing_date": 6,
+    "events_film_confirmed": 10,
+    "events_film_not_confirmed": 3,
+    "events_flagship": 3,
+    "events_community": 18
+  },
+  "yamm_validation": {
+    "total_sendable": 21,
+    "hosts_with_gaps": 21,
+    "hosts_ready": 0,
+    "gaps": [
+      {
+        "host": "Columbia College - Film Row Cinema",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Trinity Lutheran Church\nTrinity Lutheran Churn, 675 E Algonquin Rd, Des Plaines, IL 60016",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Climate Action Evanston likely at Evanston Public Library",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Uncommon Ground",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Columbia College - Film Row Cinema",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Village of Oak Park at OPRF High School",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Institute of Cultural Affairs in the USA",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Bethel New Life",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Triton College",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Cultivate Collective (at Academy for Global Citizenship)",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Kehrein Center for the Arts at BlkRoom",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Black Girl Environmentalists at UIC or Patagonia Fulton Market",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Broadway United Methodist Church",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Calumet College of St. Joseph",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Dominican University",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Chicago Cultural Center",
+        "missing": [
+          "Film Title",
+          "Screening Date",
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "BUILD, Inc.",
+        "missing": [
+          "Screening Date",
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Go Green Park Ridge possibly at Pickwick Theater",
+        "missing": [
+          "Screening Date",
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Illinois Clinicians for Climate Action at TBD location or with TBD partner",
+        "missing": [
+          "Screening Date",
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Euclid AVE UMC",
+        "missing": [
+          "Screening Date",
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Seven Generations Ahead",
+        "missing": [
+          "Film Title",
+          "Screening Date",
+          "Venue Contact"
+        ]
+      }
+    ]
+  }
+}
