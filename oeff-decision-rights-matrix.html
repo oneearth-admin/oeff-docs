@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!--
+  OEFF 2026 Decision-Rights Matrix
+  Garen Hudson | Feb 16, 2026
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decision-Rights Matrix — OEFF 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+      --font-mono: 'Source Code Pro', monospace;
+      --color-bg: #FAFAF8;
+      --color-surface: #FFFFFF;
+      --color-text: #231F20;
+      --color-text-soft: #4a4a4a;
+      --color-text-muted: #7a7a7a;
+      --color-primary: #92BEAA;
+      --color-primary-deep: #5c7c6b;
+      --color-accent: #42A7C2;
+      --color-blue: #3960AC;
+      --color-blue-deep: #2d4a8a;
+      --color-sage-whisper: #eef4f0;
+      --color-sage-light: #d4e5db;
+      --color-divider: hsla(25, 20%, 70%, 0.2);
+      --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.06);
+      --radius: 8px;
+      --radius-lg: 12px;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      font-size: 17px;
+      padding: var(--space-xl);
+    }
+    .container { max-width: 960px; margin: 0 auto; }
+    header { margin-bottom: var(--space-2xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-divider); }
+    h1 { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--color-blue-deep); letter-spacing: -0.02em; margin-bottom: var(--space-xs); }
+    .subtitle { font-family: var(--font-body-sans); color: var(--color-text-muted); font-size: 0.95rem; }
+    h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--color-primary-deep); margin-top: var(--space-2xl); margin-bottom: var(--space-md); }
+    h3 { font-family: var(--font-body-sans); font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-top: var(--space-lg); margin-bottom: var(--space-sm); }
+    p { margin-bottom: var(--space-md); }
+    a { color: var(--color-blue); text-decoration: none; }
+    a:hover { color: var(--color-blue-deep); text-decoration: underline; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: var(--space-md); }
+    li { margin-bottom: var(--space-xs); }
+    strong { color: var(--color-text); }
+    hr { border: none; border-top: 1px solid var(--color-divider); margin: var(--space-2xl) 0; }
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--color-divider);
+    }
+    .callout {
+      background: var(--color-sage-whisper);
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      font-size: 0.95rem;
+    }
+    .callout strong { color: var(--color-primary-deep); }
+    .warn {
+      background: #fef8f0;
+      border-left: 3px solid #d4a04a;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      font-size: 0.95rem;
+    }
+    .warn strong { color: #8a6530; }
+    .badge {
+      font-family: var(--font-body-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .badge--ana { background: #fce4ec; color: #8a3040; }
+    .badge--garen { background: var(--color-sage-whisper); color: var(--color-primary-deep); }
+    .badge--shared { background: #e3f2fd; color: var(--color-blue-deep); }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: var(--space-md) 0;
+    }
+    .matrix-table th {
+      font-family: var(--font-body-sans);
+      font-weight: 600;
+      text-align: left;
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 2px solid var(--color-divider);
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .matrix-table td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--color-divider);
+      vertical-align: top;
+    }
+    .matrix-table tr:last-child td { border-bottom: none; }
+    .category-cell {
+      font-family: var(--font-body-sans);
+      font-weight: 600;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+    .examples-cell {
+      font-size: 0.85rem;
+      color: var(--color-text-soft);
+    }
+    .threshold-cell {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--color-blue);
+    }
+    .escalation-cell {
+      font-size: 0.85rem;
+      color: var(--color-text-soft);
+    }
+    @media (max-width: 700px) {
+      body { padding: var(--space-md); font-size: 16px; }
+      h1 { font-size: 1.6rem; }
+      .matrix-table { font-size: 0.8rem; }
+      .matrix-table td, .matrix-table th { padding: var(--space-xs); }
+      .container { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Decision-Rights Matrix</h1>
+    <p class="subtitle">OEFF 2026 &mdash; Garen Hudson &mdash; Feb 16, 2026</p>
+  </header>
+
+  <div class="callout">
+    <strong>Purpose:</strong> This matrix clarifies decision authority between the Executive Director and Technical Coordinator, reducing delays from ambiguous approval requirements. Each category defines who can act, what triggers escalation, and how decisions flow. The goal is fewer bottlenecks and faster execution during the pre-festival crunch.
+  </div>
+
+  <h2>How to Read This Matrix</h2>
+
+  <p>Three authority levels:</p>
+  <ul>
+    <li><span class="badge badge--ana">Ana only</span> &mdash; Requires Ana's explicit approval before action. Garen prepares options and recommendations.</li>
+    <li><span class="badge badge--garen">Garen autonomous</span> &mdash; Garen can decide and act, then inform Ana in the next weekly update or async check-in.</li>
+    <li><span class="badge badge--shared">Shared</span> &mdash; Either can initiate, but the other must confirm before execution. Quick text/email confirmation is sufficient.</li>
+  </ul>
+
+  <div class="warn">
+    <strong>Pilot year note:</strong> This is our first year operating in a distributed contractor model. These boundaries are proposed based on patterns observed during Nov 2025 &ndash; Feb 2026. Both parties should review and adjust after the festival retrospective.
+  </div>
+
+  <hr>
+
+  <h2>Decision-Rights Matrix</h2>
+
+  <div class="card">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Example Decisions</th>
+          <th>Authority</th>
+          <th>Threshold / Trigger</th>
+          <th>Escalation Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Budget / Spending -->
+        <tr>
+          <td class="category-cell">Budget &amp; Spending</td>
+          <td class="examples-cell">Contractor payments, equipment purchases, vendor invoices, budget reallocation between line items</td>
+          <td><span class="badge badge--ana">Ana only</span></td>
+          <td class="threshold-cell">All spend decisions. Garen provides estimates and options.</td>
+          <td class="escalation-cell">Garen sends options with cost/benefit. Ana approves via text, email, or call. No action without explicit yes.</td>
+        </tr>
+        <!-- Scope Changes -->
+        <tr>
+          <td class="category-cell">Scope Changes</td>
+          <td class="examples-cell">Adding new deliverables, expanding venue count, taking on new partner commitments, deferring contracted work</td>
+          <td><span class="badge badge--ana">Ana only</span></td>
+          <td class="threshold-cell">Any change that alters contracted deliverables or timeline.</td>
+          <td class="escalation-cell">Garen flags the scope change with impact assessment. Ana decides whether to absorb, defer, or decline. Per contract: brief acknowledgment sufficient if within budget cap.</td>
+        </tr>
+        <!-- Host Communications -->
+        <tr>
+          <td class="category-cell">Host Communications</td>
+          <td class="examples-cell">YAMM sends, webinar reminder scheduling, recording follow-ups, host guide updates, cool host conversion emails</td>
+          <td><span class="badge badge--garen">Garen autonomous</span></td>
+          <td class="threshold-cell">Routine sends following the approved comms plan. Escalate if: new messaging not in plan, tone-sensitive situation, or host complaint.</td>
+          <td class="escalation-cell">Garen executes per comms plan calendar. Exceptions or new messaging go to Ana for tone review before send. Individual host complaints escalate immediately via text.</td>
+        </tr>
+        <!-- Technical Standards -->
+        <tr>
+          <td class="category-cell">Technical Standards</td>
+          <td class="examples-cell">Caption format decisions, audio normalization specs, file naming conventions, QC pass/fail criteria, venue tier classification</td>
+          <td><span class="badge badge--garen">Garen autonomous</span></td>
+          <td class="threshold-cell">All technical standards within AV/media/data domain. Escalate if: standard affects host-facing experience or accessibility commitments.</td>
+          <td class="escalation-cell">Garen sets and documents standards. Accessibility-impacting decisions (e.g., dropping ASL for a venue) require Ana approval. Weekly FYI update covers any new standards set.</td>
+        </tr>
+        <!-- Team Onboarding -->
+        <tr>
+          <td class="category-cell">Team Onboarding</td>
+          <td class="examples-cell">Onboarding materials, training guides, intake surveys, Claude project instructions, channel setup</td>
+          <td><span class="badge badge--garen">Garen autonomous</span></td>
+          <td class="threshold-cell">Process design and documentation. Escalate if: giving someone new system access or sharing credentials.</td>
+          <td class="escalation-cell">Garen builds onboarding infrastructure. Access grants (Google Workspace, Airtable, shared drives) confirmed with Ana before provisioning. Role scope questions go to Ana.</td>
+        </tr>
+        <!-- Data / Systems Changes -->
+        <tr>
+          <td class="category-cell">Data &amp; Systems</td>
+          <td class="examples-cell">Schema changes, Airtable field modifications, migration execution, dashboard changes, new tool adoption</td>
+          <td><span class="badge badge--shared">Shared</span></td>
+          <td class="threshold-cell">Reversible changes (adding fields, views): Garen autonomous. Irreversible changes (deleting data, migrating platforms): Ana confirmation required.</td>
+          <td class="escalation-cell">Garen proposes with rollback plan. Quick text confirmation for irreversible changes. New tool adoption requires brief discussion on cost and maintenance burden.</td>
+        </tr>
+        <!-- External Communications -->
+        <tr>
+          <td class="category-cell">External Communications</td>
+          <td class="examples-cell">Filmmaker correspondence, sponsor-facing messages, press/media statements, partnership proposals</td>
+          <td><span class="badge badge--ana">Ana only</span></td>
+          <td class="threshold-cell">Any communication representing OEFF to external parties beyond hosts.</td>
+          <td class="escalation-cell">Garen drafts, Ana approves before send. Exception: routine filmmaker file-request emails using approved templates can be sent autonomously.</td>
+        </tr>
+        <!-- Vendor / Contractor Decisions -->
+        <tr>
+          <td class="category-cell">Vendor &amp; Contractor</td>
+          <td class="examples-cell">Hiring decisions, contractor scope, vendor selection (Rev.com, rental companies), subcontractor compensation</td>
+          <td><span class="badge badge--ana">Ana only</span></td>
+          <td class="threshold-cell">All hiring, firing, and vendor commitment decisions. Garen can recommend and evaluate.</td>
+          <td class="escalation-cell">Garen provides candidate assessment or vendor comparison. Ana decides. Per contract: "brief conversation with Ana is the approval mechanism." Subcontractor pay managed separately by OEFF.</td>
+        </tr>
+        <!-- Timeline Changes -->
+        <tr>
+          <td class="category-cell">Timeline Changes</td>
+          <td class="examples-cell">Moving deadlines, adjusting comms calendar, rescheduling webinars, changing deliverable sequencing</td>
+          <td><span class="badge badge--shared">Shared</span></td>
+          <td class="threshold-cell">Minor shifts (1-3 days): Garen autonomous with FYI. Major shifts (1+ week or host-facing): Ana confirmation.</td>
+          <td class="escalation-cell">Garen proposes adjusted timeline with rationale. Host-facing date changes require Ana sign-off. Internal-only shifts logged in weekly update.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h2>Operating Principles</h2>
+
+  <div class="card">
+    <h3>Default to action, not permission</h3>
+    <p>For categories marked <span class="badge badge--garen">Garen autonomous</span>, the expectation is: act first, inform after. Waiting for approval on routine execution creates the bottleneck this matrix is designed to prevent.</p>
+
+    <h3>Escalation is not failure</h3>
+    <p>Escalating a decision to Ana is a feature, not a bug. The threshold column defines when escalation is expected. Using it means the system is working.</p>
+
+    <h3>Confirmation can be lightweight</h3>
+    <p>For <span class="badge badge--shared">Shared</span> decisions, confirmation does not require a meeting. A text reply of "yes" or "go ahead" is sufficient. The goal is alignment, not ceremony.</p>
+
+    <h3>Weekly sync as safety net</h3>
+    <p>The weekly 1:1 meeting catches anything that fell between categories. If Garen made an autonomous decision that Ana wants to revisit, the weekly meeting is the venue. No retroactive blame for good-faith autonomous action within these boundaries.</p>
+  </div>
+
+  <hr>
+
+  <h2>Quick Reference: "Should I Ask Ana?"</h2>
+
+  <div class="card">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th>If the decision involves...</th>
+          <th>Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Spending money</td>
+          <td><span class="badge badge--ana">Yes, always</span></td>
+        </tr>
+        <tr>
+          <td>Changing what we promised to deliver</td>
+          <td><span class="badge badge--ana">Yes, always</span></td>
+        </tr>
+        <tr>
+          <td>Speaking for OEFF externally</td>
+          <td><span class="badge badge--ana">Yes, always</span></td>
+        </tr>
+        <tr>
+          <td>Hiring or firing anyone</td>
+          <td><span class="badge badge--ana">Yes, always</span></td>
+        </tr>
+        <tr>
+          <td>Deleting data or switching platforms</td>
+          <td><span class="badge badge--shared">Yes, quick confirm</span></td>
+        </tr>
+        <tr>
+          <td>Moving a host-facing deadline</td>
+          <td><span class="badge badge--shared">Yes, quick confirm</span></td>
+        </tr>
+        <tr>
+          <td>Sending a scheduled email from the comms plan</td>
+          <td><span class="badge badge--garen">No, just do it</span></td>
+        </tr>
+        <tr>
+          <td>Setting a technical standard or spec</td>
+          <td><span class="badge badge--garen">No, just do it</span></td>
+        </tr>
+        <tr>
+          <td>Building onboarding docs or guides</td>
+          <td><span class="badge badge--garen">No, just do it</span></td>
+        </tr>
+        <tr>
+          <td>Updating the host guide with approved content</td>
+          <td><span class="badge badge--garen">No, just do it</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top: var(--space-2xl);">
+    <strong>Living document:</strong> This matrix should be reviewed at the post-festival retrospective (May 2026) and updated based on what worked, what caused friction, and where authority was unclear. The goal is to start with clear defaults and refine with experience.
+  </div>
+
+</div>
+</body>
+</html>
