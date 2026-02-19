@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF 2026 — AV Technician Statement of Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@300;400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest-50: #f0f4f2;
+    --forest-100: #dce5df;
+    --forest-200: #b8ccbf;
+    --forest-500: #5c7c6b;
+    --forest-600: #4a6356;
+    --forest-700: #3a4e44;
+    --forest-800: #2d3d35;
+    --forest-900: #1e2b24;
+    --cream-50: #fdfcfa;
+    --cream-100: #f7f5f2;
+    --cream-200: #ede9e3;
+    --cream-300: #ddd7ce;
+    --ember-400: #c4704b;
+
+    --color-ground: var(--cream-100);
+    --color-surface: var(--cream-50);
+    --color-surface-raised: #ffffff;
+    --color-text: var(--forest-900);
+    --color-text-secondary: var(--forest-700);
+    --color-text-muted: var(--forest-600);
+    --color-primary: var(--forest-500);
+    --color-primary-hover: var(--forest-600);
+    --color-primary-subtle: var(--forest-100);
+    --color-primary-whisper: var(--forest-50);
+    --color-accent: var(--ember-400);
+    --color-border: var(--cream-300);
+    --color-border-light: var(--cream-200);
+
+    --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.06);
+    --shadow-medium: 0 4px 16px hsla(25, 40%, 30%, 0.08);
+    --radius-s: 6px;
+    --radius-m: 10px;
+    --radius-l: 14px;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-ground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    background: var(--color-surface);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: var(--color-primary);
+    color: var(--color-surface);
+    padding: 40px 48px 36px;
+  }
+
+  .header-label {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    opacity: 0.75;
+    font-weight: 300;
+  }
+
+  .content { padding: 36px 48px 60px; }
+
+  .section { margin-bottom: 32px; }
+
+  .section h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--color-text);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .section h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    margin-top: 20px;
+  }
+
+  .section h3:first-child { margin-top: 0; }
+
+  .section p { margin-bottom: 10px; font-size: 14.5px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .field {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-s);
+    padding: 12px 16px;
+  }
+
+  .field-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .field-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .field-value--placeholder {
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .scope-block {
+    background: var(--color-primary-whisper);
+    border: 1px solid var(--color-primary-subtle);
+    border-radius: var(--radius-m);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+
+  .scope-block h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--color-primary-hover);
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+
+  .scope-list {
+    list-style: none;
+    font-size: 14px;
+  }
+
+  .scope-list li {
+    padding: 5px 0 5px 20px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .scope-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary-subtle);
+    border: 2px solid var(--color-primary);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 28px 0;
+  }
+
+  .policy-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+    margin: 12px 0;
+    border-radius: var(--radius-s);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
+  }
+
+  .policy-table th {
+    background: var(--color-primary-whisper);
+    font-weight: 500;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .policy-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-border-light);
+    background: var(--color-surface-raised);
+    vertical-align: top;
+  }
+
+  .policy-table tr:last-child td { border-bottom: none; }
+
+  .policy-table .term-label {
+    font-weight: 500;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  .policy-table .term-detail {
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .note {
+    background: var(--color-ground);
+    border-left: 3px solid var(--color-border);
+    border-radius: var(--radius-s);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 12px 0;
+    line-height: 1.55;
+  }
+
+  .note.important {
+    background: #fef9f0;
+    border-left-color: var(--color-accent);
+  }
+
+  .sig-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .sig-line {
+    border-bottom: 1px solid var(--color-text);
+    height: 40px;
+    margin-bottom: 6px;
+  }
+
+  .sig-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+  }
+
+  .footer {
+    padding: 24px 48px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  @media print {
+    body { background: white; }
+    .page { max-width: none; box-shadow: none; }
+    .header { padding: 28px 36px 24px; }
+    .content { padding: 24px 36px 40px; }
+    .section { page-break-inside: avoid; }
+    .footer { padding: 16px 36px; }
+    @page { margin: 0.5in; size: letter; }
+  }
+
+  @media screen {
+    .page {
+      box-shadow: var(--shadow-medium);
+      margin: 24px auto;
+      border-radius: var(--radius-l);
+      overflow: hidden;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">One Earth Film Festival 2026</div>
+    <h1>AV Technician<br>Statement of Work</h1>
+    <div class="header-sub">Per-Booking Engagement Agreement</div>
+  </div>
+
+  <div class="content">
+
+    <!-- PARTIES -->
+    <div class="section">
+      <h2>Engagement Details</h2>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Technician</div>
+          <div class="field-value field-value--placeholder">[Technician Name / Company]</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Organization</div>
+          <div class="field-value">One Earth Film Festival</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Event / Venue</div>
+          <div class="field-value field-value--placeholder">[Venue Name &mdash; Event Date]</div>
+        </div>
+        <div class="field">
+          <div class="field-label">OEFF Contact</div>
+          <div class="field-value">Garen Hudson, Technical Coordinator</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="field-label">Call Time</div>
+          <div class="field-value field-value--placeholder">[Start Time] &mdash; [Est. Wrap]</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Day Rate / Hourly</div>
+          <div class="field-value field-value--placeholder">[Rate] / [Day or Hourly]</div>
+        </div>
+      </div>
+
+      <p>This statement of work constitutes a per-booking engagement under the OEFF 2026 Contracted Labor Policy (Exhibit A, below). The technician is engaged as an independent contractor for the specific event(s) listed above.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SCOPE -->
+    <div class="section">
+      <h2>Scope of Work</h2>
+
+      <div class="scope-block">
+        <h3>Technician Responsibilities</h3>
+        <ul class="scope-list">
+          <li>Load-in, setup, and strike of AV equipment per the venue technical rider</li>
+          <li>Operation of sound, projection, and/or recording equipment during the event</li>
+          <li>Real-time troubleshooting of audio/video playback issues</li>
+          <li>Communication with OEFF Technical Coordinator (Garen) and on-site event lead</li>
+          <li>Verification of DCP/file playback prior to audience arrival</li>
+          <li>Post-event equipment return, cable wrapping, and breakdown</li>
+        </ul>
+      </div>
+
+      <div class="scope-block">
+        <h3>OEFF Provides</h3>
+        <ul class="scope-list">
+          <li>Venue technical rider and contact information in advance</li>
+          <li>Film files / DCP packages tested and delivered before event</li>
+          <li>On-site event lead for non-technical coordination</li>
+          <li>Equipment inventory list (if OEFF-supplied gear is used)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- EXHIBIT A: LABOR POLICY -->
+    <div class="section">
+      <h2>Exhibit A: Contracted Labor Policy</h2>
+
+      <div class="note important">
+        The following policy applies per booking contract. All terms below are binding for this engagement.
+      </div>
+
+      <h3>Day Rates & Hours</h3>
+
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="term-label">Full Day</td>
+            <td class="term-detail">Ten (10) hours at the agreed day rate.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Overtime</td>
+            <td class="term-detail">Time and a half after ten (10) hours. Double time after fourteen (14) hours.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Overnight Work</td>
+            <td class="term-detail">Overtime rate for any hours worked between midnight and 5am. First five (5) hours of a call starting midnight&ndash;5am are at overtime; next five (5) hours at straight time; after ten (10) hours, overtime resumes. Double time after the 14th hour.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Early Call</td>
+            <td class="term-detail">Any call time hours before 7am are paid at 1.5x hourly rate.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Turnaround & Continuous Pay</h3>
+
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="term-label">Short Turnaround</td>
+            <td class="term-detail">If a technician gets less than eight (8) but more than four (4) hours off between call times, the technician returns at the overtime rate for the next shift and remains on overtime until released. Short turn remains in effect until the technician is given at least eight (8) hours off.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Continuous Pay</td>
+            <td class="term-detail">If a technician gets less than four (4) hours off between shifts, hours are paid straight through continuously.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Meal Breaks</h3>
+
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="term-label">Unpaid Break</td>
+            <td class="term-detail">Meal breaks are unpaid provided the break is at least one (1) hour long and the technician is allowed to leave the work site. A second scheduled meal break due to call length is also unpaid.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Provided Meals</td>
+            <td class="term-detail">At least one (1) provided meal must be a sit-down meal. If no meal or meal break is provided, time and a half applies until a break is available.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Holidays</h3>
+
+      <p>Hours worked on New Year's Day, Memorial Day, Fourth of July, Labor Day, Thanksgiving, and Christmas are paid at the overtime rate.</p>
+
+      <h3>Parking & Per Diem</h3>
+
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="term-label">Parking</td>
+            <td class="term-detail">$25.00 per day charge for parking unless provided by the venue.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Per Diem</td>
+            <td class="term-detail">Per diem is paid for out-of-town shows. Amount depends on geographic location.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Travel</h3>
+
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="term-label">Travel Hours</td>
+            <td class="term-detail">Paid at straight time rate for travel to and from out-of-town shows, regardless of turnaround, continuous pay, or hours exceeding the defined day.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Outbound Air</td>
+            <td class="term-detail">Travel day begins two (2) hours prior to scheduled departure and ends one (1) hour after actual arrival, or when the technician arrives on site after any required work. Travel time is not included in turnaround calculations.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Return Air</td>
+            <td class="term-detail">Hours begin two (2) hours prior to scheduled departure (if not already working) and end one (1) hour after actual arrival.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- PAYMENT -->
+    <div class="section">
+      <h2>Payment Terms</h2>
+
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Timeline</th>
+            <th>Terms</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="term-label">Net 30</td>
+            <td class="term-detail">Payment due within thirty (30) days of invoice receipt. Invoice submitted within five (5) business days of event completion.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Late: 31&ndash;45 days</td>
+            <td class="term-detail">Standard rate applies. No penalty.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Late: 46&ndash;60 days</td>
+            <td class="term-detail">3% surcharge on outstanding balance.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Late: 60+ days</td>
+            <td class="term-detail">5% surcharge on outstanding balance.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        Invoices should include: technician name, event date, venue, call time, wrap time, total hours (straight / OT / DT breakdown), and any reimbursables (parking, per diem). Submit to: <strong>tech@oneearthfilmfest.org</strong>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CANCELLATION -->
+    <div class="section">
+      <h2>Cancellation & Changes</h2>
+
+      <table class="policy-table">
+        <thead>
+          <tr>
+            <th>Notice Period</th>
+            <th>Terms</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="term-label">7+ days</td>
+            <td class="term-detail">No cancellation fee. Engagement may be rescheduled.</td>
+          </tr>
+          <tr>
+            <td class="term-label">48 hours &ndash; 7 days</td>
+            <td class="term-detail">50% of the estimated day rate, or 4 hours at the hourly rate, whichever is less.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Under 48 hours</td>
+            <td class="term-detail">Full day rate applies.</td>
+          </tr>
+          <tr>
+            <td class="term-label">Day-of changes</td>
+            <td class="term-detail">Scope additions during the event are subject to overtime terms. Technician may decline scope additions that fall outside the original SOW without penalty.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- GENERAL TERMS -->
+    <div class="section">
+      <h2>General Terms</h2>
+
+      <h3>Independent contractor status</h3>
+      <p>The technician operates as an independent contractor, not an employee of One Earth Film Festival or One Earth Collective. The technician is responsible for their own taxes, insurance, and benefits. Nothing in this agreement creates an employer-employee relationship.</p>
+
+      <h3>Equipment responsibility</h3>
+      <p>OEFF-owned or rented equipment is the responsibility of the technician during the engagement period (load-in through strike). Damage resulting from negligence will be assessed and invoiced separately. Normal wear and technical failures are not the technician's liability.</p>
+
+      <h3>Safety</h3>
+      <p>The technician may refuse to perform work they consider unsafe without penalty. If venue conditions present a safety concern, the technician will notify the OEFF Technical Coordinator immediately. OEFF will not require work in conditions that violate OSHA standards or local safety codes.</p>
+
+      <h3>Confidentiality</h3>
+      <p>Film content screened at OEFF events may be under distribution restrictions. The technician agrees not to copy, distribute, or publicly share any film files, DCP packages, or screening content provided for the engagement.</p>
+
+      <h3>Illinois Freelance Worker Protection Act compliance</h3>
+      <p>This written agreement is provided in compliance with the Illinois Freelance Worker Protection Act (820 ILCS 192), effective July 1, 2024. For any engagement valued at $500 or more within a 120-day period: this written contract is provided before work begins; payment is due within thirty (30) days of invoice receipt unless otherwise specified above; and OEFF will retain this agreement for a minimum of two (2) years and produce it to the Illinois Department of Labor upon request.</p>
+
+      <h3>Governing law</h3>
+      <p>This agreement is governed by the laws of the State of Illinois.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SIGNATURES -->
+    <div class="section">
+      <h2>Agreement</h2>
+
+      <p>By signing below, both parties agree to the terms described in this statement of work, including the Contracted Labor Policy (Exhibit A).</p>
+
+      <div class="sig-block">
+        <div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Technician Name</div>
+          <div class="sig-label" style="margin-top: 24px;">Date: _______________</div>
+        </div>
+        <div>
+          <div class="sig-line"></div>
+          <div class="sig-label">Garen Hudson, OEFF Technical Coordinator</div>
+          <div class="sig-label" style="margin-top: 24px;">Date: _______________</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    OEFF 2026 &mdash; AV Technician Statement of Work &mdash; Confidential
+  </div>
+
+</div>
+</body>
+</html>
