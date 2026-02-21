@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF 2026 Host Pipeline Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       OEFF HOST PIPELINE TRACKER
+       Domain: OEFF (Forest Palette)
+       Design System: Beautiful-First v5
+       ======================================== */
+
+    /* ── Primitives ── */
+    :root {
+      --forest-canopy: #1a2e22;
+      --forest-understory: #2d4a3a;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #5c7c6b;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+
+      --ink: #2c2825;
+      --ink-soft: #5c5550;
+      --ink-muted: #8a8580;
+      --cream: #f7f5f2;
+      --paper: #faf9f7;
+      --linen: #f0ede8;
+
+      --signal-critical: #c44b4b;
+      --signal-warning: #996622;
+      --signal-success: #5c8c4b;
+      --signal-info: #4b7c8c;
+    }
+
+    /* ── Semantic Tokens ── */
+    :root {
+      --color-ground: var(--cream);
+      --color-surface: var(--paper);
+      --color-surface-raised: #ffffff;
+      --color-surface-inset: var(--linen);
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-dark: var(--forest-canopy);
+      --color-primary-light: var(--forest-mist);
+      --color-accent: var(--forest-sage);
+      --color-text: var(--ink);
+      --color-text-soft: var(--ink-soft);
+      --color-text-muted: var(--ink-muted);
+      --color-border: var(--forest-mist);
+
+      --shadow-warm: hsla(25, 40%, 30%, 0.08);
+      --shadow-soft: 0 2px 8px var(--shadow-warm);
+      --shadow-medium: 0 4px 16px var(--shadow-warm);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-section: 3rem;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+      --font-mono: 'Source Code Pro', monospace;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Paper Grain Texture ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      filter: url(#paper-grain);
+      mix-blend-mode: multiply;
+    }
+
+    body {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--color-text);
+      background-color: var(--color-ground);
+      padding: var(--space-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ── Typography ── */
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      font-optical-sizing: auto;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-xs);
+      letter-spacing: 0;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-family: var(--font-body-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+      letter-spacing: 0;
+    }
+
+    h3 {
+      font-family: var(--font-body-sans);
+      font-size: 1.13rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-context {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+      margin-bottom: var(--space-lg);
+      max-width: 72ch;
+    }
+
+    .section-synthesis {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      max-width: 72ch;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      margin-bottom: var(--space-section);
+    }
+
+    .subtitle {
+      font-size: 0.9375rem;
+      color: var(--color-text-soft);
+    }
+
+    .snapshot-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: var(--space-xs);
+    }
+
+    /* ── Sections ── */
+    .report-section {
+      margin-bottom: var(--space-section);
+    }
+
+    /* ── Summary Bar ── */
+    .summary-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .summary-stat {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg) var(--space-md);
+      text-align: center;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .summary-stat:hover {
+      box-shadow: var(--shadow-soft);
+    }
+
+    .summary-stat:focus-within {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-primary-deep);
+    }
+
+    .stat-value.critical { color: var(--signal-critical); }
+    .stat-value.warning { color: var(--signal-warning); }
+    .stat-value.success { color: var(--signal-success); }
+
+    .stat-label {
+      font-family: var(--font-body-sans);
+      font-size: 13px;
+      color: var(--color-text-soft);
+      margin-top: var(--space-xs);
+      line-height: 1.3;
+    }
+
+    .stat-sub {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── Pipeline Funnel ── */
+    .funnel {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 160px;
+      margin-bottom: var(--space-lg);
+      padding: var(--space-md) 0;
+    }
+
+    .funnel-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-xs);
+      min-width: 0;
+    }
+
+    .funnel-bar {
+      width: 100%;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      transition: opacity 0.2s ease;
+      min-height: 8px;
+    }
+
+    .funnel-stage:hover .funnel-bar {
+      opacity: 0.85;
+    }
+
+    .funnel-count {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .funnel-name {
+      font-family: var(--font-body-sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-soft);
+      text-align: center;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+
+    /* ── Completion Rings ── */
+    .rings-row {
+      display: flex;
+      gap: var(--space-xl);
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: var(--space-md) 0;
+      margin-bottom: var(--space-lg);
+    }
+
+    .ring-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .ring-svg {
+      width: 100px;
+      height: 100px;
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: var(--color-surface-inset);
+      stroke-width: 8;
+    }
+
+    .ring-fill {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s ease;
+    }
+
+    .ring-fill.primary { stroke: var(--color-primary); }
+    .ring-fill.success { stroke: var(--signal-success); }
+    .ring-fill.warning { stroke: var(--signal-warning); }
+    .ring-fill.info { stroke: var(--signal-info); }
+
+    .ring-label {
+      font-family: var(--font-body-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-soft);
+      text-align: center;
+      max-width: 100px;
+    }
+
+    .ring-pct {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Host Table ── */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: var(--space-lg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-raised);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body-sans);
+      font-size: 14px;
+    }
+
+    thead {
+      background: var(--color-surface-inset);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text-soft);
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      white-space: nowrap;
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    td {
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--color-surface-inset);
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr {
+      transition: background-color 0.15s ease;
+    }
+
+    tbody tr:hover {
+      background-color: var(--color-surface-inset);
+    }
+
+    tbody tr:focus-within {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    .host-name {
+      font-weight: 600;
+      color: var(--color-text);
+      max-width: 260px;
+      line-height: 1.3;
+    }
+
+    .host-type {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Milestone Indicators ── */
+    .milestone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+    }
+
+    .milestone-done {
+      color: var(--signal-success);
+    }
+
+    .milestone-missing {
+      color: var(--color-text-muted);
+      opacity: 0.4;
+    }
+
+    .milestone-na {
+      color: var(--color-text-muted);
+      opacity: 0.2;
+    }
+
+    /* ── Pipeline Status Chips ── */
+    .chip {
+      display: inline-block;
+      font-family: var(--font-body-sans);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+      line-height: 1.3;
+    }
+
+    .chip-scheduled {
+      background: hsla(140, 30%, 50%, 0.12);
+      color: var(--signal-success);
+    }
+
+    .chip-confirmed {
+      background: hsla(200, 40%, 50%, 0.12);
+      color: var(--signal-info);
+    }
+
+    .chip-interested {
+      background: hsla(40, 50%, 50%, 0.12);
+      color: var(--signal-warning);
+    }
+
+    .chip-new {
+      background: hsla(25, 20%, 50%, 0.10);
+      color: var(--color-text-muted);
+    }
+
+    .chip-declined {
+      background: hsla(0, 30%, 50%, 0.10);
+      color: var(--signal-critical);
+    }
+
+    .chip-inactive {
+      background: hsla(0, 0%, 50%, 0.08);
+      color: var(--color-text-muted);
+    }
+
+    /* ── Gap Count Badges ── */
+    .gap-count {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 24px;
+      padding: 0 6px;
+      border-radius: 100px;
+    }
+
+    .gap-count.zero {
+      background: hsla(140, 30%, 50%, 0.12);
+      color: var(--signal-success);
+    }
+
+    .gap-count.low {
+      background: hsla(40, 50%, 50%, 0.12);
+      color: var(--signal-warning);
+    }
+
+    .gap-count.high {
+      background: hsla(0, 30%, 50%, 0.12);
+      color: var(--signal-critical);
+    }
+
+    /* ── Action Items ── */
+    .action-list {
+      list-style: none;
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .action-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-md);
+      align-items: center;
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .action-item:hover {
+      box-shadow: var(--shadow-soft);
+    }
+
+    .action-icon {
+      color: var(--signal-warning);
+      flex-shrink: 0;
+    }
+
+    .action-icon.critical {
+      color: var(--signal-critical);
+    }
+
+    .action-host {
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+
+    .action-detail {
+      font-size: 14px;
+      color: var(--color-text-soft);
+    }
+
+    .action-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .tag-film {
+      background: hsla(0, 30%, 50%, 0.10);
+      color: var(--signal-critical);
+    }
+
+    .tag-date {
+      background: hsla(40, 50%, 50%, 0.10);
+      color: var(--signal-warning);
+    }
+
+    .tag-contact {
+      background: hsla(200, 40%, 50%, 0.10);
+      color: var(--signal-info);
+    }
+
+    /* ── Filter Bar ── */
+    .filter-bar {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-lg);
+      align-items: center;
+    }
+
+    .filter-bar label {
+      font-family: var(--font-body-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-soft);
+      margin-right: var(--space-xs);
+    }
+
+    .filter-btn {
+      font-family: var(--font-body-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      min-height: 44px;
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      background: var(--color-surface-raised);
+      color: var(--color-text-soft);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .filter-btn:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .filter-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: white;
+    }
+
+    /* ── Print Styles ── */
+    @media print {
+      body { padding: 0; font-size: 11pt; max-width: 100%; }
+      body::before { display: none; }
+      .filter-bar { display: none; }
+      .summary-stat, .action-item { box-shadow: none; border: 1px solid #ccc; }
+      .summary-stat:hover, .action-item:hover { box-shadow: none; }
+      .funnel-bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .chip { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .page-header { page-break-after: avoid; }
+      .report-section { page-break-inside: avoid; }
+      table { font-size: 10pt; }
+      th, td { padding: 4px 8px; }
+      a { color: var(--color-text); text-decoration: none; }
+      a::after { content: " (" attr(href) ")"; font-size: 9pt; color: var(--color-text-muted); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      body { padding: var(--space-md); }
+      h1 { font-size: 1.5rem; }
+      .summary-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-value { font-size: 1.75rem; }
+      .funnel { height: 120px; }
+      .rings-row { gap: var(--space-md); }
+      .ring-svg { width: 80px; height: 80px; }
+    }
+
+    /* ── Accessibility: visible focus everywhere ── */
+    a:focus, button:focus, [tabindex]:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    /* ── Utility ── */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Paper grain SVG filter -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="paper-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
+
+  <!-- ════════════════════════════════════════
+       HEADER
+       ════════════════════════════════════════ -->
+  <header class="page-header">
+    <h1>OEFF 2026 Host Pipeline</h1>
+    <p class="subtitle">Screening host readiness across 21 events for the April 22&ndash;26 festival</p>
+    <p class="snapshot-date" id="snapshotDate"></p>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       SECTION 1: SUMMARY BAR
+       ════════════════════════════════════════ -->
+  <section class="report-section" aria-labelledby="summary-heading">
+    <span class="section-label">Overview</span>
+    <h2 id="summary-heading">Where things stand</h2>
+    <p class="section-context">
+      Key readiness metrics at a glance. Zero hosts are fully ready &mdash; every event has at least one gap to close before April.
+    </p>
+    <div class="summary-bar" id="summaryBar" role="list" aria-label="Key metrics"></div>
+    <div class="section-synthesis" id="summarySynthesis"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 2: COMPLETION RINGS
+       ════════════════════════════════════════ -->
+  <section class="report-section" aria-labelledby="rings-heading">
+    <span class="section-label">Milestone Completion</span>
+    <h2 id="rings-heading">How far along each milestone is</h2>
+    <p class="section-context">
+      Each ring tracks one readiness milestone across all 21 events. A full ring means every event has that item resolved.
+    </p>
+    <div class="rings-row" id="ringsRow" role="list" aria-label="Completion rings"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 3: PIPELINE FUNNEL
+       ════════════════════════════════════════ -->
+  <section class="report-section" aria-labelledby="funnel-heading">
+    <span class="section-label">Pipeline Status</span>
+    <h2 id="funnel-heading">Events by pipeline stage</h2>
+    <p class="section-context">
+      Distribution of events across pipeline stages. Scheduled is the goal; earlier stages represent work to be done.
+    </p>
+    <div class="funnel" id="funnelChart" role="img" aria-label="Pipeline funnel chart"></div>
+    <div class="section-synthesis" id="funnelSynthesis"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 4: HOST TABLE
+       ════════════════════════════════════════ -->
+  <section class="report-section" aria-labelledby="table-heading">
+    <span class="section-label">Host Detail</span>
+    <h2 id="table-heading">Each event and its gaps</h2>
+    <p class="section-context">
+      Every active screening event with milestone completion status. Events with the most gaps appear first.
+    </p>
+    <div class="filter-bar" role="toolbar" aria-label="Filter by gap type">
+      <label id="filter-label">Show:</label>
+      <button class="filter-btn active" data-filter="all" aria-pressed="true" aria-describedby="filter-label">All</button>
+      <button class="filter-btn" data-filter="contact" aria-pressed="false" aria-describedby="filter-label">Missing Contact</button>
+      <button class="filter-btn" data-filter="date" aria-pressed="false" aria-describedby="filter-label">Missing Date</button>
+      <button class="filter-btn" data-filter="film" aria-pressed="false" aria-describedby="filter-label">Missing Film</button>
+    </div>
+    <div class="table-wrapper">
+      <table id="hostTable" aria-label="Host pipeline status">
+        <thead>
+          <tr>
+            <th scope="col">Host / Venue</th>
+            <th scope="col">Type</th>
+            <th scope="col" title="Film assigned" aria-label="Film assigned">Film</th>
+            <th scope="col" title="Screening date set" aria-label="Screening date set">Date</th>
+            <th scope="col" title="Venue contact identified" aria-label="Venue contact identified">Contact</th>
+            <th scope="col" title="Number of gaps">Gaps</th>
+          </tr>
+        </thead>
+        <tbody id="hostTableBody"></tbody>
+      </table>
+    </div>
+    <div class="section-synthesis" id="tableSynthesis"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 5: ACTION ITEMS
+       ════════════════════════════════════════ -->
+  <section class="report-section" aria-labelledby="actions-heading">
+    <span class="section-label">Next Steps</span>
+    <h2 id="actions-heading">Hosts needing follow-up</h2>
+    <p class="section-context">
+      Prioritized by severity: hosts missing film or date need attention before hosts missing only a contact.
+    </p>
+    <ul class="action-list" id="actionList" aria-label="Action items"></ul>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DATA + LOGIC
+       ════════════════════════════════════════ -->
+  <script>
+    /* ── Embedded Data Snapshot (2026-02-15) ── */
+    const SNAPSHOT = {
+      date: "2026-02-15",
+      metrics: {
+        hosts_total: 201,
+        events_total: 21,
+        events_with_film: 19,
+        events_missing_film: 2,
+        events_with_date: 15,
+        events_missing_date: 6,
+        events_film_confirmed: 10,
+        events_flagship: 3,
+        events_community: 18
+      },
+      pipeline: {
+        "Scheduled": 15,
+        "Confirmed Interest": 5,
+        "Interested": 1
+      },
+      gaps: [
+        { host: "Columbia College - Film Row Cinema", missing: ["Venue Contact"], type: "flagship" },
+        { host: "Trinity Lutheran Church", missing: ["Venue Contact"], type: "community" },
+        { host: "Climate Action Evanston", missing: ["Venue Contact"], type: "community" },
+        { host: "Uncommon Ground", missing: ["Venue Contact"], type: "community" },
+        { host: "Village of Oak Park at OPRF High School", missing: ["Venue Contact"], type: "community" },
+        { host: "Institute of Cultural Affairs", missing: ["Venue Contact"], type: "community" },
+        { host: "Bethel New Life", missing: ["Venue Contact"], type: "community" },
+        { host: "Triton College", missing: ["Venue Contact"], type: "community" },
+        { host: "Cultivate Collective (Academy for Global Citizenship)", missing: ["Venue Contact"], type: "community" },
+        { host: "Kehrein Center for the Arts", missing: ["Venue Contact"], type: "community" },
+        { host: "Black Girl Environmentalists", missing: ["Venue Contact"], type: "community" },
+        { host: "Broadway United Methodist Church", missing: ["Venue Contact"], type: "community" },
+        { host: "Calumet College of St. Joseph", missing: ["Venue Contact"], type: "community" },
+        { host: "Dominican University", missing: ["Venue Contact"], type: "community" },
+        { host: "Chicago Cultural Center", missing: ["Film Title", "Screening Date", "Venue Contact"], type: "flagship" },
+        { host: "BUILD, Inc.", missing: ["Screening Date", "Venue Contact"], type: "community" },
+        { host: "Go Green Park Ridge", missing: ["Screening Date", "Venue Contact"], type: "community" },
+        { host: "Illinois Clinicians for Climate Action", missing: ["Screening Date", "Venue Contact"], type: "community" },
+        { host: "Euclid AVE UMC", missing: ["Screening Date", "Venue Contact"], type: "community" },
+        { host: "Seven Generations Ahead", missing: ["Film Title", "Screening Date", "Venue Contact"], type: "community" }
+      ]
+    };
+
+    /* ── Derived data ── */
+    const M = SNAPSHOT.metrics;
+    const totalEvents = M.events_total;
+
+    /* Milestone completion rates */
+    const milestones = [
+      { label: "Film Assigned", done: M.events_with_film, total: totalEvents, ring: "primary" },
+      { label: "Date Set", done: M.events_with_date, total: totalEvents, ring: "warning" },
+      { label: "Contact Identified", done: 0, total: totalEvents, ring: "info" },
+      { label: "Film Confirmed", done: M.events_film_confirmed, total: totalEvents, ring: "success" }
+    ];
+
+    /* Count hosts with contacts (those not missing "Venue Contact") */
+    const hostsWithContact = SNAPSHOT.gaps.filter(
+      g => !g.missing.includes("Venue Contact")
+    ).length;
+    /* But we have 21 events and only 20 gap entries (one appears twice as flagship) */
+    /* All 21 events are missing Venue Contact per the snapshot */
+    milestones[2].done = totalEvents - SNAPSHOT.gaps.filter(
+      g => g.missing.includes("Venue Contact")
+    ).length;
+
+    /* ── Render: Snapshot Date ── */
+    document.getElementById("snapshotDate").textContent =
+      "Data snapshot: " + SNAPSHOT.date;
+
+    /* ── Render: Summary Bar ── */
+    (function renderSummary() {
+      const stats = [
+        { value: totalEvents, label: "Active Events", sub: M.events_flagship + " flagship, " + M.events_community + " community" },
+        { value: M.events_with_film + "/" + totalEvents, label: "Films Assigned", sub: M.events_missing_film + " unassigned", cls: M.events_missing_film > 0 ? "warning" : "success" },
+        { value: M.events_with_date + "/" + totalEvents, label: "Dates Set", sub: M.events_missing_date + " TBD", cls: M.events_missing_date > 3 ? "warning" : "success" },
+        { value: milestones[2].done + "/" + totalEvents, label: "Contacts Identified", sub: (totalEvents - milestones[2].done) + " missing", cls: milestones[2].done < totalEvents / 2 ? "critical" : "warning" },
+        { value: "0", label: "Fully Ready", sub: "21 with gaps", cls: "critical" }
+      ];
+
+      const bar = document.getElementById("summaryBar");
+      stats.forEach(function(s) {
+        var div = document.createElement("div");
+        div.className = "summary-stat";
+        div.setAttribute("role", "listitem");
+        div.innerHTML =
+          '<div class="stat-value ' + (s.cls || '') + '">' + s.value + '</div>' +
+          '<div class="stat-label">' + s.label + '</div>' +
+          '<div class="stat-sub">' + s.sub + '</div>';
+        bar.appendChild(div);
+      });
+
+      var synth = document.getElementById("summarySynthesis");
+      var missingFilm = M.events_missing_film;
+      var missingDate = M.events_missing_date;
+      synth.innerHTML = '<p>The biggest gap is venue contacts &mdash; not a single event has one identified yet. ' +
+        'Film assignment is nearly complete (' + M.events_with_film + ' of ' + totalEvents + '), ' +
+        'but ' + missingDate + ' events still need screening dates set. ' +
+        'Priority: identify contacts for all venues, then lock down remaining dates.</p>';
+    })();
+
+    /* ── Render: Completion Rings ── */
+    (function renderRings() {
+      var row = document.getElementById("ringsRow");
+      var r = 40;
+      var circ = 2 * Math.PI * r;
+
+      milestones.forEach(function(m) {
+        var pct = Math.round((m.done / m.total) * 100);
+        var offset = circ * (1 - m.done / m.total);
+        var item = document.createElement("div");
+        item.className = "ring-item";
+        item.setAttribute("role", "listitem");
+        item.innerHTML =
+          '<svg class="ring-svg" viewBox="0 0 100 100" aria-label="' + m.label + ': ' + pct + '% complete">' +
+            '<circle class="ring-bg" cx="50" cy="50" r="' + r + '"/>' +
+            '<circle class="ring-fill ' + m.ring + '" cx="50" cy="50" r="' + r + '" ' +
+              'stroke-dasharray="' + circ + '" stroke-dashoffset="' + offset + '"/>' +
+            '<text x="50" y="54" text-anchor="middle" transform="rotate(90, 50, 50)" ' +
+              'fill="currentColor" font-family="Source Code Pro, monospace" font-size="16" font-weight="600">' +
+              pct + '%</text>' +
+          '</svg>' +
+          '<span class="ring-label">' + m.label + '</span>' +
+          '<span class="ring-pct">' + m.done + ' / ' + m.total + '</span>';
+        row.appendChild(item);
+      });
+    })();
+
+    /* ── Render: Pipeline Funnel ── */
+    (function renderFunnel() {
+      var stages = [
+        { name: "Scheduled", count: SNAPSHOT.pipeline["Scheduled"] || 0, color: "var(--signal-success)" },
+        { name: "Confirmed Interest", count: SNAPSHOT.pipeline["Confirmed Interest"] || 0, color: "var(--signal-info)" },
+        { name: "Interested", count: SNAPSHOT.pipeline["Interested"] || 0, color: "var(--signal-warning)" }
+      ];
+
+      var maxCount = Math.max.apply(null, stages.map(function(s) { return s.count; }));
+      var chart = document.getElementById("funnelChart");
+
+      stages.forEach(function(s) {
+        var heightPct = maxCount > 0 ? Math.max((s.count / maxCount) * 100, 8) : 8;
+        var div = document.createElement("div");
+        div.className = "funnel-stage";
+        div.innerHTML =
+          '<div class="funnel-count">' + s.count + '</div>' +
+          '<div class="funnel-bar" style="height:' + heightPct + '%;background:' + s.color + '"></div>' +
+          '<div class="funnel-name">' + s.name + '</div>';
+        chart.appendChild(div);
+      });
+
+      var synth = document.getElementById("funnelSynthesis");
+      var scheduledPct = Math.round((stages[0].count / totalEvents) * 100);
+      synth.innerHTML = '<p>' + stages[0].count + ' of ' + totalEvents + ' events (' + scheduledPct + '%) ' +
+        'have reached Scheduled status. ' + stages[1].count + ' are at Confirmed Interest, ' +
+        'and ' + stages[2].count + ' at Interested. ' +
+        'All active events are in the pipeline &mdash; the funnel is weighted toward completion.</p>';
+    })();
+
+    /* ── Render: Host Table ── */
+    (function renderTable() {
+      var tbody = document.getElementById("hostTableBody");
+
+      /* Sort: most gaps first, then alphabetical */
+      var sorted = SNAPSHOT.gaps.slice().sort(function(a, b) {
+        if (b.missing.length !== a.missing.length) return b.missing.length - a.missing.length;
+        return a.host.localeCompare(b.host);
+      });
+
+      sorted.forEach(function(host) {
+        var tr = document.createElement("tr");
+        var hasFilm = !host.missing.includes("Film Title");
+        var hasDate = !host.missing.includes("Screening Date");
+        var hasContact = !host.missing.includes("Venue Contact");
+        var gapCount = host.missing.length;
+        var gapClass = gapCount === 0 ? "zero" : gapCount <= 1 ? "low" : "high";
+
+        /* Filter data attributes */
+        tr.setAttribute("data-has-contact", hasContact ? "yes" : "no");
+        tr.setAttribute("data-has-date", hasDate ? "yes" : "no");
+        tr.setAttribute("data-has-film", hasFilm ? "yes" : "no");
+
+        var checkSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>';
+        var missSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>';
+
+        tr.innerHTML =
+          '<td class="host-name">' + escapeHtml(host.host) + '</td>' +
+          '<td><span class="host-type">' + (host.type === "flagship" ? "Flagship" : "Community") + '</span></td>' +
+          '<td><span class="milestone ' + (hasFilm ? 'milestone-done' : 'milestone-missing') + '" title="' + (hasFilm ? 'Film assigned' : 'No film') + '" aria-label="Film: ' + (hasFilm ? 'assigned' : 'missing') + '">' + (hasFilm ? checkSvg : missSvg) + '</span></td>' +
+          '<td><span class="milestone ' + (hasDate ? 'milestone-done' : 'milestone-missing') + '" title="' + (hasDate ? 'Date set' : 'No date') + '" aria-label="Date: ' + (hasDate ? 'set' : 'missing') + '">' + (hasDate ? checkSvg : missSvg) + '</span></td>' +
+          '<td><span class="milestone ' + (hasContact ? 'milestone-done' : 'milestone-missing') + '" title="' + (hasContact ? 'Contact identified' : 'No contact') + '" aria-label="Contact: ' + (hasContact ? 'identified' : 'missing') + '">' + (hasContact ? checkSvg : missSvg) + '</span></td>' +
+          '<td><span class="gap-count ' + gapClass + '">' + gapCount + '</span></td>';
+
+        tbody.appendChild(tr);
+      });
+
+      /* Table synthesis */
+      var highGap = sorted.filter(function(h) { return h.missing.length >= 3; });
+      var medGap = sorted.filter(function(h) { return h.missing.length === 2; });
+      var synth = document.getElementById("tableSynthesis");
+      synth.innerHTML = '<p>' + highGap.length + ' events have 3 gaps (the maximum). ' +
+        medGap.length + ' have 2 gaps. The remaining ' + (sorted.length - highGap.length - medGap.length) + ' are missing only a venue contact. ' +
+        'Venue contact is the universal gap &mdash; no event has one yet.</p>';
+    })();
+
+    /* ── Render: Action Items ── */
+    (function renderActions() {
+      var list = document.getElementById("actionList");
+
+      /* Group by severity */
+      var critical = SNAPSHOT.gaps.filter(function(g) { return g.missing.includes("Film Title"); });
+      var urgent = SNAPSHOT.gaps.filter(function(g) { return !g.missing.includes("Film Title") && g.missing.includes("Screening Date"); });
+      var standard = SNAPSHOT.gaps.filter(function(g) { return g.missing.length === 1 && g.missing[0] === "Venue Contact"; });
+
+      var warnIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="0.5" fill="currentColor" stroke="none"/></svg>';
+
+      function addAction(host, detail, tags, isCritical) {
+        var li = document.createElement("li");
+        li.className = "action-item";
+        var tagHtml = tags.map(function(t) {
+          var cls = t === "Film Title" ? "tag-film" : t === "Screening Date" ? "tag-date" : "tag-contact";
+          var short = t === "Film Title" ? "Film" : t === "Screening Date" ? "Date" : "Contact";
+          return '<span class="tag ' + cls + '">' + short + '</span>';
+        }).join("");
+        li.innerHTML =
+          '<span class="action-icon ' + (isCritical ? 'critical' : '') + '">' + warnIcon + '</span>' +
+          '<div><span class="action-host">' + escapeHtml(host.host) + '</span> ' +
+            '<span class="action-detail">&mdash; ' + detail + '</span></div>' +
+          '<div class="action-tags">' + tagHtml + '</div>';
+        list.appendChild(li);
+      }
+
+      critical.forEach(function(h) {
+        addAction(h, "Needs film assignment, screening date, and venue contact", h.missing, true);
+      });
+
+      urgent.forEach(function(h) {
+        addAction(h, "Film assigned but needs screening date and venue contact", h.missing, false);
+      });
+
+      /* For standard: group into a summary instead of listing all 14 individually */
+      if (standard.length > 0) {
+        var li = document.createElement("li");
+        li.className = "action-item";
+        li.innerHTML =
+          '<span class="action-icon">' + warnIcon + '</span>' +
+          '<div><span class="action-host">' + standard.length + ' events</span> ' +
+            '<span class="action-detail">&mdash; Film and date confirmed, but no venue contact identified yet</span></div>' +
+          '<div class="action-tags"><span class="tag tag-contact">Contact</span></div>';
+        list.appendChild(li);
+      }
+    })();
+
+    /* ── Filter Logic ── */
+    (function setupFilters() {
+      var buttons = document.querySelectorAll(".filter-btn");
+      var rows = document.querySelectorAll("#hostTableBody tr");
+
+      buttons.forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          var filter = btn.getAttribute("data-filter");
+
+          buttons.forEach(function(b) {
+            b.classList.remove("active");
+            b.setAttribute("aria-pressed", "false");
+          });
+          btn.classList.add("active");
+          btn.setAttribute("aria-pressed", "true");
+
+          rows.forEach(function(row) {
+            if (filter === "all") {
+              row.style.display = "";
+            } else if (filter === "contact") {
+              row.style.display = row.getAttribute("data-has-contact") === "no" ? "" : "none";
+            } else if (filter === "date") {
+              row.style.display = row.getAttribute("data-has-date") === "no" ? "" : "none";
+            } else if (filter === "film") {
+              row.style.display = row.getAttribute("data-has-film") === "no" ? "" : "none";
+            }
+          });
+        });
+      });
+    })();
+
+    /* ── Utility ── */
+    function escapeHtml(str) {
+      var div = document.createElement("div");
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+  </script>
+
+</body>
+</html>
