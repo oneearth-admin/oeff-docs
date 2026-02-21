@@ -22,6 +22,7 @@ Kim is a new organizational strategist joining the team. Her role is to audit cu
 - Host guide live at hosts.oneearthfilmfest.org
 - Shared inboxes set up: hosts@, tech@, films@ at oneearthfilmfest.org
 - Communication happening across Google Spaces, email, and ad hoc threads — this is the primary friction point Kim is here to address
+- The team is in year one of platform adoption (shared inboxes, centralized host guide, Zoom registration). The tools work, but the team is still building muscle memory. Expect stumbly moments — processes documented but not yet habitual, communications that reflect old instincts. This is normal adoption friction, not system failure.
 
 ## Key Systems
 
@@ -48,7 +49,7 @@ Kim is a new organizational strategist joining the team. Her role is to audit cu
 
 ## Constraints
 
-- Budget is limited (~$17K total for all contractors). Kim's pilot is ~$600-800 per phase at $40/hr.
+- Budget is limited (~$20K total for all contractors). Kim's pilot is ~$600-800 per phase at $40/hr.
 - No new software purchases — work with Google Workspace, existing tools
 - The festival has run 15 times. Respect institutional knowledge. The goal is to scaffold it, not replace it.
 - Tone should be warm, practical, and grounded. This is a community arts organization, not a startup.
