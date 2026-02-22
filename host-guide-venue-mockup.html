@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<!--
+  OEFF Host Guide — Venue-Specific Section Mockup
+
+  Purpose: Show Ana how venue-specific content integrates into the Host Guide.
+  This is NOT a separate document — it demonstrates a new section that will be
+  added to the live host guide (hosts/index.html) once the data pipeline is ready.
+
+  ═══════════════════════════════════════════════════════════════════════════════
+  DATA LAYER OPTIONS — How the team updates venue-specific information
+  ═══════════════════════════════════════════════════════════════════════════════
+
+  OPTION A: Google Sheet + Script (Recommended)
+  ─────────────────────────────────────────────
+  - Ana/Josh maintain a single Google Sheet with one row per venue
+  - Columns: venue name, org, film, date, time, contacts, status fields
+  - Garen runs `python3 generate-venue-sections.py` to regenerate the HTML
+  - Pro: Ana already knows Sheets. Con: requires Garen to run the script
+    (but it's literally 30 seconds)
+
+  OPTION B: Google Form Intake
+  ────────────────────────────
+  - Hosts fill out a venue check-in form (already spec'd in the form designs doc)
+  - Responses auto-populate the Sheet, then Option A applies
+  - Pro: Hosts self-serve some data. Con: still needs script run for HTML
+
+  OPTION C: Manual Handoff
+  ────────────────────────
+  - Ana emails Garen updates, Garen edits HTML directly
+  - Pro: simplest. Con: Garen becomes bottleneck, doesn't scale
+
+  RECOMMENDATION: A + B together. Form collects host-side data, Ana/Josh add
+  OEC-side data to same sheet, script generates HTML. One place, one URL,
+  progressively more useful.
+
+  ═══════════════════════════════════════════════════════════════════════════════
+  FORMS STRATEGY — Tools and pipelines for host-facing forms
+  ═══════════════════════════════════════════════════════════════════════════════
+
+  Venue Check-In Form:        Google Form → Sheet (Option B above)
+  Volunteer Registration:     SignUp Genius (existing OEFF tool)
+  T-Shirt Size Survey:        Embedded in SignUp Genius or separate Google Form
+  AV Verification Checklist:  Google Form → Sheet
+  Playback Test Confirmation: Google Form → Sheet
+  Post-Event Feedback:        Google Form (existing pattern)
+
+  ═══════════════════════════════════════════════════════════════════════════════
+
+  Sample data: Trinity Lutheran / Elaine (active, relatable example host)
+-->
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>OEFF 2026 Host Guide — Venue Section Mockup</title>
+  <style>
+    :root {
+      --font-display: 'Avenir Next', 'Avenir', 'Segoe UI', system-ui, sans-serif;
+      --font-body: Georgia, 'Times New Roman', serif;
+
+      /* OEFF Brand Colors */
+      --oeff-black: #231F20;
+      --oeff-blue: #3960AC;
+      --oeff-aqua: #42A7C2;
+      --oeff-light-aqua: #BAE1E2;
+      --oeff-sage: #92BEAA;
+      --oeff-ivory: #FFF3DF;
+
+      /* Softer neutrals */
+      --oeff-warm-white: #FAFAF8;
+      --oeff-sage-mist: #F5F8F6;
+      --oeff-sage-whisper: #EEF3F0;
+
+      /* Extended */
+      --oeff-blue-deep: #2d4a8a;
+      --oeff-sage-deep: #6a9a84;
+      --oeff-sage-light: #c8ddd2;
+
+      /* Semantic */
+      --color-text: var(--oeff-black);
+      --color-text-soft: #4a4542;
+      --color-text-muted: #7a746f;
+      --color-bg: var(--oeff-warm-white);
+      --color-bg-soft: var(--oeff-sage-mist);
+      --color-border: #e5e2dc;
+
+      /* Spacing */
+      --space-2xs: 0.25rem;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+
+      --radius: 6px;
+      --radius-lg: 10px;
+      --radius-organic: 10px 12px 9px 11px;
+      --radius-organic-sm: 5px 7px 6px 8px;
+
+      /* Layered grain */
+      --grain-fine: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      --grain-medium: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g2)'/%3E%3C/svg%3E");
+
+      /* Sage-tinted shadows */
+      --shadow-soft:
+        0 1px 2px rgba(146, 190, 170, 0.08),
+        0 4px 8px rgba(146, 190, 170, 0.06),
+        0 8px 16px rgba(35, 31, 32, 0.03);
+      --shadow-elevated:
+        0 2px 4px rgba(146, 190, 170, 0.10),
+        0 8px 16px rgba(146, 190, 170, 0.08),
+        0 16px 32px rgba(35, 31, 32, 0.04);
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      word-spacing: 0.02em;
+      font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+      text-rendering: optimizeLegibility;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Layered grain overlay */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    body::before {
+      background: var(--grain-fine);
+      background-size: 128px 128px;
+      opacity: 0.08;
+    }
+    body::after {
+      background: var(--grain-medium);
+      background-size: 256px 256px;
+      opacity: 0.04;
+      mix-blend-mode: multiply;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--oeff-aqua);
+      outline-offset: 2px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    a { color: var(--oeff-blue); transition: color 0.15s var(--ease); }
+    a:hover { color: var(--oeff-blue-deep); }
+
+    .marker {
+      width: 10px;
+      height: 10px;
+      background: var(--oeff-sage);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    /* HEADER */
+    .header {
+      background: #000;
+      color: white;
+      padding: calc(var(--space-3xl) + 2rem) var(--space-lg) var(--space-2xl);
+      text-align: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(146, 190, 170, 0.3), transparent);
+    }
+
+    .header-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+    }
+    .header-subtitle {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.5);
+      margin: var(--space-xs) 0 0;
+      letter-spacing: 0.05em;
+    }
+
+    .main-content { display: block; }
+
+    .intro {
+      padding: var(--space-3xl) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .intro-headline {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin: 0 0 var(--space-md);
+      letter-spacing: -0.02em;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--color-text-soft);
+      max-width: 600px;
+      margin-bottom: var(--space-md);
+    }
+    .intro-text strong {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .intro-status {
+      font-size: 0.95rem !important;
+      color: var(--color-text-soft) !important;
+    }
+
+    /* Stage mini-nav pills */
+    .stage-nav {
+      font-family: var(--font-display);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      align-items: center;
+      margin: var(--space-lg) 0;
+    }
+    .stage-nav-label {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-right: var(--space-xs);
+    }
+    .stage-pill {
+      display: inline-block;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--oeff-sage-whisper);
+      color: var(--oeff-sage-deep);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    .stage-pill:hover {
+      background: var(--oeff-sage-light);
+      color: var(--oeff-sage-deep);
+      transform: scale(1.05) translateY(-1px);
+    }
+
+    .next-step {
+      font-family: var(--font-display);
+      margin-top: var(--space-lg);
+      padding: var(--space-md) var(--space-lg);
+      background: linear-gradient(135deg, var(--oeff-sage-whisper) 0%, var(--oeff-sage-light) 100%);
+      border-left: 3px solid var(--oeff-sage);
+      border-radius: 0 8px 6px 0;
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+    .next-step-body { flex-grow: 1; }
+    .next-step-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--oeff-sage-deep);
+      font-weight: 600;
+      margin-bottom: var(--space-2xs);
+    }
+    .next-step-content {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .next-step { flex-direction: column; gap: var(--space-sm); }
+    }
+
+    /* VENUE TOGGLE — reused from host guide for Feb/Mar/Apr states */
+    .venue-toggle {
+      display: inline-flex;
+      gap: var(--space-2xs);
+      background: var(--oeff-sage-whisper);
+      padding: var(--space-2xs);
+      border-radius: var(--radius);
+      margin-bottom: var(--space-md);
+    }
+    .venue-toggle-btn {
+      padding: var(--space-xs) var(--space-md);
+      border: none;
+      background: transparent;
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--oeff-blue-deep);
+      cursor: pointer;
+      transition: all 0.15s var(--ease);
+      min-height: 44px;
+    }
+    .venue-toggle-btn.active {
+      background: white;
+      color: var(--color-text);
+      box-shadow: var(--shadow-soft);
+    }
+    .venue-specs { display: none; }
+    .venue-specs.visible { display: block; }
+
+    /* CONTACT CARD */
+    .contact-card {
+      font-family: var(--font-display);
+      padding: var(--space-lg);
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-organic);
+      box-shadow: var(--shadow-soft);
+    }
+    .contact-card h3 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.05rem;
+      margin: 0 0 var(--space-sm);
+      color: var(--color-text);
+    }
+    .contact-card p { margin: var(--space-2xs) 0; font-size: 0.95rem; }
+    .contact-card .subtext {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* SPEC TABLE */
+    .spec-table {
+      font-family: var(--font-display);
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0;
+    }
+    .spec-table th, .spec-table td {
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .spec-table th {
+      font-weight: 600;
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .spec-table td:first-child {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    /* ALERT */
+    .alert {
+      background: linear-gradient(135deg, var(--oeff-sage-mist) 0%, var(--oeff-warm-white) 100%);
+      border-left: 3px solid var(--oeff-sage);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: 0 7px 5px 0;
+      margin: var(--space-md) 0;
+    }
+    .alert-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-2xs);
+    }
+    .alert p { margin: 0; font-size: 0.95rem; }
+
+    /* TWO COL */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      margin: var(--space-md) 0;
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* STICKY NAV — from host guide */
+    .nav {
+      position: sticky;
+      top: 0;
+      background: rgba(250, 250, 248, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-sm) 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      display: flex;
+      gap: var(--space-sm);
+      overflow-x: auto;
+      padding: 0 var(--space-xl);
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    .nav-link {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius);
+      transition: all 0.15s var(--ease);
+    }
+    .nav-link:hover {
+      color: var(--color-text);
+      background: rgba(146, 190, 170, 0.15);
+    }
+
+    /* STATUS INDICATORS — for screening details */
+    .status-confirmed {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--oeff-sage-deep);
+    }
+    .status-confirmed::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--oeff-sage);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .status-pending {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+    .status-pending::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--color-border);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* SCREENING CARD — extends contact-card */
+    .screening-card {
+      font-family: var(--font-display);
+      padding: var(--space-xl);
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-organic);
+      box-shadow: var(--shadow-soft);
+      margin: var(--space-lg) 0;
+    }
+    .screening-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .screening-card-venue {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .screening-card-org {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin: var(--space-2xs) 0 0;
+    }
+    .screening-card-badge {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: var(--space-2xs) var(--space-sm);
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .screening-card-badge--active {
+      background: var(--oeff-sage-whisper);
+      color: var(--oeff-sage-deep);
+    }
+
+    /* Screening detail rows */
+    .screening-detail {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .screening-detail:last-child {
+      border-bottom: none;
+    }
+    .screening-detail-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+      min-width: 100px;
+    }
+    .screening-detail-value {
+      font-size: 0.95rem;
+      color: var(--color-text);
+      text-align: right;
+    }
+
+    @media (max-width: 600px) {
+      .screening-detail {
+        flex-direction: column;
+        gap: var(--space-2xs);
+      }
+      .screening-detail-value {
+        text-align: left;
+      }
+      .screening-card-header {
+        flex-direction: column;
+      }
+    }
+
+    /* Volunteer roster table (April state) */
+    .volunteer-row {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-xs) 0;
+      font-size: 0.9rem;
+    }
+    .volunteer-row + .volunteer-row {
+      border-top: 1px solid var(--color-border);
+    }
+    .volunteer-name {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .volunteer-role {
+      color: var(--color-text-muted);
+    }
+
+    /* Day-of timeline (April state) */
+    .day-of-timeline {
+      margin: var(--space-md) 0;
+    }
+    .day-of-item {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-xs) 0;
+      font-size: 0.9rem;
+    }
+    .day-of-time {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+      min-width: 5rem;
+      flex-shrink: 0;
+    }
+    .day-of-task {
+      color: var(--color-text-soft);
+    }
+
+    /* Mockup context banner */
+    .mockup-banner {
+      font-family: var(--font-display);
+      background: var(--oeff-ivory);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-sm) var(--space-lg);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-text-soft);
+      letter-spacing: 0.02em;
+    }
+
+    /* SECTION */
+    .section {
+      padding: var(--space-3xl) 0;
+      border-bottom: 1px solid transparent;
+      border-image: linear-gradient(90deg, transparent, var(--color-border), transparent) 1;
+      scroll-margin-top: 4rem;
+    }
+    .section-header { margin-bottom: var(--space-lg); }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+    }
+
+    /* BTN PRIMARY */
+    .btn-primary {
+      display: inline-block;
+      background: var(--oeff-sage);
+      color: white;
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-organic-sm);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.2s var(--ease);
+      box-shadow: var(--shadow-soft);
+    }
+    .btn-primary:hover {
+      background: var(--oeff-sage-deep);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elevated);
+      color: white;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--oeff-blue-deep);
+      color: var(--oeff-light-aqua);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .footer a { color: var(--oeff-sage-light); text-decoration: none; }
+    .footer a:hover { color: white; }
+
+    @media (max-width: 600px) {
+      html { font-size: 16px; }
+      .header-title { font-size: 0.9rem; }
+      .venue-toggle {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* IN-STATE SECTION LABELS — scannable landmarks within each toggle state */
+    .state-group-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin: var(--space-xl) 0 var(--space-sm);
+      padding-bottom: var(--space-2xs);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .state-group-label:first-child {
+      margin-top: var(--space-md);
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .venue-specs.visible {
+      animation: fade-in-up 0.3s ease-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mockup-banner">
+    Mockup — This section will be added to the live Host Guide. Not a separate page.
+  </div>
+
+  <header class="header">
+    <h1 class="header-title">2026 Host Guide</h1>
+    <p class="header-subtitle">Venue Section Preview</p>
+  </header>
+
+  <div class="main-content">
+    <!-- COMMITTED PATH: Host Welcome (abbreviated from live guide) -->
+    <div class="container">
+      <div class="intro" id="host-welcome">
+        <h2 class="intro-headline">Thanks for hosting with us</h2>
+        <p class="intro-text">
+          This page has everything you need: timeline, technical specs, information about your screening packet, and how to reach us if anything comes up.
+        </p>
+        <p class="intro-text intro-status">
+          <strong>Where we are now:</strong> Film selections are complete. In February, we're working with you on program design. Marketing materials coming soon.
+        </p>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- NEW: YOUR SCREENING SECTION                                -->
+        <!-- This is the venue-specific content that gets progressively  -->
+        <!-- populated as the festival approaches.                       -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+
+        <div id="your-screening" style="margin-top: var(--space-2xl); scroll-margin-top: 4rem;">
+          <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--color-text); margin: 0 0 var(--space-sm); letter-spacing: -0.01em;">Your Screening</h3>
+          <p style="font-size: 0.95rem; color: var(--color-text-muted); margin: 0 0 var(--space-lg);">Details fill in as we confirm each piece. Toggle below to see what's coming.</p>
+
+          <!-- Timeline state toggle — reuses venue-toggle pattern -->
+          <div class="venue-toggle">
+            <button class="venue-toggle-btn active" data-stage="feb">Now (Feb)</button>
+            <button class="venue-toggle-btn" data-stage="mar">Mid-March</button>
+            <button class="venue-toggle-btn" data-stage="apr">Early April</button>
+          </div>
+
+          <!-- ─── FEBRUARY STATE ─── -->
+          <!-- Information architecture: Status → Asks → Resources → Contacts -->
+          <div class="venue-specs visible" data-stage="feb">
+
+            <!-- STATUS: What's confirmed right now -->
+            <p class="state-group-label">Status</p>
+            <div class="screening-card">
+              <div class="screening-card-header">
+                <div>
+                  <p class="screening-card-venue">Trinity Lutheran Church</p>
+                  <p class="screening-card-org">Evanston, IL</p>
+                </div>
+                <span class="screening-card-badge screening-card-badge--active">Confirmed Host</span>
+              </div>
+
+              <div class="screening-detail">
+                <span class="screening-detail-label">Film</span>
+                <span class="screening-detail-value"><strong>Common Ground</strong> (95 min)</span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Date</span>
+                <span class="screening-detail-value"><span class="status-pending">Confirmed in March</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Time</span>
+                <span class="screening-detail-value"><span class="status-pending">Confirmed in March</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Host</span>
+                <span class="screening-detail-value"><span class="status-confirmed">Elaine Ackermann</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">AV Contact</span>
+                <span class="screening-detail-value"><span class="status-pending">Confirmed in March</span></span>
+              </div>
+            </div>
+
+            <div class="alert">
+              <p class="alert-title">What's happening now</p>
+              <p>Your film is assigned and your hosting commitment is confirmed. Over the next few weeks, we'll work together on date, time, and program design through the host webinars.</p>
+            </div>
+
+            <!-- ASKS: What we need from you -->
+            <p class="state-group-label">What to do</p>
+            <div class="next-step">
+              <div class="next-step-body">
+                <div class="next-step-label">Your focus</div>
+                <div class="next-step-content"><strong>Attend the Feb 23 webinar</strong> to learn about program design and begin shaping your screening event.</div>
+              </div>
+            </div>
+
+            <div class="alert" style="margin-top: var(--space-md); border-left-color: var(--oeff-aqua);">
+              <p class="alert-title">Action Items</p>
+              <p><a href="#"><strong>Venue Check-In Form</strong></a> — Confirm your AV equipment, accessibility features, seating capacity, and wifi availability.</p>
+              <p style="margin-top: var(--space-sm);"><span class="status-pending">T-shirt size survey coming in March</span></p>
+            </div>
+
+            <!-- RESOURCES: What we're giving you -->
+            <p class="state-group-label">Resources</p>
+            <table class="spec-table">
+              <tr><th colspan="2">Links & Tools</th></tr>
+              <tr>
+                <td>Host webinar (Feb 23)</td>
+                <td><a href="https://us02web.zoom.us/webinar/register" target="_blank" rel="noopener">Register for Zoom webinar</a></td>
+              </tr>
+              <tr>
+                <td>Host interest form</td>
+                <td><a href="https://bit.ly/oeff2026hostinterestform" target="_blank" rel="noopener">Complete if you haven't yet</a></td>
+              </tr>
+              <tr>
+                <td>Past webinar recordings</td>
+                <td><a href="#" target="_blank" rel="noopener">Watch on Google Drive</a></td>
+              </tr>
+              <tr>
+                <td>Schedule a visioning meeting</td>
+                <td><a href="mailto:ana@oneearthcollective.org?subject=OEFF%202026%20Visioning%20Meeting%20—%20Trinity%20Lutheran">Email Ana to set up a call</a></td>
+              </tr>
+            </table>
+
+            <!-- CONTACTS: Who to reach -->
+            <p class="state-group-label">Contacts</p>
+            <div class="two-col">
+              <div class="contact-card">
+                <h3>Your OEFF Team</h3>
+                <p><strong>Ana Celdran</strong></p>
+                <p class="subtext">Program Director — scheduling, program design</p>
+                <p><a href="mailto:ana@oneearthcollective.org">ana@oneearthcollective.org</a></p>
+                <p style="margin-top: var(--space-sm);"><strong>Garen Glazier</strong></p>
+                <p class="subtext">Technical Coordinator — AV, screening packets</p>
+                <p><a href="mailto:tech@oneearthfilmfest.org">tech@oneearthfilmfest.org</a></p>
+              </div>
+              <div class="contact-card">
+                <h3>General Inquiries</h3>
+                <p><a href="mailto:hosts@oneearthcollective.org">hosts@oneearthcollective.org</a></p>
+                <p class="subtext">Response within 24-48 hours</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─── MARCH STATE ─── -->
+          <!-- Information architecture: Status → Asks → Resources → Contacts -->
+          <div class="venue-specs" data-stage="mar">
+
+            <!-- STATUS: What's confirmed right now -->
+            <p class="state-group-label">Status</p>
+            <div class="screening-card">
+              <div class="screening-card-header">
+                <div>
+                  <p class="screening-card-venue">Trinity Lutheran Church</p>
+                  <p class="screening-card-org">Evanston, IL</p>
+                </div>
+                <span class="screening-card-badge screening-card-badge--active">On Track</span>
+              </div>
+
+              <div class="screening-detail">
+                <span class="screening-detail-label">Film</span>
+                <span class="screening-detail-value"><strong>Common Ground</strong> (95 min)</span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Date</span>
+                <span class="screening-detail-value"><span class="status-confirmed">Saturday, April 25</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Time</span>
+                <span class="screening-detail-value"><span class="status-confirmed">7:00 PM</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Host</span>
+                <span class="screening-detail-value"><span class="status-confirmed">Elaine Ackermann</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">AV Contact</span>
+                <span class="screening-detail-value"><span class="status-confirmed">Mark Sohmer (church AV team)</span></span>
+              </div>
+            </div>
+
+            <div class="alert">
+              <p class="alert-title">What's happening now</p>
+              <p>Date and time are locked. Start promoting your event using the marketing materials below. If you need volunteers, let us know — we can help connect you with OEFF volunteers in your area.</p>
+            </div>
+
+            <!-- ASKS: What we need from you -->
+            <p class="state-group-label">What to do</p>
+            <div class="next-step">
+              <div class="next-step-body">
+                <div class="next-step-label">Your focus</div>
+                <div class="next-step-content"><strong>Promote your screening</strong> and <strong>recruit volunteers</strong>. Your screening packet arrives in late March.</div>
+              </div>
+            </div>
+
+            <div class="alert" style="margin-top: var(--space-md); border-left-color: var(--oeff-aqua);">
+              <p class="alert-title">Action Items</p>
+              <p><a href="#" target="_blank" rel="noopener"><strong>Volunteer Registration</strong></a> — Share your SignUp Genius link with potential volunteers. They'll enter name, email, t-shirt size, and role preference.</p>
+              <p style="margin-top: var(--space-sm);"><a href="#"><strong>T-Shirt Size Survey</strong></a> — Collect sizes for yourself and any volunteers not yet in SignUp Genius.</p>
+              <p style="margin-top: var(--space-sm);"><a href="#"><strong>AV Verification Checklist</strong></a> — Confirm you've tested your projector, screen, and sound system. Takes 5 minutes.</p>
+            </div>
+
+            <!-- RESOURCES: What we're giving you -->
+            <p class="state-group-label">Resources</p>
+            <table class="spec-table">
+              <tr><th colspan="2">Marketing Materials</th></tr>
+              <tr>
+                <td>Event poster</td>
+                <td><a href="#">Download poster (PDF)</a></td>
+              </tr>
+              <tr>
+                <td>Social media kit</td>
+                <td><a href="#">Download graphics + captions (ZIP)</a></td>
+              </tr>
+              <tr>
+                <td>Press blurb</td>
+                <td><a href="#">Copy-paste text</a></td>
+              </tr>
+              <tr>
+                <td>Film trailer</td>
+                <td><a href="#" target="_blank" rel="noopener">Watch / share trailer</a></td>
+              </tr>
+              <tr>
+                <td>Discussion guide</td>
+                <td><a href="#">Download discussion guide (PDF)</a></td>
+              </tr>
+            </table>
+
+            <table class="spec-table">
+              <tr><th colspan="2">Your Event Pages</th></tr>
+              <tr>
+                <td>Eventbrite / ticketing</td>
+                <td><a href="#" target="_blank" rel="noopener">Your event page is live</a></td>
+              </tr>
+              <tr>
+                <td>Volunteer signup</td>
+                <td><a href="#" target="_blank" rel="noopener">SignUp Genius page</a></td>
+              </tr>
+            </table>
+
+            <table class="spec-table">
+              <tr><th colspan="2">Volunteer Needs</th></tr>
+              <tr>
+                <td>Greeters</td>
+                <td>2 needed</td>
+              </tr>
+              <tr>
+                <td>AV assistant</td>
+                <td>1 needed (Mark will train)</td>
+              </tr>
+              <tr>
+                <td>Discussion facilitator</td>
+                <td><span class="status-pending">Recruiting</span></td>
+              </tr>
+            </table>
+
+            <!-- CONTACTS: Who to reach -->
+            <p class="state-group-label">Contacts</p>
+            <div class="two-col">
+              <div class="contact-card">
+                <h3>Your OEFF Team</h3>
+                <p><strong>Ana Celdran</strong></p>
+                <p class="subtext">Program Director — scheduling, program design</p>
+                <p><a href="mailto:ana@oneearthcollective.org">ana@oneearthcollective.org</a></p>
+                <p style="margin-top: var(--space-sm);"><strong>Garen Glazier</strong></p>
+                <p class="subtext">Technical Coordinator — AV, screening packets</p>
+                <p><a href="mailto:tech@oneearthfilmfest.org">tech@oneearthfilmfest.org</a></p>
+              </div>
+              <div class="contact-card">
+                <h3>Your Venue Team</h3>
+                <p><strong>Elaine Ackermann</strong> <span class="subtext">— Host</span></p>
+                <p><strong>Mark Sohmer</strong> <span class="subtext">— AV Contact</span></p>
+                <p style="margin-top: var(--space-sm);"><span class="status-pending">Panelist — confirming</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─── APRIL STATE ─── -->
+          <!-- Information architecture: Status → Asks → Resources → Contacts -->
+          <div class="venue-specs" data-stage="apr">
+
+            <!-- STATUS: What's confirmed right now -->
+            <p class="state-group-label">Status</p>
+            <div class="screening-card">
+              <div class="screening-card-header">
+                <div>
+                  <p class="screening-card-venue">Trinity Lutheran Church</p>
+                  <p class="screening-card-org">Evanston, IL</p>
+                </div>
+                <span class="screening-card-badge screening-card-badge--active">Ready</span>
+              </div>
+
+              <div class="screening-detail">
+                <span class="screening-detail-label">Film</span>
+                <span class="screening-detail-value"><strong>Common Ground</strong> (95 min)</span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Date</span>
+                <span class="screening-detail-value"><span class="status-confirmed">Saturday, April 25</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Time</span>
+                <span class="screening-detail-value"><span class="status-confirmed">7:00 PM</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Doors Open</span>
+                <span class="screening-detail-value"><span class="status-confirmed">6:15 PM</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Capacity</span>
+                <span class="screening-detail-value"><span class="status-confirmed">150 seats</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">RSVPs</span>
+                <span class="screening-detail-value"><span class="status-confirmed">87 registered</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">Host</span>
+                <span class="screening-detail-value"><span class="status-confirmed">Elaine Ackermann</span></span>
+              </div>
+              <div class="screening-detail">
+                <span class="screening-detail-label">AV Contact</span>
+                <span class="screening-detail-value"><span class="status-confirmed">Mark Sohmer</span></span>
+              </div>
+            </div>
+
+            <div class="alert">
+              <p class="alert-title">You're ready</p>
+              <p>All details confirmed. Download your screening packet, do a full test run, and enjoy the event. We're on standby if anything comes up.</p>
+            </div>
+
+            <!-- ASKS: What we need from you -->
+            <p class="state-group-label">What to do</p>
+            <div class="next-step">
+              <div class="next-step-body">
+                <div class="next-step-label">Your focus</div>
+                <div class="next-step-content"><strong>Test your screening packet</strong> — run the full playlist in VLC, check audio levels, and confirm everything plays smoothly. Then relax. You've got this.</div>
+              </div>
+            </div>
+
+            <div class="alert" style="margin-top: var(--space-md); border-left-color: var(--oeff-aqua);">
+              <p class="alert-title">Action Items</p>
+              <p><a href="#"><strong>Playback Test Confirmation</strong></a> — After testing your screening packet, confirm everything worked. Takes 2 minutes.</p>
+              <p style="margin-top: var(--space-sm);"><a href="#"><strong>Post-Event Feedback Form</strong></a> <span class="subtext">— Available after your screening. Share with attendees at wrap-up.</span></p>
+            </div>
+
+            <!-- RESOURCES: What we're giving you -->
+            <p class="state-group-label">Resources</p>
+
+            <!-- Screening packet + tools (frontloaded per stress-context design) -->
+            <div class="two-col">
+              <div class="contact-card">
+                <h3>Screening Packet</h3>
+                <p><a href="#" class="btn-primary" style="font-size: 0.9rem; padding: var(--space-sm) var(--space-lg);">Download Packet</a></p>
+                <p class="subtext" style="margin-top: var(--space-sm);">Includes: film file, pre-show content, VLC playlist, readme, feedback forms</p>
+              </div>
+              <div class="contact-card">
+                <h3>Tools You'll Need</h3>
+                <p><a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener"><strong>Download VLC Player</strong></a></p>
+                <p class="subtext">Free media player — required for playback</p>
+                <p style="margin-top: var(--space-sm);"><a href="#">Download day-of checklist (PDF)</a></p>
+                <p class="subtext">Printable checklist for setup, showtime, and breakdown</p>
+              </div>
+            </div>
+
+            <!-- Day-of timeline -->
+            <div class="contact-card" style="margin: var(--space-lg) 0;">
+              <h3>Day-of Timeline</h3>
+              <div class="day-of-timeline">
+                <div class="day-of-item">
+                  <span class="day-of-time">5:30 PM</span>
+                  <span class="day-of-task">Venue opens for setup. Test AV, arrange seating.</span>
+                </div>
+                <div class="day-of-item">
+                  <span class="day-of-time">6:00 PM</span>
+                  <span class="day-of-task">Volunteers arrive. Brief on roles, review checklist.</span>
+                </div>
+                <div class="day-of-item">
+                  <span class="day-of-time">6:15 PM</span>
+                  <span class="day-of-task">Doors open. Greeters welcome attendees.</span>
+                </div>
+                <div class="day-of-item">
+                  <span class="day-of-time">6:55 PM</span>
+                  <span class="day-of-task">Host welcome + intro (2-3 min).</span>
+                </div>
+                <div class="day-of-item">
+                  <span class="day-of-time">7:00 PM</span>
+                  <span class="day-of-task">Pre-show content plays (~4 min), then film starts.</span>
+                </div>
+                <div class="day-of-item">
+                  <span class="day-of-time">8:39 PM</span>
+                  <span class="day-of-task">Film ends. Transition to discussion (15-20 min).</span>
+                </div>
+                <div class="day-of-item">
+                  <span class="day-of-time">9:00 PM</span>
+                  <span class="day-of-task">Wrap-up. Thank audience, share action resources.</span>
+                </div>
+                <div class="day-of-item">
+                  <span class="day-of-time">9:15 PM</span>
+                  <span class="day-of-task">Venue breakdown. Return equipment, collect feedback forms.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Volunteer roster -->
+            <div class="contact-card" style="margin: var(--space-lg) 0;">
+              <h3>Volunteer Roster</h3>
+              <div class="volunteer-row">
+                <span class="volunteer-name">Sarah Chen</span>
+                <span class="volunteer-role">Greeter</span>
+              </div>
+              <div class="volunteer-row">
+                <span class="volunteer-name">David Park</span>
+                <span class="volunteer-role">Greeter</span>
+              </div>
+              <div class="volunteer-row">
+                <span class="volunteer-name">Lisa Reyes</span>
+                <span class="volunteer-role">AV Assistant</span>
+              </div>
+              <div class="volunteer-row">
+                <span class="volunteer-name">Dr. James Okafor</span>
+                <span class="volunteer-role">Discussion Facilitator</span>
+              </div>
+            </div>
+
+            <!-- CONTACTS: Who to reach -->
+            <p class="state-group-label">Contacts</p>
+            <div class="two-col">
+              <div class="contact-card">
+                <h3>Emergency Contacts</h3>
+                <p><strong>OEFF Tech Hotline</strong></p>
+                <p>773-555-0126</p>
+                <p class="subtext">Staffed Apr 22-26, 4 PM - 10 PM</p>
+                <p style="margin-top: var(--space-sm);"><a href="mailto:tech@oneearthfilmfest.org">tech@oneearthfilmfest.org</a></p>
+              </div>
+              <div class="contact-card">
+                <h3>Venue Contacts</h3>
+                <p><strong>OEC Staff On-Call</strong></p>
+                <p class="subtext">Josh Rivera — your event liaison</p>
+                <p style="margin-top: var(--space-sm);"><strong>Facility Contact</strong></p>
+                <p class="subtext">Trinity Lutheran office — building access, security</p>
+                <p><a href="#">773-555-0199</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END: YOUR SCREENING SECTION -->
+
+        <div class="stage-nav">
+          <span class="stage-nav-label">Jump to:</span>
+          <a href="#timeline" class="stage-pill">Planning</a>
+          <a href="#technical" class="stage-pill">Tech prep</a>
+          <a href="#packet" class="stage-pill">Screening packet</a>
+          <a href="#day-of-support" class="stage-pill">Day-of</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky nav (from live guide) -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#host-welcome" class="nav-link">Welcome</a>
+        <a href="#your-screening" class="nav-link">Your Screening</a>
+        <a href="#timeline" class="nav-link">Timeline</a>
+        <a href="#technical" class="nav-link">Tech Specs</a>
+        <a href="#help" class="nav-link">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Placeholder sections to show context -->
+    <main class="container">
+      <section class="section" id="timeline">
+        <div class="section-header">
+          <h2 class="section-title">Timeline</h2>
+        </div>
+        <div class="section-content">
+          <p style="color: var(--color-text-muted); font-style: italic;">Full timeline content from live host guide appears here.</p>
+        </div>
+      </section>
+
+      <section class="section" id="technical">
+        <div class="section-header">
+          <h2 class="section-title">Technical Requirements</h2>
+        </div>
+        <div class="section-content">
+          <p style="color: var(--color-text-muted); font-style: italic;">Full tech specs content from live host guide appears here.</p>
+        </div>
+      </section>
+
+      <section class="section" id="help">
+        <div class="section-header">
+          <h2 class="section-title">Contact</h2>
+        </div>
+        <div class="section-content">
+          <div class="two-col">
+            <div class="contact-card">
+              <h3>Before Festival Week</h3>
+              <p><a href="mailto:hosts@oneearthcollective.org">hosts@oneearthcollective.org</a></p>
+              <p class="subtext">Response within 24-48 hours</p>
+            </div>
+            <div class="contact-card">
+              <h3>During Festival Week</h3>
+              <p><a href="mailto:tech@oneearthfilmfest.org">tech@oneearthfilmfest.org</a></p>
+              <p class="subtext">April 22-26 — Phone number shared during host meeting</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p><a href="https://oneearthfilmfest.org" target="_blank" rel="noopener">One Earth Film Fest 2026</a></p>
+  </footer>
+
+  <script>
+    // Stage toggle — Feb / Mar / Apr (reuses venue-toggle pattern)
+    document.querySelectorAll('.venue-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const stage = btn.dataset.stage;
+        if (!stage) return;
+
+        // Update toggle buttons
+        btn.closest('.venue-toggle').querySelectorAll('.venue-toggle-btn').forEach(b => {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+
+        // Show matching content
+        document.querySelectorAll('.venue-specs').forEach(spec => {
+          spec.classList.toggle('visible', spec.dataset.stage === stage);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
