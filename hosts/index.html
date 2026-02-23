@@ -1252,14 +1252,26 @@
     .action-card-link:hover::after {
       margin-left: 0.4em;
     }
-    .recording-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-xs);
-      font-size: 0.9rem;
+    .recording-table {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      width: 100%;
+      border-collapse: collapse;
     }
-    .recording-list a {
-      display: inline;
+    .recording-table td {
+      padding: var(--space-2xs) var(--space-xs) var(--space-2xs) 0;
+      vertical-align: baseline;
+      color: var(--color-text-soft);
+    }
+    .recording-table td:first-child {
+      font-weight: 600;
+      white-space: nowrap;
+      width: 2.5rem;
+    }
+    .recording-table td:last-child {
+      text-align: right;
+      font-size: 0.8rem;
+      white-space: nowrap;
     }
 
     @media (max-width: 768px) {
@@ -1359,14 +1371,26 @@
           </div>
 
           <div class="action-card">
-            <div class="action-card-label">Past sessions</div>
-            <div class="action-card-title">Recordings + Decks</div>
+            <div class="action-card-label">Catch up</div>
+            <div class="action-card-title">Past Sessions</div>
             <div class="action-card-body">
-              <div class="recording-list">
-                <span><a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">Feb 23</a> — Logistics, Host Helpers, Program Preview (<a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" target="_blank" rel="noopener">deck</a>)</span>
-                <span><a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">Jan 20</a> — Host Kickoff</span>
-                <span><a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">Jan 13</a> — Intro Session</span>
-              </div>
+              <table class="recording-table">
+                <tr>
+                  <td><a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">2-23</a></td>
+                  <td>Logistics &amp; Helpers</td>
+                  <td><a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" target="_blank" rel="noopener">deck</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">1-20</a></td>
+                  <td>Host Kickoff</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">1-13</a></td>
+                  <td>Intro Session</td>
+                  <td></td>
+                </tr>
+              </table>
             </div>
           </div>
 
