@@ -1190,6 +1190,68 @@
       color: var(--oeff-sage-light);
     }
 
+    /* Action cards — committed host dashboard */
+    .action-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-lg);
+      margin: var(--space-xl) 0;
+    }
+    .action-card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-organic);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+    }
+    .action-card--primary {
+      border-color: var(--oeff-sage);
+      background: linear-gradient(135deg, var(--oeff-sage-whisper) 0%, white 100%);
+    }
+    .action-card-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--oeff-sage-deep);
+      margin-bottom: var(--space-xs);
+    }
+    .action-card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+    .action-card-body {
+      font-size: 0.9rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+      flex-grow: 1;
+      margin-bottom: var(--space-md);
+    }
+    .action-card-link {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .recording-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      font-size: 0.9rem;
+    }
+    .recording-list a {
+      display: inline;
+    }
+
+    @media (max-width: 768px) {
+      .action-cards { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 600px) {
       html { font-size: 16px; }
       .header-title { font-size: 0.9rem; }
@@ -1266,16 +1328,42 @@
       </div>
     </div>
 
-    <!-- COMMITTED PATH: Host Welcome + Webinars -->
+    <!-- COMMITTED PATH: Host Welcome + Action Cards -->
     <div class="container">
       <div class="intro" id="host-welcome">
         <h2 class="intro-headline">Thanks for hosting with us</h2>
         <p class="intro-text">
-          This page has everything you need: timeline, technical specs, information about your screening packet, and how to reach us if anything comes up.
+          This page has everything you need: timeline, technical specs, screening packet details, and how to reach us.
         </p>
-        <p class="intro-text intro-status">
-          <strong>Where we are now:</strong> Film selections are complete. In February, we're working with you on program design. Marketing materials coming soon.
-        </p>
+
+        <div class="action-cards">
+          <div class="action-card action-card--primary">
+            <div class="action-card-label">Action needed</div>
+            <div class="action-card-title">Host Intake Survey</div>
+            <div class="action-card-body">Help us plan your screening — AV needs, venue details, event format. Takes about 10 minutes.</div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform" class="btn-primary" target="_blank" rel="noopener">Complete the survey</a>
+          </div>
+
+          <div class="action-card">
+            <div class="action-card-label">Past sessions</div>
+            <div class="action-card-title">Recordings + Decks</div>
+            <div class="action-card-body">
+              <div class="recording-list">
+                <span><a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">Feb 23</a> — Logistics, Host Helpers, Program Preview (<a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" target="_blank" rel="noopener">deck</a>)</span>
+                <span><a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">Jan 20</a> — Host Kickoff</span>
+                <span><a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">Jan 13</a> — Intro Session</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-card">
+            <div class="action-card-label">Next webinar</div>
+            <div class="action-card-title">Mar 2 — Programming</div>
+            <div class="action-card-body">Film-specific programming calls, shaping your event format — panels, discussions, action tables.</div>
+            <a href="https://us02web.zoom.us/meeting/register/UEm6dAlnT5mCGn_IYvDa_Q" class="action-card-link" target="_blank" rel="noopener">Register for sessions</a>
+          </div>
+        </div>
+
         <div class="stage-nav">
           <span class="stage-nav-label">Jump to:</span>
           <a href="#timeline" class="stage-pill">Planning</a>
@@ -1283,26 +1371,7 @@
           <a href="#packet" class="stage-pill">Screening packet</a>
           <a href="#day-of-support" class="stage-pill">Day-of</a>
         </div>
-        <div class="next-step">
-          <div class="next-step-body">
-            <div class="next-step-label">Your focus</div>
-            <div class="next-step-content"><strong>Design your screening experience</strong> — panels, discussions, action tables. <a href="mailto:hosts@oneearthcollective.org">Schedule your visioning meeting</a> to shape the event.</div>
-          </div>
-        </div>
 
-        <div class="next-step">
-          <div class="next-step-body">
-            <div class="next-step-label">Host webinars</div>
-            <div class="next-step-content">
-              <a href="https://us02web.zoom.us/meeting/register/UEm6dAlnT5mCGn_IYvDa_Q" class="btn-primary" target="_blank" rel="noopener" style="margin-bottom: var(--space-sm);">Register for upcoming sessions</a>
-              <div style="margin-top: var(--space-sm);">Missed one? Past recordings:
-                <a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">1-13</a> ·
-                <a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">1-20</a> ·
-                <a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">2-23</a> (<a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" target="_blank" rel="noopener">deck</a>)
-              </div>
-            </div>
-          </div>
-        </div>
         <details class="webinar-details" id="webinars">
           <summary class="webinar-summary">
             <span class="marker marker--aqua"></span>
@@ -1653,6 +1722,18 @@
   </footer>
 
   <script>
+    // Auto-skip gate for direct links (YAMM emails use #host-welcome)
+    if (window.location.hash === '#host-welcome' || window.location.hash === '#becoming-host') {
+      const gate = document.querySelector('.gate');
+      gate.style.flex = '0';
+      gate.style.minHeight = '0';
+      gate.style.padding = '0';
+      gate.style.overflow = 'hidden';
+      gate.style.height = '0';
+      gate.style.borderBottom = 'none';
+      try { localStorage.setItem('oeff-host-faq-visited', Date.now().toString()); } catch(e) {}
+    }
+
     // Gate: scroll to relevant section
     document.querySelectorAll('.gate-btn').forEach(btn => {
       btn.addEventListener('click', () => {
