@@ -57,15 +57,22 @@ def inject_into_js(js_path, entries):
     with open(js_path, 'r', encoding='utf-8') as f:
         code = f.read()
 
-    # Match the array of film strings between .setChoiceValues([ ... ])
-    # The pattern captures from setChoiceValues([ to the closing ])
-    pattern = r"(\.setChoiceValues\(\[\s*\n)(.*?)(^\s*\]\))"
+    # Match the Film dropdown's setChoiceValues block specifically.
+    # We anchor to the .setTitle('Film') item that precedes it.
+    # Pattern: from "setTitle('Film')" through the next setChoiceValues([...])
+    pattern = (
+        r"(\.setTitle\('Film'\)\s*\n"
+        r".*?\.setChoiceValues\(\[\s*\n)"
+        r"(.*?)"
+        r"(^\s*\]\))"
+    )
 
-    # Build replacement lines
+    # Build replacement lines (all films get trailing commas since Undecided follows)
     lines = []
-    for i, entry in enumerate(entries):
-        comma = ',' if i < len(entries) - 1 else ''
-        lines.append(f"      '{entry}'{comma}")
+    for entry in entries:
+        lines.append(f"      '{entry}',")
+    # Always include the "Undecided" option at the end (no trailing comma)
+    lines.append("      'Undecided \u2014 help me choose'")
     replacement_block = '\n'.join(lines) + '\n'
 
     new_code = re.sub(
@@ -77,6 +84,10 @@ def inject_into_js(js_path, entries):
     )
 
     if new_code == code:
+        # Check if the pattern matched but content was already identical
+        if re.search(pattern, code, re.MULTILINE | re.DOTALL):
+            print("Film dropdown already up to date. No changes needed.")
+            return
         print("WARNING: Film array pattern not found in Code.js. No changes made.")
         sys.exit(1)
 

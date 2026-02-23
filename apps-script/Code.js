@@ -19,7 +19,7 @@
  * AIRTABLE FIELD MAPPING:
  * Form responses auto-transform to match these Airtable fields:
  *   Intake_ID (HIF-XXX) — auto-generated
- *   Organization_Name, Venue_Address, Capacity, Region
+ *   Organization_Name, Venue_Address, Capacity
  *   Contact_Name, Contact_Email, Contact_Phone, Contact_Role
  *   Contact2_Name, Contact2_Email, Contact2_Phone, Contact2_Role
  *   AV_Contact_Name, AV_Contact_Email
@@ -81,25 +81,6 @@ function createHostIntakeForm() {
       .requireWholeNumber()
       .requireNumberGreaterThan(0)
       .build());
-
-  form.addListItem()
-    .setTitle('Region')
-    .setRequired(true)
-    .setHelpText('Select the region closest to your venue')
-    .setChoiceValues([
-      'F26-001 | Jane Goodall: Reasons for Hope (2025) — Wildlife',
-      'F26-002 | Plastic People (2024) — Waste & Recycling',
-      'F26-003 | Beyond Zero (2020) — Built Environment',
-      'F26-004 | Drowned Land (2025) — Environmental & Social Justice (Indigenous Voices)',
-      'F26-005 | Rooted (2021) — Sustainable Food/Ag',
-      'F26-006 | How to Power a City (2024) — Energy',
-      'F26-007 | Oscar Shorts: The Last Ranger / Planetwalker (2024) — Wildlife / Historical Perspectives',
-      'F26-008 | 40 Acres (2024) — People/Cultures (Dystopian Fiction/Horror)',
-      'F26-009 | Climate Action Museum (CAM) Awards Partnership — Climate Change',
-      'F26-010 | Whose Water? (2024) — Water',
-      'F26-011 | Rails to Trails (2025) — Transportation',
-      'F26-012 | In Our Nature (2025) — Environmental & Social Justice'
-    ]);
 
   form.addParagraphTextItem()
     .setTitle('Venue Description')
@@ -196,18 +177,18 @@ function createHostIntakeForm() {
     .setTitle('Film')
     .setRequired(true)
     .setChoiceValues([
-      'F26-001 | Jane Goodall: Reasons for Hope (2025) — Wildlife / Conservation',
-      'F26-002 | Plastic People (2024) — Waste & Recycling / Health',
-      'F26-003 | Beyond Zero (2020) — Built Environment / Waste',
-      'F26-004 | Drowned Land (2025) — Indigenous Voices / Water',
-      'F26-005 | Rooted (2021) — Sustainable Food / Environmental Justice',
-      'F26-006 | How to Power a City (2024) — Energy / Climate Change',
-      'F26-007 | Oscar Shorts: The Last Ranger / Planetwalker (2024) — Wildlife',
-      'F26-008 | 40 Acres (2024) — People & Cultures / Food / Justice',
-      'F26-009 | Climate Action Museum (CAM) Awards — Climate Change',
-      'F26-010 | Whose Water? (2024) — Water / Environmental Justice',
-      'F26-011 | Rails to Trails (2025) — Transportation / Health',
-      'F26-012 | In Our Nature (2025) — Environmental Justice / Advocacy',
+      'F26-001 | Jane Goodall: Reasons for Hope (2025) — Wildlife',
+      'F26-002 | Plastic People (2024) — Waste & Recycling',
+      'F26-003 | Beyond Zero (2020) — Built Environment',
+      'F26-004 | Drowned Land (2025) — Environmental & Social Justice (Indigenous Voices)',
+      'F26-005 | Rooted (2021) — Sustainable Food/Ag',
+      'F26-006 | How to Power a City (2024) — Energy',
+      'F26-007 | Oscar Shorts: The Last Ranger / Planetwalker (2024) — Wildlife / Historical Perspectives',
+      'F26-008 | 40 Acres (2024) — People/Cultures (Dystopian Fiction/Horror)',
+      'F26-009 | Climate Action Museum (CAM) Awards Partnership — Climate Change',
+      'F26-010 | Whose Water? (2024) — Water',
+      'F26-011 | Rails to Trails (2025) — Transportation',
+      'F26-012 | In Our Nature (2025) — Environmental & Social Justice',
       'Undecided — help me choose'
     ]);
 
@@ -346,7 +327,7 @@ function createHostIntakeForm() {
   var atSheet = ss.insertSheet('Airtable Ready');
   var headers = [
     'Intake_ID', 'Timestamp', 'Email_Address',
-    'Organization_Name', 'Venue_Address', 'Capacity', 'Region',
+    'Organization_Name', 'Venue_Address', 'Capacity',
     'Venue_Description', 'Frontline_Community',
     'Contact1_Name', 'Contact1_Role', 'Contact1_Email', 'Contact1_Phone',
     'Contact2_Name', 'Contact2_Role', 'Contact2_Email', 'Contact2_Phone',
@@ -486,7 +467,6 @@ function processNewResponse(e) {
     data['Organization Name'] || '',
     data['Venue Address'] || '',
     data['Capacity'] || '',
-    data['Region'] || '',
     data['Venue Description'] || '',
     frontline,
     data['Contact 1 — Name'] || '',
