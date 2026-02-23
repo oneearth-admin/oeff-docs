@@ -1124,6 +1124,11 @@
       box-shadow: var(--shadow-elevated);
       color: white;
     }
+    .btn-compact {
+      padding: var(--space-sm) var(--space-lg);
+      font-size: 0.9rem;
+      align-self: flex-start;
+    }
 
     .footer {
       background: var(--oeff-blue-deep);
@@ -1237,6 +1242,15 @@
       font-family: var(--font-display);
       font-size: 0.9rem;
       font-weight: 500;
+      margin-top: auto;
+    }
+    .action-card-link::after {
+      content: ' \2192';
+      transition: margin-left 0.15s var(--ease);
+      margin-left: 0.15em;
+    }
+    .action-card-link:hover::after {
+      margin-left: 0.4em;
     }
     .recording-list {
       display: flex;
@@ -1341,7 +1355,7 @@
             <div class="action-card-label">Action needed</div>
             <div class="action-card-title">Host Intake Survey</div>
             <div class="action-card-body">Help us plan your screening — AV needs, venue details, event format. Takes about 10 minutes.</div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform" class="btn-primary" target="_blank" rel="noopener">Complete the survey</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform" class="btn-primary btn-compact" target="_blank" rel="noopener" style="margin-top: auto;">Complete the survey</a>
           </div>
 
           <div class="action-card">
