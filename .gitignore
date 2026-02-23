@@ -1,1 +1,7 @@
 .DS_Store
+
+# Generated host security data (contains plaintext passwords)
+token-map.json
+
+# Generated per-venue helper pages (deployed, not tracked)
+hosts/*/
