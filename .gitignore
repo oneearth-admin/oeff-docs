@@ -5,3 +5,9 @@ token-map.json
 
 # Generated per-venue helper pages (deployed, not tracked)
 hosts/*/
+
+# Wrangler cache (contains account credentials)
+.wrangler/
+
+# Python bytecode
+__pycache__/
