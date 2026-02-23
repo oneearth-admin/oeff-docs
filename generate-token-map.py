@@ -10,11 +10,16 @@ Can read venue data from:
   1. Airtable (default) — uses the same API layer as the venue generator
   2. A CSV export from V7 — via --csv flag
 
+Can push security fields back to Airtable via --push flag.
+
 Stdlib Python 3 only — no pip dependencies.
 
 Usage:
-    # From Airtable (requires AIRTABLE_TOKEN)
+    # Generate token map from Airtable
     AIRTABLE_TOKEN=pat... python3 generate-token-map.py
+
+    # Generate AND push security fields back to Airtable
+    AIRTABLE_TOKEN=pat... python3 generate-token-map.py --push
 
     # From CSV export
     python3 generate-token-map.py --csv hosts-export.csv
@@ -22,7 +27,7 @@ Usage:
     # Preserve existing tokens (default: true, use --regenerate to force new)
     AIRTABLE_TOKEN=pat... python3 generate-token-map.py --regenerate
 
-    # Dry run — show what would be generated
+    # Dry run — show what would be generated, no writes
     AIRTABLE_TOKEN=pat... python3 generate-token-map.py --dry-run
 """
 
@@ -51,6 +56,7 @@ VENUES_TABLE = "Venues"
 
 TOKEN_MAP_PATH = Path(__file__).parent / "token-map.json"
 TOKEN_LENGTH = 16  # hex chars = 64 bits entropy
+HELPER_BASE_URL = "https://hosts.oneearthfilmfest.org/"
 
 # Word list for human-readable passwords (nature + festival vocabulary)
 PASSWORD_WORDS = [
@@ -100,16 +106,22 @@ def get_token() -> str:
     return token
 
 
-def api_call(method: str, endpoint: str, token: str) -> Dict[str, Any]:
+def api_call(
+    method: str,
+    endpoint: str,
+    token: str,
+    body: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
     """Make an Airtable API call with retry and rate limit handling."""
     url = f"{API}{endpoint}"
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
     }
+    data = json.dumps(body).encode("utf-8") if body else None
     for attempt in range(4):
         try:
-            req = urllib.request.Request(url, headers=headers, method=method)
+            req = urllib.request.Request(url, headers=headers, method=method, data=data)
             with urllib.request.urlopen(req) as resp:
                 result = json.loads(resp.read())
             time.sleep(0.22)
@@ -128,32 +140,80 @@ def api_call(method: str, endpoint: str, token: str) -> Dict[str, Any]:
     return {}
 
 
-def fetch_venues_from_airtable(token: str) -> List[Dict[str, str]]:
-    """Fetch venue names and contact emails from Airtable."""
-    venues: List[Dict[str, str]] = []
+def _extract_email(text: str) -> str:
+    """Extract first email address from a multiline text block."""
+    import re
+    match = re.search(r'[\w.+-]+@[\w-]+\.[\w.-]+', text)
+    return match.group(0) if match else ""
+
+
+def fetch_venues_from_airtable(
+    token: str,
+    season_filter: str = "2026",
+) -> List[Dict[str, str]]:
+    """Fetch 2026 venue names, contact emails, and record IDs from Airtable.
+
+    Cross-references the Events table (Year=2026) to get the canonical
+    list of venues with confirmed screenings or active interest.
+    """
+    # Step 1: Fetch 2026 Events to get linked venue record IDs
+    event_venue_ids: set = set()
     offset: Optional[str] = None
 
     while True:
-        endpoint = f"/{BASE_ID}/{urllib.request.quote(VENUES_TABLE)}"
-        params = []
+        formula = urllib.request.quote("Year=2026")
+        endpoint = (
+            f"/{BASE_ID}/{urllib.request.quote('Events')}"
+            f"?filterByFormula={formula}"
+            f"&fields%5B%5D=Venue"
+            f"&fields%5B%5D=Venue+Name"
+        )
         if offset:
-            params.append(f"offset={offset}")
-        if params:
-            endpoint += "?" + "&".join(params)
+            endpoint += f"&offset={offset}"
 
         result = api_call("GET", endpoint, token)
         for rec in result.get("records", []):
-            fields = rec.get("fields", {})
-            name = fields.get("Name", "").strip()
-            email = fields.get("Contact_Email", "").strip()
-            if name:
-                venues.append({"venue_name": name, "contact_email": email})
+            for vid in rec.get("fields", {}).get("Venue", []):
+                event_venue_ids.add(vid)
 
         offset = result.get("offset")
         if not offset:
             break
 
-    print(f"  Fetched {len(venues)} venues from Airtable", file=sys.stderr)
+    print(f"  Found {len(event_venue_ids)} venue(s) linked from 2026 Events", file=sys.stderr)
+
+    if not event_venue_ids:
+        return []
+
+    # Step 2: Fetch those venue records by ID
+    venues: List[Dict[str, str]] = []
+    id_list = list(event_venue_ids)
+
+    for i in range(0, len(id_list), 20):
+        batch = id_list[i : i + 20]
+        or_clauses = ",".join(f'RECORD_ID()="{rid}"' for rid in batch)
+        formula = urllib.request.quote(f"OR({or_clauses})")
+        endpoint = (
+            f"/{BASE_ID}/{urllib.request.quote(VENUES_TABLE)}"
+            f"?filterByFormula={formula}"
+        )
+        result = api_call("GET", endpoint, token)
+
+        for rec in result.get("records", []):
+            fields = rec.get("fields", {})
+            name = fields.get("Venue Name", "").strip()
+            email = fields.get("Contact_Email", "").strip()
+            if not email:
+                contact_info = fields.get("Contact Info", "")
+                email = _extract_email(contact_info)
+            if name and name != "0" and len(name) > 2:
+                venues.append({
+                    "venue_name": name,
+                    "contact_email": email,
+                    "record_id": rec.get("id", ""),
+                })
+
+    print(f"  Fetched {len(venues)} venue records from Airtable", file=sys.stderr)
     return venues
 
 
@@ -212,11 +272,14 @@ def generate_token_map(
         name = venue["venue_name"]
         email = venue.get("contact_email", "")
 
+        record_id = venue.get("record_id", "")
+
         if not regenerate and name in existing:
             # Preserve existing token and passwords
             entry = existing[name].copy()
-            # Update email if it changed
             entry["contact_email"] = email
+            if record_id:
+                entry["record_id"] = record_id
             token_map[name] = entry
         else:
             # Generate new token and passwords
@@ -225,12 +288,129 @@ def generate_token_map(
             token_map[name] = {
                 "token": generate_token(),
                 "contact_email": email,
+                "record_id": record_id,
                 "financial_password_hash": sha256_hex(financial_pw),
                 "financial_password_plaintext": financial_pw,
                 "packet_password": packet_pw,
             }
 
     return token_map
+
+
+# ---------------------------------------------------------------------------
+# Push to Airtable
+# ---------------------------------------------------------------------------
+
+SECURITY_FIELDS = [
+    ("Host_Token", "singleLineText", "Unique URL token for host helper page"),
+    ("Host_Helper_URL", "url", "Full host helper page URL"),
+    ("Financial_Password_Hash", "singleLineText", "SHA-256 hash for password gate"),
+    ("Financial_Password", "singleLineText", "Plaintext for YAMM merge (separate email)"),
+    ("Packet_Password", "singleLineText", "Plaintext for YAMM merge (separate email)"),
+]
+
+
+def ensure_fields_exist(airtable_token: str) -> None:
+    """Create security fields on the Venues table if they don't exist."""
+    # Get the table ID for Venues
+    endpoint = f"/meta/bases/{BASE_ID}/tables"
+    result = api_call("GET", endpoint, airtable_token)
+
+    table_id = None
+    existing_fields: set = set()
+    for t in result.get("tables", []):
+        if t["name"] == VENUES_TABLE and not t["name"].startswith("[DELETE]"):
+            table_id = t["id"]
+            for f in t.get("fields", []):
+                existing_fields.add(f["name"])
+            break
+
+    if not table_id:
+        print(f"  Error: Could not find {VENUES_TABLE} table", file=sys.stderr)
+        sys.exit(1)
+
+    for field_name, field_type, description in SECURITY_FIELDS:
+        if field_name in existing_fields:
+            print(f"  Field '{field_name}' already exists", file=sys.stderr)
+            continue
+
+        body = {
+            "name": field_name,
+            "type": field_type,
+            "description": description,
+        }
+        create_endpoint = f"/meta/bases/{BASE_ID}/tables/{table_id}/fields"
+        api_call("POST", create_endpoint, airtable_token, body=body)
+        print(f"  Created field '{field_name}' ({field_type})", file=sys.stderr)
+
+
+def push_to_airtable(
+    token_map: Dict[str, Any],
+    airtable_token: str,
+    dry_run: bool = False,
+) -> int:
+    """Write security fields back to Airtable Venues table.
+
+    Fields written:
+      - Host_Token: the URL token
+      - Host_Helper_URL: full helper page URL
+      - Financial_Password_Hash: SHA-256 hex for the password gate
+      - Financial_Password: plaintext for YAMM merge (separate email)
+      - Packet_Password: plaintext for YAMM merge (separate email)
+    """
+    # Airtable batch update: up to 10 records per PATCH
+    updates: List[Dict[str, Any]] = []
+
+    for name, entry in token_map.items():
+        record_id = entry.get("record_id", "")
+        if not record_id:
+            print(f"  Skipping {name}: no Airtable record ID", file=sys.stderr)
+            continue
+
+        token = entry.get("token", "")
+        helper_url = f"{HELPER_BASE_URL}{token}/" if token else ""
+
+        updates.append({
+            "id": record_id,
+            "fields": {
+                "Host_Token": token,
+                "Host_Helper_URL": helper_url,
+                "Financial_Password_Hash": entry.get("financial_password_hash", ""),
+                "Financial_Password": entry.get("financial_password_plaintext", ""),
+                "Packet_Password": entry.get("packet_password", ""),
+            },
+        })
+
+    if not updates:
+        print("  No records to push (no record IDs found).", file=sys.stderr)
+        return 0
+
+    if dry_run:
+        for u in updates:
+            name = next(
+                (n for n, e in token_map.items() if e.get("record_id") == u["id"]),
+                u["id"],
+            )
+            print(f"  [dry-run] Would update {name}: {list(u['fields'].keys())}")
+        print(f"\n(dry run — {len(updates)} record(s) not written)", file=sys.stderr)
+        return len(updates)
+
+    # Batch in groups of 10 (Airtable limit)
+    pushed = 0
+    for i in range(0, len(updates), 10):
+        batch = updates[i : i + 10]
+        endpoint = f"/{BASE_ID}/{urllib.request.quote(VENUES_TABLE)}"
+        body = {"records": batch}
+        result = api_call("PATCH", endpoint, airtable_token, body=body)
+        pushed += len(result.get("records", []))
+        print(
+            f"  Pushed batch {i // 10 + 1}: "
+            f"{len(batch)} record(s)",
+            file=sys.stderr,
+        )
+
+    print(f"  Pushed {pushed} venue(s) to Airtable", file=sys.stderr)
+    return pushed
 
 
 # ---------------------------------------------------------------------------
@@ -260,6 +440,11 @@ def parse_args() -> argparse.Namespace:
         "--output",
         metavar="FILE",
         help=f"Write token map to this path (default: {TOKEN_MAP_PATH}).",
+    )
+    parser.add_argument(
+        "--push",
+        action="store_true",
+        help="Push security fields (token, passwords, URLs) back to Airtable Venues table.",
     )
     return parser.parse_args()
 
@@ -314,6 +499,19 @@ def main() -> int:
         f"  {len(token_map)} total, {new_count} new, {preserved} preserved",
         file=sys.stderr,
     )
+
+    # Push to Airtable if requested
+    if args.push:
+        if args.csv:
+            print(
+                "Error: --push requires Airtable (cannot push from CSV source).",
+                file=sys.stderr,
+            )
+            return 1
+        print("Ensuring security fields exist on Venues table...", file=sys.stderr)
+        ensure_fields_exist(airtable_token)
+        print("Pushing security fields to Airtable...", file=sys.stderr)
+        push_to_airtable(token_map, airtable_token)
 
     return 0
 

@@ -137,6 +137,31 @@ def fetch_all_records(table: str, view: str, token: str) -> List[Dict[str, Any]]
     return records
 
 
+def fetch_by_filter(
+    table: str, formula: str, token: str
+) -> List[Dict[str, Any]]:
+    """Paginated fetch with a filterByFormula (no view required)."""
+    records: List[Dict[str, Any]] = []
+    offset: Optional[str] = None
+    page = 0
+
+    while True:
+        page += 1
+        encoded = urllib.request.quote(formula)
+        endpoint = f"/{BASE_ID}/{urllib.request.quote(table)}?filterByFormula={encoded}"
+        if offset:
+            endpoint += f"&offset={offset}"
+        print(f"  Fetching page {page}...", file=sys.stderr)
+        result = api_call("GET", endpoint, token)
+        records.extend(result.get("records", []))
+        offset = result.get("offset")
+        if not offset:
+            break
+
+    print(f"  Fetched {len(records)} records from {table} (filtered)", file=sys.stderr)
+    return records
+
+
 def resolve_linked_records(
     records: List[Dict[str, Any]], token: str
 ) -> Tuple[Dict[str, Dict], Dict[str, Dict], Dict[str, Dict]]:
@@ -152,14 +177,14 @@ def resolve_linked_records(
             film_ids.add(fid)
 
     venues = _fetch_by_ids("Venues", venue_ids, token)
-    films = _fetch_by_ids("Films_2026", film_ids, token)
+    films = _fetch_by_ids("Films", film_ids, token)
 
     # Film contacts are linked from films
     contact_ids: set = set()
     for film in films.values():
         for cid in film.get("fields", {}).get("Film_Contact", []):
             contact_ids.add(cid)
-    contacts = _fetch_by_ids("Film_Contacts", contact_ids, token)
+    contacts = _fetch_by_ids("Film Contacts", contact_ids, token)
 
     return venues, films, contacts
 
@@ -268,6 +293,80 @@ def assemble_venues(
         assembled.append(venue)
 
     # Sort by venue name for consistent output
+    assembled.sort(key=lambda v: v["venue_name"])
+    return assembled
+
+
+def assemble_venues_for_helpers(
+    records: List[Dict[str, Any]],
+    token: str,
+) -> List[Dict[str, Any]]:
+    """Lightweight assembly for helper pages using denormalized Event fields.
+
+    The Events table has Venue Name, Film Title, Date, Time etc. directly,
+    so we don't need the full linked-record resolution. We only fetch
+    linked Venue records for contact info.
+    """
+    # Collect linked venue IDs to fetch contact info
+    venue_ids: set = set()
+    for rec in records:
+        for vid in rec.get("fields", {}).get("Venue", []):
+            venue_ids.add(vid)
+
+    # Fetch venue records for contact info
+    venues_cache = _fetch_by_ids("Venues", venue_ids, token)
+
+    # Deduplicate by venue name (some venues have multiple events)
+    seen: set = set()
+    assembled: List[Dict[str, Any]] = []
+
+    for rec in records:
+        f = rec.get("fields", {})
+        name = f.get("Venue Name", "").strip()
+        if not name or name in seen:
+            continue
+        seen.add(name)
+
+        # Resolve linked venue for contact info
+        venue_ids_list = f.get("Venue", [])
+        venue_rec = venues_cache.get(venue_ids_list[0], {}) if venue_ids_list else {}
+        vf = venue_rec.get("fields", {})
+
+        # Extract email from Contact Info multiline text
+        contact_info = vf.get("Contact Info", "")
+        import re as _re
+        email_match = _re.search(r'[\w.+-]+@[\w-]+\.[\w.-]+', contact_info)
+        contact_email = email_match.group(0) if email_match else ""
+
+        venue = {
+            "event_id": rec.get("id", ""),
+            "event_date": f.get("Date", ""),
+            "event_time": f.get("Time", ""),
+            "doors_time": "",
+            "rsvp_url": "",
+            "rsvp_count": 0,
+            "pipeline_status": f.get("Pipeline Status", ""),
+            "volunteer_needs": f.get("Volunteer Needs", ""),
+            "screening_packet_url": "",
+            # Venue fields
+            "venue_name": name,
+            "venue_city": "",
+            "venue_region": vf.get("Region", ""),
+            "venue_capacity": vf.get("Capacity", ""),
+            "venue_contact_name": "",
+            "venue_contact_email": contact_email,
+            "venue_facility_contact": "",
+            "venue_av_contact": "",
+            "venue_equipment_notes": vf.get("Notes", ""),
+            # Film fields (denormalized on Events)
+            "film_title": f.get("Film Title", "TBD"),
+            "film_runtime": 0,
+            # Film contact
+            "film_contact_name": "",
+            "film_contact_email": "",
+        }
+        assembled.append(venue)
+
     assembled.sort(key=lambda v: v["venue_name"])
     return assembled
 
@@ -1595,10 +1694,15 @@ def main() -> int:
     # Fetch from Airtable
     token = get_token()
     print("Fetching records from Airtable...", file=sys.stderr)
-    records = fetch_all_records(TABLE_NAME, VIEW_NAME, token)
+    if args.helpers:
+        # Helper pages don't require the 2026_Venue_Sections view —
+        # fetch Events filtered by Year=2026 instead
+        records = fetch_by_filter(TABLE_NAME, "Year=2026", token)
+    else:
+        records = fetch_all_records(TABLE_NAME, VIEW_NAME, token)
 
     if not records:
-        print("Warning: No records returned from Airtable view.", file=sys.stderr)
+        print("Warning: No records returned from Airtable.", file=sys.stderr)
 
     # Resolve linked records
     print("Resolving linked records...", file=sys.stderr)
@@ -1608,7 +1712,33 @@ def main() -> int:
     venues = assemble_venues(records, venues_cache, films_cache, contacts_cache)
     print(f"Assembled {len(venues)} venue(s)", file=sys.stderr)
 
-    # Render
+    # For helpers mode, use a simpler assembly path
+    if args.helpers:
+        # Events records have denormalized fields — assemble directly
+        # without the full linked-record resolution
+        venues = assemble_venues_for_helpers(records, token)
+        print(f"Assembled {len(venues)} venue(s) for helper pages", file=sys.stderr)
+
+        token_map_path = Path(args.token_map) if args.token_map else TOKEN_MAP_PATH
+        print(f"Loading token map from {token_map_path}...", file=sys.stderr)
+        token_map = load_token_map(token_map_path)
+        print(f"  {len(token_map)} venue(s) in token map", file=sys.stderr)
+
+        print("Generating helper pages...", file=sys.stderr)
+        count = generate_helper_pages(venues, state, token_map, args.dry_run)
+
+        if count < 0:
+            print("Build FAILED — privacy lint errors above.", file=sys.stderr)
+            return 2
+
+        if args.dry_run:
+            print(f"(dry run — {count} page(s) validated, no files written)", file=sys.stderr)
+        else:
+            print(f"Generated {count} helper page(s) in {HELPERS_DIR}/", file=sys.stderr)
+
+        return 0
+
+    # Render public venue sections
     sections_html = render_all_sections(venues, state)
 
     # Validate SARC order
@@ -1630,38 +1760,17 @@ def main() -> int:
     print(f"Validation passed (SARC OK, privacy OK)", file=sys.stderr)
 
     # Output — standard venue sections
-    if not args.helpers:
-        if args.dry_run:
-            print(sections_html)
-            print("(dry run — no files written)", file=sys.stderr)
-            return 0
-
-        if args.output:
-            output_path = Path(args.output)
-            output_path.write_text(sections_html, encoding="utf-8")
-            print(f"Wrote standalone fragment to {output_path}", file=sys.stderr)
-        else:
-            inject_into_html(sections_html, HOSTS_HTML)
-
+    if args.dry_run:
+        print(sections_html)
+        print("(dry run — no files written)", file=sys.stderr)
         return 0
 
-    # Output — per-venue helper pages
-    token_map_path = Path(args.token_map) if args.token_map else TOKEN_MAP_PATH
-    print(f"Loading token map from {token_map_path}...", file=sys.stderr)
-    token_map = load_token_map(token_map_path)
-    print(f"  {len(token_map)} venue(s) in token map", file=sys.stderr)
-
-    print("Generating helper pages...", file=sys.stderr)
-    count = generate_helper_pages(venues, state, token_map, args.dry_run)
-
-    if count < 0:
-        print("Build FAILED — privacy lint errors above.", file=sys.stderr)
-        return 2
-
-    if args.dry_run:
-        print(f"(dry run — {count} page(s) validated, no files written)", file=sys.stderr)
+    if args.output:
+        output_path = Path(args.output)
+        output_path.write_text(sections_html, encoding="utf-8")
+        print(f"Wrote standalone fragment to {output_path}", file=sys.stderr)
     else:
-        print(f"Generated {count} helper page(s) in {HELPERS_DIR}/", file=sys.stderr)
+        inject_into_html(sections_html, HOSTS_HTML)
 
     return 0
 
