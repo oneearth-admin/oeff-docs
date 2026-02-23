@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF 2026 — Host Venue Intake Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   OEFF Host Intake Form — Beautiful-First / Forest
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* Forest palette — OEFF domain */
+  --forest-50:  #f0f4f2;
+  --forest-100: #dce6e0;
+  --forest-200: #b8cdc0;
+  --forest-300: #8fb09e;
+  --forest-400: #6d9480;
+  --forest-500: #5c7c6b;
+  --forest-600: #4a6356;
+  --forest-700: #3a4f44;
+  --forest-800: #2b3b33;
+  --forest-900: #1c2822;
+
+  /* Warm neutrals */
+  --ground:     #f7f5f2;
+  --surface:    #ffffff;
+  --text-primary:   #2b3b33;
+  --text-secondary: #4a6356;
+  --text-muted:     #6d9480;
+  --border:     #dce6e0;
+  --border-focus: #5c7c6b;
+
+  /* Semantic mappings */
+  --color-primary: var(--forest-500);
+  --color-primary-hover: var(--forest-600);
+  --color-primary-light: var(--forest-100);
+  --color-accent: var(--forest-400);
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--forest-50);
+  --color-required: #c4704b;
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Source Sans 3', system-ui, sans-serif;
+  --font-mono: 'Source Code Pro', monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--color-ground);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.form-container {
+  max-width: 720px;
+  margin: var(--space-2xl) auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Header */
+.form-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 2px solid var(--border);
+}
+
+.form-header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.01em;
+}
+
+.form-header .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.form-header .dates {
+  display: inline-block;
+  margin-top: var(--space-md);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Sections */
+.form-section {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  box-shadow: 0 1px 3px hsla(25, 40%, 30%, 0.06),
+              0 4px 12px hsla(25, 40%, 30%, 0.04);
+}
+
+.form-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+.form-section .section-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+  margin-top: var(--space-xs);
+}
+
+/* Form fields */
+.field-group {
+  margin-bottom: var(--space-lg);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 600px) {
+  .field-row { grid-template-columns: 1fr; }
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+label .required {
+  color: var(--color-required);
+  margin-left: 2px;
+}
+
+label .optional {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary);
+  background: var(--color-ground);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px hsla(155, 15%, 42%, 0.15);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a6356' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.help-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* Checkbox groups */
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm) var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 600px) {
+  .checkbox-group { grid-template-columns: 1fr; }
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  min-height: 44px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.checkbox-item:hover {
+  background: var(--color-surface-subtle);
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-item span {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Radio groups */
+.radio-group {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 400;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.radio-item input[type="radio"] {
+  accent-color: var(--color-primary);
+  width: 20px;
+  height: 20px;
+}
+
+/* Contact block */
+.contact-block {
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.contact-block h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+/* Submit */
+.submit-section {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+.btn-submit {
+  display: inline-block;
+  padding: 14px 48px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-surface);
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  min-height: 44px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+}
+
+.submit-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--space-md);
+}
+
+/* Confirmation */
+.confirmation {
+  display: none;
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.confirmation.visible {
+  display: block;
+}
+
+.confirmation h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+/* Print */
+@media print {
+  body { background: white; }
+  .form-container { max-width: 100%; padding: 0; }
+  .form-section { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+  .btn-submit { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="form-container">
+
+  <!-- Header -->
+  <header class="form-header">
+    <h1>Host Venue Intake Form</h1>
+    <p class="subtitle">One Earth Film Festival 2026 — Help us understand your venue so we can match you with the right film and support your screening.</p>
+    <span class="dates">Festival Week: April 22 – 28, 2026</span>
+  </header>
+
+  <form id="hostIntakeForm" novalidate>
+
+    <!-- ─── SECTION 1: Venue Information ─── -->
+    <section class="form-section">
+      <h2>Venue Information</h2>
+      <p class="section-note">Tell us about your space so we can plan for a great screening experience.</p>
+
+      <div class="field-group">
+        <label for="orgName">Organization / Venue Name <span class="required">*</span></label>
+        <input type="text" id="orgName" name="orgName" required aria-label="Organization or venue name" placeholder="e.g., Trinity Lutheran Church Green Team">
+      </div>
+
+      <div class="field-group">
+        <label for="venueAddress">Venue Address <span class="required">*</span></label>
+        <input type="text" id="venueAddress" name="venueAddress" required aria-label="Venue street address" placeholder="Street address, city, state, ZIP">
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="capacity">Seating Capacity <span class="required">*</span></label>
+          <input type="number" id="capacity" name="capacity" required min="1" aria-label="Seating capacity" placeholder="e.g., 120">
+        </div>
+        <div class="field-group">
+          <label for="region">Region</label>
+          <select id="region" name="region" aria-label="Chicago region">
+            <option value="">Select region...</option>
+            <option value="Loop">Loop / Downtown</option>
+            <option value="Northside">Northside</option>
+            <option value="Westside">Westside</option>
+            <option value="Southside">Southside</option>
+            <option value="Southwest Side">Southwest Side</option>
+            <option value="N Suburbs">North Suburbs</option>
+            <option value="NW Suburbs">Northwest Suburbs</option>
+            <option value="W Suburbs">West Suburbs</option>
+            <option value="S Suburbs">South Suburbs</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="venueDescription">Venue Description <span class="required">*</span></label>
+        <textarea id="venueDescription" name="venueDescription" required aria-label="Venue description" placeholder="Describe your screening space — room name, layout, any special features or considerations."></textarea>
+      </div>
+
+      <fieldset class="field-group" style="border: none; padding: 0;">
+        <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: var(--space-xs);">Does your venue serve a frontline or environmental justice community?</legend>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="frontline" value="yes" aria-label="Yes, serves frontline community"> Yes
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="frontline" value="no" aria-label="No, does not serve frontline community"> No
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="frontline" value="unsure" aria-label="Not sure about frontline community status"> Not sure
+          </label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- ─── SECTION 2: Primary Contacts ─── -->
+    <section class="form-section">
+      <h2>Contacts</h2>
+      <p class="section-note">We need at least one primary contact. Add additional contacts as applicable.</p>
+
+      <div class="contact-block">
+        <h3>Primary Contact 1 <span class="required">*</span></h3>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="contact1Name">Full Name <span class="required">*</span></label>
+            <input type="text" id="contact1Name" name="contact1Name" required aria-label="Primary contact 1 full name">
+          </div>
+          <div class="field-group">
+            <label for="contact1Role">Role / Title</label>
+            <input type="text" id="contact1Role" name="contact1Role" aria-label="Primary contact 1 role" placeholder="e.g., Program Director">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="contact1Email">Email <span class="required">*</span></label>
+            <input type="email" id="contact1Email" name="contact1Email" required aria-label="Primary contact 1 email">
+          </div>
+          <div class="field-group">
+            <label for="contact1Phone">Phone <span class="optional">(optional)</span></label>
+            <input type="tel" id="contact1Phone" name="contact1Phone" aria-label="Primary contact 1 phone">
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-block">
+        <h3>Primary Contact 2 <span class="optional">(optional)</span></h3>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="contact2Name">Full Name</label>
+            <input type="text" id="contact2Name" name="contact2Name" aria-label="Primary contact 2 full name">
+          </div>
+          <div class="field-group">
+            <label for="contact2Role">Role / Title</label>
+            <input type="text" id="contact2Role" name="contact2Role" aria-label="Primary contact 2 role">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="contact2Email">Email</label>
+            <input type="email" id="contact2Email" name="contact2Email" aria-label="Primary contact 2 email">
+          </div>
+          <div class="field-group">
+            <label for="contact2Phone">Phone</label>
+            <input type="tel" id="contact2Phone" name="contact2Phone" aria-label="Primary contact 2 phone">
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-block">
+        <h3>AV / Technical Contact <span class="optional">(optional)</span></h3>
+        <p class="help-text" style="margin-bottom: var(--space-md);">Who should we contact about projector, sound, and screen setup?</p>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="avContactName">Full Name</label>
+            <input type="text" id="avContactName" name="avContactName" aria-label="AV contact full name">
+          </div>
+          <div class="field-group">
+            <label for="avContactEmail">Email</label>
+            <input type="email" id="avContactEmail" name="avContactEmail" aria-label="AV contact email">
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-block">
+        <h3>Marketing / Promotions Contact <span class="optional">(optional)</span></h3>
+        <p class="help-text" style="margin-bottom: var(--space-md);">Who handles event promotion and social media at your organization?</p>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="marketingContactName">Full Name</label>
+            <input type="text" id="marketingContactName" name="marketingContactName" aria-label="Marketing contact full name">
+          </div>
+          <div class="field-group">
+            <label for="marketingContactEmail">Email</label>
+            <input type="email" id="marketingContactEmail" name="marketingContactEmail" aria-label="Marketing contact email">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 3: Film Selection ─── -->
+    <section class="form-section">
+      <h2>Film Selection</h2>
+      <p class="section-note">Choose the film you'd like to screen. If you're still deciding, select "Not yet decided" and we'll follow up.</p>
+
+      <div class="field-group">
+        <label for="filmSelection">Film <span class="required">*</span></label>
+        <select id="filmSelection" name="filmSelection" required aria-label="Film selection">
+          <option value="">Select a film...</option>
+          <option value="F26-001">Jane Goodall: Reasons for Hope (2025) — Wildlife / Conservation</option>
+          <option value="F26-002">Plastic People (2024) — Waste &amp; Recycling / Health</option>
+          <option value="F26-003">Beyond Zero (2020) — Built Environment / Waste</option>
+          <option value="F26-004">Drowned Land (2025) — Indigenous Voices / Water</option>
+          <option value="F26-005">Rooted (2021) — Sustainable Food / Environmental Justice</option>
+          <option value="F26-006">How to Power a City (2024) — Energy / Climate Change</option>
+          <option value="F26-007">Oscar Shorts: The Last Ranger / Planetwalker (2024) — Wildlife / Conservation</option>
+          <option value="F26-008">40 Acres (2024) — People &amp; Cultures / Food / Justice</option>
+          <option value="F26-009">Climate Action Museum (CAM) Awards Partnership — Climate Change</option>
+          <option value="F26-010">Whose Water? (2024) — Water / Environmental Justice</option>
+          <option value="F26-011">Rails to Trails (2025) — Transportation / Health</option>
+          <option value="F26-012">In Our Nature (2025) — Environmental Justice / Advocacy</option>
+          <option value="undecided">Not yet decided — help me choose</option>
+        </select>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="screeningDate">Preferred Screening Date <span class="required">*</span></label>
+          <input type="date" id="screeningDate" name="screeningDate" required min="2026-04-22" max="2026-04-28" aria-label="Preferred screening date">
+          <p class="help-text">Festival runs April 22 – 28, 2026</p>
+        </div>
+        <div class="field-group">
+          <label for="screeningTime">Preferred Start Time <span class="optional">(optional)</span></label>
+          <select id="screeningTime" name="screeningTime" aria-label="Preferred start time">
+            <option value="">Select time...</option>
+            <option value="morning">Morning (before noon)</option>
+            <option value="afternoon">Afternoon (noon – 5pm)</option>
+            <option value="evening">Evening (after 5pm)</option>
+            <option value="flexible">Flexible</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="filmNotes">Notes about your film selection <span class="optional">(optional)</span></label>
+        <textarea id="filmNotes" name="filmNotes" rows="3" aria-label="Film selection notes" placeholder="Topics of interest, audience considerations, backup choices, etc."></textarea>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 4: AV Equipment ─── -->
+    <section class="form-section">
+      <h2>AV &amp; Technical Setup</h2>
+      <p class="section-note">Check everything your venue can provide. OEFF can help fill gaps — just let us know.</p>
+
+      <fieldset class="field-group" style="border: none; padding: 0;">
+        <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0;">Available Equipment</legend>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="av_projector" value="yes" aria-label="Projector available">
+            <span>Projector</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="av_screen" value="yes" aria-label="Projection screen available">
+            <span>Projection screen</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="av_sound" value="yes" aria-label="Sound system available">
+            <span>Sound system / speakers</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="av_computer" value="yes" aria-label="Computer for playback available">
+            <span>Computer / laptop for playback</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="av_wifi" value="yes" aria-label="Wi-Fi for streaming available">
+            <span>Wi-Fi for streaming</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="av_microphone" value="yes" aria-label="Microphone available">
+            <span>Microphone (for Q&amp;A / panel)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="av_lead" value="yes" aria-label="On-site AV technician available">
+            <span>On-site AV technician available</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="field-group">
+        <label for="avNotes">AV Notes <span class="optional">(optional)</span></label>
+        <textarea id="avNotes" name="avNotes" rows="3" aria-label="AV setup notes" placeholder="Any equipment limitations, special setup requirements, or help needed from OEFF."></textarea>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 5: Accessibility & ADA ─── -->
+    <section class="form-section">
+      <h2>Accessibility &amp; ADA Compliance</h2>
+      <p class="section-note">Help us ensure every attendee can participate fully. Check all that apply.</p>
+
+      <fieldset class="field-group" style="border: none; padding: 0;">
+        <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0;">Physical Accessibility</legend>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_wheelchair" value="yes" aria-label="Wheelchair accessible entrance">
+            <span>Wheelchair accessible entrance</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_elevator" value="yes" aria-label="Elevator access available">
+            <span>Elevator access (if not ground floor)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_restrooms" value="yes" aria-label="Accessible restrooms available">
+            <span>Accessible restrooms</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_parking" value="yes" aria-label="Accessible parking available">
+            <span>Accessible parking available</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_seating" value="yes" aria-label="Flexible wheelchair seating available">
+            <span>Flexible seating (wheelchair spaces)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_transit" value="yes" aria-label="Near public transit">
+            <span>Near public transit</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group" style="border: none; padding: 0;">
+        <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0;">Sensory &amp; Communication Accessibility</legend>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_captions" value="yes" aria-label="Can display captions or subtitles">
+            <span>Can display captions / subtitles</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_hearing_loop" value="yes" aria-label="Hearing loop or assistive listening available">
+            <span>Hearing loop / assistive listening</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_lighting" value="yes" aria-label="Adjustable lighting available">
+            <span>Adjustable lighting</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="ada_signage" value="yes" aria-label="Clear wayfinding signage available">
+            <span>Clear wayfinding signage</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="field-group">
+        <label for="accessibilityNotes">Additional Accessibility Notes <span class="optional">(optional)</span></label>
+        <textarea id="accessibilityNotes" name="accessibilityNotes" rows="3" aria-label="Additional accessibility notes" placeholder="Any barriers, accommodations your venue can offer, or support needed."></textarea>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 6: Marketing & Promotion ─── -->
+    <section class="form-section">
+      <h2>Marketing &amp; Promotion</h2>
+      <p class="section-note">How will you help spread the word? OEFF provides posters, social templates, and press copy.</p>
+
+      <fieldset class="field-group" style="border: none; padding: 0;">
+        <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0;">Promotion Channels <span class="required">*</span></legend>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="promo_enewsletter" value="yes" aria-label="Email newsletter promotion">
+            <span>Email newsletter</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="promo_print" value="yes" aria-label="Print newsletter promotion">
+            <span>Print newsletter</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="promo_social" value="yes" aria-label="Social media promotion">
+            <span>Social media</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="promo_boards" value="yes" aria-label="Physical community boards promotion">
+            <span>Physical / community boards</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="promo_partners" value="yes" aria-label="Partner networks promotion">
+            <span>Partner networks</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="promo_press" value="yes" aria-label="Local press and media promotion">
+            <span>Local press / media</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="field-group">
+        <label for="promoNotes">Promotion Details <span class="optional">(optional)</span></label>
+        <textarea id="promoNotes" name="promoNotes" rows="3" aria-label="Promotion details" placeholder="Tell us more about how you plan to promote — partner orgs, estimated reach, special outreach ideas."></textarea>
+      </div>
+
+      <div class="field-group">
+        <label for="assetLink">Link to Your Marketing Toolkit or Logo <span class="optional">(optional)</span></label>
+        <input type="url" id="assetLink" name="assetLink" aria-label="Marketing toolkit or logo URL" placeholder="https://drive.google.com/... or Dropbox, website, etc.">
+        <p class="help-text">Share a link to your organization's logos, brand assets, or marketing materials so we can co-promote effectively.</p>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 7: Additional Info ─── -->
+    <section class="form-section">
+      <h2>Anything Else?</h2>
+
+      <div class="field-group">
+        <label for="motivation">Why does your organization want to host a screening? <span class="optional">(optional)</span></label>
+        <textarea id="motivation" name="motivation" rows="3" aria-label="Motivation for hosting" placeholder="This helps us tell your story in festival marketing and connect you with the right film."></textarea>
+      </div>
+
+      <div class="field-group">
+        <label for="questions">Questions or requests for the OEFF team <span class="optional">(optional)</span></label>
+        <textarea id="questions" name="questions" rows="3" aria-label="Questions for OEFF team" placeholder="Anything we should know, or anything you need help with."></textarea>
+      </div>
+
+      <fieldset class="field-group" style="border: none; padding: 0;">
+        <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: var(--space-xs);">Have you attended a host orientation meeting?</legend>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="hostMeeting" value="yes" aria-label="Yes, attended host orientation"> Yes
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="hostMeeting" value="no" aria-label="Not yet attended host orientation"> Not yet
+          </label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- Submit -->
+    <div class="submit-section">
+      <button type="submit" class="btn-submit">Submit Intake Form</button>
+      <p class="submit-note">We'll follow up within 5 business days to confirm your screening details.</p>
+    </div>
+
+  </form>
+
+  <!-- Confirmation -->
+  <div class="confirmation" id="confirmation">
+    <h2>Thank you!</h2>
+    <p>Your intake form has been received. The OEFF team will review your submission and follow up to confirm your screening details.</p>
+    <p style="margin-top: var(--space-lg); color: var(--text-muted);">Festival Week: April 22 – 28, 2026</p>
+  </div>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   Form handling — collect, validate, export
+   ═══════════════════════════════════════════════ */
+
+document.getElementById('hostIntakeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  var fd = new FormData(this);
+  var data = {};
+
+  /* Single-value fields */
+  var fields = [
+    'orgName', 'venueAddress', 'capacity', 'region', 'venueDescription',
+    'frontline',
+    'contact1Name', 'contact1Role', 'contact1Email', 'contact1Phone',
+    'contact2Name', 'contact2Role', 'contact2Email', 'contact2Phone',
+    'avContactName', 'avContactEmail',
+    'marketingContactName', 'marketingContactEmail',
+    'filmSelection', 'screeningDate', 'screeningTime', 'filmNotes',
+    'avNotes', 'accessibilityNotes',
+    'promoNotes', 'assetLink',
+    'motivation', 'questions', 'hostMeeting'
+  ];
+
+  fields.forEach(function(f) {
+    var val = fd.get(f);
+    if (val) data[f] = val;
+  });
+
+  /* Checkbox groups — collect as arrays */
+  var checkboxGroups = {
+    av: ['av_projector', 'av_screen', 'av_sound', 'av_computer', 'av_wifi', 'av_microphone', 'av_lead'],
+    accessibility_physical: ['ada_wheelchair', 'ada_elevator', 'ada_restrooms', 'ada_parking', 'ada_seating', 'ada_transit'],
+    accessibility_sensory: ['ada_captions', 'ada_hearing_loop', 'ada_lighting', 'ada_signage'],
+    promotion: ['promo_enewsletter', 'promo_print', 'promo_social', 'promo_boards', 'promo_partners', 'promo_press']
+  };
+
+  Object.keys(checkboxGroups).forEach(function(group) {
+    data[group] = [];
+    checkboxGroups[group].forEach(function(name) {
+      if (fd.get(name)) {
+        data[group].push(name.replace(/^(av_|ada_|promo_)/, ''));
+      }
+    });
+  });
+
+  data.timestamp = new Date().toISOString();
+
+  /* Log to console — wire to backend as needed */
+  console.log('OEFF Host Intake Submission:', JSON.stringify(data, null, 2));
+
+  /* Show confirmation */
+  document.getElementById('hostIntakeForm').style.display = 'none';
+  document.getElementById('confirmation').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>
