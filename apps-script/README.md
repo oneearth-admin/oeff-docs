@@ -43,9 +43,10 @@ cd ~/Desktop/OEFF\ Clean\ Data/apps-script
 
 ## Live Artifacts (2026)
 
-- Form edit: https://docs.google.com/forms/d/1ewvYQKuEw3HG_L5ZpE9nXnbS8OZwtVY7NBQDmfpBFsk/edit
-- Form live: https://docs.google.com/forms/d/e/1FAIpQLSepbwEH7QgCrRjyMpG3e3zRFVyKmTIWBp3tQyWW4mRHRNdIPA/viewform
-- Response sheet: https://docs.google.com/spreadsheets/d/12Z9qyeFcLWcEsD0myngb_hRIc2B9-UtcEKoORV-tI5k/edit
+- Form edit: https://docs.google.com/forms/d/1QHXvvXU9JPsKIITC50cbq77XKHReAUcC8ymKXMkboig/edit
+- Form live: https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform
+- Response sheet: https://docs.google.com/spreadsheets/d/1wQkiGySU9Z4zd08MAQHGIxTDZtTgDbTd_IpPFHqjX9k/edit
+- Apps Script project: https://script.google.com/home/projects/1gZuy7QIGxk58lcSktBTOgXEDSEwBc-wm_xaiBphR1F9a9QARLdkkj53i/edit
 
 ## Airtable Interop
 
