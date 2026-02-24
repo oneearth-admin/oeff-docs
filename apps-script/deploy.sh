@@ -7,7 +7,8 @@
 #
 # Usage:
 #   cd ~/Desktop/OEFF\ Clean\ Data/apps-script
-#   ./deploy.sh           # push + run
+#   ./deploy.sh           # push + run createHostIntakeForm (CREATES NEW FORM)
+#   ./deploy.sh update    # push + run updateFormText (patches existing form text)
 #   ./deploy.sh push      # push only (no run)
 #   ./deploy.sh regen     # regenerate Code.js from template + film CSV, then push + run
 
@@ -33,6 +34,14 @@ case "$ACTION" in
     echo "Done. Check clasp logs for form URLs:"
     clasp logs --simplified
     ;;
+  update)
+    echo "Pushing to Apps Script..."
+    clasp push
+    echo "Running updateFormText (patches existing form)..."
+    clasp run updateFormText
+    echo "Done. Check clasp logs for confirmation:"
+    clasp logs --simplified
+    ;;
   push)
     echo "Pushing to Apps Script..."
     clasp push
@@ -41,7 +50,7 @@ case "$ACTION" in
   deploy|*)
     echo "Pushing to Apps Script..."
     clasp push
-    echo "Running createHostIntakeForm..."
+    echo "Running createHostIntakeForm (WARNING: creates a NEW form)..."
     clasp run createHostIntakeForm
     echo "Done. Check clasp logs for form URLs:"
     clasp logs --simplified
