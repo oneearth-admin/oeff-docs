@@ -1290,26 +1290,62 @@
     .action-card-link:hover::after {
       margin-left: 0.4em;
     }
-    .recording-table {
+    .session-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .session-item {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--oeff-sage-mist);
+      border-radius: var(--radius);
       font-family: var(--font-display);
-      font-size: 0.85rem;
-      width: 100%;
-      border-collapse: collapse;
+      font-size: 0.88rem;
+      transition: background 0.15s var(--ease);
     }
-    .recording-table td {
-      padding: var(--space-2xs) var(--space-xs) var(--space-2xs) 0;
-      vertical-align: baseline;
+    .session-item:hover {
+      background: var(--oeff-sage-whisper);
+    }
+    .session-date {
+      font-weight: 700;
+      color: var(--oeff-sage-deep);
+      white-space: nowrap;
+      min-width: 2.2rem;
+    }
+    .session-date a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--oeff-sage-light);
+    }
+    .session-date a:hover {
+      border-bottom-color: var(--oeff-sage);
+    }
+    .session-topic {
       color: var(--color-text-soft);
+      flex: 1;
     }
-    .recording-table td:first-child {
+    .session-deck {
+      font-size: 0.75rem;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--oeff-sage-deep);
+      background: white;
+      border: 1px solid var(--oeff-sage-light);
+      border-radius: 3px;
+      padding: 1px 6px;
+      text-decoration: none;
       white-space: nowrap;
-      width: 2.5rem;
     }
-    .recording-table td:last-child {
-      text-align: right;
-      font-size: 0.8rem;
-      white-space: nowrap;
+    .session-deck:hover {
+      background: var(--oeff-sage-light);
+      color: white;
     }
 
     @media (max-width: 768px) {
@@ -1418,23 +1454,21 @@
               <div class="action-card-label">Catch up</div>
               <div class="action-card-title">Past Sessions</div>
               <div class="action-card-body">
-                <table class="recording-table">
-                  <tr>
-                    <td><a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">2-23</a></td>
-                    <td>Logistics &amp; Helpers</td>
-                    <td><a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" target="_blank" rel="noopener">deck</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">1-20</a></td>
-                    <td>Host Kickoff</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td><a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">1-13</a></td>
-                    <td>Intro Session</td>
-                    <td></td>
-                  </tr>
-                </table>
+                <ul class="session-list">
+                  <li class="session-item">
+                    <span class="session-date"><a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">2-23</a></span>
+                    <span class="session-topic">Logistics &amp; Helpers</span>
+                    <a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" class="session-deck" target="_blank" rel="noopener">deck</a>
+                  </li>
+                  <li class="session-item">
+                    <span class="session-date"><a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">1-20</a></span>
+                    <span class="session-topic">Host Kickoff</span>
+                  </li>
+                  <li class="session-item">
+                    <span class="session-date"><a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">1-13</a></span>
+                    <span class="session-topic">Intro Session</span>
+                  </li>
+                </ul>
               </div>
               <a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" class="action-card-link" target="_blank" rel="noopener">Latest deck</a>
             </div>
