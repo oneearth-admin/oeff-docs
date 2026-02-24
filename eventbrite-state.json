@@ -1,0 +1,198 @@
+{
+  "venues": {
+    "Columbia College - Film Row Cinema": "296569998",
+    "Trinity Lutheran Church": "296569999",
+    "Climate Action Evanston": "296570000",
+    "Uncommon Ground": "296570001",
+    "Institute of Cultural Affairs in the USA": "296570002",
+    "Bethel New Life": "296570004",
+    "Triton College": "296570005",
+    "Cultivate Collective / AGC": "296570006",
+    "Black Girl Environmentalists/ UIC or Patagonia Fulton Market": "296570008",
+    "Broadway United Methodist": "296570009",
+    "Dominican University": "296570010",
+    "Calumet College of St. Joseph": "296570014"
+  },
+  "events": {
+    "row_2": {
+      "event_id": "1983830318887",
+      "event_name": "OEFF 2026: Reasons for Hope \u2014 Dr. Jane Goodall",
+      "age_advisory": "recommended 7+",
+      "ticket_ids": [
+        "3421788696",
+        "3421788783",
+        "3421788785"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259780"
+    },
+    "row_3": {
+      "event_id": "1983830320893",
+      "event_name": "OEFF 2026: Beyond Zero",
+      "age_advisory": "recommended 12+",
+      "ticket_ids": [
+        "3421788787",
+        "3421788789",
+        "3421788791"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259784"
+    },
+    "row_4": {
+      "event_id": "1983830336941",
+      "event_name": "OEFF 2026: Plastic People",
+      "age_advisory": "Has depictions of Organs + Surgery. recommended 15+",
+      "ticket_ids": [
+        "3421788792",
+        "3421788793",
+        "3421788794"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259790"
+    },
+    "row_5": {
+      "event_id": "1983830338947",
+      "event_name": "OEFF 2026: TBD Film",
+      "age_advisory": "",
+      "ticket_ids": [
+        "3421788801",
+        "3421788802",
+        "3421788803"
+      ],
+      "published": false,
+      "listed": false
+    },
+    "row_6": {
+      "event_id": "1983830340953",
+      "event_name": "OEFF 2026: Drowned Land",
+      "age_advisory": "TBD",
+      "ticket_ids": [
+        "3421788812",
+        "3421788813",
+        "3421788814"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259797"
+    },
+    "row_8": {
+      "event_id": "1983830343962",
+      "event_name": "OEFF 2026: How to Power a City",
+      "age_advisory": "recommended 15+",
+      "ticket_ids": [
+        "3421788824",
+        "3421788825",
+        "3421788826"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259757"
+    },
+    "row_9": {
+      "event_id": "1983830346971",
+      "event_name": "OEFF 2026: Rooted",
+      "age_advisory": "recommended 12+",
+      "ticket_ids": [
+        "3421788847",
+        "3421788849",
+        "3421788850"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259805"
+    },
+    "row_10": {
+      "event_id": "1983830349980",
+      "event_name": "OEFF 2026: How to Power a City",
+      "age_advisory": "recommended 15+",
+      "ticket_ids": [
+        "3421788592",
+        "3421788593",
+        "3421788597"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259757"
+    },
+    "row_11": {
+      "event_id": "1983830350983",
+      "event_name": "OEFF 2026: Young Filmmakers Winner Short Films",
+      "age_advisory": "recommended 4+",
+      "ticket_ids": [
+        "3421788602",
+        "3421788604",
+        "3421788606"
+      ],
+      "published": false,
+      "listed": false
+    },
+    "row_12": {
+      "event_id": "1983830351986",
+      "event_name": "OEFF 2026: 40 Acres",
+      "age_advisory": "18+ ONLY. Graphic Violence and Language",
+      "ticket_ids": [
+        "3421788608",
+        "3421788609",
+        "3421788625"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259763"
+    },
+    "row_13": {
+      "event_id": "1983830357001",
+      "event_name": "OEFF 2026: 40 Acres",
+      "age_advisory": "18+ ONLY. Graphic Violence and Language",
+      "ticket_ids": [
+        "3421788633",
+        "3421788635",
+        "3421788636"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259763"
+    },
+    "row_14": {
+      "event_id": "1983830359007",
+      "event_name": "OEFF 2026: Rails to Trails",
+      "age_advisory": "recommended 12+",
+      "ticket_ids": [
+        "3421788639",
+        "3421788640",
+        "3421788641"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259769"
+    },
+    "row_17": {
+      "event_id": "1983830361013",
+      "event_name": "OEFF 2026: Young Filmmakers Contest Winner Short Films",
+      "age_advisory": "recommended 4+",
+      "ticket_ids": [
+        "3421788645",
+        "3421788646",
+        "3421788647"
+      ],
+      "published": false,
+      "listed": false
+    },
+    "row_18": {
+      "event_id": "1983830362016",
+      "event_name": "OEFF 2026: Rails to Trails",
+      "age_advisory": "recommended 12+",
+      "ticket_ids": [
+        "3421788649",
+        "3421788650",
+        "3421788655"
+      ],
+      "published": false,
+      "listed": false,
+      "logo_id": "1178259769"
+    }
+  },
+  "org_id": "133838916899"
+}
