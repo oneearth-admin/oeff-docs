@@ -1197,28 +1197,38 @@
 
     /* Action cards — committed host dashboard */
     .action-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: var(--space-lg);
       margin: var(--space-xl) 0;
+    }
+    .action-cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
     }
     .action-card {
       background: white;
       border: 1px solid var(--color-border);
-      border-top: 3px solid var(--oeff-sage-light);
+      border-left: 3px solid var(--oeff-sage-light);
       border-radius: var(--radius-lg);
-      padding: var(--space-lg);
+      padding: var(--space-xl) var(--space-xl);
       box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
-      transition: box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
     }
-    .action-card:hover {
-      box-shadow: var(--shadow-elevated);
-      transform: translateY(-2px);
-    }
+    /* Primary card — full-width horizontal layout */
     .action-card--primary {
-      border-top-color: var(--oeff-sage);
+      border-left-color: var(--oeff-sage);
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-2xl);
+    }
+    .action-card--primary .action-card-content {
+      flex: 1;
+    }
+    .action-card--primary .action-card-action {
+      flex-shrink: 0;
     }
     .action-card-label {
       font-family: var(--font-display);
@@ -1231,26 +1241,27 @@
     }
     .action-card-title {
       font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--color-text);
       margin-bottom: var(--space-sm);
     }
+    .action-card--primary .action-card-title {
+      font-size: 1.3rem;
+    }
     .action-card-body {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--color-text-soft);
-      line-height: 1.6;
+      line-height: 1.65;
       flex-grow: 1;
-      margin-bottom: var(--space-md);
     }
     /* Primary CTA — survey button */
     .action-card .btn-primary {
       text-align: center;
       font-weight: 600;
-      font-size: 0.95rem;
-      padding: var(--space-sm) var(--space-lg);
-      margin-top: auto;
-      align-self: stretch;
+      font-size: 1rem;
+      padding: var(--space-md) var(--space-2xl);
+      white-space: nowrap;
     }
     /* Secondary CTA — card bottom links */
     .action-card-link {
@@ -1263,14 +1274,13 @@
       border-radius: var(--radius-organic-sm);
       padding: var(--space-xs) var(--space-md);
       text-decoration: none;
-      margin-top: auto;
+      margin-top: var(--space-md);
       align-self: flex-start;
       transition: all 0.15s var(--ease);
     }
     .action-card-link:hover {
       background: var(--oeff-sage-mist);
       border-color: var(--oeff-sage);
-      color: var(--oeff-sage-deep);
     }
     .action-card-link::after {
       content: ' \2192';
@@ -1303,7 +1313,8 @@
     }
 
     @media (max-width: 768px) {
-      .action-cards { grid-template-columns: 1fr; }
+      .action-card--primary { flex-direction: column; gap: var(--space-lg); }
+      .action-cards-row { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 600px) {
@@ -1392,42 +1403,48 @@
 
         <div class="action-cards">
           <div class="action-card action-card--primary">
-            <div class="action-card-label">Action needed</div>
-            <div class="action-card-title">Host Intake Survey</div>
-            <div class="action-card-body">Your answers shape your screening packet — AV setup, venue layout, event format. Takes about 10 minutes.</div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform" class="btn-primary" target="_blank" rel="noopener">Start the survey &#8594;</a>
-          </div>
-
-          <div class="action-card">
-            <div class="action-card-label">Catch up</div>
-            <div class="action-card-title">Past Sessions</div>
-            <div class="action-card-body">
-              <table class="recording-table">
-                <tr>
-                  <td><a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">2-23</a></td>
-                  <td>Logistics &amp; Helpers</td>
-                  <td><a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" target="_blank" rel="noopener">deck</a></td>
-                </tr>
-                <tr>
-                  <td><a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">1-20</a></td>
-                  <td>Host Kickoff</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td><a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">1-13</a></td>
-                  <td>Intro Session</td>
-                  <td></td>
-                </tr>
-              </table>
+            <div class="action-card-content">
+              <div class="action-card-label">Action needed</div>
+              <div class="action-card-title">Host Intake Survey</div>
+              <div class="action-card-body">Your answers shape your screening packet — AV setup, venue layout, event format. Takes about 10 minutes.</div>
             </div>
-            <a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" class="action-card-link" target="_blank" rel="noopener">Latest deck</a>
+            <div class="action-card-action">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform" class="btn-primary" target="_blank" rel="noopener">Start the survey &#8594;</a>
+            </div>
           </div>
 
-          <div class="action-card">
-            <div class="action-card-label">Next webinar</div>
-            <div class="action-card-title">Mar 2 — Programming</div>
-            <div class="action-card-body">Film-specific programming calls, shaping your event format — panels, discussions, action tables.</div>
-            <a href="https://us02web.zoom.us/meeting/register/UEm6dAlnT5mCGn_IYvDa_Q" class="action-card-link" target="_blank" rel="noopener">Register for sessions</a>
+          <div class="action-cards-row">
+            <div class="action-card">
+              <div class="action-card-label">Catch up</div>
+              <div class="action-card-title">Past Sessions</div>
+              <div class="action-card-body">
+                <table class="recording-table">
+                  <tr>
+                    <td><a href="https://drive.google.com/file/d/1gZux_xiWYhZ0qU4qCTBJVM-VywWtodf1/view?usp=sharing" target="_blank" rel="noopener">2-23</a></td>
+                    <td>Logistics &amp; Helpers</td>
+                    <td><a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" target="_blank" rel="noopener">deck</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://drive.google.com/file/d/10lMDnNGXd2vRtn4NDGQsrlCadCwfuruS/view" target="_blank" rel="noopener">1-20</a></td>
+                    <td>Host Kickoff</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><a href="https://drive.google.com/file/d/1a5gEkpBqXjyuZPf0YMNvxE2OHGB5xNYp/view" target="_blank" rel="noopener">1-13</a></td>
+                    <td>Intro Session</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+              <a href="https://docs.google.com/presentation/d/1Mv1eW3yU-GriVZANcIT4RwyxcCuc2Do5E6jP08sK4BI/edit?usp=sharing" class="action-card-link" target="_blank" rel="noopener">Latest deck</a>
+            </div>
+
+            <div class="action-card">
+              <div class="action-card-label">Next webinar</div>
+              <div class="action-card-title">Mar 2 — Programming</div>
+              <div class="action-card-body">Film-specific programming calls, shaping your event format — panels, discussions, action tables.</div>
+              <a href="https://us02web.zoom.us/meeting/register/UEm6dAlnT5mCGn_IYvDa_Q" class="action-card-link" target="_blank" rel="noopener">Register for sessions</a>
+            </div>
           </div>
         </div>
 
