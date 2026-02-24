@@ -1205,14 +1205,20 @@
     .action-card {
       background: white;
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-organic);
+      border-top: 3px solid var(--oeff-sage-light);
+      border-radius: var(--radius-lg);
       padding: var(--space-lg);
       box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
+      transition: box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .action-card:hover {
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-2px);
     }
     .action-card--primary {
-      border-top: 3px solid var(--oeff-sage);
+      border-top-color: var(--oeff-sage);
     }
     .action-card-label {
       font-family: var(--font-display);
@@ -1225,7 +1231,7 @@
     }
     .action-card-title {
       font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--color-text);
       margin-bottom: var(--space-sm);
@@ -1237,11 +1243,34 @@
       flex-grow: 1;
       margin-bottom: var(--space-md);
     }
-    .action-card-link {
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 500;
+    /* Primary CTA — survey button */
+    .action-card .btn-primary {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: var(--space-sm) var(--space-lg);
       margin-top: auto;
+      align-self: stretch;
+    }
+    /* Secondary CTA — card bottom links */
+    .action-card-link {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+      border: 1.5px solid var(--oeff-sage-light);
+      border-radius: var(--radius-organic-sm);
+      padding: var(--space-xs) var(--space-md);
+      text-decoration: none;
+      margin-top: auto;
+      align-self: flex-start;
+      transition: all 0.15s var(--ease);
+    }
+    .action-card-link:hover {
+      background: var(--oeff-sage-mist);
+      border-color: var(--oeff-sage);
+      color: var(--oeff-sage-deep);
     }
     .action-card-link::after {
       content: ' \2192';
@@ -1366,7 +1395,7 @@
             <div class="action-card-label">Action needed</div>
             <div class="action-card-title">Host Intake Survey</div>
             <div class="action-card-body">Your answers shape your screening packet — AV setup, venue layout, event format. Takes about 10 minutes.</div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform" class="btn-primary btn-compact" target="_blank" rel="noopener" style="margin-top: auto;">Start the survey</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScSmS4i--WT6rgm6p8wIuLHVLnoyQNsn52hfSW4Qe1rDQVhrw/viewform" class="btn-primary" target="_blank" rel="noopener">Start the survey &#8594;</a>
           </div>
 
           <div class="action-card">
