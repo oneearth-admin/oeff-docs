@@ -1840,10 +1840,10 @@
   </footer>
 
   <script>
-    // Auto-skip gate for direct links (YAMM emails use #host-welcome, #resources, etc.)
-    const gateSkipHashes = ['#host-welcome', '#becoming-host', '#resources', '#packet'];
-    const currentHash = window.location.hash;
-    if (gateSkipHashes.includes(currentHash)) {
+    // Auto-skip gate: all visitors go straight to host-welcome for now
+    // (committed hosts have already received the bare URL via email)
+    // To restore the gate, remove this block and the gate will work as before
+    {
       const gate = document.querySelector('.gate');
       gate.style.flex = '0';
       gate.style.minHeight = '0';
@@ -1852,12 +1852,10 @@
       gate.style.height = '0';
       gate.style.borderBottom = 'none';
       try { localStorage.setItem('oeff-host-faq-visited', Date.now().toString()); } catch(e) {}
-      // Resolve #resources alias to #host-welcome
-      if (currentHash === '#resources') {
-        setTimeout(() => {
-          const target = document.getElementById('host-welcome');
-          if (target) target.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+      const target = document.getElementById('host-welcome');
+      if (target) {
+        // Instant scroll on load — no smooth animation needed
+        target.scrollIntoView();
       }
     }
 
