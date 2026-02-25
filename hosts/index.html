@@ -332,6 +332,83 @@
     }
 
     /* GATE */
+    .gate {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 40%, rgba(146, 190, 170, 0.08) 0%, transparent 70%),
+        linear-gradient(180deg, var(--oeff-sage-mist) 0%, var(--oeff-warm-white) 100%);
+      padding: calc(var(--space-3xl) + 30px) var(--space-lg) var(--space-3xl);
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+    }
+
+    .gate-prompt {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      margin: 0 0 var(--space-xl);
+    }
+
+    .gate-options {
+      display: flex;
+      gap: var(--space-lg);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .gate-btn {
+      background: white;
+      border: 1px solid var(--color-border);
+      padding: var(--space-lg) var(--space-xl);
+      border-radius: var(--radius-organic);
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      text-align: left;
+      min-width: 260px;
+      font-family: inherit;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gate-btn:hover {
+      border-color: var(--oeff-sage);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--shadow-elevated);
+    }
+    .gate-btn:active {
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    .gate-btn.selected {
+      border-color: var(--oeff-sage);
+      background: var(--oeff-sage-whisper);
+    }
+
+    .gate-btn-label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .gate-btn-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .gate-help {
+      margin-top: var(--space-xl);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
     .main-content { display: block; }
 
     .intro {
@@ -1279,6 +1356,14 @@
     @media (max-width: 600px) {
       html { font-size: 16px; }
       .header-title { font-size: 0.9rem; }
+      .gate-options {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gate-btn {
+        width: 100%;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
@@ -1293,6 +1378,21 @@
     <img src="OEFF_Logo_Reverse_Stacked.png" alt="One Earth Film Festival" class="header-logo">
     <h1 class="header-title">2026 Host Guide</h1>
   </header>
+
+  <div class="gate">
+    <p class="gate-prompt">What brings you here?</p>
+    <div class="gate-options">
+      <button class="gate-btn" data-scroll="#becoming-host">
+        <span class="gate-btn-label">Curious about hosting</span>
+        <span class="gate-btn-desc">Learn what's involved</span>
+      </button>
+      <button class="gate-btn" data-scroll="#host-welcome">
+        <span class="gate-btn-label">Already a host</span>
+        <span class="gate-btn-desc">Jump to logistics and tech specs</span>
+      </button>
+    </div>
+    <p class="gate-help">Questions? <a href="mailto:hosts@oneearthcollective.org">hosts@oneearthcollective.org</a></p>
+  </div>
 
   <div class="main-content">
     <!-- CURIOUS PATH: Overview + Becoming a Host -->
@@ -1740,6 +1840,43 @@
   </footer>
 
   <script>
+    // Auto-skip gate for direct links (YAMM emails use #host-welcome, #resources, etc.)
+    const gateSkipHashes = ['#host-welcome', '#becoming-host', '#resources', '#packet'];
+    const currentHash = window.location.hash;
+    if (gateSkipHashes.includes(currentHash)) {
+      const gate = document.querySelector('.gate');
+      gate.style.flex = '0';
+      gate.style.minHeight = '0';
+      gate.style.padding = '0';
+      gate.style.overflow = 'hidden';
+      gate.style.height = '0';
+      gate.style.borderBottom = 'none';
+      try { localStorage.setItem('oeff-host-faq-visited', Date.now().toString()); } catch(e) {}
+      // Resolve #resources alias to #host-welcome
+      if (currentHash === '#resources') {
+        setTimeout(() => {
+          const target = document.getElementById('host-welcome');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+
+    // Gate: scroll to relevant section
+    document.querySelectorAll('.gate-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const scrollTarget = btn.dataset.scroll;
+        document.querySelectorAll('.gate-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.querySelector('.gate').style.flex = '0';
+        document.querySelector('.gate').style.minHeight = 'auto';
+        try { localStorage.setItem('oeff-host-faq-visited', Date.now().toString()); } catch(e) {}
+        setTimeout(() => {
+          const target = document.querySelector(scrollTarget);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      });
+    });
+
     document.querySelectorAll('.faq-question').forEach((q, i) => {
       const answer = q.nextElementSibling;
       const id = `faq-${i}`;
