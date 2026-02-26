@@ -182,14 +182,14 @@
       <thead><tr><th>Tool</th><th>Role</th><th>Notes</th></tr></thead>
       <tbody>
         <tr>
-          <td><strong>YAMM</strong></td>
-          <td>Scheduled email sends from hosts@ Gmail</td>
-          <td>Can schedule up to 2 weeks out. One scheduled merge at a time. Manual trigger for each send. Merge fields from Google Sheet ({{First Name}}, {{Film Title}}, {{Screening Date}}, etc.)</td>
+          <td><strong>Mailmeteor</strong></td>
+          <td>Mail merge sends from hosts@ Gmail</td>
+          <td>Gmail-native interface. Shared template support (up to 10 collaborators). Works with Send As aliases, so Kim sends from her own login while emails come from hosts@. Merge fields from Google Sheet ({{First Name}}, {{Film Title}}, {{Screening Date}}, etc.)</td>
         </tr>
         <tr>
           <td><strong>Google Sheets</strong></td>
           <td>Mailing lists + merge data</td>
-          <td>Warm host list, cool host list. Columns: First Name, Email, Film Title, Screening Date, Venue, Tier. YAMM reads directly from these.</td>
+          <td>Warm host list, cool host list. Columns: First Name, Email, Film Title, Screening Date, Venue, Tier. Mailmeteor reads directly from these.</td>
         </tr>
         <tr>
           <td><strong>Host guide</strong></td>
@@ -210,8 +210,8 @@
     </table>
   </div>
 
-  <div class="warn">
-    <strong>YAMM limitation:</strong> You can only schedule one mail merge at a time, up to 2 weeks in advance. This means you can't queue up the whole calendar at once. You'll need to schedule each send individually, ideally on a weekly batch rhythm (e.g., every Monday morning, schedule that week's sends). (<a href="https://support.yet-another-mail-merge.com/hc/en-us/articles/211869705-Schedule-mail-merges-for-later-delivery">YAMM docs</a>)
+  <div class="callout">
+    <strong>Why Mailmeteor over YAMM:</strong> YAMM can't use Gmail delegated access — each user must log into the sending account directly. No shared template infrastructure. Mailmeteor supports Send As aliases (Kim sends from her own login, emails come from hosts@) and shared templates that propagate updates. $12.99/user/month Premium tier.
   </div>
 
   <hr>
@@ -225,17 +225,18 @@
   <h4>Cadence</h4>
   <p>For each of the 5 webinars + 2 optional office hours:</p>
   <ul>
-    <li><strong>2 days before:</strong> Reminder email via YAMM. Subject: "Reminder: Host Webinar this Monday at noon &mdash; {{Topic}}"</li>
-    <li><strong>1 day after:</strong> Follow-up email with recording link + key takeaways. Subject: "Recording + notes from {{Topic}} webinar"</li>
+    <li><strong>7 days before:</strong> Preview email via Mailmeteor (template 03). Topic preview, agenda, prep notes.</li>
+    <li><strong>1 day before:</strong> Reminder email via Mailmeteor (template 04). Short nudge + Zoom link.</li>
+    <li><strong>1 day after:</strong> Recap + recording email via Mailmeteor (template 05). Recording link, key takeaways, next session preview.</li>
     <li><strong>Same day as follow-up:</strong> Update host guide with recording link (add to the "Past recordings" section)</li>
   </ul>
 
   <h4>Implementation</h4>
   <ol>
-    <li><strong>Create a "Webinar Comms" Google Sheet</strong> with columns: First Name, Email, Webinar Date, Topic, Recording Link, Status</li>
-    <li><strong>Draft 2 email templates</strong> (reminder + follow-up) using Claude. Keep them short &mdash; 3-4 sentences max.</li>
-    <li><strong>Batch rhythm:</strong> Every Thursday, schedule the following Monday's reminder (2 days before). Every Tuesday after a webinar, send the recording follow-up.</li>
-    <li><strong>Host guide update:</strong> After each webinar, add the recording link to the next-step block in index.html. Commit, drag-drop to Cloudflare.</li>
+    <li><strong>Templates live in email-drafts/</strong> &mdash; 03 (preview), 04 (reminder), 05 (recap). Each includes per-webinar content blocks.</li>
+    <li><strong>Batch rhythm:</strong> Sunday/Monday: send preview (7 days out) + reminder (1 day out). Tuesday: send recap with recording link.</li>
+    <li><strong>Host guide update:</strong> After each webinar, add the recording link to the recordings section in index.html. Git push auto-deploys.</li>
+    <li><strong>Process doc:</strong> See <em>kim-webinar-cycle-process.md</em> for the full step-by-step cycle Kim follows.</li>
   </ol>
 
   <h4>AI support</h4>
@@ -244,23 +245,23 @@
   <table class="schedule-table">
     <thead><tr><th>Date</th><th>Action</th><th>Tool</th></tr></thead>
     <tbody>
-      <tr><td class="date-col">Feb 21 (Fri)</td><td>Schedule Feb 23 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Feb 21 (Fri)</td><td>Schedule Feb 23 webinar reminder</td><td><span class="badge badge--yamm">Mailmeteor</span></td></tr>
       <tr><td class="date-col">Feb 23 (Mon)</td><td>Webinar 1: Background, Logistics</td><td></td></tr>
-      <tr><td class="date-col">Feb 24 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
-      <tr><td class="date-col">Feb 28 (Fri)</td><td>Schedule Mar 2 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Feb 24 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">Mailmeteor</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Feb 28 (Fri)</td><td>Schedule Mar 2 webinar reminder</td><td><span class="badge badge--yamm">Mailmeteor</span></td></tr>
       <tr><td class="date-col">Mar 2 (Mon)</td><td>Webinar 2: Programming</td><td></td></tr>
-      <tr><td class="date-col">Mar 3 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
-      <tr><td class="date-col">Mar 14 (Fri)</td><td>Schedule Mar 16 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 3 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">Mailmeteor</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Mar 14 (Fri)</td><td>Schedule Mar 16 webinar reminder</td><td><span class="badge badge--yamm">Mailmeteor</span></td></tr>
       <tr><td class="date-col">Mar 16 (Mon)</td><td>Webinar 3: Marketing/Promotion</td><td></td></tr>
-      <tr><td class="date-col">Mar 17 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
-      <tr><td class="date-col">Mar 21 (Fri)</td><td>Schedule Mar 23 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 17 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">Mailmeteor</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Mar 21 (Fri)</td><td>Schedule Mar 23 webinar reminder</td><td><span class="badge badge--yamm">Mailmeteor</span></td></tr>
       <tr><td class="date-col">Mar 23 (Mon)</td><td>Webinar 4: Volunteer Recruitment</td><td></td></tr>
-      <tr><td class="date-col">Mar 24 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
-      <tr><td class="date-col">Mar 28 (Fri)</td><td>Schedule Mar 30 webinar reminder</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 24 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">Mailmeteor</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Mar 28 (Fri)</td><td>Schedule Mar 30 webinar reminder</td><td><span class="badge badge--yamm">Mailmeteor</span></td></tr>
       <tr><td class="date-col">Mar 30 (Mon)</td><td>Webinar 5: AV/Tech</td><td></td></tr>
-      <tr><td class="date-col">Mar 31 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">YAMM</span> <span class="badge badge--guide">Guide</span></td></tr>
-      <tr><td class="date-col">Apr 4 (Fri)</td><td>Schedule Apr 6 office hours reminder (mark as optional)</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
-      <tr><td class="date-col">Apr 11 (Fri)</td><td>Schedule Apr 13 office hours reminder (mark as optional)</td><td><span class="badge badge--yamm">YAMM</span></td></tr>
+      <tr><td class="date-col">Mar 31 (Tue)</td><td>Send recording + notes. Update host guide.</td><td><span class="badge badge--yamm">Mailmeteor</span> <span class="badge badge--guide">Guide</span></td></tr>
+      <tr><td class="date-col">Apr 4 (Fri)</td><td>Schedule Apr 6 office hours reminder (mark as optional)</td><td><span class="badge badge--yamm">Mailmeteor</span></td></tr>
+      <tr><td class="date-col">Apr 11 (Fri)</td><td>Schedule Apr 13 office hours reminder (mark as optional)</td><td><span class="badge badge--yamm">Mailmeteor</span></td></tr>
     </tbody>
   </table>
 
@@ -281,7 +282,7 @@
   <h4>Implementation</h4>
   <ol>
     <li><strong>Add columns to the warm host sheet:</strong> Film Delivered (Y/N), Promo Sent (Y/N), Slides Sent (Y/N), Presenter Guide Sent (Y/N), T-shirt Size, T-shirt Shipped (Y/N)</li>
-    <li><strong>Draft 3 YAMM templates:</strong>
+    <li><strong>Draft 3 Mailmeteor templates:</strong>
       <ul>
         <li>"Your screening packet is ready" &mdash; film file + promo materials (3 weeks out)</li>
         <li>"Slides and trailers for your screening" &mdash; Google Slides deck (1 week out)</li>
@@ -289,7 +290,7 @@
       </ul>
     </li>
     <li><strong>Personalize with merge fields:</strong> {{Film Title}}, {{Screening Date}}, {{Download Link}}, {{Venue Name}}</li>
-    <li><strong>Use YAMM's tracking</strong> to confirm opens. If a host doesn't open the screening packet email within 48 hours, follow up individually.</li>
+    <li><strong>Use Mailmeteor's tracking</strong> to confirm opens. If a host doesn't open the screening packet email within 48 hours, follow up individually.</li>
   </ol>
 
   <h4>AI support</h4>
@@ -302,7 +303,7 @@
   <table class="schedule-table">
     <thead><tr><th>Date</th><th>Email</th><th>Purpose</th></tr></thead>
     <tbody>
-      <tr><td class="date-col">Feb 12</td><td>Host guide launch + webinar registration</td><td>Done (sent today via YAMM)</td></tr>
+      <tr><td class="date-col">Feb 12</td><td>Host guide launch + webinar registration</td><td>Done (sent via YAMM, now migrated to Mailmeteor)</td></tr>
       <tr><td class="date-col">~Mar 9</td><td>"Your film is confirmed" (per-host)</td><td>Film matching complete, confirm assignment. Include film synopsis + trailer link.</td></tr>
       <tr><td class="date-col">~Mar 23</td><td>Marketing kit ready</td><td>Promo materials available. Link to download. Social media copy suggestions.</td></tr>
       <tr><td class="date-col">~Apr 1</td><td>Screening packet shipped</td><td>Film file + everything they need. Instructions for testing.</td></tr>
@@ -329,7 +330,7 @@
     </ul>
     <div class="tool-stack">
       <span class="badge badge--form">Google Form</span>
-      <span class="badge badge--yamm">Sent via YAMM</span>
+      <span class="badge badge--yamm">Sent via Mailmeteor</span>
     </div>
   </div>
 
@@ -343,7 +344,7 @@
     </ul>
     <div class="tool-stack">
       <span class="badge badge--form">Google Form</span>
-      <span class="badge badge--yamm">Sent via YAMM</span>
+      <span class="badge badge--yamm">Sent via Mailmeteor</span>
     </div>
   </div>
 
@@ -361,7 +362,7 @@
     </ul>
     <div class="tool-stack">
       <span class="badge badge--form">Google Form</span>
-      <span class="badge badge--yamm">Sent via YAMM</span>
+      <span class="badge badge--yamm">Sent via Mailmeteor</span>
       <span class="badge badge--ai">Claude analysis</span>
     </div>
   </div>
@@ -402,7 +403,7 @@
     </ul>
     <div class="tool-stack">
       <span class="badge badge--form">Google Form</span>
-      <span class="badge badge--yamm">Sent via YAMM</span>
+      <span class="badge badge--yamm">Sent via Mailmeteor</span>
     </div>
     <p style="margin-top: var(--space-sm); font-size: 0.9rem; color: var(--color-text-muted);">When a cool host fills out this form and selects a film, move them to the warm host sheet. They now enter the regular communication streams.</p>
   </div>
@@ -514,9 +515,9 @@
   <h3>Phase 2: Weekly rhythm (ongoing Feb-Apr)</h3>
   <ol>
     <li><strong>Monday AM:</strong> Check the calendar. What goes out this week?</li>
-    <li><strong>Monday AM:</strong> Schedule that week's YAMM sends (reminders, follow-ups)</li>
-    <li><strong>Tuesday after webinar:</strong> Record, upload, send follow-up, update host guide, commit + deploy</li>
-    <li><strong>Friday:</strong> Schedule next Monday's webinar reminder</li>
+    <li><strong>Monday AM:</strong> Schedule that week's Mailmeteor sends (reminders, follow-ups)</li>
+    <li><strong>Tuesday after webinar:</strong> Record, upload, send recap, update host guide, git push to deploy</li>
+    <li><strong>Sunday/Monday:</strong> Send preview + reminder for next webinar</li>
     <li><strong>Weekly:</strong> Check warm host sheet for any missing confirmations or deliverables. Follow up individually.</li>
   </ol>
 
@@ -533,8 +534,8 @@
     <strong>Where AI fits in this plan:</strong> Claude drafts every email template (saves ~30 min each, 10 templates = 5 hours saved). Claude summarizes webinar recordings for follow-ups. Claude analyzes post-screening survey data. Claude generates per-host personalized instructions based on venue tier. Total AI-assisted time savings: ~10-15 hours across the festival cycle.
   </div>
 
-  <div class="warn">
-    <strong>What YAMM can't do:</strong> True automation (no "send this email every Monday at 9am forever"). No conditional logic ("if host hasn't opened in 48 hours, send reminder"). No drip sequences. Each send is manual or scheduled up to 2 weeks out. The weekly rhythm in Phase 2 compensates for this &mdash; it's a human-in-the-loop system, not an autopilot.
+  <div class="callout">
+    <strong>Human-in-the-loop by design:</strong> Mailmeteor doesn't do true automation (no drip sequences, no conditional "if not opened, re-send"). Each send is manual or scheduled. The weekly rhythm in Phase 2 compensates &mdash; Kim follows the calendar, preps and sends. This is intentional: host comms benefit from human judgment on timing and tone.
   </div>
 
   <hr>
@@ -542,7 +543,7 @@
   <h2>What Kim Could Own</h2>
   <p>If Kim's onboarding goes well, she could take over significant parts of this system by Phase 2 of her engagement:</p>
   <ul>
-    <li><strong>Weekly YAMM scheduling</strong> &mdash; she follows the calendar, preps and schedules sends</li>
+    <li><strong>Weekly Mailmeteor scheduling</strong> &mdash; she follows the calendar, preps and schedules sends</li>
     <li><strong>Form response monitoring</strong> &mdash; flags issues from pre-event readiness forms</li>
     <li><strong>Host follow-ups</strong> &mdash; individual outreach for non-responders or hosts with issues</li>
     <li><strong>Cool host pipeline</strong> &mdash; manages the conversion flow from interest to commitment</li>
