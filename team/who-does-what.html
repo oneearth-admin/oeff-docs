@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<!-- guards: core/color, core/typography, core/layout, core/interaction -->
+<html lang="en" data-domain="forest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF 2026 — Who Does What</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+        --forest-canopy: #1a2e22;
+        --forest-understory: #2d4a3a;
+        --forest-deep: #3a5c4d;
+        --forest-sage: #5c7c6b;
+        --forest-lichen: #8aaa98;
+        --forest-mist: #c8d9ce;
+        --ink: #2c2825;
+        --ink-soft: #5c5550;
+        --ink-muted: #8a8580;
+        --cream: #f7f5f2;
+        --paper: #faf9f7;
+        --linen: #f0ede8;
+        --signal-warning: #996622;
+    }
+    :root {
+        --color-ground: var(--cream);
+        --color-surface: var(--paper);
+        --color-surface-raised: #ffffff;
+        --color-surface-inset: var(--linen);
+        --color-primary: var(--forest-sage);
+        --color-primary-deep: var(--forest-deep);
+        --color-primary-dark: var(--forest-canopy);
+        --color-primary-light: var(--forest-mist);
+        --color-accent: var(--forest-sage);
+        --color-text: var(--ink);
+        --color-text-soft: var(--ink-soft);
+        --color-text-muted: var(--ink-muted);
+        --color-border: var(--forest-mist);
+        --shadow-warm: hsla(25, 40%, 30%, 0.08);
+        --shadow-soft: 0 2px 8px var(--shadow-warm);
+        --shadow-medium: 0 4px 16px var(--shadow-warm);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --space-xs: 0.5rem;
+        --space-sm: 0.75rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-section: 3rem;
+        --font-display: 'Fraunces', Georgia, serif;
+        --font-body: 'Source Serif 4', Georgia, serif;
+        --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+        --font-mono: 'Source Code Pro', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    .person-card { scroll-margin-top: var(--space-xl); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      filter: url(#paper-grain);
+      mix-blend-mode: multiply;
+    }
+
+    body {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--color-text);
+      background-color: var(--color-ground);
+      padding: var(--space-xl) var(--space-lg);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    a { color: var(--color-primary-deep); }
+    a:hover { text-decoration: underline; }
+    a:focus, button:focus, [tabindex]:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-xs);
+      line-height: 1.2;
+    }
+    h2 {
+      font-family: var(--font-body-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+    h3 {
+      font-family: var(--font-body-sans);
+      font-size: 1.13rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+    .section-context {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+      margin-bottom: var(--space-lg);
+      max-width: 72ch;
+    }
+    .section-synthesis {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      max-width: 72ch;
+    }
+    .report-section {
+      margin-bottom: var(--space-section);
+    }
+
+    /* --- Header --- */
+    .doc-header {
+      margin-bottom: var(--space-section);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .doc-header .subtitle {
+      font-family: var(--font-body);
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      margin-top: var(--space-xs);
+      max-width: 60ch;
+    }
+    .doc-header .meta {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: var(--space-sm);
+    }
+
+    /* --- Name Filter --- */
+    .name-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-xl);
+    }
+    .name-btn {
+      font-family: var(--font-body-sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: var(--space-xs) var(--space-md);
+      min-height: 44px;
+      min-width: 44px;
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface-raised);
+      color: var(--color-text-soft);
+      text-decoration: none;
+      transition: all 200ms ease;
+    }
+    .name-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary-deep);
+      text-decoration: none;
+    }
+
+    /* --- Person Cards --- */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+    .person-card {
+      background: var(--color-surface-raised);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      transition: opacity 300ms ease, box-shadow 300ms ease;
+    }
+    .person-card.core {
+      border-color: var(--color-primary);
+    }
+    .person-card.dimmed {
+      opacity: 0.15;
+    }
+    .person-card.highlighted {
+      box-shadow: var(--shadow-medium);
+    }
+
+    .person-card .card-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-xs);
+    }
+    .person-card .card-note {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-primary);
+      margin-bottom: var(--space-md);
+    }
+
+    .card-section {
+      margin-bottom: var(--space-lg);
+    }
+    .card-section:last-child {
+      margin-bottom: 0;
+    }
+    .card-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .card-section p {
+      font-size: 0.9375rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+    }
+    .card-section p em {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      font-size: 0.8125rem;
+      letter-spacing: 0.03em;
+    }
+    .card-section .routing {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      padding-top: var(--space-sm);
+      margin-top: var(--space-sm);
+      border-top: 1px solid var(--color-border);
+    }
+    .card-section .routing strong {
+      color: var(--color-primary-deep);
+      font-weight: 600;
+    }
+    .card-section .out-of-scope {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+      line-height: 1.55;
+    }
+
+    .tbd-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--signal-warning);
+      background: hsla(40, 60%, 50%, 0.1);
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    /* --- Open Questions --- */
+    .open-questions {
+      list-style: none;
+      padding: 0;
+    }
+    .open-questions li {
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--color-border);
+      line-height: 1.5;
+    }
+    .open-questions li:last-child {
+      border-bottom: none;
+    }
+    .open-questions .q-label {
+      font-weight: 600;
+      color: var(--signal-warning);
+    }
+    .open-questions .q-detail {
+      color: var(--color-text-soft);
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    /* --- Footer --- */
+    .doc-footer {
+      margin-top: var(--space-section);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--color-border);
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+    }
+    .doc-footer a { color: var(--color-primary); }
+
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    @media print {
+      body { padding: 0; font-size: 11pt; max-width: 100%; }
+      body::before { display: none; }
+      .name-filter { display: none; }
+      .person-card.dimmed { opacity: 1; }
+      .person-card { break-inside: avoid; box-shadow: none !important; }
+      a { color: var(--color-text); text-decoration: none; }
+      a::after { content: ' (' attr(href) ')'; font-size: 9pt; color: var(--color-text-muted); }
+    }
+
+    @media (max-width: 768px) {
+      body { padding: var(--space-md); }
+      h1 { font-size: 1.5rem; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .person-card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="paper-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
+
+  <a href="#main" class="visually-hidden">Skip to content</a>
+
+  <header class="doc-header">
+    <h1>Who Does What</h1>
+    <p class="subtitle">Find your name, know your lane, know where things route.</p>
+    <p class="meta">OEFF 2026 &middot; February 26, 2026 &middot; Draft for team review</p>
+  </header>
+
+  <main id="main">
+
+  <!-- Name filter -->
+  <nav class="name-filter" aria-label="Jump to person">
+    <a href="#card-ana" class="name-btn">Ana</a>
+    <a href="#card-garen" class="name-btn">Garen</a>
+    <a href="#card-erin" class="name-btn">Erin</a>
+    <a href="#card-kim" class="name-btn">Kim</a>
+    <a href="#card-josh" class="name-btn">Josh</a>
+    <a href="#card-michael" class="name-btn">Michael</a>
+    <a href="#card-cesar" class="name-btn">Cesar</a>
+    <a href="#card-sandy" class="name-btn">Sandy</a>
+  </nav>
+
+  <!-- ======================================== -->
+  <!--     PERSON CARDS                          -->
+  <!-- ======================================== -->
+  <section class="report-section" aria-labelledby="roles-heading">
+    <span class="section-label">Team</span>
+    <h2 id="roles-heading">What each person handles and defines</h2>
+    <p class="section-context">
+      Each card names what someone handles, what they define, what they greenlight, and how things route.
+    </p>
+
+    <!-- BEGIN:ROLES -->
+    <div class="card-grid" id="rolesData">
+
+      <!-- ANA -->
+      <div class="person-card core" id="card-ana" data-person="ana">
+        <div class="card-name">Ana</div>
+        <div class="card-note">Year 15</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p>Vision, budget, partnerships. Face and voice of the festival. The relationships that hold everything together. Batch host comms route through <strong>Kim</strong> directly from Ana.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p>Scope, contracts, festival-week logistics, hiring. Anything that commits the organization.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>Public-facing comms, press, sponsor commitments. Anything that carries the organization's name.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Systems and process route through <strong>Garen</strong>. Creative production routes through <strong>Erin</strong>. Host follow-ups route through <strong>Kim</strong>.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Technical implementation, system design, day-to-day host logistics.</p>
+        </div>
+      </div>
+
+      <!-- GAREN -->
+      <div class="person-card core" id="card-garen" data-person="garen">
+        <div class="card-name">Garen</div>
+        <div class="card-note">Year 7</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p><em>Technical:</em> Systems, data, AV, IT. Film ingest, QC, print traffic. Host venue technical speccing, production planning and staffing. <em>Documentation:</em> Host guide, onboarding docs, technical specs. Process design, tools. <em>Advisement:</em> Language, cognitive load, accessibility, team empowerment through clear and useful systems. Not sure where something goes? It starts here.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p>Technical approach, workflow design, inbox routing, onboarding materials. Autonomous unless it changes who does what.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>Technical comms (film specs, filmmaker comms), data decisions, accessibility and technical requirements. Batch updates route through here.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Scope, budget, and people route through <strong>Ana</strong>. Creative assets route through <strong>Erin</strong>. Doesn't define scope or hiring.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Fundraising, sponsor relationships, public-facing brand decisions, creative direction.</p>
+        </div>
+      </div>
+
+      <!-- ERIN -->
+      <div class="person-card core" id="card-erin" data-person="erin">
+        <div class="card-name">Erin</div>
+        <div class="card-note">Year 9</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p>Visual storytelling, creative assets, video production. Trailer, screening slide decks, video documentation. Filmmaker-in-residence. On-site documentation and technical backup during festival week. Coordinates with <strong>Cesar</strong> on look and feel. Coordinates with <strong>Garen</strong> on communication standards.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p>Creative direction within specs. Production choices. Program design contour. How the story gets told.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>Creative assets before they go out. Screening shape &mdash; look, feel, experiential flow.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Technical questions route through <strong>Garen</strong>. Budget and scope route through <strong>Ana</strong>. Doesn't define technical specs or budget.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Systems infrastructure, host logistics, fundraising, technical specs.</p>
+        </div>
+      </div>
+
+      <!-- KIM -->
+      <div class="person-card" id="card-kim" data-person="kim">
+        <div class="card-name">Kim</div>
+        <div class="card-note">Year 1</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p>Host communications. Documenting as she goes, identifying bottlenecks. Translator between operations and strategy. Identifies tasks that can route to interns, need documentation, or are good candidates for automation and better technical processes.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p>Sends and follow-ups within the playbook. Growing toward operational architecture alongside Garen.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>Routes through <strong>Garen</strong> or <strong>Ana</strong>.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Off-playbook questions route through <strong>Garen</strong>. Budget and scope route through <strong>Ana</strong>. Doesn't send comms outside the documented playbook.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Creative direction, fundraising, technical infrastructure, scope decisions.</p>
+        </div>
+      </div>
+
+      <!-- JOSH -->
+      <div class="person-card" id="card-josh" data-person="josh">
+        <div class="card-name">Josh</div>
+        <div class="card-note">Year 3</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p>Newsletter, WEJA, Squarespace, ticketing, Eventbrite. Digital comms off-season, day-of support in-season. Task tracking and follow-through. Works alongside Ana and Garen.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p><span class="tbd-tag">Being clarified</span></p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>Comms within his digital channels. Batch updates route through <strong>Garen</strong>. <span class="tbd-tag">Scope being clarified</span></p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Direction and priorities route through <strong>Ana</strong>. Technical questions route through <strong>Garen</strong>. Batch updates don't go out without <strong>Garen</strong>.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Host comms, creative direction, technical infrastructure, fundraising.</p>
+        </div>
+      </div>
+
+      <!-- MICHAEL -->
+      <div class="person-card" id="card-michael" data-person="michael">
+        <div class="card-name">Michael</div>
+        <div class="card-note">Year 2</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p>Fundraising, sponsor relationships. Launch Party, Opening Night. Stewards both money and reciprocal offerings. Sponsorship compliance across screenings.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p><span class="tbd-tag">Being clarified</span> &mdash; specific events vs. broader "event planning" needs defining.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>Sponsor-related decisions within his relationships. <span class="tbd-tag">Scope being clarified</span></p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Host comms route through <strong>Kim</strong> or <strong>Garen</strong>. Budget commitments route through <strong>Ana</strong>. Doesn't send host-facing communications.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Host communications, technical infrastructure, creative production, day-to-day digital comms.</p>
+        </div>
+      </div>
+
+      <!-- CESAR -->
+      <div class="person-card" id="card-cesar" data-person="cesar">
+        <div class="card-name">Cesar</div>
+        <div class="card-note">Contractor &middot; Year 4</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p>Theme, brand, social media, press. Public-facing comms, brand coherence across all assets. Collaborates with Erin where marketing meets narrative. Brings his own team (Ahmad, Andy).</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p>Marketing content within brand guidelines.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>Brand and marketing assets within guidelines.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Messaging approval routes through <strong>Ana</strong>. Internal asks route through <strong>Garen</strong>. Doesn't check Google Spaces &mdash; reach him directly.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Host logistics, fundraising, technical infrastructure, internal process design.</p>
+        </div>
+      </div>
+
+      <!-- SANDY -->
+      <div class="person-card" id="card-sandy" data-person="sandy">
+        <div class="card-name">Sandy</div>
+        <div class="card-note">Year 2</div>
+        <div class="card-section">
+          <div class="card-section-label">Handles</div>
+          <p>Youth Film Council program, student engagement.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Defines</div>
+          <p>YFC programming and youth-facing content.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Greenlights</div>
+          <p>YFC content and programming.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Routing</div>
+          <p class="routing">Film scheduling routes through <strong>Josh</strong>. Technical needs route through <strong>Garen</strong>.</p>
+        </div>
+        <div class="card-section">
+          <div class="card-section-label">Out of Scope</div>
+          <p class="out-of-scope">Host comms, fundraising, brand, technical infrastructure, festival-wide logistics.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- END:ROLES -->
+
+    <div class="section-synthesis" id="rolesSynthesis">
+      <p>Cards with a green border mark the longest-tenured team members &mdash; Ana (15 years), Erin (9), and Garen (7). They hold the institutional memory and keep the frame. Not managers, not gatekeepers. When a choice affects how the whole team works, it runs through them before it reaches the wider group.</p>
+      <p style="margin-top: var(--space-sm);">Interns work within the area they're assigned to. Kim identifies and routes delegable tasks; Ana supervises.</p>
+    </div>
+  </section>
+
+  <!-- ======================================== -->
+  <!--     OPEN QUESTIONS                        -->
+  <!-- ======================================== -->
+  <section class="report-section" aria-labelledby="open-questions-heading">
+    <span class="section-label">Open Questions</span>
+    <h2 id="open-questions-heading">What we still need to name</h2>
+    <p class="section-context">
+      These are honest gaps, not oversights. Naming them is the first step toward resolving them.
+    </p>
+
+    <!-- BEGIN:OPEN_QUESTIONS -->
+    <div class="section-data" id="openquestionsData">
+      <ul class="open-questions">
+        <li>
+          <div class="q-label">Josh's scope</div>
+          <div class="q-detail">Digital comms and day-of support is clear. What decisions can Josh make without checking with Ana? Where does WEJA sit? What's his greenlight boundary?</div>
+        </li>
+        <li>
+          <div class="q-label">Michael's boundaries</div>
+          <div class="q-detail">Fundraising + Launch Party + Opening Night is clear. "Event planning" without specifying which events creates confusion. How do we name that boundary?</div>
+        </li>
+        <li>
+          <div class="q-label">When someone sees a gap</div>
+          <div class="q-detail">The protocol should be: flag it, the right person picks it up, it goes out in the right voice. This needs to be shared with the team so everyone follows it.</div>
+        </li>
+      </ul>
+    </div>
+    <!-- END:OPEN_QUESTIONS -->
+
+    <div class="section-synthesis" id="openquestionsSynthesis">
+      <p>These are on the agenda for the core stewards to resolve this week. Once named, the cards above get updated and this list gets shorter.</p>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="doc-footer">
+    <p>OEFF 2026 &middot; For onboarding, response templates, and detailed routing: <a href="https://docs.oneearthfilmfest.org">docs.oneearthfilmfest.org</a></p>
+  </footer>
+
+  <script>
+    /* Brief highlight on jump target */
+    document.querySelectorAll('.name-btn').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var id = link.getAttribute('href').slice(1);
+        var card = document.getElementById(id);
+        if (card) {
+          card.style.boxShadow = 'var(--shadow-medium)';
+          setTimeout(function() { card.style.boxShadow = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
