@@ -3,14 +3,19 @@
 generate-ops-page.py — OEFF Ops Dashboard generator
 
 Reads ops/kim-tasks.json, generates hosts/ops/index.html.
+With --airtable flag, also fetches live venue/event data from Airtable
+and renders a Host Readiness section.
+
 Stdlib Python 3 only — no pip dependencies.
 
 Usage:
     python3 ops/generate-ops-page.py
     python3 ops/generate-ops-page.py --today 2026-03-15
+    AIRTABLE_TOKEN=pat... python3 ops/generate-ops-page.py --airtable
 """
 
 import json
+import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -35,14 +40,13 @@ def parse_date(s):
     return datetime.strptime(s, "%Y-%m-%d").date()
 
 def get_today():
-    for arg in sys.argv[1:]:
-        if arg.startswith("--today"):
-            continue
-    # Check --today flag
     for i, arg in enumerate(sys.argv[1:], 1):
         if arg == "--today" and i < len(sys.argv) - 1:
             return parse_date(sys.argv[i + 1])
     return date.today()
+
+def has_airtable_flag():
+    return "--airtable" in sys.argv
 
 # ---------------------------------------------------------------------------
 # Stream labels
@@ -162,10 +166,169 @@ def html_escape(s):
         .replace("'", "&#39;"))
 
 # ---------------------------------------------------------------------------
+# Airtable: Host Readiness
+# ---------------------------------------------------------------------------
+
+# Privacy guard — strip any phone numbers or emails that leak through
+PHONE_RE = re.compile(r"\b\d{3}[-.)\s]?\d{3}[-.\s]?\d{4}\b")
+EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")
+
+def fetch_readiness_data():
+    """Fetch Events + linked Venues from Airtable, return readiness summary."""
+    # Import from sibling module
+    from airtable_api import get_token, fetch_all_records, _fetch_by_ids
+
+    token = get_token()
+    print("Fetching Airtable data for Host Readiness...", file=sys.stderr)
+
+    records = fetch_all_records("Events", "2026_Venue_Sections", token)
+
+    # Collect linked Venue IDs
+    venue_ids = set()
+    for rec in records:
+        fields = rec.get("fields", {})
+        for vid in fields.get("Venue", []):
+            venue_ids.add(vid)
+
+    venues = _fetch_by_ids("Venues", venue_ids, token)
+
+    # Build per-venue readiness
+    venue_events = {}  # venue_name -> list of event dicts
+    for rec in records:
+        fields = rec.get("fields", {})
+        venue_linked = fields.get("Venue", [])
+        if not venue_linked:
+            continue
+
+        venue_id = venue_linked[0]
+        venue_rec = venues.get(venue_id, {})
+        venue_name = venue_rec.get("fields", {}).get("Name", "Unknown Venue")
+
+        # Guard: strip any PII that might be in the name
+        venue_name = PHONE_RE.sub("[redacted]", venue_name)
+        venue_name = EMAIL_RE.sub("[redacted]", venue_name)
+
+        film_title = fields.get("Film Title", fields.get("Name", "Untitled"))
+        event_date = fields.get("Event Date", "")
+        pipeline_status = fields.get("Pipeline_Status", "")
+        rsvp_url = fields.get("RSVP_URL", "")
+        packet_url = fields.get("Screening_Packet_URL", "")
+        volunteer_needs = fields.get("Volunteer_Needs", "")
+
+        event_info = {
+            "film_title": film_title,
+            "event_date": event_date,
+            "pipeline_confirmed": pipeline_status == "Confirmed",
+            "ticket_set": bool(rsvp_url),
+            "packet_delivered": bool(packet_url),
+            "volunteer_noted": bool(volunteer_needs),
+        }
+
+        if venue_name not in venue_events:
+            venue_events[venue_name] = []
+        venue_events[venue_name].append(event_info)
+
+    return venue_events
+
+
+def compute_readiness(venue_events):
+    """Classify venues into needs_attention and on_track."""
+    needs_attention = []
+    on_track = []
+
+    for venue_name, events in sorted(venue_events.items()):
+        # A venue is "on track" if ALL its events have all checklist items
+        missing_items = []
+        # Use the first event for display (most venues have one)
+        primary = events[0]
+
+        for ev in events:
+            if not ev["pipeline_confirmed"]:
+                missing_items.append("No pipeline confirmation")
+            if not ev["ticket_set"]:
+                missing_items.append("No ticket link")
+            if not ev["packet_delivered"]:
+                missing_items.append("No screening packet")
+            if not ev["volunteer_noted"]:
+                missing_items.append("No volunteer plan")
+
+        # Deduplicate
+        missing_items = sorted(set(missing_items))
+
+        venue_info = {
+            "name": venue_name,
+            "events": events,
+            "primary": primary,
+            "missing": missing_items,
+        }
+
+        if missing_items:
+            needs_attention.append(venue_info)
+        else:
+            on_track.append(venue_info)
+
+    return needs_attention, on_track
+
+
+def render_readiness_section(venue_events):
+    """Render the Host Readiness HTML section."""
+    needs_attention, on_track = compute_readiness(venue_events)
+    total = len(needs_attention) + len(on_track)
+    on_track_count = len(on_track)
+
+    # Build venue cards for "needs attention"
+    attention_cards = []
+    for v in needs_attention:
+        primary = v["primary"]
+        date_display = ""
+        if primary["event_date"]:
+            try:
+                d = datetime.strptime(primary["event_date"], "%Y-%m-%d").date()
+                date_display = d.strftime("%b %d")
+            except ValueError:
+                date_display = html_escape(primary["event_date"])
+
+        film_display = html_escape(primary["film_title"])
+        missing_html = "  ".join(
+            f'<span class="readiness-missing">{html_escape(m)}</span>'
+            for m in v["missing"]
+        )
+
+        attention_cards.append(f"""<div class="task-card">
+          <div class="task-header">
+            <span class="readiness-venue">{html_escape(v["name"])}</span>
+          </div>
+          <div class="readiness-detail">{film_display}{" &middot; " + date_display if date_display else ""}</div>
+          <div class="readiness-items">{missing_html}</div>
+        </div>""")
+
+    attention_html = "\n".join(attention_cards) if attention_cards else ""
+
+    # On-track summary
+    on_track_html = ""
+    if on_track:
+        on_track_html = f"""<div class="readiness-summary">
+          <span class="readiness-ok">On track ({on_track_count})</span> &mdash; all items confirmed
+        </div>"""
+
+    return f"""
+    <!-- Host Readiness (from Airtable) -->
+    <!-- BEGIN:HOST_READINESS -->
+    <section class="section" id="readiness">
+      <h2>Host Readiness &mdash; {on_track_count} of {total} venues on track</h2>
+      {"" if not needs_attention else f'<h3>Needs attention ({len(needs_attention)})</h3>'}
+      {attention_html}
+      {on_track_html}
+    </section>
+    <!-- END:HOST_READINESS -->
+"""
+
+
+# ---------------------------------------------------------------------------
 # Full page template
 # ---------------------------------------------------------------------------
 
-def generate_page(data, today):
+def generate_page(data, today, readiness_html=""):
     festival_date = parse_date(data["festivalDate"])
     countdown = render_countdown(today, festival_date)
     last_updated = data["lastUpdated"]
@@ -471,6 +634,53 @@ def generate_page(data, today):
       border: 1px solid var(--color-border);
     }}
 
+    /* --- Host Readiness --- */
+
+    .readiness-venue {{
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }}
+
+    .readiness-detail {{
+      font-size: 0.85rem;
+      color: var(--color-text-soft);
+      margin-bottom: var(--space-xs);
+    }}
+
+    .readiness-items {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }}
+
+    .readiness-missing {{
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #a0564e;
+      background: rgba(160, 86, 78, 0.08);
+      padding: 0.2em 0.6em;
+      border-radius: 10px;
+    }}
+
+    .readiness-summary {{
+      background: var(--oeff-sage-mist);
+      border: 1px solid var(--oeff-sage-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      margin-top: var(--space-sm);
+      font-size: 0.9rem;
+      color: var(--color-text-soft);
+    }}
+
+    .readiness-ok {{
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+    }}
+
     /* --- Tools / reference tables --- */
 
     .ref-table td:first-child {{
@@ -718,6 +928,8 @@ def generate_page(data, today):
 
     <!-- END:DYNAMIC_CONTENT -->
 
+    {readiness_html}
+
     <!-- ============================================= -->
     <!-- STATIC SECTIONS (from resource hub content) -->
     <!-- ============================================= -->
@@ -948,18 +1160,43 @@ def main():
     today = get_today()
     data = load_data()
 
+    # Optionally fetch Airtable data for Host Readiness
+    readiness_html = ""
+    if has_airtable_flag():
+        try:
+            venue_events = fetch_readiness_data()
+            readiness_html = render_readiness_section(venue_events)
+            needs, ok = compute_readiness(venue_events)
+            print(
+                f"Readiness: {len(ok)} on track, {len(needs)} need attention "
+                f"({len(ok) + len(needs)} total venues)",
+                file=sys.stderr,
+            )
+        except Exception as e:
+            print(f"Warning: Airtable fetch failed: {e}", file=sys.stderr)
+            print("Generating page without Host Readiness section.", file=sys.stderr)
+
     # Ensure output directory exists
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
 
-    html = generate_page(data, today)
+    html = generate_page(data, today, readiness_html)
+
+    # Privacy check — no phone numbers or emails in output
+    if PHONE_RE.search(html) or EMAIL_RE.search(html):
+        print("ERROR: Output contains PII (phone/email). Aborting.", file=sys.stderr)
+        sys.exit(1)
 
     OUTPUT_FILE.write_text(html, encoding="utf-8")
 
     size_kb = OUTPUT_FILE.stat().st_size / 1024
     print(f"Generated: {OUTPUT_FILE}")
     print(f"Size: {size_kb:.1f} KB")
+    if size_kb > 60:
+        print(f"WARNING: Output exceeds 60 KB target ({size_kb:.1f} KB)", file=sys.stderr)
     print(f"Countdown: {render_countdown(today, parse_date(data['festivalDate']))}")
     print(f"Tasks: {len(data['tasks'])} ({sum(1 for t in data['tasks'] if t['status'] == 'active')} active)")
+    if readiness_html:
+        print("Host Readiness: included (from Airtable)")
 
 
 if __name__ == "__main__":
