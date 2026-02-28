@@ -1174,18 +1174,18 @@ def generate_hub_page(data, today, readiness_summary=None):
     <!-- QUICK LINKS -->
     <!-- ============================================= -->
     <div class="quick-links">
-      <div class="quick-link">
+      <a href="https://mail.google.com/mail/" class="quick-link">
         <span class="quick-link-label">hosts@ Gmail</span>
         <span class="quick-link-desc">Shared inbox</span>
-      </div>
-      <div class="quick-link">
+      </a>
+      <a href="https://airtable.com/app9DymWrbAQaHH0K" class="quick-link">
         <span class="quick-link-label">Airtable</span>
         <span class="quick-link-desc">Master data</span>
-      </div>
-      <div class="quick-link">
+      </a>
+      <a href="https://mailmeteor.com/app" class="quick-link">
         <span class="quick-link-label">Mailmeteor</span>
         <span class="quick-link-desc">Mail merge</span>
-      </div>
+      </a>
       <a href="https://hosts.oneearthfilmfest.org" class="quick-link">
         <span class="quick-link-label">Host Guide</span>
         <span class="quick-link-desc">Public reference</span>
@@ -1194,10 +1194,10 @@ def generate_hub_page(data, today, readiness_summary=None):
         <span class="quick-link-label">Claude Project</span>
         <span class="quick-link-desc">AI comms assistant</span>
       </div>
-      <div class="quick-link">
+      <a href="https://drive.google.com/drive/folders/1C8DzM8TCfkfvTlW4yiu0Wyw5F63OPm4K" class="quick-link">
         <span class="quick-link-label">Google Drive</span>
         <span class="quick-link-desc">Templates &amp; docs</span>
-      </div>
+      </a>
     </div>
 
     <!-- ============================================= -->
@@ -1257,15 +1257,15 @@ def generate_hub_page(data, today, readiness_summary=None):
         <table class="ref-table">
           <tbody>
             <tr>
-              <td>hosts@ Gmail</td>
+              <td><a href="https://mail.google.com/mail/">hosts@ Gmail</a></td>
               <td>Shared inbox — all host replies come here</td>
             </tr>
             <tr>
-              <td>Airtable</td>
+              <td><a href="https://airtable.com/app9DymWrbAQaHH0K">Airtable</a></td>
               <td>Master data source — hosts, events, screening dates</td>
             </tr>
             <tr>
-              <td>Mailmeteor</td>
+              <td><a href="https://mailmeteor.com/app">Mailmeteor</a></td>
               <td>Mail merge — build and send campaigns</td>
             </tr>
             <tr>
@@ -1277,7 +1277,7 @@ def generate_hub_page(data, today, readiness_summary=None):
               <td>AI assistant scoped to OEFF host comms — helps draft emails, process data</td>
             </tr>
             <tr>
-              <td>Google Drive</td>
+              <td><a href="https://drive.google.com/drive/folders/1C8DzM8TCfkfvTlW4yiu0Wyw5F63OPm4K">Google Drive</a></td>
               <td>Shared folder for templates, recordings, working docs</td>
             </tr>
           </tbody>
