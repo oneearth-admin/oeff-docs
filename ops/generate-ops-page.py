@@ -1174,7 +1174,7 @@ def generate_hub_page(data, today, readiness_summary=None):
     <!-- QUICK LINKS -->
     <!-- ============================================= -->
     <div class="quick-links">
-      <a href="https://mail.google.com/mail/" class="quick-link">
+      <a href="https://groups.google.com/a/oneearthfilmfest.org/g/hosts" class="quick-link">
         <span class="quick-link-label">hosts@ Gmail</span>
         <span class="quick-link-desc">Shared inbox</span>
       </a>
@@ -1257,7 +1257,7 @@ def generate_hub_page(data, today, readiness_summary=None):
         <table class="ref-table">
           <tbody>
             <tr>
-              <td><a href="https://mail.google.com/mail/">hosts@ Gmail</a></td>
+              <td><a href="https://groups.google.com/a/oneearthfilmfest.org/g/hosts">hosts@ Gmail</a></td>
               <td>Shared inbox — all host replies come here</td>
             </tr>
             <tr>
