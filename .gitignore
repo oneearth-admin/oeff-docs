@@ -5,6 +5,8 @@ token-map.json
 
 # Generated per-venue helper pages (deployed, not tracked)
 hosts/*/
+# But track the ops dashboard
+!hosts/ops/
 
 # Wrangler cache (contains account credentials)
 .wrangler/

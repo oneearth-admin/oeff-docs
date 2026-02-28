@@ -1,0 +1,106 @@
+{
+  "lastUpdated": "2026-02-28",
+  "currentWeek": 1,
+  "festivalDate": "2026-04-22",
+  "tasks": [
+    {
+      "id": "w1-01",
+      "title": "Read resource hub, webinar cycle process, SOP library index",
+      "stream": 0,
+      "status": "active",
+      "due": "2026-03-03",
+      "notes": "Links in SOPs section below"
+    },
+    {
+      "id": "w1-02",
+      "title": "Get set up: hosts@ inbox access, Airtable, Mailmeteor, Send As",
+      "stream": 0,
+      "status": "active",
+      "due": "2026-03-03",
+      "notes": "Tools section has all links"
+    },
+    {
+      "id": "w1-03",
+      "title": "Follow along with Mar 2 webinar cycle — observe the full send sequence",
+      "stream": 1,
+      "status": "active",
+      "due": "2026-03-04",
+      "notes": "Shadow Garen through preview → reminder → recap flow"
+    },
+    {
+      "id": "w1-04",
+      "title": "Start your running notes doc (three questions)",
+      "stream": 0,
+      "status": "upcoming",
+      "due": "2026-03-07",
+      "notes": "See 'Your Three Questions' section"
+    },
+    {
+      "id": "w2-01",
+      "title": "Run Mar 16 webinar preview send (Garen reviews before send)",
+      "stream": 1,
+      "status": "upcoming",
+      "due": "2026-03-09",
+      "notes": "Your first solo cycle — use template 03-webinar-preview"
+    },
+    {
+      "id": "w2-02",
+      "title": "Run Mar 16 webinar reminder send",
+      "stream": 1,
+      "status": "upcoming",
+      "due": "2026-03-15",
+      "notes": "Template 04-webinar-reminder"
+    },
+    {
+      "id": "w2-03",
+      "title": "Run Mar 16 webinar recap send (after webinar)",
+      "stream": 1,
+      "status": "upcoming",
+      "due": "2026-03-17",
+      "notes": "Template 05-webinar-recap — include recording link"
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-02-28",
+      "text": "Dashboard live. Mailmeteor confirmed. Templates shared to your account."
+    }
+  ],
+  "webinars": [
+    {
+      "date": "2026-02-23",
+      "topic": "Background, Logistics, Program Preview",
+      "status": "done"
+    },
+    {
+      "date": "2026-03-02",
+      "topic": "Programming + Per-Film Discussions",
+      "status": "next"
+    },
+    {
+      "date": "2026-03-16",
+      "topic": "Marketing & Promotion",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-03-23",
+      "topic": "Volunteer Recruitment & Training",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-03-30",
+      "topic": "AV/Tech Verification & Day-of Support",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-04-06",
+      "topic": "Office Hours (optional)",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-04-13",
+      "topic": "Office Hours (optional)",
+      "status": "upcoming"
+    }
+  ]
+}
