@@ -9,7 +9,7 @@ Purpose: What Garen needs to prepare, and what Kim's first two weeks look like.
 
 ### Access checklist
 - [ ] hosts@oneearthfilmfest.org — shared inbox access
-- [ ] V7 Google Sheet — viewer or editor
+- [ ] Airtable — viewer or editor (migrated from V7 → 2026 Tech → Airtable)
 - [ ] Google Drive folder (curated onboarding docs)
 - [ ] Mailmeteor — installed on hosts@ account
 - [ ] Host guide link: hosts.oneearthfilmfest.org
@@ -92,7 +92,7 @@ When Kim leaves: revoke Send As permission, revoke Mailmeteor template sharing. 
 ## Garen's timeline
 
 ### Today (Monday Feb 24)
-- [ ] Prep access checklist — confirm Kim has hosts@ inbox, V7 sheet, Drive folder
+- [ ] Prep access checklist — confirm Kim has hosts@ inbox, Airtable access, Drive folder
 - [ ] Pick three docs to share tomorrow
 
 ### Tomorrow (Tuesday Feb 25)
@@ -127,7 +127,7 @@ When Kim leaves: revoke Send As permission, revoke Mailmeteor template sharing. 
 - Kim reads the three docs at her own pace
 
 ### Tuesday-Wednesday
-- Kim reviews V7 sheet structure (just the Hosts tab and Events_2026 tab)
+- Kim reviews Airtable structure (Hosts and Events tables — migrated from earlier Google Sheets)
 - Kim watches a recorded webinar or reviews a past send (Garen provides example)
 - Kim drafts the next webinar reminder (doesn't send — Garen reviews)
 
