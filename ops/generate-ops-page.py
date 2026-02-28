@@ -174,51 +174,58 @@ PHONE_RE = re.compile(r"\b\d{3}[-.)\s]?\d{3}[-.\s]?\d{4}\b")
 EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")
 
 def fetch_readiness_data():
-    """Fetch Events + linked Venues from Airtable, return readiness summary."""
-    # Import from sibling module
-    from airtable_api import get_token, fetch_all_records, _fetch_by_ids
+    """Fetch Events + linked Venues from Airtable, return readiness summary.
+
+    Actual Airtable field names (as of 2026-02-28):
+      - "Venue Name" (denormalized text on Event)
+      - "Pipeline Status" (e.g. "Scheduled", "Confirmed Interest", "Confirmed")
+      - "Film Title" (may not exist yet on all records)
+      - "Event Date" (may not exist yet)
+      - "RSVP_URL", "Screening_Packet_URL", "Volunteer_Needs" (future fields)
+    Only 2026-season events are included.
+    """
+    from airtable_api import get_token, fetch_all_records
 
     token = get_token()
     print("Fetching Airtable data for Host Readiness...", file=sys.stderr)
 
-    records = fetch_all_records("Events", "2026_Venue_Sections", token)
+    records = fetch_all_records("Events", "Grid view", token)
 
-    # Collect linked Venue IDs
-    venue_ids = set()
-    for rec in records:
-        fields = rec.get("fields", {})
-        for vid in fields.get("Venue", []):
-            venue_ids.add(vid)
-
-    venues = _fetch_by_ids("Venues", venue_ids, token)
-
-    # Build per-venue readiness
+    # Build per-venue readiness — only 2026 events
     venue_events = {}  # venue_name -> list of event dicts
     for rec in records:
         fields = rec.get("fields", {})
-        venue_linked = fields.get("Venue", [])
-        if not venue_linked:
+
+        # Filter to 2026 season
+        if fields.get("Year") != 2026 and fields.get("Season") != "2026":
             continue
 
-        venue_id = venue_linked[0]
-        venue_rec = venues.get(venue_id, {})
-        venue_name = venue_rec.get("fields", {}).get("Name", "Unknown Venue")
+        # Venue name is denormalized on the Event record
+        venue_name = fields.get("Venue Name", "").strip()
+        if not venue_name:
+            continue
 
-        # Guard: strip any PII that might be in the name
+        # Guard: strip any PII that might leak through
         venue_name = PHONE_RE.sub("[redacted]", venue_name)
         venue_name = EMAIL_RE.sub("[redacted]", venue_name)
 
-        film_title = fields.get("Film Title", fields.get("Name", "Untitled"))
+        film_title = fields.get("Film Title", fields.get("Name", ""))
         event_date = fields.get("Event Date", "")
-        pipeline_status = fields.get("Pipeline_Status", "")
+        pipeline_status = fields.get("Pipeline Status", "")
         rsvp_url = fields.get("RSVP_URL", "")
         packet_url = fields.get("Screening_Packet_URL", "")
         volunteer_needs = fields.get("Volunteer_Needs", "")
+        event_tier = fields.get("Event Tier", fields.get("Tier", ""))
+
+        # Pipeline is "confirmed" if Scheduled or Confirmed
+        pipeline_ok = pipeline_status in ("Scheduled", "Confirmed")
 
         event_info = {
             "film_title": film_title,
             "event_date": event_date,
-            "pipeline_confirmed": pipeline_status == "Confirmed",
+            "event_tier": event_tier,
+            "pipeline_status": pipeline_status,
+            "pipeline_confirmed": pipeline_ok,
             "ticket_set": bool(rsvp_url),
             "packet_delivered": bool(packet_url),
             "volunteer_noted": bool(volunteer_needs),
@@ -232,25 +239,28 @@ def fetch_readiness_data():
 
 
 def compute_readiness(venue_events):
-    """Classify venues into needs_attention and on_track."""
+    """Classify venues into needs_attention and on_track.
+
+    Current checklist (adapts as fields are populated in Airtable):
+    - Pipeline confirmed? (Pipeline Status == Scheduled or Confirmed)
+    - Ticket link set? (RSVP_URL non-empty — future field)
+    - Screening packet delivered? (Screening_Packet_URL — future field)
+    """
     needs_attention = []
     on_track = []
 
     for venue_name, events in sorted(venue_events.items()):
-        # A venue is "on track" if ALL its events have all checklist items
         missing_items = []
-        # Use the first event for display (most venues have one)
         primary = events[0]
 
         for ev in events:
             if not ev["pipeline_confirmed"]:
-                missing_items.append("No pipeline confirmation")
+                status = ev.get("pipeline_status", "Unknown")
+                missing_items.append(f"Pipeline: {status}")
             if not ev["ticket_set"]:
                 missing_items.append("No ticket link")
             if not ev["packet_delivered"]:
                 missing_items.append("No screening packet")
-            if not ev["volunteer_noted"]:
-                missing_items.append("No volunteer plan")
 
         # Deduplicate
         missing_items = sorted(set(missing_items))
@@ -288,7 +298,11 @@ def render_readiness_section(venue_events):
             except ValueError:
                 date_display = html_escape(primary["event_date"])
 
-        film_display = html_escape(primary["film_title"])
+        film_display = html_escape(primary["film_title"]) if primary["film_title"] else ""
+        tier = html_escape(primary.get("event_tier", ""))
+        detail_parts = [p for p in [film_display, date_display, tier] if p]
+        detail_str = " &middot; ".join(detail_parts)
+
         missing_html = "  ".join(
             f'<span class="readiness-missing">{html_escape(m)}</span>'
             for m in v["missing"]
@@ -298,7 +312,7 @@ def render_readiness_section(venue_events):
           <div class="task-header">
             <span class="readiness-venue">{html_escape(v["name"])}</span>
           </div>
-          <div class="readiness-detail">{film_display}{" &middot; " + date_display if date_display else ""}</div>
+          {"" if not detail_str else f'<div class="readiness-detail">{detail_str}</div>'}
           <div class="readiness-items">{missing_html}</div>
         </div>""")
 
