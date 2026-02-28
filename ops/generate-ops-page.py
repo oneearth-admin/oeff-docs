@@ -2,9 +2,14 @@
 """
 generate-ops-page.py — OEFF Ops Dashboard generator
 
-Reads ops/kim-tasks.json, generates hosts/ops/index.html.
-With --airtable flag, also fetches live venue/event data from Airtable
-and renders a Host Readiness section.
+Generates two pages:
+  1. Hub page (hosts/ops/index.html) — Kim's daily bookmark with tasks, updates,
+     quick links, and collapsible reference sections.
+  2. Readiness page (hosts/ops/readiness/index.html) — Standalone venue readiness
+     with timeline-gated checklist items. Only generated with --airtable flag.
+
+Reads ops/kim-tasks.json for task/update data.
+With --airtable flag, fetches live venue data from Airtable.
 
 Stdlib Python 3 only — no pip dependencies.
 
@@ -26,7 +31,8 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
 DATA_FILE = SCRIPT_DIR / "kim-tasks.json"
-OUTPUT_FILE = SCRIPT_DIR.parent / "hosts" / "ops" / "index.html"
+OUTPUT_HUB = SCRIPT_DIR.parent / "hosts" / "ops" / "index.html"
+OUTPUT_READINESS = SCRIPT_DIR.parent / "hosts" / "ops" / "readiness" / "index.html"
 
 # ---------------------------------------------------------------------------
 # Data loading
@@ -71,8 +77,43 @@ STREAM_COLORS = {
 }
 
 # ---------------------------------------------------------------------------
-# HTML generation
+# Timeline gating — readiness checklist items unlock on schedule
 # ---------------------------------------------------------------------------
+
+READINESS_GATES = {
+    "pipeline_confirmed": None,         # Always shown
+    "film_assigned":      "2026-03-01",
+    "ticket_set":         "2026-03-15",
+    "packet_delivered":   "2026-04-01",
+    "volunteer_noted":    "2026-04-05",
+}
+
+READINESS_LABELS = {
+    "pipeline_confirmed": "Pipeline confirmed",
+    "film_assigned":      "Film assigned",
+    "ticket_set":         "Ticket link set",
+    "packet_delivered":   "Screening packet",
+    "volunteer_noted":    "Volunteer plan",
+}
+
+def is_gated(field_key, today):
+    """Return True if this checklist item is not yet due."""
+    gate = READINESS_GATES.get(field_key)
+    if gate is None:
+        return False
+    return today < parse_date(gate)
+
+# ---------------------------------------------------------------------------
+# HTML helpers
+# ---------------------------------------------------------------------------
+
+def html_escape(s):
+    return (s
+        .replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&#39;"))
 
 def render_countdown(today, festival_date):
     delta = festival_date - today
@@ -119,7 +160,6 @@ def render_updates(updates):
     if not updates:
         return "<p style='color: var(--color-text-muted); font-style: italic;'>No updates yet.</p>"
 
-    # Newest first
     sorted_updates = sorted(updates, key=lambda u: u["date"], reverse=True)
     items = []
     for u in sorted_updates:
@@ -157,24 +197,19 @@ def render_webinars(webinars):
 
     return "\n".join(rows)
 
-def html_escape(s):
-    return (s
-        .replace("&", "&amp;")
-        .replace("<", "&lt;")
-        .replace(">", "&gt;")
-        .replace('"', "&quot;")
-        .replace("'", "&#39;"))
+# ---------------------------------------------------------------------------
+# Privacy guard
+# ---------------------------------------------------------------------------
+
+PHONE_RE = re.compile(r"\b\d{3}[-.)\s]?\d{3}[-.\s]?\d{4}\b")
+EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")
 
 # ---------------------------------------------------------------------------
 # Airtable: Host Readiness
 # ---------------------------------------------------------------------------
 
-# Privacy guard — strip any phone numbers or emails that leak through
-PHONE_RE = re.compile(r"\b\d{3}[-.)\s]?\d{3}[-.\s]?\d{4}\b")
-EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b")
-
 def fetch_readiness_data():
-    """Fetch Events + linked Venues from Airtable, return readiness summary.
+    """Fetch Events + linked Venues from Airtable, return per-venue event data.
 
     Actual Airtable field names (as of 2026-02-28):
       - "Venue Name" (denormalized text on Event)
@@ -191,16 +226,13 @@ def fetch_readiness_data():
 
     records = fetch_all_records("Events", "Grid view", token)
 
-    # Build per-venue readiness — only 2026 events
     venue_events = {}  # venue_name -> list of event dicts
     for rec in records:
         fields = rec.get("fields", {})
 
-        # Filter to 2026 season
         if fields.get("Year") != 2026 and fields.get("Season") != "2026":
             continue
 
-        # Venue name is denormalized on the Event record
         venue_name = fields.get("Venue Name", "").strip()
         if not venue_name:
             continue
@@ -217,7 +249,6 @@ def fetch_readiness_data():
         volunteer_needs = fields.get("Volunteer_Needs", "")
         event_tier = fields.get("Event Tier", fields.get("Tier", ""))
 
-        # Pipeline is "confirmed" if Scheduled or Confirmed
         pipeline_ok = pipeline_status in ("Scheduled", "Confirmed")
 
         event_info = {
@@ -226,6 +257,7 @@ def fetch_readiness_data():
             "event_tier": event_tier,
             "pipeline_status": pipeline_status,
             "pipeline_confirmed": pipeline_ok,
+            "film_assigned": bool(film_title),
             "ticket_set": bool(rsvp_url),
             "packet_delivered": bool(packet_url),
             "volunteer_noted": bool(volunteer_needs),
@@ -238,29 +270,37 @@ def fetch_readiness_data():
     return venue_events
 
 
-def compute_readiness(venue_events):
+def compute_readiness(venue_events, today):
     """Classify venues into needs_attention and on_track.
 
-    Current checklist (adapts as fields are populated in Airtable):
-    - Pipeline confirmed? (Pipeline Status == Scheduled or Confirmed)
-    - Ticket link set? (RSVP_URL non-empty — future field)
-    - Screening packet delivered? (Screening_Packet_URL — future field)
+    Only checks items whose gate date has arrived. Before the gate date,
+    a missing field is simply not evaluated — it's not due yet.
     """
     needs_attention = []
     on_track = []
+
+    checklist_fields = [
+        "pipeline_confirmed",
+        "film_assigned",
+        "ticket_set",
+        "packet_delivered",
+        "volunteer_noted",
+    ]
 
     for venue_name, events in sorted(venue_events.items()):
         missing_items = []
         primary = events[0]
 
         for ev in events:
-            if not ev["pipeline_confirmed"]:
-                status = ev.get("pipeline_status", "Unknown")
-                missing_items.append(f"Pipeline: {status}")
-            if not ev["ticket_set"]:
-                missing_items.append("No ticket link")
-            if not ev["packet_delivered"]:
-                missing_items.append("No screening packet")
+            for field in checklist_fields:
+                if is_gated(field, today):
+                    continue  # Not due yet — skip entirely
+                if not ev.get(field, False):
+                    if field == "pipeline_confirmed":
+                        status = ev.get("pipeline_status", "Unknown")
+                        missing_items.append(f"Pipeline: {status}")
+                    else:
+                        missing_items.append(READINESS_LABELS[field])
 
         # Deduplicate
         missing_items = sorted(set(missing_items))
@@ -280,94 +320,14 @@ def compute_readiness(venue_events):
     return needs_attention, on_track
 
 
-def render_readiness_section(venue_events):
-    """Render the Host Readiness HTML section."""
-    needs_attention, on_track = compute_readiness(venue_events)
-    total = len(needs_attention) + len(on_track)
-    on_track_count = len(on_track)
-
-    # Build venue cards for "needs attention"
-    attention_cards = []
-    for v in needs_attention:
-        primary = v["primary"]
-        date_display = ""
-        if primary["event_date"]:
-            try:
-                d = datetime.strptime(primary["event_date"], "%Y-%m-%d").date()
-                date_display = d.strftime("%b %d")
-            except ValueError:
-                date_display = html_escape(primary["event_date"])
-
-        film_display = html_escape(primary["film_title"]) if primary["film_title"] else ""
-        tier = html_escape(primary.get("event_tier", ""))
-        detail_parts = [p for p in [film_display, date_display, tier] if p]
-        detail_str = " &middot; ".join(detail_parts)
-
-        missing_html = "  ".join(
-            f'<span class="readiness-missing">{html_escape(m)}</span>'
-            for m in v["missing"]
-        )
-
-        attention_cards.append(f"""<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">{html_escape(v["name"])}</span>
-          </div>
-          {"" if not detail_str else f'<div class="readiness-detail">{detail_str}</div>'}
-          <div class="readiness-items">{missing_html}</div>
-        </div>""")
-
-    attention_html = "\n".join(attention_cards) if attention_cards else ""
-
-    # On-track summary
-    on_track_html = ""
-    if on_track:
-        on_track_html = f"""<div class="readiness-summary">
-          <span class="readiness-ok">On track ({on_track_count})</span> &mdash; all items confirmed
-        </div>"""
-
-    return f"""
-    <!-- Host Readiness (from Airtable) -->
-    <!-- BEGIN:HOST_READINESS -->
-    <section class="section" id="readiness">
-      <h2>Host Readiness &mdash; {on_track_count} of {total} venues on track</h2>
-      {"" if not needs_attention else f'<h3>Needs attention ({len(needs_attention)})</h3>'}
-      {attention_html}
-      {on_track_html}
-    </section>
-    <!-- END:HOST_READINESS -->
-"""
-
-
 # ---------------------------------------------------------------------------
-# Full page template
+# Shared CSS — used by both hub and readiness pages
 # ---------------------------------------------------------------------------
 
-def generate_page(data, today, readiness_html=""):
-    festival_date = parse_date(data["festivalDate"])
-    countdown = render_countdown(today, festival_date)
-    last_updated = data["lastUpdated"]
-    current_week = data.get("currentWeek", 1)
-
-    active_tasks = render_tasks(data["tasks"], "active")
-    upcoming_tasks = render_tasks(data["tasks"], "upcoming")
-    done_tasks = render_tasks(data["tasks"], "done")
-    updates_html = render_updates(data["updates"])
-    webinars_html = render_webinars(data["webinars"])
-
-    return f"""<!DOCTYPE html>
-<!--
-  OEFF 2026 — Ops Dashboard
-  Generated by generate-ops-page.py on {today.isoformat()}
-  Do not edit directly — edit kim-tasks.json and regenerate.
--->
-<html lang="en" data-domain="oeff">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>OEFF 2026 — Ops Dashboard</title>
-  <style>
-    :root {{
+def render_base_css():
+    """CSS custom properties, reset, typography, and shared component styles."""
+    return """
+    :root {
       --font-display: 'Avenir Next', 'Avenir', 'Segoe UI', system-ui, sans-serif;
       --font-body: Georgia, 'Times New Roman', serif;
 
@@ -414,25 +374,25 @@ def generate_page(data, today, readiness_html=""):
         0 16px 32px rgba(35, 31, 32, 0.04);
 
       --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    }}
+    }
 
-    *, *::before, *::after {{ box-sizing: border-box; }}
+    *, *::before, *::after { box-sizing: border-box; }
 
-    html {{
+    html {
       font-size: 17px;
       -webkit-font-smoothing: antialiased;
       scroll-behavior: smooth;
-    }}
+    }
 
-    @media (prefers-reduced-motion: reduce) {{
-      html {{ scroll-behavior: auto; }}
-      *, *::before, *::after {{
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
-      }}
-    }}
+      }
+    }
 
-    body {{
+    body {
       margin: 0;
       font-family: var(--font-body);
       color: var(--color-text);
@@ -443,33 +403,33 @@ def generate_page(data, today, readiness_html=""):
       font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
       text-rendering: optimizeLegibility;
       min-height: 100vh;
-    }}
+    }
 
-    .container {{
+    .container {
       max-width: 720px;
       margin: 0 auto;
       padding: var(--space-lg) var(--space-lg) var(--space-3xl);
-    }}
+    }
 
     /* --- Header --- */
 
-    .header {{
+    .header {
       text-align: center;
       padding: var(--space-2xl) 0 var(--space-xl);
       border-bottom: 1px solid var(--color-border);
       margin-bottom: var(--space-2xl);
-    }}
+    }
 
-    .header h1 {{
+    .header h1 {
       font-family: var(--font-display);
       font-size: 1.6rem;
       font-weight: 600;
       letter-spacing: -0.02em;
       margin: 0 0 var(--space-sm);
       color: var(--color-text);
-    }}
+    }
 
-    .countdown-badge {{
+    .countdown-badge {
       display: inline-block;
       font-family: var(--font-display);
       font-size: 0.85rem;
@@ -479,22 +439,22 @@ def generate_page(data, today, readiness_html=""):
       padding: 0.35em 1em;
       border-radius: 20px;
       letter-spacing: 0.02em;
-    }}
+    }
 
-    .meta {{
+    .meta {
       font-family: var(--font-display);
       font-size: 0.78rem;
       color: var(--color-text-muted);
       margin-top: var(--space-sm);
-    }}
+    }
 
     /* --- Sections --- */
 
-    .section {{
+    .section {
       margin-bottom: var(--space-2xl);
-    }}
+    }
 
-    .section h2 {{
+    .section h2 {
       font-family: var(--font-display);
       font-size: 1.15rem;
       font-weight: 600;
@@ -503,35 +463,35 @@ def generate_page(data, today, readiness_html=""):
       margin: 0 0 var(--space-md);
       padding-bottom: var(--space-xs);
       border-bottom: 2px solid var(--oeff-sage-light);
-    }}
+    }
 
-    .section h3 {{
+    .section h3 {
       font-family: var(--font-display);
       font-size: 0.95rem;
       font-weight: 600;
       color: var(--color-text-soft);
       margin: var(--space-lg) 0 var(--space-sm);
-    }}
+    }
 
     /* --- Task cards --- */
 
-    .task-card {{
+    .task-card {
       background: white;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
       padding: var(--space-md);
       margin-bottom: var(--space-sm);
       box-shadow: var(--shadow-soft);
-    }}
+    }
 
-    .task-header {{
+    .task-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: var(--space-xs);
-    }}
+    }
 
-    .stream-pill {{
+    .stream-pill {
       font-family: var(--font-display);
       font-size: 0.7rem;
       font-weight: 600;
@@ -540,63 +500,63 @@ def generate_page(data, today, readiness_html=""):
       border-radius: 12px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-    }}
+    }
 
-    .task-due {{
+    .task-due {
       font-family: var(--font-display);
       font-size: 0.78rem;
       color: var(--color-text-muted);
-    }}
+    }
 
-    .task-title {{
+    .task-title {
       font-size: 0.95rem;
       line-height: 1.5;
-    }}
+    }
 
-    .task-notes {{
+    .task-notes {
       font-size: 0.82rem;
       color: var(--color-text-muted);
       margin-top: var(--space-xs);
       font-style: italic;
-    }}
+    }
 
     /* --- Updates --- */
 
-    .update-item {{
+    .update-item {
       display: flex;
       gap: var(--space-md);
       padding: var(--space-sm) 0;
       border-bottom: 1px solid var(--color-border);
       align-items: baseline;
-    }}
+    }
 
-    .update-item:last-child {{
+    .update-item:last-child {
       border-bottom: none;
-    }}
+    }
 
-    .update-date {{
+    .update-date {
       font-family: var(--font-display);
       font-size: 0.78rem;
       font-weight: 600;
       color: var(--oeff-sage-deep);
       white-space: nowrap;
       min-width: 3.5em;
-    }}
+    }
 
-    .update-text {{
+    .update-text {
       font-size: 0.9rem;
       color: var(--color-text-soft);
-    }}
+    }
 
     /* --- Tables --- */
 
-    table {{
+    table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.88rem;
-    }}
+    }
 
-    th {{
+    th {
       font-family: var(--font-display);
       font-size: 0.75rem;
       font-weight: 600;
@@ -606,23 +566,23 @@ def generate_page(data, today, readiness_html=""):
       text-align: left;
       padding: var(--space-xs) var(--space-sm);
       border-bottom: 2px solid var(--oeff-sage-light);
-    }}
+    }
 
-    td {{
+    td {
       padding: var(--space-sm);
       border-bottom: 1px solid var(--color-border);
       vertical-align: top;
-    }}
+    }
 
-    tr:last-child td {{
+    tr:last-child td {
       border-bottom: none;
-    }}
+    }
 
     /* Webinar rows */
-    .webinar-done {{ opacity: 0.55; }}
-    .webinar-next {{ background: rgba(66, 167, 194, 0.08); }}
+    .webinar-done { opacity: 0.55; }
+    .webinar-next { background: rgba(66, 167, 194, 0.08); }
 
-    .webinar-status {{
+    .webinar-status {
       font-family: var(--font-display);
       font-size: 0.72rem;
       font-weight: 600;
@@ -630,46 +590,46 @@ def generate_page(data, today, readiness_html=""):
       border-radius: 10px;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-    }}
+    }
 
-    .webinar-status.done {{
+    .webinar-status.done {
       color: var(--color-text-muted);
       background: var(--oeff-sage-whisper);
-    }}
+    }
 
-    .webinar-status.next {{
+    .webinar-status.next {
       color: white;
       background: var(--oeff-aqua);
-    }}
+    }
 
-    .webinar-status.upcoming {{
+    .webinar-status.upcoming {
       color: var(--color-text-muted);
       background: transparent;
       border: 1px solid var(--color-border);
-    }}
+    }
 
     /* --- Host Readiness --- */
 
-    .readiness-venue {{
+    .readiness-venue {
       font-family: var(--font-display);
       font-size: 0.92rem;
       font-weight: 600;
       color: var(--color-text);
-    }}
+    }
 
-    .readiness-detail {{
+    .readiness-detail {
       font-size: 0.85rem;
       color: var(--color-text-soft);
       margin-bottom: var(--space-xs);
-    }}
+    }
 
-    .readiness-items {{
+    .readiness-items {
       display: flex;
       flex-wrap: wrap;
       gap: var(--space-xs);
-    }}
+    }
 
-    .readiness-missing {{
+    .readiness-missing {
       font-family: var(--font-display);
       font-size: 0.75rem;
       font-weight: 600;
@@ -677,9 +637,19 @@ def generate_page(data, today, readiness_html=""):
       background: rgba(160, 86, 78, 0.08);
       padding: 0.2em 0.6em;
       border-radius: 10px;
-    }}
+    }
 
-    .readiness-summary {{
+    .readiness-ok-pill {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+      background: rgba(106, 154, 132, 0.10);
+      padding: 0.2em 0.6em;
+      border-radius: 10px;
+    }
+
+    .readiness-summary {
       background: var(--oeff-sage-mist);
       border: 1px solid var(--oeff-sage-light);
       border-radius: var(--radius-lg);
@@ -687,125 +657,300 @@ def generate_page(data, today, readiness_html=""):
       margin-top: var(--space-sm);
       font-size: 0.9rem;
       color: var(--color-text-soft);
-    }}
+    }
 
-    .readiness-ok {{
+    .readiness-ok {
       font-family: var(--font-display);
       font-weight: 600;
       color: var(--oeff-sage-deep);
-    }}
+    }
+
+    /* --- Footer --- */
+
+    .footer {
+      text-align: center;
+      padding: var(--space-xl) 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--space-xl);
+    }
+
+    .footer p {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .footer a {
+      color: var(--oeff-blue);
+      text-decoration: none;
+    }
+
+    /* --- Responsive --- */
+
+    @media (max-width: 600px) {
+      .container {
+        padding: var(--space-md) var(--space-md) var(--space-2xl);
+      }
+
+      .header h1 {
+        font-size: 1.3rem;
+      }
+
+      .task-header {
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+      }
+    }
+"""
+
+
+# ---------------------------------------------------------------------------
+# Hub page CSS (page-specific additions)
+# ---------------------------------------------------------------------------
+
+def render_hub_css():
+    """CSS specific to the hub page — quick links, collapsible sections, ref tables."""
+    return """
+    /* --- Quick Links --- */
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .quick-link {
+      display: block;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      text-decoration: none;
+      color: var(--color-text);
+      min-height: 44px;
+      box-shadow: var(--shadow-soft);
+      transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+    }
+
+    .quick-link:hover {
+      border-color: var(--oeff-sage);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .quick-link-label {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--oeff-blue);
+      display: block;
+      margin-bottom: 0.15em;
+    }
+
+    .quick-link-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* --- Readiness link card --- */
+
+    .readiness-link-card {
+      display: block;
+      background: var(--oeff-sage-mist);
+      border: 1px solid var(--oeff-sage-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-2xl);
+      text-decoration: none;
+      color: var(--color-text);
+      transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+    }
+
+    .readiness-link-card:hover {
+      border-color: var(--oeff-sage);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .readiness-link-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+    }
+
+    .readiness-link-arrow {
+      float: right;
+      font-size: 1.1rem;
+      color: var(--oeff-sage-deep);
+    }
+
+    .readiness-link-meta {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-top: 0.2em;
+    }
+
+    /* --- Collapsible reference sections --- */
+
+    details.ref-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    details.ref-section summary {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      padding-bottom: var(--space-xs);
+      border-bottom: 2px solid var(--oeff-sage-light);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    details.ref-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.ref-section summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--color-text-muted);
+      transition: transform 0.15s var(--ease);
+    }
+
+    details[open].ref-section summary::after {
+      content: '\\2212';
+    }
+
+    details.ref-section > .ref-content {
+      padding-top: var(--space-md);
+    }
 
     /* --- Tools / reference tables --- */
 
-    .ref-table td:first-child {{
+    .ref-table td:first-child {
       font-family: var(--font-display);
       font-weight: 600;
       font-size: 0.85rem;
       white-space: nowrap;
       width: 30%;
-    }}
+    }
 
-    .ref-table a {{
+    .ref-table a {
       color: var(--oeff-blue);
       text-decoration: none;
-    }}
+    }
 
-    .ref-table a:hover {{
+    .ref-table a:hover {
       text-decoration: underline;
-    }}
+    }
 
     /* --- SOP list --- */
 
-    .sop-item {{
+    .sop-item {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       padding: var(--space-sm) 0;
       border-bottom: 1px solid var(--color-border);
       gap: var(--space-md);
-    }}
+    }
 
-    .sop-item:last-child {{
+    .sop-item:last-child {
       border-bottom: none;
-    }}
+    }
 
-    .sop-number {{
+    .sop-number {
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 0.85rem;
       color: var(--oeff-sage-deep);
       min-width: 1.5em;
-    }}
+    }
 
-    .sop-title {{
+    .sop-title {
       flex: 1;
-    }}
+    }
 
-    .sop-title a {{
+    .sop-title a {
       color: var(--oeff-blue);
       text-decoration: none;
       font-weight: 600;
-    }}
+    }
 
-    .sop-title a:hover {{
+    .sop-title a:hover {
       text-decoration: underline;
-    }}
+    }
 
-    .sop-desc {{
+    .sop-desc {
       font-size: 0.82rem;
       color: var(--color-text-muted);
       display: block;
-    }}
+    }
 
-    .sop-status {{
+    .sop-status {
       font-family: var(--font-display);
       font-size: 0.72rem;
       font-weight: 600;
       color: var(--color-text-muted);
       white-space: nowrap;
-    }}
+    }
 
-    .sop-status.active {{
+    .sop-status.active {
       color: var(--oeff-sage-deep);
-    }}
+    }
 
     /* --- Escalation --- */
 
-    .escalation-item {{
+    .escalation-item {
       display: flex;
       gap: var(--space-md);
       padding: var(--space-sm) 0;
       border-bottom: 1px solid var(--color-border);
       font-size: 0.9rem;
-    }}
+    }
 
-    .escalation-item:last-child {{
+    .escalation-item:last-child {
       border-bottom: none;
-    }}
+    }
 
-    .escalation-trigger {{
+    .escalation-trigger {
       flex: 1;
       color: var(--color-text-soft);
-    }}
+    }
 
-    .escalation-action {{
+    .escalation-action {
       font-family: var(--font-display);
       font-size: 0.82rem;
       font-weight: 600;
       color: var(--oeff-sage-deep);
       white-space: nowrap;
-    }}
+    }
 
     /* --- Three questions --- */
 
-    .questions-list {{
+    .questions-list {
       list-style: none;
       padding: 0;
       margin: 0;
       counter-reset: q;
-    }}
+    }
 
-    .questions-list li {{
+    .questions-list li {
       counter-increment: q;
       padding: var(--space-sm) 0;
       padding-left: var(--space-xl);
@@ -813,13 +958,13 @@ def generate_page(data, today, readiness_html=""):
       font-size: 0.92rem;
       color: var(--color-text-soft);
       border-bottom: 1px solid var(--color-border);
-    }}
+    }
 
-    .questions-list li:last-child {{
+    .questions-list li:last-child {
       border-bottom: none;
-    }}
+    }
 
-    .questions-list li::before {{
+    .questions-list li::before {
       content: counter(q);
       position: absolute;
       left: 0;
@@ -827,59 +972,190 @@ def generate_page(data, today, readiness_html=""):
       font-weight: 700;
       font-size: 1rem;
       color: var(--oeff-sage-deep);
-    }}
+    }
 
-    /* --- Footer --- */
+    @media (max-width: 600px) {
+      .escalation-item {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
 
-    .footer {{
-      text-align: center;
-      padding: var(--space-xl) 0;
-      border-top: 1px solid var(--color-border);
-      margin-top: var(--space-xl);
-    }}
+      .sop-item {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
 
-    .footer p {{
+      .ref-table td:first-child {
+        white-space: normal;
+      }
+    }
+"""
+
+
+# ---------------------------------------------------------------------------
+# Readiness page CSS (page-specific additions)
+# ---------------------------------------------------------------------------
+
+def render_readiness_css():
+    """CSS specific to the readiness page — pipeline bar, legend, back link."""
+    return """
+    /* --- Back link --- */
+
+    .back-link {
+      display: inline-block;
       font-family: var(--font-display);
-      font-size: 0.75rem;
-      color: var(--color-text-muted);
-      margin: 0;
-    }}
-
-    .footer a {{
+      font-size: 0.85rem;
+      font-weight: 600;
       color: var(--oeff-blue);
       text-decoration: none;
-    }}
+      margin-bottom: var(--space-lg);
+      min-height: 44px;
+      line-height: 44px;
+    }
 
-    /* --- Responsive --- */
+    .back-link:hover {
+      text-decoration: underline;
+    }
 
-    @media (max-width: 600px) {{
-      .container {{
-        padding: var(--space-md) var(--space-md) var(--space-2xl);
-      }}
+    /* --- Data freshness --- */
 
-      .header h1 {{
-        font-size: 1.3rem;
-      }}
+    .data-freshness {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-top: var(--space-xs);
+    }
 
-      .task-header {{
-        flex-wrap: wrap;
-        gap: var(--space-xs);
-      }}
+    /* --- Pipeline summary bar --- */
 
-      .escalation-item {{
-        flex-direction: column;
-        gap: var(--space-xs);
-      }}
+    .pipeline-bar {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+      flex-wrap: wrap;
+    }
 
-      .sop-item {{
-        flex-direction: column;
-        gap: var(--space-xs);
-      }}
+    .pipeline-stat {
+      flex: 1;
+      min-width: 120px;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
 
-      .ref-table td:first-child {{
-        white-space: normal;
-      }}
-    }}
+    .pipeline-stat-count {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--color-text);
+      display: block;
+    }
+
+    .pipeline-stat-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Checklist legend --- */
+
+    .checklist-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+      padding: var(--space-md);
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .legend-item {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.3em 0.8em;
+      border-radius: 10px;
+    }
+
+    .legend-active {
+      color: var(--oeff-sage-deep);
+      background: rgba(106, 154, 132, 0.10);
+    }
+
+    .legend-gated {
+      color: var(--color-text-muted);
+      background: transparent;
+      border: 1px dashed var(--color-border);
+    }
+"""
+
+
+# ---------------------------------------------------------------------------
+# Hub page generator
+# ---------------------------------------------------------------------------
+
+def generate_hub_page(data, today, readiness_summary=None):
+    """Generate the hub page — Kim's daily bookmark."""
+    festival_date = parse_date(data["festivalDate"])
+    countdown = render_countdown(today, festival_date)
+    last_updated = data["lastUpdated"]
+    current_week = data.get("currentWeek", 1)
+
+    active_tasks = render_tasks(data["tasks"], "active")
+    upcoming_tasks = render_tasks(data["tasks"], "upcoming")
+    done_tasks = render_tasks(data["tasks"], "done")
+    updates_html = render_updates(data["updates"])
+    webinars_html = render_webinars(data["webinars"])
+
+    # Readiness link card (only when Airtable data is available)
+    readiness_card = ""
+    if readiness_summary:
+        on_track = readiness_summary["on_track"]
+        total = readiness_summary["total"]
+        readiness_card = f"""
+    <!-- Readiness link card -->
+    <a href="readiness/" class="readiness-link-card">
+      <span class="readiness-link-arrow">&rarr;</span>
+      <div class="readiness-link-title">Host Readiness &mdash; {on_track} of {total} on track</div>
+      <div class="readiness-link-meta">View venue status and checklist details</div>
+    </a>
+"""
+
+    # Done section (conditional)
+    done_section = ""
+    if [t for t in data["tasks"] if t["status"] == "done"]:
+        done_section = f"""
+    <!-- Done -->
+    <section class="section" id="done">
+      <h3>Completed</h3>
+      {done_tasks}
+    </section>"""
+
+    base_css = render_base_css()
+    hub_css = render_hub_css()
+
+    return f"""<!DOCTYPE html>
+<!--
+  OEFF 2026 — Ops Dashboard
+  Generated by generate-ops-page.py on {today.isoformat()}
+  Do not edit directly — edit kim-tasks.json and regenerate.
+-->
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>OEFF 2026 — Ops Dashboard</title>
+  <style>
+{base_css}
+{hub_css}
   </style>
 </head>
 <body>
@@ -895,13 +1171,43 @@ def generate_page(data, today, readiness_html=""):
     </header>
 
     <!-- ============================================= -->
+    <!-- QUICK LINKS -->
+    <!-- ============================================= -->
+    <div class="quick-links">
+      <div class="quick-link">
+        <span class="quick-link-label">hosts@ Gmail</span>
+        <span class="quick-link-desc">Shared inbox</span>
+      </div>
+      <div class="quick-link">
+        <span class="quick-link-label">Airtable</span>
+        <span class="quick-link-desc">Master data</span>
+      </div>
+      <div class="quick-link">
+        <span class="quick-link-label">Mailmeteor</span>
+        <span class="quick-link-desc">Mail merge</span>
+      </div>
+      <a href="https://hosts.oneearthfilmfest.org" class="quick-link">
+        <span class="quick-link-label">Host Guide</span>
+        <span class="quick-link-desc">Public reference</span>
+      </a>
+      <div class="quick-link">
+        <span class="quick-link-label">Claude Project</span>
+        <span class="quick-link-desc">AI comms assistant</span>
+      </div>
+      <div class="quick-link">
+        <span class="quick-link-label">Google Drive</span>
+        <span class="quick-link-desc">Templates &amp; docs</span>
+      </div>
+    </div>
+
+    <!-- ============================================= -->
     <!-- DYNAMIC SECTIONS (from kim-tasks.json) -->
     <!-- BEGIN:DYNAMIC_CONTENT -->
     <!-- ============================================= -->
 
     <!-- What's Current -->
     <section class="section" id="current">
-      <h2>What's Current</h2>
+      <h2>What&#39;s Current</h2>
       {active_tasks}
     </section>
 
@@ -911,11 +1217,7 @@ def generate_page(data, today, readiness_html=""):
       {upcoming_tasks}
     </section>
 
-    <!-- Done -->
-    {"" if not [t for t in data["tasks"] if t["status"] == "done"] else '''<section class="section" id="done">
-      <h3>Completed</h3>
-      ''' + done_tasks + '''
-    </section>'''}
+    {done_section}
 
     <!-- Updates -->
     <section class="section" id="updates">
@@ -942,206 +1244,216 @@ def generate_page(data, today, readiness_html=""):
 
     <!-- END:DYNAMIC_CONTENT -->
 
-    {readiness_html}
+    {readiness_card}
 
     <!-- ============================================= -->
-    <!-- STATIC SECTIONS (from resource hub content) -->
+    <!-- REFERENCE SECTIONS (collapsible) -->
     <!-- ============================================= -->
 
-    <!-- Your Tools -->
-    <section class="section" id="tools">
-      <h2>Your Tools</h2>
-      <table class="ref-table">
-        <tbody>
-          <tr>
-            <td>hosts@ Gmail</td>
-            <td>Shared inbox — all host replies come here</td>
-          </tr>
-          <tr>
-            <td>Airtable</td>
-            <td>Master data source — hosts, events, screening dates</td>
-          </tr>
-          <tr>
-            <td>Mailmeteor</td>
-            <td>Mail merge — build and send campaigns</td>
-          </tr>
-          <tr>
-            <td><a href="https://hosts.oneearthfilmfest.org">Host Guide</a></td>
-            <td>The persistent reference hosts are pointed to in every email</td>
-          </tr>
-          <tr>
-            <td>Claude Project</td>
-            <td>AI assistant scoped to OEFF host comms — helps draft emails, process data</td>
-          </tr>
-          <tr>
-            <td>Google Drive</td>
-            <td>Shared folder for templates, recordings, working docs</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- Tools -->
+    <details class="ref-section" id="tools">
+      <summary>Your Tools</summary>
+      <div class="ref-content">
+        <table class="ref-table">
+          <tbody>
+            <tr>
+              <td>hosts@ Gmail</td>
+              <td>Shared inbox — all host replies come here</td>
+            </tr>
+            <tr>
+              <td>Airtable</td>
+              <td>Master data source — hosts, events, screening dates</td>
+            </tr>
+            <tr>
+              <td>Mailmeteor</td>
+              <td>Mail merge — build and send campaigns</td>
+            </tr>
+            <tr>
+              <td><a href="https://hosts.oneearthfilmfest.org">Host Guide</a></td>
+              <td>The persistent reference hosts are pointed to in every email</td>
+            </tr>
+            <tr>
+              <td>Claude Project</td>
+              <td>AI assistant scoped to OEFF host comms — helps draft emails, process data</td>
+            </tr>
+            <tr>
+              <td>Google Drive</td>
+              <td>Shared folder for templates, recordings, working docs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- Email Templates -->
-    <section class="section" id="templates">
-      <h2>Email Templates</h2>
-      <table class="ref-table">
-        <thead>
-          <tr>
-            <th>Template</th>
-            <th>When to use</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>03 — Webinar Preview</td>
-            <td>7 days before webinar</td>
-          </tr>
-          <tr>
-            <td>04 — Webinar Reminder</td>
-            <td>1 day before webinar</td>
-          </tr>
-          <tr>
-            <td>05 — Webinar Recap</td>
-            <td>Day after webinar (with recording link)</td>
-          </tr>
-          <tr>
-            <td>01 — Host Helper URL</td>
-            <td>When sharing host-specific page links</td>
-          </tr>
-          <tr>
-            <td>02 — Financial/Password</td>
-            <td>When sending secure credentials</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <details class="ref-section" id="templates">
+      <summary>Email Templates</summary>
+      <div class="ref-content">
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>Template</th>
+              <th>When to use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>03 — Webinar Preview</td>
+              <td>7 days before webinar</td>
+            </tr>
+            <tr>
+              <td>04 — Webinar Reminder</td>
+              <td>1 day before webinar</td>
+            </tr>
+            <tr>
+              <td>05 — Webinar Recap</td>
+              <td>Day after webinar (with recording link)</td>
+            </tr>
+            <tr>
+              <td>01 — Host Helper URL</td>
+              <td>When sharing host-specific page links</td>
+            </tr>
+            <tr>
+              <td>02 — Financial/Password</td>
+              <td>When sending secure credentials</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- SOPs -->
-    <section class="section" id="sops">
-      <h2>SOPs</h2>
-      <div class="sop-item">
-        <span class="sop-number">1</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1NxmvMUHP2Rk3vaNzzDKzwHAAUyb7s1EvpaJ-H262KKA/edit?usp=drivesdk">Webinar Cycle Process</a>
-          <span class="sop-desc">Your primary playbook</span>
-        </span>
-        <span class="sop-status active">Active now</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">2</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1zNZAYPdQV-V7hyCnGnJ9Wy2UGnv_wWIWlGAOIp5ftQQ/edit?usp=drivesdk">Deliverables Shipping</a>
-          <span class="sop-desc">Film files, promo, slides, t-shirts</span>
-        </span>
-        <span class="sop-status">Late March</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">3</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/19WmKK3AexuxIvuEP7aGqHkKoHrFPq9GWHqaa3URn-xg/edit?usp=drivesdk">Milestone Communications</a>
-          <span class="sop-desc">Key-date emails (film confirmed, one week out, etc.)</span>
-        </span>
-        <span class="sop-status">Sends start Mar 9</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">4</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1jXlsgP9l0sfhHUKufHnzL-nHNxz4zCAJZI4m-YrNy5U/edit?usp=drivesdk">Host Surveys</a>
-          <span class="sop-desc">3 forms: pre-event, day-of, post-screening</span>
-        </span>
-        <span class="sop-status">Before Apr 1</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">5</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1nlqqnt070WJgBPPmHhPD6M5Z6z73fgiPdhF-WVIb20k/edit?usp=drivesdk">Cool Host Conversion</a>
-          <span class="sop-desc">Uncommitted venues pipeline</span>
-        </span>
-        <span class="sop-status">If needed</span>
-      </div>
+    <details class="ref-section" id="sops">
+      <summary>SOPs</summary>
+      <div class="ref-content">
+        <div class="sop-item">
+          <span class="sop-number">1</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1NxmvMUHP2Rk3vaNzzDKzwHAAUyb7s1EvpaJ-H262KKA/edit?usp=drivesdk">Webinar Cycle Process</a>
+            <span class="sop-desc">Your primary playbook</span>
+          </span>
+          <span class="sop-status active">Active now</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">2</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1zNZAYPdQV-V7hyCnGnJ9Wy2UGnv_wWIWlGAOIp5ftQQ/edit?usp=drivesdk">Deliverables Shipping</a>
+            <span class="sop-desc">Film files, promo, slides, t-shirts</span>
+          </span>
+          <span class="sop-status">Late March</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">3</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/19WmKK3AexuxIvuEP7aGqHkKoHrFPq9GWHqaa3URn-xg/edit?usp=drivesdk">Milestone Communications</a>
+            <span class="sop-desc">Key-date emails (film confirmed, one week out, etc.)</span>
+          </span>
+          <span class="sop-status">Sends start Mar 9</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">4</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1jXlsgP9l0sfhHUKufHnzL-nHNxz4zCAJZI4m-YrNy5U/edit?usp=drivesdk">Host Surveys</a>
+            <span class="sop-desc">3 forms: pre-event, day-of, post-screening</span>
+          </span>
+          <span class="sop-status">Before Apr 1</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">5</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1nlqqnt070WJgBPPmHhPD6M5Z6z73fgiPdhF-WVIb20k/edit?usp=drivesdk">Cool Host Conversion</a>
+            <span class="sop-desc">Uncommitted venues pipeline</span>
+          </span>
+          <span class="sop-status">If needed</span>
+        </div>
 
-      <h3>Supporting References</h3>
-      <div class="sop-item">
-        <span class="sop-number">&bull;</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1qUuZgCqqbAvU41vY9cB_JQwGDpd_MyPv3Ypifv8e0Ks/edit?usp=drivesdk">Email Template Quick Reference</a>
-          <span class="sop-desc">All templates, merge fields, send checklist</span>
-        </span>
+        <h3>Supporting References</h3>
+        <div class="sop-item">
+          <span class="sop-number">&bull;</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1qUuZgCqqbAvU41vY9cB_JQwGDpd_MyPv3Ypifv8e0Ks/edit?usp=drivesdk">Email Template Quick Reference</a>
+            <span class="sop-desc">All templates, merge fields, send checklist</span>
+          </span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">&bull;</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1PXox5bpJK8SDFxjCS-LYBFX2vAkOVZopMC5OaMJZL1I/edit?usp=drivesdk">Who Does What</a>
+            <span class="sop-desc">Team roles, decision rights, routing rules</span>
+          </span>
+        </div>
       </div>
-      <div class="sop-item">
-        <span class="sop-number">&bull;</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1PXox5bpJK8SDFxjCS-LYBFX2vAkOVZopMC5OaMJZL1I/edit?usp=drivesdk">Who Does What</a>
-          <span class="sop-desc">Team roles, decision rights, routing rules</span>
-        </span>
-      </div>
-    </section>
+    </details>
 
-    <!-- Team — Who Does What -->
-    <section class="section" id="team">
-      <h2>Team — Who Does What</h2>
-      <table class="ref-table">
-        <thead>
-          <tr>
-            <th>Role</th>
-            <th>Scope</th>
-            <th>When to reach out</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Executive Director</td>
-            <td>Strategic direction, messaging approval, budget, scope</td>
-            <td>Outside your playbook, touches budget/scope</td>
-          </tr>
-          <tr>
-            <td>Operations</td>
-            <td>Eventbrite, scheduling, venue logistics</td>
-            <td>Event details or scheduling questions</td>
-          </tr>
-          <tr>
-            <td>Technical Coordinator (Garen)</td>
-            <td>Comms infrastructure, data systems, your primary contact</td>
-            <td>Templates need review, technical questions, anything you're unsure about</td>
-          </tr>
-          <tr>
-            <td>AV/Production</td>
-            <td>Equipment, technical specs, on-site setup</td>
-            <td>Venue tech questions</td>
-          </tr>
-          <tr>
-            <td>Marketing/Creative</td>
-            <td>Trailer reel, graphics, social assets</td>
-            <td>Route through AV/Production or Technical Coordinator</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- Team -->
+    <details class="ref-section" id="team">
+      <summary>Team — Who Does What</summary>
+      <div class="ref-content">
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Scope</th>
+              <th>When to reach out</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Executive Director</td>
+              <td>Strategic direction, messaging approval, budget, scope</td>
+              <td>Outside your playbook, touches budget/scope</td>
+            </tr>
+            <tr>
+              <td>Operations</td>
+              <td>Eventbrite, scheduling, venue logistics</td>
+              <td>Event details or scheduling questions</td>
+            </tr>
+            <tr>
+              <td>Technical Coordinator (Garen)</td>
+              <td>Comms infrastructure, data systems, your primary contact</td>
+              <td>Templates need review, technical questions, anything you&#39;re unsure about</td>
+            </tr>
+            <tr>
+              <td>AV/Production</td>
+              <td>Equipment, technical specs, on-site setup</td>
+              <td>Venue tech questions</td>
+            </tr>
+            <tr>
+              <td>Marketing/Creative</td>
+              <td>Trailer reel, graphics, social assets</td>
+              <td>Route through AV/Production or Technical Coordinator</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- Escalation Rules -->
-    <section class="section" id="escalation">
-      <h2>Escalation Rules</h2>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Host asks something you can answer</span>
-        <span class="escalation-action">Answer from hosts@, your judgment</span>
+    <details class="ref-section" id="escalation">
+      <summary>Escalation Rules</summary>
+      <div class="ref-content">
+        <div class="escalation-item">
+          <span class="escalation-trigger">Host asks something you can answer</span>
+          <span class="escalation-action">Answer from hosts@, your judgment</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Host asks something you&#39;re not sure about</span>
+          <span class="escalation-action">Flag to Garen in Google Chat</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Host can&#39;t make a webinar</span>
+          <span class="escalation-action">Reassure — recording will be sent</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Mailmeteor merge looks wrong in test</span>
+          <span class="escalation-action">Don&#39;t send — screenshot to Garen</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Anything about budget, scope, or commitments</span>
+          <span class="escalation-action">Escalate to Executive Director</span>
+        </div>
       </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Host asks something you're not sure about</span>
-        <span class="escalation-action">Flag to Garen in Google Chat</span>
-      </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Host can't make a webinar</span>
-        <span class="escalation-action">Reassure — recording will be sent</span>
-      </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Mailmeteor merge looks wrong in test</span>
-        <span class="escalation-action">Don't send — screenshot to Garen</span>
-      </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Anything about budget, scope, or commitments</span>
-        <span class="escalation-action">Escalate to Executive Director</span>
-      </div>
-    </section>
+    </details>
 
     <!-- Your Three Questions -->
     <section class="section" id="questions">
@@ -1150,8 +1462,8 @@ def generate_page(data, today, readiness_html=""):
         Keep a running doc with your observations. These make the system better for next time.
       </p>
       <ol class="questions-list">
-        <li><strong>What tripped you up?</strong> Where did the process assume context you didn't have?</li>
-        <li><strong>What's missing?</strong> If someone else needed to do this next year, what would you add?</li>
+        <li><strong>What tripped you up?</strong> Where did the process assume context you didn&#39;t have?</li>
+        <li><strong>What&#39;s missing?</strong> If someone else needed to do this next year, what would you add?</li>
         <li><strong>What could be tighter?</strong> Patterns you see that could become templates or checklists.</li>
       </ol>
     </section>
@@ -1167,50 +1479,240 @@ def generate_page(data, today, readiness_html=""):
 
 
 # ---------------------------------------------------------------------------
+# Readiness page generator
+# ---------------------------------------------------------------------------
+
+def generate_readiness_page(venue_events, today, festival_date):
+    """Generate the standalone readiness page."""
+    countdown = render_countdown(today, festival_date)
+    needs_attention, on_track = compute_readiness(venue_events, today)
+    total = len(needs_attention) + len(on_track)
+    on_track_count = len(on_track)
+    now_str = datetime.now().strftime("%b %d, %Y %I:%M %p")
+
+    # Pipeline summary — count venues by pipeline status
+    pipeline_counts = {}
+    for venue_name, events in venue_events.items():
+        primary_status = events[0].get("pipeline_status", "Unknown")
+        # Normalize similar statuses
+        if primary_status in ("Scheduled", "Confirmed"):
+            key = "Confirmed"
+        elif primary_status == "Confirmed Interest":
+            key = "Interest"
+        else:
+            key = primary_status or "Unknown"
+        pipeline_counts[key] = pipeline_counts.get(key, 0) + 1
+
+    pipeline_cards = []
+    for status_label in ["Confirmed", "Interest", "Unknown"]:
+        count = pipeline_counts.get(status_label, 0)
+        if count > 0 or status_label == "Confirmed":
+            pipeline_cards.append(f"""<div class="pipeline-stat">
+        <span class="pipeline-stat-count">{count}</span>
+        <span class="pipeline-stat-label">{html_escape(status_label)}</span>
+      </div>""")
+    pipeline_html = "\n      ".join(pipeline_cards)
+
+    # Checklist legend — show which items are active vs gated
+    legend_items = []
+    for field_key in ["pipeline_confirmed", "film_assigned", "ticket_set",
+                      "packet_delivered", "volunteer_noted"]:
+        label = READINESS_LABELS[field_key]
+        if is_gated(field_key, today):
+            gate_date = parse_date(READINESS_GATES[field_key])
+            gate_str = gate_date.strftime("%b %d")
+            legend_items.append(
+                f'<span class="legend-item legend-gated">{html_escape(label)} (unlocks {gate_str})</span>'
+            )
+        else:
+            legend_items.append(
+                f'<span class="legend-item legend-active">{html_escape(label)}</span>'
+            )
+    legend_html = "\n        ".join(legend_items)
+
+    # Venue cards — needs attention
+    attention_cards = []
+    for v in needs_attention:
+        primary = v["primary"]
+        date_display = ""
+        if primary["event_date"]:
+            try:
+                d = datetime.strptime(primary["event_date"], "%Y-%m-%d").date()
+                date_display = d.strftime("%b %d")
+            except ValueError:
+                date_display = html_escape(primary["event_date"])
+
+        film_display = html_escape(primary["film_title"]) if primary["film_title"] else ""
+        tier = html_escape(primary.get("event_tier", ""))
+        detail_parts = [p for p in [film_display, date_display, tier] if p]
+        detail_str = " &middot; ".join(detail_parts)
+
+        # Show confirmed items as sage pills, missing as red
+        pills = []
+        for field_key in ["pipeline_confirmed", "film_assigned", "ticket_set",
+                          "packet_delivered", "volunteer_noted"]:
+            if is_gated(field_key, today):
+                continue  # Not due yet — don't show at all
+            label = READINESS_LABELS[field_key]
+            # Check across all events for this venue
+            has_it = any(ev.get(field_key, False) for ev in v["events"])
+            if has_it:
+                pills.append(f'<span class="readiness-ok-pill">{html_escape(label)}</span>')
+            else:
+                if field_key == "pipeline_confirmed":
+                    status = primary.get("pipeline_status", "Unknown")
+                    pills.append(f'<span class="readiness-missing">Pipeline: {html_escape(status)}</span>')
+                else:
+                    pills.append(f'<span class="readiness-missing">{html_escape(label)}</span>')
+
+        pills_html = "  ".join(pills)
+
+        attention_cards.append(f"""<div class="task-card">
+          <div class="task-header">
+            <span class="readiness-venue">{html_escape(v["name"])}</span>
+          </div>
+          {"" if not detail_str else f'<div class="readiness-detail">{detail_str}</div>'}
+          <div class="readiness-items">{pills_html}</div>
+        </div>""")
+
+    attention_html = "\n".join(attention_cards) if attention_cards else ""
+
+    # On-track summary
+    on_track_html = ""
+    if on_track:
+        on_track_names = ", ".join(html_escape(v["name"]) for v in on_track[:5])
+        more = f" and {len(on_track) - 5} more" if len(on_track) > 5 else ""
+        on_track_html = f"""<div class="readiness-summary">
+          <span class="readiness-ok">On track ({on_track_count})</span> &mdash;
+          {on_track_names}{more}
+        </div>"""
+
+    base_css = render_base_css()
+    readiness_css = render_readiness_css()
+
+    return f"""<!DOCTYPE html>
+<!--
+  OEFF 2026 — Host Readiness
+  Generated by generate-ops-page.py on {today.isoformat()}
+  Do not edit directly — regenerate with: python3 ops/generate-ops-page.py --airtable
+-->
+<html lang="en" data-domain="oeff">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>OEFF 2026 — Host Readiness</title>
+  <style>
+{base_css}
+{readiness_css}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <a href="../" class="back-link">&larr; Ops Dashboard</a>
+
+    <header class="header">
+      <h1>Host Readiness</h1>
+      <div class="countdown-badge">{html_escape(countdown)}</div>
+      <div class="data-freshness">Data from Airtable &middot; Generated {html_escape(now_str)}</div>
+    </header>
+
+    <!-- Pipeline summary -->
+    <div class="pipeline-bar">
+      {pipeline_html}
+    </div>
+
+    <!-- Checklist legend -->
+    <div class="checklist-legend">
+      {legend_html}
+    </div>
+
+    <!-- Needs attention -->
+    {"" if not needs_attention else f'<section class="section" id="attention"><h2>Needs attention ({len(needs_attention)})</h2>{attention_html}</section>'}
+
+    <!-- On track -->
+    {on_track_html}
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>OEFF 2026 &middot; <a href="../">Ops Dashboard</a> &middot; <a href="https://hosts.oneearthfilmfest.org">Host Guide</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>"""
+
+
+# ---------------------------------------------------------------------------
+# Output helpers
+# ---------------------------------------------------------------------------
+
+def check_pii(html, label):
+    """Abort if output contains phone numbers or emails."""
+    if PHONE_RE.search(html) or EMAIL_RE.search(html):
+        print(f"ERROR: {label} contains PII (phone/email). Aborting.", file=sys.stderr)
+        sys.exit(1)
+
+def write_and_report(path, html, label):
+    """Write HTML to path, report size, warn if over 60 KB."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(html, encoding="utf-8")
+    size_kb = path.stat().st_size / 1024
+    print(f"Generated: {path} ({size_kb:.1f} KB)")
+    if size_kb > 60:
+        print(f"WARNING: {label} exceeds 60 KB target ({size_kb:.1f} KB)", file=sys.stderr)
+    return size_kb
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 def main():
     today = get_today()
     data = load_data()
+    festival_date = parse_date(data["festivalDate"])
 
-    # Optionally fetch Airtable data for Host Readiness
-    readiness_html = ""
+    # Optionally fetch Airtable data
+    venue_events = None
+    readiness_summary = None
     if has_airtable_flag():
         try:
             venue_events = fetch_readiness_data()
-            readiness_html = render_readiness_section(venue_events)
-            needs, ok = compute_readiness(venue_events)
+            needs, ok = compute_readiness(venue_events, today)
+            readiness_summary = {
+                "on_track": len(ok),
+                "needs_attention": len(needs),
+                "total": len(ok) + len(needs),
+            }
             print(
                 f"Readiness: {len(ok)} on track, {len(needs)} need attention "
-                f"({len(ok) + len(needs)} total venues)",
+                f"({readiness_summary['total']} total venues)",
                 file=sys.stderr,
             )
         except Exception as e:
             print(f"Warning: Airtable fetch failed: {e}", file=sys.stderr)
-            print("Generating page without Host Readiness section.", file=sys.stderr)
+            print("Generating hub page without readiness data.", file=sys.stderr)
 
-    # Ensure output directory exists
-    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    # Generate hub page
+    hub_html = generate_hub_page(data, today, readiness_summary)
+    check_pii(hub_html, "Hub page")
+    write_and_report(OUTPUT_HUB, hub_html, "Hub page")
 
-    html = generate_page(data, today, readiness_html)
+    # Generate readiness page (only with Airtable data)
+    if venue_events is not None:
+        readiness_html = generate_readiness_page(venue_events, today, festival_date)
+        check_pii(readiness_html, "Readiness page")
+        write_and_report(OUTPUT_READINESS, readiness_html, "Readiness page")
 
-    # Privacy check — no phone numbers or emails in output
-    if PHONE_RE.search(html) or EMAIL_RE.search(html):
-        print("ERROR: Output contains PII (phone/email). Aborting.", file=sys.stderr)
-        sys.exit(1)
-
-    OUTPUT_FILE.write_text(html, encoding="utf-8")
-
-    size_kb = OUTPUT_FILE.stat().st_size / 1024
-    print(f"Generated: {OUTPUT_FILE}")
-    print(f"Size: {size_kb:.1f} KB")
-    if size_kb > 60:
-        print(f"WARNING: Output exceeds 60 KB target ({size_kb:.1f} KB)", file=sys.stderr)
-    print(f"Countdown: {render_countdown(today, parse_date(data['festivalDate']))}")
+    # Summary
+    print(f"Countdown: {render_countdown(today, festival_date)}")
     print(f"Tasks: {len(data['tasks'])} ({sum(1 for t in data['tasks'] if t['status'] == 'active')} active)")
-    if readiness_html:
-        print("Host Readiness: included (from Airtable)")
+    if readiness_summary:
+        print("Host Readiness: hub link card + standalone page generated")
+    else:
+        print("Host Readiness: skipped (no --airtable flag)")
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@
   <meta name="robots" content="noindex, nofollow">
   <title>OEFF 2026 — Ops Dashboard</title>
   <style>
+
     :root {
       --font-display: 'Avenir Next', 'Avenir', 'Segoe UI', system-ui, sans-serif;
       --font-body: Georgia, 'Times New Roman', serif;
@@ -323,6 +324,16 @@
       border-radius: 10px;
     }
 
+    .readiness-ok-pill {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+      background: rgba(106, 154, 132, 0.10);
+      padding: 0.2em 0.6em;
+      border-radius: 10px;
+    }
+
     .readiness-summary {
       background: var(--oeff-sage-mist);
       border: 1px solid var(--oeff-sage-light);
@@ -337,6 +348,173 @@
       font-family: var(--font-display);
       font-weight: 600;
       color: var(--oeff-sage-deep);
+    }
+
+    /* --- Footer --- */
+
+    .footer {
+      text-align: center;
+      padding: var(--space-xl) 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: var(--space-xl);
+    }
+
+    .footer p {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .footer a {
+      color: var(--oeff-blue);
+      text-decoration: none;
+    }
+
+    /* --- Responsive --- */
+
+    @media (max-width: 600px) {
+      .container {
+        padding: var(--space-md) var(--space-md) var(--space-2xl);
+      }
+
+      .header h1 {
+        font-size: 1.3rem;
+      }
+
+      .task-header {
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+      }
+    }
+
+
+    /* --- Quick Links --- */
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .quick-link {
+      display: block;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      text-decoration: none;
+      color: var(--color-text);
+      min-height: 44px;
+      box-shadow: var(--shadow-soft);
+      transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+    }
+
+    .quick-link:hover {
+      border-color: var(--oeff-sage);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .quick-link-label {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--oeff-blue);
+      display: block;
+      margin-bottom: 0.15em;
+    }
+
+    .quick-link-desc {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* --- Readiness link card --- */
+
+    .readiness-link-card {
+      display: block;
+      background: var(--oeff-sage-mist);
+      border: 1px solid var(--oeff-sage-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-2xl);
+      text-decoration: none;
+      color: var(--color-text);
+      transition: border-color 0.15s var(--ease), box-shadow 0.15s var(--ease);
+    }
+
+    .readiness-link-card:hover {
+      border-color: var(--oeff-sage);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .readiness-link-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--oeff-sage-deep);
+    }
+
+    .readiness-link-arrow {
+      float: right;
+      font-size: 1.1rem;
+      color: var(--oeff-sage-deep);
+    }
+
+    .readiness-link-meta {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-top: 0.2em;
+    }
+
+    /* --- Collapsible reference sections --- */
+
+    details.ref-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    details.ref-section summary {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      padding-bottom: var(--space-xs);
+      border-bottom: 2px solid var(--oeff-sage-light);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    details.ref-section summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.ref-section summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--color-text-muted);
+      transition: transform 0.15s var(--ease);
+    }
+
+    details[open].ref-section summary::after {
+      content: '\2212';
+    }
+
+    details.ref-section > .ref-content {
+      padding-top: var(--space-md);
     }
 
     /* --- Tools / reference tables --- */
@@ -473,43 +651,7 @@
       color: var(--oeff-sage-deep);
     }
 
-    /* --- Footer --- */
-
-    .footer {
-      text-align: center;
-      padding: var(--space-xl) 0;
-      border-top: 1px solid var(--color-border);
-      margin-top: var(--space-xl);
-    }
-
-    .footer p {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      color: var(--color-text-muted);
-      margin: 0;
-    }
-
-    .footer a {
-      color: var(--oeff-blue);
-      text-decoration: none;
-    }
-
-    /* --- Responsive --- */
-
     @media (max-width: 600px) {
-      .container {
-        padding: var(--space-md) var(--space-md) var(--space-2xl);
-      }
-
-      .header h1 {
-        font-size: 1.3rem;
-      }
-
-      .task-header {
-        flex-wrap: wrap;
-        gap: var(--space-xs);
-      }
-
       .escalation-item {
         flex-direction: column;
         gap: var(--space-xs);
@@ -524,6 +666,7 @@
         white-space: normal;
       }
     }
+
   </style>
 </head>
 <body>
@@ -539,13 +682,43 @@
     </header>
 
     <!-- ============================================= -->
+    <!-- QUICK LINKS -->
+    <!-- ============================================= -->
+    <div class="quick-links">
+      <div class="quick-link">
+        <span class="quick-link-label">hosts@ Gmail</span>
+        <span class="quick-link-desc">Shared inbox</span>
+      </div>
+      <div class="quick-link">
+        <span class="quick-link-label">Airtable</span>
+        <span class="quick-link-desc">Master data</span>
+      </div>
+      <div class="quick-link">
+        <span class="quick-link-label">Mailmeteor</span>
+        <span class="quick-link-desc">Mail merge</span>
+      </div>
+      <a href="https://hosts.oneearthfilmfest.org" class="quick-link">
+        <span class="quick-link-label">Host Guide</span>
+        <span class="quick-link-desc">Public reference</span>
+      </a>
+      <div class="quick-link">
+        <span class="quick-link-label">Claude Project</span>
+        <span class="quick-link-desc">AI comms assistant</span>
+      </div>
+      <div class="quick-link">
+        <span class="quick-link-label">Google Drive</span>
+        <span class="quick-link-desc">Templates &amp; docs</span>
+      </div>
+    </div>
+
+    <!-- ============================================= -->
     <!-- DYNAMIC SECTIONS (from kim-tasks.json) -->
     <!-- BEGIN:DYNAMIC_CONTENT -->
     <!-- ============================================= -->
 
     <!-- What's Current -->
     <section class="section" id="current">
-      <h2>What's Current</h2>
+      <h2>What&#39;s Current</h2>
       <div class="task-card">
           <div class="task-header">
             <span class="stream-pill" style="background: #3960AC;">Onboarding</span>
@@ -617,6 +790,7 @@
         </div>
     </section>
 
+    
     <!-- Done -->
     <section class="section" id="done">
       <h3>Completed</h3>
@@ -697,403 +871,215 @@
     <!-- END:DYNAMIC_CONTENT -->
 
     
-    <!-- Host Readiness (from Airtable) -->
-    <!-- BEGIN:HOST_READINESS -->
-    <section class="section" id="readiness">
-      <h2>Host Readiness &mdash; 0 of 27 venues on track</h2>
-      <h3>Needs attention (27)</h3>
-      <div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">BUILD, Inc.</span>
-          </div>
-          <div class="readiness-detail">Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Confirmed Interest</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Bethel New Life</span>
-          </div>
-          <div class="readiness-detail">Rooted &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Black Girl Environmentalists at UIC or Patagonia Fulton Market</span>
-          </div>
-          <div class="readiness-detail">40 Acres &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Broadway United Methodist Church</span>
-          </div>
-          <div class="readiness-detail">From Rails to Trails &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Chicago Cultural Center</span>
-          </div>
-          <div class="readiness-detail">Flagship</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Climate Action Evanston</span>
-          </div>
-          <div class="readiness-detail">Plastic People &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Columbia College - Film Row Cinema</span>
-          </div>
-          <div class="readiness-detail">Reasons for Hope: Dr. Jane Goodall &middot; Flagship</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Cultivate Collective (at Academy for Global Citizenship)</span>
-          </div>
-          <div class="readiness-detail">Young Filmmakers Winner Short Films &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Cultivate Collective/Academy for Global Citizenship (said they are interested in 2026)</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Discover Card/Capital One</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Dominican University</span>
-          </div>
-          <div class="readiness-detail">Rooted &middot; Community/Hybrid Stream</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Epiphany Center for the Arts (said they are interested in 2026)</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Euclid AVE UMC</span>
-          </div>
-          <div class="readiness-detail">Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Confirmed Interest</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Go Green Park Ridge</span>
-          </div>
-          <div class="readiness-detail">Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Confirmed Interest</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Illinois Clinicians for Climate Action</span>
-          </div>
-          <div class="readiness-detail">Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Confirmed Interest</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Institute of Cultural Affairs in the USA</span>
-          </div>
-          <div class="readiness-detail">How to Power a City &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Kehrein Center for the Arts at BlkRoom</span>
-          </div>
-          <div class="readiness-detail">40 Acres &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Lizadro Museum (gem museum), Northbrook</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Loyola University Law School</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Northbrook Public Library</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Seven Generations Ahead</span>
-          </div>
-          <div class="readiness-detail">Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Confirmed Interest</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Trinity Lutheran Church</span>
-          </div>
-          <div class="readiness-detail">Beyond Zero &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Trinity Lutheran, Des Plaines (Prospect)</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Triton College</span>
-          </div>
-          <div class="readiness-detail">How to Power a City &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Uncommon Ground</span>
-          </div>
-          <div class="readiness-detail">TBD &middot; Flagship</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Village of Oak Park</span>
-          </div>
-          <div class="readiness-detail">How to Power a City &middot; Community</div>
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span></div>
-        </div>
-<div class="task-card">
-          <div class="task-header">
-            <span class="readiness-venue">Village of Oak Park at Oak Park Village Hall (with Sustainability Department, Chief Sustainability Officer)</span>
-          </div>
-          
-          <div class="readiness-items"><span class="readiness-missing">No screening packet</span>  <span class="readiness-missing">No ticket link</span>  <span class="readiness-missing">Pipeline: Interested</span></div>
-        </div>
-      
-    </section>
-    <!-- END:HOST_READINESS -->
-
 
     <!-- ============================================= -->
-    <!-- STATIC SECTIONS (from resource hub content) -->
+    <!-- REFERENCE SECTIONS (collapsible) -->
     <!-- ============================================= -->
 
-    <!-- Your Tools -->
-    <section class="section" id="tools">
-      <h2>Your Tools</h2>
-      <table class="ref-table">
-        <tbody>
-          <tr>
-            <td>hosts@ Gmail</td>
-            <td>Shared inbox — all host replies come here</td>
-          </tr>
-          <tr>
-            <td>Airtable</td>
-            <td>Master data source — hosts, events, screening dates</td>
-          </tr>
-          <tr>
-            <td>Mailmeteor</td>
-            <td>Mail merge — build and send campaigns</td>
-          </tr>
-          <tr>
-            <td><a href="https://hosts.oneearthfilmfest.org">Host Guide</a></td>
-            <td>The persistent reference hosts are pointed to in every email</td>
-          </tr>
-          <tr>
-            <td>Claude Project</td>
-            <td>AI assistant scoped to OEFF host comms — helps draft emails, process data</td>
-          </tr>
-          <tr>
-            <td>Google Drive</td>
-            <td>Shared folder for templates, recordings, working docs</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- Tools -->
+    <details class="ref-section" id="tools">
+      <summary>Your Tools</summary>
+      <div class="ref-content">
+        <table class="ref-table">
+          <tbody>
+            <tr>
+              <td>hosts@ Gmail</td>
+              <td>Shared inbox — all host replies come here</td>
+            </tr>
+            <tr>
+              <td>Airtable</td>
+              <td>Master data source — hosts, events, screening dates</td>
+            </tr>
+            <tr>
+              <td>Mailmeteor</td>
+              <td>Mail merge — build and send campaigns</td>
+            </tr>
+            <tr>
+              <td><a href="https://hosts.oneearthfilmfest.org">Host Guide</a></td>
+              <td>The persistent reference hosts are pointed to in every email</td>
+            </tr>
+            <tr>
+              <td>Claude Project</td>
+              <td>AI assistant scoped to OEFF host comms — helps draft emails, process data</td>
+            </tr>
+            <tr>
+              <td>Google Drive</td>
+              <td>Shared folder for templates, recordings, working docs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- Email Templates -->
-    <section class="section" id="templates">
-      <h2>Email Templates</h2>
-      <table class="ref-table">
-        <thead>
-          <tr>
-            <th>Template</th>
-            <th>When to use</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>03 — Webinar Preview</td>
-            <td>7 days before webinar</td>
-          </tr>
-          <tr>
-            <td>04 — Webinar Reminder</td>
-            <td>1 day before webinar</td>
-          </tr>
-          <tr>
-            <td>05 — Webinar Recap</td>
-            <td>Day after webinar (with recording link)</td>
-          </tr>
-          <tr>
-            <td>01 — Host Helper URL</td>
-            <td>When sharing host-specific page links</td>
-          </tr>
-          <tr>
-            <td>02 — Financial/Password</td>
-            <td>When sending secure credentials</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <details class="ref-section" id="templates">
+      <summary>Email Templates</summary>
+      <div class="ref-content">
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>Template</th>
+              <th>When to use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>03 — Webinar Preview</td>
+              <td>7 days before webinar</td>
+            </tr>
+            <tr>
+              <td>04 — Webinar Reminder</td>
+              <td>1 day before webinar</td>
+            </tr>
+            <tr>
+              <td>05 — Webinar Recap</td>
+              <td>Day after webinar (with recording link)</td>
+            </tr>
+            <tr>
+              <td>01 — Host Helper URL</td>
+              <td>When sharing host-specific page links</td>
+            </tr>
+            <tr>
+              <td>02 — Financial/Password</td>
+              <td>When sending secure credentials</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- SOPs -->
-    <section class="section" id="sops">
-      <h2>SOPs</h2>
-      <div class="sop-item">
-        <span class="sop-number">1</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1NxmvMUHP2Rk3vaNzzDKzwHAAUyb7s1EvpaJ-H262KKA/edit?usp=drivesdk">Webinar Cycle Process</a>
-          <span class="sop-desc">Your primary playbook</span>
-        </span>
-        <span class="sop-status active">Active now</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">2</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1zNZAYPdQV-V7hyCnGnJ9Wy2UGnv_wWIWlGAOIp5ftQQ/edit?usp=drivesdk">Deliverables Shipping</a>
-          <span class="sop-desc">Film files, promo, slides, t-shirts</span>
-        </span>
-        <span class="sop-status">Late March</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">3</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/19WmKK3AexuxIvuEP7aGqHkKoHrFPq9GWHqaa3URn-xg/edit?usp=drivesdk">Milestone Communications</a>
-          <span class="sop-desc">Key-date emails (film confirmed, one week out, etc.)</span>
-        </span>
-        <span class="sop-status">Sends start Mar 9</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">4</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1jXlsgP9l0sfhHUKufHnzL-nHNxz4zCAJZI4m-YrNy5U/edit?usp=drivesdk">Host Surveys</a>
-          <span class="sop-desc">3 forms: pre-event, day-of, post-screening</span>
-        </span>
-        <span class="sop-status">Before Apr 1</span>
-      </div>
-      <div class="sop-item">
-        <span class="sop-number">5</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1nlqqnt070WJgBPPmHhPD6M5Z6z73fgiPdhF-WVIb20k/edit?usp=drivesdk">Cool Host Conversion</a>
-          <span class="sop-desc">Uncommitted venues pipeline</span>
-        </span>
-        <span class="sop-status">If needed</span>
-      </div>
+    <details class="ref-section" id="sops">
+      <summary>SOPs</summary>
+      <div class="ref-content">
+        <div class="sop-item">
+          <span class="sop-number">1</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1NxmvMUHP2Rk3vaNzzDKzwHAAUyb7s1EvpaJ-H262KKA/edit?usp=drivesdk">Webinar Cycle Process</a>
+            <span class="sop-desc">Your primary playbook</span>
+          </span>
+          <span class="sop-status active">Active now</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">2</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1zNZAYPdQV-V7hyCnGnJ9Wy2UGnv_wWIWlGAOIp5ftQQ/edit?usp=drivesdk">Deliverables Shipping</a>
+            <span class="sop-desc">Film files, promo, slides, t-shirts</span>
+          </span>
+          <span class="sop-status">Late March</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">3</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/19WmKK3AexuxIvuEP7aGqHkKoHrFPq9GWHqaa3URn-xg/edit?usp=drivesdk">Milestone Communications</a>
+            <span class="sop-desc">Key-date emails (film confirmed, one week out, etc.)</span>
+          </span>
+          <span class="sop-status">Sends start Mar 9</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">4</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1jXlsgP9l0sfhHUKufHnzL-nHNxz4zCAJZI4m-YrNy5U/edit?usp=drivesdk">Host Surveys</a>
+            <span class="sop-desc">3 forms: pre-event, day-of, post-screening</span>
+          </span>
+          <span class="sop-status">Before Apr 1</span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">5</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1nlqqnt070WJgBPPmHhPD6M5Z6z73fgiPdhF-WVIb20k/edit?usp=drivesdk">Cool Host Conversion</a>
+            <span class="sop-desc">Uncommitted venues pipeline</span>
+          </span>
+          <span class="sop-status">If needed</span>
+        </div>
 
-      <h3>Supporting References</h3>
-      <div class="sop-item">
-        <span class="sop-number">&bull;</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1qUuZgCqqbAvU41vY9cB_JQwGDpd_MyPv3Ypifv8e0Ks/edit?usp=drivesdk">Email Template Quick Reference</a>
-          <span class="sop-desc">All templates, merge fields, send checklist</span>
-        </span>
+        <h3>Supporting References</h3>
+        <div class="sop-item">
+          <span class="sop-number">&bull;</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1qUuZgCqqbAvU41vY9cB_JQwGDpd_MyPv3Ypifv8e0Ks/edit?usp=drivesdk">Email Template Quick Reference</a>
+            <span class="sop-desc">All templates, merge fields, send checklist</span>
+          </span>
+        </div>
+        <div class="sop-item">
+          <span class="sop-number">&bull;</span>
+          <span class="sop-title">
+            <a href="https://docs.google.com/document/d/1PXox5bpJK8SDFxjCS-LYBFX2vAkOVZopMC5OaMJZL1I/edit?usp=drivesdk">Who Does What</a>
+            <span class="sop-desc">Team roles, decision rights, routing rules</span>
+          </span>
+        </div>
       </div>
-      <div class="sop-item">
-        <span class="sop-number">&bull;</span>
-        <span class="sop-title">
-          <a href="https://docs.google.com/document/d/1PXox5bpJK8SDFxjCS-LYBFX2vAkOVZopMC5OaMJZL1I/edit?usp=drivesdk">Who Does What</a>
-          <span class="sop-desc">Team roles, decision rights, routing rules</span>
-        </span>
-      </div>
-    </section>
+    </details>
 
-    <!-- Team — Who Does What -->
-    <section class="section" id="team">
-      <h2>Team — Who Does What</h2>
-      <table class="ref-table">
-        <thead>
-          <tr>
-            <th>Role</th>
-            <th>Scope</th>
-            <th>When to reach out</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Executive Director</td>
-            <td>Strategic direction, messaging approval, budget, scope</td>
-            <td>Outside your playbook, touches budget/scope</td>
-          </tr>
-          <tr>
-            <td>Operations</td>
-            <td>Eventbrite, scheduling, venue logistics</td>
-            <td>Event details or scheduling questions</td>
-          </tr>
-          <tr>
-            <td>Technical Coordinator (Garen)</td>
-            <td>Comms infrastructure, data systems, your primary contact</td>
-            <td>Templates need review, technical questions, anything you're unsure about</td>
-          </tr>
-          <tr>
-            <td>AV/Production</td>
-            <td>Equipment, technical specs, on-site setup</td>
-            <td>Venue tech questions</td>
-          </tr>
-          <tr>
-            <td>Marketing/Creative</td>
-            <td>Trailer reel, graphics, social assets</td>
-            <td>Route through AV/Production or Technical Coordinator</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- Team -->
+    <details class="ref-section" id="team">
+      <summary>Team — Who Does What</summary>
+      <div class="ref-content">
+        <table class="ref-table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Scope</th>
+              <th>When to reach out</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Executive Director</td>
+              <td>Strategic direction, messaging approval, budget, scope</td>
+              <td>Outside your playbook, touches budget/scope</td>
+            </tr>
+            <tr>
+              <td>Operations</td>
+              <td>Eventbrite, scheduling, venue logistics</td>
+              <td>Event details or scheduling questions</td>
+            </tr>
+            <tr>
+              <td>Technical Coordinator (Garen)</td>
+              <td>Comms infrastructure, data systems, your primary contact</td>
+              <td>Templates need review, technical questions, anything you&#39;re unsure about</td>
+            </tr>
+            <tr>
+              <td>AV/Production</td>
+              <td>Equipment, technical specs, on-site setup</td>
+              <td>Venue tech questions</td>
+            </tr>
+            <tr>
+              <td>Marketing/Creative</td>
+              <td>Trailer reel, graphics, social assets</td>
+              <td>Route through AV/Production or Technical Coordinator</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- Escalation Rules -->
-    <section class="section" id="escalation">
-      <h2>Escalation Rules</h2>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Host asks something you can answer</span>
-        <span class="escalation-action">Answer from hosts@, your judgment</span>
+    <details class="ref-section" id="escalation">
+      <summary>Escalation Rules</summary>
+      <div class="ref-content">
+        <div class="escalation-item">
+          <span class="escalation-trigger">Host asks something you can answer</span>
+          <span class="escalation-action">Answer from hosts@, your judgment</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Host asks something you&#39;re not sure about</span>
+          <span class="escalation-action">Flag to Garen in Google Chat</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Host can&#39;t make a webinar</span>
+          <span class="escalation-action">Reassure — recording will be sent</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Mailmeteor merge looks wrong in test</span>
+          <span class="escalation-action">Don&#39;t send — screenshot to Garen</span>
+        </div>
+        <div class="escalation-item">
+          <span class="escalation-trigger">Anything about budget, scope, or commitments</span>
+          <span class="escalation-action">Escalate to Executive Director</span>
+        </div>
       </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Host asks something you're not sure about</span>
-        <span class="escalation-action">Flag to Garen in Google Chat</span>
-      </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Host can't make a webinar</span>
-        <span class="escalation-action">Reassure — recording will be sent</span>
-      </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Mailmeteor merge looks wrong in test</span>
-        <span class="escalation-action">Don't send — screenshot to Garen</span>
-      </div>
-      <div class="escalation-item">
-        <span class="escalation-trigger">Anything about budget, scope, or commitments</span>
-        <span class="escalation-action">Escalate to Executive Director</span>
-      </div>
-    </section>
+    </details>
 
     <!-- Your Three Questions -->
     <section class="section" id="questions">
@@ -1102,8 +1088,8 @@
         Keep a running doc with your observations. These make the system better for next time.
       </p>
       <ol class="questions-list">
-        <li><strong>What tripped you up?</strong> Where did the process assume context you didn't have?</li>
-        <li><strong>What's missing?</strong> If someone else needed to do this next year, what would you add?</li>
+        <li><strong>What tripped you up?</strong> Where did the process assume context you didn&#39;t have?</li>
+        <li><strong>What&#39;s missing?</strong> If someone else needed to do this next year, what would you add?</li>
         <li><strong>What could be tighter?</strong> Patterns you see that could become templates or checklists.</li>
       </ol>
     </section>
