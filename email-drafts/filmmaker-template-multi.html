@@ -1,0 +1,47 @@
+<!--
+  From: films@oneearthcollective.org
+  CC: garen@oneearthcollective.org, ana@oneearthcollective.org
+  Subject: OEFF 2026: {{ Film Title }} — screening confirmation + licensing
+  Account: films@oneearthcollective.org
+  Tags: oeff, filmmaker-comms, mail-merge
+  Guards: none (email HTML — inline styles required, no CSS variables)
+  Notes: Mailmeteor merge template — MULTI SCREENING films only.
+  Fields: {{ First Name }}, {{ Film Title }}, {{ Screening Count }}, {{ Venue 1 }}, {{ Date 1 }}, {{ Venue 2 }}, {{ Date 2 }}, {{ Venue 3 }}, {{ Date 3 }}
+  Multi-venue films: Rooted (3), How to Power a City (3), 40 Acres (2), Rails to Trails (2)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"></head>
+<body style="font-family: system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.5; color: #333; margin: 0; padding: 0;">
+
+<p>Hi {{ First Name }},</p>
+
+<p>Your film <strong>{{ Film Title }}</strong> is confirmed for <strong>{{ Screening Count }} screenings</strong> at OEFF 2026:</p>
+
+<p style="margin-left: 16px;">
+{{ Venue 1 }} — {{ Date 1 }}<br>
+{{ Venue 2 }} — {{ Date 2 }}<br>
+{{ Venue 3 }} — {{ Date 3 }}
+</p>
+
+<!--
+  MERGE NOTE: For 2-screening films (40 Acres, Rails to Trails), delete the
+  Venue 3 / Date 3 line before sending. Mailmeteor will leave blank merge
+  fields if the row is empty, so remove the line entirely.
+-->
+
+<p>All screenings are free with a suggested donation, with audiences up to 100–200 depending on the venue.</p>
+
+<p>Could you let us know your nonprofit screening license rate for {{ Screening Count }} screenings? If you offer a multi-screening or festival rate, we're happy to work with that.</p>
+
+<p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+
+<p>Looking forward to working with you.</p>
+
+<p>Best,<br>
+Garen Hudson<br>
+Technical Coordinator, One Earth Film Festival<br>
+films@oneearthcollective.org</p>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!--
+  From: films@oneearthcollective.org
+  CC: garen@oneearthcollective.org, ana@oneearthcollective.org
+  Subject: OEFF 2026: {{ Film Title }} — screening confirmation + licensing
+  Account: films@oneearthcollective.org
+  Tags: oeff, filmmaker-comms, mail-merge
+  Guards: none (email HTML — inline styles required, no CSS variables)
+  Notes: Mailmeteor merge template. Fields: {{ First Name }}, {{ Film Title }}, {{ Screening Count }}, {{ Venue 1 }}, {{ Date 1 }}, {{ Venue 2 }}, {{ Date 2 }}, {{ Venue 3 }}, {{ Date 3 }}, {{ License Tier }}, {{ Survey Status }}
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"></head>
+<body style="font-family: system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.6; color: #333; max-width: 600px; margin: 0; padding: 16px;">
+
+<p>Hi {{ First Name }},</p>
+
+<p>Thanks for being part of One Earth Film Festival 2026. Your film <strong>{{ Film Title }}</strong> is confirmed for <strong>{{ Screening Count }}</strong> screening(s):</p>
+
+<ul>
+<li>{{ Venue 1 }} — {{ Date 1 }}</li>
+</ul>
+
+<!--
+  MERGE NOTE: For multi-screening films, manually add Venue 2/3 lines before sending.
+  Mailmeteor doesn't support conditional rows, so for films with 2-3 venues,
+  add the extra <li> lines in the draft before running the merge.
+  OR: create separate templates per tier (single vs multi).
+-->
+
+<p>All screenings are free with a suggested $10 donation, with audiences of up to 100-200 depending on the venue.</p>
+
+<p><strong>One ask:</strong> Please reply with your nonprofit screening license rate for {{ Screening Count }} screening(s). If you offer a multi-screening discount, we're happy to discuss.</p>
+
+<p>We'll confirm final details (file delivery format, AV specs, day-of logistics) once licensing is settled.</p>
+
+<!--
+  CONDITIONAL: Only include the form paragraph for films where Survey Status = "Needed".
+  For films where Survey Status = "Submitted", delete this paragraph before sending.
+-->
+<p><em>If you haven't already, please also complete our <a href="https://docs.google.com/forms/d/e/1FAIpQLSfpGUQ-Wwy4IrkhmlWqf17kgs7PSyFiSMW2Q-uCDanV0bzfwg/viewform">Film Intake Form</a> — it covers contact info, file formats, and accessibility details we'll need for your screening.</em></p>
+
+<p>Looking forward to working with you on this.</p>
+
+<p>Best,<br>
+Garen Hudson<br>
+Technical Coordinator, One Earth Film Festival<br>
+<a href="mailto:films@oneearthcollective.org">films@oneearthcollective.org</a></p>
+
+</body>
+</html>

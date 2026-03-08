@@ -1,4 +1,4 @@
-# YAMM Draft 1: Host Helper Page URL
+# Mailmeteor Draft 1: Host Helper Page URL
 
 **Subject:** Your OEFF 2026 Host Helper Page — {{Venue Name}}
 

@@ -1,4 +1,4 @@
-# YAMM Draft 2: Financial Information Password
+# Mailmeteor Draft 2: Financial Information Password
 
 **Subject:** OEFF 2026 — Financial Information — {{Venue Name}}
 

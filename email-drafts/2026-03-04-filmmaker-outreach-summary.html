@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OEFF 2026 Filmmaker Outreach — Session Summary</title>
+<style>
+  :root {
+    --bg: #faf9f7;
+    --surface: #ffffff;
+    --text: #2c2c2c;
+    --text-muted: #6b6b6b;
+    --border: #e4e0db;
+    --accent: #5c7c6b;
+    --accent-light: #eef3f0;
+    --warn: #c4762b;
+    --warn-light: #fdf4ec;
+    --done: #3d7c5f;
+    --done-light: #edf6f1;
+    --shadow: hsla(25, 40%, 30%, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 24px 16px 64px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+  }
+  .dateline {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    box-shadow: 0 1px 3px var(--shadow);
+  }
+  .card-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .card a {
+    color: var(--accent);
+    word-break: break-all;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+  th {
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted);
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .tag-done { background: var(--done-light); color: var(--done); }
+  .tag-open { background: var(--warn-light); color: var(--warn); }
+  .tag-info { background: var(--accent-light); color: var(--accent); }
+  ol, ul { padding-left: 20px; margin: 8px 0; }
+  li { margin: 6px 0; }
+  .question-list { counter-reset: q; list-style: none; padding: 0; }
+  .question-list li {
+    counter-increment: q;
+    padding: 12px 16px 12px 48px;
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 8px 0;
+    box-shadow: 0 1px 3px var(--shadow);
+  }
+  .question-list li::before {
+    content: counter(q);
+    position: absolute;
+    left: 16px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .question-list strong { display: block; margin-bottom: 2px; }
+  .section-open { margin-top: 24px; }
+  code {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 13px;
+    background: var(--accent-light);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    table { font-size: 13px; }
+    td, th { padding: 6px; }
+  }
+  .nowrap { white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<h1>Filmmaker Outreach — Session Summary</h1>
+<div class="dateline">March 4, 2026 &middot; OEFF 2026 &middot; Garen Hudson</div>
+
+<!-- ===================== LINKS ===================== -->
+<h2>Key Links</h2>
+<div class="two-col">
+  <div class="card">
+    <div class="card-label">Merge Sheet (Google)</div>
+    <a href="https://docs.google.com/spreadsheets/d/1eFyEiENnjiOdy5eYAVwZUpWKvtfxhdZ2L-_YlWSSxFQ/edit" target="_blank">OEFF 2026 Filmmaker Merge Sheet</a>
+    <div style="margin-top:6px;font-size:13px;color:var(--text-muted);">Needs sharing with Ana + Josh (editor access)</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Supplemental Form Responses</div>
+    <a href="https://docs.google.com/spreadsheets/d/1fs57bxIZJdfpm6nqlIZ_D42QsA9_iSjXuDlLiiz7nOU/edit" target="_blank">Film Supplemental Survey (Responses)</a>
+    <div style="margin-top:6px;font-size:13px;color:var(--text-muted);">Linked to form. 0 responses so far.</div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-label">Local Merge CSV</div>
+    <code>~/Desktop/OEFF Clean Data/filmmaker-merge-sheet.csv</code>
+  </div>
+  <div class="card">
+    <div class="card-label">Email Templates (3)</div>
+    <code>~/Desktop/OEFF Clean Data/email-drafts/filmmaker-template-{single,multi,needs-intake}.html</code>
+  </div>
+</div>
+
+<!-- ===================== FILM STATUS ===================== -->
+<h2>Film Status — All 11 in Merge Sheet</h2>
+<div class="card" style="overflow-x:auto;">
+<table>
+  <thead>
+    <tr>
+      <th>Film</th>
+      <th>Contact</th>
+      <th class="nowrap">Screens</th>
+      <th>Tier</th>
+      <th>Venues</th>
+      <th>Intake</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Jane Goodall: Reasons for Hope</strong></td>
+      <td>John Wickstrom<br><span style="font-size:12px;color:var(--text-muted)">Cosmic Picture</span></td>
+      <td>1</td>
+      <td><span class="tag tag-info">Single</span></td>
+      <td>Broadway United Methodist</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>Plastic People</strong></td>
+      <td>Ruth Fein Pindilli<br><span style="font-size:12px;color:var(--text-muted)">White Pine</span></td>
+      <td>1</td>
+      <td><span class="tag tag-info">Single</span></td>
+      <td>Unity Temple</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>Beyond Zero</strong></td>
+      <td>Nathan Havey<br><span style="font-size:12px;color:var(--text-muted)">nathan@haveypro.com</span></td>
+      <td>1</td>
+      <td><span class="tag tag-info">Single</span></td>
+      <td>Trinity Lutheran Church</td>
+      <td><span class="tag tag-open">Needed</span></td>
+    </tr>
+    <tr>
+      <td><strong>Drowned Land</strong></td>
+      <td>Colleen Thurston</td>
+      <td>1</td>
+      <td><span class="tag tag-info">Single</span></td>
+      <td>Episcopal Church of Our Saviour</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>Rooted</strong></td>
+      <td>Lauren Waring Douglas<br><span style="font-size:12px;color:var(--text-muted)">+ Bridget Besaw</span></td>
+      <td>3</td>
+      <td><span class="tag tag-open">Multi</span></td>
+      <td>Bethel New Life · Dominican University · IIT/Bronzeville</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>How to Power a City</strong></td>
+      <td>Melanie La Rosa</td>
+      <td>3</td>
+      <td><span class="tag tag-open">Multi</span></td>
+      <td>Epiphany · Beverly Arts · Kehrein Center</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>Oscar Shorts</strong></td>
+      <td>Darwin Shaw<br><span style="font-size:12px;color:var(--text-muted)">ShortsTV</span></td>
+      <td>1</td>
+      <td><span class="tag tag-info">Single</span></td>
+      <td>Chicago Cultural Center</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>40 Acres</strong></td>
+      <td>Dan McCarthy<br><span style="font-size:12px;color:var(--text-muted)">dmccarthy@magpictures.com<br>Magnolia Pictures (distributor)</span></td>
+      <td>2</td>
+      <td><span class="tag tag-open">Multi</span></td>
+      <td>Kehrein Center · BGE (UIC/Patagonia)</td>
+      <td><span class="tag tag-open">Needed</span></td>
+    </tr>
+    <tr>
+      <td><strong>Whose Water?</strong></td>
+      <td>Kate Levy</td>
+      <td>1</td>
+      <td><span class="tag tag-info">Single</span></td>
+      <td>Epiphany Center for the Arts</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>Rails to Trails</strong></td>
+      <td>Dan Protess<br><span style="font-size:12px;color:var(--text-muted)">Protess Communications</span></td>
+      <td>2</td>
+      <td><span class="tag tag-open">Multi</span></td>
+      <td>Broadway United Methodist · Calumet College</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+    <tr>
+      <td><strong>In Our Nature</strong></td>
+      <td>James Parker<br><span style="font-size:12px;color:var(--text-muted)">Synchronous · + Juliet Grable</span></td>
+      <td>1</td>
+      <td><span class="tag tag-info">Single</span></td>
+      <td>Chicago Cultural Center</td>
+      <td><span class="tag tag-done">Done</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ===================== UPDATES THIS SESSION ===================== -->
+<h2>What Changed Today</h2>
+<div class="card">
+  <h3>Josh provided two missing emails</h3>
+  <ul>
+    <li><strong>Beyond Zero:</strong> Nathan Havey &rarr; <code>nathan@haveypro.com</code> (filmmaker direct). Also corrected last name from "Church" to "Havey."</li>
+    <li><strong>40 Acres:</strong> Dan McCarthy &rarr; <code>dmccarthy@magpictures.com</code> (Magnolia Pictures, distributor). R.T. Thorne is the filmmaker; licensing goes through Magnolia.</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>Screening counts reconciled with Roadmap</h3>
+  <table>
+    <thead><tr><th>Film</th><th>Was</th><th>Now</th><th>Change</th></tr></thead>
+    <tbody>
+      <tr><td>Rooted</td><td>2</td><td>3</td><td>Added IIT/Bronzeville</td></tr>
+      <tr><td>Rails to Trails</td><td>1</td><td>2</td><td>Added Calumet College</td></tr>
+      <tr><td>Whose Water?</td><td>0</td><td>1</td><td>Venue: Epiphany Center</td></tr>
+      <tr><td>In Our Nature</td><td>0</td><td>1</td><td>Venue: Chicago Cultural Center</td></tr>
+    </tbody>
+  </table>
+  <div style="font-size:13px;color:var(--text-muted);margin-top:8px;">Google Sheet and local CSV are in sync as of this session.</div>
+</div>
+
+<!-- ===================== TEMPLATES ===================== -->
+<h2>Email Templates</h2>
+<div class="card">
+  <p>Three Mailmeteor-ready HTML templates, all sending from <code>films@oneearthcollective.org</code>, cc Garen + Ana:</p>
+  <table>
+    <thead><tr><th>Template</th><th>For</th><th>Key ask</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Single</strong><br><code>filmmaker-template-single.html</code></td>
+        <td>1-screening films (7 films)</td>
+        <td>Nonprofit screening license rate</td>
+      </tr>
+      <tr>
+        <td><strong>Multi</strong><br><code>filmmaker-template-multi.html</code></td>
+        <td>2-3 screening films (4 films: Rooted, How to Power a City, 40 Acres, Rails to Trails)</td>
+        <td>Multi-screening / festival rate</td>
+      </tr>
+      <tr>
+        <td><strong>Needs Intake</strong><br><code>filmmaker-template-needs-intake.html</code></td>
+        <td>Beyond Zero, 40 Acres</td>
+        <td>Licensing rate + Film Intake Form link</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:10px;padding:10px 14px;background:var(--warn-light);border-radius:6px;font-size:13px;">
+    <strong style="color:var(--warn);">Note:</strong> The intake form URL in <code>needs-intake</code> template is a placeholder (<code>1FAIpQLSflchFav/viewform</code>). Needs the real full URL pasted in before sending.
+  </div>
+</div>
+
+<!-- ===================== NOT IN MERGE SHEET ===================== -->
+<h2>Not in Merge Sheet</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Film</th><th>Roadmap Screenings</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Chasing Time</strong></td><td>3</td><td><span class="tag tag-open">No contact, not in merge sheet</span></td></tr>
+      <tr><td><strong>Planetwalker</strong></td><td>3</td><td><span class="tag tag-open">No contact, not in merge sheet</span></td></tr>
+      <tr><td><strong>CAM Awards</strong></td><td>0</td><td><span class="tag tag-info">Partnership — separate track</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================== OPEN ITEMS ===================== -->
+<h2>Still Open</h2>
+<div class="card">
+  <ul>
+    <li><strong>Licensing framing</strong> — "Name your price" vs. "Here's our offer." Draft asking Josh/Ana is in Gmail drafts. Garen also unsure of the right framing.</li>
+    <li><strong>Film Intake Survey URL</strong> — needs full URL pasted into needs-intake template.</li>
+    <li><strong>Merge sheet sharing</strong> — not yet shared with Ana/Josh. Manual step (Share button).</li>
+    <li><strong>Chasing Time + Planetwalker</strong> — on Roadmap with 3 screenings each but missing from merge sheet entirely. Need contacts + confirmation.</li>
+    <li><strong>Early-access tickets</strong> — planned for week of March 2, now March 4. Blocked on licensing or something else?</li>
+    <li><strong>Stale status doc</strong> — <code>filmmaker-comms-status.md</code> is from Feb 28. Screening counts and contacts are now outdated vs. what's in the merge sheet.</li>
+  </ul>
+</div>
+
+<!-- ===================== ANA QUESTIONS ===================== -->
+<h2>5 Questions for Ana Call</h2>
+<ol class="question-list">
+  <li>
+    <strong>Licensing framing — what's the actual ask?</strong>
+    Are we asking filmmakers to name their nonprofit screening rate, or proposing a number? The template currently says "let us know your rate" — but if there's a budget ceiling or standard offer, that's a very different email.
+  </li>
+  <li>
+    <strong>Early-access tickets — what's the blocker?</strong>
+    Target was week of March 2. Is licensing confirmation the gate, or something else? What does "unblocked" look like?
+  </li>
+  <li>
+    <strong>CAM Awards — same outreach or separate track?</strong>
+    Status doc flags this as a partnership, not a standard screening. Does CAM get the licensing email, a different one, or is someone else handling that relationship entirely?
+  </li>
+  <li>
+    <strong>Chasing Time + Planetwalker — confirmed?</strong>
+    Both show 3 screenings on the Roadmap but aren't in the merge sheet and have no filmmaker contact on file. Are they in the lineup? Who's the contact?
+  </li>
+  <li>
+    <strong>Can you share the merge sheet?</strong>
+    The Google Sheet with all filmmaker data is built but only Garen can see it. Need Ana + Josh added as editors so everyone's working from the same source.
+  </li>
+</ol>
+
+<div style="margin-top:40px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);text-align:center;">
+  Generated March 4, 2026 &middot; Session summary &middot; Not for external distribution
+</div>
+
+</body>
+</html>

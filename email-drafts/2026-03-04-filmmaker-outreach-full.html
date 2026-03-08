@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OEFF 2026 Filmmaker Outreach — Full Reference</title>
+<style>
+  :root {
+    --bg: #faf9f7;
+    --surface: #ffffff;
+    --text: #2c2c2c;
+    --text-muted: #6b6b6b;
+    --border: #e4e0db;
+    --accent: #5c7c6b;
+    --accent-light: #eef3f0;
+    --warn: #c4762b;
+    --warn-light: #fdf4ec;
+    --done: #3d7c5f;
+    --done-light: #edf6f1;
+    --shadow: hsla(25, 40%, 30%, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 24px 16px 64px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .dateline {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 40px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Film card */
+  .film-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 1px 3px var(--shadow);
+    overflow: hidden;
+  }
+  .film-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 20px 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--accent-light);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .film-title {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .film-id {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'Source Code Pro', monospace;
+  }
+  .film-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .film-meta-cell {
+    background: var(--surface);
+    padding: 10px 20px;
+  }
+  .film-meta-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+  }
+  .film-meta-value {
+    font-size: 14px;
+  }
+  .venue-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .venue-list li {
+    padding: 2px 0;
+  }
+  .venue-date {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .tag-single { background: var(--accent-light); color: var(--accent); }
+  .tag-multi { background: var(--warn-light); color: var(--warn); }
+  .tag-done { background: var(--done-light); color: var(--done); }
+  .tag-needed { background: var(--warn-light); color: var(--warn); }
+  .tag-none { background: #f0f0f0; color: #999; }
+
+  /* Email preview */
+  .email-preview {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .email-preview-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .email-body {
+    background: #fdfdfc;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .email-body p {
+    margin: 0 0 12px;
+  }
+  .email-body p:last-child {
+    margin-bottom: 0;
+  }
+  .email-subject {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .email-venues {
+    margin-left: 16px;
+    margin-bottom: 12px;
+  }
+  .note-box {
+    background: var(--warn-light);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .note-box strong { color: var(--warn); }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+  .summary-table th {
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted);
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .summary-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .open-items {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px var(--shadow);
+  }
+  .open-items li { margin: 6px 0; }
+
+  @media (max-width: 600px) {
+    .film-meta { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>OEFF 2026 — Filmmaker Outreach</h1>
+<div class="dateline">March 4, 2026 &middot; Every film, every venue, every email &middot; Internal reference</div>
+
+<!-- ===================== OVERVIEW ===================== -->
+<h2>At a Glance</h2>
+<table class="summary-table">
+  <thead>
+    <tr><th>Metric</th><th>Count</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Films in merge sheet</td><td><strong>11</strong></td></tr>
+    <tr><td>Total screenings</td><td><strong>16</strong></td></tr>
+    <tr><td>Single-screening films</td><td>7</td></tr>
+    <tr><td>Multi-screening films</td><td>4 (Rooted ×3, How to Power a City ×3, 40 Acres ×2, Rails to Trails ×2)</td></tr>
+    <tr><td>Intake survey submitted</td><td>9 of 11</td></tr>
+    <tr><td>Intake still needed</td><td>2 (Beyond Zero, 40 Acres)</td></tr>
+    <tr><td>Not in merge sheet</td><td>3 (Chasing Time, Planetwalker, CAM Awards — need confirmation)</td></tr>
+  </tbody>
+</table>
+
+<!-- ===================== SINGLE SCREENING FILMS ===================== -->
+<h2>Single Screening Films</h2>
+
+<!-- Jane Goodall -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Jane Goodall: Reasons for Hope</span>
+    <span class="film-id">F26-001</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">John Wickstrom · Cosmic Picture<br><code style="font-size:13px;">john@cosmicpicture.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">Joanie Philipp</div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venue</div>
+      <div class="film-meta-value">Columbia College — Film Row Cinema<br><span class="venue-date">April 22, 2026</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-single">Single</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — Jane Goodall: Reasons for Hope — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team Jane Goodall: Reasons for Hope,</p>
+      <p>Your film <strong>Jane Goodall: Reasons for Hope</strong> is confirmed for one screening at OEFF 2026:</p>
+      <div class="email-venues">Columbia College — Film Row Cinema — April 22, 2026</div>
+      <p>All screenings are free community events with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate? One Earth Film Festival is a 501(c)(3).</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- Plastic People -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Plastic People</span>
+    <span class="film-id">F26-002</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Ruth Fein Pindilli · White Pine Pictures<br><code style="font-size:13px;">ruth@whitepinepictures.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">Peter Raymont</div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venue</div>
+      <div class="film-meta-value">Climate Action Evanston<br><span class="venue-date">April 23, 2026</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-single">Single</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — Plastic People — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team Plastic People,</p>
+      <p>Your film <strong>Plastic People</strong> is confirmed for one screening at OEFF 2026:</p>
+      <div class="email-venues">Climate Action Evanston — April 23, 2026</div>
+      <p>All screenings are free community events with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate? One Earth Film Festival is a 501(c)(3).</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- Beyond Zero -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Beyond Zero</span>
+    <span class="film-id">F26-003</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Nathan Havey · HaveyPro<br><code style="font-size:13px;">nathan@haveypro.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value"><span class="tag tag-needed">Needed</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venue</div>
+      <div class="film-meta-value">Trinity Lutheran Church<br><span class="venue-date">April 23, 2026</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-single">Single</span> <span class="tag tag-needed">Intake needed</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — Beyond Zero — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team Beyond Zero,</p>
+      <p>Your film <strong>Beyond Zero</strong> is confirmed for one screening at OEFF 2026:</p>
+      <div class="email-venues">Trinity Lutheran Church — April 23, 2026</div>
+      <p>All screenings are free community events with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate? One Earth Film Festival is a 501(c)(3).</p>
+      <p>We also need your film's technical and contact details. Could you fill out our <a href="https://docs.google.com/forms/d/e/1FAIpQLSflchFav/viewform">Film Intake Form</a>? It covers file formats, accessibility info, and contact details we'll need for your screening.</p>
+      <p>We'll follow up separately with AV specs and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+    <div class="note-box"><strong>Note:</strong> Intake form URL is a placeholder — needs real full URL before sending.</div>
+  </div>
+</div>
+
+<!-- Drowned Land -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Drowned Land</span>
+    <span class="film-id">F26-004</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Colleen Thurston<br><code style="font-size:13px;">colleenthurston8@gmail.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">Michelle Svenson</div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venue</div>
+      <div class="film-meta-value">Columbia College — Film Row Cinema<br><span class="venue-date">April 23, 2026</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-single">Single</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — Drowned Land — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team Drowned Land,</p>
+      <p>Your film <strong>Drowned Land</strong> is confirmed for one screening at OEFF 2026:</p>
+      <div class="email-venues">Columbia College — Film Row Cinema — April 23, 2026</div>
+      <p>All screenings are free community events with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate? One Earth Film Festival is a 501(c)(3).</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- Oscar Shorts -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Oscar Shorts: The Last Ranger / Planetwalker</span>
+    <span class="film-id">F26-007</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Darwin Shaw<br><code style="font-size:13px;">darwinshaw1@gmail.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">Will Hawkes</div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venue</div>
+      <div class="film-meta-value"><span class="tag tag-none">No venue assigned</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-none">TBD</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="note-box"><strong>Hold:</strong> No venue assigned yet. Cannot send confirmation email until screening is placed. Needs Ana/Josh input.</div>
+  </div>
+</div>
+
+<!-- Whose Water? -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Whose Water?</span>
+    <span class="film-id">F26-010</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Kate Levy<br><code style="font-size:13px;">kateelizabethlevy@gmail.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">—</div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venue</div>
+      <div class="film-meta-value">Epiphany Center for the Arts<br><span class="venue-date">April 22, 2026</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-single">Single</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — Whose Water? — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team Whose Water?,</p>
+      <p>Your film <strong>Whose Water?</strong> is confirmed for one screening at OEFF 2026:</p>
+      <div class="email-venues">Epiphany Center for the Arts — April 22, 2026</div>
+      <p>All screenings are free community events with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate? One Earth Film Festival is a 501(c)(3).</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- In Our Nature -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">In Our Nature</span>
+    <span class="film-id">F26-012</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">James Parker · Synchronous<br><code style="font-size:13px;">james@synchronous.tv</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">Juliet Grable · <code style="font-size:13px;">julietgrable@gmail.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venue</div>
+      <div class="film-meta-value">Chicago Cultural Center<br><span class="venue-date">April 22, 2026</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-single">Single</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — In Our Nature — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team In Our Nature,</p>
+      <p>Your film <strong>In Our Nature</strong> is confirmed for one screening at OEFF 2026:</p>
+      <div class="email-venues">Chicago Cultural Center — April 22, 2026</div>
+      <p>All screenings are free community events with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate? One Earth Film Festival is a 501(c)(3).</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MULTI SCREENING FILMS ===================== -->
+<h2>Multi-Screening Films</h2>
+
+<!-- Rooted -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Rooted</span>
+    <span class="film-id">F26-005</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Lauren Waring Douglas<br><code style="font-size:13px;">LWaring.Douglas@gmail.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">Bridget Besaw · <code style="font-size:13px;">Mail@BridgetBesaw.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venues (3 screenings)</div>
+      <div class="film-meta-value">
+        <ul class="venue-list">
+          <li>Bethel New Life <span class="venue-date">— April 24</span></li>
+          <li>IIT/Bronzeville <span class="venue-date">— April 26</span></li>
+          <li>Dominican University <span class="venue-date">— April 27</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-multi">Multi ×3</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — Rooted — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team Rooted,</p>
+      <p>Your film <strong>Rooted</strong> is confirmed for <strong>3 screenings</strong> at OEFF 2026:</p>
+      <div class="email-venues">
+        Bethel New Life — April 24, 2026<br>
+        IIT/Bronzeville — April 26, 2026<br>
+        Dominican University — April 27, 2026
+      </div>
+      <p>Each screening is a free community event with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate for 3 screenings? One Earth Film Festival is a 501(c)(3). If you are able to additionally offer a multi-screening or festival rate, that would be amazing.</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- How to Power a City -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">How to Power a City</span>
+    <span class="film-id">F26-006</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Melanie La Rosa<br><code style="font-size:13px;">melanie.larosa@gmail.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">—</div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venues (3 screenings)</div>
+      <div class="film-meta-value">
+        <ul class="venue-list">
+          <li>Village of Oak Park <span class="venue-date">— April 24</span></li>
+          <li>Institute of Cultural Affairs <span class="venue-date">— April 24</span></li>
+          <li>Triton College <span class="venue-date">— April 24</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-multi">Multi ×3</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — How to Power a City — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team How to Power a City,</p>
+      <p>Your film <strong>How to Power a City</strong> is confirmed for <strong>3 screenings</strong> at OEFF 2026:</p>
+      <div class="email-venues">
+        Village of Oak Park — April 24, 2026<br>
+        Institute of Cultural Affairs — April 24, 2026<br>
+        Triton College — April 24, 2026
+      </div>
+      <p>Each screening is a free community event with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate for 3 screenings? One Earth Film Festival is a 501(c)(3). If you are able to additionally offer a multi-screening or festival rate, that would be amazing.</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- 40 Acres -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">40 Acres</span>
+    <span class="film-id">F26-008</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Dan McCarthy · Magnolia Pictures (distributor)<br><code style="font-size:13px;">dmccarthy@magpictures.com</code><br><span style="font-size:12px;color:var(--text-muted);">Filmmaker: R.T. Thorne</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value"><span class="tag tag-needed">Needed</span></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venues (2 screenings)</div>
+      <div class="film-meta-value">
+        <ul class="venue-list">
+          <li>Kehrein Center for the Arts at BlkRoom <span class="venue-date">— April 25</span></li>
+          <li>Black Girl Environmentalists (UIC/Patagonia) <span class="venue-date">— April 25</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-multi">Multi ×2</span> <span class="tag tag-needed">Intake needed</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — 40 Acres — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team 40 Acres,</p>
+      <p>Your film <strong>40 Acres</strong> is confirmed for <strong>2 screenings</strong> at OEFF 2026:</p>
+      <div class="email-venues">
+        Kehrein Center for the Arts at BlkRoom — April 25, 2026<br>
+        Black Girl Environmentalists (UIC/Patagonia) — April 25, 2026
+      </div>
+      <p>Each screening is a free community event with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate for 2 screenings? One Earth Film Festival is a 501(c)(3). If you are able to additionally offer a multi-screening or festival rate, that would be amazing.</p>
+      <p>We also need your film's technical and contact details. Could you fill out our <a href="https://docs.google.com/forms/d/e/1FAIpQLSflchFav/viewform">Film Intake Form</a>? It covers file formats, accessibility info, and contact details we'll need for your screenings.</p>
+      <p>We'll follow up separately with AV specs and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+    <div class="note-box"><strong>Note:</strong> Intake form URL is a placeholder. Also: contact is distributor (Magnolia), not filmmaker directly.</div>
+  </div>
+</div>
+
+<!-- Rails to Trails -->
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Rails to Trails</span>
+    <span class="film-id">F26-011</span>
+  </div>
+  <div class="film-meta">
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Contact</div>
+      <div class="film-meta-value">Dan Protess · Protess Communications<br><code style="font-size:13px;">dan@protesscommunications.com</code></div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Secondary</div>
+      <div class="film-meta-value">—</div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Venues (2 screenings)</div>
+      <div class="film-meta-value">
+        <ul class="venue-list">
+          <li>Broadway United Methodist Church <span class="venue-date">— April 25</span></li>
+          <li>Calumet College of St. Joseph <span class="venue-date">— April 26</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="film-meta-cell">
+      <div class="film-meta-label">Status</div>
+      <div class="film-meta-value"><span class="tag tag-multi">Multi ×2</span> <span class="tag tag-done">Intake done</span></div>
+    </div>
+  </div>
+  <div class="email-preview">
+    <div class="email-preview-label">Email Preview</div>
+    <div class="email-subject">Subject: One Earth Film Festival 2026 — Rails to Trails — screening confirmation + licensing</div>
+    <div class="email-body">
+      <p>Hi Team Rails to Trails,</p>
+      <p>Your film <strong>Rails to Trails</strong> is confirmed for <strong>2 screenings</strong> at OEFF 2026:</p>
+      <div class="email-venues">
+        Broadway United Methodist Church — April 25, 2026<br>
+        Calumet College of St. Joseph — April 26, 2026
+      </div>
+      <p>Each screening is a free community event with a suggested donation, with audiences of 100–200 depending on the venue.</p>
+      <p>Could you let us know your nonprofit screening license rate for 2 screenings? One Earth Film Festival is a 501(c)(3). If you are able to additionally offer a multi-screening or festival rate, that would be amazing.</p>
+      <p>We'll follow up separately with file delivery specs, AV details, and day-of logistics once licensing is confirmed.</p>
+      <p>Looking forward to working with you.</p>
+      <p>Best,<br>Garen Hudson<br>Technical Coordinator, One Earth Film Festival<br>films@oneearthcollective.org</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== NOT READY ===================== -->
+<h2>Not Ready to Send</h2>
+
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Oscar Shorts: The Last Ranger / Planetwalker</span>
+    <span class="film-id">F26-007</span>
+  </div>
+  <div class="email-preview">
+    <div class="note-box"><strong>Hold:</strong> 0 screenings assigned. No venue to confirm. Needs placement before outreach.</div>
+  </div>
+</div>
+
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Chasing Time</span>
+    <span class="film-id">Not in merge sheet</span>
+  </div>
+  <div class="email-preview">
+    <div class="note-box"><strong>Hold:</strong> Shows 3 screenings on Roadmap but not in merge sheet. No filmmaker contact. Needs confirmation from Ana/Josh.</div>
+  </div>
+</div>
+
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">Planetwalker</span>
+    <span class="film-id">Not in merge sheet</span>
+  </div>
+  <div class="email-preview">
+    <div class="note-box"><strong>Hold:</strong> Shows 3 screenings on Roadmap but not in merge sheet. No filmmaker contact. Needs confirmation from Ana/Josh.</div>
+  </div>
+</div>
+
+<div class="film-card">
+  <div class="film-header">
+    <span class="film-title">CAM Awards</span>
+    <span class="film-id">Partnership track</span>
+  </div>
+  <div class="email-preview">
+    <div class="note-box"><strong>Separate track:</strong> Partnership, not a standard screening. Different outreach — not using these templates.</div>
+  </div>
+</div>
+
+<!-- ===================== OPEN ITEMS ===================== -->
+<h2>Still Open</h2>
+<div class="open-items">
+  <ul>
+    <li><strong>Film Intake Survey URL</strong> — placeholder in Beyond Zero + 40 Acres emails. Need full URL.</li>
+    <li><strong>Merge sheet sharing</strong> — needs Ana + Josh as editors. Manual Share button click.</li>
+    <li><strong>Chasing Time + Planetwalker</strong> — 3 screenings each on Roadmap, not in merge sheet, no contacts.</li>
+    <li><strong>Oscar Shorts venue</strong> — 0 screenings assigned. Can't send until placed.</li>
+    <li><strong>Licensing budget</strong> — do we have a ceiling or range to negotiate against? Current approach is "name your price." Ana may want to change this.</li>
+    <li><strong>Ana sign-off</strong> — template draft pushed to Gmail. Need approval before Mailmeteor send.</li>
+  </ul>
+</div>
+
+<div style="margin-top:40px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);text-align:center;">
+  Generated March 4, 2026 &middot; Internal reference — not for external distribution
+</div>
+
+</body>
+</html>

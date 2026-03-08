@@ -1,0 +1,92 @@
+<!--
+  Mailmeteor Mail Merge Template — Filmmaker Licensing Outreach
+  From: films@oneearthcollective.org
+  CC: garen@oneearthcollective.org, ana@oneearthcollective.org
+  Subject: OEFF 2026 — {{Film Title}} screening details + licensing
+
+  Merge fields (from filmmaker-merge-sheet.csv):
+    {{First Name}}        — filmmaker first name
+    {{Film Title}}        — film title
+    {{Screening Count}}   — number of screenings (1, 2, or 3)
+    {{License Tier}}      — "Single" or "Multi-screening"
+    {{Venue 1}}           — first venue name
+    {{Date 1}}            — first screening date
+    {{Venue 2}}           — second venue (blank if single)
+    {{Date 2}}            — second date (blank if single)
+    {{Venue 3}}           — third venue (blank if single)
+    {{Date 3}}            — third date (blank if single)
+    {{Survey Status}}     — "Submitted" or "Needed"
+
+  INSTRUCTIONS:
+  - Import filmmaker-merge-sheet.csv into a Google Sheet
+  - Fill in missing emails (40 Acres, Beyond Zero) before sending
+  - Create this as a Gmail draft in films@oneearthcollective.org
+  - Use Mailmeteor to merge from the sheet
+  - Mailmeteor will skip rows where Email = "MISSING"
+  - The survey link placeholder needs the actual Google Form URL
+
+  VARIANT HANDLING:
+  - Multi-screening films: Venue 2/3 and Date 2/3 will populate
+  - Single-screening films: Venue 2/3 will be blank — Mailmeteor leaves blank merge fields empty
+  - Films with no venue (0 screenings): handled separately, not in this template
+  - Survey "Needed" vs "Submitted": use Mailmeteor conditional blocks (see below)
+
+  Guards: none (email HTML — inline styles required, no CSS variables)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<body style="font-family: system-ui, sans-serif; line-height: 1.6; color: rgb(51,51,51); max-width: 640px;">
+
+<p>Hi {{First Name}},</p>
+
+<p>Thank you for being part of the 2026 One Earth Film Fest. We're confirming your screening details and have one important ask below.</p>
+
+<p><b>Your screening(s)</b></p>
+
+<p><strong>{{Film Title}}</strong> is scheduled for <strong>{{Screening Count}} screening(s)</strong> during OEFF 2026 (April 22&ndash;27):</p>
+
+<table style="border-collapse: collapse; font-size: 14px; margin: 8px 0 16px 0;">
+  <tr>
+    <td style="padding: 4px 12px 4px 0; font-weight: bold;">1.</td>
+    <td style="padding: 4px 0;">{{Venue 1}} &mdash; {{Date 1}}</td>
+  </tr>
+  <!-- Mailmeteor: rows below will be blank for single-screening films -->
+  <tr>
+    <td style="padding: 4px 12px 4px 0; font-weight: bold;">{{Venue 2}}</td>
+    <td style="padding: 4px 0;">{{Date 2}}</td>
+  </tr>
+  <tr>
+    <td style="padding: 4px 12px 4px 0; font-weight: bold;">{{Venue 3}}</td>
+    <td style="padding: 4px 0;">{{Date 3}}</td>
+  </tr>
+</table>
+
+<p>All OEFF screenings are free, public events hosted by community venues across Chicagoland. Typical audience size is 50&ndash;100 per screening.</p>
+
+<p><b>Licensing</b></p>
+
+<p>Please reply to this email with your <strong>per-screening nonprofit screening rate</strong> for {{Screening Count}} screening(s). If your rate varies by number of screenings, please let us know your multi-screening pricing as well.</p>
+
+<p>To confirm: we need a written reply from you acknowledging the screening count and your agreed rate before we can finalize. This protects both of us.</p>
+
+<p><strong>Please respond by Friday, March 6.</strong></p>
+
+<!-- Mailmeteor conditional: only show survey section if Survey Status = "Needed" -->
+<!-- {{#ifEquals Survey Status "Needed"}} -->
+<p><b>Film intake survey</b></p>
+
+<p>We also need you to complete our Film Intake Survey so we have your technical specs, marketing assets, and accessibility info on file:</p>
+
+<p><a href="[SURVEY_URL_HERE]" style="color: rgb(46, 125, 50);">Complete the Film Intake Survey</a></p>
+
+<p>Survey deadline: <strong>Thursday, March 13.</strong></p>
+<!-- {{/ifEquals}} -->
+
+<p>If you have questions about any of this, reply here and we'll get back to you quickly.</p>
+
+<p>Thank you,<br>
+The OEFF Film Team<br>
+<span style="font-size: 13px; color: rgb(102,102,102);">One Earth Film Fest &mdash; April 22&ndash;27, 2026</span></p>
+
+</body>
+</html>
