@@ -1758,8 +1758,8 @@ def main() -> int:
     print("Fetching records from Airtable...", file=sys.stderr)
     if args.helpers:
         # Helper pages don't require the 2026_Venue_Sections view —
-        # fetch Events filtered by Year=2026 instead
-        records = fetch_by_filter(TABLE_NAME, "Year=2026", token)
+        # fetch Events filtered by Year=2026, excluding archived records
+        records = fetch_by_filter(TABLE_NAME, 'AND({Year}=2026,{Archive Status}!="Archived")', token)
     else:
         # Try the named view first; fall back to filterByFormula if it doesn't exist.
         # The 2026_Venue_Sections view may not yet exist in Airtable — filter client-side

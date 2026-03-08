@@ -3,10 +3,8 @@
 # Generated host security data (contains plaintext passwords)
 token-map.json
 
-# Generated per-venue helper pages (deployed, not tracked)
-hosts/*/
-# But track the ops dashboard
-!hosts/ops/
+# Track all hosts/ subdirectories (venue pages + ops dashboard)
+# Venue pages have noindex/nofollow and no host PII — safe to track
 
 # Wrangler cache (contains account credentials)
 .wrangler/
