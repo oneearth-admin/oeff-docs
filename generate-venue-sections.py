@@ -53,6 +53,68 @@ API = "https://api.airtable.com/v0"
 VIEW_NAME = "2026_Venue_Sections"
 TABLE_NAME = "Events"
 
+# ---------------------------------------------------------------------------
+# Field name mapping — Airtable actual names → script canonical names
+#
+# The 2026_Venue_Sections view was designed with normalized field names.
+# Until that view exists, we fetch with filterByFormula and normalize here.
+# If the view IS created with the correct field names, normalize_record()
+# becomes a no-op for fields that already match.
+# ---------------------------------------------------------------------------
+EVENTS_FIELD_MAP = {
+    # Airtable actual name  →  script canonical name
+    "Date": "Event_Date",
+    "Time": "Event_Time",
+    "Ticket URL": "RSVP_URL",
+    "Pipeline Select": "Pipeline_Status",
+    "Pipeline Status": "Pipeline_Status",  # fallback if text field exists
+    "Volunteer Needs": "Volunteer_Needs",
+    # Fields below are direct matches — included for documentation
+    # "Venue": "Venue",  (link field — already correct)
+    # "Film": "Film",    (link field — already correct)
+}
+
+# Venue linked-record field mapping (Venues table)
+VENUE_FIELD_MAP = {
+    "Venue Name": "Name",       # If Venues table uses "Venue Name" as primary
+    "Contact Info": "_contact_info_raw",  # multiline → parsed for email
+    "Notes": "Equipment_Notes",
+    # "Region": "Region",       # already matches
+    # "Capacity": "Capacity",   # already matches
+}
+
+
+def normalize_record(rec: Dict[str, Any], field_map: Dict[str, str]) -> Dict[str, Any]:
+    """Return a copy of rec with fields renamed per field_map.
+
+    Fields not in field_map are passed through unchanged. If both an
+    old name and a new name exist, the mapped (new) name wins.
+    """
+    original = rec.get("fields", {})
+    normalized: Dict[str, Any] = {}
+
+    for k, v in original.items():
+        canonical = field_map.get(k, k)
+        normalized[canonical] = v
+
+    return {**rec, "fields": normalized}
+
+
+def normalize_venue_record(rec: Dict[str, Any]) -> Dict[str, Any]:
+    """Normalize a Venues linked record, including email extraction from Contact Info."""
+    rec = normalize_record(rec, VENUE_FIELD_MAP)
+    f = rec.get("fields", {})
+
+    # Extract email from Contact Info multiline text if Contact_Email not present
+    if not f.get("Contact_Email") and f.get("_contact_info_raw"):
+        import re as _re
+        m = _re.search(r'[\w.+-]+@[\w-]+\.[\w.-]+', f["_contact_info_raw"])
+        if m:
+            f["Contact_Email"] = m.group(0)
+
+    return rec
+
+
 SENTINEL_BEGIN = "<!-- BEGIN:VENUE_SECTIONS -->"
 SENTINEL_END = "<!-- END:VENUE_SECTIONS -->"
 HOSTS_HTML = Path(__file__).parent / "hosts" / "index.html"
@@ -1699,14 +1761,47 @@ def main() -> int:
         # fetch Events filtered by Year=2026 instead
         records = fetch_by_filter(TABLE_NAME, "Year=2026", token)
     else:
-        records = fetch_all_records(TABLE_NAME, VIEW_NAME, token)
+        # Try the named view first; fall back to filterByFormula if it doesn't exist.
+        # The 2026_Venue_Sections view may not yet exist in Airtable — filter client-side
+        # after fetching, or use formula to pre-filter on the server.
+        #
+        # Strategy: fetch with filterByFormula for 2026 events in an active pipeline
+        # state. This works without requiring the view to exist, and the field mapping
+        # in normalize_record() handles field name differences.
+        pipeline_filter = (
+            'AND('
+            '{Year}=2026,'
+            '{Archive Status}!="Archived",'
+            'OR({Pipeline Select}="Scheduled",{Pipeline Select}="Confirmed Interest",'
+            '{Pipeline Select}="Confirmed",{Pipeline Status}="Confirmed",'
+            '{Pipeline Status}="Scheduled")'
+            ')'
+        )
+        try:
+            records = fetch_all_records(TABLE_NAME, VIEW_NAME, token)
+            print(f"  Using view: {VIEW_NAME}", file=sys.stderr)
+        except Exception as e:
+            print(
+                f"  View '{VIEW_NAME}' not found ({e}), falling back to filterByFormula",
+                file=sys.stderr,
+            )
+            records = fetch_by_filter(TABLE_NAME, pipeline_filter, token)
 
     if not records:
         print("Warning: No records returned from Airtable.", file=sys.stderr)
 
+    # Normalize field names on Event records to match script's canonical names.
+    # This handles the gap between Airtable's actual field names and the names
+    # the script was designed around (Event_Date, RSVP_URL, etc.).
+    records = [normalize_record(r, EVENTS_FIELD_MAP) for r in records]
+    print(f"  Normalized {len(records)} event record(s)", file=sys.stderr)
+
     # Resolve linked records
     print("Resolving linked records...", file=sys.stderr)
     venues_cache, films_cache, contacts_cache = resolve_linked_records(records, token)
+
+    # Normalize Venue linked records for field name compatibility
+    venues_cache = {k: normalize_venue_record(v) for k, v in venues_cache.items()}
 
     # Assemble venue data
     venues = assemble_venues(records, venues_cache, films_cache, contacts_cache)
