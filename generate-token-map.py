@@ -305,8 +305,8 @@ SECURITY_FIELDS = [
     ("Host_Token", "singleLineText", "Unique URL token for host helper page"),
     ("Host_Helper_URL", "url", "Full host helper page URL"),
     ("Financial_Password_Hash", "singleLineText", "SHA-256 hash for password gate"),
-    ("Financial_Password", "singleLineText", "Plaintext for YAMM merge (separate email)"),
-    ("Packet_Password", "singleLineText", "Plaintext for YAMM merge (separate email)"),
+    ("Financial_Password", "singleLineText", "Plaintext for Mailmeteor merge (separate email)"),
+    ("Packet_Password", "singleLineText", "Plaintext for Mailmeteor merge (separate email)"),
 ]
 
 
@@ -355,8 +355,8 @@ def push_to_airtable(
       - Host_Token: the URL token
       - Host_Helper_URL: full helper page URL
       - Financial_Password_Hash: SHA-256 hex for the password gate
-      - Financial_Password: plaintext for YAMM merge (separate email)
-      - Packet_Password: plaintext for YAMM merge (separate email)
+      - Financial_Password: plaintext for Mailmeteor merge (separate email)
+      - Packet_Password: plaintext for Mailmeteor merge (separate email)
     """
     # Airtable batch update: up to 10 records per PATCH
     updates: List[Dict[str, Any]] = []

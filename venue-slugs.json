@@ -1,0 +1,166 @@
+{
+  "generated": "2026-03-06",
+  "note": "Canonical venue names and URL slugs for 2026 venue pages. Deduplicated from token-map.json, gap-report, and hh-venue-match.json. Awaiting Ana/Erin confirmation.",
+  "venues": [
+    {
+      "canonical_name": "Andersonville Chamber of Commerce",
+      "slug": "andersonville-chamber",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Bethel New Life",
+      "slug": "bethel-new-life",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Black Girl Environmentalists at Patagonia Fulton Market",
+      "slug": "black-girl-environmentalists",
+      "status": "confirmed",
+      "notes": "Venue confirmed as Patagonia Fulton Market. Walkthrough needed to scope AV."
+    },
+    {
+      "canonical_name": "Broadway United Methodist Church",
+      "slug": "broadway-umc",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "BUILD Chicago",
+      "slug": "build-chicago",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Calumet College of St. Joseph",
+      "slug": "calumet-college",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Chicago Climate Action Museum",
+      "slug": "chicago-climate-museum",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Chicago Cultural Center",
+      "slug": "chicago-cultural-center",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Chicago Public Library — Harold Washington",
+      "slug": "cpl-harold-washington",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Chicago Public Library — Rogers Park",
+      "slug": "cpl-rogers-park",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Climate Action Evanston",
+      "slug": "climate-action-evanston",
+      "status": "confirmed",
+      "notes": "Likely at Evanston Public Library"
+    },
+    {
+      "canonical_name": "Columbia College Film Row Cinema",
+      "slug": "columbia-film-row",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Cultivate Collective at Academy for Global Citizenship",
+      "slug": "cultivate-agc",
+      "status": "confirmed",
+      "notes": "Merged from 2 token-map entries (Cultivate Collective + Academy for Global Citizenship)"
+    },
+    {
+      "canonical_name": "Dominican University",
+      "slug": "dominican",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Epiphany Center for the Arts",
+      "slug": "epiphany",
+      "status": "tentative",
+      "notes": "Film being confirmed"
+    },
+    {
+      "canonical_name": "Euclid Avenue UMC",
+      "slug": "euclid-umc",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Go Green Park Ridge",
+      "slug": "go-green-park-ridge",
+      "status": "confirmed",
+      "notes": "At Park Ridge Community Church. Merged from 2 names in source data."
+    },
+    {
+      "canonical_name": "IIT Bronzeville",
+      "slug": "iit-bronzeville",
+      "status": "confirmed",
+      "notes": "With Organic Oneness"
+    },
+    {
+      "canonical_name": "Illinois Clinicians for Climate Action",
+      "slug": "il-clinicians",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Institute of Cultural Affairs",
+      "slug": "ica",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Kehrein Center for the Arts",
+      "slug": "kehrein-center",
+      "status": "confirmed",
+      "notes": "At Urban Essentials Cafe / BlkRoom — same venue, multiple names in source data"
+    },
+    {
+      "canonical_name": "Loyola University Law School",
+      "slug": "loyola-law",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Northbrook Public Library",
+      "slug": "northbrook-library",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Oak Park Public Library",
+      "slug": "oak-park-library",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Seven Generations Ahead",
+      "slug": "seven-generations",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Triton College",
+      "slug": "triton-college",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Trinity Lutheran Church — Des Plaines",
+      "slug": "trinity-lutheran",
+      "status": "confirmed",
+      "notes": "From token-map. Not in gap report's original 26 but confirmed for inclusion."
+    },
+    {
+      "canonical_name": "Uncommon Ground",
+      "slug": "uncommon-ground",
+      "status": "confirmed"
+    },
+    {
+      "canonical_name": "Village of Oak Park — OPRF High School",
+      "slug": "oak-park-oprf",
+      "status": "confirmed",
+      "notes": "Screening venue — distinct from Village Hall event"
+    },
+    {
+      "canonical_name": "Village of Oak Park — Village Hall",
+      "slug": "oak-park-village-hall",
+      "status": "confirmed",
+      "notes": "Separate event from OPRF. Contact: LNieratka@oak-park.us"
+    }
+  ]
+}

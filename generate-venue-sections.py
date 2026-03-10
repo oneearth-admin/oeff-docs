@@ -359,15 +359,41 @@ def assemble_venues(
     return assembled
 
 
+def _load_host_intake_by_venue(token: str) -> Dict[str, Dict[str, Any]]:
+    """Fetch Host Intake records and index by linked Venue ID.
+
+    Returns dict mapping venue record ID → intake fields for venue
+    details enrichment (capacity, ADA, parking, transit, WiFi, AV, etc.).
+    """
+    print("  Fetching Host Intake records...", file=sys.stderr)
+    intake_records = fetch_by_filter("Host Intake", "NOT({Venue Id}='')", token)
+    by_venue: Dict[str, Dict[str, Any]] = {}
+
+    for rec in intake_records:
+        f = rec.get("fields", {})
+        # Host Intake links to Venues via a linked record field or text ID
+        venue_links = f.get("Venue", [])
+        if venue_links:
+            vid = venue_links[0] if isinstance(venue_links, list) else venue_links
+            by_venue[vid] = f
+        # Fallback: match by Venue Id text field
+        venue_id_text = f.get("Venue Id", "")
+        if venue_id_text:
+            by_venue[venue_id_text] = f
+
+    print(f"  Indexed {len(by_venue)} Host Intake record(s)", file=sys.stderr)
+    return by_venue
+
+
 def assemble_venues_for_helpers(
     records: List[Dict[str, Any]],
     token: str,
 ) -> List[Dict[str, Any]]:
-    """Lightweight assembly for helper pages using denormalized Event fields.
+    """Assembly for helper pages: Events + Venues + Host Intake data.
 
-    The Events table has Venue Name, Film Title, Date, Time etc. directly,
-    so we don't need the full linked-record resolution. We only fetch
-    linked Venue records for contact info.
+    Pulls denormalized Event fields, linked Venue records for contacts,
+    and Host Intake records for venue details (capacity, ADA, parking,
+    transit, WiFi, AV equipment, wayfinding).
     """
     # Collect linked venue IDs to fetch contact info
     venue_ids: set = set()
@@ -377,6 +403,9 @@ def assemble_venues_for_helpers(
 
     # Fetch venue records for contact info
     venues_cache = _fetch_by_ids("Venues", venue_ids, token)
+
+    # Fetch Host Intake for venue details enrichment
+    intake_by_venue = _load_host_intake_by_venue(token)
 
     # Deduplicate by venue name (some venues have multiple events)
     seen: set = set()
@@ -393,6 +422,7 @@ def assemble_venues_for_helpers(
         venue_ids_list = f.get("Venue", [])
         venue_rec = venues_cache.get(venue_ids_list[0], {}) if venue_ids_list else {}
         vf = venue_rec.get("fields", {})
+        venue_record_id = venue_ids_list[0] if venue_ids_list else ""
 
         # Extract email from Contact Info multiline text
         contact_info = vf.get("Contact Info", "")
@@ -400,26 +430,56 @@ def assemble_venues_for_helpers(
         email_match = _re.search(r'[\w.+-]+@[\w-]+\.[\w.-]+', contact_info)
         contact_email = email_match.group(0) if email_match else ""
 
+        # Extract contact name from Contact Info (first line often "Name")
+        contact_name = ""
+        if contact_info:
+            lines = [l.strip() for l in contact_info.strip().splitlines() if l.strip()]
+            if lines and not _re.match(r'[\w.+-]+@', lines[0]):
+                contact_name = lines[0]
+
+        # Enrich from Host Intake (match by record ID or text Venue Id)
+        intake = intake_by_venue.get(venue_record_id, {})
+        if not intake:
+            # Try matching by text Venue Id field (e.g. "V-008")
+            venue_text_id = vf.get("Venue ID", "")
+            intake = intake_by_venue.get(venue_text_id, {})
+
+        # Parse intake fields — checkmarks are "✓" strings
+        def _check(val: Any) -> bool:
+            return str(val).strip() in ("✓", "Yes", "yes", "true", "True", "1")
+
         venue = {
             "event_id": rec.get("id", ""),
             "event_date": f.get("Date", ""),
             "event_time": f.get("Time", ""),
+            "ticket_price": f.get("Ticket Price", ""),
             "doors_time": "",
-            "rsvp_url": "",
-            "rsvp_count": 0,
+            "rsvp_url": f.get("Ticket URL", ""),
+            "rsvp_count": f.get("RSVP Count", 0),
             "pipeline_status": f.get("Pipeline Status", ""),
             "volunteer_needs": f.get("Volunteer Needs", ""),
-            "screening_packet_url": "",
+            "screening_packet_url": f.get("Screening Packet URL", ""),
+            "oeff_rep": f.get("OEFF Rep", ""),
             # Venue fields
             "venue_name": name,
+            "venue_address": intake.get("Venue Address", ""),
             "venue_city": "",
             "venue_region": vf.get("Region", ""),
             "venue_capacity": vf.get("Capacity", ""),
-            "venue_contact_name": "",
-            "venue_contact_email": contact_email,
+            "venue_contact_name": intake.get("Contact Name", "") or contact_name,
+            "venue_contact_email": intake.get("Contact Email", "") or contact_email,
             "venue_facility_contact": "",
-            "venue_av_contact": "",
+            "venue_av_contact": vf.get("AV Contact", ""),
             "venue_equipment_notes": vf.get("Notes", ""),
+            # Host Intake venue details
+            "has_projector": _check(intake.get("Has Projector", "")),
+            "has_sound": _check(intake.get("Has Sound", "")),
+            "has_screen": _check(intake.get("Has Screen", "")),
+            "has_computer": _check(intake.get("Has Computer", "")),
+            "has_wifi": _check(intake.get("Has Wifi", "")),
+            "has_av_lead": _check(intake.get("Has Av Lead", "")),
+            "has_wheelchair": _check(intake.get("Has Wheelchair", "")),
+            "space_notes": intake.get("Space Notes", ""),
             # Film fields (denormalized on Events)
             "film_title": f.get("Film Title", "TBD"),
             "film_runtime": 0,
@@ -1018,12 +1078,92 @@ def render_password_gate_js(password_hash: str) -> str:
     </script>""")
 
 
-def render_helper_timeline(venue: Dict[str, Any]) -> str:
-    """Render the day-of timeline for the helper page."""
+def render_helper_hero(venue: Dict[str, Any], state: str) -> str:
+    """Render the hero card — Tier 1 info: film, date, venue, event link."""
+    name = _esc(venue["venue_name"])
+    film = _esc(venue["film_title"])
+    event_date = _esc(venue.get("event_date", ""))
+    event_time = _esc(venue.get("event_time", ""))
+    address = _esc(venue.get("venue_address", ""))
+    rsvp_url = venue.get("rsvp_url", "")
+    ticket_price = _esc(venue.get("ticket_price", ""))
+
+    # Format date display
+    date_display = event_date
+    if event_date:
+        try:
+            dt = datetime.strptime(event_date, "%Y-%m-%d")
+            date_display = dt.strftime("%A, %B %-d")
+        except (ValueError, TypeError):
+            pass
+
+    date_line = date_display
+    if event_time and event_time != "TBD":
+        date_line += f" at {event_time}"
+
+    price_line = ""
+    if ticket_price:
+        price_line = f'<div class="hero-price">{ticket_price}</div>'
+
+    address_line = ""
+    if address:
+        address_line = f'<div class="hero-address">{address}</div>'
+
+    btn = ""
+    if rsvp_url:
+        btn = (
+            f'<a class="helper-btn hero-btn" href="{_esc(rsvp_url)}" '
+            f'target="_blank" rel="noopener">Your Event Page</a>'
+        )
+
+    return (
+        '<section class="hero-card">'
+        f'<div class="hero-film">{film}</div>'
+        f'<div class="hero-date">{date_line if date_line else "Date coming soon"}</div>'
+        f'{address_line}'
+        f'{price_line}'
+        f'{btn}'
+        '</section>'
+    )
+
+
+def render_helper_ticket_count(venue: Dict[str, Any], state: str) -> str:
+    """Render the ticket/RSVP count — visible in apr state, dimmed in mar."""
+    rsvp_count = venue.get("rsvp_count", 0)
+
+    if state == "feb":
+        return ""  # Hidden before events are public
+
+    muted = ' helper-muted' if state == "mar" else ""
+    prominent = ' ticket-prominent' if state == "apr" else ""
+
+    count_display = str(rsvp_count) if rsvp_count else "0"
+
+    return (
+        f'<section class="helper-section ticket-section{muted}{prominent}">'
+        '<h2>Registrations</h2>'
+        f'<div class="ticket-count">{_esc(count_display)}</div>'
+        '<div class="ticket-label">registered so far</div>'
+        '</section>'
+    )
+
+
+def render_helper_run_of_show(venue: Dict[str, Any], state: str) -> str:
+    """Render the run of show — Tier 2 info. Hidden until data exists."""
     timeline = compute_day_of_timeline(
         venue.get("event_time", ""), venue.get("film_runtime", 0)
     )
+
+    # Only show when we have enough data (time + runtime)
     if not timeline:
+        if state == "apr":
+            return (
+                '<section class="helper-section helper-muted">'
+                '<h2>Run of Show</h2>'
+                '<p>Timeline details are being finalized. '
+                'Check back closer to your event.</p>'
+                '</section>'
+            )
         return ""
 
     rows = "".join(
@@ -1033,119 +1173,183 @@ def render_helper_timeline(venue: Dict[str, Any]) -> str:
     )
     return (
         '<section class="helper-section">'
-        '<h2>Day-of Timeline</h2>'
+        '<h2>Run of Show</h2>'
         f'<table class="helper-timeline"><tbody>{rows}</tbody></table>'
         '</section>'
     )
 
 
-def render_helper_contacts(venue: Dict[str, Any]) -> str:
-    """Render the contacts section for the helper page."""
-    rows = []
+def render_helper_contacts(venue: Dict[str, Any], state: str) -> str:
+    """Render the contacts section — Tier 2 info."""
+    cards = []
 
-    # Host coordinator (always present)
-    rows.append(
-        '<div class="hc-row">'
-        '<span class="hc-role">Host coordinator</span>'
-        '<a class="hc-value" href="mailto:hosts@oneearthcollective.org">'
-        'hosts@oneearthcollective.org</a>'
-        '</div>'
-    )
-
-    # Venue contact
+    # Host lead (from intake data)
     vc_email = venue.get("venue_contact_email", "")
-    vc_name = venue.get("venue_contact_name", "Venue contact")
-    if vc_email:
-        rows.append(
-            f'<div class="hc-row">'
-            f'<span class="hc-role">{_esc(vc_name)}</span>'
-            f'<a class="hc-value" href="mailto:{_esc(vc_email)}">{_esc(vc_email)}</a>'
-            f'</div>'
-        )
-
-    # Facility contact
-    fc = venue.get("venue_facility_contact", "")
-    if fc:
-        rows.append(
-            f'<div class="hc-row">'
-            f'<span class="hc-role">Facility contact</span>'
-            f'<a class="hc-value" href="mailto:{_esc(fc)}">{_esc(fc)}</a>'
+    vc_name = venue.get("venue_contact_name", "")
+    if vc_name or vc_email:
+        label = _esc(vc_name) if vc_name else "Your host contact"
+        email_link = f'<a class="hc-value" href="mailto:{_esc(vc_email)}">{_esc(vc_email)}</a>' if vc_email else ""
+        cards.append(
+            f'<div class="contact-card">'
+            f'<span class="hc-role">Host lead</span>'
+            f'<span class="hc-name">{label}</span>'
+            f'{email_link}'
             f'</div>'
         )
 
     # AV contact
     av = venue.get("venue_av_contact", "")
     if av:
-        rows.append(
-            f'<div class="hc-row">'
+        cards.append(
+            f'<div class="contact-card">'
             f'<span class="hc-role">AV contact</span>'
             f'<a class="hc-value" href="mailto:{_esc(av)}">{_esc(av)}</a>'
             f'</div>'
         )
 
-    # Emergency (Apr only — shown in all states for simplicity, safe info)
-    rows.append(
-        '<div class="hc-row">'
-        '<span class="hc-role">Emergency support</span>'
-        '<a class="hc-value" href="mailto:tech@oneearthfilmfest.org">'
-        'tech@oneearthfilmfest.org</a>'
+    # OEFF rep
+    oeff_rep = venue.get("oeff_rep", "")
+    if oeff_rep:
+        cards.append(
+            f'<div class="contact-card">'
+            f'<span class="hc-role">OEFF onsite rep</span>'
+            f'<span class="hc-name">{_esc(oeff_rep)}</span>'
+            f'</div>'
+        )
+
+    # Host coordinator (always present)
+    cards.append(
+        '<div class="contact-card">'
+        '<span class="hc-role">Host coordinator</span>'
+        '<a class="hc-value" href="mailto:hosts@oneearthcollective.org">'
+        'hosts@oneearthcollective.org</a>'
         '</div>'
     )
 
+    # Emergency support (expanded in apr)
+    if state == "apr":
+        cards.append(
+            '<div class="contact-card contact-emergency">'
+            '<span class="hc-role">Emergency support</span>'
+            '<a class="hc-value" href="mailto:tech@oneearthfilmfest.org">'
+            'tech@oneearthfilmfest.org</a>'
+            '<span class="hc-note">Staffed April 22-26</span>'
+            '</div>'
+        )
+
     return (
         '<section class="helper-section">'
-        '<h2>Contacts</h2>'
-        '<div class="helper-contacts">' + "\n".join(rows) + '</div>'
+        '<h2>Your Contacts</h2>'
+        '<div class="contact-grid">' + "\n".join(cards) + '</div>'
         '</section>'
     )
 
 
-def render_helper_event_page(venue: Dict[str, Any]) -> str:
-    """Render the event/RSVP page link section."""
-    rsvp_url = venue.get("rsvp_url", "")
-    if not rsvp_url:
+def render_helper_venue_details(venue: Dict[str, Any]) -> str:
+    """Render venue details — Tier 3 info. Collapsible."""
+    items = []
+
+    capacity = venue.get("venue_capacity", "")
+    if capacity:
+        items.append(("Capacity", str(capacity)))
+
+    # AV equipment summary
+    av_items = []
+    if venue.get("has_projector"):
+        av_items.append("Projector")
+    if venue.get("has_screen"):
+        av_items.append("Screen")
+    if venue.get("has_sound"):
+        av_items.append("Sound system")
+    if venue.get("has_computer"):
+        av_items.append("Computer")
+    if av_items:
+        items.append(("AV equipment", ", ".join(av_items)))
+    elif venue.get("venue_equipment_notes"):
+        items.append(("AV notes", _esc(venue["venue_equipment_notes"])))
+
+    if venue.get("has_wifi"):
+        items.append(("WiFi", "Available"))
+
+    if venue.get("has_wheelchair"):
+        items.append(("Accessible seating", "Available"))
+
+    space_notes = venue.get("space_notes", "")
+    if space_notes:
+        items.append(("Space notes", _esc(space_notes)))
+
+    address = venue.get("venue_address", "")
+    if address:
+        items.append(("Address", _esc(address)))
+
+    if not items:
         return ""
+
+    rows = "".join(
+        f'<div class="detail-row">'
+        f'<span class="detail-label">{label}</span>'
+        f'<span class="detail-value">{value}</span>'
+        f'</div>'
+        for label, value in items
+    )
+
     return (
-        '<section class="helper-section">'
-        '<h2>Your Event Page</h2>'
-        f'<a class="helper-btn" href="{_esc(rsvp_url)}" '
-        f'target="_blank" rel="noopener">Open event page</a>'
+        '<section class="helper-section venue-details-section">'
+        '<details class="venue-details">'
+        '<summary><h2>Venue Details</h2></summary>'
+        f'<div class="detail-grid">{rows}</div>'
+        '</details>'
         '</section>'
     )
 
 
-def render_helper_screening_packet(venue: Dict[str, Any], state: str) -> str:
-    """Render the screening packet section (Apr state only)."""
-    if state != "apr":
-        return (
-            '<section class="helper-section helper-muted">'
-            '<h2>Screening Packet</h2>'
-            '<p>Your screening packet download link will appear here '
-            'when it becomes available (typically 3 weeks before your event).</p>'
-            '</section>'
+def render_helper_resources(venue: Dict[str, Any], state: str) -> str:
+    """Render resources section — Tier 4 info. Links shown when populated."""
+    links = []
+
+    # Screening packet (hidden until April)
+    if state == "apr":
+        packet_url = venue.get("screening_packet_url", "")
+        if packet_url:
+            links.append(
+                '<a class="resource-link" href="' + _esc(packet_url) + '" '
+                'target="_blank" rel="noopener">'
+                '<span class="resource-icon">&#9744;</span>'
+                'Download screening packet</a>'
+            )
+        else:
+            links.append(
+                '<div class="resource-link resource-pending">'
+                '<span class="resource-icon">&#9744;</span>'
+                'Screening packet coming soon via email</div>'
+            )
+
+    # Host guide (always shown)
+    links.append(
+        '<a class="resource-link" href="https://hosts.oneearthfilmfest.org" '
+        'target="_blank" rel="noopener">'
+        '<span class="resource-icon">&#9782;</span>'
+        'Host guide</a>'
+    )
+
+    # VLC download (apr only)
+    if state == "apr":
+        links.append(
+            '<a class="resource-link" href="https://www.videolan.org/vlc/" '
+            'target="_blank" rel="noopener">'
+            '<span class="resource-icon">&#9654;</span>'
+            'Download VLC (recommended player)</a>'
         )
 
-    packet_url = venue.get("screening_packet_url", "")
-    if packet_url:
-        return (
-            '<section class="helper-section">'
-            '<h2>Screening Packet</h2>'
-            '<p>Download link sent via separate email. Check your inbox '
-            'for the packet password.</p>'
-            '<p class="helper-note">Test full playback before your event '
-            '(not just the first 30 seconds).</p>'
-            '<a class="helper-btn" href="https://www.videolan.org/vlc/" '
-            'target="_blank" rel="noopener">Download VLC (recommended player)</a>'
-            '</section>'
-        )
-    else:
-        return (
-            '<section class="helper-section">'
-            '<h2>Screening Packet</h2>'
-            '<p>Your screening packet download link is coming soon. '
-            'You\'ll receive it via a separate email.</p>'
-            '</section>'
-        )
+    if not links:
+        return ""
+
+    return (
+        '<section class="helper-section">'
+        '<h2>Resources</h2>'
+        '<div class="resource-grid">' + "\n".join(links) + '</div>'
+        '</section>'
+    )
 
 
 def render_helper_financial_section(venue: Dict[str, Any], password_hash: str) -> str:
@@ -1174,16 +1378,14 @@ def render_helper_financial_section(venue: Dict[str, Any], password_hash: str) -
 
 
 def render_helper_update_link(venue: Dict[str, Any], update_form_url: str) -> str:
-    """Render the 'something wrong?' section with update form link."""
-    venue_name = _esc(venue["venue_name"])
+    """Render the footer with contact info and update link."""
     mailto = (
         f'mailto:hosts@oneearthcollective.org'
         f'?subject={_esc(venue["venue_name"])}%20-%20Update%20Request'
     )
     parts = [
-        '<section class="helper-section helper-footer">',
-        '<h2>Something wrong?</h2>',
-        '<p>If any information on this page is incorrect or outdated:</p>',
+        '<section class="helper-section helper-footer-section">',
+        '<p class="helper-note">Questions? Something on this page look wrong?</p>',
         '<div class="helper-actions">',
     ]
     if update_form_url:
@@ -1193,7 +1395,7 @@ def render_helper_update_link(venue: Dict[str, Any], update_form_url: str) -> st
         )
     parts.append(
         f'<a class="helper-btn helper-btn-secondary" href="{mailto}">'
-        f'Email the host team</a>'
+        f'Email hosts@oneearthcollective.org</a>'
     )
     parts.append('</div></section>')
     return "\n".join(parts)
@@ -1265,6 +1467,13 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -1290,6 +1499,15 @@ body::before {
   mix-blend-mode: multiply;
 }
 
+:focus-visible {
+  outline: 2px solid var(--oeff-sage);
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+a { color: var(--color-accent); }
+a:hover { color: var(--oeff-sage-deep); }
+
 .helper-wrap {
   max-width: 640px;
   margin: 0 auto;
@@ -1301,6 +1519,14 @@ body::before {
   background: var(--oeff-black);
   text-align: center;
   padding: var(--space-xl) var(--space-md) var(--space-lg);
+  position: relative;
+}
+.helper-logo-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(146, 190, 170, 0.3), transparent);
 }
 .helper-logo-header img {
   height: 80px;
@@ -1309,18 +1535,18 @@ body::before {
 }
 .helper-logo-header .helper-logo-label {
   font-family: var(--font-display);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--oeff-sage-light);
 }
 
+/* Header — venue name + badge */
 .helper-header {
   text-align: center;
   padding: var(--space-xl) 0 var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 .helper-header h1 {
   font-family: var(--font-display);
@@ -1348,19 +1574,78 @@ body::before {
   color: var(--oeff-sage-deep);
   margin-top: var(--space-sm);
 }
-.helper-header .helper-film {
-  font-size: 1.05rem;
+
+/* Hero card — Tier 1 */
+.hero-card {
+  background: var(--oeff-sage-mist);
+  border: 1px solid var(--oeff-sage-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  margin-bottom: var(--space-lg);
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+}
+.hero-film {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
   font-style: italic;
   color: var(--color-heading);
-  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
 }
-.helper-header .helper-date {
+.hero-date {
   font-family: var(--font-display);
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
   color: var(--color-text-soft);
-  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+.hero-address {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+.hero-price {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+.hero-btn {
+  margin-top: var(--space-md);
 }
 
+/* Ticket count */
+.ticket-section {
+  text-align: center;
+  padding: var(--space-xl);
+}
+.ticket-count {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--oeff-sage-deep);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.ticket-label {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.ticket-prominent {
+  border-left-color: var(--oeff-sage);
+  border-left-width: 4px;
+}
+.ticket-prominent .ticket-count {
+  font-size: 3rem;
+  color: var(--oeff-sage-deep);
+}
+
+/* Standard section */
 .helper-section {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -1380,10 +1665,10 @@ body::before {
   margin-bottom: var(--space-sm);
 }
 .helper-muted {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
-/* Timeline */
+/* Run of show / Timeline */
 .helper-timeline {
   width: 100%;
   border-collapse: collapse;
@@ -1407,19 +1692,23 @@ body::before {
   line-height: 1.65;
 }
 
-/* Contacts */
-.helper-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* Contact cards */
+.contact-grid {
+  display: grid;
+  gap: var(--space-sm);
 }
-.hc-row {
+.contact-card {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0;
+  padding: var(--space-sm) 0;
   border-bottom: 1px solid var(--color-border-light);
 }
-.hc-row:last-child { border-bottom: none; }
+.contact-card:last-child { border-bottom: none; }
+.contact-emergency {
+  border-left: 3px solid var(--oeff-sage);
+  padding-left: var(--space-sm);
+  margin-top: var(--space-xs);
+}
 .hc-role {
   font-family: var(--font-display);
   font-size: 0.75rem;
@@ -1429,6 +1718,11 @@ body::before {
   letter-spacing: 0.04em;
   margin-bottom: 0.125rem;
 }
+.hc-name {
+  font-size: 0.9375rem;
+  color: var(--color-heading);
+  font-weight: 500;
+}
 .hc-value {
   font-size: 0.92rem;
   color: var(--oeff-sage-deep);
@@ -1436,6 +1730,101 @@ body::before {
   word-break: break-all;
 }
 .hc-value:hover { text-decoration: underline; }
+.hc-note {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Venue details (collapsible) */
+.venue-details-section {
+  padding: 0;
+  border-left-width: 1px;
+}
+.venue-details {
+  padding: var(--space-xl);
+}
+.venue-details summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 44px;
+}
+.venue-details summary::before {
+  content: '+';
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--oeff-sage-deep);
+  width: 1.25rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+.venue-details[open] summary::before {
+  content: '\\2212';
+}
+.venue-details summary h2 {
+  margin-bottom: 0;
+}
+.venue-details summary::-webkit-details-marker { display: none; }
+.detail-grid {
+  margin-top: var(--space-md);
+}
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 0.9375rem;
+  gap: var(--space-md);
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label {
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  flex-shrink: 0;
+}
+.detail-value {
+  color: var(--color-heading);
+  text-align: right;
+}
+
+/* Resource links */
+.resource-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.resource-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--oeff-sage-mist);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--color-heading);
+  font-size: 0.9375rem;
+  min-height: 44px;
+  transition: background 0.15s var(--ease);
+}
+.resource-link:hover {
+  background: var(--oeff-sage-whisper);
+}
+.resource-pending {
+  opacity: 0.6;
+  cursor: default;
+}
+.resource-icon {
+  font-size: 1.1rem;
+  width: 1.5rem;
+  text-align: center;
+  flex-shrink: 0;
+}
 
 /* Buttons */
 .helper-btn {
@@ -1445,6 +1834,7 @@ body::before {
   font-weight: 600;
   padding: var(--space-sm) var(--space-xl);
   min-height: 44px;
+  line-height: 1.5;
   border-radius: var(--radius-organic-sm);
   background: var(--oeff-sage);
   color: var(--oeff-black);
@@ -1515,13 +1905,17 @@ body::before {
 }
 
 /* Footer */
-.helper-footer {
+.helper-footer-section {
   background: transparent;
   border: 1px dashed var(--color-border);
   box-shadow: none;
+  text-align: center;
 }
-.helper-footer h2 {
+.helper-footer-section h2 {
   color: var(--color-text);
+}
+.helper-footer-section .helper-note {
+  margin-bottom: var(--space-md);
 }
 
 .helper-note {
@@ -1531,18 +1925,29 @@ body::before {
   margin-top: 0.5rem;
 }
 
+.helper-updated {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  padding: var(--space-lg) 0;
+}
+
 /* Print */
 @media print {
   body { background: #fff; }
+  body::before { display: none; }
   .helper-wrap { max-width: 100%; padding: 0; }
-  .helper-section { box-shadow: none; break-inside: avoid; }
-  .financial-gate, .helper-footer { display: none; }
+  .helper-section, .hero-card { box-shadow: none; break-inside: avoid; }
+  .financial-gate, .helper-footer-section { display: none; }
+  .venue-details[open] { display: block; }
 }
 
 @media (min-width: 640px) {
   .helper-wrap { padding: 2rem; }
   .gate-form { max-width: 400px; }
-  .helper-actions { flex-direction: row; }
+  .helper-actions { flex-direction: row; justify-content: center; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>"""
 
@@ -1552,11 +1957,19 @@ def render_helper_page(
     state: str,
     token_entry: Dict[str, Any],
 ) -> str:
-    """Render a complete per-venue host helper page."""
+    """Render a complete per-venue host helper page.
+
+    Section order follows the information design hierarchy:
+      1. Header — OEFF logo + venue name + badge
+      2. Hero card — Film title, date/time, venue address, event page button (Tier 1)
+      3. Ticket count — RSVP number, hidden in feb, dimmed in mar, prominent in apr (Tier 2)
+      4. Run of Show — Day-of timeline, hidden until data exists (Tier 2)
+      5. Your Contacts — Host lead, AV, OEFF rep, coordinator (Tier 2)
+      6. Venue Details — Collapsible: capacity, AV, WiFi, ADA (Tier 3)
+      7. Resources — Host guide, screening packet, VLC (Tier 4)
+      8. Footer — "Questions?" + last-updated timestamp
+    """
     name = _esc(venue["venue_name"])
-    film = _esc(venue["film_title"])
-    event_date = _esc(venue.get("event_date", "TBD"))
-    event_time = _esc(venue.get("event_time", "TBD"))
     password_hash = token_entry.get("financial_password_hash", "")
 
     # State-aware badge
@@ -1567,31 +1980,29 @@ def render_helper_page(
     }
     badge_text = badge_map.get(state, "")
 
-    # Date/time display
-    date_line = event_date
-    if event_time and event_time != "TBD":
-        date_line += f" at {event_time}"
-
-    # Update form URL from token map
-    update_form_url = token_entry.get("update_form_url", "")
-
-    # Build page sections
+    # Build page sections in hierarchy order
     sections = [
-        render_helper_timeline(venue),
-        render_helper_contacts(venue),
-        render_helper_event_page(venue),
-        render_helper_screening_packet(venue, state),
+        render_helper_hero(venue, state),
+        render_helper_ticket_count(venue, state),
+        render_helper_run_of_show(venue, state),
+        render_helper_contacts(venue, state),
+        render_helper_venue_details(venue),
+        render_helper_resources(venue, state),
     ]
 
-    # Financial section (always present, password-gated)
+    # Financial section (password-gated, only if hash exists)
     if password_hash:
         sections.append(render_helper_financial_section(venue, password_hash))
 
     # "Something wrong?" footer
+    update_form_url = token_entry.get("update_form_url", "")
     sections.append(render_helper_update_link(venue, update_form_url))
 
     # Filter empty sections
     body = "\n".join(s for s in sections if s)
+
+    # Last-updated timestamp
+    today_str = date.today().strftime("%B %-d, %Y")
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -1599,28 +2010,87 @@ def render_helper_page(
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>{name} — OEFF 2026 Host Guide</title>
+<title>{name} — OEFF 2026 Host Helper</title>
 {render_helper_styles()}
 </head>
 <body>
 <div class="helper-logo-header">
-<img src="/hosts/OEFF_Logo_Reverse_Stacked.png" alt="One Earth Film Festival">
-<div class="helper-logo-label">2026 Host Guide</div>
+<img src="/OEFF_Logo_Reverse_Stacked.png" alt="One Earth Film Festival" width="200" height="auto">
+<div class="helper-logo-label">Your Screening Page</div>
 </div>
 <div class="helper-wrap">
 <header class="helper-header">
 <h1>{name}</h1>
 <div class="helper-subtitle">One Earth Film Festival 2026</div>
 <span class="helper-badge">{badge_text}</span>
-<div class="helper-film">{film}</div>
-<div class="helper-date">{date_line}</div>
 </header>
 {body}
+<div class="helper-updated">Last updated {today_str}</div>
 </div>
 {render_password_gate_js(password_hash) if password_hash else ''}
 </body>
 </html>
 """
+
+
+# ---------------------------------------------------------------------------
+# Venue name reconciliation — Airtable names ↔ token map keys
+# ---------------------------------------------------------------------------
+
+# Explicit aliases: Airtable venue name → token map key.
+# The token map was generated from an earlier Airtable snapshot where venue
+# names had different formatting or parenthetical notes. This table maps
+# current Airtable names to the token map's canonical keys.
+VENUE_NAME_ALIASES: Dict[str, str] = {
+    "Academy for Global Citizenship":
+        "Cultivate Collective (at Academy for Global Citizenship)",
+    "Cultivate Collective at Academy for Global Citizenship":
+        "Cultivate Collective (at Academy for Global Citizenship)",
+    "Chicago Climate Action Museum":
+        "Chicago Climate Action Museum",  # needs token — no alias, just new
+    "Chicago Public Library Harold Washington Branch":
+        "Chicago Public Library Harold Washington Branch",  # needs token
+    "Chicago Public Library Rogers Park Branch":
+        "Chicago Public Library Rogers Park Branch",  # needs token
+    "IIT Bronzeville":
+        "IIT Bronzeville",  # needs token
+    "Andersonville Chamber of Commerce":
+        "Andersonville Chamber of Commerce",  # needs token
+    "Calumet College of St. Joseph":
+        "Calumet College of St. Joseph",  # needs token
+}
+
+
+def _match_venue_to_token(
+    name: str, token_map: Dict[str, Any]
+) -> Optional[Dict[str, Any]]:
+    """Match an Airtable venue name to a token map entry.
+
+    Strategy (in order):
+      1. Exact match on token map key
+      2. Explicit alias lookup
+      3. Substring containment — if the Airtable name is contained in
+         exactly one token map key (handles parenthetical suffixes)
+    """
+    # 1. Exact match
+    entry = token_map.get(name)
+    if entry:
+        return entry
+
+    # 2. Alias lookup
+    alias = VENUE_NAME_ALIASES.get(name, "")
+    if alias and alias in token_map:
+        return token_map[alias]
+
+    # 3. Substring containment — Airtable name inside token map key
+    candidates = [
+        (k, v) for k, v in token_map.items()
+        if name.lower() in k.lower() or k.lower() in name.lower()
+    ]
+    if len(candidates) == 1:
+        return candidates[0][1]
+
+    return None
 
 
 def generate_helper_pages(
@@ -1635,7 +2105,7 @@ def generate_helper_pages(
 
     for venue in venues:
         name = venue["venue_name"]
-        entry = token_map.get(name)
+        entry = _match_venue_to_token(name, token_map)
 
         if not entry:
             skipped.append(name)
