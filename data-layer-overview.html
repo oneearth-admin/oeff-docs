@@ -1,0 +1,484 @@
+<!-- guards: core/color, core/layout, core/typography -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF Data Layer — How It Works</title>
+<style>
+  :root {
+    --color-primary: oklch(0.55 0.08 160);
+    --color-primary-light: oklch(0.94 0.03 160);
+    --color-primary-muted: oklch(0.73 0.05 160);
+    --color-bg: oklch(0.97 0.005 70);
+    --color-border: oklch(0.91 0.01 70);
+    --color-text: oklch(0.25 0.01 50);
+    --color-text-muted: oklch(0.50 0.02 50);
+    --color-accent: oklch(0.55 0.12 30);
+    --color-accent-light: oklch(0.96 0.02 30);
+    --color-info: oklch(0.55 0.08 230);
+    --color-info-light: oklch(0.95 0.02 230);
+    --color-warning: oklch(0.65 0.10 85);
+    --color-warning-light: oklch(0.96 0.03 85);
+    --color-muted: oklch(0.72 0.01 50);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+    --radius: 10px;
+    --shadow: 0 2px 12px hsla(25, 40%, 30%, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-bg);
+    padding: 2rem 1.5rem;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .subtitle {
+    color: var(--color-text-muted);
+    font-size: 15px;
+    margin-bottom: 2rem;
+  }
+
+  .diagram {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 1rem 0;
+  }
+
+  .flow-step {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+    border-radius: var(--radius);
+  }
+
+  .flow-step::after {
+    content: '';
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid currentColor;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    z-index: 1;
+  }
+
+  .flow-step:last-child::after { display: none; }
+
+  .flow-step .step-icon {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    opacity: 0.7;
+  }
+  .flow-step .label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+  .flow-step .desc {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .step-source { background: var(--color-info-light); color: var(--color-info); }
+  .step-filter { background: var(--color-warning-light); color: var(--color-warning); }
+  .step-summary { background: var(--color-primary-light); color: var(--color-primary); }
+  .step-display { background: var(--color-accent-light); color: var(--color-accent); }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .compare-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+  }
+
+  .compare-card.bad { border-color: var(--color-accent); }
+  .compare-card.good { border-color: var(--color-primary); }
+
+  .compare-card .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+  }
+
+  .bad .tag { background: var(--color-accent-light); color: var(--color-accent); }
+  .good .tag { background: var(--color-primary-light); color: var(--color-primary); }
+
+  .compare-card .venue {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 15px;
+  }
+
+  .film-list { list-style: none; padding: 0; }
+
+  .film-list li {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .film-list li.current {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .film-list li.old {
+    background: var(--color-bg);
+    color: var(--color-muted);
+    text-decoration: line-through;
+  }
+
+  .layers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .layer {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 1rem;
+    align-items: start;
+    border-left: 4px solid transparent;
+  }
+
+  .layer-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .layer-1 { border-left-color: var(--color-info); }
+  .layer-1 .layer-num { background: var(--color-info); }
+  .layer-2 { border-left-color: var(--color-warning); }
+  .layer-2 .layer-num { background: var(--color-warning); }
+  .layer-3 { border-left-color: var(--color-primary); }
+  .layer-3 .layer-num { background: var(--color-primary); }
+  .layer-4 { border-left-color: var(--color-accent); }
+  .layer-4 .layer-num { background: var(--color-accent); }
+
+  .layer h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+
+  .layer p {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .layer .example {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--color-bg);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+  }
+
+  .layer .example strong { color: var(--color-text); }
+
+  .wall {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .wall-grid {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 0;
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+
+  .wall-grid > div {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .wall-grid .header {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    background: var(--color-bg);
+    border-radius: 6px 6px 0 0;
+  }
+
+  .wall-grid .yes { color: var(--color-primary); font-weight: 600; }
+  .wall-grid .no { color: var(--color-accent); font-weight: 600; }
+
+  .callout {
+    background: var(--color-warning-light);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    font-size: 14px;
+    border-left: 4px solid var(--color-warning);
+  }
+
+  .callout strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--color-warning);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .flow { flex-direction: column; gap: 0.75rem; }
+    .flow-step::after { display: none; }
+    .compare { grid-template-columns: 1fr; }
+    .wall-grid { font-size: 13px; }
+    .wall-grid > div { padding: 6px 8px; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Code+Pro&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<h1>How Venue Data Reaches Hosts</h1>
+<p class="subtitle">OEFF 2026 Airtable Data Layer</p>
+
+<h2>The Big Picture</h2>
+
+<div class="diagram">
+  <div class="flow">
+    <div class="flow-step step-source">
+      <div class="step-icon">S</div>
+      <div class="label">Source</div>
+      <div class="desc">Raw data in Events, Contacts, Intake tables</div>
+    </div>
+    <div class="flow-step step-filter">
+      <div class="step-icon">F</div>
+      <div class="label">Filter</div>
+      <div class="desc">Only 2026 events pass through</div>
+    </div>
+    <div class="flow-step step-summary">
+      <div class="step-icon">R</div>
+      <div class="label">Summarize</div>
+      <div class="desc">Pull film, date, time, rep into venue row</div>
+    </div>
+    <div class="flow-step step-display">
+      <div class="step-icon">D</div>
+      <div class="label">Display</div>
+      <div class="desc">Format for hosts with friendly fallbacks</div>
+    </div>
+  </div>
+</div>
+
+<h2>What Changed (The Season Fix)</h2>
+
+<div class="compare">
+  <div class="compare-card bad">
+    <div class="tag">Before</div>
+    <div class="venue">Climate Action Evanston</div>
+    <ul class="film-list">
+      <li class="current">Plastic People — Apr 23</li>
+      <li class="old">Carbon-VIRTUAL — 2024</li>
+      <li class="old">The Grab — Apr 27, 2025</li>
+      <li class="old">Women of Carbon — Apr 28, 2025</li>
+    </ul>
+    <p style="font-size:13px; color:var(--color-accent); margin-top:8px;">Hosts saw old years mixed in</p>
+  </div>
+  <div class="compare-card good">
+    <div class="tag">After</div>
+    <div class="venue">Climate Action Evanston</div>
+    <ul class="film-list">
+      <li class="current">Plastic People — Apr 23 at 6:30P</li>
+    </ul>
+    <p style="font-size:13px; color:var(--color-primary); margin-top:8px;">Only 2026 screenings visible</p>
+  </div>
+</div>
+
+<h2>The Four Layers</h2>
+
+<div class="layers">
+
+  <div class="layer layer-1">
+    <div class="layer-num">1</div>
+    <div>
+      <h3>Connections</h3>
+      <p>Link fields wire tables together. Each venue connects to its events, contacts, and intake form.</p>
+      <div class="example">
+        Venue &rarr; <strong>"2026 Events"</strong> &rarr; only this year's screenings<br>
+        Venue &rarr; "Host Contacts" &rarr; contact people<br>
+        Venue &rarr; "Host Intake" &rarr; form responses
+      </div>
+    </div>
+  </div>
+
+  <div class="layer layer-2">
+    <div class="layer-num">2</div>
+    <div>
+      <h3>Season Filter</h3>
+      <p>The "2026 Events" link only includes events with Season = 2026. Old years are excluded at this level, before any data gets pulled.</p>
+      <div class="example">
+        <strong>28 events</strong> across <strong>27 venues</strong><br>
+        (Columbia College has 2 screenings)
+      </div>
+    </div>
+  </div>
+
+  <div class="layer layer-3">
+    <div class="layer-num">3</div>
+    <div>
+      <h3>Summaries (LKP fields)</h3>
+      <p>Rollup fields follow the connections and pull specific data into each venue's row. These are the "LKP" fields — short for lookup.</p>
+      <div class="example">
+        LKP Film Title &rarr; <strong>"Plastic People"</strong><br>
+        LKP Event Date &rarr; <strong>"2026-04-23"</strong><br>
+        LKP Event Time &rarr; <strong>"6:30P"</strong><br>
+        LKP OEFF Rep &rarr; <strong>"Kim"</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="layer layer-4">
+    <div class="layer-num">4</div>
+    <div>
+      <h3>Host Display</h3>
+      <p>Formula fields format the raw data for hosts. If data is missing, they show a friendly fallback instead of blank cells.</p>
+      <div class="example">
+        Host - Film &rarr; <strong>"Plastic People"</strong><br>
+        Host - Screening Date &rarr; <strong>"Wednesday, April 23, 2026"</strong><br>
+        Host - Ticket Info &rarr; <strong>"Ticket link coming soon"</strong><br>
+        Host - Start Time &rarr; <strong>"6:30P"</strong>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<h2>What Can Be Changed Programmatically</h2>
+
+<div class="wall">
+  <p style="font-size:14px; color:var(--color-text-muted); margin-bottom:0.5rem;">Airtable restricts what scripts can create or modify. This is why some steps required manual UI work.</p>
+  <div class="wall-grid">
+    <div class="header">Operation</div>
+    <div class="header" style="text-align:center;">Script</div>
+    <div class="header" style="text-align:center;">Extension</div>
+    <div class="header" style="text-align:center;">UI</div>
+
+    <div>Create a link field</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+
+    <div>Populate link values</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+
+    <div>Create a rollup field</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+
+    <div>Change a rollup's source</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+
+    <div>Create a formula field</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+
+    <div>Edit formula expression</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="no" style="text-align:center;">No</div>
+    <div class="yes" style="text-align:center;">Yes</div>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>Yearly maintenance</strong>
+  When 2027 comes: create a "2027 Events" link field, populate it with next year's events, and retarget the 8 rollup fields in the Airtable UI. The old "2026 Events" link stays as historical reference. Takes about 10 minutes.
+</div>
+
+</body>
+</html>
