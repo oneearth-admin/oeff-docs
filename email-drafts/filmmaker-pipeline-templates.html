@@ -1,0 +1,201 @@
+<!--
+  OEFF 2026 Filmmaker Pipeline Templates (Post-Outreach)
+  From: films@oneearthcollective.org
+  CC: ana@oneearthcollective.org, garen@oneearthcollective.org
+  Account: films@oneearthcollective.org
+  Tags: oeff, filmmaker-comms, pipeline
+  Guards: none (email HTML — inline styles required, no CSS variables)
+  Created: 2026-03-12
+  Context: Initial outreach sent March 5 via Mailmeteor. These 5 templates
+  cover the remaining pipeline from follow-up through final confirmation.
+
+  Merge fields used across templates:
+    {{ First Name }}, {{ Film Title }}, {{ Screening Count }}, {{ Venue List }},
+    {{ Licensing Fee }}, {{ Upload Link }}, {{ Intake Form Link }}, {{ Deadline }}
+-->
+
+
+<!-- ============================================================
+     TEMPLATE 1: FOLLOW-UP (No Response)
+     TRIGGER: 7-10 days after initial outreach with no reply (~March 12-15)
+     SUBJECT: Following up — {{ Film Title }} at OEFF 2026
+     ============================================================ -->
+
+<p>Hi {{ First Name }},</p>
+
+<p>Following up on our email last week about <strong>{{ Film Title }}</strong> at OEFF 2026. We have {{ Screening Count }} screening(s) confirmed for your film and want to make sure we lock in licensing before we get into logistics.</p>
+
+<p><strong>Could you reply with your nonprofit screening license rate?</strong> If you have questions about the festival or the screening setup, happy to answer those too.</p>
+
+<p>Best,<br>
+Garen Hudson<br>
+Technical Coordinator, One Earth Film Festival<br>
+films@oneearthcollective.org</p>
+
+<!--
+  INTERNAL NOTES — Template 1:
+  - Send window: March 12-15 (7-10 days after March 5 outreach)
+  - If no reply after this: escalate to Ana for a personal follow-up or phone call
+  - Do NOT resend the full venue/date list — they have it from the first email
+  - Next in sequence: Template 2 (on reply) or Template 4 (if still silent after day 14)
+-->
+
+
+<!-- ============================================================
+     TEMPLATE 2: LICENSING CONFIRMED + FILE DELIVERY
+     TRIGGER: After filmmaker responds with licensing terms and Ana approves
+     SUBJECT: {{ Film Title }} — licensing confirmed, file delivery details
+     ============================================================ -->
+
+<p>Hi {{ First Name }},</p>
+
+<p>Licensing is confirmed for <strong>{{ Film Title }}</strong> — {{ Licensing Fee }}. Thank you for working with us on that.</p>
+
+<p>Here's what we need to get your film ready for screening:</p>
+
+<p><strong>File delivery</strong></p>
+<ul>
+  <li>Upload here: <a href="{{ Upload Link }}">{{ Upload Link }}</a></li>
+  <li>Preferred format: H.264 MP4, highest resolution available</li>
+  <li>File naming: FilmTitle_OEFF2026.mp4</li>
+  <li><strong>Deadline: {{ Deadline }}</strong> (two weeks before the festival)</li>
+</ul>
+
+<p><strong>Captions</strong></p>
+<ul>
+  <li>If you have an SRT file, please upload it alongside the film</li>
+  <li>If you don't have captions yet, no problem — we'll handle it and send you the finished SRT for your own use (more details in a separate email if needed)</li>
+</ul>
+
+<!--
+  CONDITIONAL: Include this paragraph only if intake form not yet submitted.
+-->
+<p>One more thing — if you haven't filled out our <a href="{{ Intake Form Link }}">Film Intake Form</a>, please do when you get a chance. It covers contact details, format info, and accessibility notes we'll need.</p>
+
+<p>Let us know if you have any questions about the upload or format.</p>
+
+<p>Best,<br>
+Garen Hudson<br>
+Technical Coordinator, One Earth Film Festival<br>
+films@oneearthcollective.org</p>
+
+<!--
+  INTERNAL NOTES — Template 2:
+  - Only send AFTER Ana confirms the licensing agreement
+  - {{ Licensing Fee }} = agreed rate, e.g. "$250 for 2 screenings" or "fee waived"
+  - {{ Deadline }} = April 8, 2026 (default). Adjust per filmmaker if needed.
+  - {{ Upload Link }} = Dropbox file request link (one per film, or shared folder)
+  - Caption mention is intentionally light here — Template 3 handles the full conversation
+  - Next in sequence: Template 3 (if no captions) or Template 5 (if everything arrives)
+-->
+
+
+<!-- ============================================================
+     TEMPLATE 3: CAPTION RESOLUTION
+     TRIGGER: Filmmaker indicates they don't have captions/SRT
+     SUBJECT: Captions for {{ Film Title }} — we'll take care of it
+     ============================================================ -->
+
+<p>Hi {{ First Name }},</p>
+
+<p>Thanks for letting us know about captions. We screen every film with open captions — it's part of how we make the festival accessible — so we'll get <strong>{{ Film Title }}</strong> captioned through Rev.</p>
+
+<!--
+  CONDITIONAL: Use one of the two paragraphs below based on licensing fee status.
+
+  VERSION A — Filmmaker is receiving a licensing fee:
+-->
+<p>We'll deduct the captioning cost from your licensing fee and send you an itemized breakdown. You'll also receive the finished SRT file — it's yours to use however you'd like going forward.</p>
+
+<!--
+  VERSION B — Filmmaker waived their fee:
+-->
+<p>Since you've generously waived your licensing fee, we'll cover the captioning cost. You'll receive the finished SRT file — it's yours to use however you'd like going forward.</p>
+
+<p>No action needed from you on this. We'll let you know when the SRT is ready.</p>
+
+<p>Best,<br>
+Garen Hudson<br>
+Technical Coordinator, One Earth Film Festival<br>
+films@oneearthcollective.org</p>
+
+<!--
+  INTERNAL NOTES — Template 3:
+  - Delete the version (A or B) that doesn't apply before sending
+  - Rev turnaround: ~24-48 hours for most films. Order early.
+  - Caption cost reference: Rev charges ~$1.50/min. A 90-min film = ~$135.
+  - If licensing fee < caption cost, flag for Ana before sending Version A
+  - SRT delivery back to filmmaker happens after QC — separate from this email
+  - Next in sequence: Template 5 (once file + captions are in hand)
+-->
+
+
+<!-- ============================================================
+     TEMPLATE 4: URGENT DEADLINE
+     TRIGGER: Filmmaker explicitly said they're short on time, OR
+              no response 14+ days after initial outreach
+     SUBJECT: Quick ask — {{ Film Title }} for OEFF
+     ============================================================ -->
+
+<p>Hi {{ First Name }},</p>
+
+<p>We need two things for <strong>{{ Film Title }}</strong> at OEFF 2026:</p>
+
+<ol>
+  <li>Your nonprofit screening license rate (reply to this email)</li>
+  <li>Your film file uploaded by <strong>{{ Deadline }}</strong>: <a href="{{ Upload Link }}">{{ Upload Link }}</a></li>
+</ol>
+
+<p>That's it. We'll handle captions and logistics from there.</p>
+
+<p>Best,<br>
+Garen Hudson<br>
+Technical Coordinator, One Earth Film Festival<br>
+films@oneearthcollective.org</p>
+
+<!--
+  INTERNAL NOTES — Template 4:
+  - Under 75 words. Intentionally stripped down.
+  - Use for: (1) filmmaker who said "make it easy, I'm leaving soon,"
+    (2) any filmmaker who hasn't responded after 14+ days
+  - If using for a late responder, this replaces Template 1 (don't send both)
+  - If licensing is already confirmed, delete item 1 and change to a single ask
+  - Next in sequence: Template 5 (once file arrives) or escalate to Ana
+-->
+
+
+<!-- ============================================================
+     TEMPLATE 5: CONFIRMATION + THANK YOU
+     TRIGGER: Film file, captions, and metadata all received
+     SUBJECT: {{ Film Title }} — all set for OEFF 2026
+     ============================================================ -->
+
+<p>Hi {{ First Name }},</p>
+
+<p>We have everything we need for <strong>{{ Film Title }}</strong>. Thank you.</p>
+
+<p>Here's what happens next:</p>
+<ul>
+  <li>We'll QC the file and captions over the next week</li>
+  <li>Your film gets delivered to {{ Screening Count }} venue(s): {{ Venue List }}</li>
+  <li>You'll receive a separate pre-event email closer to the festival with screening details and any day-of info</li>
+</ul>
+
+<p>If anything changes on your end before the festival, just let us know.</p>
+
+<p>Thanks for being part of OEFF 2026.</p>
+
+<p>Best,<br>
+Garen Hudson<br>
+Technical Coordinator, One Earth Film Festival<br>
+films@oneearthcollective.org</p>
+
+<!--
+  INTERNAL NOTES — Template 5:
+  - This closes the filmmaker pipeline loop. No further emails until pre-event.
+  - Pre-event email (not in this template set) goes out ~1 week before festival
+    with screening times, venue contact info, and any Q&A or panel details.
+  - If QC reveals issues (wrong format, corrupt file, missing audio),
+    reply directly to the filmmaker — no template needed, just describe the issue.
+  - Update Airtable status to "Received" when sending this email.
+-->
