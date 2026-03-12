@@ -1,0 +1,721 @@
+<!-- guards: core/color, core/interaction, core/layout, core/typography -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF 2026 — Host Shared Views</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Source+Sans+3:wght@400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   Primitive Layer — domain palette (forest/OEFF)
+   These are NEVER used directly in components.
+   ═══════════════════════════════════════════════════ */
+:root {
+  --forest-50: #f0f5f2;
+  --forest-100: #dce8e0;
+  --forest-200: #c8d9ce;
+  --forest-300: #a3bfad;
+  --forest-400: #7ea38c;
+  --forest-500: #5c7c6b;
+  --forest-600: #4a6356;
+  --forest-700: #3a4f44;
+  --forest-800: #2a3a32;
+  --forest-900: #1a2e22;
+  --slate-50: #f8faf9;
+  --slate-100: #f0f3f1;
+  --slate-200: #e2e7e4;
+  --slate-300: #c8d0cc;
+  --slate-400: #8e9e95;
+  --slate-500: #6b7a72;
+  --slate-600: #4d5a53;
+  --slate-700: #3a4540;
+  --slate-800: #2a3230;
+  --amber-400: #c4a04b;
+  --amber-500: #a88a3e;
+  --red-400: #c44b4b;
+  --red-500: #a83e3e;
+
+  /* Region badge primitives */
+  --badge-blue-bg: #dbeafe;
+  --badge-blue-fg: #1e40af;
+  --badge-pink-bg: #fce7f3;
+  --badge-pink-fg: #9d174d;
+  --badge-amber-bg: #fef3c7;
+  --badge-amber-fg: #92400e;
+  --badge-green-bg: #d1fae5;
+  --badge-green-fg: #065f46;
+  --badge-violet-bg: #ede9fe;
+  --badge-violet-fg: #5b21b6;
+}
+
+/* ═══════════════════════════════════════════════════
+   Semantic Layer — functional roles
+   Components ONLY reference these tokens.
+   ═══════════════════════════════════════════════════ */
+:root {
+  /* Surfaces */
+  --color-ground: var(--slate-50);
+  --color-surface: #ffffff;
+  --color-wash: var(--forest-50);
+
+  /* Text */
+  --color-figure: var(--forest-900);
+  --color-figure-muted: var(--slate-500);
+  --color-figure-inverse: #ffffff;
+
+  /* Interactive */
+  --color-primary: var(--forest-600);
+  --color-primary-hover: var(--forest-700);
+  --color-accent: var(--forest-500);
+  --color-accent-hover: var(--forest-600);
+  --color-accent-subtle: var(--forest-100);
+
+  /* Structure */
+  --color-border: var(--slate-200);
+  --color-border-strong: var(--slate-300);
+  --color-divider: var(--slate-100);
+
+  /* Status */
+  --color-signal-success: var(--forest-500);
+  --color-signal-warning: var(--amber-400);
+  --color-signal-error: var(--red-400);
+
+  /* Region badges — semantic mapping */
+  --color-region-north-bg: var(--badge-blue-bg);
+  --color-region-north-fg: var(--badge-blue-fg);
+  --color-region-south-bg: var(--badge-pink-bg);
+  --color-region-south-fg: var(--badge-pink-fg);
+  --color-region-west-bg: var(--badge-amber-bg);
+  --color-region-west-fg: var(--badge-amber-fg);
+  --color-region-loop-bg: var(--badge-green-bg);
+  --color-region-loop-fg: var(--badge-green-fg);
+  --color-region-suburb-bg: var(--badge-violet-bg);
+  --color-region-suburb-fg: var(--badge-violet-fg);
+
+  /* Shadows — warm tinted, never pure black */
+  --shadow-sm: 0 1px 3px hsla(25, 40%, 30%, 0.06);
+  --shadow-md: 0 4px 12px hsla(25, 40%, 30%, 0.08);
+  --shadow-lg: 0 8px 24px hsla(25, 40%, 30%, 0.10);
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Source Sans 3', system-ui, sans-serif;
+  --font-mono: 'Source Code Pro', monospace;
+
+  /* Layout */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+}
+
+/* ═══════════════════════════════════════════════════
+   Reset + Base
+   ═══════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-figure);
+  background: var(--color-ground);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Paper grain — subtle OEFF texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  filter: url(#paper-grain);
+  opacity: 0.05;
+  z-index: 9999;
+}
+
+/* ═══════════════════════════════════════════════════
+   Layout
+   ═══════════════════════════════════════════════════ */
+.page-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.page-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-figure);
+  letter-spacing: -0.01em;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-figure-muted);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-xl) var(--space-2xl);
+}
+
+/* ═══════════════════════════════════════════════════
+   Stats Bar
+   ═══════════════════════════════════════════════════ */
+.stats-bar {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  flex: 1;
+  min-width: 140px;
+  transition: box-shadow 0.15s ease;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--color-figure-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-xs);
+}
+
+/* ═══════════════════════════════════════════════════
+   Toolbar
+   ═══════════════════════════════════════════════════ */
+.toolbar {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-figure);
+  background: var(--color-surface);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+
+.search-input::placeholder {
+  color: var(--color-figure-muted);
+}
+
+.filter-select {
+  padding: var(--space-sm) var(--space-md);
+  padding-right: var(--space-xl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-figure);
+  background: var(--color-surface);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%236b7a72' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  min-height: 44px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filter-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+
+/* ═══════════════════════════════════════════════════
+   Table
+   ═══════════════════════════════════════════════════ */
+.table-wrapper {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: var(--color-wash);
+}
+
+th {
+  padding: var(--space-md) var(--space-md);
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-figure-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+th:hover {
+  color: var(--color-figure);
+}
+
+th .sort-arrow {
+  display: inline-block;
+  margin-left: var(--space-xs);
+  opacity: 0.3;
+  font-size: 0.7rem;
+}
+
+th .sort-arrow.active {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-divider);
+  vertical-align: middle;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: var(--color-wash);
+}
+
+.venue-name {
+  font-weight: 600;
+  color: var(--color-figure);
+}
+
+/* ═══════════════════════════════════════════════════
+   Region Badges — all via semantic tokens
+   ═══════════════════════════════════════════════════ */
+.badge {
+  display: inline-block;
+  padding: 2px var(--space-sm);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.badge-north  { background: var(--color-region-north-bg);  color: var(--color-region-north-fg); }
+.badge-south  { background: var(--color-region-south-bg);  color: var(--color-region-south-fg); }
+.badge-west   { background: var(--color-region-west-bg);   color: var(--color-region-west-fg); }
+.badge-loop   { background: var(--color-region-loop-bg);   color: var(--color-region-loop-fg); }
+.badge-suburb { background: var(--color-region-suburb-bg);  color: var(--color-region-suburb-fg); }
+
+/* ═══════════════════════════════════════════════════
+   Buttons
+   ═══════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  background: var(--color-surface);
+  cursor: pointer;
+  min-height: 36px;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  border-color: var(--color-accent);
+  background: var(--color-wash);
+  color: var(--color-primary-hover);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-figure-inverse);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-figure-inverse);
+}
+
+.link-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.link-url {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.link-url:hover {
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════════════
+   Toast
+   ═══════════════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  background: var(--color-primary);
+  color: var(--color-figure-inverse);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.toast.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════
+   Empty State
+   ═══════════════════════════════════════════════════ */
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+  color: var(--color-figure-muted);
+}
+
+.empty-state-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+/* ═══════════════════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════════════════ */
+.page-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-xl);
+  font-size: 0.8rem;
+  color: var(--color-figure-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .page-header { padding: var(--space-md); }
+  main { padding: var(--space-md); }
+  .stats-bar { gap: var(--space-sm); }
+  .stat-card { min-width: 100px; padding: var(--space-sm) var(--space-md); }
+  .stat-value { font-size: 1.25rem; }
+  .table-wrapper { border-radius: var(--radius-md); }
+  th, td { padding: var(--space-sm); font-size: 0.85rem; }
+  .link-url { font-size: 0.75rem; }
+  .btn { font-size: 0.8rem; padding: var(--space-xs) var(--space-sm); min-height: 44px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Paper grain SVG filter -->
+<svg width="0" height="0" style="position:absolute">
+  <filter id="paper-grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+</svg>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <h1 class="page-title">Host Shared Views</h1>
+    <span class="page-subtitle">OEFF 2026 &mdash; 24 venue Airtable links for Kim's Mailmeteor merge</span>
+  </div>
+</header>
+
+<main>
+  <div class="stats-bar" id="stats-bar"></div>
+
+  <div class="toolbar">
+    <input type="text" class="search-input" id="search" placeholder="Search venues..." aria-label="Search venues">
+    <select class="filter-select" id="region-filter" aria-label="Filter by region">
+      <option value="all">All regions</option>
+      <option value="north">North Side</option>
+      <option value="south">South Side</option>
+      <option value="west">West Side</option>
+      <option value="loop">Loop / Downtown</option>
+      <option value="suburb">Suburbs</option>
+    </select>
+    <button class="btn btn-primary" onclick="copyAllLinks()" aria-label="Copy all links to clipboard">Copy All Links</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table id="venues-table" role="grid" aria-label="Host shared view links">
+      <thead>
+        <tr>
+          <th onclick="sortTable('index')" aria-sort="none"># <span class="sort-arrow" id="sort-index">&#9650;</span></th>
+          <th onclick="sortTable('name')" aria-sort="none">Venue <span class="sort-arrow" id="sort-name">&#9650;</span></th>
+          <th onclick="sortTable('region')" aria-sort="none">Region <span class="sort-arrow" id="sort-region">&#9650;</span></th>
+          <th>Shared View Link</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <div class="empty-state" id="empty-state" style="display:none">
+    <div class="empty-state-icon">&#x1f50d;</div>
+    <p>No venues match your search.</p>
+  </div>
+</main>
+
+<footer class="page-footer">
+  <span>Generated 2026-03-11 &middot; Source: Venues table (not Events)</span>
+  <span>Base: app9DymWrbAQaHH0K</span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BASE_URL = 'https://airtable.com/app9DymWrbAQaHH0K';
+
+const VENUES = [
+  { name: 'Academy for Global Citizenship', id: 'shrenniLpTWcdWlFw', region: 'south' },
+  { name: 'Andersonville Chamber of Commerce', id: 'shrO1hwyTzYoDgcwX', region: 'north' },
+  { name: 'Bethel New Life', id: 'shrsSJqTJaiHfS7CH', region: 'west' },
+  { name: 'Black Girl Environmentalists', id: 'shrEfmLlixv0F4Die', region: 'south' },
+  { name: 'Broadway United Methodist Church', id: 'shrN22cut7IbrxARm', region: 'north' },
+  { name: 'BUILD Inc.', id: 'shrFQvyLHlybfydFN', region: 'south' },
+  { name: 'Calumet College of St. Joseph', id: 'shripA2h6vXQYk0PR', region: 'south' },
+  { name: 'Chicago Climate Action Museum', id: 'shrCdTHXCxCWih0yS', region: 'loop' },
+  { name: 'Chicago Cultural Center', id: 'shrr0hYcbCwnajIFH', region: 'loop' },
+  { name: 'Chicago Public Library Harold Washington', id: 'shrXianXfXDslJbzH', region: 'loop' },
+  { name: 'Chicago Public Library Rogers Park', id: 'shr7xXYq5qQjq8DAt', region: 'north' },
+  { name: 'Climate Action Evanston', id: 'shralJ8r0ayIay01U', region: 'suburb' },
+  { name: 'Columbia College', id: 'shrybF0dD02jnQGvf', region: 'loop' },
+  { name: 'Dominican University', id: 'shrccozQs2ezwhRjp', region: 'suburb' },
+  { name: 'Epiphany Center for the Arts', id: 'shrPKoWExdUtDs9JQ', region: 'west' },
+  { name: 'Euclid AVE UMC', id: 'shrJtNNh0WSSAjsYw', region: 'suburb' },
+  { name: 'Go Green Park Ridge', id: 'shrEvSQfYN2QmG3rp', region: 'suburb' },
+  { name: 'IIT Bronzeville', id: 'shrlzj8ZrBfR1Xoxz', region: 'south' },
+  { name: 'Kehrein Center for the Arts', id: 'shrrw97cC49tbKvw2', region: 'west' },
+  { name: 'Triton College', id: 'shrgfGlDtWuczZigy', region: 'suburb' },
+  { name: 'Trinity Lutheran Church', id: 'shr4D2cLNYnCYUm0m', region: 'north' },
+  { name: 'Trinity Lutheran Des Plaines', id: 'shrIF0aUKO2jNxKnW', region: 'suburb' },
+  { name: 'Uncommon Ground', id: 'shre9EksODmYA4Mnn', region: 'north' },
+  { name: 'Village of Oak Park', id: 'shrEZVChZpNuPlPNx', region: 'suburb' }
+];
+
+const REGION_LABELS = {
+  north: 'North Side',
+  south: 'South Side',
+  west: 'West Side',
+  loop: 'Loop',
+  suburb: 'Suburbs'
+};
+
+const REGION_BADGE = {
+  north: 'badge-north',
+  south: 'badge-south',
+  west: 'badge-west',
+  loop: 'badge-loop',
+  suburb: 'badge-suburb'
+};
+
+let sortCol = 'index';
+let sortAsc = true;
+
+function getUrl(id) {
+  return BASE_URL + '/' + id;
+}
+
+function renderStats() {
+  const regions = {};
+  VENUES.forEach(v => { regions[v.region] = (regions[v.region] || 0) + 1; });
+  const bar = document.getElementById('stats-bar');
+  bar.innerHTML = `
+    <div class="stat-card"><div class="stat-value">${VENUES.length}</div><div class="stat-label">Total Venues</div></div>
+    ${Object.entries(regions).sort((a,b) => b[1] - a[1]).map(([r, c]) =>
+      `<div class="stat-card"><div class="stat-value">${c}</div><div class="stat-label">${REGION_LABELS[r]}</div></div>`
+    ).join('')}
+  `;
+}
+
+function renderTable() {
+  const search = document.getElementById('search').value.toLowerCase();
+  const region = document.getElementById('region-filter').value;
+
+  let filtered = VENUES.map((v, i) => ({ ...v, originalIndex: i + 1 }));
+
+  if (search) {
+    filtered = filtered.filter(v => v.name.toLowerCase().includes(search));
+  }
+  if (region !== 'all') {
+    filtered = filtered.filter(v => v.region === region);
+  }
+
+  filtered.sort((a, b) => {
+    let va, vb;
+    if (sortCol === 'index') { va = a.originalIndex; vb = b.originalIndex; }
+    else if (sortCol === 'name') { va = a.name.toLowerCase(); vb = b.name.toLowerCase(); }
+    else if (sortCol === 'region') { va = a.region; vb = b.region; }
+    else { va = a.originalIndex; vb = b.originalIndex; }
+
+    if (va < vb) return sortAsc ? -1 : 1;
+    if (va > vb) return sortAsc ? 1 : -1;
+    return 0;
+  });
+
+  const tbody = document.getElementById('table-body');
+  const empty = document.getElementById('empty-state');
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  tbody.innerHTML = filtered.map(v => `
+    <tr>
+      <td style="text-align:center;color:var(--color-figure-muted);font-size:0.85rem">${v.originalIndex}</td>
+      <td><span class="venue-name">${v.name}</span></td>
+      <td><span class="badge ${REGION_BADGE[v.region]}">${REGION_LABELS[v.region]}</span></td>
+      <td>
+        <div class="link-cell">
+          <a href="${getUrl(v.id)}" target="_blank" rel="noopener" class="link-url">${v.id}</a>
+        </div>
+      </td>
+      <td>
+        <div class="link-cell">
+          <button class="btn" onclick="copyLink('${v.id}', '${v.name.replace(/'/g, "\\'")}')">Copy</button>
+          <a href="${getUrl(v.id)}" target="_blank" rel="noopener" class="btn">Open</a>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+
+  document.querySelectorAll('.sort-arrow').forEach(el => el.classList.remove('active'));
+  const activeArrow = document.getElementById('sort-' + sortCol);
+  if (activeArrow) {
+    activeArrow.classList.add('active');
+    activeArrow.innerHTML = sortAsc ? '&#9650;' : '&#9660;';
+  }
+}
+
+function sortTable(col) {
+  if (sortCol === col) { sortAsc = !sortAsc; }
+  else { sortCol = col; sortAsc = true; }
+  renderTable();
+}
+
+function copyLink(id, name) {
+  const url = getUrl(id);
+  navigator.clipboard.writeText(url).then(() => {
+    showToast('Copied link for ' + name);
+  });
+}
+
+function copyAllLinks() {
+  const text = VENUES.map(v => v.name + '\t' + getUrl(v.id)).join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Copied all ' + VENUES.length + ' links');
+  });
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('visible');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('visible'), 2000);
+}
+
+document.getElementById('search').addEventListener('input', renderTable);
+document.getElementById('region-filter').addEventListener('change', renderTable);
+
+renderStats();
+renderTable();
+</script>
+</body>
+</html>

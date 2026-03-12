@@ -1,9 +1,18 @@
 {
-  "generated": "2026-03-11",
+  "generated": "2026-03-12",
   "base": "app9DymWrbAQaHH0K",
   "base_url": "https://airtable.com/app9DymWrbAQaHH0K",
   "source_table": "Venues",
   "note": "Venues-table views with Host-* fields. Replaces Events-table views (old IDs in events_views_deprecated).",
+  "interface": {
+    "name": "Host Helper",
+    "page_id": "pag6ol17RVv9gRUeV",
+    "share_id": "shrWiUJZFqE6ugneb",
+    "public_url": "https://airtable.com/app9DymWrbAQaHH0K/shrWiUJZFqE6ugneb",
+    "edit_url": "https://airtable.com/app9DymWrbAQaHH0K/pag6ol17RVv9gRUeV/edit",
+    "layout": "record_review",
+    "note": "All-venue interface with 15 Host-* fields. Published + shared to web Mar 12. Shows all venues — use per-venue shared views for host-facing emails."
+  },
   "views": {
     "Academy for Global Citizenship": "shrenniLpTWcdWlFw",
     "Andersonville Chamber of Commerce": "shrO1hwyTzYoDgcwX",
