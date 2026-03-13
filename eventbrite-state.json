@@ -192,6 +192,72 @@
       "published": true,
       "listed": false,
       "logo_id": "1178259769"
+    },
+    "row_19": {
+      "event_id": "1984830234662",
+      "event_name": "OEFF 2026: Beyond Zero @Uncommon Ground",
+      "published": true,
+      "listed": false
+    },
+    "row_20": {
+      "event_id": "1984831685000",
+      "event_name": "OEFF 2026: Rooted + Planetwalker @IIT",
+      "published": true,
+      "listed": false
+    },
+    "row_21": {
+      "event_id": "1984885724634",
+      "event_name": "OEFF 2026: How to Power a City @OPRFHS",
+      "published": true,
+      "listed": false
+    },
+    "row_22": {
+      "event_id": "1984886808877",
+      "event_name": "OEFF 2026: Chasing Time/Planetwalker @Euclid",
+      "published": true,
+      "listed": false
+    },
+    "row_23": {
+      "event_id": "1984888976360",
+      "event_name": "OEFF 2026: Chasing Time + Planetwalker @Park Ridge",
+      "published": true,
+      "listed": false
+    },
+    "row_24": {
+      "event_id": "1984828763261",
+      "event_name": "OEFF 2026: 40 Acres @Urban Essentials Cafe",
+      "published": true,
+      "listed": false
+    },
+    "row_25": {
+      "event_id": "1984985499062",
+      "event_name": "OEFF 2026: Whose Water? @Epiphany",
+      "published": true,
+      "listed": false
+    },
+    "row_26": {
+      "event_id": "1984898199948",
+      "event_name": "OEFF 2026: Action Fair @Chicago Cultural Center",
+      "published": true,
+      "listed": false
+    },
+    "row_27": {
+      "event_id": "1984895433674",
+      "event_name": "OEFF 2026: In Our Nature @Chicago Cultural Center",
+      "published": true,
+      "listed": false
+    },
+    "row_28": {
+      "event_id": "1984832697027",
+      "event_name": "OEFF 2026: Rooted @Dominican",
+      "published": true,
+      "listed": false
+    },
+    "row_29": {
+      "event_id": "1984883717631",
+      "event_name": "OEFF 2026: Rooted @Dominican (Hybrid)",
+      "published": true,
+      "listed": false
     }
   },
   "org_id": "133838916899"

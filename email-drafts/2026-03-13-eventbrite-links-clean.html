@@ -1,0 +1,55 @@
+<!--
+To: ana@oneearthcollective.org, josh@oneearthcollective.org
+CC: erin@oneearthcollective.org
+Subject: Eventbrite links — all 25 events accessible, no password gates
+From: garen@oneearthcollective.org
+-->
+<div style="font-family: Georgia, serif; max-width: 640px; line-height: 1.5;">
+
+<p>Quick update — all 25 Eventbrite event pages are cleaned up and working. If you visit any of the event links, you'll land directly on the ticket page. No password prompts, no extra steps.</p>
+
+<p>I thought this was fully sorted last night, but Eventbrite has a few overlapping systems — access codes, event-level passwords, and a separate "Private" publish setting — that each gate the page in different ways. Turned out we had issues in two of those layers, and the second one was harder to spot because it doesn't show up in the places you'd expect.</p>
+
+<p><strong>What was fixed:</strong></p>
+<ul>
+<li>Removed access codes from all events (leftover from earlier setup — these required visitors to type in a code before seeing tickets)</li>
+<li>Cleared a privacy setting on 11 newer venue-specific events (Uncommon Ground, IIT, Dominican, etc.) that was blocking the entire page with a password wall</li>
+</ul>
+
+<p><strong>Where things stand now:</strong></p>
+<ul>
+<li>All 25 events are live but <strong>won't show up if someone searches Eventbrite</strong> — people can only find them through the direct links we share (from Squarespace, emails, etc.)</li>
+<li>I've verified every link loads correctly, but <strong>please triple-check a few yourselves</strong> — extra eyes are worth it here, especially given how many layers Eventbrite has for this stuff</li>
+</ul>
+
+<p>The Squarespace film pages can now link straight to Eventbrite and the ticket flow just works.</p>
+
+<p>Could I have done all of this by clicking through each event one at a time in the Eventbrite dashboard? Sure — and in some ways clicking is more immediately verifiable. But with 25 events it already took a couple passes to get right, and if we scale to 40 or 50 screenings next year, doing this by hand stops being realistic. I built a few small scripts that check every event, fix what needs fixing, and verify the results — hoping we can lean into this kind of tooling more as the festival grows.</p>
+
+<hr style="border: none; border-top: 1px solid hsla(25, 40%, 30%, 0.15); margin: 24px 0;">
+
+<p><strong>For the technically curious:</strong></p>
+
+<p>Eventbrite has three separate systems that can gate an event page, which is part of why this took a couple rounds:</p>
+
+<ol>
+<li><strong>Access codes</strong> — codes attached to specific ticket types. Visitors have to enter the code to see those tickets. The API exposes these cleanly, so the script queried each event and deleted any it found. 26 codes removed total.</li>
+<li><strong>Event passwords</strong> — a password set on the event itself. Shows up as <code>is_locked</code> and <code>password</code> in the API. None of our events had this.</li>
+<li><strong>"Private" publish setting</strong> — this is the sneaky one. When you create an event through the Eventbrite dashboard and set it to "Private," it flips an internal flag that adds a password gate. But that flag doesn't appear anywhere in the API. If you query the event, every field — <code>is_locked</code>, <code>password</code>, <code>privacy_setting</code> — reads identically to a working event. You can't see it's broken from the data alone.</li>
+</ol>
+
+<p>The fix for #3 turned out to be a toggle: set the event to <code>listed: true</code> via the API (which clears the internal "Private" state), then immediately set it back to <code>listed: false</code>. This resets the event to "unlisted but accessible via direct link" — no password gate, but also not searchable. The original 14 events never had this problem because they were created through the API, which bypasses the dashboard's "Private" mode entirely.</p>
+
+<p>Scripts are in the OEFF data repo if anyone wants to look.</p>
+
+<hr style="border: none; border-top: 1px solid hsla(25, 40%, 30%, 0.15); margin: 24px 0;">
+
+<p><strong>Separate recommendation — archiving old event recordings:</strong></p>
+
+<p>While I was working through the Eventbrite pages, I noticed we still have a bunch of old event recordings on the Squarespace site — livestreams and panel recordings from the COVID/virtual era. These feel like a holdover from when streaming was the main way people attended. They're cluttering the site and making it harder for visitors to find what's current.</p>
+
+<p>I'd suggest we archive them — not delete, just move them off the main pages. We can keep the videos hosted wherever they are and link to them from a single "Past Events" or "Archive" page if we want to preserve access. Happy to help with this if it sounds right.</p>
+
+<p>Garen</p>
+
+</div>
