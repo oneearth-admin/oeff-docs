@@ -130,17 +130,18 @@
       "listed": false
     },
     "row_12": {
-      "event_id": "1983830351986",
+      "event_id": "1985174627751",
       "event_name": "OEFF 2026: 40 Acres",
       "age_advisory": "18+ ONLY. Graphic Violence and Language",
       "ticket_ids": [
-        "3421788608",
-        "3421788609",
-        "3421788625"
+        "3424209045",
+        "3424209046",
+        "3424209048"
       ],
       "published": true,
       "listed": false,
-      "logo_id": "1178259763"
+      "logo_id": "1178259763",
+      "previous_event_id": "1983830351986"
     },
     "row_13": {
       "event_id": "1983830357001",
