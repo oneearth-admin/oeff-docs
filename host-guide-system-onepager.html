@@ -61,7 +61,7 @@
         --color-text: var(--ink);
         --color-text-soft: var(--ink-soft);
         --color-text-muted: var(--ink-muted);
-        --color-border: var(--forest-mist);
+        --color-border: var(--color-primary-light);
         --color-action: var(--signal-critical);
 
         --shadow-warm: hsla(25, 40%, 30%, 0.08);
@@ -479,33 +479,30 @@
 
   <div class="status-grid">
     <div class="status-card">
-      <div class="number">26</div>
-      <div class="label">total venues<br>(all with dates confirmed)</div>
+      <div class="number">22</div>
+      <div class="label">scheduled venues<br>(all with films confirmed)</div>
     </div>
     <div class="status-card">
-      <div class="number">13</div>
-      <div class="label">fully populated<br>(film, date, time, tickets)</div>
+      <div class="number">14</div>
+      <div class="label">Eventbrite events<br>(published, unlisted/preview)</div>
     </div>
     <div class="status-card">
-      <div class="number">13</div>
-      <div class="label">need film assignment<br>and ticket URL</div>
+      <div class="number">2</div>
+      <div class="label">unscheduled venues<br>(confirmed interest, no date)</div>
     </div>
     <div class="status-card">
       <div class="number">0</div>
-      <div class="label">venues missing<br>screening dates</div>
+      <div class="label">intake form responses<br>(form live, not yet sent)</div>
     </div>
   </div>
 
   <h2>What Needs to Happen Next</h2>
 
-  <h3>1. Assign films and ticket links to the remaining 13 venues</h3>
-  <p>All 26 venues have confirmed dates. 13 still need a film assignment and an Eventbrite/RSVP link. Ana and Josh know which films go where — it just needs to be entered in Airtable.</p>
+  <h3>1. Send the intake form to hosts</h3>
+  <p>All 22 scheduled venues have confirmed films and dates. The main data gap is host-side: AV setup, parking, accessibility, contacts. The intake form is built — it needs to be sent. One form, one URL, phase-gated sections so hosts only see what's relevant right now.</p>
 
-  <h3>2. Send a new host check-in form</h3>
-  <p>Some venues haven't responded to the first intake form. We need a fresh push — ideally the March version that also asks about AV setup (projector, screen, sound system). One form, one URL, phase-gated sections so hosts only see what's relevant right now.</p>
-
-  <h3>3. First live demo</h3>
-  <p>13 venues already have enough data to generate pages. Garen runs the generator and pushes a few venue pages live so the team can see the format before rolling out to all hosts.</p>
+  <h3>2. Generate screening pages</h3>
+  <p>All 22 venues have enough data to generate pages now. Garen runs the generator and pushes a few venue pages live so the team can see the format before rolling out URLs to all hosts.</p>
 
   <h3>4. Share venue page URLs with hosts</h3>
   <p>Each host gets a private link to their venue page. The page is their single reference for everything about their screening. We send this link in the same emails we're already sending — no new communication channel.</p>

@@ -375,7 +375,7 @@ select {
   <!-- Header -->
   <header class="form-header">
     <h1>Host Venue Intake Form</h1>
-    <p class="subtitle">One Earth Film Festival 2026 — Help us understand your venue so we can match you with the right film and support your screening.</p>
+    <p class="subtitle">One Earth Film Festival 2026 — You know your space and your community. Let's plan your screening together.</p>
     <span class="dates">Festival Week: April 22 – 28, 2026</span>
   </header>
 
@@ -384,7 +384,7 @@ select {
     <!-- ─── SECTION 1: Venue Information ─── -->
     <section class="form-section">
       <h2>Venue Information</h2>
-      <p class="section-note">Tell us about your space so we can plan for a great screening experience.</p>
+      <p class="section-note">You're the expert on your venue. This helps us support your screening well.</p>
 
       <div class="field-group">
         <label for="orgName">Organization / Venue Name <span class="required">*</span></label>
@@ -396,27 +396,9 @@ select {
         <input type="text" id="venueAddress" name="venueAddress" required aria-label="Venue street address" placeholder="Street address, city, state, ZIP">
       </div>
 
-      <div class="field-row">
-        <div class="field-group">
-          <label for="capacity">Seating Capacity <span class="required">*</span></label>
-          <input type="number" id="capacity" name="capacity" required min="1" aria-label="Seating capacity" placeholder="e.g., 120">
-        </div>
-        <div class="field-group">
-          <label for="region">Region</label>
-          <select id="region" name="region" aria-label="Chicago region">
-            <option value="">Select region...</option>
-            <option value="Loop">Loop / Downtown</option>
-            <option value="Northside">Northside</option>
-            <option value="Westside">Westside</option>
-            <option value="Southside">Southside</option>
-            <option value="Southwest Side">Southwest Side</option>
-            <option value="N Suburbs">North Suburbs</option>
-            <option value="NW Suburbs">Northwest Suburbs</option>
-            <option value="W Suburbs">West Suburbs</option>
-            <option value="S Suburbs">South Suburbs</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+      <div class="field-group">
+        <label for="capacity">Seating Capacity <span class="required">*</span></label>
+        <input type="number" id="capacity" name="capacity" required min="1" aria-label="Seating capacity" placeholder="e.g., 120" style="max-width: 200px;">
       </div>
 
       <div class="field-group">
@@ -426,6 +408,7 @@ select {
 
       <fieldset class="field-group" style="border: none; padding: 0;">
         <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: var(--space-xs);">Does your venue serve a frontline or environmental justice community?</legend>
+        <p class="help-text" style="margin-bottom: var(--space-sm);">Frontline communities are those most directly affected by environmental harm — often low-income neighborhoods or communities of color near pollution sources. This helps OEFF prioritize equitable access to resources.</p>
         <div class="radio-group">
           <label class="radio-item">
             <input type="radio" name="frontline" value="yes" aria-label="Yes, serves frontline community"> Yes
@@ -443,7 +426,7 @@ select {
     <!-- ─── SECTION 2: Primary Contacts ─── -->
     <section class="form-section">
       <h2>Contacts</h2>
-      <p class="section-note">We need at least one primary contact. Add additional contacts as applicable.</p>
+      <p class="section-note">Who should we be in touch with? At least one primary contact, plus anyone who handles AV or promotion.</p>
 
       <div class="contact-block">
         <h3>Primary Contact 1 <span class="required">*</span></h3>
@@ -527,7 +510,7 @@ select {
     <!-- ─── SECTION 3: Film Selection ─── -->
     <section class="form-section">
       <h2>Film Selection</h2>
-      <p class="section-note">Choose the film you'd like to screen. If you're still deciding, select "Not yet decided" and we'll follow up.</p>
+      <p class="section-note">Which film speaks to your community? If you're still deciding, select "Not yet decided" and we'll help you find the right fit.</p>
 
       <div class="field-group">
         <label for="filmSelection">Film <span class="required">*</span></label>
@@ -576,7 +559,7 @@ select {
     <!-- ─── SECTION 4: AV Equipment ─── -->
     <section class="form-section">
       <h2>AV &amp; Technical Setup</h2>
-      <p class="section-note">Check everything your venue can provide. OEFF can help fill gaps — just let us know.</p>
+      <p class="section-note">Check what your venue already has. We can help fill any gaps — that's what we're here for.</p>
 
       <fieldset class="field-group" style="border: none; padding: 0;">
         <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0;">Available Equipment</legend>
@@ -620,8 +603,8 @@ select {
 
     <!-- ─── SECTION 5: Accessibility & ADA ─── -->
     <section class="form-section">
-      <h2>Accessibility &amp; ADA Compliance</h2>
-      <p class="section-note">Help us ensure every attendee can participate fully. Check all that apply.</p>
+      <h2>Accessibility</h2>
+      <p class="section-note">Every screening should be welcoming to everyone in your community. Check what your venue offers.</p>
 
       <fieldset class="field-group" style="border: none; padding: 0;">
         <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0;">Physical Accessibility</legend>
@@ -684,7 +667,7 @@ select {
     <!-- ─── SECTION 6: Marketing & Promotion ─── -->
     <section class="form-section">
       <h2>Marketing &amp; Promotion</h2>
-      <p class="section-note">How will you help spread the word? OEFF provides posters, social templates, and press copy.</p>
+      <p class="section-note">You know how to reach your community. We'll provide posters, social templates, and press copy to support your outreach.</p>
 
       <fieldset class="field-group" style="border: none; padding: 0;">
         <legend style="font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0;">Promotion Channels <span class="required">*</span></legend>
@@ -730,11 +713,11 @@ select {
 
     <!-- ─── SECTION 7: Additional Info ─── -->
     <section class="form-section">
-      <h2>Anything Else?</h2>
+      <h2>Your Screening Story</h2>
 
       <div class="field-group">
         <label for="motivation">Why does your organization want to host a screening? <span class="optional">(optional)</span></label>
-        <textarea id="motivation" name="motivation" rows="3" aria-label="Motivation for hosting" placeholder="This helps us tell your story in festival marketing and connect you with the right film."></textarea>
+        <textarea id="motivation" name="motivation" rows="3" aria-label="Motivation for hosting" placeholder="What drew you to this — a connection to the topic, your community's interests, a past screening that worked well?"></textarea>
       </div>
 
       <div class="field-group">
@@ -765,8 +748,8 @@ select {
 
   <!-- Confirmation -->
   <div class="confirmation" id="confirmation">
-    <h2>Thank you!</h2>
-    <p>Your intake form has been received. The OEFF team will review your submission and follow up to confirm your screening details.</p>
+    <h2>We're glad you're hosting.</h2>
+    <p>Thank you for opening your space to your community this Earth Week. We've received your information and will be in touch within 5 business days to confirm your screening details and talk through next steps together.</p>
     <p style="margin-top: var(--space-lg); color: var(--text-muted);">Festival Week: April 22 – 28, 2026</p>
   </div>
 
@@ -785,7 +768,7 @@ document.getElementById('hostIntakeForm').addEventListener('submit', function(e)
 
   /* Single-value fields */
   var fields = [
-    'orgName', 'venueAddress', 'capacity', 'region', 'venueDescription',
+    'orgName', 'venueAddress', 'capacity', 'venueDescription',
     'frontline',
     'contact1Name', 'contact1Role', 'contact1Email', 'contact1Phone',
     'contact2Name', 'contact2Role', 'contact2Email', 'contact2Phone',

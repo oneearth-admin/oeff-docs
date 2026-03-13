@@ -9,7 +9,7 @@
  *   - Pre-filled Google Form update URLs
  *
  * Reads venue names and contact emails from a "Hosts" tab,
- * writes security data to a "Host Security" tab with YAMM merge columns.
+ * writes security data to a "Host Security" tab with Mailmeteor merge columns.
  *
  * Install: Extensions > Apps Script > paste this file > save.
  * Run: OEFF menu > Generate Host Security Data
@@ -258,7 +258,7 @@ function generateHostSecurityData() {
   ui.alert(
     'Host Security Data Generated',
     outputRows.length + ' venue(s) processed.\n\n'
-    + 'Columns ready for YAMM merge:\n'
+    + 'Columns ready for Mailmeteor merge:\n'
     + '  - Host Helper URL\n'
     + '  - Financial Password\n'
     + '  - Packet Password\n'

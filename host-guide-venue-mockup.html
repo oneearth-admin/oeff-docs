@@ -37,12 +37,38 @@
   FORMS STRATEGY — Tools and pipelines for host-facing forms
   ═══════════════════════════════════════════════════════════════════════════════
 
+  ORIGINAL (5 forms):
   Venue Check-In Form:        Google Form → Sheet (Option B above)
   Volunteer Registration:     SignUp Genius (existing OEFF tool)
   T-Shirt Size Survey:        Embedded in SignUp Genius or separate Google Form
   AV Verification Checklist:  Google Form → Sheet
   Playback Test Confirmation: Google Form → Sheet
   Post-Event Feedback:        Google Form (existing pattern)
+
+  RECOMMENDED (2 forms + SignUp Genius):
+  ─────────────────────────────────────
+
+  Form 1: "Host Check-In" (one rolling form, 3 phase-gated sections)
+  ├── Feb section: venue details, preferred date/time, t-shirt size
+  ├── Mar section: AV verification checklist (projector, screen, sound)
+  └── Apr section: playback test confirmation (packet received, tested OK)
+  Google Forms section branching handles this natively — host picks
+  "What are you checking in about?" and sees only their phase's questions.
+  One form → one Sheet → one URL that works from February through April.
+
+  Form 2: "Post-Event Feedback" (standalone, different audience)
+  Shared with attendees at wrap-up. Different lifecycle, different audience.
+  Merging this into the check-in form would be confusing.
+
+  Volunteer Registration: stays in SignUp Genius (existing OEFF tool).
+  T-shirt sizes: add as a field in Form 1's Feb section, not a separate form.
+  SignUp Genius already collects this for volunteers; Form 1 covers hosts.
+
+  WHY NOT 5 FORMS:
+  - 5 URLs = 5 things Ana/Josh maintain, 5 things to link per-state
+  - Historical pattern: "resources aren't read" — more forms makes this worse
+  - 5 Google Forms = 5 response Sheets to monitor
+  - 1 branching form = 1 Sheet with a "Phase" column, one place to check
 
   ═══════════════════════════════════════════════════════════════════════════════
 
@@ -718,6 +744,111 @@
     .venue-specs.visible {
       animation: fade-in-up 0.3s ease-out;
     }
+
+    /* ── Host Helper annotations (visible on page for OEC review) ── */
+    .hh-annotation {
+      position: relative;
+      margin: var(--space-sm) 0;
+      padding: 0.625rem 0.75rem 0.625rem 2.25rem;
+      background: #fdf6ec;
+      border: 1px solid #e8d5b8;
+      border-radius: 6px;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #5c4a2e;
+    }
+    .hh-annotation::before {
+      content: "HH";
+      position: absolute;
+      left: 0.5rem;
+      top: 0.5rem;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: #b8943e;
+      padding: 0.125rem 0.3rem;
+      border-radius: 3px;
+    }
+    .hh-annotation strong { color: #3d3118; }
+    .hh-annotation code {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.75rem;
+      background: #f0e6d2;
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+    }
+    .hh-annotation.hh-new::before {
+      content: "NEW";
+      background: var(--oeff-sage);
+    }
+    .hh-annotation.hh-new {
+      background: #f0f5ee;
+      border-color: #c5d4be;
+      color: #2c4a2e;
+    }
+    .hh-annotation.hh-removed::before {
+      content: "OUT";
+      background: #c47a5a;
+    }
+    .hh-annotation.hh-removed {
+      background: #fdf2ee;
+      border-color: #e4c4b4;
+      color: #5c3a2a;
+    }
+    .hh-coverage-map {
+      margin: var(--space-lg) 0;
+      padding: var(--space-md);
+      background: #fdf6ec;
+      border: 2px solid #d4b87a;
+      border-radius: 8px;
+    }
+    .hh-coverage-map h4 {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: #3d3118;
+      margin: 0 0 var(--space-sm);
+    }
+    .hh-coverage-map table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    .hh-coverage-map th {
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8a7450;
+      padding: 0.375rem 0.5rem;
+      border-bottom: 1px solid #e8d5b8;
+    }
+    .hh-coverage-map td {
+      padding: 0.375rem 0.5rem;
+      border-bottom: 1px solid #f0e6d2;
+      color: #5c4a2e;
+      vertical-align: top;
+    }
+    .hh-coverage-map .hh-arrow { color: #b8943e; font-weight: 600; }
+    .hh-toggle-btn {
+      display: inline-block;
+      margin-bottom: var(--space-md);
+      padding: 0.375rem 0.75rem;
+      background: #b8943e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .hh-toggle-btn:hover { background: #a07e2e; }
+    .hh-hidden { display: none; }
   </style>
 </head>
 <body>
@@ -749,6 +880,35 @@
         <!-- populated as the festival approaches.                       -->
         <!-- ═══════════════════════════════════════════════════════════ -->
 
+        <button class="hh-toggle-btn" onclick="document.querySelectorAll('.hh-annotation,.hh-coverage-map').forEach(el => el.classList.toggle('hh-hidden')); this.textContent = this.textContent.includes('Hide') ? 'Show Host Helper annotations' : 'Hide Host Helper annotations';">Hide Host Helper annotations</button>
+
+        <div class="hh-coverage-map">
+          <h4>Host Helper Coverage Map</h4>
+          <p style="font-size: 0.8rem; color: #5c4a2e; margin: 0 0 0.75rem;">The historical Host Helper was a per-venue Excel doc in <code>05 Logistics and Venues / Host Helpers</code> on the Shared Drive. It combined logistics, film delivery, and emergency info into one spreadsheet. This section replaces it &mdash; one section per venue, inside the guide hosts already use, updated by script instead of by hand.</p>
+          <table>
+            <tr><th>Host Helper had</th><th></th><th>Now lives here</th></tr>
+            <tr><td>Venue name, date, time</td><td class="hh-arrow">&rarr;</td><td>STATUS block (all 3 states)</td></tr>
+            <tr><td>Host contact name</td><td class="hh-arrow">&rarr;</td><td>STATUS block (feb: pending, mar/apr: confirmed)</td></tr>
+            <tr><td>AV contact</td><td class="hh-arrow">&rarr;</td><td>STATUS block (same pattern)</td></tr>
+            <tr><td>Film assignment</td><td class="hh-arrow">&rarr;</td><td>STATUS block, film title row</td></tr>
+            <tr><td>Ticket / RSVP counts</td><td class="hh-arrow">&rarr;</td><td>STATUS block (apr: RSVP snapshot &mdash; was daily in Excel, live counts would need a different pipeline)</td></tr>
+            <tr><td>Run of show</td><td class="hh-arrow">&rarr;</td><td>RESOURCES block (apr: day-of timeline, computed from event time + runtime)</td></tr>
+            <tr><td>Emergency contacts</td><td class="hh-arrow">&rarr;</td><td>CONTACTS block (apr: email + hotline hours &mdash; phone delivered via Mailmeteor, not here)</td></tr>
+            <tr><td>Film file download (cell 27B)</td><td class="hh-arrow">&rarr;</td><td><strong>Removed.</strong> Film delivery is now separate: Dropbox link via Mailmeteor email with per-venue password</td></tr>
+            <tr><td>Marketing toolkit (flyer, social, print)</td><td class="hh-arrow">&rarr;</td><td>RESOURCES block (mar: linked directly &mdash; was a separate Shared Drive folder)</td></tr>
+          </table>
+          <h4 style="margin-top: 0.75rem;">New in this design (Host Helper didn't have these)</h4>
+          <table>
+            <tr><td>&ldquo;Your Focus&rdquo; callout</td><td>Single priority action per phase</td></tr>
+            <tr><td>Temporal states (feb / mar / apr toggle)</td><td>Progressive disclosure by timeline</td></tr>
+            <tr><td>SARC ordering</td><td>Consistent Status &rarr; Asks &rarr; Resources &rarr; Contacts hierarchy</td></tr>
+            <tr><td>Form links</td><td>Check-in, AV verification, playback test &mdash; inline, not emailed separately</td></tr>
+            <tr><td>Volunteer roster</td><td>Named volunteers with roles (apr)</td></tr>
+            <tr><td>Privacy guardrails</td><td>No phone numbers or Dropbox URLs in HTML &mdash; build fails if present</td></tr>
+          </table>
+          <p style="font-size: 0.8rem; color: #8a7450; margin: 0.75rem 0 0; font-style: italic;">Open question the OEC team has revisited but not resolved: &ldquo;Is Host Helper a documentation problem or a relationship problem?&rdquo; This design tests both hypotheses &mdash; named contacts (Ana, Garen, Josh) are the relationship layer; the toggle + SARC is the documentation layer. Measurable once this ships: do support emails decrease?</p>
+        </div>
+
         <div id="your-screening" style="margin-top: var(--space-2xl); scroll-margin-top: 4rem;">
           <h3 style="font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--color-text); margin: 0 0 var(--space-sm); letter-spacing: -0.01em;">Your Screening</h3>
           <p style="font-size: 0.95rem; color: var(--color-text-muted); margin: 0 0 var(--space-lg);">Details fill in as we confirm each piece. Toggle below to see what's coming.</p>
@@ -765,6 +925,7 @@
           <div class="venue-specs visible" data-stage="feb">
 
             <!-- STATUS: What's confirmed right now -->
+            <div class="hh-annotation">Venue name, film assignment, host contact, AV contact &mdash; all lived in the Excel header rows. Now shown as a card with confirmed/pending indicators so hosts can see at a glance what&rsquo;s settled vs. in progress.</div>
             <p class="state-group-label">Status</p>
             <div class="screening-card">
               <div class="screening-card-header">
@@ -818,6 +979,7 @@
             </div>
 
             <!-- RESOURCES: What we're giving you -->
+            <div class="hh-annotation hh-new">The Excel had no resources section. Links to webinars, forms, and recordings were sent via separate emails &mdash; hosts had to dig through their inbox. Now everything is in one place, in the guide itself.</div>
             <p class="state-group-label">Resources</p>
             <table class="spec-table">
               <tr><th colspan="2">Links & Tools</th></tr>
@@ -840,6 +1002,7 @@
             </table>
 
             <!-- CONTACTS: Who to reach -->
+            <div class="hh-annotation">Emergency contacts were in the Excel but only useful during festival week. In February, hosts emailed hosts@ and waited. Now they see <strong>named people with roles</strong> &mdash; Ana for program, Garen for tech. Whether named contacts reduce support emails is testable once this ships.</div>
             <p class="state-group-label">Contacts</p>
             <div class="two-col">
               <div class="contact-card">
@@ -918,6 +1081,7 @@
             </div>
 
             <!-- RESOURCES: What we're giving you -->
+            <div class="hh-annotation hh-new">Marketing toolkit was a separate folder in the Shared Drive, not linked from the Host Helper at all. Hosts had to be told where to find it via email. Now the assets are linked directly in the guide at the moment they&rsquo;re needed (March = promotion time).</div>
             <p class="state-group-label">Resources</p>
             <table class="spec-table">
               <tr><th colspan="2">Marketing Materials</th></tr>
@@ -955,6 +1119,7 @@
               </tr>
             </table>
 
+            <div class="hh-annotation hh-new">Volunteer info was not in the Host Helper. Hosts managed volunteers independently or via SignUp Genius. This is new &mdash; structured volunteer needs visible to the host inside the guide. <strong>Data source TBD:</strong> needs a structured Airtable field or SignUp Genius export.</div>
             <table class="spec-table">
               <tr><th colspan="2">Volunteer Needs</th></tr>
               <tr>
@@ -1065,6 +1230,7 @@
             <p class="state-group-label">Resources</p>
 
             <!-- Screening packet + tools (frontloaded per stress-context design) -->
+            <div class="hh-annotation hh-removed">Film file download link lived at <strong>cell 27B</strong> in the Excel, marked &ldquo;confidential, limited distribution.&rdquo; The Host Helper was the film delivery mechanism. <strong>Now separated:</strong> screening packet delivered via Mailmeteor email with per-venue Dropbox password. No Dropbox URL appears in the guide HTML &mdash; privacy lint fails the build if one does. The guide is for logistics and orientation, not file distribution.</div>
             <div class="two-col">
               <div class="contact-card">
                 <h3>Screening Packet</h3>
@@ -1081,6 +1247,7 @@
             </div>
 
             <!-- Day-of timeline -->
+            <div class="hh-annotation">&ldquo;Run of show&rdquo; was in the Excel &mdash; venue name, date/time, run of show, emergency contacts. Now <strong>computed</strong> from event time + film runtime rather than manually typed. <strong>Note:</strong> mockup uses -90/-60/-45 min offsets; generator uses -60/-30/-15. Verify with Ana/Josh which setup window is standard for 2026.</div>
             <div class="contact-card" style="margin: var(--space-lg) 0;">
               <h3>Day-of Timeline</h3>
               <div class="day-of-timeline">
@@ -1120,6 +1287,7 @@
             </div>
 
             <!-- Volunteer roster -->
+            <div class="hh-annotation hh-new">Volunteer roster is entirely new &mdash; not in the historical Host Helper. <strong>Data source TBD:</strong> would need a <code>Volunteers_2026</code> Airtable table or a SignUp Genius CSV export keyed by venue name. Generator doesn&rsquo;t render this yet.</div>
             <div class="contact-card" style="margin: var(--space-lg) 0;">
               <h3>Volunteer Roster</h3>
               <div class="volunteer-row">
@@ -1141,6 +1309,7 @@
             </div>
 
             <!-- CONTACTS: Who to reach -->
+            <div class="hh-annotation hh-removed">Emergency contacts were the most-used part of the Excel during festival week &mdash; phone number + on-call staff name. <strong>Phone number is now NOT in the guide.</strong> Delivered via Mailmeteor email and screening packet readme instead. Privacy lint catches phone patterns and fails the build. The numbers below are <strong>mock data only</strong> &mdash; the generator will never output a phone number.</div>
             <p class="state-group-label">Contacts</p>
             <div class="two-col">
               <div class="contact-card">

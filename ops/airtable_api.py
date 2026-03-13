@@ -43,16 +43,25 @@ def get_token() -> str:
 # Core API
 # ---------------------------------------------------------------------------
 
-def api_call(method: str, endpoint: str, token: str) -> Dict[str, Any]:
-    """Make an Airtable API call with retry and rate limit handling."""
+def api_call(
+    method: str,
+    endpoint: str,
+    token: str,
+    body: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """Make an Airtable API call with retry and rate limit handling.
+
+    When body is provided, it is JSON-encoded and sent as the request payload.
+    """
     url = f"{API}{endpoint}"
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
     }
+    data = json.dumps(body).encode("utf-8") if body else None
     for attempt in range(4):
         try:
-            req = urllib.request.Request(url, headers=headers, method=method)
+            req = urllib.request.Request(url, headers=headers, method=method, data=data)
             with urllib.request.urlopen(req) as resp:
                 result = json.loads(resp.read())
             time.sleep(0.22)  # Stay under 5 req/s

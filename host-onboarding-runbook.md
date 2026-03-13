@@ -26,15 +26,15 @@ A venue moves through six phases on its way from "we found them" to "see you nex
 
 **Pipeline statuses** track where each venue is:
 
-| Status | Meaning |
-|--------|---------|
-| New Lead | Identified but not yet contacted |
-| Contacted | Reached out, awaiting response |
-| Interested | Expressed interest, not yet confirmed |
-| Confirmed Interest | Agreed in principle, details pending |
-| Scheduled | Committed to a screening with date and film |
-| Declined | Said no (for now) |
-| Inactive | Was active in prior years, not engaged this cycle |
+| Status             | Meaning                                           |
+| ------------------ | ------------------------------------------------- |
+| New Lead           | Identified but not yet contacted                  |
+| Contacted          | Reached out, awaiting response                    |
+| Interested         | Expressed interest, not yet confirmed             |
+| Confirmed Interest | Agreed in principle, details pending              |
+| Scheduled          | Committed to a screening with date and film       |
+| Declined           | Said no (for now)                                 |
+| Inactive           | Was active in prior years, not engaged this cycle |
 
 ---
 
@@ -52,13 +52,13 @@ A venue moves through six phases on its way from "we found them" to "see you nex
 - A prior-year host re-emerges
 
 **Action:**
-1. Check the Hosts sheet in V7 to see if this venue already exists.
+1. Check the Hosts table in Airtable to see if this venue already exists.
 2. If the venue is already in Hosts, check its current status. If it says "Inactive" or "Declined," skip to Step 1.3 (Re-engaging a Prior Host).
 3. If the venue is new, add a row to the Hosts sheet with: Venue Name, Region, Venue Type, and any known contact info.
 4. Set Pipeline Status to "New Lead."
 
 **Verify:** The venue appears in the Hosts sheet with status "New Lead."
-**If it fails:** If you cannot access V7, write the venue name and contact info in an email to the Tech Coordinator (Garen) and ask them to add it.
+**If it fails:** If you cannot access Airtable, write the venue name and contact info in an email to the Tech Coordinator (Garen) and ask them to add it.
 
 ---
 
@@ -149,7 +149,7 @@ If the venue meets fewer than three, update to "Declined" with the reason "Venue
 **Trigger:** A host intake form response arrives.
 
 **Action:**
-1. Open the Host_Intake sheet in V7.
+1. Open the Host Intake table in Airtable.
 2. Confirm the response is recorded there. If the intake form is connected to Google Sheets, responses appear automatically. If responses arrive via email, manually enter the data.
 3. Check for completeness:
    - If any critical field is blank (venue name, contact info, capacity, or AV equipment), email the contact to request the missing information. Do not proceed to tier classification until these fields are filled.
@@ -192,7 +192,7 @@ If the venue meets fewer than three, update to "Declined" with the reason "Venue
 **Trigger:** A venue has a completed intake form AND a Technical Tier assigned.
 
 **Action:**
-1. Open the Ana_Matching sheet in V7.
+1. Open the Ana Matching view in Airtable.
 2. Review the venue's profile: capacity, location, audience type, and any preferences the host expressed.
 3. Consider:
    - Does the film's subject matter fit the community the venue serves?
@@ -578,14 +578,14 @@ Host calls with a problem
 
 | What | Where |
 |------|-------|
-| All venues and their statuses | V7 Google Sheet, Hosts tab |
-| All 2026 events | V7 Google Sheet, Events_2026 tab |
-| Film catalog | V7 Google Sheet, Films_2026 tab |
-| Host intake responses | V7 Google Sheet, Host_Intake tab |
-| Film-to-venue matching | V7 Google Sheet, Ana_Matching tab |
-| Dashboard metrics | V7 Google Sheet, Dashboard_V2 tab |
+| All venues and their statuses | Airtable — Hosts table |
+| All 2026 events | Airtable — Events table |
+| Film catalog | Airtable — Films table |
+| Host intake responses | Airtable — Host Intake table |
+| Film-to-venue matching | Airtable — Ana Matching view |
+| Dashboard metrics | Airtable — Dashboard view |
 | Presenter guide | tonight-runsheet.html |
-| Host pipeline tracker | host-tracker.html (or V7 filtered views) |
+| Host pipeline tracker | host-tracker.html (or Airtable filtered views) |
 
 ---
 

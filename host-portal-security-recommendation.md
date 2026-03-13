@@ -110,7 +110,7 @@ RSVPs as of [DATE]: [COUNT]
 SCREENING PACKET
 ------------------
 [LINK -- apr state only, behind token]
-Password: [via separate YAMM email]
+Password: [via separate Mailmeteor email]
 
 SOMETHING WRONG?
 ------------------
@@ -132,7 +132,7 @@ Email: hosts@oneearthfilmfest.org
 ### What needs team input before building
 
 - Confirm the day-of timeline offsets with Ana/Josh (see open question in `host-helper-comparison.md` — mockup uses -90/-60/-45, generator uses -60/-30/-15).
-- Confirm whether RSVP count should be snapshot-only or whether daily updates via YAMM email are needed in parallel.
+- Confirm whether RSVP count should be snapshot-only or whether daily updates via Mailmeteor email are needed in parallel.
 - Confirm whether the helper page should be linked from the main host guide, or distributed only via direct URL.
 
 ---
@@ -223,7 +223,7 @@ CLOUDFLARE PAGES (public)
           |
           v (scholarship data only)
   hosts/[token]/index.html -- password gate (JS, client-side)
-  Password distributed via separate YAMM email, not stored in HTML
+  Password distributed via separate Mailmeteor email, not stored in HTML
 ```
 
 **Who sees what:**
@@ -254,8 +254,8 @@ CLOUDFLARE PAGES (public)
 
 - **Day-of timeline offsets:** Ana/Josh to confirm whether setup window is -90/-60/-45 or -60/-30/-15 minutes before showtime. (See `host-helper-comparison.md`.)
 - **Scholarship data inclusion:** Ana/Michael to confirm whether scholarship status should appear in the host helper at all, or remain only in V7/internal docs. If it appears anywhere in the helper, the password gate tier is required.
-- **Token distribution plan:** Tokens need to be distributed to hosts. YAMM (Yet Another Mail Merge — our bulk personalized email tool) is the existing mechanism. Does the token go in the confirmation email? The March prep email? A dedicated "your host page is ready" email?
-- **RSVP count cadence:** If hosts relied on daily counts to drive marketing, snapshot-only isn't sufficient. Does OEFF want to send daily YAMM emails with current RSVPs during fest week, or is the snapshot acceptable?
+- **Token distribution plan:** Tokens need to be distributed to hosts. Mailmeteor (Mailmeteor — our bulk personalized email tool) is the existing mechanism. Does the token go in the confirmation email? The March prep email? A dedicated "your host page is ready" email?
+- **RSVP count cadence:** If hosts relied on daily counts to drive marketing, snapshot-only isn't sufficient. Does OEFF want to send daily Mailmeteor emails with current RSVPs during fest week, or is the snapshot acceptable?
 - **Update form timing:** When should the pre-filled update form go out? After confirmation, or in the March prep wave?
 
 ---

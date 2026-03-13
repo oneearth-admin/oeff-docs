@@ -15,12 +15,28 @@
       "id": "w1-02",
       "title": "Get set up: hosts@ inbox access, Airtable, Mailmeteor, Send As",
       "stream": 0,
-      "status": "active",
+      "status": "done",
       "due": "2026-03-03",
-      "notes": "Tools section has all links"
+      "notes": "Complete — access confirmed"
     },
     {
       "id": "w1-03",
+      "title": "Schedule remaining webinar calendar invites via Mailmeteor",
+      "stream": 1,
+      "status": "active",
+      "due": "2026-03-04",
+      "notes": "First invite (Mar 2) sent by Garen. Kim schedules Mar 16 through Apr 13."
+    },
+    {
+      "id": "w1-04",
+      "title": "Research task — Mailmeteor capabilities and best practices",
+      "stream": 0,
+      "status": "active",
+      "due": "2026-03-05",
+      "notes": "Explore what Mailmeteor can do, how merge fields work, deliverability tips"
+    },
+    {
+      "id": "w1-05",
       "title": "Follow along with Mar 2 webinar cycle — observe the full send sequence",
       "stream": 1,
       "status": "active",
@@ -28,7 +44,7 @@
       "notes": "Shadow Garen through preview → reminder → recap flow"
     },
     {
-      "id": "w1-04",
+      "id": "w1-06",
       "title": "Start your running notes doc (three questions)",
       "stream": 0,
       "status": "upcoming",
@@ -61,6 +77,10 @@
     }
   ],
   "updates": [
+    {
+      "date": "2026-02-28",
+      "text": "Kim is set up — access confirmed. First webinar cal invite (Mar 2) sent. Kim scheduling remaining invites and researching Mailmeteor."
+    },
     {
       "date": "2026-02-28",
       "text": "Dashboard live. Mailmeteor confirmed. Templates shared to your account."

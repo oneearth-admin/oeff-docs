@@ -120,6 +120,62 @@
       padding: var(--space-5) var(--space-4);
     }
 
+    /* ===== Platform Toggle ===== */
+    .platform-toggle-wrapper {
+      background: var(--color-surface);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .platform-toggle-label {
+      font-family: var(--font-body-sans);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .platform-toggle {
+      display: inline-flex;
+      gap: 0;
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .platform-toggle button {
+      font-family: var(--font-body-sans);
+      font-size: var(--text-base);
+      font-weight: 600;
+      padding: var(--space-2) var(--space-4);
+      min-height: 44px;
+      min-width: 100px;
+      border: none;
+      cursor: pointer;
+      background: var(--color-surface);
+      color: var(--color-text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .platform-toggle button[aria-pressed="true"] {
+      background: var(--color-primary-deep);
+      color: #fff;
+    }
+
+    .platform-toggle button:focus-visible {
+      outline: 2px solid var(--color-primary-deep);
+      outline-offset: -2px;
+    }
+
+    /* Platform visibility */
+    body.show-mac .win { display: none !important; }
+    body.show-win .mac { display: none !important; }
+
     /* ===== Skip Link ===== */
     .skip-link {
       position: absolute;
@@ -438,17 +494,24 @@
         break-inside: avoid;
       }
       h2 { break-after: avoid; }
-      .skip-link { display: none; }
+      .skip-link, .platform-toggle-wrapper { display: none; }
     }
   </style>
 </head>
-<body>
+<body class="show-mac">
 
 <a href="#main" class="skip-link">Skip to guide</a>
 
 <header>
   <h1>Tonight's Screening</h1>
   <p class="subtitle">A presenter guide for running slides and trailers</p>
+  <div class="platform-toggle-wrapper">
+    <span class="platform-toggle-label">Your computer:</span>
+    <div class="platform-toggle" role="group" aria-label="Choose your platform">
+      <button type="button" id="btn-mac" aria-pressed="true">Mac</button>
+      <button type="button" id="btn-win" aria-pressed="false">Windows</button>
+    </div>
+  </div>
 </header>
 
 <main id="main">
@@ -461,20 +524,51 @@
       <li><strong>Google Slides</strong> (in Chrome) — for the presentation deck</li>
       <li><strong>VLC</strong> — for the opening and closing trailers</li>
     </ol>
-    <p>Slides run in your browser. VLC runs in its own window. You will switch between them with <kbd>Cmd</kbd> + <kbd>Tab</kbd>.</p>
+    <p>Slides run in your browser. VLC runs in its own window. You will switch between them with <span class="mac"><kbd>Cmd</kbd> + <kbd>Tab</kbd></span><span class="win"><kbd>Alt</kbd> + <kbd>Tab</kbd></span>.</p>
+  </div>
+
+  <!-- ===== TONIGHT'S LINKS ===== -->
+  <div class="card">
+    <h3>Tonight's Links</h3>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      <li style="margin-bottom: var(--space-2);">
+        <span class="app-tag app-tag--vlc">VLC</span>
+        <a href="https://vimeo.com/1164478717/6ac202bb4b?share=copy&amp;fl=sv&amp;fe=ci" style="margin-left: var(--space-2); color: var(--color-primary-deep); font-weight: 600;">Trailer Reel</a>
+      </li>
+      <li style="margin-bottom: var(--space-2);">
+        <span class="app-tag app-tag--vlc">VLC</span>
+        <a href="https://drive.google.com/drive/folders/1DNwIVY_vyvrYJxu7UxsH7tCoeCyzoWFf?usp=sharing" style="margin-left: var(--space-2); color: var(--color-primary-deep); font-weight: 600;">Opening/Closing Trailer Downloads</a>
+      </li>
+      <li>
+        <span class="app-tag app-tag--slides">Slides</span>
+        <a href="https://docs.google.com/presentation/d/1P21LcEoB2CAxF9agD2TJfgWKr1HYVIzx/edit?slide=id.p7#slide=id.p7" style="margin-left: var(--space-2); color: var(--color-primary-deep); font-weight: 600;">Presentation Deck</a>
+      </li>
+    </ul>
   </div>
 
   <!-- ===== WELL BEFORE THE SHOW ===== -->
   <h2>Well Before the Show</h2>
 
   <div class="callout callout--important">
+    <strong>Download the trailer files first</strong>
+    Do this the day before — not the night of. Venue Wi-Fi is often slow or unreliable, and these are large video files.
+    <ol style="margin: var(--space-2) 0 0 var(--space-4);">
+      <li>Open the <a href="https://drive.google.com/drive/folders/1DNwIVY_vyvrYJxu7UxsH7tCoeCyzoWFf?usp=sharing" style="color: inherit; font-weight: 600;">Trailer Downloads folder</a> in Google Drive.</li>
+      <li>Download each trailer file. To download from Google Drive: click the file, then click the download icon (arrow pointing down) in the top right, or right-click the file and select "Download."</li>
+      <li>Choose <strong>1080p</strong> resolution if given a choice. This is the standard for projectors — anything lower will look blurry on a large screen.</li>
+      <li>Save the files somewhere easy to find, like your Desktop or a folder called "OEFF Trailers."</li>
+      <li>After downloading, double-click each file to make sure it plays and has sound. Do not skip this step.</li>
+    </ol>
+  </div>
+
+  <div class="callout callout--important">
     <strong>Download VLC in advance</strong>
-    VLC is free and available at <a href="https://www.videolan.org" style="color: inherit; font-weight: 600;">videolan.org</a>. Download and install it on the presenting computer before the event — not the night of. Venue Wi-Fi can be slow or unreliable, and you do not want to depend on it.
+    VLC is free and available at <a href="https://www.videolan.org" style="color: inherit; font-weight: 600;">videolan.org</a>. Download and install it on the presenting computer before the event. If VLC is already installed, you can skip this step.
   </div>
 
   <div class="callout callout--tip">
     <strong>Clear the desktop</strong>
-    Before you set anything up, close every open app, tab, and window on the computer. You want only two things running: Chrome with the Google Slides tab, and VLC. Notifications, too — turn on Do Not Disturb (<kbd>Control</kbd> + <kbd>Click</kbd> the clock in the menu bar, or open System Settings &rarr; Focus &rarr; Do Not Disturb) so nothing pops up mid-presentation.
+    Before you set anything up, close every open app, tab, and window on the computer. You want only two things running: Chrome with the Google Slides tab, and VLC. <span class="mac">Notifications, too — turn on Do Not Disturb (<kbd>Control</kbd> + <kbd>Click</kbd> the clock in the menu bar, or open System Settings &rarr; Focus &rarr; Do Not Disturb) so nothing pops up mid-presentation.</span><span class="win">Notifications, too — turn on Focus Assist (open Settings &rarr; System &rarr; Focus Assist, and select "Alarms only") so nothing pops up mid-presentation.</span>
   </div>
 
   <!-- ===== BEFORE THE SHOW ===== -->
@@ -486,11 +580,11 @@
     <ol class="steps">
       <li>
         <strong>Open VLC</strong>
-        Find VLC in your Applications folder (or Spotlight: <kbd>Cmd</kbd> + <kbd>Space</kbd>, type "VLC").
+        <span class="mac">Find VLC in your Applications folder (or Spotlight: <kbd>Cmd</kbd> + <kbd>Space</kbd>, type "VLC").</span><span class="win">Find VLC in your Start menu (press the <kbd>Win</kbd> key, type "VLC").</span>
       </li>
       <li>
-        <strong>Load the trailer playlist</strong>
-        Go to <kbd>File</kbd> &rarr; <kbd>Open File</kbd>. Select the playlist file that contains the opening and closing trailers. If you have individual files instead of a playlist, drag them into the VLC window in the correct order: opening trailer first, closing trailer second.
+        <strong>Load the trailers you downloaded</strong>
+        Go to <kbd>File</kbd> &rarr; <kbd>Open File</kbd> and select the opening trailer. Then drag the closing trailer into the VLC window so both are in the playlist. Make sure the opening trailer is first and the closing trailer is second.
       </li>
       <li>
         <strong>Confirm the order</strong>
@@ -499,6 +593,10 @@
       <li>
         <strong>Pause immediately</strong>
         Press <kbd>Space</kbd> to start playback, then <kbd>Space</kbd> again to pause. This loads the first frame of the opening trailer so it is ready to go.
+      </li>
+      <li>
+        <strong>Set the trailer reel to loop</strong>
+        If you want the trailer reel to repeat until you are ready to start, turn on loop: go to <kbd>Playback</kbd> &rarr; <kbd>Loop</kbd> (or press <kbd>L</kbd> until the loop icon appears in the status bar). To stop looping later, press <kbd>L</kbd> again or go back to <kbd>Playback</kbd> &rarr; <kbd>Loop</kbd> to toggle it off.
       </li>
       <li>
         <strong>Do not go fullscreen yet</strong>
@@ -516,11 +614,11 @@
       </li>
       <li>
         <strong>Enter presenter mode</strong>
-        Click the <kbd>Slideshow</kbd> button in the top right, or press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> to present from the first slide.
+        Click the <kbd>Slideshow</kbd> button in the top right, or press <span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></span><span class="win"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></span> to present from the first slide.
       </li>
       <li>
         <strong>Verify it fills the screen</strong>
-        The slides should take over the full display. If you see browser chrome, press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> to toggle browser fullscreen.
+        The slides should take over the full display. If you see browser chrome, press <span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd></span><span class="win"><kbd>F11</kbd></span> to toggle browser fullscreen.
       </li>
       <li>
         <strong>Exit presenter mode for now</strong>
@@ -531,7 +629,7 @@
 
   <div class="callout callout--tip">
     <strong>Sound check</strong>
-    Play a few seconds of the opening trailer with the room's speakers before anyone arrives. Adjust volume in VLC and on the room's audio system until it sounds right. Then pause the trailer and scrub back to the beginning (<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Left Arrow</kbd> to jump to start, or just press <kbd>Home</kbd>).
+    Play a few seconds of the opening trailer with the room's speakers before anyone arrives. Adjust volume in VLC and on the room's audio system until it sounds right. Then pause the trailer and scrub back to the beginning (<span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Left Arrow</kbd></span><span class="win"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left Arrow</kbd></span> to jump to start, or just press <kbd>Home</kbd>).
   </div>
 
   <!-- ===== THE SHOW ===== -->
@@ -549,17 +647,17 @@
     <tbody>
       <tr>
         <td>Opening trailer</td>
-        <td>Switch to VLC (<kbd>Cmd</kbd> + <kbd>Tab</kbd>). Press <kbd>F</kbd> to go fullscreen. Press <kbd>Space</kbd> to play.</td>
+        <td>Switch to VLC (<span class="mac"><kbd>Cmd</kbd> + <kbd>Tab</kbd></span><span class="win"><kbd>Alt</kbd> + <kbd>Tab</kbd></span>). Press <kbd>F</kbd> to go fullscreen. Press <kbd>Space</kbd> to play.</td>
         <td><span class="app-tag app-tag--vlc">VLC</span></td>
       </tr>
       <tr>
         <td>Trailer ends</td>
-        <td>Press <kbd>F</kbd> to exit fullscreen. Switch to Chrome (<kbd>Cmd</kbd> + <kbd>Tab</kbd>).</td>
+        <td>Press <kbd>F</kbd> to exit fullscreen. Switch to Chrome (<span class="mac"><kbd>Cmd</kbd> + <kbd>Tab</kbd></span><span class="win"><kbd>Alt</kbd> + <kbd>Tab</kbd></span>).</td>
         <td></td>
       </tr>
       <tr>
         <td>Slides begin</td>
-        <td>Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> to start slideshow from slide 1. Advance slides with <kbd>Right Arrow</kbd> or <kbd>Space</kbd>.</td>
+        <td>Press <span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></span><span class="win"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></span> to start slideshow from slide 1. Advance slides with <kbd>Right Arrow</kbd> or <kbd>Space</kbd>.</td>
         <td><span class="app-tag app-tag--slides">Slides</span></td>
       </tr>
       <tr>
@@ -569,7 +667,7 @@
       </tr>
       <tr>
         <td>Closing trailer</td>
-        <td>Switch to VLC (<kbd>Cmd</kbd> + <kbd>Tab</kbd>). The closing trailer should be next in the playlist. Press <kbd>F</kbd> for fullscreen. Press <kbd>N</kbd> to skip to the next track, or <kbd>Space</kbd> if it is already queued. Then <kbd>Space</kbd> to play.</td>
+        <td>Switch to VLC (<span class="mac"><kbd>Cmd</kbd> + <kbd>Tab</kbd></span><span class="win"><kbd>Alt</kbd> + <kbd>Tab</kbd></span>). The closing trailer should be next in the playlist. Press <kbd>F</kbd> for fullscreen. Press <kbd>N</kbd> to skip to the next track, or <kbd>Space</kbd> if it is already queued. Then <kbd>Space</kbd> to play.</td>
         <td><span class="app-tag app-tag--vlc">VLC</span></td>
       </tr>
       <tr>
@@ -605,15 +703,15 @@
       </div>
       <div>
         <dt>Jump to start of track</dt>
-        <dd><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd></dd>
+        <dd><span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd></span><span class="win"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Left</kbd></span></dd>
       </div>
       <div>
         <dt>Volume up / down</dt>
-        <dd><kbd>Cmd</kbd> + <kbd>Up</kbd> / <kbd>Down</kbd></dd>
+        <dd><span class="mac"><kbd>Cmd</kbd> + <kbd>Up</kbd> / <kbd>Down</kbd></span><span class="win"><kbd>Ctrl</kbd> + <kbd>Up</kbd> / <kbd>Down</kbd></span></dd>
       </div>
       <div>
         <dt>Mute</dt>
-        <dd><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd></dd>
+        <dd><span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd></span><span class="win"><kbd>M</kbd></span></dd>
       </div>
     </dl>
   </div>
@@ -623,7 +721,7 @@
     <dl class="key-ref">
       <div>
         <dt>Start slideshow</dt>
-        <dd><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></dd>
+        <dd><span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></span><span class="win"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd></span></dd>
       </div>
       <div>
         <dt>Next slide</dt>
@@ -645,11 +743,11 @@
     <dl class="key-ref">
       <div>
         <dt>Switch between apps</dt>
-        <dd><kbd>Cmd</kbd> + <kbd>Tab</kbd></dd>
+        <dd><span class="mac"><kbd>Cmd</kbd> + <kbd>Tab</kbd></span><span class="win"><kbd>Alt</kbd> + <kbd>Tab</kbd></span></dd>
       </div>
       <div>
         <dt>Hide current app</dt>
-        <dd><kbd>Cmd</kbd> + <kbd>H</kbd></dd>
+        <dd><span class="mac"><kbd>Cmd</kbd> + <kbd>H</kbd></span><span class="win"><kbd>Win</kbd> + <kbd>D</kbd> (show desktop)</span></dd>
       </div>
     </dl>
   </div>
@@ -665,17 +763,17 @@
 
     <div class="trouble-item">
       <dt>No sound from VLC</dt>
-      <dd>Check three things in order: (1) Is VLC muted? Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd> to toggle. (2) Is Mac volume up? Use the physical volume keys. (3) Is the room audio system on and set to the right input?</dd>
+      <dd>Check three things in order: (1) Is VLC muted? <span class="mac">Press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Down</kbd> to toggle.</span><span class="win">Press <kbd>M</kbd> to toggle.</span> (2) Is <span class="mac">Mac</span><span class="win">system</span> volume up? Use the physical volume keys. (3) Is the room audio system on and set to the right input?</dd>
     </div>
 
     <div class="trouble-item">
       <dt>Google Slides won't go fullscreen</dt>
-      <dd>Try <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> to toggle browser fullscreen first, then click the Slideshow button. If presenter view opens on the wrong monitor, go to <kbd>View</kbd> &rarr; <kbd>Presenter View</kbd> and swap displays.</dd>
+      <dd>Try <span class="mac"><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd></span><span class="win"><kbd>F11</kbd></span> to toggle browser fullscreen first, then click the Slideshow button. If presenter view opens on the wrong monitor, go to <kbd>View</kbd> &rarr; <kbd>Presenter View</kbd> and swap displays.</dd>
     </div>
 
     <div class="trouble-item">
       <dt>VLC is behind the browser and you can't find it</dt>
-      <dd>Press <kbd>Cmd</kbd> + <kbd>Tab</kbd> and look for the VLC cone icon. Click it to bring VLC forward.</dd>
+      <dd>Press <span class="mac"><kbd>Cmd</kbd> + <kbd>Tab</kbd></span><span class="win"><kbd>Alt</kbd> + <kbd>Tab</kbd></span> and look for the VLC cone icon. Click it to bring VLC forward.</dd>
     </div>
 
     <div class="trouble-item">
@@ -685,7 +783,7 @@
 
     <div class="trouble-item">
       <dt>Everything froze</dt>
-      <dd>Press <kbd>Esc</kbd> to exit fullscreen or slideshow mode. If an app is unresponsive, press <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>Esc</kbd> to force-quit it, then reopen.</dd>
+      <dd>Press <kbd>Esc</kbd> to exit fullscreen or slideshow mode. If an app is unresponsive, <span class="mac">press <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>Esc</kbd> to force-quit it, then reopen.</span><span class="win">press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd>, open Task Manager, and end the frozen app, then reopen.</span></dd>
     </div>
   </dl>
 
@@ -699,6 +797,28 @@
 <footer>
   <p>OEFF Presenter Guide &middot; February 2026</p>
 </footer>
+
+<script>
+  (function () {
+    var body = document.body;
+    var btnMac = document.getElementById('btn-mac');
+    var btnWin = document.getElementById('btn-win');
+
+    // Auto-detect platform
+    if (navigator.platform && navigator.platform.indexOf('Win') > -1) {
+      setPlatform('win');
+    }
+
+    btnMac.addEventListener('click', function () { setPlatform('mac'); });
+    btnWin.addEventListener('click', function () { setPlatform('win'); });
+
+    function setPlatform(p) {
+      body.className = p === 'win' ? 'show-win' : 'show-mac';
+      btnMac.setAttribute('aria-pressed', p === 'mac');
+      btnWin.setAttribute('aria-pressed', p === 'win');
+    }
+  })();
+</script>
 
 </body>
 </html>

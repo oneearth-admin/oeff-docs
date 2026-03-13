@@ -89,7 +89,7 @@ Upload these files into the project's knowledge base:
 2. **Host Comms Plan** — `host-comms-plan.html` — the 5-stream operations map
 3. **Host Guide content** — copy from hosts.oneearthfilmfest.org or the source HTML
 4. **Warm Hosts List** — `oeff-warm-hosts-cleaned.csv` — the merge list Kim will use for sends
-5. **Email templates** — all files from `yamm-drafts/` (03-webinar-preview, 04-webinar-reminder, 05-webinar-recap, etc.)
+5. **Email templates** — all files from `email-drafts/` (03-webinar-preview, 04-webinar-reminder, 05-webinar-recap, etc.)
 6. **Who Does What** — `oeff-who-does-what.md` — roles, routing, escalation
 
 ### Reference — add in week 1-2

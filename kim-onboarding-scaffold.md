@@ -15,11 +15,11 @@ Purpose: What Garen needs to prepare, and what Kim's first two weeks look like.
 - [ ] Host guide link: hosts.oneearthfilmfest.org
 
 ### Docs to share (three, not twelve)
-1. **Host Comms Plan** — the 5-stream operations plan (this is her map)
-2. **Starter Project Brief** — what she's actually doing and how it's scoped
-3. **Host Guide** — what hosts see, so she knows the other side of every email
+1. **Host Comms Plan** — the 5-stream operations plan (Kim's map)
+2. **Starter Project Brief** — the actual scope and structure
+3. **Host Guide** — what hosts see, shows the other side of every email
 
-Everything else (dependency map, onboarding overview, runbook) is reference. She finds it when she needs it, not before.
+Everything else (dependency map, onboarding overview, runbook) is reference. Find it when needed, not before.
 
 ### First task, named
 **"Send the next webinar reminder via Mailmeteor."**
@@ -40,7 +40,7 @@ This is a get-to-know-you, not a briefing. Kim should leave with:
 ### What NOT to do
 - Don't walk through all 5 streams
 - Don't explain the full tech stack
-- Don't over-brief. She's a change management professional. She'll figure out the system faster by touching it than by hearing about it.
+- Don't over-brief. Kim's a change management professional — learns faster by touching the system than hearing about it.
 
 ---
 
@@ -53,22 +53,21 @@ This is a get-to-know-you, not a briefing. Kim should leave with:
 | Google Chat | Day-to-day back-and-forth, links, quick questions |
 | Phone | When something's complex or nuanced, or when text isn't working |
 
-**Sync cadence:** 2x/week, 30 min each
+**Sync rhythm:** 2x/week, 30 min each
 - Suggest: Monday (plan the week) + Thursday (check progress, unblock)
 - Format: Loose — no formal agenda. "What are you working on, what's stuck, what's next."
 
-**Escalation rule:** If a host asks something Kim doesn't know, she doesn't guess. She flags it in Google Chat and Garen responds within a few hours. No host should wait more than a business day.
+**Escalation rule:** If a host asks something Kim doesn't know — don't guess. Flag it in Google Chat, Garen responds within a few hours. No host should wait more than a business day.
 
 ---
 
 ## Tool + identity model
 
 ### Mail merge: Mailmeteor
-Replacing YAMM. Gmail-native interface (looks like composing a regular email), shared template support (up to 10 collaborators), works with Send As aliases.
+Gmail-native interface (looks like composing a regular email), shared template support (up to 10 collaborators), works with Send As aliases.
 
 - **Cost:** $12.99/user/month (Premium) for 2-3 users
-- **Why not YAMM:** YAMM cannot use Gmail delegated access — each user must log into the sending account directly. No shared template infrastructure. Workarounds only.
-- **Migration risk:** 4 of 5 comms streams are zero-risk. Stream 2 (deliverables shipping) has a moderate question around open tracking for 48-hour no-open follow-ups — assess whether this workflow is active in practice.
+- **Stream 2 note:** Stream 2 (deliverables shipping) has a moderate question around open tracking for 48-hour no-open follow-ups — assess whether this workflow is active in practice.
 
 ### Sending identity: Gmail "Send As" delegation
 No shared account. No admin@ or comms@ user needed.
@@ -85,7 +84,7 @@ No shared account. No admin@ or comms@ user needed.
 - **Merge data** lives in shared Google Sheets (already collaborative by nature).
 - **Email drafts** live in shared Google Drive folder owned by the org (role-portable, survives operator turnover).
 
-When Kim leaves: revoke Send As permission, revoke Mailmeteor template sharing. Templates and merge data stay with the org.
+When the engagement ends: revoke Send As permission, revoke Mailmeteor template sharing. Templates and merge data stay with the org.
 
 ---
 
@@ -114,7 +113,6 @@ When Kim leaves: revoke Send As permission, revoke Mailmeteor template sharing. 
 
 ### Friday Feb 28 — Decision point
 - [ ] Commit or revert. If test send went clean: Mailmeteor is the tool.
-- [ ] Rename yamm-drafts/ → email-drafts/
 - [ ] Update comms plan tool stack section
 
 ---

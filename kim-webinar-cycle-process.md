@@ -130,7 +130,7 @@ Example: `OEFF 2026 Host Webinar — Marketing Promotion — 2026-03-16.mp4`
 
 | Thing | Location |
 |-------|----------|
-| Email templates | Email drafts folder (shared Google Drive) — also in `yamm-drafts/` as markdown reference |
+| Email templates | Email drafts folder (shared Google Drive) — also in `email-drafts/` as markdown reference |
 | Host list for merges | `oeff-warm-hosts-cleaned.csv` in Google Sheets |
 | Host guide (live site) | [hosts.oneearthfilmfest.org](https://hosts.oneearthfilmfest.org) |
 | Host guide (source file) | `~/Desktop/OEFF Clean Data/hosts/index.html` |

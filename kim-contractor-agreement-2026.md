@@ -15,9 +15,9 @@
 | **Term** | Late February 2026 — May 2026 |
 | **Rate** | $40 / hour |
 | **Budget** | $1,920 (~48 hrs at $40/hr) |
-| **Availability** | Flexible; async-primary with weekly sync |
+| **Availability** | Flexible; async-primary with 2x/week sync (Monday + Thursday) |
 
-This agreement formalizes the scope of work for Kim supporting OEFF 2026 in host communications operations and coordination during the pre-festival period. Kim provides operational capacity for the communication systems the Technical Coordinator has built, allowing the team to run host-facing processes at scale rather than through a single point of contact.
+This agreement formalizes the scope of work for Kim supporting OEFF 2026 in host communications operations and coordination during the pre-festival period. Kim operates the communication systems the Technical Coordinator has built — and improves them. Her hands-on experience with the workflows, templates, and host relationships shapes what the systems become. The goal is host-facing processes that run at scale through someone who understands them, not just executes them.
 
 Festival week on-site support (April 22-27) is described in this agreement as a proposed scope but is scoped and budgeted separately. Both parties will evaluate fit and confirm festival week engagement after the pre-festival collaboration is underway.
 
@@ -30,7 +30,7 @@ Festival week on-site support (April 22-27) is described in this agreement as a 
 #### Webinar & Info Session Support
 | Task | Description | Hours |
 |------|-------------|-------|
-| Webinar reminders + follow-ups | Execute mail merge campaigns for host info sessions using YAMM + Google Sheets | 6-8 hrs |
+| Webinar reminders + follow-ups | Execute mail merge campaigns for host info sessions using Mailmeteor + Google Sheets | 6-8 hrs |
 | RSVP tracking | Monitor responses, update tracking sheet, flag non-responders | 3-4 hrs |
 | Recording distribution | Send post-session recordings and materials to registered hosts | 2-3 hrs |
 | **Subtotal** | | **11-15 hrs** |
@@ -45,7 +45,7 @@ Festival week on-site support (April 22-27) is described in this agreement as a 
 
 ### Area 2: Process Documentation + Digital Tool Maintenance (~10-14 hrs)
 
-This is not a separate deliverable — it's a natural output of doing the work. Digital tool maintenance is collaborative with the Technical Coordinator; Kim won't be solely responsible for any tooling, but will help keep the operational layer running.
+Kim's operator perspective is one of the most valuable outputs of this engagement. By running the systems daily, she sees what's missing, what's friction, and what the next person would need. This work is collaborative with the Technical Coordinator — Kim identifies gaps and proposes improvements, Garen implements infrastructure changes.
 
 | Task | Description | Hours |
 |------|-------------|-------|
@@ -137,6 +137,8 @@ Festival week compensation structure (day rate, total budget) is TBD and will be
 - Kim operates within them (runs the merges, sends the emails, monitors responses)
 - Kim documents what's missing or broken so the systems improve over time
 
+As Kim builds context, the boundary between "operates" and "shapes" naturally shifts. The scope of what she owns is expected to widen over the engagement — starting with execution, growing into identifying delegable tasks, proposing workflow improvements, and coordinating with interns as capacity allows.
+
 ---
 
 ## Tools & Access
@@ -144,7 +146,7 @@ Festival week compensation structure (day rate, total budget) is TBD and will be
 Kim will receive access to:
 - **hosts@oneearthfilmfest.org** shared inbox (Gmail)
 - **Host Communications Plan** (Google Sheets) — templates, schedule, dependency map
-- **YAMM** (Yet Another Mail Merge) — Gmail add-on for host email campaigns
+- **Mailmeteor** — Gmail add-on for host email campaigns
 - **V7 Google Sheet** — master data source for hosts, events, film matching
 - **Host Guide** — hosts.oneearthfilmfest.org (reference, not editing)
 - **Google Drive folder** — curated onboarding documents
@@ -162,7 +164,7 @@ All work described in Areas 1-3, including coordination with the Technical Coord
 ### Not included
 
 - Technical infrastructure (building tools, writing code, system configuration)
-- Process design or workflow architecture (Kim operates processes, not designs them)
+- Process design or workflow architecture (though process improvements identified through hands-on work are welcome and valued — Kim flags what she sees, and we decide together what to change)
 - Budget decisions or vendor management
 - Direct communication with sponsors or donors
 - Social media or marketing content creation

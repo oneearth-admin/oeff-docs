@@ -203,7 +203,7 @@
           <td class="owner-cell">Garen</td>
           <td class="owner-cell">Ana (view access)</td>
           <td><span class="badge badge--active">Active</span></td>
-          <td class="handoff-notes">Migrated from Google Sheets via API (Feb 15). Schema documented in <code>OEFF_Airtable_Migration_Schema.md</code>. Core tables: Films, Venues, Events, Contacts, Sponsors, Participants, Recordings, Partners, Media Assets, Packet QA, Host Intake. 739 imported records post-cleanup. Key: Airtable is system of record for structured data; Sheets remain for YAMM merge lists.</td>
+          <td class="handoff-notes">Migrated from Google Sheets via API (Feb 15). Schema documented in <code>OEFF_Airtable_Migration_Schema.md</code>. Core tables: Films, Venues, Events, Contacts, Sponsors, Participants, Recordings, Partners, Media Assets, Packet QA, Host Intake. 739 imported records post-cleanup. Key: Airtable is system of record for structured data; Sheets remain for Mailmeteor merge lists.</td>
           <td class="deps-cell">Dashboard widgets read from this. Film tracking depends on Films table. Host comms depend on Contacts + Venues.</td>
         </tr>
         <!-- Support Inbox & Routing -->
@@ -216,18 +216,18 @@
           <td class="owner-cell">Kim (training)</td>
           <td><span class="badge badge--transitioning">Transitioning</span></td>
           <td class="handoff-notes">Shared Gmail inbox with auto-reply configured (<code>oeff-auto-reply-config.docx</code>). Routing logic: FAQ deflection first, then template responses, then escalation to Garen/Ana. Support system docs in <code>team/support-system.html</code>. Templates in <code>team/templates.html</code>. Escalation rules in <code>team/escalation.html</code>. Kim is being onboarded to handle routine responses.</td>
-          <td class="deps-cell">Host comms drive inbound volume here. YAMM sends go from this address. Auto-reply depends on current config doc.</td>
+          <td class="deps-cell">Host comms drive inbound volume here. Mailmeteor sends go from this address. Auto-reply depends on current config doc.</td>
         </tr>
-        <!-- Host Communications (YAMM) -->
+        <!-- Host Communications (Mailmeteor) -->
         <tr>
           <td>
             <span class="system-name">Host Communications</span>
-            <span class="system-url">YAMM via Gmail + Sheets</span>
+            <span class="system-url">Mailmeteor via Gmail + Sheets</span>
           </td>
           <td class="owner-cell">Garen</td>
           <td class="owner-cell">Kim (next owner)</td>
           <td><span class="badge badge--active">Active</span></td>
-          <td class="handoff-notes">YAMM add-on in hosts@ Gmail. Reads merge fields from Google Sheets (warm host list). Comms plan with full calendar in <code>host-comms-plan.html</code>. Key constraint: one scheduled merge at a time, max 2 weeks out. Weekly rhythm: Monday AM schedule that week's sends. Template drafts live in Google Docs (shared folder). Kim can take over weekly scheduling in Phase 2.</td>
+          <td class="handoff-notes">Mailmeteor add-on in hosts@ Gmail. Reads merge fields from Google Sheets (warm host list). Comms plan with full calendar in <code>host-comms-plan.html</code>. Key constraint: one scheduled merge at a time, max 2 weeks out. Weekly rhythm: Monday AM schedule that week's sends. Template drafts live in Google Docs (shared folder). Kim can take over weekly scheduling in Phase 2.</td>
           <td class="deps-cell">Depends on warm host sheet being current. Links to host guide. Recording follow-ups depend on webinar happening on schedule.</td>
         </tr>
         <!-- Data Pipeline & Dashboards -->
@@ -276,7 +276,7 @@
           <td class="owner-cell">Ana (review)</td>
           <td><span class="badge badge--active">Active</span></td>
           <td class="handoff-notes">Seven team support docs (<code>team/</code> folder): support-system, auto-reply, templates, escalation, support-onboarding, admin-guide, design-dna. Kim-specific: onboarding overview, starter project, Claude project instructions. Process: new team member reads support-onboarding first, then admin-guide, then starts on their starter project. Garen reviews first-week output.</td>
-          <td class="deps-cell">New hires depend on these. Support inbox routing depends on escalation doc. Templates doc feeds into YAMM drafts.</td>
+          <td class="deps-cell">New hires depend on these. Support inbox routing depends on escalation doc. Templates doc feeds into Mailmeteor drafts.</td>
         </tr>
         <!-- V7 Health Monitor -->
         <tr>
@@ -303,7 +303,7 @@
   </div>
 
   <div class="callout">
-    <strong>Strongest handoff candidates:</strong> Host Communications (YAMM) and Support Inbox are the most ready for delegation. Kim is actively onboarding into both. The comms plan provides a complete calendar, and the support docs provide response templates. These could be fully transferred by mid-March with supervised practice.
+    <strong>Strongest handoff candidates:</strong> Host Communications (Mailmeteor) and Support Inbox are the most ready for delegation. Kim is actively onboarding into both. The comms plan provides a complete calendar, and the support docs provide response templates. These could be fully transferred by mid-March with supervised practice.
   </div>
 
   <hr>
@@ -348,7 +348,7 @@
           <td>Yes (comms plan)</td>
           <td>Yes</td>
           <td>In progress (Kim)</td>
-          <td>YAMM via hosts@ Gmail</td>
+          <td>Mailmeteor via hosts@ Gmail</td>
         </tr>
         <tr>
           <td class="system-name">Data Pipeline</td>
