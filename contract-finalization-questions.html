@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contract Finalization — Open Questions</title>
+<style>
+  :root {
+    --forest-sage: oklch(0.55 0.05 155);
+    --surface: oklch(0.97 0.005 90);
+    --surface-raised: #fff;
+    --text: oklch(0.25 0.02 60);
+    --text-secondary: oklch(0.45 0.02 60);
+    --border: oklch(0.85 0.01 90);
+    --accent: oklch(0.55 0.05 155);
+    --accent-bg: oklch(0.95 0.02 155);
+    --shadow: hsla(25, 40%, 30%, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--surface);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 2rem 1rem;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+
+  .question-card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px var(--shadow);
+  }
+
+  .question-card.priority {
+    border-left: 3px solid var(--accent);
+  }
+
+  .q-number {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .q-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .q-context {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 0.6rem 0.75rem;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    resize: vertical;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-bg);
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  button {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    min-height: 44px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .btn-primary:hover { filter: brightness(1.1); }
+
+  .btn-secondary {
+    background: var(--surface-raised);
+    color: var(--text);
+  }
+
+  .btn-secondary:hover { background: var(--surface); }
+
+  .toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    background: oklch(0.3 0.02 60);
+    color: #fff;
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Contract Finalization</h1>
+  <p class="subtitle">10 open questions before sending to Ana. Answer inline, then copy all.</p>
+
+  <div class="question-card priority">
+    <div class="q-number">Question 1 &mdash; Priority</div>
+    <div class="q-title">Kim's last name</div>
+    <div class="q-context">Contract still says "Kim [Last Name]" throughout.</div>
+    <textarea id="q1" placeholder="Full name..."></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-number">Question 2</div>
+    <div class="q-title">Kim's reporting line &mdash; who signs?</div>
+    <div class="q-context">Kim reports to Garen, but her signature block has Garen as counter-signer. Erin's has Ana. Intentional difference, or should Ana sign all three?</div>
+    <textarea id="q2" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card priority">
+    <div class="q-number">Question 3 &mdash; Priority</div>
+    <div class="q-title">Kim's budget source</div>
+    <div class="q-context">Garen $10K + Erin $4.6K + Kim $1.9K + tooling $1K + equipment $3.5K = ~$21K before Kim's fest week or captioning. Does Kim come from Garen's $10K discretionary, or a separate line? The math is over $20K as written.</div>
+    <textarea id="q3" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-number">Question 4</div>
+    <div class="q-title">Garen's hour estimate &mdash; 130 vs. actual</div>
+    <div class="q-context">Contract says ~130 hrs. Email to Ana estimates 160-180 actual. Budget CSV shows ~143. Should the contract number update, or does the passion-project framing cover the gap?</div>
+    <textarea id="q4" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card priority">
+    <div class="q-number">Question 5 &mdash; Priority</div>
+    <div class="q-title">Garen's fest week: remote or on-site?</div>
+    <div class="q-context">Contract says "remote during fest." Budget CSV milestone 10 says "on-site tech lead." Which is accurate?</div>
+    <textarea id="q5" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-number">Question 6</div>
+    <div class="q-title">Festival week coverage</div>
+    <div class="q-context">Erin at 42 hrs = 6 hrs/day every day of fest week. Garen at 15 hrs remote. If Garen is remote, who is on-site tech decision-maker when things go sideways mid-day?</div>
+    <textarea id="q6" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-number">Question 7</div>
+    <div class="q-title">Termination notice: 1 week vs. 2 weeks</div>
+    <div class="q-context">Garen and Erin have 2-week notice. Kim has 1-week. Intentional (shorter engagement) or should it match?</div>
+    <textarea id="q7" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-number">Question 8</div>
+    <div class="q-title">Invoicing cadence</div>
+    <div class="q-context">Garen and Erin invoice monthly by the 5th. Kim invoices biweekly. Intentional, or should Ana get consistent cadence across all three?</div>
+    <textarea id="q8" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-number">Question 9</div>
+    <div class="q-title">Kim's reporting during fest week</div>
+    <div class="q-context">Kim reports to Garen pre-fest. If Garen is remote during fest week, who does Kim report to on-site?</div>
+    <textarea id="q9" placeholder=""></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="q-number">Question 10</div>
+    <div class="q-title">Work product &mdash; portfolio clause</div>
+    <div class="q-context">Garen and Erin can reference OEFF by name with approval. Kim's clause is vaguer ("professional materials" without naming OEFF or requiring approval). Match the others?</div>
+    <textarea id="q10" placeholder=""></textarea>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" onclick="copyAll()">Copy All Answers</button>
+    <button class="btn-secondary" onclick="clearAll()">Clear All</button>
+  </div>
+</main>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+function copyAll() {
+  const questions = [
+    { id: 'q1', label: "Kim's last name" },
+    { id: 'q2', label: "Kim's reporting line / who signs" },
+    { id: 'q3', label: "Kim's budget source" },
+    { id: 'q4', label: "Garen's hour estimate" },
+    { id: 'q5', label: "Garen fest week: remote or on-site" },
+    { id: 'q6', label: "Festival week coverage" },
+    { id: 'q7', label: "Termination notice period" },
+    { id: 'q8', label: "Invoicing cadence" },
+    { id: 'q9', label: "Kim's reporting during fest week" },
+    { id: 'q10', label: "Work product / portfolio clause" }
+  ];
+
+  const lines = questions
+    .map(q => {
+      const val = document.getElementById(q.id).value.trim();
+      return val ? `**${q.label}:** ${val}` : null;
+    })
+    .filter(Boolean);
+
+  if (lines.length === 0) {
+    showToast('Nothing to copy — answer at least one question');
+    return;
+  }
+
+  const text = '## Contract Finalization Answers\n\n' + lines.join('\n\n');
+  navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard'));
+}
+
+function clearAll() {
+  for (let i = 1; i <= 10; i++) {
+    document.getElementById('q' + i).value = '';
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>
