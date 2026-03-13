@@ -1,0 +1,489 @@
+{
+  "generated": "2026-03-04",
+  "active_2026_count": 33,
+  "gap_count": 27,
+  "venues": [
+    {
+      "row": 3,
+      "name": "Columbia College - Film Row Cinema",
+      "capacity": "260",
+      "cap_status": "OK",
+      "date": "4/22/26",
+      "geography": "Chicago Central (Downtown, Loop)"
+    },
+    {
+      "row": 4,
+      "name": "Trinity Lutheran Church\nTrinity Lutheran Churn, 675 E Algonq",
+      "capacity": "120",
+      "cap_status": "OK",
+      "date": "4/23/26",
+      "geography": "Northern Suburbs (Des Plaines)"
+    },
+    {
+      "row": 5,
+      "name": "Uncommon Ground",
+      "capacity": "50",
+      "cap_status": "OK",
+      "date": "4/23/26",
+      "geography": "Chicago North (Lakeview)"
+    },
+    {
+      "row": 6,
+      "name": "Climate Action Evanston likely at Evanston Public Library",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/23/26",
+      "geography": "Northern Suburbs (Evanston)"
+    },
+    {
+      "row": 7,
+      "name": "Columbia College - Film Row Cinema",
+      "capacity": "260",
+      "cap_status": "OK",
+      "date": "4/23/26",
+      "geography": "Downtown/(S) Loop"
+    },
+    {
+      "row": 8,
+      "name": "Village of Oak Park at OPRF High School",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)"
+    },
+    {
+      "row": 9,
+      "name": "Institute of Cultural Affairs in the USA",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago North (Uptown)"
+    },
+    {
+      "row": 10,
+      "name": "Triton College",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Western Suburbs (River Grove)"
+    },
+    {
+      "row": 11,
+      "name": "Bethel New Life",
+      "capacity": "120?",
+      "cap_status": "UNCERTAIN",
+      "date": "4/24/26",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 12,
+      "name": "IIT Bronzeville",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Chicago South (Bronzeville)"
+    },
+    {
+      "row": 13,
+      "name": "Park Ridge Community Church (Go Green Park Ridge)",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Northern Suburbs (Park Ridge)"
+    },
+    {
+      "row": 14,
+      "name": "Chicago Climate Action Museum",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago Central (Downtown, Loop)"
+    },
+    {
+      "row": 15,
+      "name": "Euclid Ave United Methodist Church",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)"
+    },
+    {
+      "row": 16,
+      "name": "Cultivate Collective (at Academy for Global Citizenship)",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago South (Stickney/Brighton Park)"
+    },
+    {
+      "row": 17,
+      "name": "BUILD Chicago",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 18,
+      "name": "Broadway United Methodist Church",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago North (East Lakeview)"
+    },
+    {
+      "row": 19,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "NW Indiana"
+    },
+    {
+      "row": 20,
+      "name": "Kehrein Center for the Arts at Urban Essentials Cafe",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 21,
+      "name": "Black Girl Environmentalists at UIC or Patagonia Fulton Mark",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "TBD"
+    },
+    {
+      "row": 22,
+      "name": "Ephiphany Center for the Arts (Upstairs Sanctuary)",
+      "capacity": "80",
+      "cap_status": "OK",
+      "date": "4/25/26",
+      "geography": "Chicago Near West (Loop/Union Park)"
+    },
+    {
+      "row": 23,
+      "name": "Chicago Cultural Center",
+      "capacity": "200",
+      "cap_status": "OK",
+      "date": "4/26/26",
+      "geography": "Chicago Central (Downtown, Loop)"
+    },
+    {
+      "row": 24,
+      "name": "Dominican University",
+      "capacity": "Check email thread",
+      "cap_status": "CHECK_HH",
+      "date": "4/27/26",
+      "geography": "Western Suburbs (River Forest)"
+    },
+    {
+      "row": 56,
+      "name": "Academy for Global Citizenship\n\n*See Note in Col I about mon",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago South (Stickney/Brighton Park)"
+    },
+    {
+      "row": 57,
+      "name": "BUILD Chicago\n\nin Performance Hall",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 58,
+      "name": "Oak Park Public Library",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)"
+    },
+    {
+      "row": 59,
+      "name": "Three Brothers Theater (Waukegan)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Lake County (Waukegan)"
+    },
+    {
+      "row": 60,
+      "name": "Andersonville Chamber of Commerce",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago North (Andersonville)"
+    },
+    {
+      "row": 61,
+      "name": "Palos Heights Green Team/Palos Heights Library\n\nMay also inc",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Western Suburbs (Palos Heights)"
+    },
+    {
+      "row": 62,
+      "name": "Kehrein Center for the Arts\n\nSupport by Euclid Ave United Me",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 63,
+      "name": "Go Green Park Ridge/Park Ridge Community Church",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "North Suburbs: Park Ridge"
+    },
+    {
+      "row": 97,
+      "name": "Chicago Public Library Rogers Park Branch",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "North (Rogers Park)"
+    },
+    {
+      "row": 99,
+      "name": "Chicago Public Library Harold Washington Branch\n\nMaria can a",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Central (Downtown/Loop)"
+    },
+    {
+      "row": 100,
+      "name": "Radiant Vessels Community Services\n\nat Fellowship Christian ",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)"
+    }
+  ],
+  "gaps": [
+    {
+      "row": 6,
+      "name": "Climate Action Evanston likely at Evanston Public Library",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/23/26",
+      "geography": "Northern Suburbs (Evanston)"
+    },
+    {
+      "row": 8,
+      "name": "Village of Oak Park at OPRF High School",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)"
+    },
+    {
+      "row": 9,
+      "name": "Institute of Cultural Affairs in the USA",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago North (Uptown)"
+    },
+    {
+      "row": 10,
+      "name": "Triton College",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Western Suburbs (River Grove)"
+    },
+    {
+      "row": 11,
+      "name": "Bethel New Life",
+      "capacity": "120?",
+      "cap_status": "UNCERTAIN",
+      "date": "4/24/26",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 12,
+      "name": "IIT Bronzeville",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Chicago South (Bronzeville)"
+    },
+    {
+      "row": 13,
+      "name": "Park Ridge Community Church (Go Green Park Ridge)",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Northern Suburbs (Park Ridge)"
+    },
+    {
+      "row": 14,
+      "name": "Chicago Climate Action Museum",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago Central (Downtown, Loop)"
+    },
+    {
+      "row": 15,
+      "name": "Euclid Ave United Methodist Church",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)"
+    },
+    {
+      "row": 16,
+      "name": "Cultivate Collective (at Academy for Global Citizenship)",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago South (Stickney/Brighton Park)"
+    },
+    {
+      "row": 17,
+      "name": "BUILD Chicago",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 18,
+      "name": "Broadway United Methodist Church",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago North (East Lakeview)"
+    },
+    {
+      "row": 19,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "NW Indiana"
+    },
+    {
+      "row": 20,
+      "name": "Kehrein Center for the Arts at Urban Essentials Cafe",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 21,
+      "name": "Black Girl Environmentalists at UIC or Patagonia Fulton Mark",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "TBD"
+    },
+    {
+      "row": 24,
+      "name": "Dominican University",
+      "capacity": "Check email thread",
+      "cap_status": "CHECK_HH",
+      "date": "4/27/26",
+      "geography": "Western Suburbs (River Forest)"
+    },
+    {
+      "row": 56,
+      "name": "Academy for Global Citizenship\n\n*See Note in Col I about mon",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago South (Stickney/Brighton Park)"
+    },
+    {
+      "row": 57,
+      "name": "BUILD Chicago\n\nin Performance Hall",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 58,
+      "name": "Oak Park Public Library",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)"
+    },
+    {
+      "row": 59,
+      "name": "Three Brothers Theater (Waukegan)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Lake County (Waukegan)"
+    },
+    {
+      "row": 60,
+      "name": "Andersonville Chamber of Commerce",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago North (Andersonville)"
+    },
+    {
+      "row": 61,
+      "name": "Palos Heights Green Team/Palos Heights Library\n\nMay also inc",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Western Suburbs (Palos Heights)"
+    },
+    {
+      "row": 62,
+      "name": "Kehrein Center for the Arts\n\nSupport by Euclid Ave United Me",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)"
+    },
+    {
+      "row": 63,
+      "name": "Go Green Park Ridge/Park Ridge Community Church",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "North Suburbs: Park Ridge"
+    },
+    {
+      "row": 97,
+      "name": "Chicago Public Library Rogers Park Branch",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "North (Rogers Park)"
+    },
+    {
+      "row": 99,
+      "name": "Chicago Public Library Harold Washington Branch\n\nMaria can a",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Central (Downtown/Loop)"
+    },
+    {
+      "row": 100,
+      "name": "Radiant Vessels Community Services\n\nat Fellowship Christian ",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)"
+    }
+  ]
+}

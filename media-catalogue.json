@@ -1,0 +1,3215 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-03-08T19:40:44+00:00",
+  "sources_used": [
+    "07-media-assets.csv",
+    "08-packet-qa.csv",
+    "10-recordings.csv",
+    "drive-manifest.json"
+  ],
+  "assets": [
+    {
+      "asset_id": "M26-001",
+      "type": "other",
+      "title": "Ocean Monologue, Bohdana Bihdan (3 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-001"
+      ],
+      "venue_ids": [
+        "V-029"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "Ocean Monologue, Bohdana Bihdan (3 min)",
+        "feature": "Launch Party (No feature film)",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "UNIV-INTRO",
+      "type": "intro",
+      "title": "Universal Intro",
+      "year": null,
+      "film_id": null,
+      "event_ids": [
+        "E25-001",
+        "E25-002",
+        "E25-004",
+        "E25-003",
+        "E25-005",
+        "E25-006",
+        "E25-007",
+        "E25-008",
+        "E25-009",
+        "NEEDS_REVIEW",
+        "E25-011",
+        "E25-012",
+        "E25-013",
+        "E25-015",
+        "E25-016",
+        "E25-019",
+        "E25-020"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": {
+          "link": "https://example.com/universal/intro.mp4",
+          "verified": null
+        },
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "Understorey by Claire Riverland, Lily Newcombe, Isabella Sanderson, and Spencer Cameron (7 min)",
+        "feature": "When We Cycle\nwith Go Green Park Ridge at Park Ridge Community Church",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "UNIV-TRAILER",
+      "type": "trailer",
+      "title": "Universal Trailer",
+      "year": null,
+      "film_id": null,
+      "event_ids": [
+        "E25-001",
+        "E25-002",
+        "E25-004",
+        "E25-003",
+        "E25-005",
+        "E25-006",
+        "E25-007",
+        "E25-008",
+        "E25-009",
+        "NEEDS_REVIEW",
+        "E25-011",
+        "E25-012",
+        "E25-013",
+        "E25-015",
+        "E25-016",
+        "E25-019",
+        "E25-020"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": {
+          "link": "https://example.com/universal/trailer.mp4",
+          "verified": null
+        },
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "UNIV-YFCPROMO",
+      "type": "yfc_promo",
+      "title": "Universal Yfc Promo",
+      "year": null,
+      "film_id": null,
+      "event_ids": [
+        "E25-001",
+        "E25-002",
+        "E25-004",
+        "E25-003",
+        "E25-005",
+        "E25-006",
+        "E25-007",
+        "E25-008",
+        "E25-009",
+        "NEEDS_REVIEW",
+        "E25-011",
+        "E25-012",
+        "E25-013",
+        "E25-015",
+        "E25-016",
+        "E25-019",
+        "E25-020"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": {
+          "link": "https://example.com/universal/yfc_promo.mp4",
+          "verified": null
+        },
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "UNIV-PRESHOW",
+      "type": "preshow_reel",
+      "title": "Universal Preshow Reel",
+      "year": null,
+      "film_id": null,
+      "event_ids": [
+        "E25-001",
+        "E25-002",
+        "E25-004",
+        "E25-003",
+        "E25-005",
+        "E25-006",
+        "E25-007",
+        "E25-008",
+        "E25-009",
+        "NEEDS_REVIEW",
+        "E25-011",
+        "E25-012",
+        "E25-013",
+        "E25-015",
+        "E25-016",
+        "E25-019",
+        "E25-020"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1033668562",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/1033668562/ab1355ea21"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-002",
+      "type": "other",
+      "title": "Ocean Monologue, Bohdana Bihdan (3 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-001"
+      ],
+      "venue_ids": [
+        "V-029"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-003",
+      "type": "other",
+      "title": "The Atlantis Mussels, Rachmat Kurniawan Idrus and Azyd Aqsha",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-002"
+      ],
+      "venue_ids": [
+        "V-006"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": true,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "checked",
+        "checked_by": "System Prep",
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-004",
+      "type": "other",
+      "title": "Does Uncommon Ground still have a charging station onsite? O",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-004"
+      ],
+      "venue_ids": [
+        "V-004"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-005",
+      "type": "other",
+      "title": "The Most Wonderful Choice of the Year, Young Filmmakers atte",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-003"
+      ],
+      "venue_ids": [
+        "V-024"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-006",
+      "type": "other",
+      "title": "The Kiribati Project, Loyola University Chicago students Mic",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-005"
+      ],
+      "venue_ids": [
+        "V-026"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-007",
+      "type": "other",
+      "title": "The Kiribati Project, Loyola University Chicago students Mic",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-006"
+      ],
+      "venue_ids": [
+        "V-013"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-008",
+      "type": "other",
+      "title": "The Kiribati Project, Loyola University Chicago students Mic",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-007"
+      ],
+      "venue_ids": [
+        "V-030"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-009",
+      "type": "other",
+      "title": "Black Tide, Chloe Ban (3.5 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-008"
+      ],
+      "venue_ids": [
+        "V-008"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-010",
+      "type": "other",
+      "title": "Throwaway Living, Laura Malatos & Helen Sun, Graduates from",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-009"
+      ],
+      "venue_ids": [
+        "V-031"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-011",
+      "type": "other",
+      "title": "Throwaway Living, Laura Malatos & Helen Sun, Graduates from",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-012",
+      "type": "other",
+      "title": "Throwaway Living, Laura Malatos & Helen Sun, Graduates from",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-011"
+      ],
+      "venue_ids": [
+        "V-006"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-013",
+      "type": "other",
+      "title": "A Dark Future, Riley Adler, Curran Randhawa, Dylan Wilson, a",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-012"
+      ],
+      "venue_ids": [
+        "V-012"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-014",
+      "type": "other",
+      "title": "A Dark Future, Riley Adler, Curran Randhawa, Dylan Wilson, a",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-013"
+      ],
+      "venue_ids": [
+        "V-032"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-015",
+      "type": "other",
+      "title": "If I Could, Saron Bahre (4 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-016",
+      "type": "other",
+      "title": "Monarchs in Motion, Mason Mirabile (8 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-017",
+      "type": "other",
+      "title": "If I Could, Saron Bahre (4 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-015"
+      ],
+      "venue_ids": [
+        "V-033"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-018",
+      "type": "other",
+      "title": "If I Could, Saron Bahre (4 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-016"
+      ],
+      "venue_ids": [
+        "V-030"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-019",
+      "type": "other",
+      "title": "Monarchs in Motion, Mason Mirabile (8 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-020",
+      "type": "other",
+      "title": "Monarchs in Motion, Mason Mirabile (8 min)",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-021",
+      "type": "other",
+      "title": "A Dark Future, Riley Adler, Curran Randhawa, Dylan Wilson, a",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-019"
+      ],
+      "venue_ids": [
+        "V-010"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-022",
+      "type": "other",
+      "title": "Understorey by Claire Riverland, Lily Newcombe, Isabella San",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "E25-020"
+      ],
+      "venue_ids": [
+        "V-016"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-023",
+      "type": "other",
+      "title": "Foundation, Jack Hinz (7 min)\n*Honorable Mention winner",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-024",
+      "type": "other",
+      "title": "Two Level House, Arfiyan Dewa Purnama (5 min)\n*2024 Post-Gra",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M26-025",
+      "type": "other",
+      "title": "TestVenue_2025-04-99",
+      "year": 2026,
+      "film_id": null,
+      "event_ids": [
+        "NEEDS_REVIEW"
+      ],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-901",
+      "type": "screening_copy",
+      "title": "Bad River",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-035"
+      ],
+      "venue_ids": [
+        "V-037"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "The Kiribati Project, Loyola University Chicago students Michael Rogowski, Taylor Zielenbach, Robbert Kennedy, and Zanjay Numbiar alongside Kiribati Youth (5 min)",
+        "feature": "Bad River",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-902",
+      "type": "screening_copy",
+      "title": "Bad River",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-039"
+      ],
+      "venue_ids": [
+        "V-023"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": "done",
+        "oeff_promo": "done",
+        "sponsor_slide": "done",
+        "laurel": "done",
+        "yfc_short": "The Kiribati Project, Loyola University Chicago students Michael Rogowski, Taylor Zielenbach, Robbert Kennedy, and Zanjay Numbiar alongside Kiribati Youth (5 min)",
+        "feature": "done",
+        "qr_loop": "done",
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-903",
+      "type": "screening_copy",
+      "title": "Bad River",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-040"
+      ],
+      "venue_ids": [
+        "V-037"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "The Kiribati Project, Loyola University Chicago students Michael Rogowski, Taylor Zielenbach, Robbert Kennedy, and Zanjay Numbiar alongside Kiribati Youth (5 min)",
+        "feature": "Bad River",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-904",
+      "type": "screening_copy",
+      "title": "50 States of Sustainability",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-010"
+      ],
+      "venue_ids": [
+        "V-014"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "A Dark Future, Riley Adler, Curran Randhawa, Dylan Wilson, and Janelle Lim (5.5 min)",
+        "feature": "50 States of Sustainability",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-905",
+      "type": "screening_copy",
+      "title": "Cafeteria Man",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-034"
+      ],
+      "venue_ids": [
+        "V-036"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "If I Could, Saron Bahre (4 min)",
+        "feature": "Cafeteria Man",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-906",
+      "type": "screening_copy",
+      "title": "Food Inc 2\nwith Andersonville Chamber of Commerce",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-042"
+      ],
+      "venue_ids": [
+        "V-036"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "Monarchs in Motion, Mason Mirabile (8 min)",
+        "feature": "Food Inc 2\nwith Andersonville Chamber of Commerce at Chicago Filmmakers",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-907",
+      "type": "screening_copy",
+      "title": "Food Inc 2\nwith Palos Heights Library at Palos Hei",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-014"
+      ],
+      "venue_ids": [
+        "V-014"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "Monarchs in Motion, Mason Mirabile (8 min)",
+        "feature": "Food Inc 2\nwith Palos Heights Library at Palos Heights Rec Center",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-908",
+      "type": "screening_copy",
+      "title": "The Grab\npreceded by Earth Day Action Fair\n\nIN PER",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-017"
+      ],
+      "venue_ids": [
+        "V-034"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "Foundation, Jack Hinz (7 min)\n*Honorable Mention winner",
+        "feature": "The Grab\npreceded by Earth Day Action Fair\n\nIN PERSON & VIRTUAL",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "M25-909",
+      "type": "screening_copy",
+      "title": "Women of Carbon\nwith Studio Gang and Chicago Clima",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [
+        "E25-018"
+      ],
+      "venue_ids": [
+        "V-036"
+      ],
+      "sources": {
+        "vimeo": null,
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": "done",
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": "Two Level House, Arfiyan Dewa Purnama (5 min)\n*2024 Post-Grad winner",
+        "feature": "Women of Carbon\nwith Studio Gang and Chicago Climate Action Museum at Chicago Architecture Center\n\nIN PERSON & VIRTUAL",
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-001-RECA",
+      "type": "recap",
+      "title": "4.22 Launch Party — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1080714409",
+          "privacy": "public",
+          "link": "https://vimeo.com/1080714409/8666c8710c"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-002-RECA",
+      "type": "recap",
+      "title": "4.23 Every Little Thing — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1080714441",
+          "privacy": "public",
+          "link": "https://vimeo.com/1080714441/1a22cde84d"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-002-FULL",
+      "type": "full_recording",
+      "title": "4.23 Every Little Thing — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083667111",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/user57960263/review/1083667111/7a1a135805"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-003-RECA",
+      "type": "recap",
+      "title": "4.23 The Hills — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1082282088",
+          "privacy": "public",
+          "link": "https://vimeo.com/1082282088/5abfcb44e1"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-003-FULL",
+      "type": "full_recording",
+      "title": "4.23 The Hills — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083669307",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/user57960263/review/1083669307/72459f89f2"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-004-RECA",
+      "type": "recap",
+      "title": "4.24 Bad River — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1082282036",
+          "privacy": "public",
+          "link": "https://vimeo.com/1082282036/84ceb081c5"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-004-FULL",
+      "type": "full_recording",
+      "title": "4.24 Bad River — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083666461",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/user57960263/review/1083666461/4a3a9375db"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-005-RECA",
+      "type": "recap",
+      "title": "4.25 Single Use Planet — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1082703798",
+          "privacy": "public",
+          "link": "https://vimeo.com/1082703798/d8d4cfa92d"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-005-FULL",
+      "type": "full_recording",
+      "title": "4.25 Single Use Planet — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083668134",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/user57960263/review/1083668134/d5c76c9816"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-006-RECA",
+      "type": "recap",
+      "title": "4.26 Cafeteria Man — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1082731610",
+          "privacy": "public",
+          "link": "https://vimeo.com/1082731610/a3731bf2eb"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-006-FULL",
+      "type": "full_recording",
+      "title": "4.26 Cafeteria Man — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083667537",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/user57960263/review/1083667537/1aa5ff1c74"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-007-RECA",
+      "type": "recap",
+      "title": "4.26 When We Cycle — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083016516",
+          "privacy": "public",
+          "link": "https://vimeo.com/1083016516/ad97a9f3f5"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-007-FULL",
+      "type": "full_recording",
+      "title": "4.26 When We Cycle — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083669784",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/user57960263/review/1083669784/5de670de17"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-008-RECA",
+      "type": "recap",
+      "title": "4.27 The Grab — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083016355",
+          "privacy": "public",
+          "link": "https://vimeo.com/1083016355/d3182d7af2"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-008-FULL",
+      "type": "full_recording",
+      "title": "4.27 The Grab — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083668852",
+          "privacy": "unlisted",
+          "link": "https://vimeo.com/user57960263/review/1083668852/2dccaf6cee"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-009-RECA",
+      "type": "recap",
+      "title": "4.28 Women of Carbon — Recap",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1083043327",
+          "privacy": "public",
+          "link": "https://vimeo.com/1083043327/27be9b2737"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R25-009-FULL",
+      "type": "full_recording",
+      "title": "4.28 Women of Carbon — Full Recording",
+      "year": 2025,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "1081990232",
+          "privacy": "public",
+          "link": "https://vimeo.com/1081990232/17e9283864"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-013-RECA",
+      "type": "recap",
+      "title": "3.25 Preview — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "928883922",
+          "privacy": "public",
+          "link": "https://vimeo.com/928883922"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-014-RECA",
+      "type": "recap",
+      "title": "4.17 Launch Party — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "946695451",
+          "privacy": "public",
+          "link": "https://vimeo.com/946695451"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-015-RECA",
+      "type": "recap",
+      "title": "4.18 World of Water — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "946341370",
+          "privacy": "public",
+          "link": "https://vimeo.com/946341370"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-016-RECA",
+      "type": "recap",
+      "title": "4.19 Earthbound — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "947801789",
+          "privacy": "public",
+          "link": "https://vimeo.com/947801789"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-017-RECA",
+      "type": "recap",
+      "title": "4.20 Razing Liberty Square — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "949735489",
+          "privacy": "public",
+          "link": "https://vimeo.com/949735489"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-018-RECA",
+      "type": "recap",
+      "title": "4.21 Common Ground — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "949735820",
+          "privacy": "public",
+          "link": "https://vimeo.com/949735820"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-019-RECA",
+      "type": "recap",
+      "title": "4.22 Patrol — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "952123162",
+          "privacy": "public",
+          "link": "https://vimeo.com/952123162"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    },
+    {
+      "asset_id": "R24-020-RECA",
+      "type": "recap",
+      "title": "4.23 Carbon — Recap",
+      "year": 2024,
+      "film_id": null,
+      "event_ids": [],
+      "venue_ids": [],
+      "sources": {
+        "vimeo": {
+          "id": "952487680",
+          "privacy": "public",
+          "link": "https://vimeo.com/952487680"
+        },
+        "dropbox": null,
+        "gdrive": null,
+        "local": null
+      },
+      "technical": {
+        "format": null,
+        "resolution": null,
+        "duration_sec": null,
+        "has_captions": false,
+        "caption_lang": []
+      },
+      "qc": {
+        "status": "not_checked",
+        "checked_by": null,
+        "checked_date": null,
+        "notes": ""
+      },
+      "delivery": {
+        "venues_delivered_to": [],
+        "delivery_method": null,
+        "confirmed_received": false,
+        "confirmed_date": null
+      },
+      "packet_components": {
+        "sponsor_loop": null,
+        "opening_remarks": null,
+        "yfc_promo": null,
+        "oeff_promo": null,
+        "sponsor_slide": null,
+        "laurel": null,
+        "yfc_short": null,
+        "feature": null,
+        "qr_loop": null,
+        "concat_created": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "generated": "2026-03-04",
+  "note": "Explicit matches only. All proposed values come from prior-year Host Helpers and need host confirmation for 2026.",
+  "preview": [
+    {
+      "row_in_sheet": 3,
+      "name": "Columbia College - Film Row Cinema",
+      "date": "4/22/26",
+      "current_cap": "260",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 4,
+      "name": "Trinity Lutheran Church",
+      "date": "4/23/26",
+      "current_cap": "120",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 5,
+      "name": "Uncommon Ground",
+      "date": "4/23/26",
+      "current_cap": "50",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 6,
+      "name": "Climate Action Evanston likely at Evanston Public Libra",
+      "date": "4/23/26",
+      "current_cap": "TBD",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 7,
+      "name": "Columbia College - Film Row Cinema",
+      "date": "4/23/26",
+      "current_cap": "260",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 8,
+      "name": "Village of Oak Park at OPRF High School",
+      "date": "4/24/26",
+      "current_cap": "TBD",
+      "proposed_cap": "150 seats",
+      "source": "OEFF2025 04.23 Host Helper: Village of Oak Pa",
+      "needs_update": true,
+      "matched_to": "Village of Oak Park",
+      "address": "Village of Oak Park\nOak Park Village Hall\n123 Madison St., Council Cha"
+    },
+    {
+      "row_in_sheet": 9,
+      "name": "Institute of Cultural Affairs in the USA",
+      "date": "4/24/26",
+      "current_cap": "TBD",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 10,
+      "name": "Triton College",
+      "date": "4/24/26",
+      "current_cap": "Check last yr HH",
+      "proposed_cap": "400",
+      "source": "OEFF2025 04.24 Host Helper: Triton College-Sl",
+      "needs_update": true,
+      "matched_to": "Triton College",
+      "address": "Triton College 2000 Fifth Ave River Grove, IL 60171 (Showing located i"
+    },
+    {
+      "row_in_sheet": 11,
+      "name": "Bethel New Life",
+      "date": "4/24/26",
+      "current_cap": "120?",
+      "proposed_cap": "180-200",
+      "source": "OEFF2024 04.20-PM Host Helper: Bethel New Lif",
+      "needs_update": true,
+      "matched_to": "Bethel New Life",
+      "address": "Bethel New Life\n1140 N Lamon Ave, Chicago, IL 60651"
+    },
+    {
+      "row_in_sheet": 12,
+      "name": "IIT Bronzeville",
+      "date": "4/24/26",
+      "current_cap": "Check last yr HH",
+      "proposed_cap": "155",
+      "source": "OEFF2025 04.23 Host Helper: Organic Oneness w",
+      "needs_update": true,
+      "matched_to": "IIT Bronzeville",
+      "address": "Illinois Tech MTCC Building"
+    },
+    {
+      "row_in_sheet": 13,
+      "name": "Park Ridge Community Church (Go Green Park Ridge)",
+      "date": "4/24/26",
+      "current_cap": "TBD",
+      "proposed_cap": "100+",
+      "source": "OEFF2024 04.18 Host Helper: Go Green Park Rid",
+      "needs_update": true,
+      "matched_to": "Park Ridge Community Church",
+      "address": "Park Ridge Community Church\n100 Courtland Ave.\nPark Ridge, IL 60068"
+    },
+    {
+      "row_in_sheet": 14,
+      "name": "Chicago Climate Action Museum",
+      "date": "4/24/26",
+      "current_cap": "TBD",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 15,
+      "name": "Euclid Ave United Methodist Church",
+      "date": "4/24/26",
+      "current_cap": "TBD",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 16,
+      "name": "Cultivate Collective (at Academy for Global Citizenship",
+      "date": "4/25/26",
+      "current_cap": "Check last yr HH",
+      "proposed_cap": "150 pple",
+      "source": "OEFF2025 04.26 Host Helper: CultivateCollecti",
+      "needs_update": true,
+      "matched_to": "Cultivate Collective / Academy for Global Citizenship",
+      "address": "Academy for Global Citizenship\n4942 W 44th St, Chicago, IL 60638"
+    },
+    {
+      "row_in_sheet": 17,
+      "name": "BUILD Chicago",
+      "date": "4/25/26",
+      "current_cap": "Check last yr HH",
+      "proposed_cap": "100",
+      "source": "OEFF2025 04.26 Host Helper: BUILDChicago-Cafe",
+      "needs_update": true,
+      "matched_to": "BUILD Chicago",
+      "address": "BUILD Chicago\nPerformance Hall\n5100 W Harrison St., Chicago 60644"
+    },
+    {
+      "row_in_sheet": 18,
+      "name": "Broadway United Methodist Church",
+      "date": "4/25/26",
+      "current_cap": "Check last yr HH",
+      "proposed_cap": "100",
+      "source": "OEFF2025 04.25 Host Helper: BroadwayUMC-50 St",
+      "needs_update": true,
+      "matched_to": "Broadway United Methodist Church",
+      "address": "Broadway United Methodist Church\n3338 N Broadway, Chicago 60657"
+    },
+    {
+      "row_in_sheet": 19,
+      "name": "Calumet College of St. Joseph",
+      "date": "4/25/26",
+      "current_cap": "TBD",
+      "proposed_cap": "75-80",
+      "source": "0_MiniFest_Host Helper: Ford Calumet Educatio",
+      "needs_update": true,
+      "matched_to": "Calumet College",
+      "address": "Big Marsh Bike Park, \r\n11559 S. Stony Island Ave., Chicago"
+    },
+    {
+      "row_in_sheet": 20,
+      "name": "Kehrein Center for the Arts at Urban Essentials Cafe",
+      "date": "4/25/26",
+      "current_cap": "TBD",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 21,
+      "name": "Black Girl Environmentalists at UIC or Patagonia Fulton",
+      "date": "4/25/26",
+      "current_cap": "TBD",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 22,
+      "name": "Ephiphany Center for the Arts (Upstairs Sanctuary)",
+      "date": "4/25/26",
+      "current_cap": "80",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 23,
+      "name": "Chicago Cultural Center",
+      "date": "4/26/26",
+      "current_cap": "200",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 24,
+      "name": "Dominican University",
+      "date": "4/27/26",
+      "current_cap": "Check email thread",
+      "proposed_cap": "100",
+      "source": "OEFF2025 04.24 Host Helper: DominicanUniversi",
+      "needs_update": true,
+      "matched_to": "Dominican University",
+      "address": "Dominican University\nParmer Hall, Room 108\n7900 Division St., River Fo"
+    },
+    {
+      "row_in_sheet": 56,
+      "name": "Academy for Global Citizenship",
+      "date": "4/26",
+      "current_cap": "(empty)",
+      "proposed_cap": "150 pple",
+      "source": "OEFF2025 04.26 Host Helper: CultivateCollecti",
+      "needs_update": true,
+      "matched_to": "Cultivate Collective / Academy for Global Citizenship",
+      "address": "Academy for Global Citizenship\n4942 W 44th St, Chicago, IL 60638"
+    },
+    {
+      "row_in_sheet": 60,
+      "name": "Andersonville Chamber of Commerce",
+      "date": "4/26",
+      "current_cap": "(empty)",
+      "proposed_cap": "50",
+      "source": "OEFF2025 04.26 Host Helper: AndersonvilleCham",
+      "needs_update": true,
+      "matched_to": "Andersonville Chamber",
+      "address": "5706 N Clark, Chicago IL 60660"
+    },
+    {
+      "row_in_sheet": 97,
+      "name": "Chicago Public Library Rogers Park Branch",
+      "date": "4/26",
+      "current_cap": "(empty)",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    },
+    {
+      "row_in_sheet": 99,
+      "name": "Chicago Public Library Harold Washington Branch",
+      "date": "4/26",
+      "current_cap": "(empty)",
+      "proposed_cap": "",
+      "source": "",
+      "needs_update": false,
+      "matched_to": "",
+      "address": ""
+    }
+  ],
+  "changes": [
+    {
+      "row": 8,
+      "col_letter": "D",
+      "venue": "Village of Oak Park at OPRF High School",
+      "old_value": "TBD",
+      "new_value": "150 seats",
+      "source": "OEFF2025 04.23 Host Helper: Village of Oak Pa"
+    },
+    {
+      "row": 10,
+      "col_letter": "D",
+      "venue": "Triton College",
+      "old_value": "Check last yr HH",
+      "new_value": "400",
+      "source": "OEFF2025 04.24 Host Helper: Triton College-Sl"
+    },
+    {
+      "row": 11,
+      "col_letter": "D",
+      "venue": "Bethel New Life",
+      "old_value": "120?",
+      "new_value": "180-200",
+      "source": "OEFF2024 04.20-PM Host Helper: Bethel New Lif"
+    },
+    {
+      "row": 12,
+      "col_letter": "D",
+      "venue": "IIT Bronzeville",
+      "old_value": "Check last yr HH",
+      "new_value": "155",
+      "source": "OEFF2025 04.23 Host Helper: Organic Oneness w"
+    },
+    {
+      "row": 13,
+      "col_letter": "D",
+      "venue": "Park Ridge Community Church (Go Green Park Ridge)",
+      "old_value": "TBD",
+      "new_value": "100+",
+      "source": "OEFF2024 04.18 Host Helper: Go Green Park Rid"
+    },
+    {
+      "row": 16,
+      "col_letter": "D",
+      "venue": "Cultivate Collective (at Academy for Global Citizenship",
+      "old_value": "Check last yr HH",
+      "new_value": "150 pple",
+      "source": "OEFF2025 04.26 Host Helper: CultivateCollecti"
+    },
+    {
+      "row": 17,
+      "col_letter": "D",
+      "venue": "BUILD Chicago",
+      "old_value": "Check last yr HH",
+      "new_value": "100",
+      "source": "OEFF2025 04.26 Host Helper: BUILDChicago-Cafe"
+    },
+    {
+      "row": 18,
+      "col_letter": "D",
+      "venue": "Broadway United Methodist Church",
+      "old_value": "Check last yr HH",
+      "new_value": "100",
+      "source": "OEFF2025 04.25 Host Helper: BroadwayUMC-50 St"
+    },
+    {
+      "row": 19,
+      "col_letter": "D",
+      "venue": "Calumet College of St. Joseph",
+      "old_value": "TBD",
+      "new_value": "75-80",
+      "source": "0_MiniFest_Host Helper: Ford Calumet Educatio"
+    },
+    {
+      "row": 24,
+      "col_letter": "D",
+      "venue": "Dominican University",
+      "old_value": "Check email thread",
+      "new_value": "100",
+      "source": "OEFF2025 04.24 Host Helper: DominicanUniversi"
+    },
+    {
+      "row": 56,
+      "col_letter": "D",
+      "venue": "Academy for Global Citizenship",
+      "old_value": "",
+      "new_value": "150 pple",
+      "source": "OEFF2025 04.26 Host Helper: CultivateCollecti"
+    },
+    {
+      "row": 60,
+      "col_letter": "D",
+      "venue": "Andersonville Chamber of Commerce",
+      "old_value": "",
+      "new_value": "50",
+      "source": "OEFF2025 04.26 Host Helper: AndersonvilleCham"
+    }
+  ],
+  "sheet_id": "1uYJw8Whx29PQ6EpxWp8sUO_wRnhDx5-p0gROnyWU7Qg",
+  "tab": "2026HostVenues",
+  "column": "D (Capacity)"
+}

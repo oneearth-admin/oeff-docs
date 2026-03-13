@@ -1,0 +1,167 @@
+{
+  "generated": "2026-03-04",
+  "source": "Host Helper spreadsheets (most recent per venue)",
+  "note": "Capacity and address from prior year Host Helpers. Needs host confirmation for 2026.",
+  "venues": {
+    "Triton College": {
+      "source_file": "OEFF2025 04.24 Host Helper: Triton College-Slay",
+      "source_id": "1F8Bh2dmg-_XnNn20pwWwfQpNSBXHkUTB0PSRX-qeFvo",
+      "capacity": "400",
+      "address": "Triton College 2000 Fifth Ave River Grove, IL 60171 (Showing located inside the R Building - showing will be in the Performing Arts Center)",
+      "host_contact": "Benjamin Kadlec <benjaminkadlec@triton.edu> Office: 708-456-0300, Ext. 3189 Cell",
+      "av_contact": "Maria Correa <mariacorrea@triton.edu>",
+      "parking": "Free parking available in Lot 10, adjacent to the R building. EV charging statio",
+      "accessibility": "Yes"
+    },
+    "IIT Bronzeville": {
+      "source_file": "OEFF2025 04.23 Host Helper: Organic Oneness w IIT Bronzeville-The Hills",
+      "source_id": "1i0ltsjLJjDb9S9ehrQeMK5Ss1JkBROZSEmtz_spBIuk",
+      "capacity": "155",
+      "address": "Illinois Tech MTCC Building",
+      "host_contact": "Syda Taylor <syda@organiconeness.org>, cell 312-371-7036\nAlicia Bunton <abunton1",
+      "av_contact": "Alicia Bunton, see above for email address",
+      "parking": "Parking is free in the visitors parking lot on State Street between 35th and 34t",
+      "accessibility": "Yes"
+    },
+    "Cultivate Collective / Academy for Global Citizenship": {
+      "source_file": "OEFF2025 04.26 Host Helper: CultivateCollective-AcademyforGlobalCitizenship-CafeteriaMan",
+      "source_id": "1NFCxUqQjzj8ZZ7PaOARoOSSKbRhjXr-2U72Lb-WqqTQ",
+      "capacity": "150 pple",
+      "address": "Academy for Global Citizenship\n4942 W 44th St, Chicago, IL 60638",
+      "host_contact": "Please clarify which staff member is responsible for various roles described:\nKr",
+      "av_contact": "Please clarify which staff member is responsible for various roles described:\nFa",
+      "parking": "There is ample free street parking and a small lot with 2 accessible spaces for ",
+      "accessibility": "Yes"
+    },
+    "BUILD Chicago": {
+      "source_file": "OEFF2025 04.26 Host Helper: BUILDChicago-CafeteriaMan",
+      "source_id": "1WeXS_oRF4WFkzT7fGQ4c8wCsjyTuYD8goenZ0Y7h9vo",
+      "capacity": "100",
+      "address": "BUILD Chicago\nPerformance Hall\n5100 W Harrison St., Chicago 60644",
+      "host_contact": "Please clarify which staff member is responsible for various roles described:\nke",
+      "av_contact": "Please clarify which staff member is responsible for various roles described:",
+      "parking": "Our parking lot will likely be closed for the day (other event activities will b",
+      "accessibility": "Yes"
+    },
+    "Broadway United Methodist Church": {
+      "source_file": "OEFF2025 04.25 Host Helper: BroadwayUMC-50 StatesofSustainability",
+      "source_id": "1Xj7giBfoYUX2sh1NY3HYyV9URxEZl9mhoWgyabotF0Q",
+      "capacity": "100",
+      "address": "Broadway United Methodist Church\n3338 N Broadway, Chicago 60657",
+      "host_contact": "Richard Alton, richard.alton@gmail.com",
+      "av_contact": "Woo Evans, woodolla2004@gmail.com",
+      "parking": "We have a small parking lot off of Buckingham to the rear of the church that you",
+      "accessibility": "Yes"
+    },
+    "Dominican University": {
+      "source_file": "OEFF2025 04.24 Host Helper: DominicanUniversity-Bad River",
+      "source_id": "1cRDZ35Ru-E_YaQrmUsEpSPpLnW_1F7s5g3mf1-IwcHE",
+      "capacity": "100",
+      "address": "Dominican University\nParmer Hall, Room 108\n7900 Division St., River Forest 60305",
+      "host_contact": "Please clarify which staff member is responsible for various roles described:\nCh",
+      "av_contact": "Please clarify which staff member is responsible for various roles described:\nHa",
+      "parking": "",
+      "accessibility": "Yes"
+    },
+    "Bethel New Life": {
+      "source_file": "OEFF2024 04.20-PM Host Helper: Bethel New Life-RazingLibertySq",
+      "source_id": "19CaINDhSfMaPDnxuKlfEPklepk2U13NaFOdQjQceyO8",
+      "capacity": "180-200",
+      "address": "Bethel New Life\n1140 N Lamon Ave, Chicago, IL 60651",
+      "host_contact": "Tyanna Powell <tyanna@bethelnewlife.org>, cell 312-218-3320\nMarcia Kay <mkay@bet",
+      "av_contact": "It is possible that OEFF Tech Team can be onsite with personnel and equipment. A",
+      "parking": "Free parking is availiable in the parking lot located at 1140 N. Lamon Avenue. S",
+      "accessibility": "Yes"
+    },
+    "Kehrein Center": {
+      "source_file": "OEFF2025 04.26 Host Helper: Kehrein Ctr for the Arts-WhenWeCycle",
+      "source_id": "1eU6IFCbeOCJetyRmbFpU1fwSRZG3Yv6SJwIhQ3FpAWs",
+      "capacity": "",
+      "address": "Kehrein Center for the Arts\n5628 W. Washington St., Chicago",
+      "host_contact": "janelle@kcachicago.org, reesheda@kcachicago.org",
+      "av_contact": "",
+      "parking": "",
+      "accessibility": "Yes"
+    },
+    "Park Ridge Community Church": {
+      "source_file": "OEFF2024 04.18 Host Helper: Go Green Park Ridge-WorldofWater",
+      "source_id": "1hY-BiB5CrqupldSU45PG8O2wGfYyuu8tTa4UnOVxE7w",
+      "capacity": "100+",
+      "address": "Park Ridge Community Church\n100 Courtland Ave.\nPark Ridge, IL 60068",
+      "host_contact": "Mark Kleinschmit <markkleiny@gmail.com>, please share cell if/in case needed",
+      "av_contact": "Please clarify main person responsible for AV/Tech\nName, email, cell#: Mark Klei",
+      "parking": "There is a parking lot just south of the church.  There is also ample street par",
+      "accessibility": "Yes"
+    },
+    "Calumet College": {
+      "source_file": "0_MiniFest_Host Helper: Ford Calumet Education Center",
+      "source_id": "1RCi_VQe40Ru03D1WizJemqoKGSmi2wEm3_ItXeUMW-E",
+      "capacity": "75-80",
+      "address": "Big Marsh Bike Park, \r\n11559 S. Stony Island Ave., Chicago",
+      "host_contact": "Paul Fitzgerald, Executive Director of Friends of Big Marsh, paul@bigmarsh.org c",
+      "av_contact": "Luis Cabrales, Program and Event Facilitator, Ford Calument Education Center, Ch",
+      "parking": "Parking lot - 100 cars",
+      "accessibility": "Yes"
+    },
+    "Oak Park Public Library": {
+      "source_file": "OEFF2025 04.26 Host Helper: Oak Park Public Library-CafeteriaMan",
+      "source_id": "19R-EPDduqDrcTi8M55bSXfx_pSD10Eyo_Z0kl3l15CA",
+      "capacity": "50",
+      "address": "",
+      "host_contact": "Christine Poreba, cporeba@oppl.org,  (cell) 850 590 8095",
+      "av_contact": "Rafal Baranowicz, rbaranowicz@oppl.org",
+      "parking": "Paid Garage below building $1 = 3 hours and paid street parking per village app ",
+      "accessibility": "Yes"
+    },
+    "Uncommon Ground": {
+      "source_file": "OEFF2025 04.23 Host Helper: UncommonGround-Every Little Thing",
+      "source_id": "1o23XP1OzSo82vwM5F0UDcU9LbIWB8Bmy-gBmX-iH810",
+      "capacity": "",
+      "address": "Uncommon Ground\n3800 N. Clark St., Chicago 60613",
+      "host_contact": "Please clarify which staff member is responsible for various roles described:\nMi",
+      "av_contact": "Isaac Rodriguez  Bookings@uncommonground.com",
+      "parking": "",
+      "accessibility": "Please select one"
+    },
+    "Village of Oak Park": {
+      "source_file": "OEFF2025 04.23 Host Helper: Village of Oak Park-Every Little Thing",
+      "source_id": "1qEbYfz-9UTlQHfyUsRyRqmG-zQuuNSy_Vxb6tG1Q7LY",
+      "capacity": "150 seats",
+      "address": "Village of Oak Park\nOak Park Village Hall\n123 Madison St., Council Chambers (Room 201), Oak Park 60302",
+      "host_contact": "Nalini Johnson, nalini.johnson@oak-park.us Cell: (224) 598-4728",
+      "av_contact": "Kreml, Joe <jkreml@oak-park.us>",
+      "parking": "There is parking on the street.",
+      "accessibility": "Yes"
+    },
+    "Andersonville Chamber": {
+      "source_file": "OEFF2025 04.26 Host Helper: AndersonvilleChamberofCommerce-Food Inc,2",
+      "source_id": "1-5JdRz4Ii29ysT_OcbUjaBB25MYWSOohgNy94RteGKs",
+      "capacity": "50",
+      "address": "5706 N Clark, Chicago IL 60660",
+      "host_contact": "Please clarify which staff member is responsible for various roles described:\nMa",
+      "av_contact": "",
+      "parking": "street parking available",
+      "accessibility": "No"
+    },
+    "Epiphany Center for the Arts": {
+      "source_file": "OEFF2025 04.24 Host Helper: Epiphany-Bad River",
+      "source_id": "1ACbJh_0RYOlXZKbcuDrQ1zebMbl7We4G1yfUNdUiiKQ",
+      "capacity": "200 - Drew confirmed 2/2025 that we can go to 300 if needed",
+      "address": "Epiphany Center for the Arts\nEpiphany Hall\n201 S. Ashland Ave., Chicago 60607",
+      "host_contact": "Please clarify which staff member is responsible for various roles described:\nDr",
+      "av_contact": "Please clarify which staff member is responsible for various roles described:\nDr",
+      "parking": "Attended parking is available in the parking garage located at 1608 W. Adams or ",
+      "accessibility": "Yes"
+    },
+    "Chicago Cultural Center": {
+      "source_file": "OEFF2025 04.27 Host Helper: Chicago Cultural Center-TheGrab",
+      "source_id": "1y-f-9NuSFljQsvnn_6tWaV5NH_6GdTrdqjJngI4QjmM",
+      "capacity": "200",
+      "address": "Chicago Cultural Center\nClaudia Cassidy Theater, 2nd Floor North\n78 E. Washington St.,Chicago 60602\n\n*Screening preceded by Earth Day Action Fair in GAR Rotunda",
+      "host_contact": "Alex Vazquez <Jose.Vazquez2@cityofchicago.org>, Natalia.Salazar@cityofchicago.or",
+      "av_contact": "Alex Vazquez <Jose.Vazquez2@cityofchicago.org>",
+      "parking": "N/A (public street parking or downtown lots)",
+      "accessibility": "Yes"
+    }
+  }
+}

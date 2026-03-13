@@ -1,0 +1,3418 @@
+{
+  "generated": "2026-03-04",
+  "total_venues": 192,
+  "gap_count": 186,
+  "gap_types": {
+    "TBD": 10,
+    "CHECK_HH": 6,
+    "UNCERTAIN": 2,
+    "MISSING": 168
+  },
+  "note": "No address column in 2026HostVenues. Address data must come from Host Helpers or intake form.",
+  "gaps": [
+    {
+      "row": 6,
+      "name": "Climate Action Evanston likely at Evanston Public Library",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/23/26",
+      "geography": "Northern Suburbs (Evanston)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 8,
+      "name": "Village of Oak Park at OPRF High School",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 9,
+      "name": "Institute of Cultural Affairs in the USA",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago North (Uptown)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 10,
+      "name": "Triton College",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Western Suburbs (River Grove)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 11,
+      "name": "Bethel New Life",
+      "capacity": "120?",
+      "cap_status": "UNCERTAIN",
+      "date": "4/24/26",
+      "geography": "Chicago West (Austin)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 12,
+      "name": "IIT Bronzeville",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Chicago South (Bronzeville)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 13,
+      "name": "Park Ridge Community Church (Go Green Park Ridge)",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Northern Suburbs (Park Ridge)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 14,
+      "name": "Chicago Climate Action Museum",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": "COMMUNITY (w pre-event CAFF Happy Hour at Little T"
+    },
+    {
+      "row": 15,
+      "name": "Euclid Ave United Methodist Church",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 16,
+      "name": "Cultivate Collective (at Academy for Global Citizenship)",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago South (Stickney/Brighton Park)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 17,
+      "name": "BUILD Chicago",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)",
+      "status_note": "FLAGSHIP"
+    },
+    {
+      "row": 18,
+      "name": "Broadway United Methodist Church",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago North (East Lakeview)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 19,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "NW Indiana",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 20,
+      "name": "Kehrein Center for the Arts at Urban Essentials Cafe",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 21,
+      "name": "Black Girl Environmentalists at UIC or Patagonia Fulton Mark",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "TBD",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 24,
+      "name": "Dominican University",
+      "capacity": "Check email thread",
+      "cap_status": "CHECK_HH",
+      "date": "4/27/26",
+      "geography": "Western Suburbs (River Forest)",
+      "status_note": "FLAGSHIP\nCOMMUNITY/HYBRID STREAM"
+    },
+    {
+      "row": 26,
+      "name": "Illinois Clinicians for Climate Action at TBD location or wi",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "TBD",
+      "geography": "TBD - possibly DePaul University",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 27,
+      "name": "Seven Generations Ahead",
+      "capacity": "WANTS TO PARTNER WITH A CHILDREN'S SCREENING SITE - CULTIVATE/AGC OR BUILD?",
+      "cap_status": "UNCERTAIN",
+      "date": "",
+      "geography": "",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 43,
+      "name": "Launch Party - Sarabande",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/22/25",
+      "geography": "Chicago North (Roscoe Village)",
+      "status_note": "Accessibility features:\n- Live captioning\n- ASL\n*3"
+    },
+    {
+      "row": 44,
+      "name": "Organic Oneness (with Bronzeville partners) at IIT, Illinois",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "Chicago South (Bronzeville)",
+      "status_note": "3/4: CHANGED from Food Inc 2 on Sat to EITHER The "
+    },
+    {
+      "row": 45,
+      "name": "Village of Oak Park at Oak Park Village Hall (with Sustainab",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "1/27/25: Lindsey emailed commitment for Wed 4/23/2"
+    },
+    {
+      "row": 46,
+      "name": "Uncommon Ground",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "Chicago North (Lakeview)",
+      "status_note": ""
+    },
+    {
+      "row": 47,
+      "name": "Epiphany Center for the Arts",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24/25",
+      "geography": "Chicago Near West (Loop/Union Park)",
+      "status_note": "2/18: Ana sent contract feedback to Drew/Julie; pr"
+    },
+    {
+      "row": 48,
+      "name": "Dominican University, Parmer Hall",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24/25",
+      "geography": "Near West Suburbs (River Forest)",
+      "status_note": "Per email 1/19/25: Christine Wilson said they are "
+    },
+    {
+      "row": 49,
+      "name": "Three Brothers Theater (Waukegan)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24",
+      "geography": "Lake County (Waukegan)",
+      "status_note": "3/17/25: Josh confirmed they're in for BOTH Bad Ri"
+    },
+    {
+      "row": 50,
+      "name": "Triton College",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24/25",
+      "geography": "Western Suburbs (River Grove)",
+      "status_note": "2/10/25: floated ideas to Ben about programming wi"
+    },
+    {
+      "row": 51,
+      "name": "The Plant (by Bubbly Dynamics), in partnership with Whiner B",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Near South East (Back of the Yards)",
+      "status_note": "2/26/25: Final stage of contract \n2/2/25: Ana has "
+    },
+    {
+      "row": 52,
+      "name": "Alt Space Chicago/Redemptive Plastics\nin alt_Chicago's new s",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago West (Austin)",
+      "status_note": "Per email and discussions in Dec'24 and Jan'25, Jo"
+    },
+    {
+      "row": 53,
+      "name": "Institute of Cultural Affairs",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago North (Uptown)",
+      "status_note": "2/20: final decision made\n2/18: AGD followed up re"
+    },
+    {
+      "row": 54,
+      "name": "Broadway UMC",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago North (East Lakeview)",
+      "status_note": "2/18: Dick inquiring about invoice, YFC match film"
+    },
+    {
+      "row": 55,
+      "name": "Gary United Methodist Church",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "West Suburbs (Wheaton)",
+      "status_note": "Confirmed 2/16/25"
+    },
+    {
+      "row": 56,
+      "name": "Academy for Global Citizenship\n\n*See Note in Col I about mon",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago South (Stickney/Brighton Park)",
+      "status_note": "3/10/25: Confirmed participation\n3/7/25: Kris conf"
+    },
+    {
+      "row": 57,
+      "name": "BUILD Chicago\n\nin Performance Hall",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)",
+      "status_note": "2/19: Awaiting YAC members from Spring 2024 Austin"
+    },
+    {
+      "row": 58,
+      "name": "Oak Park Public Library",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)",
+      "status_note": "2/26/25: Contract sent from Alex Skinner to Jodi\n2"
+    },
+    {
+      "row": 59,
+      "name": "Three Brothers Theater (Waukegan)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Lake County (Waukegan)",
+      "status_note": "3/17/25: Josh confirmed they're in for BOTH Bad Ri"
+    },
+    {
+      "row": 60,
+      "name": "Andersonville Chamber of Commerce",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago North (Andersonville)",
+      "status_note": "3/14 Matt confirmed they are IN\n3/7 Ana sent Matt "
+    },
+    {
+      "row": 61,
+      "name": "Palos Heights Green Team/Palos Heights Library\n\nMay also inc",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Western Suburbs (Palos Heights)",
+      "status_note": "2/18/25: talked w Matt about having a program meet"
+    },
+    {
+      "row": 62,
+      "name": "Kehrein Center for the Arts\n\nSupport by Euclid Ave United Me",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)",
+      "status_note": "Confirmed 2/14/25"
+    },
+    {
+      "row": 63,
+      "name": "Go Green Park Ridge/Park Ridge Community Church",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "North Suburbs: Park Ridge",
+      "status_note": "3/7/25: Mark confirmed they are IN + will host at "
+    },
+    {
+      "row": 64,
+      "name": "Chicago Cultural Center Claudia Cassidy Theater\n\npreceded by",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/27/25",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": ""
+    },
+    {
+      "row": 65,
+      "name": "Chicago Architecture Center in partnership with Studio Gang ",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/28/25",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": ""
+    },
+    {
+      "row": 68,
+      "name": "Trinity Lutheran, Des Plaines (Prospect)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Northern Suburbs (Des Plaines)",
+      "status_note": "Email inquiry to Josh/form response 9/23/25"
+    },
+    {
+      "row": 70,
+      "name": "Loyola University Law School",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 71,
+      "name": "Discover Card/Capital One",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 72,
+      "name": "Village of Oak Park at Oak Park Village Hall (with Sustainab",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "9/24/25: Lindsey confirmed OEFF2026 interest"
+    },
+    {
+      "row": 73,
+      "name": "Columbia College Film Row Cinema",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Downtown/S Loop",
+      "status_note": "Email inquiry from Michelle 9/25/25; meeting 10/6"
+    },
+    {
+      "row": 81,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago South, Whiting IN",
+      "status_note": "3/11/25: Monica wrote to say this is CANCELLED\nGoo"
+    },
+    {
+      "row": 82,
+      "name": "\"Greener Grove\" (Downers Grove Green Organization) who wants",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "",
+      "status_note": "2/11: Ana followed up by email w Julie; says they "
+    },
+    {
+      "row": 94,
+      "name": "Chicago Public Library Northtown Branch",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "North (Rogers Park)",
+      "status_note": "3/12: Jim L at Rogers Park said he will connect us"
+    },
+    {
+      "row": 95,
+      "name": "Discover Card Green Team\n\nElizabeth Wimmer\nDiscover Financia",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "",
+      "status_note": "3/7/25: Liz said they are interested in Every Litt"
+    },
+    {
+      "row": 96,
+      "name": "\"Greener Grove\" (Downers Grove Green Organization) who wants",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "",
+      "status_note": "2/11: Ana followed up by email w Julie; says they "
+    },
+    {
+      "row": 97,
+      "name": "Chicago Public Library Rogers Park Branch",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "North (Rogers Park)",
+      "status_note": "3/10/25: Jim Laczkowski says they are interested i"
+    },
+    {
+      "row": 98,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago South, Whiting IN",
+      "status_note": "3/11/25: Monica wrote to say this is CANCELLED\nGoo"
+    },
+    {
+      "row": 99,
+      "name": "Chicago Public Library Harold Washington Branch\n\nMaria can a",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Central (Downtown/Loop)",
+      "status_note": "3/10/25 Maria says it's not possible for this year"
+    },
+    {
+      "row": 100,
+      "name": "Radiant Vessels Community Services\n\nat Fellowship Christian ",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)",
+      "status_note": "3/4/25 CANCELLED - NO CAPACITY\nConfirmed 2/7/25"
+    },
+    {
+      "row": 115,
+      "name": "Geography",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Day",
+      "geography": "VENUE STATUS",
+      "status_note": "2024 NOTES"
+    },
+    {
+      "row": 116,
+      "name": "Northwest (Galewood/Belmont-Cragin)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Wed",
+      "geography": "CONFIRMED 2/13/24",
+      "status_note": "1"
+    },
+    {
+      "row": 118,
+      "name": "North Suburbs: Park Ridge",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/28",
+      "status_note": "2B"
+    },
+    {
+      "row": 119,
+      "name": "Near West Suburbs",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Thur",
+      "geography": "CONFIRMED 3/18/24",
+      "status_note": "2C"
+    },
+    {
+      "row": 120,
+      "name": "Chicago (Austin)\n\n$500 host fee paid by EUMC",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Fri",
+      "geography": "CONFIRMED 2/20/24",
+      "status_note": "3A"
+    },
+    {
+      "row": 121,
+      "name": "Chicago (Austin) as with above",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/25",
+      "status_note": "3A as with above at KCA in KCA's space on 4/19"
+    },
+    {
+      "row": 122,
+      "name": "West Suburbs (River Grove)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Fri",
+      "geography": "CONFIRMED 3/12/24",
+      "status_note": "3B"
+    },
+    {
+      "row": 123,
+      "name": "Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Fri",
+      "geography": "CONFIRMED 2/5/24",
+      "status_note": "3C"
+    },
+    {
+      "row": 124,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "CONFIRMED 2/15/24",
+      "status_note": "4AM-A"
+    },
+    {
+      "row": 125,
+      "name": "Chicago West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/23",
+      "status_note": "4AM-B"
+    },
+    {
+      "row": 126,
+      "name": "Austin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/25",
+      "status_note": "5"
+    },
+    {
+      "row": 127,
+      "name": "Chicago Downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED DEC 2023",
+      "status_note": "6A"
+    },
+    {
+      "row": 128,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sun",
+      "geography": "CONFIRMED 2/15/24",
+      "status_note": "6B"
+    },
+    {
+      "row": 129,
+      "name": "Bronzeville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sun",
+      "geography": "CONFIRMED 3/1/24",
+      "status_note": "6C"
+    },
+    {
+      "row": 130,
+      "name": "North-Lincoln Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/26",
+      "status_note": "6D"
+    },
+    {
+      "row": 131,
+      "name": "Lake County-Waukegan",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sun",
+      "geography": "CONFIRMED 12/30/23 & 2/8/24",
+      "status_note": "6E"
+    },
+    {
+      "row": 133,
+      "name": "North, Uptown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "3/18/24 moved back to UNCONFIRMED STATUS \nInitially confirmed 3/12/24 but buildings closed on weekend",
+      "status_note": "7\nVIRTUAL SCREENING MARKETING/ATTENDANCE PARTNER 4"
+    },
+    {
+      "row": 134,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Tues",
+      "geography": "McHenry Community College is a possibility; not sure if Waubonsee CC is still a possibility as well if they decide to do in-person after all",
+      "status_note": "8\nVIRTUAL SCREENING SPONSOR 4/23 TUES\n\"Carbon\"\n$10"
+    },
+    {
+      "row": 136,
+      "name": "Davis, CA",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Tues",
+      "geography": "",
+      "status_note": "8\nVIRTUAL ATTENDANCE PARTNER 4/23 TUES\n\"Carbon\"\n\nN"
+    },
+    {
+      "row": 138,
+      "name": "Downtown Chicago",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "PROVIDE PROMO MATERIALS ASAP"
+    },
+    {
+      "row": 142,
+      "name": "Funding",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Receiving Site",
+      "geography": "# of Sites",
+      "status_note": "Donor"
+    },
+    {
+      "row": 143,
+      "name": "$2,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "4",
+      "status_note": "Bess Celio"
+    },
+    {
+      "row": 144,
+      "name": "$1,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "2",
+      "status_note": "Jennifer Lucas/Go Green Barrington"
+    },
+    {
+      "row": 145,
+      "name": "$1,500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "3",
+      "status_note": "Mander Family Foundation"
+    },
+    {
+      "row": 146,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "1",
+      "status_note": "Organic Oneness"
+    },
+    {
+      "row": 147,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "CPL Austin Branch: Family/Children's",
+      "geography": "1",
+      "status_note": "Notebaert Nature Museum"
+    },
+    {
+      "row": 148,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Bethel New Life: Razing Liberty Square",
+      "geography": "1",
+      "status_note": "Fox River EcoSystem Partnership"
+    },
+    {
+      "row": 149,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Kehrein Center for the Arts: \"Disposable\" program",
+      "geography": "1",
+      "status_note": "Euclid UMC"
+    },
+    {
+      "row": 184,
+      "name": "Chicago South, Whiting IN",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Good for 2025 per Amy + Brian\nMonica Puente <mpuen"
+    },
+    {
+      "row": 185,
+      "name": "Addison IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 186,
+      "name": "Downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Good for 2025?"
+    },
+    {
+      "row": 187,
+      "name": "Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 188,
+      "name": "NW side of Chi",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Never replied"
+    },
+    {
+      "row": 191,
+      "name": "Milwaukee WI",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 197,
+      "name": "CITY COLLEGES",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Letter of support\nDOE logo",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 204,
+      "name": "Chicago Downtown, Mag Mile",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Th",
+      "geography": "2024: In discussions with Jason + Jess re kickoff or screening space",
+      "status_note": ""
+    },
+    {
+      "row": 210,
+      "name": "South-West Woodlawn",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 211,
+      "name": "North, Evanston",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 212,
+      "name": "Lake, Barrington",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 213,
+      "name": "Little Village (Chicago)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 214,
+      "name": "North Lawndale? (Chicago)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 215,
+      "name": "Downtown Chicago",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 217,
+      "name": "Austin/Greater West Side",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "2/8/24 personal note from Ana"
+    },
+    {
+      "row": 219,
+      "name": "Austin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "2/8/24 personal note from Ana"
+    },
+    {
+      "row": 221,
+      "name": "South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 222,
+      "name": "Chicago West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 224,
+      "name": "South-Washington Heights",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 225,
+      "name": "Chicago South, Englewood",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 231,
+      "name": "North, Rogers Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Want to try for next year in partnership w their a"
+    },
+    {
+      "row": 232,
+      "name": "Chicago Downtown, Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Declined for this year due mainly to cost - $500 i"
+    },
+    {
+      "row": 233,
+      "name": "Jackson Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "AWAITING RESPONSE RE 4/20 @1:30p",
+      "status_note": "Eventually declined but offered to promote our eve"
+    },
+    {
+      "row": 234,
+      "name": "Lake, Lake Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 236,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out 1/4/24 to new contacts, w cc to Monica Halloran and Caroline Marinoff",
+      "status_note": "Reached out; Ellen McManus expecting us to share n"
+    },
+    {
+      "row": 237,
+      "name": "North",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 238,
+      "name": "Western Suburbs, LaGrange",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 239,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 240,
+      "name": "Chicago Downtown, Near West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "2/8/24 personal note to Mykhailo and Andy"
+    },
+    {
+      "row": 241,
+      "name": "South-Bronzeville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "TBD",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 242,
+      "name": "Chicago Downtown, Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 243,
+      "name": "TBD",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 244,
+      "name": "Chicago, downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 245,
+      "name": "TBD",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 246,
+      "name": "Harlem, NYC",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Ana sent a personal note 2/8/24\n\nMallory running b"
+    },
+    {
+      "row": 247,
+      "name": "Chicago West, Near West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "NEED NEW CONTACTS"
+    },
+    {
+      "row": 250,
+      "name": "Chicago Downtown, Eastside",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 252,
+      "name": "North, Wilmette",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 254,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 256,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 257,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 258,
+      "name": "Chicago West, Garfield Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 259,
+      "name": "West Cook County near DuPage",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 260,
+      "name": "OTHER: Florida",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Personal note from Ana 2/8/24 -- WANT TO TRY FOR 2"
+    },
+    {
+      "row": 261,
+      "name": "Will County, Frankfurt IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Not able to host"
+    },
+    {
+      "row": 262,
+      "name": "Chicago South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 263,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 264,
+      "name": "Chicago Downtown, Lincoln Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 265,
+      "name": "Evanston",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 266,
+      "name": "OTHER, Global (Possible virtual host?)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Personal note from Ana 2/8/24\n\nDecided they want t"
+    },
+    {
+      "row": 267,
+      "name": "Lake, Libertyville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 268,
+      "name": "Lake, Grayslake",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "DECLINED via David Husemoller"
+    },
+    {
+      "row": 269,
+      "name": "Lake, Grayslake",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 270,
+      "name": "OTHER, Weston, FL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 271,
+      "name": "OTHER: Wisconsin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 272,
+      "name": "Western Suburbs, Westchester IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Liz Chase said they might be interested but then s"
+    },
+    {
+      "row": 273,
+      "name": "Chicago South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 274,
+      "name": "Downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 275,
+      "name": "Chicago South, Hyde Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 276,
+      "name": "Chicago South, Hyde Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 277,
+      "name": "Chicago South, Kenwood",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 278,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 279,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "NEED NEW CONTACTS"
+    },
+    {
+      "row": 280,
+      "name": "Chicago South, Hyde Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "NEED NEW CONTACTS"
+    },
+    {
+      "row": 281,
+      "name": "Lake, Gurnee",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 287,
+      "name": "Funding",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Receiving Site",
+      "geography": "# of Sites",
+      "status_note": "Donor"
+    },
+    {
+      "row": 288,
+      "name": "$2,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "4",
+      "status_note": "Bess Celio"
+    },
+    {
+      "row": 289,
+      "name": "$1,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "2",
+      "status_note": "Jennifer Lucas/Go Green Barrington"
+    },
+    {
+      "row": 290,
+      "name": "$1,500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "3",
+      "status_note": "Mander Family Foundation"
+    },
+    {
+      "row": 291,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "1",
+      "status_note": "Notebaert Nature Museum"
+    },
+    {
+      "row": 292,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "1",
+      "status_note": "Fox River EcoSystem Partnership"
+    },
+    {
+      "row": 294,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "1",
+      "status_note": "Euclid UMC"
+    },
+    {
+      "row": 312,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Tues",
+      "geography": "CONFIRMED/published",
+      "status_note": "JACLYN DECLINED FOR 2024. MAYBE 2025"
+    },
+    {
+      "row": 313,
+      "name": "Will County, Channahon, IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "F",
+      "geography": "CONFIRMED/published",
+      "status_note": "Said not interested for 2024 - reach out to see wh"
+    },
+    {
+      "row": 314,
+      "name": "Chicago South, South Shore",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "F",
+      "geography": "CONFIRMED/published",
+      "status_note": "Continue with Field Fdn grant if possible? Assess "
+    },
+    {
+      "row": 315,
+      "name": "Chicago Downtown, W Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Th",
+      "geography": "",
+      "status_note": "Need new contact from Kayla Jackson now at Dominic"
+    },
+    {
+      "row": 316,
+      "name": "North-Highland Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "APRIL\nReconfirmed interest 3/14; awaiting logistics reply from Clayton/Elyse",
+      "status_note": "Reach out fall 2023 - what would make this more su"
+    },
+    {
+      "row": 317,
+      "name": "Chicago South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Su",
+      "geography": "APRIL\nCONFIRMED/published",
+      "status_note": "Continue with Field Fdn grant if possible? Assess "
+    },
+    {
+      "row": 318,
+      "name": "North, Andersonville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch\nDECINED IN 2023 per David Oakes",
+      "status_note": "Likely to decline again"
+    },
+    {
+      "row": 326,
+      "name": "South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "DECLINED FOR 2024",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 327,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch\nHost org is Elmhurst\nCool Cities Coalition\nNo response to Dec.\nemail & phone outrch",
+      "status_note": "NEED NEW CONTACT"
+    },
+    {
+      "row": 328,
+      "name": "North, North Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 329,
+      "name": "Lake, Bartington",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "See above re GGBarrington",
+      "status_note": "NEED NEW CONTACT THROUGH JENNIFER LUCAS"
+    },
+    {
+      "row": 330,
+      "name": "Chicago Downtown, South Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 331,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out 11/11 + 11/14",
+      "status_note": "SKIPPED"
+    },
+    {
+      "row": 335,
+      "name": "Chicago Downtown, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Wed",
+      "geography": "CONFIRMED/published",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 336,
+      "name": "Chicago Downtown, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Su",
+      "geography": "CONFIRMED/published",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 337,
+      "name": "North",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out-STILL WAITING",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 338,
+      "name": "South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out-STILL WAITING",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 339,
+      "name": "Chicago Downtown, Gold Coast",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 340,
+      "name": "Chicago Downtown, Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "In process for Sept 16 w Lisa + Sue",
+      "status_note": ""
+    },
+    {
+      "row": 341,
+      "name": "Chicago Downtown, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 342,
+      "name": "Chicago West, Garfield Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 343,
+      "name": "Chicago West, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 344,
+      "name": "Chicago West, Austin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 345,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 346,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch",
+      "status_note": ""
+    },
+    {
+      "row": 347,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch\n\nInterested but no $; would be a swap, likely",
+      "status_note": ""
+    },
+    {
+      "row": 348,
+      "name": "Chicago South, Washington Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 349,
+      "name": "North",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 352,
+      "name": "OTHER",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch",
+      "status_note": ""
+    },
+    {
+      "row": 359,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 360,
+      "name": "Near West Suburbs",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    }
+  ],
+  "all_venues": [
+    {
+      "row": 3,
+      "name": "Columbia College - Film Row Cinema",
+      "capacity": "260",
+      "cap_status": "OK",
+      "date": "4/22/26",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": "FLAGSHIP"
+    },
+    {
+      "row": 4,
+      "name": "Trinity Lutheran Church\nTrinity Lutheran Churn, 675 E Algonq",
+      "capacity": "120",
+      "cap_status": "OK",
+      "date": "4/23/26",
+      "geography": "Northern Suburbs (Des Plaines)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 5,
+      "name": "Uncommon Ground",
+      "capacity": "50",
+      "cap_status": "OK",
+      "date": "4/23/26",
+      "geography": "Chicago North (Lakeview)",
+      "status_note": "FLAGSHIP\n*Need OEC laptop w all media to plug into"
+    },
+    {
+      "row": 6,
+      "name": "Climate Action Evanston likely at Evanston Public Library",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/23/26",
+      "geography": "Northern Suburbs (Evanston)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 7,
+      "name": "Columbia College - Film Row Cinema",
+      "capacity": "260",
+      "cap_status": "OK",
+      "date": "4/23/26",
+      "geography": "Downtown/(S) Loop",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 8,
+      "name": "Village of Oak Park at OPRF High School",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 9,
+      "name": "Institute of Cultural Affairs in the USA",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago North (Uptown)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 10,
+      "name": "Triton College",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Western Suburbs (River Grove)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 11,
+      "name": "Bethel New Life",
+      "capacity": "120?",
+      "cap_status": "UNCERTAIN",
+      "date": "4/24/26",
+      "geography": "Chicago West (Austin)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 12,
+      "name": "IIT Bronzeville",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/24/26",
+      "geography": "Chicago South (Bronzeville)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 13,
+      "name": "Park Ridge Community Church (Go Green Park Ridge)",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Northern Suburbs (Park Ridge)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 14,
+      "name": "Chicago Climate Action Museum",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": "COMMUNITY (w pre-event CAFF Happy Hour at Little T"
+    },
+    {
+      "row": 15,
+      "name": "Euclid Ave United Methodist Church",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/24/26",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 16,
+      "name": "Cultivate Collective (at Academy for Global Citizenship)",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago South (Stickney/Brighton Park)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 17,
+      "name": "BUILD Chicago",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)",
+      "status_note": "FLAGSHIP"
+    },
+    {
+      "row": 18,
+      "name": "Broadway United Methodist Church",
+      "capacity": "Check last yr HH",
+      "cap_status": "CHECK_HH",
+      "date": "4/25/26",
+      "geography": "Chicago North (East Lakeview)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 19,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "NW Indiana",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 20,
+      "name": "Kehrein Center for the Arts at Urban Essentials Cafe",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "Chicago West (Austin)",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 21,
+      "name": "Black Girl Environmentalists at UIC or Patagonia Fulton Mark",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "4/25/26",
+      "geography": "TBD",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 22,
+      "name": "Ephiphany Center for the Arts (Upstairs Sanctuary)",
+      "capacity": "80",
+      "cap_status": "OK",
+      "date": "4/25/26",
+      "geography": "Chicago Near West (Loop/Union Park)",
+      "status_note": "FLAGSHIP - TENTATIVE"
+    },
+    {
+      "row": 23,
+      "name": "Chicago Cultural Center",
+      "capacity": "200",
+      "cap_status": "OK",
+      "date": "4/26/26",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": "FLAGSHIP"
+    },
+    {
+      "row": 24,
+      "name": "Dominican University",
+      "capacity": "Check email thread",
+      "cap_status": "CHECK_HH",
+      "date": "4/27/26",
+      "geography": "Western Suburbs (River Forest)",
+      "status_note": "FLAGSHIP\nCOMMUNITY/HYBRID STREAM"
+    },
+    {
+      "row": 26,
+      "name": "Illinois Clinicians for Climate Action at TBD location or wi",
+      "capacity": "TBD",
+      "cap_status": "TBD",
+      "date": "TBD",
+      "geography": "TBD - possibly DePaul University",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 27,
+      "name": "Seven Generations Ahead",
+      "capacity": "WANTS TO PARTNER WITH A CHILDREN'S SCREENING SITE - CULTIVATE/AGC OR BUILD?",
+      "cap_status": "UNCERTAIN",
+      "date": "",
+      "geography": "",
+      "status_note": "COMMUNITY"
+    },
+    {
+      "row": 43,
+      "name": "Launch Party - Sarabande",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/22/25",
+      "geography": "Chicago North (Roscoe Village)",
+      "status_note": "Accessibility features:\n- Live captioning\n- ASL\n*3"
+    },
+    {
+      "row": 44,
+      "name": "Organic Oneness (with Bronzeville partners) at IIT, Illinois",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "Chicago South (Bronzeville)",
+      "status_note": "3/4: CHANGED from Food Inc 2 on Sat to EITHER The "
+    },
+    {
+      "row": 45,
+      "name": "Village of Oak Park at Oak Park Village Hall (with Sustainab",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "1/27/25: Lindsey emailed commitment for Wed 4/23/2"
+    },
+    {
+      "row": 46,
+      "name": "Uncommon Ground",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "Chicago North (Lakeview)",
+      "status_note": ""
+    },
+    {
+      "row": 47,
+      "name": "Epiphany Center for the Arts",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24/25",
+      "geography": "Chicago Near West (Loop/Union Park)",
+      "status_note": "2/18: Ana sent contract feedback to Drew/Julie; pr"
+    },
+    {
+      "row": 48,
+      "name": "Dominican University, Parmer Hall",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24/25",
+      "geography": "Near West Suburbs (River Forest)",
+      "status_note": "Per email 1/19/25: Christine Wilson said they are "
+    },
+    {
+      "row": 49,
+      "name": "Three Brothers Theater (Waukegan)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24",
+      "geography": "Lake County (Waukegan)",
+      "status_note": "3/17/25: Josh confirmed they're in for BOTH Bad Ri"
+    },
+    {
+      "row": 50,
+      "name": "Triton College",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/24/25",
+      "geography": "Western Suburbs (River Grove)",
+      "status_note": "2/10/25: floated ideas to Ben about programming wi"
+    },
+    {
+      "row": 51,
+      "name": "The Plant (by Bubbly Dynamics), in partnership with Whiner B",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Near South East (Back of the Yards)",
+      "status_note": "2/26/25: Final stage of contract \n2/2/25: Ana has "
+    },
+    {
+      "row": 52,
+      "name": "Alt Space Chicago/Redemptive Plastics\nin alt_Chicago's new s",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago West (Austin)",
+      "status_note": "Per email and discussions in Dec'24 and Jan'25, Jo"
+    },
+    {
+      "row": 53,
+      "name": "Institute of Cultural Affairs",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago North (Uptown)",
+      "status_note": "2/20: final decision made\n2/18: AGD followed up re"
+    },
+    {
+      "row": 54,
+      "name": "Broadway UMC",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago North (East Lakeview)",
+      "status_note": "2/18: Dick inquiring about invoice, YFC match film"
+    },
+    {
+      "row": 55,
+      "name": "Gary United Methodist Church",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "West Suburbs (Wheaton)",
+      "status_note": "Confirmed 2/16/25"
+    },
+    {
+      "row": 56,
+      "name": "Academy for Global Citizenship\n\n*See Note in Col I about mon",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago South (Stickney/Brighton Park)",
+      "status_note": "3/10/25: Confirmed participation\n3/7/25: Kris conf"
+    },
+    {
+      "row": 57,
+      "name": "BUILD Chicago\n\nin Performance Hall",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)",
+      "status_note": "2/19: Awaiting YAC members from Spring 2024 Austin"
+    },
+    {
+      "row": 58,
+      "name": "Oak Park Public Library",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)",
+      "status_note": "2/26/25: Contract sent from Alex Skinner to Jodi\n2"
+    },
+    {
+      "row": 59,
+      "name": "Three Brothers Theater (Waukegan)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Lake County (Waukegan)",
+      "status_note": "3/17/25: Josh confirmed they're in for BOTH Bad Ri"
+    },
+    {
+      "row": 60,
+      "name": "Andersonville Chamber of Commerce",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Chicago North (Andersonville)",
+      "status_note": "3/14 Matt confirmed they are IN\n3/7 Ana sent Matt "
+    },
+    {
+      "row": 61,
+      "name": "Palos Heights Green Team/Palos Heights Library\n\nMay also inc",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Western Suburbs (Palos Heights)",
+      "status_note": "2/18/25: talked w Matt about having a program meet"
+    },
+    {
+      "row": 62,
+      "name": "Kehrein Center for the Arts\n\nSupport by Euclid Ave United Me",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Chicago West (Austin)",
+      "status_note": "Confirmed 2/14/25"
+    },
+    {
+      "row": 63,
+      "name": "Go Green Park Ridge/Park Ridge Community Church",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "North Suburbs: Park Ridge",
+      "status_note": "3/7/25: Mark confirmed they are IN + will host at "
+    },
+    {
+      "row": 64,
+      "name": "Chicago Cultural Center Claudia Cassidy Theater\n\npreceded by",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/27/25",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": ""
+    },
+    {
+      "row": 65,
+      "name": "Chicago Architecture Center in partnership with Studio Gang ",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/28/25",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "status_note": ""
+    },
+    {
+      "row": 68,
+      "name": "Trinity Lutheran, Des Plaines (Prospect)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Northern Suburbs (Des Plaines)",
+      "status_note": "Email inquiry to Josh/form response 9/23/25"
+    },
+    {
+      "row": 70,
+      "name": "Loyola University Law School",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 71,
+      "name": "Discover Card/Capital One",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 72,
+      "name": "Village of Oak Park at Oak Park Village Hall (with Sustainab",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Near West Suburbs (Oak Park)",
+      "status_note": "9/24/25: Lindsey confirmed OEFF2026 interest"
+    },
+    {
+      "row": 73,
+      "name": "Columbia College Film Row Cinema",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Downtown/S Loop",
+      "status_note": "Email inquiry from Michelle 9/25/25; meeting 10/6"
+    },
+    {
+      "row": 81,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago South, Whiting IN",
+      "status_note": "3/11/25: Monica wrote to say this is CANCELLED\nGoo"
+    },
+    {
+      "row": 82,
+      "name": "\"Greener Grove\" (Downers Grove Green Organization) who wants",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "",
+      "status_note": "2/11: Ana followed up by email w Julie; says they "
+    },
+    {
+      "row": 94,
+      "name": "Chicago Public Library Northtown Branch",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "North (Rogers Park)",
+      "status_note": "3/12: Jim L at Rogers Park said he will connect us"
+    },
+    {
+      "row": 95,
+      "name": "Discover Card Green Team\n\nElizabeth Wimmer\nDiscover Financia",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "",
+      "status_note": "3/7/25: Liz said they are interested in Every Litt"
+    },
+    {
+      "row": 96,
+      "name": "\"Greener Grove\" (Downers Grove Green Organization) who wants",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/23/25",
+      "geography": "",
+      "status_note": "2/11: Ana followed up by email w Julie; says they "
+    },
+    {
+      "row": 97,
+      "name": "Chicago Public Library Rogers Park Branch",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "North (Rogers Park)",
+      "status_note": "3/10/25: Jim Laczkowski says they are interested i"
+    },
+    {
+      "row": 98,
+      "name": "Calumet College of St. Joseph",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/25/25",
+      "geography": "Chicago South, Whiting IN",
+      "status_note": "3/11/25: Monica wrote to say this is CANCELLED\nGoo"
+    },
+    {
+      "row": 99,
+      "name": "Chicago Public Library Harold Washington Branch\n\nMaria can a",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26",
+      "geography": "Central (Downtown/Loop)",
+      "status_note": "3/10/25 Maria says it's not possible for this year"
+    },
+    {
+      "row": 100,
+      "name": "Radiant Vessels Community Services\n\nat Fellowship Christian ",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "4/26/25",
+      "geography": "Near West (Oak Park)",
+      "status_note": "3/4/25 CANCELLED - NO CAPACITY\nConfirmed 2/7/25"
+    },
+    {
+      "row": 115,
+      "name": "Geography",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Day",
+      "geography": "VENUE STATUS",
+      "status_note": "2024 NOTES"
+    },
+    {
+      "row": 116,
+      "name": "Northwest (Galewood/Belmont-Cragin)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Wed",
+      "geography": "CONFIRMED 2/13/24",
+      "status_note": "1"
+    },
+    {
+      "row": 118,
+      "name": "North Suburbs: Park Ridge",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/28",
+      "status_note": "2B"
+    },
+    {
+      "row": 119,
+      "name": "Near West Suburbs",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Thur",
+      "geography": "CONFIRMED 3/18/24",
+      "status_note": "2C"
+    },
+    {
+      "row": 120,
+      "name": "Chicago (Austin)\n\n$500 host fee paid by EUMC",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Fri",
+      "geography": "CONFIRMED 2/20/24",
+      "status_note": "3A"
+    },
+    {
+      "row": 121,
+      "name": "Chicago (Austin) as with above",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/25",
+      "status_note": "3A as with above at KCA in KCA's space on 4/19"
+    },
+    {
+      "row": 122,
+      "name": "West Suburbs (River Grove)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Fri",
+      "geography": "CONFIRMED 3/12/24",
+      "status_note": "3B"
+    },
+    {
+      "row": 123,
+      "name": "Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Fri",
+      "geography": "CONFIRMED 2/5/24",
+      "status_note": "3C"
+    },
+    {
+      "row": 124,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "CONFIRMED 2/15/24",
+      "status_note": "4AM-A"
+    },
+    {
+      "row": 125,
+      "name": "Chicago West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/23",
+      "status_note": "4AM-B"
+    },
+    {
+      "row": 126,
+      "name": "Austin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/25",
+      "status_note": "5"
+    },
+    {
+      "row": 127,
+      "name": "Chicago Downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED DEC 2023",
+      "status_note": "6A"
+    },
+    {
+      "row": 128,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sun",
+      "geography": "CONFIRMED 2/15/24",
+      "status_note": "6B"
+    },
+    {
+      "row": 129,
+      "name": "Bronzeville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sun",
+      "geography": "CONFIRMED 3/1/24",
+      "status_note": "6C"
+    },
+    {
+      "row": 130,
+      "name": "North-Lincoln Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "CONFIRMED 3/26",
+      "status_note": "6D"
+    },
+    {
+      "row": 131,
+      "name": "Lake County-Waukegan",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sun",
+      "geography": "CONFIRMED 12/30/23 & 2/8/24",
+      "status_note": "6E"
+    },
+    {
+      "row": 133,
+      "name": "North, Uptown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "3/18/24 moved back to UNCONFIRMED STATUS \nInitially confirmed 3/12/24 but buildings closed on weekend",
+      "status_note": "7\nVIRTUAL SCREENING MARKETING/ATTENDANCE PARTNER 4"
+    },
+    {
+      "row": 134,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Tues",
+      "geography": "McHenry Community College is a possibility; not sure if Waubonsee CC is still a possibility as well if they decide to do in-person after all",
+      "status_note": "8\nVIRTUAL SCREENING SPONSOR 4/23 TUES\n\"Carbon\"\n$10"
+    },
+    {
+      "row": 136,
+      "name": "Davis, CA",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Tues",
+      "geography": "",
+      "status_note": "8\nVIRTUAL ATTENDANCE PARTNER 4/23 TUES\n\"Carbon\"\n\nN"
+    },
+    {
+      "row": 138,
+      "name": "Downtown Chicago",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "PROVIDE PROMO MATERIALS ASAP"
+    },
+    {
+      "row": 142,
+      "name": "Funding",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Receiving Site",
+      "geography": "# of Sites",
+      "status_note": "Donor"
+    },
+    {
+      "row": 143,
+      "name": "$2,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "4",
+      "status_note": "Bess Celio"
+    },
+    {
+      "row": 144,
+      "name": "$1,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "2",
+      "status_note": "Jennifer Lucas/Go Green Barrington"
+    },
+    {
+      "row": 145,
+      "name": "$1,500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "3",
+      "status_note": "Mander Family Foundation"
+    },
+    {
+      "row": 146,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "May need to be used to pay honoraria for activist panelists + facilitators - check w sponsor first",
+      "geography": "1",
+      "status_note": "Organic Oneness"
+    },
+    {
+      "row": 147,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "CPL Austin Branch: Family/Children's",
+      "geography": "1",
+      "status_note": "Notebaert Nature Museum"
+    },
+    {
+      "row": 148,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Bethel New Life: Razing Liberty Square",
+      "geography": "1",
+      "status_note": "Fox River EcoSystem Partnership"
+    },
+    {
+      "row": 149,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Kehrein Center for the Arts: \"Disposable\" program",
+      "geography": "1",
+      "status_note": "Euclid UMC"
+    },
+    {
+      "row": 184,
+      "name": "Chicago South, Whiting IN",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Good for 2025 per Amy + Brian\nMonica Puente <mpuen"
+    },
+    {
+      "row": 185,
+      "name": "Addison IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 186,
+      "name": "Downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Good for 2025?"
+    },
+    {
+      "row": 187,
+      "name": "Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 188,
+      "name": "NW side of Chi",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Never replied"
+    },
+    {
+      "row": 191,
+      "name": "Milwaukee WI",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 197,
+      "name": "CITY COLLEGES",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Letter of support\nDOE logo",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 204,
+      "name": "Chicago Downtown, Mag Mile",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Th",
+      "geography": "2024: In discussions with Jason + Jess re kickoff or screening space",
+      "status_note": ""
+    },
+    {
+      "row": 210,
+      "name": "South-West Woodlawn",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 211,
+      "name": "North, Evanston",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 212,
+      "name": "Lake, Barrington",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 213,
+      "name": "Little Village (Chicago)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 214,
+      "name": "North Lawndale? (Chicago)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 215,
+      "name": "Downtown Chicago",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 217,
+      "name": "Austin/Greater West Side",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "2/8/24 personal note from Ana"
+    },
+    {
+      "row": 219,
+      "name": "Austin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "2/8/24 personal note from Ana"
+    },
+    {
+      "row": 221,
+      "name": "South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 222,
+      "name": "Chicago West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 224,
+      "name": "South-Washington Heights",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 225,
+      "name": "Chicago South, Englewood",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 231,
+      "name": "North, Rogers Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Want to try for next year in partnership w their a"
+    },
+    {
+      "row": 232,
+      "name": "Chicago Downtown, Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Declined for this year due mainly to cost - $500 i"
+    },
+    {
+      "row": 233,
+      "name": "Jackson Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "AWAITING RESPONSE RE 4/20 @1:30p",
+      "status_note": "Eventually declined but offered to promote our eve"
+    },
+    {
+      "row": 234,
+      "name": "Lake, Lake Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 236,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out 1/4/24 to new contacts, w cc to Monica Halloran and Caroline Marinoff",
+      "status_note": "Reached out; Ellen McManus expecting us to share n"
+    },
+    {
+      "row": 237,
+      "name": "North",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 238,
+      "name": "Western Suburbs, LaGrange",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 239,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 240,
+      "name": "Chicago Downtown, Near West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "2/8/24 personal note to Mykhailo and Andy"
+    },
+    {
+      "row": 241,
+      "name": "South-Bronzeville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "TBD",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 242,
+      "name": "Chicago Downtown, Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "No response, webinar invites declined 2024"
+    },
+    {
+      "row": 243,
+      "name": "TBD",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 244,
+      "name": "Chicago, downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 245,
+      "name": "TBD",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 246,
+      "name": "Harlem, NYC",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Ana sent a personal note 2/8/24\n\nMallory running b"
+    },
+    {
+      "row": 247,
+      "name": "Chicago West, Near West",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "NEED NEW CONTACTS"
+    },
+    {
+      "row": 250,
+      "name": "Chicago Downtown, Eastside",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 252,
+      "name": "North, Wilmette",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 254,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 256,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 257,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 258,
+      "name": "Chicago West, Garfield Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 259,
+      "name": "West Cook County near DuPage",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 260,
+      "name": "OTHER: Florida",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Personal note from Ana 2/8/24 -- WANT TO TRY FOR 2"
+    },
+    {
+      "row": 261,
+      "name": "Will County, Frankfurt IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Not able to host"
+    },
+    {
+      "row": 262,
+      "name": "Chicago South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 263,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 264,
+      "name": "Chicago Downtown, Lincoln Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 265,
+      "name": "Evanston",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 266,
+      "name": "OTHER, Global (Possible virtual host?)",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Personal note from Ana 2/8/24\n\nDecided they want t"
+    },
+    {
+      "row": 267,
+      "name": "Lake, Libertyville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 268,
+      "name": "Lake, Grayslake",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "DECLINED via David Husemoller"
+    },
+    {
+      "row": 269,
+      "name": "Lake, Grayslake",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 270,
+      "name": "OTHER, Weston, FL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 271,
+      "name": "OTHER: Wisconsin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 272,
+      "name": "Western Suburbs, Westchester IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Liz Chase said they might be interested but then s"
+    },
+    {
+      "row": 273,
+      "name": "Chicago South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 274,
+      "name": "Downtown",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 275,
+      "name": "Chicago South, Hyde Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 276,
+      "name": "Chicago South, Hyde Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 277,
+      "name": "Chicago South, Kenwood",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 278,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 279,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "NEED NEW CONTACTS"
+    },
+    {
+      "row": 280,
+      "name": "Chicago South, Hyde Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "NEED NEW CONTACTS"
+    },
+    {
+      "row": 281,
+      "name": "Lake, Gurnee",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 287,
+      "name": "Funding",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Receiving Site",
+      "geography": "# of Sites",
+      "status_note": "Donor"
+    },
+    {
+      "row": 288,
+      "name": "$2,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "4",
+      "status_note": "Bess Celio"
+    },
+    {
+      "row": 289,
+      "name": "$1,000",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "2",
+      "status_note": "Jennifer Lucas/Go Green Barrington"
+    },
+    {
+      "row": 290,
+      "name": "$1,500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "3",
+      "status_note": "Mander Family Foundation"
+    },
+    {
+      "row": 291,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "1",
+      "status_note": "Notebaert Nature Museum"
+    },
+    {
+      "row": 292,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "1",
+      "status_note": "Fox River EcoSystem Partnership"
+    },
+    {
+      "row": 294,
+      "name": "$500",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "1",
+      "status_note": "Euclid UMC"
+    },
+    {
+      "row": 312,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Tues",
+      "geography": "CONFIRMED/published",
+      "status_note": "JACLYN DECLINED FOR 2024. MAYBE 2025"
+    },
+    {
+      "row": 313,
+      "name": "Will County, Channahon, IL",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "F",
+      "geography": "CONFIRMED/published",
+      "status_note": "Said not interested for 2024 - reach out to see wh"
+    },
+    {
+      "row": 314,
+      "name": "Chicago South, South Shore",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "F",
+      "geography": "CONFIRMED/published",
+      "status_note": "Continue with Field Fdn grant if possible? Assess "
+    },
+    {
+      "row": 315,
+      "name": "Chicago Downtown, W Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Th",
+      "geography": "",
+      "status_note": "Need new contact from Kayla Jackson now at Dominic"
+    },
+    {
+      "row": 316,
+      "name": "North-Highland Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Sat",
+      "geography": "APRIL\nReconfirmed interest 3/14; awaiting logistics reply from Clayton/Elyse",
+      "status_note": "Reach out fall 2023 - what would make this more su"
+    },
+    {
+      "row": 317,
+      "name": "Chicago South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Su",
+      "geography": "APRIL\nCONFIRMED/published",
+      "status_note": "Continue with Field Fdn grant if possible? Assess "
+    },
+    {
+      "row": 318,
+      "name": "North, Andersonville",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch\nDECINED IN 2023 per David Oakes",
+      "status_note": "Likely to decline again"
+    },
+    {
+      "row": 326,
+      "name": "South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "DECLINED FOR 2024",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 327,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch\nHost org is Elmhurst\nCool Cities Coalition\nNo response to Dec.\nemail & phone outrch",
+      "status_note": "NEED NEW CONTACT"
+    },
+    {
+      "row": 328,
+      "name": "North, North Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": "Reached out early in 2024 but never attended webin"
+    },
+    {
+      "row": 329,
+      "name": "Lake, Bartington",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "See above re GGBarrington",
+      "status_note": "NEED NEW CONTACT THROUGH JENNIFER LUCAS"
+    },
+    {
+      "row": 330,
+      "name": "Chicago Downtown, South Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 331,
+      "name": "Near West, River Forest",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out 11/11 + 11/14",
+      "status_note": "SKIPPED"
+    },
+    {
+      "row": 335,
+      "name": "Chicago Downtown, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Wed",
+      "geography": "CONFIRMED/published",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 336,
+      "name": "Chicago Downtown, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "Su",
+      "geography": "CONFIRMED/published",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 337,
+      "name": "North",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out-STILL WAITING",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 338,
+      "name": "South",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "Reached out-STILL WAITING",
+      "status_note": "Reach out summer 2023"
+    },
+    {
+      "row": 339,
+      "name": "Chicago Downtown, Gold Coast",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 340,
+      "name": "Chicago Downtown, Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "In process for Sept 16 w Lisa + Sue",
+      "status_note": ""
+    },
+    {
+      "row": 341,
+      "name": "Chicago Downtown, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 342,
+      "name": "Chicago West, Garfield Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 343,
+      "name": "Chicago West, West Loop",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 344,
+      "name": "Chicago West, Austin",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 345,
+      "name": "Near West, Oak Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 346,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch",
+      "status_note": ""
+    },
+    {
+      "row": 347,
+      "name": "Chicago Pilsen/LV/McKinley: Back of the Yards",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch\n\nInterested but no $; would be a swap, likely",
+      "status_note": ""
+    },
+    {
+      "row": 348,
+      "name": "Chicago South, Washington Park",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 349,
+      "name": "North",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 352,
+      "name": "OTHER",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "11/11 + 11/14 outrch",
+      "status_note": ""
+    },
+    {
+      "row": 359,
+      "name": "DuPage/Kane",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    },
+    {
+      "row": 360,
+      "name": "Near West Suburbs",
+      "capacity": "",
+      "cap_status": "MISSING",
+      "date": "",
+      "geography": "",
+      "status_note": ""
+    }
+  ]
+}

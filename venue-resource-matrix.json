@@ -1,0 +1,1210 @@
+{
+  "generated": "2026-03-06",
+  "description": "Resource matrix for venue pages. Tracks what each venue needs and what we have. Sources: venue-data-combined.json, token-map.json, hh-venue-match.json, gap-report-2026-03-04.md. Updated 2026-03-06 with intake form data (14 responses, 11 venues matched).",
+  "resource_schema": {
+    "identity": {
+      "description": "Who the venue is — name, location, branding",
+      "fields": {
+        "canonical_name": "From venue-slugs.json. Authority file for all downstream references.",
+        "slug": "URL path segment for venue page.",
+        "address": "Street address for maps, directions, day-of logistics.",
+        "neighborhood_region": "Human-readable geography (e.g., 'Chicago North (Lakeview)').",
+        "venue_logo": "Venue or host org logo file. For venue page header + marketing materials.",
+        "venue_photo": "Exterior or interior photo. For venue page hero + social assets.",
+        "venue_type": "Community, Cinema, Hybrid, Library, Church, University, etc."
+      }
+    },
+    "event_details": {
+      "description": "What's happening at this venue — date, time, film, format",
+      "fields": {
+        "event_date": "Screening date.",
+        "event_time": "Doors open / screening start.",
+        "film_title": "Assigned film.",
+        "film_runtime": "Minutes. Drives run-of-show timeline computation.",
+        "event_format": "In-person only, hybrid stream, or special format.",
+        "ticket_price": "Free, donation, or priced.",
+        "ticket_url": "Eventbrite link for this specific screening.",
+        "capacity": "Seated capacity number.",
+        "accessibility_notes": "ADA, wheelchair, hearing loop, etc."
+      }
+    },
+    "contacts": {
+      "description": "People — who to reach at the venue and on the OEFF side",
+      "fields": {
+        "host_contact_name": "Primary host point person.",
+        "host_contact_email": "Primary host email.",
+        "host_contact_phone": "Primary host phone. PRIVATE — Mailmeteor delivery only, never in HTML.",
+        "av_contact_name": "Venue AV person (if different from host contact).",
+        "av_contact_email": "AV person email.",
+        "marketing_contact_name": "Who handles flyers/social for the host org.",
+        "marketing_contact_email": "Marketing contact email.",
+        "oeff_team_contact": "Assigned OEFF team member (Ana, Josh, Michael, etc.).",
+        "oeff_rep_onsite": "Who's physically present day-of from OEFF side.",
+        "volunteer_names": "Named volunteers with assigned roles (apr state)."
+      }
+    },
+    "technical": {
+      "description": "AV and screening infrastructure at the venue",
+      "fields": {
+        "venue_tier": "T1-T4 classification from tier system.",
+        "has_projector": "Venue-provided projector or OEFF supplies.",
+        "has_sound_system": "Venue-provided sound or OEFF supplies.",
+        "screen_type": "Fixed screen, pull-down, wall projection, cinema screen.",
+        "internet_available": "For hybrid streaming venues.",
+        "hybrid_capable": "Boolean — can this venue do a hybrid stream.",
+        "av_notes": "Free text — special requirements, known issues."
+      }
+    },
+    "assets_and_delivery": {
+      "description": "Files and materials that flow to or from this venue",
+      "fields": {
+        "screening_packet_url": "Dropbox link. PRIVATE — Mailmeteor delivery only.",
+        "packet_password": "Per-venue password for screening packet. From token-map.json.",
+        "financial_password": "Per-venue password for financial info. From token-map.json.",
+        "poster_file": "Customized venue poster (if exists).",
+        "social_kit": "Social media assets customized for this venue.",
+        "press_blurb": "Venue-specific press copy.",
+        "discussion_guide": "Post-film discussion guide for this film.",
+        "pre_show_content": "YFC winner, trailer reel, sponsor slides."
+      }
+    },
+    "scheduling": {
+      "description": "Deadlines and milestones for this venue",
+      "fields": {
+        "final_headcount_deadline": "When host confirms final attendance estimate.",
+        "av_requirements_deadline": "When AV needs must be locked.",
+        "film_delivery_date": "When screening packet is sent.",
+        "playback_test_deadline": "When host must confirm successful playback.",
+        "volunteer_training_date": "When volunteers attend training webinar."
+      }
+    },
+    "meta": {
+      "description": "Tracking and pipeline state",
+      "fields": {
+        "pipeline_status": "From onboarding runbook: New Lead → Contacted → Confirmed → Scheduled.",
+        "intake_form_completed": "Boolean — has the host filled out the intake form.",
+        "token": "Hex token for private venue page URL. From token-map.json.",
+        "airtable_record_id": "Airtable record for this venue.",
+        "host_helper_prior_years": "Google Sheet IDs for historical host helpers. From hh-venue-match.json.",
+        "data_gaps": "List of missing fields that need filling.",
+        "values_alignment_flag": "Soft flag for unresolved values concerns.",
+        "notes": "Free text."
+      }
+    }
+  },
+  "venues": [
+    {
+      "slug": "andersonville-chamber",
+      "identity": {
+        "canonical_name": "Andersonville Chamber of Commerce",
+        "address": "5706 N Clark, Chicago IL 60660",
+        "neighborhood_region": null,
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Community"
+      },
+      "event_details": {
+        "event_date": null,
+        "event_time": null,
+        "film_title": null,
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "50",
+        "capacity_confidence": "from_hh",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": null,
+        "host_contact_email": null,
+        "av_contact_name": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": null,
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": null,
+        "airtable_record_id": null,
+        "host_helper_prior_years": ["1-5JdRz4Ii29ysT_OcbUjaBB25MYWSOohgNy94RteGKs"],
+        "intake_form_completed": false,
+        "data_gaps": ["event_date", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "bethel-new-life",
+      "identity": {
+        "canonical_name": "Bethel New Life",
+        "address": "1140 N Lamon Ave., Chicago, IL",
+        "neighborhood_region": "Chicago West (Austin)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Chapel Arts Center"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": "6:30P",
+        "film_title": "Rooted (2021)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "120",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Trenton Lige",
+        "host_contact_email": "trenton@bethelnewlife.org",
+        "av_contact_name": null,
+        "av_contact_email": null,
+        "marketing_contact_name": "Trenton Lige",
+        "marketing_contact_email": "Trenton@bethelnewlife.org",
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": "Projector not reliable. May need assistance with a technician if no one in volunteer-pool has experience."
+      },
+      "assets_and_delivery": {
+        "packet_password": "gather-grove-18",
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": "4ba3e6d6d5f358ec",
+        "airtable_record_id": "recmccF0PHwKrlNHn",
+        "host_helper_prior_years": ["19CaINDhSfMaPDnxuKlfEPklepk2U13NaFOdQjQceyO8"],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "black-girl-environmentalists",
+      "identity": {
+        "canonical_name": "Black Girl Environmentalists at Patagonia Fulton Market",
+        "address": "1115 W Fulton Market, Chicago, IL 60607",
+        "neighborhood_region": "Chicago West (Fulton Market)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Community"
+      },
+      "event_details": {
+        "event_date": "4/25/26",
+        "event_time": "6:30–7P",
+        "film_title": "40 Acres (2024)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "150",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Jill Storms",
+        "host_contact_email": "jillian.storms@patagonia.com",
+        "av_contact_name": null,
+        "av_contact_email": null,
+        "marketing_contact_name": "Jill Storms",
+        "marketing_contact_email": "jillian.storms@patagonia.com",
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": "Large open space with projector and installed speakers. Connects via HDMI. Virtual Q&A panels can be tricky with their AV setup."
+      },
+      "assets_and_delivery": {
+        "packet_password": "lake-forage-47",
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": "5ed500864abeec21",
+        "airtable_record_id": "rec21WiXlD96KaJV0",
+        "host_helper_prior_years": [],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "broadway-umc",
+      "identity": {
+        "canonical_name": "Broadway United Methodist Church",
+        "address": "3338 N. Broadway St, Chicago, IL 60657",
+        "neighborhood_region": "Chicago North (Lakeview)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Church"
+      },
+      "event_details": {
+        "event_date": "4/25/26",
+        "event_time": "6:30P",
+        "film_title": "Rails to Trails (2025)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "120",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Richard Alton",
+        "host_contact_email": "richard.alton@gmail.com",
+        "av_contact_name": null,
+        "av_contact_email": null,
+        "marketing_contact_name": null,
+        "marketing_contact_email": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": "cliff-moss-25",
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": "d96d41217bde9ef0",
+        "airtable_record_id": "recvAD19CefbsjwDv",
+        "host_helper_prior_years": ["1Xj7giBfoYUX2sh1NY3HYyV9URxEZl9mhoWgyabotF0Q"],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "build-chicago",
+      "identity": {
+        "canonical_name": "BUILD Chicago",
+        "address": "5100 W Harrison Street, Chicago",
+        "neighborhood_region": "Chicago West",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Performance Hall"
+      },
+      "event_details": {
+        "event_date": "4/25/26",
+        "event_time": "1P",
+        "film_title": "Young Filmmakers Contest Winning Short Films Series",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "100",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Kesiah Bascom",
+        "host_contact_email": "kesiahbascom@buildchicago.org",
+        "av_contact_name": "Kesiah Bascom",
+        "av_contact_email": null,
+        "marketing_contact_name": "Kesiah Bascom / Danny Perez",
+        "marketing_contact_email": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": "wind-vale-29",
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": "31035386f10e37bd",
+        "airtable_record_id": "recBS5tIjbVJ0sz3f",
+        "host_helper_prior_years": ["1WeXS_oRF4WFkzT7fGQ4c8wCsjyTuYD8goenZ0Y7h9vo"],
+        "intake_form_completed": true,
+        "data_gaps": ["av_contact_email", "marketing_contact_email", "venue_tier"]
+      }
+    },
+    {
+      "slug": "calumet-college",
+      "identity": {
+        "canonical_name": "Calumet College of St. Joseph",
+        "address": null,
+        "neighborhood_region": "Chicago South",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "University"
+      },
+      "event_details": {
+        "event_date": null,
+        "event_time": null,
+        "film_title": null,
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "75-80",
+        "capacity_confidence": "from_hh — 2023 MiniFest at Ford Calumet Education Center, may be different space",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": null,
+        "host_contact_email": null,
+        "av_contact_name": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": null,
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": null,
+        "airtable_record_id": null,
+        "host_helper_prior_years": ["1RCi_VQe40Ru03D1WizJemqoKGSmi2wEm3_ItXeUMW-E"],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "event_date", "contacts", "venue_tier", "token_missing"]
+      }
+    },
+    {
+      "slug": "chicago-climate-museum",
+      "identity": {
+        "canonical_name": "Chicago Climate Action Museum",
+        "address": null,
+        "neighborhood_region": null,
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Museum"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": null,
+        "film_title": null,
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": null,
+        "capacity_confidence": "missing — no prior HH",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": null,
+        "host_contact_email": null,
+        "av_contact_name": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": null,
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": null,
+        "airtable_record_id": null,
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "capacity", "contacts", "venue_tier", "token_missing"]
+      }
+    },
+    {
+      "slug": "chicago-cultural-center",
+      "identity": {
+        "canonical_name": "Chicago Cultural Center",
+        "address": null,
+        "neighborhood_region": "Chicago Central (Loop)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Cultural"
+      },
+      "event_details": {
+        "event_date": null,
+        "event_time": null,
+        "film_title": null,
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": null,
+        "capacity_confidence": "missing",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": null,
+        "host_contact_email": null,
+        "av_contact_name": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": {
+        "venue_tier": null,
+        "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": "ridge-meadow-15",
+        "poster_file": null,
+        "social_kit": null
+      },
+      "meta": {
+        "token": "bd0ba55394710133",
+        "airtable_record_id": "reco7qXJhGATqEFOg",
+        "host_helper_prior_years": ["1y-f-9NuSFljQsvnn_6tWaV5NH_6GdTrdqjJngI4QjmM", "1_ikhKbMtCOD5jISFuzlu74b1_qCvmt-hcDZ4CJy7PlY", "19rM0PLqU7lnApOS3xYrZRXkLyZdCIL7KkbJY11DPZtA"],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "capacity", "event_date", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "cpl-harold-washington",
+      "identity": {
+        "canonical_name": "Chicago Public Library — Harold Washington",
+        "address": null,
+        "neighborhood_region": "Chicago Central (Loop)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Library"
+      },
+      "event_details": {
+        "event_date": "4/26/26",
+        "event_time": null,
+        "capacity": null,
+        "capacity_confidence": "missing — no prior HH"
+      },
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": { "packet_password": null },
+      "meta": {
+        "token": null,
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "capacity", "contacts", "venue_tier", "token_missing"]
+      }
+    },
+    {
+      "slug": "cpl-rogers-park",
+      "identity": {
+        "canonical_name": "Chicago Public Library — Rogers Park",
+        "address": null,
+        "neighborhood_region": "Chicago North (Rogers Park)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Library"
+      },
+      "event_details": {
+        "event_date": "4/26/26",
+        "event_time": null,
+        "capacity": null,
+        "capacity_confidence": "missing — no prior HH"
+      },
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": { "packet_password": null },
+      "meta": {
+        "token": null,
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "capacity", "contacts", "venue_tier", "token_missing"]
+      }
+    },
+    {
+      "slug": "climate-action-evanston",
+      "identity": {
+        "canonical_name": "Climate Action Evanston",
+        "address": null,
+        "neighborhood_region": "Northern Suburbs (Evanston)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Community"
+      },
+      "event_details": {
+        "event_date": "4/23/26",
+        "event_time": null,
+        "capacity": null,
+        "capacity_confidence": "missing — likely at Evanston Public Library"
+      },
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "ember-canopy-51"
+      },
+      "meta": {
+        "token": "6e6d8f42d6f843bd",
+        "airtable_record_id": "recOXmgRCE2xtxIkL",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "capacity", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "columbia-film-row",
+      "identity": {
+        "canonical_name": "Columbia College Film Row Cinema",
+        "address": null,
+        "neighborhood_region": "Chicago Central (Downtown, Loop)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Cinema"
+      },
+      "event_details": {
+        "event_date": "4/22/26",
+        "event_time": "6-9P",
+        "film_title": null,
+        "capacity": "260",
+        "capacity_confidence": "confirmed",
+        "ticket_price": "$75 ea or two for $150"
+      },
+      "contacts": {
+        "oeff_team_contact": "Michael"
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "field-aspen-86"
+      },
+      "meta": {
+        "token": "ca8a826e789a683f",
+        "airtable_record_id": "recIkQNX2gTDjFqLp",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "cultivate-agc",
+      "identity": {
+        "canonical_name": "Cultivate Collective at Academy for Global Citizenship",
+        "address": "4942 W 44th St, Chicago, IL 60638",
+        "neighborhood_region": "Chicago Southwest",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Community"
+      },
+      "event_details": {
+        "event_date": null,
+        "event_time": null,
+        "capacity": "150",
+        "capacity_confidence": "from_hh"
+      },
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "fern-gather-61"
+      },
+      "meta": {
+        "token": "ea037cea9f67751a",
+        "airtable_record_id": "recdMhmy12MQaZcr5",
+        "host_helper_prior_years": ["1NFCxUqQjzj8ZZ7PaOARoOSSKbRhjXr-2U72Lb-WqqTQ"],
+        "intake_form_completed": false,
+        "data_gaps": ["event_date", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "dominican",
+      "identity": {
+        "canonical_name": "Dominican University",
+        "address": "7900 Division St, River Forest",
+        "neighborhood_region": "Near West Suburbs (River Forest)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "University"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": "6:30P",
+        "film_title": "Rooted (2021)",
+        "film_runtime": null,
+        "event_format": "hybrid",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "75",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Maria Pascarella",
+        "host_contact_email": "mpascarella@dom.edu",
+        "av_contact_name": "Sam Barr",
+        "av_contact_email": "sbarr@dom.edu",
+        "marketing_contact_name": "Office of Marketing and Communications",
+        "marketing_contact_email": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": true,
+        "av_notes": "Springer Suites meeting space with tech in place for hybrid screening. Garen is aware."
+      },
+      "assets_and_delivery": {
+        "packet_password": "lantern-linden-57"
+      },
+      "meta": {
+        "token": "c4d9ff6fc0db2b93",
+        "airtable_record_id": "recYABpslmiSRzfMl",
+        "host_helper_prior_years": ["1cRDZ35Ru-E_YaQrmUsEpSPpLnW_1F7s5g3mf1-IwcHE", "1bO2OwR_PGTB0RzNudDAYOcdl4qDrKidFGeIBtVdleAk"],
+        "intake_form_completed": true,
+        "data_gaps": ["marketing_contact_email", "venue_tier"]
+      }
+    },
+    {
+      "slug": "epiphany",
+      "identity": {
+        "canonical_name": "Epiphany Center for the Arts",
+        "address": null,
+        "neighborhood_region": "Chicago West",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Arts Center"
+      },
+      "event_details": {
+        "event_date": null,
+        "event_time": null,
+        "capacity": null,
+        "capacity_confidence": "missing"
+      },
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "willow-lantern-99"
+      },
+      "meta": {
+        "token": "8800f08a34726f3e",
+        "airtable_record_id": "recN2oSv0XgmxcPjG",
+        "host_helper_prior_years": ["1ACbJh_0RYOlXZKbcuDrQ1zebMbl7We4G1yfUNdUiiKQ", "1mB9cBrGKMx-X1UCOAVz0HT1eexmmXZ8c_P7lQPW4ds0"],
+        "intake_form_completed": false,
+        "status": "tentative",
+        "data_gaps": ["address", "capacity", "event_date", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "euclid-umc",
+      "identity": {
+        "canonical_name": "Euclid Avenue UMC",
+        "address": null,
+        "neighborhood_region": null,
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Church"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": null,
+        "capacity": null,
+        "capacity_confidence": "missing — no prior HH"
+      },
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "reef-moss-67"
+      },
+      "meta": {
+        "token": "7274dfa30a310404",
+        "airtable_record_id": "recl6WJOplIiZZqb1",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "capacity", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "go-green-park-ridge",
+      "identity": {
+        "canonical_name": "Go Green Park Ridge",
+        "address": "100 Courtland Ave., Park Ridge, IL 60068",
+        "neighborhood_region": "Northern Suburbs (Park Ridge)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Church/Community"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": "6:30P",
+        "film_title": "Chasing Time",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "300",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Johnny Patney",
+        "host_contact_email": "jpatney@hotmail.com",
+        "av_contact_name": "Johnny Patney",
+        "av_contact_email": "jpatney@hotmail.com",
+        "marketing_contact_name": "Laura Dini",
+        "marketing_contact_email": "lmdini@sbcglobal.net",
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": "summit-screening-89"
+      },
+      "meta": {
+        "token": "2fba49fb6490618b",
+        "airtable_record_id": "recLcD00BuHsYzPHR",
+        "host_helper_prior_years": ["1hY-BiB5CrqupldSU45PG8O2wGfYyuu8tTa4UnOVxE7w", "14eo_V5hkf3Kz5-gnEpZLFVO9h0-_cwxfklT1JjLHNyI"],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "iit-bronzeville",
+      "identity": {
+        "canonical_name": "IIT Bronzeville",
+        "address": "3201 S. State Street, Chicago, IL 60616",
+        "neighborhood_region": "Chicago South (Bronzeville)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Auditorium"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": "6:30P",
+        "film_title": "Rooted (2021)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "165",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Alicia Bunton",
+        "host_contact_email": "abunton1@iit.edu",
+        "av_contact_name": "Alicia Bunton",
+        "av_contact_email": "abunton1@iit.edu",
+        "marketing_contact_name": null,
+        "marketing_contact_email": null,
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {},
+      "meta": {
+        "token": null,
+        "host_helper_prior_years": ["1i0ltsjLJjDb9S9ehrQeMK5Ss1JkBROZSEmtz_spBIuk", "1V8HT7K3__Viq0sJn80hEUBhMOAVpuJOabK_jOHjlMDA"],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier", "token_missing"]
+      }
+    },
+    {
+      "slug": "il-clinicians",
+      "identity": {
+        "canonical_name": "Illinois Clinicians for Climate Action",
+        "address": null,
+        "neighborhood_region": null,
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Community"
+      },
+      "event_details": {},
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "field-river-78"
+      },
+      "meta": {
+        "token": "ebe5cd2a49159456",
+        "airtable_record_id": "rec8ZpbL0gHLW4Y5Q",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "event_date", "capacity", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "ica",
+      "identity": {
+        "canonical_name": "Institute of Cultural Affairs",
+        "address": "4750 N Sheridan Rd, Chicago, IL 60640",
+        "neighborhood_region": "Chicago North (Uptown)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Community"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": "6:30P",
+        "film_title": "How to Power a City (2024)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "75",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Jameson Walker",
+        "host_contact_email": "jwalker@ica-usa.org",
+        "av_contact_name": "Rory Gilchrist",
+        "av_contact_email": "rgilchrist@ica-usa.org",
+        "marketing_contact_name": "Jameson Walker",
+        "marketing_contact_email": "jwalker@ica-usa.org",
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false,
+        "av_notes": "Bonhoeffer Room, 6th floor of GreenRise. Film screened with projector and in-room audio. Mixer would be super helpful."
+      },
+      "assets_and_delivery": {
+        "packet_password": "aspen-sage-82"
+      },
+      "meta": {
+        "token": "ef76123fe45248c9",
+        "airtable_record_id": "recmUJJMjw4Bw2dLl",
+        "host_helper_prior_years": [],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "kehrein-center",
+      "identity": {
+        "canonical_name": "Kehrein Center for the Arts",
+        "address": null,
+        "neighborhood_region": "Chicago West (Austin)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Arts Center"
+      },
+      "event_details": {
+        "event_date": "4/25/26",
+        "event_time": null,
+        "capacity": null,
+        "capacity_confidence": "missing — HH exists but capacity not found"
+      },
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "dawn-meadow-40"
+      },
+      "meta": {
+        "token": "c17225009e5b2bd7",
+        "airtable_record_id": "recuAPMLYrW2LqZXS",
+        "host_helper_prior_years": ["1eU6IFCbeOCJetyRmbFpU1fwSRZG3Yv6SJwIhQ3FpAWs", "1YMZqUPMdDi7qMP5gzeudC_xgfOq3aW3K9IPUQh9swAM"],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "capacity", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "loyola-law",
+      "identity": {
+        "canonical_name": "Loyola University Law School",
+        "address": null,
+        "neighborhood_region": null,
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "University"
+      },
+      "event_details": {},
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "brook-ember-69"
+      },
+      "meta": {
+        "token": "8e46192f77967d66",
+        "airtable_record_id": "recCaIkw8EnpMbrid",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "event_date", "capacity", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "northbrook-library",
+      "identity": {
+        "canonical_name": "Northbrook Public Library",
+        "address": null,
+        "neighborhood_region": "Northern Suburbs (Northbrook)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Library"
+      },
+      "event_details": {},
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "ember-meadow-65"
+      },
+      "meta": {
+        "token": "d10492f4a6165669",
+        "airtable_record_id": "recYlbQ3uJj5KJA6U",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "event_date", "capacity", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "oak-park-library",
+      "identity": {
+        "canonical_name": "Oak Park Public Library",
+        "address": null,
+        "neighborhood_region": "Near West Suburbs (Oak Park)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Library"
+      },
+      "event_details": {},
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {},
+      "meta": {
+        "token": null,
+        "host_helper_prior_years": ["19R-EPDduqDrcTi8M55bSXfx_pSD10Eyo_Z0kl3l15CA", "1JY_tK3b8vI0RtPfdIUMVFKIJXXuQriYWbAp9a5e-mvA", "1Xw4Sa4gt5dsJVmMMrOfjtlbKceJY8uUeJMFWd2kWr1I"],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "event_date", "capacity", "contacts", "venue_tier", "token_missing"]
+      }
+    },
+    {
+      "slug": "seven-generations",
+      "identity": {
+        "canonical_name": "Seven Generations Ahead",
+        "address": null,
+        "neighborhood_region": null,
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Community"
+      },
+      "event_details": {},
+      "contacts": {},
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "stone-ridge-62"
+      },
+      "meta": {
+        "token": "af9abb2594504ba6",
+        "airtable_record_id": "rec4S4YTZqNpnTdHH",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "event_date", "capacity", "contacts", "venue_tier"]
+      }
+    },
+    {
+      "slug": "triton-college",
+      "identity": {
+        "canonical_name": "Triton College",
+        "address": "2000 Fifth Avenue, River Grove, IL 60171",
+        "neighborhood_region": "Western Suburbs (River Grove)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "University"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": "6:30P",
+        "film_title": "How to Power a City (2024)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "150",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Benjamin Kadlec",
+        "host_contact_email": "benjaminkadlec@triton.edu",
+        "av_contact_name": "Maria Correa",
+        "av_contact_email": "mariacorrea@triton.edu",
+        "marketing_contact_name": "Sam Tolia",
+        "marketing_contact_email": "marketing@triton.edu",
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false,
+        "av_notes": null
+      },
+      "assets_and_delivery": {
+        "packet_password": "dune-forage-35"
+      },
+      "meta": {
+        "token": "0c56d79815e911af",
+        "airtable_record_id": "recsHBnmKMgRRalSI",
+        "host_helper_prior_years": ["1F8Bh2dmg-_XnNn20pwWwfQpNSBXHkUTB0PSRX-qeFvo", "1ZE68gP710YuAH-Nh2c2bA8migyvunUUIJ4UDSpRDpPs"],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "trinity-lutheran",
+      "identity": {
+        "canonical_name": "Trinity Lutheran Church — Des Plaines",
+        "address": "675 E Algonquin Rd, Des Plaines, IL 60016",
+        "neighborhood_region": "Northern Suburbs (Des Plaines)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Church"
+      },
+      "event_details": {
+        "event_date": "4/23/26",
+        "event_time": "6:30P",
+        "film_title": "Beyond Zero (2020)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "120",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "John Stoffregen",
+        "host_contact_email": "jstoff304@gmail.com",
+        "av_contact_name": null,
+        "av_contact_email": null,
+        "marketing_contact_name": "Emily Olivos",
+        "marketing_contact_email": "Communicationsmanager@trinitydesplaines.org",
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false,
+        "av_notes": "Waiting for response re Ana's mention of OEFF AV resources to consider as options to existing church laptop and projector."
+      },
+      "assets_and_delivery": {
+        "packet_password": "screening-ember-73"
+      },
+      "meta": {
+        "token": "6c82b0e444c01d88",
+        "airtable_record_id": "recX1dEcNAyOb6Xhv",
+        "host_helper_prior_years": [],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "uncommon-ground",
+      "identity": {
+        "canonical_name": "Uncommon Ground",
+        "address": "3800 N. Clark St., Chicago 60613",
+        "neighborhood_region": "Chicago North (Lakeview)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Restaurant/Venue"
+      },
+      "event_details": {
+        "event_date": "4/23/26",
+        "event_time": "6:30P",
+        "capacity": "50",
+        "capacity_confidence": "confirmed"
+      },
+      "contacts": {
+        "host_contact_name": "Michael Cameron, Helen Cameron",
+        "av_contact_name": "Isaac Rodriguez"
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "bloom-screening-13"
+      },
+      "meta": {
+        "token": "d0732c329bd19d03",
+        "airtable_record_id": "rec3uDHHjHUwNfZV1",
+        "host_helper_prior_years": ["1o23XP1OzSo82vwM5F0UDcU9LbIWB8Bmy-gBmX-iH810"],
+        "intake_form_completed": false,
+        "data_gaps": ["venue_tier"]
+      }
+    },
+    {
+      "slug": "oak-park-oprf",
+      "identity": {
+        "canonical_name": "Village of Oak Park — OPRF High School",
+        "address": "201 N Scoville Ave, Oak Park, IL 60302",
+        "neighborhood_region": "Near West Suburbs (Oak Park)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Auditorium"
+      },
+      "event_details": {
+        "event_date": "4/24/26",
+        "event_time": "6:30P",
+        "film_title": "How to Power a City (2024)",
+        "film_runtime": null,
+        "event_format": "in-person",
+        "ticket_price": null,
+        "ticket_url": null,
+        "capacity": "350",
+        "capacity_confidence": "confirmed_intake",
+        "accessibility_notes": null
+      },
+      "contacts": {
+        "host_contact_name": "Lindsey Nieratka",
+        "host_contact_email": "LNIERATKA@oak-park.us",
+        "av_contact_name": "Kyle Hurt",
+        "av_contact_email": "khurt@oprfhs.org",
+        "marketing_contact_name": "Malcolm Mossman",
+        "marketing_contact_email": "malcolm.mossman@oak-park.us",
+        "oeff_team_contact": null,
+        "volunteer_names": null
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false,
+        "av_notes": "Small auditorium with auditorium seating, stage, and screens. Response covers partnership with Oak Park Public Library and Village of Oak Park. Address 201 N Scoville is the library building; AV contact Kyle Hurt is from OPRFHS."
+      },
+      "assets_and_delivery": {
+        "packet_password": "linden-harbor-11"
+      },
+      "meta": {
+        "token": "c557ec977732717f",
+        "airtable_record_id": "recwkZO9380Cl00EB",
+        "host_helper_prior_years": ["1qEbYfz-9UTlQHfyUsRyRqmG-zQuuNSy_Vxb6tG1Q7LY"],
+        "intake_form_completed": true,
+        "data_gaps": ["venue_tier", "clarify_venue_address_vs_library"]
+      }
+    },
+    {
+      "slug": "oak-park-village-hall",
+      "identity": {
+        "canonical_name": "Village of Oak Park — Village Hall",
+        "address": null,
+        "neighborhood_region": "Near West Suburbs (Oak Park)",
+        "venue_logo": null,
+        "venue_photo": null,
+        "venue_type": "Government"
+      },
+      "event_details": {},
+      "contacts": {
+        "host_contact_email": "LNieratka@oak-park.us"
+      },
+      "technical": { "venue_tier": null, "hybrid_capable": false },
+      "assets_and_delivery": {
+        "packet_password": "cliff-prairie-81"
+      },
+      "meta": {
+        "token": "8b16fa74f3760ad5",
+        "airtable_record_id": "recxtCyQRPVxfWyQj",
+        "host_helper_prior_years": [],
+        "intake_form_completed": false,
+        "data_gaps": ["address", "event_date", "capacity", "venue_tier"]
+      }
+    }
+  ]
+}

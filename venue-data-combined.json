@@ -1,0 +1,990 @@
+{
+  "generated": "2026-03-04",
+  "description": "Combined 2026 venue data from Roadmap + Host Helpers. Confidence levels indicate what needs host confirmation.",
+  "stats": {
+    "total": 26,
+    "capacity_confirmed": 6,
+    "capacity_needs_confirmation": 11,
+    "capacity_missing": 9,
+    "address_available": 13,
+    "address_missing": 13
+  },
+  "venues": [
+    {
+      "venue_name": "Columbia College - Film Row Cinema",
+      "date": "4/22/26",
+      "time": "6-9P",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "capacity": {
+        "value": "260",
+        "source": "sheet",
+        "confidence": "confirmed",
+        "sheet_original": "260"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Michael",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "$75 ea or two for $150",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "address_missing"
+      ],
+      "roadmap_row": 3
+    },
+    {
+      "venue_name": "Trinity Lutheran Church",
+      "date": "4/23/26",
+      "time": "6:30P",
+      "geography": "Northern Suburbs (Des Plaines)",
+      "capacity": {
+        "value": "120",
+        "source": "sheet",
+        "confidence": "confirmed",
+        "sheet_original": "120"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "address_missing"
+      ],
+      "roadmap_row": 4
+    },
+    {
+      "venue_name": "Uncommon Ground",
+      "date": "4/23/26",
+      "time": "6:30P",
+      "geography": "Chicago North (Lakeview)",
+      "capacity": {
+        "value": "50",
+        "source": "sheet",
+        "confidence": "confirmed",
+        "sheet_original": "50"
+      },
+      "address": {
+        "value": "Uncommon Ground\n3800 N. Clark St., Chicago 60613",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "Michael Cameron <uncommonmichaelcameron@gmail.com>, Helen Cameron <ohhelencameron@gmail.com>\n(from 2",
+        "av_contact": "Isaac Rodriguez  Bookings@uncommonground.com",
+        "host_contact_hh": "Please clarify which staff member is responsible for various roles described:\nMi"
+      },
+      "film": null,
+      "ticket_price": "$20 ticket",
+      "accessibility": "Please select one",
+      "parking": "",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.23 Host Helper: UncommonGround-Every Little Thing",
+          "id": "1o23XP1OzSo82vwM5F0UDcU9LbIWB8Bmy-gBmX-iH810",
+          "year": "OEFF2025"
+        }
+      ],
+      "data_gaps": [],
+      "roadmap_row": 5
+    },
+    {
+      "venue_name": "Climate Action Evanston likely at Evanston Public Library",
+      "date": "4/23/26",
+      "time": "6:30P",
+      "geography": "Northern Suburbs (Evanston)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 6
+    },
+    {
+      "venue_name": "Columbia College - Film Row Cinema",
+      "date": "4/23/26",
+      "time": "6:30P",
+      "geography": "Downtown/(S) Loop",
+      "capacity": {
+        "value": "260",
+        "source": "sheet",
+        "confidence": "confirmed",
+        "sheet_original": "260"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "address_missing"
+      ],
+      "roadmap_row": 7
+    },
+    {
+      "venue_name": "Village of Oak Park at OPRF High School",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Near West Suburbs (Oak Park)",
+      "capacity": {
+        "value": "50",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "Lindsey Nieratka <LNieratka@oak-park.us>\n(from 2025 \u2014 verify current. 2/10/26 email references CSO r",
+        "av_contact": "Rafal Baranowicz, rbaranowicz@oppl.org",
+        "host_contact_hh": "Christine Poreba, cporeba@oppl.org,  (cell) 850 590 8095"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "Paid Garage below building $1 = 3 hours and paid street parking per village app ",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.26 Host Helper: Oak Park Public Library-CafeteriaMan",
+          "id": "19R-EPDduqDrcTi8M55bSXfx_pSD10Eyo_Z0kl3l15CA",
+          "year": "OEFF2025"
+        },
+        {
+          "name": "OEFF2024 04.20-AM Host Helper: Oak Park Public Library-Children's",
+          "id": "1JY_tK3b8vI0RtPfdIUMVFKIJXXuQriYWbAp9a5e-mvA",
+          "year": "OEFF2024"
+        },
+        {
+          "name": "OEFF2024 04.21 Host Helper: Oak Park Public Library-CommonGround",
+          "id": "1Xw4Sa4gt5dsJVmMMrOfjtlbKceJY8uUeJMFWd2kWr1I",
+          "year": "OEFF2024"
+        },
+        {
+          "name": "Host Helper: Powerlands_Oak Park Public Library",
+          "id": "12uxlaSPVYoHWrnhVohNaaH0ojbCXV5FD5iHfKBcZ3xk",
+          "year": "unknown"
+        },
+        {
+          "name": "Host Helper: Children-Family_Oak Park Public Library",
+          "id": "1CXJ7xxIjFzZqqUBqygxlRNbdlqQeKlQA5RlYuvcB5jk",
+          "year": "unknown"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation",
+        "address_missing"
+      ],
+      "roadmap_row": 8
+    },
+    {
+      "venue_name": "Institute of Cultural Affairs in the USA",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Chicago North (Uptown)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 9
+    },
+    {
+      "venue_name": "Triton College",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Western Suburbs (River Grove)",
+      "capacity": {
+        "value": "400",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "Check last yr HH"
+      },
+      "address": {
+        "value": "Triton College 2000 Fifth Ave River Grove, IL 60171 (Showing located inside the R Building - showing will be in the Performing Arts Center)",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": "Maria Correa <mariacorrea@triton.edu>",
+        "host_contact_hh": "Benjamin Kadlec <benjaminkadlec@triton.edu> Office: 708-456-0300, Ext. 3189 Cell"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "Free parking available in Lot 10, adjacent to the R building. EV charging statio",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.24 Host Helper: Triton College-Slay",
+          "id": "1F8Bh2dmg-_XnNn20pwWwfQpNSBXHkUTB0PSRX-qeFvo",
+          "year": "OEFF2025"
+        },
+        {
+          "name": "OEFF2024 04.19 Host Helper: Triton College-Disposable",
+          "id": "1ZE68gP710YuAH-Nh2c2bA8migyvunUUIJ4UDSpRDpPs",
+          "year": "OEFF2024"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 10
+    },
+    {
+      "venue_name": "Bethel New Life",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Chicago West (Austin)",
+      "capacity": {
+        "value": "180-200",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "120?"
+      },
+      "address": {
+        "value": "Bethel New Life\n1140 N Lamon Ave, Chicago, IL 60651",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": "It is possible that OEFF Tech Team can be onsite with personnel and equipment. A",
+        "host_contact_hh": "Tyanna Powell <tyanna@bethelnewlife.org>, cell 312-218-3320\nMarcia Kay <mkay@bet"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "Free parking is availiable in the parking lot located at 1140 N. Lamon Avenue. S",
+      "host_helper_files": [
+        {
+          "name": "OEFF2024 04.20-PM Host Helper: Bethel New Life-RazingLibertySq",
+          "id": "19CaINDhSfMaPDnxuKlfEPklepk2U13NaFOdQjQceyO8",
+          "year": "OEFF2024"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 11
+    },
+    {
+      "venue_name": "IIT Bronzeville",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Chicago South (Bronzeville)",
+      "capacity": {
+        "value": "155",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "Check last yr HH"
+      },
+      "address": {
+        "value": "Illinois Tech MTCC Building",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": "Alicia Bunton, see above for email address",
+        "host_contact_hh": "Syda Taylor <syda@organiconeness.org>, cell 312-371-7036\nAlicia Bunton <abunton1"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "Parking is free in the visitors parking lot on State Street between 35th and 34t",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.23 Host Helper: Organic Oneness w IIT Bronzeville-The Hills",
+          "id": "1i0ltsjLJjDb9S9ehrQeMK5Ss1JkBROZSEmtz_spBIuk",
+          "year": "OEFF2025"
+        },
+        {
+          "name": "OEFF2024 04.21 Host Helper: Organic Oneness w IIT Bronzeville-CommonGround",
+          "id": "1V8HT7K3__Viq0sJn80hEUBhMOAVpuJOabK_jOHjlMDA",
+          "year": "OEFF2024"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 12
+    },
+    {
+      "venue_name": "Park Ridge Community Church (Go Green Park Ridge)",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Northern Suburbs (Park Ridge)",
+      "capacity": {
+        "value": "100+",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": "Park Ridge Community Church\n100 Courtland Ave.\nPark Ridge, IL 60068",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": "Please clarify main person responsible for AV/Tech\nName, email, cell#: Mark Klei",
+        "host_contact_hh": "Mark Kleinschmit <markkleiny@gmail.com>, please share cell if/in case needed"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "There is a parking lot just south of the church.  There is also ample street par",
+      "host_helper_files": [
+        {
+          "name": "OEFF2024 04.18 Host Helper: Go Green Park Ridge-WorldofWater",
+          "id": "1hY-BiB5CrqupldSU45PG8O2wGfYyuu8tTa4UnOVxE7w",
+          "year": "OEFF2024"
+        },
+        {
+          "name": "Host Helper: GoingCircular_Go Green Park Ridge-Maine South HS",
+          "id": "14eo_V5hkf3Kz5-gnEpZLFVO9h0-_cwxfklT1JjLHNyI",
+          "year": "unknown"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 13
+    },
+    {
+      "venue_name": "Chicago Climate Action Museum",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 14
+    },
+    {
+      "venue_name": "Euclid Ave United Methodist Church",
+      "date": "4/24/26",
+      "time": "6:30P",
+      "geography": "Near West Suburbs (Oak Park)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 15
+    },
+    {
+      "venue_name": "Cultivate Collective (at Academy for Global Citizenship)",
+      "date": "4/25/26",
+      "time": "1P",
+      "geography": "Chicago South (Stickney/Brighton Park)",
+      "capacity": {
+        "value": "150 pple",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "Check last yr HH"
+      },
+      "address": {
+        "value": "Academy for Global Citizenship\n4942 W 44th St, Chicago, IL 60638",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": "Please clarify which staff member is responsible for various roles described:\nFa",
+        "host_contact_hh": "Please clarify which staff member is responsible for various roles described:\nKr"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "There is ample free street parking and a small lot with 2 accessible spaces for ",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.26 Host Helper: CultivateCollective-AcademyforGlobalCitizenship-CafeteriaMan",
+          "id": "1NFCxUqQjzj8ZZ7PaOARoOSSKbRhjXr-2U72Lb-WqqTQ",
+          "year": "OEFF2025"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 16
+    },
+    {
+      "venue_name": "BUILD Chicago",
+      "date": "4/25/26",
+      "time": "1P",
+      "geography": "Chicago West (Austin)",
+      "capacity": {
+        "value": "100",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "Check last yr HH"
+      },
+      "address": {
+        "value": "BUILD Chicago\nPerformance Hall\n5100 W Harrison St., Chicago 60644",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Josh",
+        "venue_contacts": null,
+        "av_contact": "Please clarify which staff member is responsible for various roles described:",
+        "host_contact_hh": "Please clarify which staff member is responsible for various roles described:\nke"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "Our parking lot will likely be closed for the day (other event activities will b",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.26 Host Helper: BUILDChicago-CafeteriaMan",
+          "id": "1WeXS_oRF4WFkzT7fGQ4c8wCsjyTuYD8goenZ0Y7h9vo",
+          "year": "OEFF2025"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 17
+    },
+    {
+      "venue_name": "Broadway United Methodist Church",
+      "date": "4/25/26",
+      "time": "6:30P",
+      "geography": "Chicago North (East Lakeview)",
+      "capacity": {
+        "value": "100",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "Check last yr HH"
+      },
+      "address": {
+        "value": "Broadway United Methodist Church\n3338 N Broadway, Chicago 60657",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": "Woo Evans, woodolla2004@gmail.com",
+        "host_contact_hh": "Richard Alton, richard.alton@gmail.com"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "We have a small parking lot off of Buckingham to the rear of the church that you",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.25 Host Helper: BroadwayUMC-50 StatesofSustainability",
+          "id": "1Xj7giBfoYUX2sh1NY3HYyV9URxEZl9mhoWgyabotF0Q",
+          "year": "OEFF2025"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 18
+    },
+    {
+      "venue_name": "Calumet College of St. Joseph",
+      "date": "4/25/26",
+      "time": "6:30P",
+      "geography": "NW Indiana",
+      "capacity": {
+        "value": "75-80",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": "Big Marsh Bike Park, \r\n11559 S. Stony Island Ave., Chicago",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "Monica Puente <mpuente1@ccsj.edu>",
+        "av_contact": "Luis Cabrales, Program and Event Facilitator, Ford Calument Education Center, Ch",
+        "host_contact_hh": "Paul Fitzgerald, Executive Director of Friends of Big Marsh, paul@bigmarsh.org c"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "Parking lot - 100 cars",
+      "host_helper_files": [
+        {
+          "name": "0_MiniFest_Host Helper: Ford Calumet Education Center",
+          "id": "1RCi_VQe40Ru03D1WizJemqoKGSmi2wEm3_ItXeUMW-E",
+          "year": "unknown"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 19
+    },
+    {
+      "venue_name": "Kehrein Center for the Arts at Urban Essentials Cafe",
+      "date": "4/25/26",
+      "time": "6:30P",
+      "geography": "Chicago West (Austin)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": "Kehrein Center for the Arts\n5628 W. Washington St., Chicago",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": "",
+        "host_contact_hh": "janelle@kcachicago.org, reesheda@kcachicago.org"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.26 Host Helper: Kehrein Ctr for the Arts-WhenWeCycle",
+          "id": "1eU6IFCbeOCJetyRmbFpU1fwSRZG3Yv6SJwIhQ3FpAWs",
+          "year": "OEFF2025"
+        },
+        {
+          "name": "OEFF2024 04.19 Host Helper: Kehrein Ctr for the Arts-Disposable",
+          "id": "1YMZqUPMdDi7qMP5gzeudC_xgfOq3aW3K9IPUQh9swAM",
+          "year": "OEFF2024"
+        }
+      ],
+      "data_gaps": [
+        "capacity_missing"
+      ],
+      "roadmap_row": 20
+    },
+    {
+      "venue_name": "Black Girl Environmentalists at UIC or Patagonia Fulton Market",
+      "date": "4/25/26",
+      "time": "7P",
+      "geography": "TBD",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": "TBD"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "TBD",
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 21
+    },
+    {
+      "venue_name": "Ephiphany Center for the Arts (Upstairs Sanctuary)",
+      "date": "4/25/26",
+      "time": "6:30p",
+      "geography": "Chicago Near West (Loop/Union Park)",
+      "capacity": {
+        "value": "80",
+        "source": "sheet",
+        "confidence": "confirmed",
+        "sheet_original": "80"
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": null,
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": null,
+      "ticket_price": "$20 ticket (with sliding scale)",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "address_missing"
+      ],
+      "roadmap_row": 22
+    },
+    {
+      "venue_name": "Chicago Cultural Center",
+      "date": "4/26/26",
+      "time": "1:30P",
+      "geography": "Chicago Central (Downtown, Loop)",
+      "capacity": {
+        "value": "200",
+        "source": "sheet",
+        "confidence": "confirmed",
+        "sheet_original": "200"
+      },
+      "address": {
+        "value": "Chicago Cultural Center\nClaudia Cassidy Theater, 2nd Floor North\n78 E. Washington St.,Chicago 60602\n\n*Screening preceded by Earth Day Action Fair in GAR Rotunda",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana/Garen",
+        "venue_contacts": null,
+        "av_contact": "Alex Vazquez <Jose.Vazquez2@cityofchicago.org>",
+        "host_contact_hh": "Alex Vazquez <Jose.Vazquez2@cityofchicago.org>, Natalia.Salazar@cityofchicago.or"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "N/A (public street parking or downtown lots)",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.27 Host Helper: Chicago Cultural Center-TheGrab",
+          "id": "1y-f-9NuSFljQsvnn_6tWaV5NH_6GdTrdqjJngI4QjmM",
+          "year": "OEFF2025"
+        },
+        {
+          "name": "OEFF2024 04.21 Host Helper: Chicago Cultural Center-CommonGround",
+          "id": "1_ikhKbMtCOD5jISFuzlu74b1_qCvmt-hcDZ4CJy7PlY",
+          "year": "OEFF2024"
+        },
+        {
+          "name": "0_MiniFest_Host Helper: Chicago Cultural Center",
+          "id": "19rM0PLqU7lnApOS3xYrZRXkLyZdCIL7KkbJY11DPZtA",
+          "year": "unknown"
+        }
+      ],
+      "data_gaps": [],
+      "roadmap_row": 23
+    },
+    {
+      "venue_name": "Dominican University",
+      "date": "4/27/26",
+      "time": "6:30P",
+      "geography": "Western Suburbs (River Forest)",
+      "capacity": {
+        "value": "100",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": "Check email thread"
+      },
+      "address": {
+        "value": "Dominican University\nParmer Hall, Room 108\n7900 Division St., River Forest 60305",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana/Garen",
+        "venue_contacts": null,
+        "av_contact": "Please clarify which staff member is responsible for various roles described:\nHa",
+        "host_contact_hh": "Please clarify which staff member is responsible for various roles described:\nCh"
+      },
+      "film": null,
+      "ticket_price": "Free w suggested $10 donation",
+      "accessibility": "Yes",
+      "parking": "",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.24 Host Helper: DominicanUniversity-Bad River",
+          "id": "1cRDZ35Ru-E_YaQrmUsEpSPpLnW_1F7s5g3mf1-IwcHE",
+          "year": "OEFF2025"
+        },
+        {
+          "name": "Host Helper Dominican",
+          "id": "1bO2OwR_PGTB0RzNudDAYOcdl4qDrKidFGeIBtVdleAk",
+          "year": "unknown"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 24
+    },
+    {
+      "venue_name": "Academy for Global Citizenship",
+      "date": "4/26",
+      "time": "",
+      "geography": "Chicago South (Stickney/Brighton Park)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": ""
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "Kris de la Torre <kdelatorre@agcchicago.org>, Lekisha@cultivate-collective.org\nFarz@cultivate-collec",
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": "TBD",
+      "ticket_price": "Free with suggested $8 donation",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 56
+    },
+    {
+      "venue_name": "Andersonville Chamber of Commerce",
+      "date": "4/26",
+      "time": "",
+      "geography": "Chicago North (Andersonville)",
+      "capacity": {
+        "value": "50",
+        "source": "host_helper_prior_year",
+        "confidence": "needs_host_confirmation",
+        "sheet_original": ""
+      },
+      "address": {
+        "value": "5706 N Clark, Chicago IL 60660",
+        "source": "host_helper_prior_year",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "Matt Junger <mjunger@andersonville.org>",
+        "av_contact": "",
+        "host_contact_hh": "Please clarify which staff member is responsible for various roles described:\nMa"
+      },
+      "film": "TBD",
+      "ticket_price": "Free with suggested $8 donation",
+      "accessibility": "No",
+      "parking": "street parking available",
+      "host_helper_files": [
+        {
+          "name": "OEFF2025 04.26 Host Helper: AndersonvilleChamberofCommerce-Food Inc,2",
+          "id": "1-5JdRz4Ii29ysT_OcbUjaBB25MYWSOohgNy94RteGKs",
+          "year": "OEFF2025"
+        }
+      ],
+      "data_gaps": [
+        "capacity_needs_host_confirmation"
+      ],
+      "roadmap_row": 60
+    },
+    {
+      "venue_name": "Chicago Public Library Rogers Park Branch",
+      "date": "4/26",
+      "time": "",
+      "geography": "North (Rogers Park)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": ""
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "jlaczkows@chipublib.org",
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": "TBD",
+      "ticket_price": "Free w suggested $8 donation, if confirmed",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 97
+    },
+    {
+      "venue_name": "Chicago Public Library Harold Washington Branch",
+      "date": "4/26",
+      "time": "",
+      "geography": "Central (Downtown/Loop)",
+      "capacity": {
+        "value": null,
+        "source": "unknown",
+        "confidence": "missing",
+        "sheet_original": ""
+      },
+      "address": {
+        "value": null,
+        "source": "missing",
+        "needs_confirmation": true
+      },
+      "contacts": {
+        "team_contact": "Ana",
+        "venue_contacts": "Maria Sheehan <msheehan@chipublib.org>",
+        "av_contact": null,
+        "host_contact_hh": null
+      },
+      "film": "TBD",
+      "ticket_price": "Free w suggested $8 donation, if confirmed",
+      "accessibility": null,
+      "parking": null,
+      "host_helper_files": [],
+      "data_gaps": [
+        "capacity_missing",
+        "address_missing"
+      ],
+      "roadmap_row": 99
+    }
+  ]
+}

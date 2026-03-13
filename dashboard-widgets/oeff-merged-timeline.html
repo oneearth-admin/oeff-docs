@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF 2026 — Merged Project + Tech Timeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Primitives */
+      --forest-canopy: #1a2e22;
+      --forest-understory: #2d4a3a;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #5c7c6b;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+
+      /* Semantic tokens */
+      --color-ink: #2c2825;
+      --color-ink-soft: #5c5550;
+      --color-ink-muted: #8a8580;
+      --color-ground: #f7f5f2;
+      --color-surface: #faf9f7;
+      --color-surface-raised: #ffffff;
+      --color-surface-inset: #f0ede8;
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-dark: var(--forest-understory);
+      --color-primary-darkest: var(--forest-canopy);
+      --color-primary-light: var(--forest-mist);
+      --color-primary-lighter: var(--forest-lichen);
+      --color-border: var(--forest-mist);
+      --color-text: var(--color-ink);
+      --color-text-soft: var(--color-ink-soft);
+      --color-text-muted: var(--color-ink-muted);
+      --signal-critical: #c44b4b;
+      --signal-warning: #996622;
+      --signal-success: #5c8c4b;
+      --signal-info: #4b7c8c;
+      --shadow-soft: 0 1px 4px hsla(30, 20%, 20%, 0.08);
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--color-text);
+      background: var(--color-ground);
+      padding: 1.25rem 1.5rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+    .header h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem; font-weight: 600; color: var(--color-text);
+    }
+    .header-meta {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.8rem; color: var(--color-text-muted);
+    }
+    .header-phase {
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--color-primary-deep);
+      background: var(--color-primary-light);
+      padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex; gap: 0; border-bottom: 2px solid var(--color-border);
+      margin: 1rem 0 0 0; flex-wrap: wrap;
+    }
+    .tab {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      font-size: 13px; font-weight: 600;
+      padding: 0.5rem 1rem; min-height: 44px;
+      border: none; background: transparent;
+      color: var(--color-text-muted); cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.1s;
+    }
+    .tab:hover { color: var(--color-text-soft); }
+    .tab.active {
+      color: var(--color-primary-deep);
+      border-bottom-color: var(--color-primary-deep);
+    }
+    .tab-count {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 12px; color: var(--color-text-muted);
+      margin-left: 0.25rem;
+    }
+    .tab-pane { display: none; padding-top: 1rem; }
+    .tab-pane.active { display: block; }
+
+    /* ── Stat Strip ── */
+    .stat-strip {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      padding: 0.75rem 0; font-size: 0.85rem;
+      color: var(--color-text-soft); border-bottom: 1px solid var(--color-surface-inset);
+      margin-bottom: 1rem;
+    }
+    .stat-strip strong { color: var(--color-text); font-weight: 600; }
+    .stat-strip .alert { color: var(--signal-critical); font-weight: 600; }
+    .stat-strip .warn { color: var(--signal-warning); font-weight: 600; }
+
+    /* ── Dashboard Cards ── */
+    .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+    .dash-card {
+      background: var(--color-surface-raised); border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 1rem 1.25rem;
+    }
+    .dash-card h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--color-primary-deep); margin-bottom: 0.5rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid var(--color-surface-inset);
+    }
+    .dash-card.full { grid-column: 1 / -1; }
+    .dash-card.alert-card { border-left: 3px solid var(--signal-critical); }
+    .dash-card.warn-card { border-left: 3px solid var(--signal-warning); }
+    .dash-card.ok-card { border-left: 3px solid var(--signal-success); }
+    .dash-card.info-card { border-left: 3px solid var(--signal-info); }
+
+    .dash-list { list-style: none; }
+    .dash-list li {
+      padding: 0.3rem 0; border-bottom: 1px solid var(--color-surface-inset);
+      font-size: 0.85rem; display: flex; gap: 0.5rem; align-items: baseline;
+    }
+    .dash-list li:last-child { border-bottom: none; }
+    .dash-date {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 12px; color: var(--color-text-muted);
+      min-width: 48px; flex-shrink: 0;
+    }
+    .dash-owner {
+      font-size: 12px; color: var(--color-text-muted);
+      margin-left: auto; flex-shrink: 0;
+    }
+
+    /* ── Tables ── */
+    table { width: 100%; border-collapse: collapse; }
+    table th {
+      text-align: left; padding: 0.4rem 0.5rem;
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      color: var(--color-text-muted); background: var(--color-surface-inset);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky; top: 0; z-index: 2;
+    }
+    table td {
+      padding: 0.35rem 0.5rem; font-size: 13px;
+      border-bottom: 1px solid var(--color-surface-inset); vertical-align: top;
+    }
+    table tr:hover td { background: hsla(150, 15%, 94%, 0.5); }
+    table tr.conflict td { background: hsla(40, 80%, 96%, 1); }
+    table tr.done td { opacity: 0.45; }
+    table tr.done .m-text { text-decoration: line-through; }
+    table tr.overdue td { background: hsla(0, 60%, 97%, 1); }
+
+    .m-text { max-width: 420px; }
+    .m-date {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 12px; white-space: nowrap;
+    }
+    .m-owner { font-size: 12px; color: var(--color-text-soft); white-space: nowrap; }
+    .m-notes { font-size: 12px; color: var(--color-text-muted); max-width: 220px; }
+    .m-enables { font-size: 12px; color: var(--signal-info); }
+
+    /* ── Status / Source chips ── */
+    .chip {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      padding: 0.1rem 0.4rem; border-radius: 8px;
+      text-transform: uppercase; letter-spacing: 0.02em;
+      white-space: nowrap; vertical-align: middle;
+    }
+    .s-done     { background: #dcecd6; color: #3a6630; }
+    .s-progress { background: #d6e8f0; color: #2a5a6a; }
+    .s-waiting  { background: #f0e8d6; color: #6a5030; }
+    .s-notstart { background: var(--color-surface-inset); color: var(--color-text-muted); }
+    .s-blocked  { background: #f0d6d6; color: #8a3030; }
+    .s-overdue  { background: #f0d6d6; color: var(--signal-critical); }
+    .src-ana    { background: #ece0f0; color: #604080; }
+    .src-garen  { background: #d6ece0; color: var(--color-primary-deep); }
+    .src-both   { background: var(--color-primary-light); color: var(--color-primary-darkest); }
+    .chip-conflict { background: #f0e4c8; color: var(--signal-warning); }
+
+    .domain-tag {
+      font-size: 12px; font-weight: 600;
+      color: var(--color-text-soft); white-space: nowrap;
+    }
+
+    /* ── Phase Divider ── */
+    .phase-row td {
+      background: var(--color-primary-dark) !important;
+      color: var(--color-surface-raised); font-weight: 600; font-size: 0.85rem;
+      padding: 0.5rem 0.6rem; border: none;
+      font-family: 'Fraunces', serif;
+    }
+    .phase-row td .phase-stats {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 12px; font-weight: 400; opacity: 0.7;
+      margin-left: 1rem;
+    }
+    .phase-row.current td { background: var(--color-primary) !important; }
+
+    /* ── Conflict detail ── */
+    .conflict-sub {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 12px; color: var(--signal-warning);
+    }
+
+    /* ── Filter bar ── */
+    .filter-bar {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .filter-bar label { font-size: 12px; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; }
+    .filter-bar select {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px; padding: 0.3rem 0.5rem;
+      border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+      background: var(--color-surface-raised); min-height: 44px;
+    }
+    .filter-bar input[type=text] {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px; padding: 0.3rem 0.5rem;
+      border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+      background: var(--color-surface-raised); min-height: 44px; width: 180px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .dash-grid { grid-template-columns: 1fr; }
+      .m-notes, .m-enables { display: none; }
+    }
+    @media print {
+      .tabs, .filter-bar { display: none; }
+      .tab-pane { display: block !important; page-break-before: always; }
+      .tab-pane:first-of-type { page-break-before: auto; }
+      body { background: var(--color-surface-raised); font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>OEFF 2026 Merged Timeline</h1>
+  <span class="header-phase">Phase 1: Program & Venue Clarity</span>
+  <span class="header-meta">62 days to festival &middot; 2026-02-18 &middot; 218 milestones</span>
+</div>
+
+<div class="stat-strip">
+  <span><strong>23</strong> done</span>
+  <span class="warn"><strong>36</strong> overdue</span>
+  <span><strong>19</strong> due this week</span>
+  <span><strong>3</strong> date conflicts</span>
+  <span>Sources: <strong>135</strong> Ana &middot; <strong>79</strong> Garen &middot; <strong>4</strong> shared</span>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="dashboard">Dashboard</button>
+  <button class="tab" data-tab="timeline">Timeline <span class="tab-count">218</span></button>
+  <button class="tab" data-tab="deliverables">Deliverables</button>
+  <button class="tab" data-tab="myitems">My Items</button>
+  <button class="tab" data-tab="conflicts">Conflicts <span class="tab-count">3</span></button>
+</div>
+
+<!-- DASHBOARD -->
+<div class="tab-pane active" id="pane-dashboard">
+  <div class="dash-grid">
+    <div class="dash-card alert-card">
+      <h2>Overdue</h2>
+      <ul class="dash-list" id="dash-overdue"></ul>
+    </div>
+    <div class="dash-card warn-card">
+      <h2>Due This Week</h2>
+      <ul class="dash-list" id="dash-thisweek"></ul>
+    </div>
+    <div class="dash-card info-card">
+      <h2>Coming Up (Next 2 Weeks)</h2>
+      <ul class="dash-list" id="dash-upcoming"></ul>
+    </div>
+    <div class="dash-card ok-card">
+      <h2>Recently Completed</h2>
+      <ul class="dash-list" id="dash-done"></ul>
+    </div>
+    <div class="dash-card full info-card">
+      <h2>Waiting On / Open Decisions</h2>
+      <ul class="dash-list" id="dash-decisions"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="tab-pane" id="pane-timeline">
+  <div class="filter-bar">
+    <label for="tl-domain">Domain:</label>
+    <select id="tl-domain"><option value="all">All Domains</option></select>
+    <label for="tl-source">Source:</label>
+    <select id="tl-source">
+      <option value="all">All Sources</option>
+      <option value="ana">Ana</option>
+      <option value="garen">Garen</option>
+      <option value="both">Both</option>
+    </select>
+    <label for="tl-status">Status:</label>
+    <select id="tl-status">
+      <option value="all">All Statuses</option>
+      <option value="open">Open (hide done)</option>
+      <option value="Done">Done</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Waiting">Waiting</option>
+      <option value="overdue">Overdue</option>
+    </select>
+    <label for="tl-search">Search:</label>
+    <input type="text" id="tl-search" placeholder="Search milestones..." aria-label="Search milestones">
+  </div>
+  <table id="tl-table">
+    <thead><tr>
+      <th>Date</th><th>Domain</th><th>Milestone</th><th>Owner</th><th>Status</th><th>Source</th><th>Enables</th><th>Notes</th>
+    </tr></thead>
+    <tbody id="tl-body"></tbody>
+  </table>
+</div>
+
+<!-- DELIVERABLES -->
+<div class="tab-pane" id="pane-deliverables">
+  <div class="filter-bar">
+    <label for="dl-risk">Risk:</label>
+    <select id="dl-risk">
+      <option value="all">All</option>
+      <option value="High">High</option>
+      <option value="Med">Med</option>
+    </select>
+    <label for="dl-status">Status:</label>
+    <select id="dl-status">
+      <option value="all">All</option>
+      <option value="open">Open</option>
+      <option value="Done">Done</option>
+      <option value="Waiting">Waiting</option>
+      <option value="In Progress">In Progress</option>
+    </select>
+    <label for="dl-search">Search:</label>
+    <input type="text" id="dl-search" placeholder="Search..." aria-label="Search deliverables">
+  </div>
+  <table id="dl-table">
+    <thead><tr>
+      <th>Date</th><th>Milestone</th><th>Status</th><th>Owner</th><th>Risk</th><th>Waiting On</th><th>Enables</th><th>Source</th><th>Notes</th>
+    </tr></thead>
+    <tbody id="dl-body"></tbody>
+  </table>
+</div>
+
+<!-- MY ITEMS -->
+<div class="tab-pane" id="pane-myitems">
+  <p style="font-size:0.85rem;color:var(--color-text-soft);margin-bottom:0.75rem;">Items assigned to Garen, Tech Coord, or Erin, sorted by date.</p>
+  <table id="mi-table">
+    <thead><tr>
+      <th>Date</th><th>Milestone</th><th>Status</th><th>Domain</th><th>Co-owners</th><th>Enables</th><th>Notes</th>
+    </tr></thead>
+    <tbody id="mi-body"></tbody>
+  </table>
+</div>
+
+<!-- CONFLICTS -->
+<div class="tab-pane" id="pane-conflicts">
+  <p style="font-size:0.85rem;color:var(--color-text-soft);margin-bottom:0.75rem;">Milestones where Ana's date and Garen's date disagree. Resolve and update the canonical source.</p>
+  <table id="cf-table">
+    <thead><tr>
+      <th>Milestone</th><th>Ana's Date</th><th>Garen's Date</th><th>Gap</th><th>Domain</th><th>Owner</th><th>Notes</th>
+    </tr></thead>
+    <tbody id="cf-body"></tbody>
+  </table>
+</div>
+
+<script>
+const DATA = [{"id": "M-001", "milestone": "Film reviewer recruitment/outreach", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-06-01", "actual_date": null, "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-06-01", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-002", "milestone": "Film review process begins", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-06-25", "actual_date": null, "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-06-25", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-003", "milestone": "All analysis/reporting complete from previous fest: Audience survey, Participant survey, host survey, team survey", "phase": "Pre-Season", "domain": "Marketing/PR", "planned_date": "2025-07-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2025-07-30", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-004", "milestone": "Midway film review process check-in/gap-filling", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-08-30", "actual_date": null, "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-08-30", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-005", "milestone": "Begin EBB sponsor campaign", "phase": "Pre-Season", "domain": "Development", "planned_date": "2025-09-01", "actual_date": null, "complete": true, "status": "Done", "owner": "Michael/Ana", "source": "ana", "ana_date": "2025-09-01", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-006", "milestone": "Identify top scorers + gaps/gap-filling", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-09-30", "actual_date": null, "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-09-30", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-007", "milestone": "Fest timeline/milestones populated", "phase": "Pre-Season", "domain": "Organization", "planned_date": "2025-10-01", "actual_date": null, "complete": true, "status": "Done", "owner": "Ana", "source": "ana", "ana_date": "2025-10-01", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-008", "milestone": "Pre-season squad basetouch", "phase": "Pre-Season", "domain": "Organization", "planned_date": "2025-10-15", "actual_date": null, "complete": true, "status": "Done", "owner": "All team", "source": "ana", "ana_date": "2025-10-15", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-009", "milestone": "Film review process final stage check-in/gap filling w small group of super-reviewers (8-10 people plus Josh/Ana)", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-10-31", "actual_date": null, "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-10-31", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-010", "milestone": "Preview Party location confirmed", "phase": "Pre-Season", "domain": "Development", "planned_date": "2025-11-15", "actual_date": null, "complete": true, "status": "Done", "owner": "Michael/Ana", "source": "ana", "ana_date": "2025-11-15", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-011", "milestone": "All final film scores, holes identified, internal team/staff viewings/reviews", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-11-20", "actual_date": null, "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-11-20", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-012", "milestone": "Launch party location confirmed", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-12-02", "actual_date": null, "complete": true, "status": "Done", "owner": "Michael/Ana", "source": "ana", "ana_date": "2025-12-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-013", "milestone": "Preliminary film lineup list", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-12-02", "actual_date": "2026-01-13", "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-12-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-014", "milestone": "Congrats/Final Films invitation", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2025-12-08", "actual_date": "2026-01-26", "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2025-12-08", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-015", "milestone": "All team docs ready to go - quicklinks, org chart, tech ops w timeline, etc", "phase": "Pre-Season", "domain": "Organization", "planned_date": "2025-12-20", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Garen", "source": "ana", "ana_date": "2025-12-20", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-016", "milestone": "EBB sponsor deadline", "phase": "Pre-Season", "domain": "Development", "planned_date": "2025-12-31", "actual_date": null, "complete": true, "status": "Done", "owner": "Michael/Ana", "source": "ana", "ana_date": "2025-12-31", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Website logos are rolling, as soon as EBB sponsor is confirmed", "waiting_on": ""}, {"id": "M-017", "milestone": "Plan + implement Preview Party\nPLANNING TIMELINE: Add link here", "phase": "Pre-Season", "domain": "Development", "planned_date": "2026-01-08", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Natasha", "source": "ana", "ana_date": "2026-01-08", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-018", "milestone": "Actively check for new sponsors, donors, members who should receive a Preview Event invite; send it out as needed", "phase": "Pre-Season", "domain": "Development", "planned_date": "2026-01-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Riley/Christy", "source": "ana", "ana_date": "2026-01-10", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Cesar is using the Preview Event to stimulate (new/returning) sponsors, donors, members; we will want to check frequently to ensure any of these folks who join receive the Preview invite with enough lead time. Thanks!", "waiting_on": ""}, {"id": "M-019", "milestone": "Final film lineup list", "phase": "Pre-Season", "domain": "Films/Programs", "planned_date": "2026-01-12", "actual_date": "2026-01-13", "complete": true, "status": "Done", "owner": "Ana/Josh", "source": "ana", "ana_date": "2026-01-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-020", "milestone": "All squad contractors back on board: day 1", "phase": "Pre-Season", "domain": "Organization", "planned_date": "2026-01-12", "actual_date": null, "complete": true, "status": "Done", "owner": "All", "source": "ana", "ana_date": "2026-01-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Season kickoff meeting", "waiting_on": ""}, {"id": "M-021", "milestone": "EBB sponsor logos for all assets, benefit deliveries", "phase": "Pre-Season", "domain": "Development", "planned_date": "2026-01-12", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Michael", "source": "ana", "ana_date": "2026-01-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-022", "milestone": "Preview party assets/templates determined", "phase": "Phase 0: Foundation", "domain": "Cross-Team", "planned_date": "2026-01-15", "actual_date": null, "complete": true, "status": "Done", "owner": "Cesar/Garen/Ana/Michael", "source": "ana", "ana_date": "2026-01-15", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-023", "milestone": "Team input for Film Survey", "phase": "Phase 0: Foundation", "domain": "Organization", "planned_date": "2026-01-15", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen/Cesar/Ana/Josh", "source": "ana", "ana_date": "2026-01-15", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-024", "milestone": "Film Survey final & sent to accepted fims/filmmakers", "phase": "Phase 0: Foundation", "domain": "AV/Tech", "planned_date": "2026-01-21", "actual_date": null, "complete": true, "status": "Done", "owner": "Josh", "source": "both", "ana_date": "2026-01-21", "garen_date": "2026-01-22", "conflict": true, "enables": "File collection", "risk": "Med", "notes": "", "waiting_on": ""}, {"id": "M-025", "milestone": "Push out promo video on next eNews, socials, etc?", "phase": "Phase 0: Foundation", "domain": "Marketing/PR", "planned_date": "2026-01-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-01-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-026", "milestone": "Host FAQ content drafted", "phase": "Phase 0: Foundation", "domain": "Hosts", "planned_date": "2026-01-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-01-24", "conflict": false, "enables": "Self-service support", "risk": "Med", "notes": "", "waiting_on": "Unlocks FAQ"}, {"id": "M-027", "milestone": "Team leads populate timeline with their project-specific dates", "phase": "Phase 0: Foundation", "domain": "Infrastructure", "planned_date": "2026-01-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "All team leads", "source": "ana", "ana_date": "2026-01-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Need to dovetail/square with overall OEFF project timeline created in Fall by Ana", "waiting_on": ""}, {"id": "M-028", "milestone": "Domain emails set up (tech@, films@, venues@)", "phase": "Phase 0: Foundation", "domain": "Infrastructure", "planned_date": "2026-01-27", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-01-27", "conflict": false, "enables": "All email workflows", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-029", "milestone": "Film_ID column added to AV Backend", "phase": "Phase 0: Foundation", "domain": "Infrastructure", "planned_date": "2026-01-27", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-01-27", "conflict": false, "enables": "All film automation", "risk": "High", "notes": "", "waiting_on": "Blocks automation"}, {"id": "M-030", "milestone": "Venue_ID column added to tracking", "phase": "Phase 0: Foundation", "domain": "Infrastructure", "planned_date": "2026-01-27", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-01-27", "conflict": false, "enables": "All venue automation", "risk": "High", "notes": "", "waiting_on": "Blocks lookups"}, {"id": "M-031", "milestone": "Domain emails setup", "phase": "Phase 0: Foundation", "domain": "Infrastructure", "planned_date": "2026-01-27", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord + Programming", "source": "garen", "ana_date": null, "garen_date": "2026-01-27", "conflict": false, "enables": "", "risk": "High", "notes": "tech@, films@, venues@", "waiting_on": "Blocks email workflows"}, {"id": "M-032", "milestone": "File naming convention documented", "phase": "Phase 0: Foundation", "domain": "Infrastructure", "planned_date": "2026-01-28", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-01-28", "conflict": false, "enables": "Team consistency", "risk": "Med", "notes": "", "waiting_on": "Unlocks clean handoffs"}, {"id": "M-033", "milestone": "Host FAQ reviewed by ED", "phase": "Phase 0: Foundation", "domain": "Hosts", "planned_date": "2026-01-28", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-01-28", "conflict": false, "enables": "Publish approval", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-034", "milestone": "Auto-reply configured with FAQ link", "phase": "Phase 0: Foundation", "domain": "Infrastructure", "planned_date": "2026-01-29", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-01-29", "conflict": false, "enables": "Host acknowledgment", "risk": "High", "notes": "", "waiting_on": "Unlocks instant ack"}, {"id": "M-035", "milestone": "Film survey finalized", "phase": "Phase 0: Foundation", "domain": "Films/Programs", "planned_date": "2026-01-30", "actual_date": null, "complete": false, "status": "In Progress", "owner": "Programming", "source": "garen", "ana_date": null, "garen_date": "2026-01-30", "conflict": false, "enables": "File intake", "risk": "Med", "notes": "", "waiting_on": ""}, {"id": "M-036", "milestone": "Host Portal format decided", "phase": "Phase 0: Foundation", "domain": "Hosts", "planned_date": "2026-01-31", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-01-31", "conflict": false, "enables": "Portal build", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-037", "milestone": "Host Portal", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-01", "actual_date": null, "complete": false, "status": "Waiting", "owner": "Tech Coord + Exec Director + Programming", "source": "garen", "ana_date": null, "garen_date": "2026-02-01", "conflict": false, "enables": "", "risk": "High", "notes": "Doc Started here: (best way to collab -- Tech Coord can quickly can turn into site once we feel it's ready)", "waiting_on": "Blocks portal build"}, {"id": "M-038", "milestone": "Media/Publicity/Ad Blitz (interviews, ads, podcasts, etc)", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-03", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cassandra/Helen/Cesar", "source": "ana", "ana_date": "2026-02-03", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "https://www.oneearthfilmfest.org/earth-words-blog/2023/2/6/falconer-interview", "waiting_on": ""}, {"id": "M-039", "milestone": "First draft screenings schedule", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-04", "actual_date": "2026-02-04", "complete": true, "status": "Done", "owner": "Ana", "source": "ana", "ana_date": "2026-02-04", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-040", "milestone": "Preview Party assets complete/tested", "phase": "Phase 1: Program & Venue Clarity", "domain": "Infrastructure", "planned_date": "2026-02-05", "actual_date": "2026-02-12", "complete": true, "status": "Done", "owner": "Cesar/Garen/Ana/Michael", "source": "ana", "ana_date": "2026-02-05", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-041", "milestone": "Film survey responses collected", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Programming", "source": "garen", "ana_date": null, "garen_date": "2026-02-07", "conflict": false, "enables": "Know what formats we're getting", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-042", "milestone": "Host FAQ published on portal", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-07", "conflict": false, "enables": "Deflect email volume", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-043", "milestone": "QC checklist finalized", "phase": "Phase 1: Program & Venue Clarity", "domain": "Infrastructure", "planned_date": "2026-02-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-07", "conflict": false, "enables": "Anyone can do QC", "risk": "High", "notes": "", "waiting_on": "Unlocks QC delegation"}, {"id": "M-044", "milestone": "Packet contents spec finalized", "phase": "Phase 1: Program & Venue Clarity", "domain": "Infrastructure", "planned_date": "2026-02-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-07", "conflict": false, "enables": "Consistent delivery", "risk": "Med", "notes": "", "waiting_on": "Unlocks assembly"}, {"id": "M-045", "milestone": "Chicago Dept of Environment Letter of Support", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-09", "actual_date": "2026-02-17", "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-02-09", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Awaiting reply from DOE 2/17/26", "waiting_on": ""}, {"id": "M-046", "milestone": "Completed schedule of Host Webinars", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-09", "actual_date": "2026-02-13", "complete": true, "status": "Done", "owner": "Ana", "source": "both", "ana_date": "2026-02-09", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Host webinars take place 3rd week in Feb through mid April + office hours", "waiting_on": ""}, {"id": "M-047", "milestone": "Host Guide launch/distribution", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-12", "actual_date": "2026-02-13", "complete": true, "status": "Done", "owner": "Ana/Garen", "source": "ana", "ana_date": "2026-02-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-048", "milestone": "Film inventory complete (formats, runtimes)", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-14", "conflict": false, "enables": "QC planning", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-049", "milestone": "Host Portal shell live", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-14", "actual_date": null, "complete": false, "status": "In Progress", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-14", "conflict": false, "enables": "Host self-service", "risk": "High", "notes": "", "waiting_on": "Unlocks resources"}, {"id": "M-050", "milestone": "Host Webinar #1 scheduled", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Programming", "source": "garen", "ana_date": null, "garen_date": "2026-02-14", "conflict": false, "enables": "Host onboarding", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-051", "milestone": "Venue tier classifications confirmed", "phase": "Phase 1: Program & Venue Clarity", "domain": "Venues", "planned_date": "2026-02-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-14", "conflict": false, "enables": "Equipment + staffing plan", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-052", "milestone": "Support person identified", "phase": "Phase 1: Program & Venue Clarity", "domain": "Support", "planned_date": "2026-02-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-02-14", "conflict": false, "enables": "Email coverage", "risk": "High", "notes": "", "waiting_on": "Unlocks delegation"}, {"id": "M-053", "milestone": "Monthly eNews in Feb + Mar; 2-3 eNews/alerts in Apr in fest run-up.\nENEWS TIMELINE + CONTENT IDEAS: Add link here", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-15", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar, Lisa", "source": "ana", "ana_date": "2026-02-15", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-054", "milestone": "Ticketing Process/Platform", "phase": "Phase 1: Program & Venue Clarity", "domain": "Infrastructure", "planned_date": "2026-02-15", "actual_date": null, "complete": false, "status": "Waiting", "owner": "Tech Coord + Exec Director + Programming", "source": "garen", "ana_date": null, "garen_date": "2026-02-15", "conflict": false, "enables": "", "risk": "Low", "notes": "Still Eventbrite? Been hearing a lot about LUMA recently", "waiting_on": "Blocks host instructions"}, {"id": "M-055", "milestone": "Slide deck process", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-15", "actual_date": null, "complete": false, "status": "Waiting", "owner": "Tech Coord + Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-02-15", "conflict": false, "enables": "", "risk": "Med", "notes": "Tech Coord can start creating templates for population by anyone down the line. Wants Marketing alignment.", "waiting_on": "Unlocks sign-off"}, {"id": "M-056", "milestone": "Intern scope", "phase": "Phase 1: Program & Venue Clarity", "domain": "Organization", "planned_date": "2026-02-15", "actual_date": null, "complete": false, "status": "Waiting", "owner": "Tech Coord + Exec Director + Programming", "source": "garen", "ana_date": null, "garen_date": "2026-02-15", "conflict": false, "enables": "", "risk": "Low", "notes": "Can be rolling, Tech Coord has some ideas", "waiting_on": "Unlocks task assignment"}, {"id": "M-057", "milestone": "Film survey response data sorted", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-15", "actual_date": null, "complete": false, "status": "In Progress", "owner": "Tech Coord + Interns", "source": "garen", "ana_date": null, "garen_date": "2026-02-15", "conflict": false, "enables": "", "risk": "Med", "notes": "Get data into base, Chase non-responders", "waiting_on": "Blocks QC"}, {"id": "M-058", "milestone": "Theme decision/internal announcement", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-17", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-02-17", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "With team input from early Feb + funder input from 2/12/26 Preview Party poll", "waiting_on": ""}, {"id": "M-059", "milestone": "Update sustainabillity organizations list", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-18", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-02-18", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "For use by Marketing (Cesar) + PR (Jason)", "waiting_on": ""}, {"id": "M-060", "milestone": "EBB featurette", "phase": "Phase 1: Program & Venue Clarity", "domain": "Infrastructure", "planned_date": "2026-02-18", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2026-02-18", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-061", "milestone": "EBB social posts", "phase": "Phase 1: Program & Venue Clarity", "domain": "Infrastructure", "planned_date": "2026-02-18", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2026-02-18", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-062", "milestone": "Finalize YFC shorts paired with feature film programs", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-19", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-02-19", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Ana to confirm with Sue/YFC team", "waiting_on": ""}, {"id": "M-063", "milestone": "Film Survey review + finalize/adjust if/as needed", "phase": "Phase 1: Program & Venue Clarity", "domain": "Cross-Team", "planned_date": "2026-02-19", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Josh/Garen/Cesar", "source": "ana", "ana_date": "2026-02-19", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-064", "milestone": "Film tweaks/first final schedule to Josh/team for website + Ebrite page construction", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-19", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-02-19", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-065", "milestone": "Site visit schedule drafted", "phase": "Phase 1: Program & Venue Clarity", "domain": "Venues", "planned_date": "2026-02-21", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-21", "conflict": false, "enables": "March site visits", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-066", "milestone": "Support onboarding doc shared", "phase": "Phase 1: Program & Venue Clarity", "domain": "Support", "planned_date": "2026-02-21", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-02-21", "conflict": false, "enables": "Enable support person", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-067", "milestone": "Film declines -- ALL films not selected for fest", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-23", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Josh", "source": "ana", "ana_date": "2026-02-23", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Intern project; HOLD OFF on anything that is in top scoring range or in Lineup Doc. Earmark top scorers/lineup doc unmatches for final resolution!", "waiting_on": ""}, {"id": "M-068", "milestone": "Host webinar 1 @noon: Background, OEFF team support, host helpers,", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-23", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2026-02-23", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-069", "milestone": "Outreach to faciliators (includes schedule of 2 facilitator prep calls)", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-23", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-02-23", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-070", "milestone": "All film surveys completed - includes all assets delivered to AV/Tech + Marketing teams", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-23", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Josh", "source": "ana", "ana_date": "2026-02-23", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Gather all film survey data for Cesar, Garen + team", "waiting_on": ""}, {"id": "M-071", "milestone": "Event/program visioning calls with hosts: group calls by film title", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-23", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-02-23", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-072", "milestone": "Filmmaker social media list", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-02-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-073", "milestone": "Event marketing research + calendar ready", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-02-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Staffing event marketing gigs with interns, marketing team + Sandy Dixon from YFC would like to collaborate and promo YFC at the same time", "waiting_on": ""}, {"id": "M-074", "milestone": "Membership materials & benefits delivery plan drafted", "phase": "Phase 1: Program & Venue Clarity", "domain": "Development", "planned_date": "2026-02-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Michael/Ana", "source": "ana", "ana_date": "2026-02-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-075", "milestone": "Logos from HOSTs approved in a folder for all movie posters, flyers", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Josh/Cesar", "source": "ana", "ana_date": "2026-02-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-076", "milestone": "Outreach to Filmmakers re final media formats + delivery", "phase": "Phase 1: Program & Venue Clarity", "domain": "AV/Tech", "planned_date": "2026-02-25", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen", "source": "ana", "ana_date": "2026-02-25", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Pending Survey Responses", "waiting_on": ""}, {"id": "M-077", "milestone": "Review analytics from last three seasons and finalize social media, website, and advertising strategy .", "phase": "Phase 1: Program & Venue Clarity", "domain": "Marketing/PR", "planned_date": "2026-02-25", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-02-25", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Incorporate PR feedback from Jason", "waiting_on": ""}, {"id": "M-078", "milestone": "Website event / schedule + Eventbrite Pages Ready For Final Approval", "phase": "Phase 1: Program & Venue Clarity", "domain": "Hosts", "planned_date": "2026-02-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Josh", "source": "ana", "ana_date": "2026-02-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "CREATE AS HIDDEN/PASSWORD PROTECTED, THEN UNVEIL WITH EARLY ACCESS CODE TO TOP FUNDERS ON 3/3 EARLY ACCESS TICKET LAUNCH", "waiting_on": ""}, {"id": "M-079", "milestone": "Top sponsor deadline for Promo Video benefit\n*Includes deadline for logos + other needed assets", "phase": "Phase 1: Program & Venue Clarity", "domain": "Development", "planned_date": "2026-02-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Michael", "source": "ana", "ana_date": "2026-02-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-080", "milestone": "Sue Crothers YFC Founding Director 30-60 sec pre-recorded remarks for Launch Party program", "phase": "Phase 1: Program & Venue Clarity", "domain": "AV/Tech", "planned_date": "2026-02-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen/Erin", "source": "ana", "ana_date": "2026-02-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-081", "milestone": "Sue Crothers YFC Founding Director 30-60 sec pre-recorded remarks for Launch Party program", "phase": "Phase 1: Program & Venue Clarity", "domain": "Films/Programs", "planned_date": "2026-02-27", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2026-02-27", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-082", "milestone": "Film files arriving", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "QC queue", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-083", "milestone": "Support person active on email", "phase": "Phase 2: Media Rights & Intake", "domain": "Support", "planned_date": "2026-03-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Support", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "Email coverage", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-084", "milestone": "Venue tier mix", "phase": "Phase 2: Media Rights & Intake", "domain": "Venues", "planned_date": "2026-03-01", "actual_date": null, "complete": false, "status": "Waiting", "owner": "Venues Lead", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "", "risk": "High", "notes": "T1/T2/T3 count -- Most venues are T1 so far.", "waiting_on": "Blocks production scoping/budget clarity"}, {"id": "M-085", "milestone": "Trailer reel ownership", "phase": "Phase 2: Media Rights & Intake", "domain": "Infrastructure", "planned_date": "2026-03-01", "actual_date": null, "complete": true, "status": "Done", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "", "risk": "Med", "notes": "Erin to take on", "waiting_on": "Blocks Erin scope"}, {"id": "M-086", "milestone": "File intake monitoring", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": "Blocks QC"}, {"id": "M-087", "milestone": "Brand templates", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-01", "actual_date": null, "complete": false, "status": "Waiting", "owner": "Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": "Blocks slides"}, {"id": "M-088", "milestone": "Site visits scheduled", "phase": "Phase 2: Media Rights & Intake", "domain": "Venues", "planned_date": "2026-03-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": ""}, {"id": "M-089", "milestone": "Staffing plan locked", "phase": "Phase 2: Media Rights & Intake", "domain": "Support", "planned_date": "2026-03-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-01", "conflict": false, "enables": "", "risk": "High", "notes": "", "waiting_on": "Blocks coverage"}, {"id": "M-090", "milestone": "Host Webinar 2 @noon: Programming (+ separate per-film calls late Feb-early Mar)", "phase": "Phase 2: Media Rights & Intake", "domain": "Hosts", "planned_date": "2026-03-02", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/All", "source": "ana", "ana_date": "2026-03-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-091", "milestone": "Facilitator follow up/matching", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-02", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-092", "milestone": "Event/program visioning calls with hosts: group calls by film title", "phase": "Phase 2: Media Rights & Intake", "domain": "Hosts", "planned_date": "2026-03-02", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-093", "milestone": "Early access ticket launch", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-03", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Cesar/Josh", "source": "ana", "ana_date": "2026-03-03", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Create code and comms for early access supporters ($125+ donors/members, $250+ sponsors/benefactors) to view schedule, tickets, and make bookings", "waiting_on": ""}, {"id": "M-094", "milestone": "Initial promo video launch/wide distribution (includes required top sponsor + benefactor logos)", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-03", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-03", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-095", "milestone": "Earth Day Action Fair partner promo/invites", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-03", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-03", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "See Helen's Promo Partner Folder, Promo Outreach Timeline + Sustainability Orgs list", "waiting_on": ""}, {"id": "M-096", "milestone": "Outreach to All Venues, Schedule Walkthroughs", "phase": "Phase 2: Media Rights & Intake", "domain": "AV/Tech", "planned_date": "2026-03-03", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen", "source": "ana", "ana_date": "2026-03-03", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-097", "milestone": "Fest flyers and postcards ready", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-04", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-04", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-098", "milestone": "Facilitator prep call 1 (choice - only need to attend one)", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-04", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-04", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-099", "milestone": "Post-Fest TY participant/action partner/venue host TYs + surveys sent (rolling, post-events)", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-04", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Huan/Ana", "source": "ana", "ana_date": "2026-03-04", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "All sent no later than 3/20/23", "waiting_on": ""}, {"id": "M-100", "milestone": "QC in progress", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-07", "conflict": false, "enables": "Verified files", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-101", "milestone": "Host Webinar #2", "phase": "Phase 2: Media Rights & Intake", "domain": "Hosts", "planned_date": "2026-03-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Programming", "source": "garen", "ana_date": null, "garen_date": "2026-03-07", "conflict": false, "enables": "Film selection support", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-102", "milestone": "FINAL deadline for host sites to be added to schedule, website, eventbrite, marketing toolkits, etc", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-09", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-09", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-103", "milestone": "Membership materials finalized + printed\nMembership benefits delivery plan finalized", "phase": "Phase 2: Media Rights & Intake", "domain": "Development", "planned_date": "2026-03-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Michael/Ana", "source": "ana", "ana_date": "2026-03-10", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-104", "milestone": "Begin OEFF Recruitment for 3/26 deadline", "phase": "Phase 2: Media Rights & Intake", "domain": "Logistics", "planned_date": "2026-03-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-10", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-105", "milestone": "Advertising/promo plan", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-11", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-11", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-106", "milestone": "All event marketing assets ready for team, hosts + promo partners: digital movie posters, digital movie flyers", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-11", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-11", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-107", "milestone": "*If needed, updated promo video cut in preparation for public ticket launch", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-11", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-11", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-108", "milestone": "Facilitator prep call 2 (choice - only need to attend one)", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-11", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-11", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-109", "milestone": "Sponsor deadline, includes delivery of logos + other needed assets for benefit deliveries", "phase": "Phase 2: Media Rights & Intake", "domain": "Development", "planned_date": "2026-03-12", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Michael", "source": "ana", "ana_date": "2026-03-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-110", "milestone": "Pre-recorded video - Ana's remarks (1 min)", "phase": "Phase 2: Media Rights & Intake", "domain": "AV/Tech", "planned_date": "2026-03-12", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen/Erin/Ana", "source": "ana", "ana_date": "2026-03-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-111", "milestone": "Marketing Toolkit ready for 3/16 host webinar on marketing/promo + for 3/17 public ticket launch and", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-12", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Film-specific flyers sent to volunteers, Sustainabilty Orgs, hosts, promo partners, press for (their) specific events", "waiting_on": ""}, {"id": "M-112", "milestone": "First press release distributed", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-12", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Theme, early access + public schedule announcement, top sponsors", "waiting_on": ""}, {"id": "M-113", "milestone": "Sustainability Orgs list outreach w press release + ways to plug in", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-12", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar/Ana", "source": "ana", "ana_date": "2026-03-12", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-114", "milestone": "Caption inventory complete", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-14", "conflict": false, "enables": "Know what to order", "risk": "Med", "notes": "", "waiting_on": "Blocks orders"}, {"id": "M-115", "milestone": "Caption orders placed", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-14", "conflict": false, "enables": "Captions arrive in time", "risk": "Med", "notes": "", "waiting_on": "Blocks verify"}, {"id": "M-116", "milestone": "Site visits completed", "phase": "Phase 2: Media Rights & Intake", "domain": "Venues", "planned_date": "2026-03-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-14", "conflict": false, "enables": "Know each venue's needs", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-117", "milestone": "Sponsor logos collected", "phase": "Phase 2: Media Rights & Intake", "domain": "Infrastructure", "planned_date": "2026-03-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-03-14", "conflict": false, "enables": "Slide deck assembly", "risk": "Med", "notes": "", "waiting_on": "Blocks slides"}, {"id": "M-118", "milestone": "Launch Party scope", "phase": "Phase 2: Media Rights & Intake", "domain": "Festival", "planned_date": "2026-03-15", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Launch Party Lead + Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-15", "conflict": false, "enables": "", "risk": "Low", "notes": "Tech Coord meeting w Michael this week", "waiting_on": "Blocks day-1 plan"}, {"id": "M-119", "milestone": "Host Webinar 3 @noon: Marketing/Promotion (noon)", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-16", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "both", "ana_date": "2026-03-16", "garen_date": "2026-03-21", "conflict": true, "enables": "Logistics prep", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-120", "milestone": "SUG goes live publicly - big promo/recruitment push to fill all slots by 4/6 recruitment deadline", "phase": "Phase 2: Media Rights & Intake", "domain": "Logistics", "planned_date": "2026-03-16", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2026-03-16", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-121", "milestone": "Events created for Facebook, LinkedIn, Patch.com", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-17", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-03-17", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "See: https://www.facebook.com/events/calendar", "waiting_on": ""}, {"id": "M-122", "milestone": "Public ticket launch", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-17", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Cesar/Josh", "source": "ana", "ana_date": "2026-03-17", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "St Patrick's day messaging?", "waiting_on": ""}, {"id": "M-123", "milestone": "Sustainability Orgs list outreach w request to promote + ways to plug in", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-19", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar/Ana", "source": "ana", "ana_date": "2026-03-19", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-124", "milestone": "Accessibility Plan: Film/Program Content", "phase": "Phase 2: Media Rights & Intake", "domain": "AV/Tech", "planned_date": "2026-03-19", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Garen/Erin", "source": "ana", "ana_date": "2026-03-19", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "State of all film subs/captions (OPEN not closed captions)\nDecide which events (1-2) will have LiveCaptioning + how we will handle (whether contractors for in-person, or something automated for one or both virtual events)", "waiting_on": ""}, {"id": "M-125", "milestone": "Site visits complete", "phase": "Phase 2: Media Rights & Intake", "domain": "Venues", "planned_date": "2026-03-20", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-03-20", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": "Blocks tests"}, {"id": "M-126", "milestone": "Equipment needs list finalized", "phase": "Phase 2: Media Rights & Intake", "domain": "Venues", "planned_date": "2026-03-21", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-21", "conflict": false, "enables": "Rental/purchase orders", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-127", "milestone": "Slide deck template finalized", "phase": "Phase 2: Media Rights & Intake", "domain": "Infrastructure", "planned_date": "2026-03-21", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-21", "conflict": false, "enables": "Per-venue customization", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-128", "milestone": "Host Webinar 4 @noon: Volunteer Recruitment & Training Plan", "phase": "Phase 2: Media Rights & Intake", "domain": "Logistics", "planned_date": "2026-03-23", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Garen", "source": "ana", "ana_date": "2026-03-23", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-129", "milestone": "Confirm accessibility supports/contractors", "phase": "Phase 2: Media Rights & Intake", "domain": "AV/Tech", "planned_date": "2026-03-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2026-03-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-130", "milestone": "Venue Kits ready except t-shirts + last printing (program guides, etc). Includes \"Kit\"/signage for t-shirt sales at launch, action fair, all events", "phase": "Phase 2: Media Rights & Intake", "domain": "Logistics", "planned_date": "2026-03-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Josh/Interns", "source": "ana", "ana_date": "2026-03-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Need to schedule 2 sessions with interns to get to this milestone, in early to mid March\n*JOSH PLS WORK W INTERNS TO IDENTIFY AND CONFIRM DATES*", "waiting_on": ""}, {"id": "M-131", "milestone": "Accessibility Plan: Seating, Hospitality", "phase": "Phase 2: Media Rights & Intake", "domain": "Hosts", "planned_date": "2026-03-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Angelica", "source": "ana", "ana_date": "2026-03-24", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-132", "milestone": "Membership materials mailed", "phase": "Phase 2: Media Rights & Intake", "domain": "Development", "planned_date": "2026-03-25", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Michael", "source": "ana", "ana_date": "2026-03-25", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-133", "milestone": "All pre-roll content finalized and ready\nAll film content (w open captions) finalized and ready (includes fest week trailer reel)", "phase": "Phase 2: Media Rights & Intake", "domain": "AV/Tech", "planned_date": "2026-03-25", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen/Erin/Ana/Michael", "source": "ana", "ana_date": "2026-03-25", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Specific to each screening", "waiting_on": ""}, {"id": "M-134", "milestone": "Captions received & verified", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-25", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-03-25", "conflict": false, "enables": "Ready for packets", "risk": "Med", "notes": "", "waiting_on": "Blocks packets"}, {"id": "M-135", "milestone": "QC all films", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-25", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-03-25", "conflict": false, "enables": "", "risk": "High", "notes": "22-26 hrs", "waiting_on": "Blocks packets"}, {"id": "M-136", "milestone": "Program description deadline - incl accessibility info for venue, content", "phase": "Phase 2: Media Rights & Intake", "domain": "Hosts", "planned_date": "2026-03-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Josh/Hosts", "source": "ana", "ana_date": "2026-03-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-137", "milestone": "All OEFF Reps assigned w t-shirt need/size", "phase": "Phase 2: Media Rights & Intake", "domain": "Logistics", "planned_date": "2026-03-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Connect with hosts + prepare for venue kit pickup and delivery", "waiting_on": ""}, {"id": "M-138", "milestone": "Launch Party program plan/ROS finalized", "phase": "Phase 2: Media Rights & Intake", "domain": "Cross-Team", "planned_date": "2026-03-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Garen/Erin/Cesar/Michael", "source": "ana", "ana_date": "2026-03-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Filmmakers toast? Silent auction? YFC film. DOE/Angela. Post-film light Q&A inspired by Dr Jane", "waiting_on": ""}, {"id": "M-139", "milestone": "Invite alders + commissioners", "phase": "Phase 2: Media Rights & Intake", "domain": "Marketing/PR", "planned_date": "2026-03-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "PR", "source": "ana", "ana_date": "2026-03-26", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-140", "milestone": "Packet assembly", "phase": "Phase 2: Media Rights & Intake", "domain": "Festival", "planned_date": "2026-03-28", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-03-28", "conflict": false, "enables": "", "risk": "High", "notes": "", "waiting_on": "Blocks delivery"}, {"id": "M-141", "milestone": "Screening packets delivered", "phase": "Phase 2: Media Rights & Intake", "domain": "AV/Tech", "planned_date": "2026-03-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "AVTech", "source": "both", "ana_date": "2026-03-30", "garen_date": "2026-04-07", "conflict": true, "enables": "Hosts have materials", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-142", "milestone": "Host Webinar 5 @noon: Tech verification, testing, and day-of support plan", "phase": "Phase 2: Media Rights & Intake", "domain": "AV/Tech", "planned_date": "2026-03-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen/Erin", "source": "ana", "ana_date": "2026-03-30", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-143", "milestone": "Payment deadline for venue host fees", "phase": "Phase 2: Media Rights & Intake", "domain": "Hosts", "planned_date": "2026-03-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-03-30", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-144", "milestone": "All program descriptions added to website, Ebrite, FB events, etc", "phase": "Phase 2: Media Rights & Intake", "domain": "Films/Programs", "planned_date": "2026-03-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Josh", "source": "ana", "ana_date": "2026-03-30", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-145", "milestone": "Launch Party Content Edited & Finalized", "phase": "Phase 3: Pre-Fest Prep", "domain": "AV/Tech", "planned_date": "2026-04-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Garen/Erin/Michael", "source": "ana", "ana_date": "2026-04-01", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-146", "milestone": "Event Decks ready for each screening event", "phase": "Phase 3: Pre-Fest Prep", "domain": "AV/Tech", "planned_date": "2026-04-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Garen/Cesar", "source": "ana", "ana_date": "2026-04-01", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Slide in Event Deck for each film, reflecting all the hosts coralling together for that slot, in a map view", "waiting_on": ""}, {"id": "M-147", "milestone": "Segment pitch to news outlets", "phase": "Phase 3: Pre-Fest Prep", "domain": "Marketing/PR", "planned_date": "2026-04-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD/Jason?", "source": "ana", "ana_date": "2026-04-01", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-148", "milestone": "QC complete — all films verified", "phase": "Phase 3: Pre-Fest Prep", "domain": "Films/Programs", "planned_date": "2026-04-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-04-01", "conflict": false, "enables": "Ready for packets", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-149", "milestone": "All captions verified", "phase": "Phase 3: Pre-Fest Prep", "domain": "Films/Programs", "planned_date": "2026-04-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-04-01", "conflict": false, "enables": "Accessible screenings", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-150", "milestone": "Packet delivery", "phase": "Phase 3: Pre-Fest Prep", "domain": "Festival", "planned_date": "2026-04-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-04-01", "conflict": false, "enables": "", "risk": "High", "notes": "", "waiting_on": "Blocks host prep"}, {"id": "M-151", "milestone": "Show flows", "phase": "Phase 3: Pre-Fest Prep", "domain": "Festival", "planned_date": "2026-04-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-04-01", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": "Unlocks day-of"}, {"id": "M-152", "milestone": "Second press release", "phase": "Phase 3: Pre-Fest Prep", "domain": "Marketing/PR", "planned_date": "2026-04-02", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-04-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "TBD content - 3 weeks out from fest launch", "waiting_on": ""}, {"id": "M-153", "milestone": "Sustainability Orgs list outreach w request to promote, 2nd press release, and ways to plug in", "phase": "Phase 3: Pre-Fest Prep", "domain": "Marketing/PR", "planned_date": "2026-04-02", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar/Ana", "source": "ana", "ana_date": "2026-04-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Film-specific flyers sent to volunteers for their specific events", "waiting_on": ""}, {"id": "M-154", "milestone": "Deadline for Action Fair tablers to submit tabling requests", "phase": "Phase 3: Pre-Fest Prep", "domain": "Cross-Team", "planned_date": "2026-04-02", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar/Ana/Michael", "source": "ana", "ana_date": "2026-04-02", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "PRovide list to Alex/CFO team w layout request, floor plan", "waiting_on": ""}, {"id": "M-155", "milestone": "Volunteer training", "phase": "Phase 3: Pre-Fest Prep", "domain": "Support", "planned_date": "2026-04-02", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-04-02", "conflict": false, "enables": "", "risk": "Low", "notes": "Two sessions", "waiting_on": ""}, {"id": "M-156", "milestone": "Packets assembled (all venues)", "phase": "Phase 3: Pre-Fest Prep", "domain": "Festival", "planned_date": "2026-04-05", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-04-05", "conflict": false, "enables": "Delivery ready", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-157", "milestone": "Executive Director remarks", "phase": "Phase 3: Pre-Fest Prep", "domain": "Infrastructure", "planned_date": "2026-04-05", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Erin", "source": "garen", "ana_date": null, "garen_date": "2026-04-05", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": "Blocks video"}, {"id": "M-158", "milestone": "Tech tests", "phase": "Phase 3: Pre-Fest Prep", "domain": "Infrastructure", "planned_date": "2026-04-05", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-04-05", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": ""}, {"id": "M-159", "milestone": "#1 OPTIONAL Host Office Hours Call/Webinar @noon", "phase": "Phase 3: Pre-Fest Prep", "domain": "Hosts", "planned_date": "2026-04-06", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/All", "source": "ana", "ana_date": "2026-04-06", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-160", "milestone": "Volunteer recruitment deadline (hosts/public)", "phase": "Phase 3: Pre-Fest Prep", "domain": "Logistics", "planned_date": "2026-04-06", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/All", "source": "ana", "ana_date": "2026-04-06", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Hosts please identify # of volunteers, which roles, and what t-shirt sizes", "waiting_on": ""}, {"id": "M-161", "milestone": "PROGRAM CALLS: Launch/Close + Community Events", "phase": "Phase 3: Pre-Fest Prep", "domain": "Films/Programs", "planned_date": "2026-04-06", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Hosts/ProgramPtners/Facils", "source": "ana", "ana_date": "2026-04-06", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-162", "milestone": "Volunteer Training Session Option 1 (evening)", "phase": "Phase 3: Pre-Fest Prep", "domain": "Logistics", "planned_date": "2026-04-06", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/All", "source": "ana", "ana_date": "2026-04-06", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-163", "milestone": "Accessibility Plan", "phase": "Phase 3: Pre-Fest Prep", "domain": "AV/Tech", "planned_date": "2026-04-06", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": "2026-04-06", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-164", "milestone": "Show flows sent to hosts", "phase": "Phase 3: Pre-Fest Prep", "domain": "Festival", "planned_date": "2026-04-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-04-07", "conflict": false, "enables": "Hosts know the plan", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-165", "milestone": "Host Webinar #4 (final prep)", "phase": "Phase 3: Pre-Fest Prep", "domain": "Hosts", "planned_date": "2026-04-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Programming", "source": "garen", "ana_date": null, "garen_date": "2026-04-07", "conflict": false, "enables": "Last questions answered", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-166", "milestone": "Venue kits complete with (assigned + extra) t-shirts, program guide, printed surveys, event signage, ZW compostables for hospitality, and other last supplies", "phase": "Phase 3: Pre-Fest Prep", "domain": "Logistics", "planned_date": "2026-04-08", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Josh/Interns", "source": "ana", "ana_date": "2026-04-08", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-167", "milestone": "OEFF Rep Venue Kit pickup + audit/verification (extends from Thurs 4/9 through Sun 4/13)", "phase": "Phase 3: Pre-Fest Prep", "domain": "Logistics", "planned_date": "2026-04-09", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/OEFFReps", "source": "ana", "ana_date": "2026-04-09", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Missing VK pieces need to be identified + rectified by 4/16", "waiting_on": ""}, {"id": "M-168", "milestone": "Delivery confirmations received", "phase": "Phase 3: Pre-Fest Prep", "domain": "Festival", "planned_date": "2026-04-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-04-10", "conflict": false, "enables": "No surprises", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-169", "milestone": "Volunteer briefing complete", "phase": "Phase 3: Pre-Fest Prep", "domain": "Support", "planned_date": "2026-04-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-04-10", "conflict": false, "enables": "Day-of coverage ready", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-170", "milestone": "Tech hotline active", "phase": "Phase 3: Pre-Fest Prep", "domain": "Infrastructure", "planned_date": "2026-04-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-04-10", "conflict": false, "enables": "Emergency support ready", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-171", "milestone": "HARD STOP: All packets must be complete", "phase": "Phase 3: Pre-Fest Prep", "domain": "Festival", "planned_date": "2026-04-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "All", "source": "garen", "ana_date": null, "garen_date": "2026-04-10", "conflict": false, "enables": "", "risk": "High", "notes": "No slippage allowed", "waiting_on": ""}, {"id": "M-172", "milestone": "Risk: Coordinator remote in April — team must be self-sufficient", "phase": "Phase 3: Pre-Fest Prep", "domain": "Organization", "planned_date": "2026-04-10", "actual_date": null, "complete": false, "status": "Not Started", "owner": "All", "source": "garen", "ana_date": null, "garen_date": "2026-04-10", "conflict": false, "enables": "", "risk": "High", "notes": "Team must be self-sufficient by this date", "waiting_on": ""}, {"id": "M-173", "milestone": "Volunteer Training Session Option 2 (morning)", "phase": "Phase 3: Pre-Fest Prep", "domain": "Logistics", "planned_date": "2026-04-13", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/All", "source": "ana", "ana_date": "2026-04-13", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-174", "milestone": "#2 OPTIONAL Host Office Hours Call/Webinar @noon", "phase": "Phase 3: Pre-Fest Prep", "domain": "Hosts", "planned_date": "2026-04-13", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/All", "source": "ana", "ana_date": "2026-04-13", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-175", "milestone": "PROGRAM CALLS: Launch/Close + Community Events", "phase": "Phase 3: Pre-Fest Prep", "domain": "Festival", "planned_date": "2026-04-13", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Hosts/ProgramPtners/Facils", "source": "ana", "ana_date": "2026-04-13", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-176", "milestone": "Chat Log for 4/27 Hybrid at Dominican U", "phase": "Phase 3: Pre-Fest Prep", "domain": "Hosts", "planned_date": "2026-04-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Interns", "source": "ana", "ana_date": "2026-04-14", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-177", "milestone": "Presented by/Chat Links for specific sponsors at qualifying levels Dominican U hybrid event", "phase": "Phase 3: Pre-Fest Prep", "domain": "Development", "planned_date": "2026-04-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Michael/Ana/Cesar", "source": "ana", "ana_date": "2026-04-14", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-178", "milestone": "Program prep calls for each of 22 events", "phase": "Phase 3: Pre-Fest Prep", "domain": "Hosts", "planned_date": "2026-04-14", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-04-14", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Ana to devise a schedule based on events schedule (first events have first prep calls, some prep calls might overlap w earliest days of fest)", "waiting_on": ""}, {"id": "M-179", "milestone": "Ensure all Reg/Tix Sales volunteers have access to Ebrite + trainiing needed to serve in this role, swiping registered guests in + registering walk-ins as they arrive or after the fact from the walk-in sign-in sheets", "phase": "Phase 3: Pre-Fest Prep", "domain": "Logistics", "planned_date": "2026-04-15", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Josh", "source": "ana", "ana_date": "2026-04-15", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-180", "milestone": "Photobank structure + push before launch party", "phase": "Phase 3: Pre-Fest Prep", "domain": "Marketing/PR", "planned_date": "2026-04-15", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Cesar", "source": "ana", "ana_date": "2026-04-15", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-181", "milestone": "Media Advisory for Launch Party", "phase": "Phase 3: Pre-Fest Prep", "domain": "Marketing/PR", "planned_date": "2026-04-16", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD/Jason?", "source": "ana", "ana_date": "2026-04-16", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-182", "milestone": "Wait List/Overflow Plan for specific events that are filling up", "phase": "Phase 3: Pre-Fest Prep", "domain": "Hosts", "planned_date": "2026-04-16", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-04-16", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Read Volunteer Training Packet for Sold Out/Overflow Protocols + provide materials, instructions to relevant sites/teams", "waiting_on": ""}, {"id": "M-183", "milestone": "Media Advisory for Cultural Center", "phase": "Phase 3: Pre-Fest Prep", "domain": "Marketing/PR", "planned_date": "2026-04-20", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD/Jason?", "source": "ana", "ana_date": "2026-04-20", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-184", "milestone": "Wed Apr 22: Launch Party", "phase": "Phase 4: Festival Week", "domain": "Festival", "planned_date": "2026-04-22", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Team", "source": "garen", "ana_date": null, "garen_date": "2026-04-22", "conflict": false, "enables": "Festival kickoff", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-185", "milestone": "Tech hotline staffed 9am-10pm", "phase": "Phase 4: Festival Week", "domain": "Support", "planned_date": "2026-04-22", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-04-22", "conflict": false, "enables": "Real-time troubleshooting", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-186", "milestone": "Email monitoring continues", "phase": "Phase 4: Festival Week", "domain": "Support", "planned_date": "2026-04-22", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Support", "source": "garen", "ana_date": null, "garen_date": "2026-04-22", "conflict": false, "enables": "Non-urgent issues", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-187", "milestone": "Day-of coverage", "phase": "Phase 4: Festival Week", "domain": "Support", "planned_date": "2026-04-22", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-04-22", "conflict": false, "enables": "", "risk": "High", "notes": "~25 hrs", "waiting_on": ""}, {"id": "M-188", "milestone": "Host hotline", "phase": "Phase 4: Festival Week", "domain": "Hosts", "planned_date": "2026-04-22", "actual_date": null, "complete": false, "status": "Not Started", "owner": "TBD", "source": "garen", "ana_date": null, "garen_date": "2026-04-22", "conflict": false, "enables": "", "risk": "Med", "notes": "", "waiting_on": ""}, {"id": "M-189", "milestone": "Thu Apr 23: Screenings (evening)", "phase": "Phase 4: Festival Week", "domain": "Festival", "planned_date": "2026-04-23", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Hosts + Support", "source": "garen", "ana_date": null, "garen_date": "2026-04-23", "conflict": false, "enables": "6:30pm slots", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-190", "milestone": "Fri Apr 24: Screenings (evening)", "phase": "Phase 4: Festival Week", "domain": "Festival", "planned_date": "2026-04-24", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Hosts + Support", "source": "garen", "ana_date": null, "garen_date": "2026-04-24", "conflict": false, "enables": "6:30pm slots", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-191", "milestone": "Sat Apr 25: Screenings (afternoon + evening)", "phase": "Phase 4: Festival Week", "domain": "Festival", "planned_date": "2026-04-25", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Hosts + Support", "source": "garen", "ana_date": null, "garen_date": "2026-04-25", "conflict": false, "enables": "1pm + 6:30pm slots", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-192", "milestone": "Sun Apr 26: Closing event", "phase": "Phase 4: Festival Week", "domain": "Festival", "planned_date": "2026-04-26", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Team", "source": "garen", "ana_date": null, "garen_date": "2026-04-26", "conflict": false, "enables": "Festival wrap", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-193", "milestone": "Team debrief meeting 1 + lunch", "phase": "Phase 5: Wrap", "domain": "Organization", "planned_date": "2026-04-29", "actual_date": null, "complete": false, "status": "Not Started", "owner": "All/All", "source": "ana", "ana_date": "2026-04-29", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-194", "milestone": "Team survey sent to all squad members", "phase": "Phase 5: Wrap", "domain": "Organization", "planned_date": "2026-04-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-04-30", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-195", "milestone": "Equipment returned", "phase": "Phase 5: Wrap", "domain": "Festival", "planned_date": "2026-04-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-04-30", "conflict": false, "enables": "Close rentals", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-196", "milestone": "Host thank-yous sent", "phase": "Phase 5: Wrap", "domain": "Festival", "planned_date": "2026-04-30", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Exec Director", "source": "garen", "ana_date": null, "garen_date": "2026-04-30", "conflict": false, "enables": "Relationship maintenance", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-197", "milestone": "Files archived", "phase": "Phase 5: Wrap", "domain": "Films/Programs", "planned_date": "2026-05-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": "2026-05-01", "conflict": false, "enables": "2027 reference", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-198", "milestone": "Team debrief meeting 2 + lunch", "phase": "Phase 5: Wrap", "domain": "Organization", "planned_date": "2026-05-06", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/All", "source": "ana", "ana_date": "2026-05-06", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-199", "milestone": "Retrospective scheduled", "phase": "Phase 5: Wrap", "domain": "Festival", "planned_date": "2026-05-07", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-05-07", "conflict": false, "enables": "Capture learnings", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-200", "milestone": "Team survey deadline", "phase": "Phase 5: Wrap", "domain": "Organization", "planned_date": "2026-05-08", "actual_date": null, "complete": false, "status": "Not Started", "owner": "All team", "source": "ana", "ana_date": "2026-05-08", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-201", "milestone": "Documentation updated", "phase": "Phase 5: Wrap", "domain": "Infrastructure", "planned_date": "2026-05-15", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Tech Coord", "source": "garen", "ana_date": null, "garen_date": "2026-05-15", "conflict": false, "enables": "2027 head start", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-202", "milestone": "Research, identify + evaluate films for festival", "phase": "Phase 5: Wrap", "domain": "Films/Programs", "planned_date": "2026-10-01", "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana", "source": "ana", "ana_date": "2026-10-01", "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Review Team engagement + review process. Filmmaker/distribution company links procurement, communications (status of film in evaluation process), and license procurement for dates/times/# of total screenings per film.", "waiting_on": ""}, {"id": "M-203", "milestone": "Project/Task Milestone", "phase": "Unscheduled", "domain": "Organization", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Who", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Notes/Comments", "waiting_on": ""}, {"id": "M-204", "milestone": "Plan and implement first true \"Green Carpet Gala\"", "phase": "Unscheduled", "domain": "Development", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Natasha", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Koval Distillery has offered their space, but can only accommodate about 50 indoors - many more if using outdoor space. There may be better venues for the Gala. Consider using Koval (great space!) for a highly targeted stewardship event in late spring or early summer", "waiting_on": ""}, {"id": "M-205", "milestone": "Have a rough idea of what content we will be shooting", "phase": "Unscheduled", "domain": "AV/Tech", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Niko, Garen, Erin, Ana", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-206", "milestone": "Final host prep session: Office Hours", "phase": "Unscheduled", "domain": "Hosts", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "Office hours for questions, concerns, troubleshooting, tips, etc\nMOVE THIS TO 10 DAYS BEFORE FEST OPENS?", "waiting_on": ""}, {"id": "M-207", "milestone": "Text phone# campaign + text banking", "phase": "Unscheduled", "domain": "Marketing/PR", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-208", "milestone": "Postcard campaign?", "phase": "Unscheduled", "domain": "Marketing/PR", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-209", "milestone": "Audience Survey raffle closeout", "phase": "Unscheduled", "domain": "Marketing/PR", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Marketing", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-210", "milestone": "Check all filmmaker websites/platforms for our laurels + promo about their event", "phase": "Unscheduled", "domain": "Marketing/PR", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Marketing", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-211", "milestone": "Forward film-specific marketing toolkit, flyer + other to all filmmakers/distribution companies for each film", "phase": "Unscheduled", "domain": "Marketing/PR", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Marketing", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-212", "milestone": "Final season survey reporting: audience survey; registration, attendance data included", "phase": "Unscheduled", "domain": "Films/Programs", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Programs", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-213", "milestone": "Participant Survey data report", "phase": "Unscheduled", "domain": "Films/Programs", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Programs", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-214", "milestone": "Host survey data report", "phase": "Unscheduled", "domain": "Films/Programs", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Ana/Programs", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-215", "milestone": "Digital name tags for show interfact", "phase": "Unscheduled", "domain": "Cross-Team", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Garen/Mktg", "source": "ana", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-216", "milestone": "Venue assignments in progress", "phase": "Unscheduled", "domain": "Venues", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "Programming", "source": "garen", "ana_date": null, "garen_date": null, "conflict": false, "enables": "Film-venue matching", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-217", "milestone": "ALL DELIVERABLES", "phase": "Unscheduled", "domain": "Infrastructure", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}, {"id": "M-218", "milestone": "Pulled from your Tracker tab. Filter by Status, Owner, or Horizon.", "phase": "Unscheduled", "domain": "Infrastructure", "planned_date": null, "actual_date": null, "complete": false, "status": "Not Started", "owner": "", "source": "garen", "ana_date": null, "garen_date": null, "conflict": false, "enables": "", "risk": "", "notes": "", "waiting_on": ""}];
+const TODAY = "2026-02-18";
+const PHASES = ["Pre-Season", "Phase 0: Foundation", "Phase 1: Program & Venue Clarity", "Phase 2: Media Rights & Intake", "Phase 3: Pre-Fest Prep", "Phase 4: Festival Week", "Phase 5: Wrap"];
+
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmtDate(d) {
+  if (!d) return "\u2014";
+  const p = d.split("-");
+  return MONTHS[parseInt(p[1])-1] + " " + parseInt(p[2]);
+}
+function statusChip(m) {
+  if (m.complete || m.status === "Done") return '<span class="chip s-done">Done</span>';
+  if (m.planned_date && m.planned_date < TODAY && m.status !== "Done") return '<span class="chip s-overdue">Overdue</span>';
+  if (m.status === "In Progress") return '<span class="chip s-progress">In Prog</span>';
+  if (m.status === "Waiting") return '<span class="chip s-waiting">Waiting</span>';
+  if (m.status === "Blocked") return '<span class="chip s-blocked">Blocked</span>';
+  return '<span class="chip s-notstart">Not Started</span>';
+}
+function sourceChip(s) {
+  if (s === "both") return '<span class="chip src-both">Both</span>';
+  if (s === "ana") return '<span class="chip src-ana">Ana</span>';
+  return '<span class="chip src-garen">Garen</span>';
+}
+function rowClass(m) {
+  const c = [];
+  if (m.conflict) c.push("conflict");
+  if (m.complete || m.status === "Done") c.push("done");
+  else if (m.planned_date && m.planned_date < TODAY) c.push("overdue");
+  return c.join(" ");
+}
+function isOpen(m) { return !m.complete && m.status !== "Done"; }
+function isOverdue(m) { return isOpen(m) && m.planned_date && m.planned_date < TODAY; }
+function isGaren(m) {
+  const o = (m.owner || "").toLowerCase();
+  return o.includes("garen") || o.includes("tech coord") || o.includes("erin");
+}
+function daysBetween(a, b) { return Math.round((new Date(a) - new Date(b)) / 86400000); }
+
+// Tabs
+document.querySelectorAll(".tab").forEach(btn => {
+  btn.addEventListener("click", function() {
+    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
+    this.classList.add("active");
+    document.getElementById("pane-" + this.dataset.tab).classList.add("active");
+  });
+});
+
+// Dashboard
+function renderDashboard() {
+  const overdue = DATA.filter(m => isOverdue(m)).sort((a,b) => (a.planned_date||"").localeCompare(b.planned_date||""));
+  const todayDate = new Date(TODAY);
+  const weekEnd = new Date(todayDate); weekEnd.setDate(weekEnd.getDate() + 7);
+  const weekEndStr = weekEnd.toISOString().slice(0,10);
+  const twoWeeksEnd = new Date(todayDate); twoWeeksEnd.setDate(twoWeeksEnd.getDate() + 21);
+  const twoWeeksStr = twoWeeksEnd.toISOString().slice(0,10);
+  const thisWeek = DATA.filter(m => isOpen(m) && m.planned_date && m.planned_date >= TODAY && m.planned_date <= weekEndStr);
+  const upcoming = DATA.filter(m => isOpen(m) && m.planned_date && m.planned_date > weekEndStr && m.planned_date <= twoWeeksStr);
+  const recentDone = DATA.filter(m => (m.complete || m.status === "Done") && m.planned_date && m.planned_date >= "2026-01-01").slice(-15).reverse();
+  const decisions = DATA.filter(m => (m.status === "Waiting" || (m.waiting_on && m.waiting_on.length > 0)) && isOpen(m));
+
+  function renderList(el, items, max) {
+    const target = document.getElementById(el);
+    if (!items.length) { target.innerHTML = '<li style="color:var(--color-text-muted)">None</li>'; return; }
+    target.innerHTML = items.slice(0, max || 20).map(m =>
+      '<li><span class="dash-date">' + fmtDate(m.planned_date) + '</span>' +
+      '<span>' + m.milestone.slice(0, 80) + '</span>' +
+      '<span class="dash-owner">' + (m.owner || "").slice(0, 20) + '</span></li>'
+    ).join("");
+  }
+  renderList("dash-overdue", overdue, 15);
+  renderList("dash-thisweek", thisWeek, 15);
+  renderList("dash-upcoming", upcoming, 20);
+  renderList("dash-done", recentDone, 15);
+  renderList("dash-decisions", decisions, 10);
+}
+
+// Timeline
+function renderTimeline() {
+  const domF = document.getElementById("tl-domain").value;
+  const srcF = document.getElementById("tl-source").value;
+  const statF = document.getElementById("tl-status").value;
+  const search = document.getElementById("tl-search").value.toLowerCase();
+  let items = DATA.filter(m => {
+    if (domF !== "all" && m.domain !== domF) return false;
+    if (srcF !== "all" && m.source !== srcF) return false;
+    if (statF === "open" && !isOpen(m)) return false;
+    else if (statF === "overdue" && !isOverdue(m)) return false;
+    else if (statF !== "all" && statF !== "open" && statF !== "overdue" && m.status !== statF) return false;
+    if (search && !m.milestone.toLowerCase().includes(search) && !(m.owner||"").toLowerCase().includes(search)) return false;
+    return true;
+  });
+  let html = "";
+  let lastPhase = "";
+  items.forEach(m => {
+    if (m.phase !== lastPhase) {
+      lastPhase = m.phase;
+      const phaseItems = items.filter(x => x.phase === m.phase);
+      const pDone = phaseItems.filter(x => x.complete || x.status === "Done").length;
+      const isCurrent = m.phase.includes("Phase 1");
+      html += '<tr class="phase-row' + (isCurrent ? " current" : "") + '"><td colspan="8">' +
+        m.phase + '<span class="phase-stats">' + pDone + '/' + phaseItems.length + ' done</span></td></tr>';
+    }
+    html += '<tr class="' + rowClass(m) + '">';
+    html += '<td class="m-date">' + fmtDate(m.planned_date);
+    if (m.conflict) html += '<div class="conflict-sub">A:' + fmtDate(m.ana_date) + ' G:' + fmtDate(m.garen_date) + '</div>';
+    html += '</td>';
+    html += '<td><span class="domain-tag">' + m.domain + '</span></td>';
+    html += '<td class="m-text">' + m.milestone + '</td>';
+    html += '<td class="m-owner">' + (m.owner || "\u2014") + '</td>';
+    html += '<td>' + statusChip(m) + '</td>';
+    html += '<td>' + sourceChip(m.source) + (m.conflict ? ' <span class="chip chip-conflict">Conflict</span>' : '') + '</td>';
+    html += '<td class="m-enables">' + (m.enables || "") + '</td>';
+    html += '<td class="m-notes">' + (m.notes || "") + '</td>';
+    html += '</tr>';
+  });
+  document.getElementById("tl-body").innerHTML = html;
+}
+
+// Deliverables
+function renderDeliverables() {
+  const riskF = document.getElementById("dl-risk").value;
+  const statF = document.getElementById("dl-status").value;
+  const search = document.getElementById("dl-search").value.toLowerCase();
+  let items = DATA.filter(m => {
+    if (riskF !== "all" && m.risk !== riskF) return false;
+    if (statF === "open" && !isOpen(m)) return false;
+    else if (statF !== "all" && statF !== "open" && m.status !== statF) return false;
+    if (search && !m.milestone.toLowerCase().includes(search)) return false;
+    return true;
+  });
+  let html = items.map(m =>
+    '<tr class="' + rowClass(m) + '">' +
+    '<td class="m-date">' + fmtDate(m.planned_date) + '</td>' +
+    '<td class="m-text">' + m.milestone + '</td>' +
+    '<td>' + statusChip(m) + '</td>' +
+    '<td class="m-owner">' + (m.owner || "\u2014") + '</td>' +
+    '<td style="font-weight:600;color:' + (m.risk==="High" ? "var(--signal-critical)" : m.risk==="Med" ? "var(--signal-warning)" : "inherit") + '">' + (m.risk || "") + '</td>' +
+    '<td class="m-notes">' + (m.waiting_on || "") + '</td>' +
+    '<td class="m-enables">' + (m.enables || "") + '</td>' +
+    '<td>' + sourceChip(m.source) + '</td>' +
+    '<td class="m-notes">' + (m.notes || "") + '</td>' +
+    '</tr>'
+  ).join("");
+  document.getElementById("dl-body").innerHTML = html;
+}
+
+// My Items
+function renderMyItems() {
+  const items = DATA.filter(m => isGaren(m)).sort((a,b) => (a.planned_date||"z").localeCompare(b.planned_date||"z"));
+  let html = items.map(m =>
+    '<tr class="' + rowClass(m) + '">' +
+    '<td class="m-date">' + fmtDate(m.planned_date) + '</td>' +
+    '<td class="m-text">' + m.milestone + '</td>' +
+    '<td>' + statusChip(m) + '</td>' +
+    '<td><span class="domain-tag">' + m.domain + '</span></td>' +
+    '<td class="m-owner">' + (m.owner || "\u2014") + '</td>' +
+    '<td class="m-enables">' + (m.enables || "") + '</td>' +
+    '<td class="m-notes">' + (m.notes || "") + '</td>' +
+    '</tr>'
+  ).join("");
+  document.getElementById("mi-body").innerHTML = html;
+}
+
+// Conflicts
+function renderConflicts() {
+  const items = DATA.filter(m => m.conflict);
+  let html = items.map(m => {
+    const gap = (m.ana_date && m.garen_date) ? Math.abs(daysBetween(m.ana_date, m.garen_date)) + " days" : "\u2014";
+    return '<tr>' +
+      '<td class="m-text">' + m.milestone + '</td>' +
+      '<td class="m-date">' + fmtDate(m.ana_date) + '</td>' +
+      '<td class="m-date">' + fmtDate(m.garen_date) + '</td>' +
+      '<td style="font-weight:600;color:var(--signal-warning)">' + gap + '</td>' +
+      '<td><span class="domain-tag">' + m.domain + '</span></td>' +
+      '<td class="m-owner">' + (m.owner || "\u2014") + '</td>' +
+      '<td class="m-notes">' + (m.notes || "") + '</td>' +
+      '</tr>';
+  }).join("");
+  document.getElementById("cf-body").innerHTML = html;
+}
+
+// Populate domain filter
+const domains = [...new Set(DATA.map(m => m.domain))].sort();
+const domSel = document.getElementById("tl-domain");
+domains.forEach(d => { const o = document.createElement("option"); o.value = d; o.textContent = d; domSel.appendChild(o); });
+
+// Bind filters
+["tl-domain","tl-source","tl-status"].forEach(id => {
+  document.getElementById(id).addEventListener("change", renderTimeline);
+});
+document.getElementById("tl-search").addEventListener("input", renderTimeline);
+["dl-risk","dl-status"].forEach(id => {
+  document.getElementById(id).addEventListener("change", renderDeliverables);
+});
+document.getElementById("dl-search").addEventListener("input", renderDeliverables);
+
+// Initial render
+renderDashboard();
+renderTimeline();
+renderDeliverables();
+renderMyItems();
+renderConflicts();
+</script>
+</body>
+</html>

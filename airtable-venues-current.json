@@ -1,0 +1,2028 @@
+[
+  {
+    "id": "rec0a5HhkCiKB8G2m",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "0",
+      "Venue ID": "V-063",
+      "Region": "0",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recNwRncWMoHciseu"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-079 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec0qEZa8ZKEw3Bu3",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Lake, Lake Forest",
+      "Venue ID": "V-077",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recxWsMDfTQO6lMCr"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-103 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec0x29ayTCTr6Qqm",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "North-Highland Park",
+      "Venue ID": "V-095",
+      "Region": "APRIL\nReconfirmed interest 3/14; awaiting logistics reply from Clayton/Elyse",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec1J6VjSfGKn11NK"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-149 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec1sitB67zSklRuN",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "North, Evanston",
+      "Venue ID": "V-070",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recQa7U8tKJg0Ieu0",
+        "reckQYRQQ99zEQhKj"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-089 (no date) \u2014 Interested\nE25-126 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec1vNJqoC0W6UnO8",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Geography",
+      "Venue ID": "V-049",
+      "Region": "VENUE STATUS",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec6bShVwK2xTJIzL"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-058 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec21WiXlD96KaJV0",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Black Girl Environmentalists at UIC or Patagonia Fulton Market",
+      "Venue ID": "V-011",
+      "Region": "TBD",
+      "Tech Tier": "T2",
+      "Events": [
+        "recAFPVKjeJoMK9qL"
+      ],
+      "Host Intake": [
+        "recn2fC4XP2Mg7F0f"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Event Summary": "E26-012 (2026-04-25) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2026",
+      "Host_Token": "5ed500864abeec21",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/5ed500864abeec21/",
+      "Financial_Password_Hash": "aed7ade931fc8cc1951f1c1257560d235822a052f07ca13c60ac43e993fcae16",
+      "Financial_Password": "birch-creek-22",
+      "Packet_Password": "lake-forage-47"
+    }
+  },
+  {
+    "id": "rec25ujX9W3dnOdXN",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "\"Greener Grove\" (Downers Grove Green Organization) who wants",
+      "Venue ID": "V-037",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec35V64IYIoJ6uPC",
+        "recc7QzXAafIG1v57"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-035 (2025-04-23) \u2014 Scheduled\nE25-040 (2025-04-23) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec3uDHHjHUwNfZV1",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Uncommon Ground",
+      "Venue ID": "V-004",
+      "Region": "Chicago North (Lakeview)",
+      "Capacity": 50,
+      "Tech Tier": "T2",
+      "Events": [
+        "rec8M9mlpCkN7UM9B",
+        "recdmPcy5tlpZa5rP"
+      ],
+      "Host Intake": [
+        "recOufbYZZ3Av03Ig"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "Chicago North",
+      "Event Summary": "E25-004 (2025-04-23) \u2014 Scheduled\nE26-004 (2026-04-23) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "d0732c329bd19d03",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/d0732c329bd19d03/",
+      "Financial_Password_Hash": "39a0c7781cf0329943973299ba7e6c86c50920a439b5878532d763de3b705de4",
+      "Financial_Password": "heron-stone-79",
+      "Packet_Password": "bloom-screening-13"
+    }
+  },
+  {
+    "id": "rec4S4YTZqNpnTdHH",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Seven Generations Ahead",
+      "Venue ID": "V-019",
+      "Tech Tier": "T2",
+      "Events": [
+        "recrJxFU6WgNpbGJY"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Event Summary": "E26-020 (no date) \u2014 Confirmed Interest",
+      "Outreach Priority": "Urgent",
+      "Season": "2026",
+      "Host_Token": "af9abb2594504ba6",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/af9abb2594504ba6/",
+      "Financial_Password_Hash": "f8457ba9fde17c7ad096845eb9244226b07ec911ce70fd7ba4f519db42e9ed0c",
+      "Financial_Password": "peak-festival-50",
+      "Packet_Password": "stone-ridge-62"
+    }
+  },
+  {
+    "id": "rec5kI3cb007sOy3h",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "South-West Woodlawn",
+      "Venue ID": "V-069",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec0QxabEpIVOcGvr"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-088 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec6GC2M6tQz9uTd9",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "See list from Ana-Dick Clusters meeting (about 10 sites on N",
+      "Venue ID": "V-101",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Readiness": "Needs Data",
+      "Outreach Priority": "Low",
+      "Season": "Inactive"
+    }
+  },
+  {
+    "id": "rec6fvgLNvkDA6Kj7",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Calumet College of St. Joseph",
+      "Venue ID": "V-036",
+      "Region": "Chicago South, Whiting IN",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec3U9jMzwqGASWGp",
+        "rec4jICP8G98iHjtS",
+        "recZoL7wh22E4p5sE",
+        "recpbN1l7DSpdF8gH"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Chicago South",
+      "Event Summary": "E24-007 (2024-04-22) \u2014 Completed\nE25-018 (2025-04-26) \u2014 Scheduled\nE25-034 (2025-04-25) \u2014 Scheduled\nE25-042 (2025-04-25) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec7JHMlG7lq7rXeF",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "The Plant (by Bubbly Dynamics), in partnership with Whiner B",
+      "Venue ID": "V-031",
+      "Region": "Near South East (Back of the Yards)",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recCEO5taTpVIARyu"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Near South",
+      "Event Summary": "E25-009 (2025-04-25) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec7SqhmrBBx1ttAI",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "OTHER, Weston, FL",
+      "Venue ID": "V-088",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recUS5kZ03OY2R53N"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-130 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec7ZZpAuOgCfMHvv",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Near West Suburbs",
+      "Venue ID": "V-052",
+      "Region": "CONFIRMED 3/18/24",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recKkdQOLV6qbobxq",
+        "recLGIVoElau5HXqi"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-061 (no date) \u2014 Scheduled\nE25-175 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec7tzOIAuixcMW95",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "North, Rogers Park",
+      "Venue ID": "V-075",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recpCzI1q5Gvk4hST"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-100 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rec8ZpbL0gHLW4Y5Q",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Illinois Clinicians for Climate Action",
+      "Venue ID": "V-017",
+      "Tech Tier": "T2",
+      "Notes": "Original: Illinois Clinicians for Climate Action at TBD location or with TBD partner.",
+      "Events": [
+        "recA6wIeZeHruOA7s",
+        "recpnnVnXc8xn4cGp"
+      ],
+      "Host Intake": [
+        "rec0yhG1vWGpggTo4"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Event Summary": "E25-048 (no date) \u2014 Interested\nE26-018 (no date) \u2014 Confirmed Interest",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "ebe5cd2a49159456",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/ebe5cd2a49159456/",
+      "Financial_Password_Hash": "eea319715dbb924a52f3dc205f6db62680a9fd08dcfec90f077a8fd279465b3b",
+      "Financial_Password": "meadow-aspen-55",
+      "Packet_Password": "field-river-78"
+    }
+  },
+  {
+    "id": "recAtahBYnSj9B4e7",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Near West, Oak Park",
+      "Venue ID": "V-054",
+      "Region": "CONFIRMED 2/15/24",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recQ0pOvYKxyirmZC",
+        "recU7j2CMcDqxZrWr",
+        "reca3n0QLlo8EWwYF",
+        "recvrMKbuZ8ndZESb",
+        "recvxozdJXP0DAHrw"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-066 (no date) \u2014 Scheduled\nE25-070 (no date) \u2014 Scheduled\nE25-117 (no date) \u2014 Interested\nE25-118 (no date) \u2014 Interested\nE25-168 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recAvqRdEhdAkuLmZ",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Northwest (Galewood/Belmont-Cragin)",
+      "Venue ID": "V-050",
+      "Region": "CONFIRMED 2/13/24",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recTFqOHXwv6rJz6o"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-059 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recB72tNVkck3DD9B",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Lake County-Waukegan",
+      "Venue ID": "V-058",
+      "Region": "CONFIRMED 12/30/23 & 2/8/24",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recjQJvHDjLO3P4Ow"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-073 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recBS5tIjbVJ0sz3f",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "BUILD, Inc.",
+      "Venue ID": "V-015",
+      "Region": "Westside",
+      "Tech Tier": "T2",
+      "Events": [
+        "rec4FBRe4qMwumLLT"
+      ],
+      "Host Intake": [
+        "rec9rQiHITCyxtigl"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "Chicago West",
+      "Event Summary": "E26-016 (no date) \u2014 Confirmed Interest",
+      "Outreach Priority": "Urgent",
+      "Season": "2026",
+      "Host_Token": "31035386f10e37bd",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/31035386f10e37bd/",
+      "Financial_Password_Hash": "9397f7912c12851e706b31b6285ccc9982bde997378ae4a9a7985e69c9340bcd",
+      "Financial_Password": "grove-river-92",
+      "Packet_Password": "wind-vale-29"
+    }
+  },
+  {
+    "id": "recBpyIvqSpBqLEvA",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Cultivate Collective/Academy for Global Citizenship (said they are interested in 2026)",
+      "Venue ID": "V-027",
+      "Events": [
+        "rec8EEH5Q4FY472SE",
+        "reclwY6L5GXtE5X3P"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-030 (no date) \u2014 Interested\nE26-028 (no date) \u2014 Interested",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "15b85dad81b22068",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/15b85dad81b22068/",
+      "Financial_Password_Hash": "48831f949d6b52d88c12c5857bb25c65d927331864c10ab0a42cbfbd8b918c3b",
+      "Financial_Password": "lake-canopy-48",
+      "Packet_Password": "canopy-ember-29"
+    }
+  },
+  {
+    "id": "recCaIkw8EnpMbrid",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Loyola University Law School",
+      "Venue ID": "V-022",
+      "Events": [
+        "recOzAuYfZXR3ZLix",
+        "recjC1k1KLQooUwi0",
+        "recmBmjg72htk4EMA"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-025 (no date) \u2014 Interested\nE25-177 (no date) \u2014 Interested\nE26-023 (no date) \u2014 Interested",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "8e46192f77967d66",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/8e46192f77967d66/",
+      "Financial_Password_Hash": "2f11ac5558a1e91515443091caf3a379914ecf9821589ab8b6e1481469a96177",
+      "Financial_Password": "river-vale-21",
+      "Packet_Password": "brook-ember-69"
+    }
+  },
+  {
+    "id": "recFooo1AyuV78exg",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "Milwaukee WI",
+      "Venue ID": "V-068",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rectnIRVGUwENFzco"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-086 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recGLC5WxA10GSVwx",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Lake, Grayslake",
+      "Venue ID": "V-087",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec7YAaJYQma8YKQ5",
+        "reca0493P1amCo6Ov"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-128 (no date) \u2014 Interested\nE25-129 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recGhrB96xbecIuTS",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Lake, Gurnee",
+      "Venue ID": "V-091",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec3HJwyfLNNBTaOw"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-141 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recIkQNX2gTDjFqLp",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Columbia College - Film Row Cinema",
+      "Venue ID": "V-001",
+      "Region": "Chicago Central (Downtown, Loop)",
+      "Capacity": 260,
+      "Tech Tier": "T1",
+      "Events": [
+        "rec75gHrVeEESz57e",
+        "recJVpKg6TQbOlLA9",
+        "recSIuzgxI8BWWGIc"
+      ],
+      "Host Intake": [
+        "recrm8e2D3xFP5yPq"
+      ],
+      "Tech Level": "T1",
+      "Readiness": "Partial",
+      "Area": "Chicago Central",
+      "Event Summary": "E25-028 (no date) \u2014 Interested\nE26-001 (2026-04-22) \u2014 Scheduled\nE26-005 (2026-04-23) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "ca8a826e789a683f",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/ca8a826e789a683f/",
+      "Financial_Password_Hash": "f7c1f2f87d05a01e6787b6ac16f68325f9696805a4509cded7f7474c00ebb0e4",
+      "Financial_Password": "river-aspen-72",
+      "Packet_Password": "field-aspen-86"
+    }
+  },
+  {
+    "id": "recJRoi4Rl3na38m5",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Western Suburbs, LaGrange",
+      "Venue ID": "V-079",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recIidGZOLejTau7R"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-106 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recK6kA6rXDg5khIy",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "Addison IL",
+      "Venue ID": "V-065",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recee6px5iizyMAnO"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-082 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recKCKGhCK6aZnn1R",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "New Sound Cafe in Austin",
+      "Venue ID": "V-038",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recvHedCi2RlrHRnc"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-036 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recKf9vj1tyVbgzbq",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Carter G Woodson Branch",
+      "Venue ID": "V-047",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recDozDhOYRL7XPao"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-056 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recLcD00BuHsYzPHR",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Go Green Park Ridge",
+      "Venue ID": "V-016",
+      "Region": "NW Suburbs",
+      "Tech Tier": "T2",
+      "Notes": "Original: Go Green Park Ridge possibly at Pickwick Theater.",
+      "Events": [
+        "recWR5bpGnZWDONtj",
+        "recwpcW1YS0XtUz6X"
+      ],
+      "Host Intake": [
+        "rectB0X2DLBq6mwmD"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "NW Suburbs",
+      "Event Summary": "E25-020 (2025-04-26) \u2014 Scheduled\nE26-017 (no date) \u2014 Confirmed Interest",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "2fba49fb6490618b",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/2fba49fb6490618b/",
+      "Financial_Password_Hash": "6f5ce3790386ab4a5d368dd1f0886556968139c72ed5bee10fe43a2acdb4304c",
+      "Financial_Password": "pine-forage-25",
+      "Packet_Password": "summit-screening-89"
+    }
+  },
+  {
+    "id": "recMAJQTNNkw8HIRK",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Gary United Methodist Church",
+      "Venue ID": "V-032",
+      "Region": "West Suburbs (Wheaton)",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recTqauNM583V09Iw"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "West Suburbs",
+      "Event Summary": "E25-013 (2025-04-25) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recMVxDhPIqVq0trv",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "North, Uptown",
+      "Venue ID": "V-059",
+      "Region": "3/18/24 moved back to UNCONFIRMED STATUS \nInitially confirmed 3/12/24 but buildings closed on weekend",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recy2ZgEpD00uBsCK"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-074 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recN2oSv0XgmxcPjG",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Epiphany Center for the Arts (said they are interested in 2026)",
+      "Venue ID": "V-026",
+      "Region": "Near West",
+      "Events": [
+        "rec222tUgTRKTmBTL",
+        "recDdzhTUQw2TdjP7",
+        "recaLa8ZzmFybweYF"
+      ],
+      "Host Intake": [
+        "rec8PnWxzV4p5I43X"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Near West",
+      "Event Summary": "E25-005 (2025-04-24) \u2014 Scheduled\nE25-029 (no date) \u2014 Interested\nE26-027 (no date) \u2014 Interested",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "8800f08a34726f3e",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/8800f08a34726f3e/",
+      "Financial_Password_Hash": "c71dfa719b1c8569f00e8e542b6a04190926ba1c606d1f9d86719b9660375370",
+      "Financial_Password": "vale-canopy-16",
+      "Packet_Password": "willow-lantern-99"
+    }
+  },
+  {
+    "id": "recNBrcd2UFJDwe36",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "0",
+      "Venue ID": "V-092",
+      "Region": "0",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recdxrP8C3qvD9yjx"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-143 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recOUQzQudjCjunzR",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Three Brothers Theater (Waukegan)",
+      "Venue ID": "V-030",
+      "Region": "Lake County (Waukegan)",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recZ1Q1TnGLhvwzjU",
+        "rect4soDjpaET6pMk"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Lake County",
+      "Event Summary": "E25-007 (2025-04-24) \u2014 Scheduled\nE25-016 (2025-04-26) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recOXmgRCE2xtxIkL",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Climate Action Evanston",
+      "Venue ID": "V-003",
+      "Region": "Northern Suburbs (Evanston)",
+      "Tech Tier": "T2",
+      "Notes": "Original: Climate Action Evanston likely at.",
+      "Events": [
+        "rec4T0FgCQaTlLNe3",
+        "recAeUwW61MNeBRUY",
+        "recPQgyho6aeFgfQJ",
+        "recVw7KKPwVFzDIH1"
+      ],
+      "Host Intake": [
+        "rectUbxs5TivQdKmG"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "North Suburbs",
+      "Event Summary": "E24-008 (no date) \u2014 Completed\nE25-021 (2025-04-27) \u2014 Scheduled\nE25-022 (2025-04-28) \u2014 Scheduled\nE26-003 (2026-04-23) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "6e6d8f42d6f843bd",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/6e6d8f42d6f843bd/",
+      "Financial_Password_Hash": "98ca1581a3cd29e22e5c0c3b06cd0ebe63e96cd1e2a3a8e536f866b8c621142b",
+      "Financial_Password": "screening-meadow-35",
+      "Packet_Password": "ember-canopy-51"
+    }
+  },
+  {
+    "id": "recOtnucW4LBq32mp",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Oak Park Public Library",
+      "Venue ID": "V-033",
+      "Region": "Near West (Oak Park)",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recg3AYzFt7nbOd0U",
+        "recyubBEjWtOEoftV"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Near West",
+      "Event Summary": "E24-006 (2024-04-21) \u2014 Completed\nE25-015 (2025-04-26) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recQPEdMu24ekrJAH",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Lake, Libertyville",
+      "Venue ID": "V-086",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recuBEqmx6eU0VTiY"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-127 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recQac93wdirSnV91",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "DuPage/Kane",
+      "Venue ID": "V-060",
+      "Region": "McHenry Community College is a possibility; not sure if Waubonsee CC is still a possibility as well if they decide to do in-person after all",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recoAt4jvmqXhfhur",
+        "recrWebs5lgmPM40f",
+        "recxSHUzlpculK3Z6",
+        "recz1k8kzHK6c2GRl"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-075 (no date) \u2014 Scheduled\nE25-116 (no date) \u2014 Interested\nE25-153 (no date) \u2014 Interested\nE25-174 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recR0Cfvw0QecBjHX",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Discover Card/Capital One",
+      "Venue ID": "V-023",
+      "Events": [
+        "recKRssH2Z1aLxgY3",
+        "recQqCtkEDErGhBkJ",
+        "recubwuL5sf26QoPn"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-026 (no date) \u2014 Interested\nE25-039 (2025-04-23) \u2014 Scheduled\nE26-024 (no date) \u2014 Interested",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "fbc294028ba53677",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/fbc294028ba53677/",
+      "Financial_Password_Hash": "381589f4f070275ebed1f6b7105563ac11b74a027783afce6b7625b2c65bf4fe",
+      "Financial_Password": "ember-river-22",
+      "Packet_Password": "bloom-reef-98"
+    }
+  },
+  {
+    "id": "recRR8Mfcn2IQujvL",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "Will County, Channahon, IL",
+      "Venue ID": "V-094",
+      "Region": "CONFIRMED/published",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "reccmLu7erfyBrIMY"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-146 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recRduzkXWhG12wEh",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Davis, CA",
+      "Venue ID": "V-061",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recaCfbVvlNG9t5ZY"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-076 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recRyTp6K5r42u4j1",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "North, Andersonville",
+      "Venue ID": "V-096",
+      "Region": "11/11 + 11/14 outrch\nDECINED IN 2023 per David Oakes",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recm559vSiPNWPnto"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-151 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recS0nmfx2BCP4x4N",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "7 Van Buren?",
+      "Venue ID": "V-035",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec51lrYt4HTUbChi"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-032 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recVBZFmzfDPBxnz5",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "West Suburbs (River Grove)",
+      "Venue ID": "V-053",
+      "Region": "CONFIRMED 3/12/24",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recS8xeivKdvk5xyK"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-064 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recVZM2ULsGyQEdRO",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Western Suburbs, Westchester IL",
+      "Venue ID": "V-090",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recnrU9sAmfkZZzTS"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-132 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recVz3FuiOE8948M4",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Radiant Vessels Community Services",
+      "Venue ID": "V-040",
+      "Region": "Near West (Oak Park)",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recyhMPh9n1tfJBZF"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Near West",
+      "Event Summary": "E25-044 (2025-04-26) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recX1dEcNAyOb6Xhv",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Trinity Lutheran, Des Plaines (Prospect)",
+      "Venue ID": "V-020",
+      "Region": "Northern Suburbs (Des Plaines)",
+      "Contact Info": "John Stoffregen <jstoff304@gmail.com>, Trinity Lutheran (Des Plaines) Green Team",
+      "Events": [
+        "rec23Te6SN2kTKvyi",
+        "rec6iURUZl3XZDsi3",
+        "recAp41VNuwhbegub"
+      ],
+      "Readiness": "Partial",
+      "Area": "North Suburbs",
+      "Event Summary": "E25-023 (no date) \u2014 Interested\nE25-055 (no date) \u2014 Interested\nE26-021 (no date) \u2014 Interested",
+      "Outreach Priority": "High",
+      "Season": "2025+2026",
+      "Host_Token": "6c82b0e444c01d88",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/6c82b0e444c01d88/",
+      "Financial_Password_Hash": "37810fcfdfa216df5bb0b8dbcf55a4a709b8c7604dedbd8a5251a34a3ebeb11e",
+      "Financial_Password": "fern-prairie-70",
+      "Packet_Password": "screening-ember-73"
+    }
+  },
+  {
+    "id": "recXY6SWJfIwhxuLH",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "0",
+      "Venue ID": "V-093",
+      "Region": "0",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recbsL6GakJEkMPha"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-144 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recXhvvifYKGCOGtP",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "Lake, Barrington",
+      "Venue ID": "V-071",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recCDN6NlG4aLkV6X"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-090 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recYABpslmiSRzfMl",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Dominican University",
+      "Venue ID": "V-013",
+      "Region": "Western Suburbs (River Forest)",
+      "Tech Tier": "T2-H",
+      "Events": [
+        "rec8iCxXMNXtwTzln",
+        "rec9fe9v9NQUBjxxW"
+      ],
+      "Host Intake": [
+        "recF0D1E9HIqYEgDX",
+        "recaC64j7SNesfleg"
+      ],
+      "Tech Level": "T2-H",
+      "Readiness": "Partial",
+      "Area": "West Suburbs",
+      "Event Summary": "E25-006 (2025-04-24) \u2014 Scheduled\nE26-014 (2026-04-27) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "c4d9ff6fc0db2b93",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/c4d9ff6fc0db2b93/",
+      "Financial_Password_Hash": "7a8dc949d424e0c07162d002f8189fe83cc434c8bef472b2c71b10b64a02e206",
+      "Financial_Password": "maple-screening-80",
+      "Packet_Password": "lantern-linden-57"
+    }
+  },
+  {
+    "id": "recYGYsXprrTDwo5V",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "South-Bronzeville",
+      "Venue ID": "V-080",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec0U8y4elhYH8V3c",
+        "rec9V7GeZ0JFd6BJo",
+        "recSy5l9LAUW1pAUm",
+        "recX980e5C3O8WuA2",
+        "recjbTSXjvsnKL8gs"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-071 (no date) \u2014 Scheduled\nE25-096 (no date) \u2014 Interested\nE25-109 (no date) \u2014 Scheduled\nE25-152 (no date) \u2014 Interested\nE25-161 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recYhmyFeHLUGT1b2",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "St James",
+      "Venue ID": "V-041",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recVRxRASE9GLvE5X"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-045 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recYlbQ3uJj5KJA6U",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Northbrook Public Library",
+      "Venue ID": "V-021",
+      "Region": "Northern Suburbs (Northbrook)",
+      "Events": [
+        "recg8Y9Q2HbKMV3mT",
+        "recwKxmRXIqXmIZaQ"
+      ],
+      "Host Intake": [
+        "recg3PGNKKBD3owmn"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "North Suburbs",
+      "Event Summary": "E25-024 (no date) \u2014 Interested\nE26-022 (no date) \u2014 Interested",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "d10492f4a6165669",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/d10492f4a6165669/",
+      "Financial_Password_Hash": "4e73a3cc5968edbaf965604a2e88fd48f1ab183973951c1c6c573fb1f5be078f",
+      "Financial_Password": "reef-wind-22",
+      "Packet_Password": "ember-meadow-65"
+    }
+  },
+  {
+    "id": "recaMe3fNNHrJpJHa",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Will County, Frankfurt IL",
+      "Venue ID": "V-085",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recYMEBkDsYGyhmqo"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-122 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recaYY4IgsfzOZ9T1",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Bronzeville",
+      "Venue ID": "V-056",
+      "Region": "CONFIRMED 3/1/24",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Readiness": "Needs Data",
+      "Outreach Priority": "Low",
+      "Season": "Inactive"
+    }
+  },
+  {
+    "id": "recaZkudshk1eLWj5",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "Downtown",
+      "Venue ID": "V-066",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec1X5kelbZHcPyCi",
+        "recJv6EbsviWZTn3q",
+        "reclrwaZBwk6eLQQk"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-083 (no date) \u2014 Interested\nE25-134 (no date) \u2014 Interested\nE25-180 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recb2zdGwePa73Cnd",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "North, Wilmette",
+      "Venue ID": "V-082",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recWggPx3MZ5JUuQp"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-115 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "reccUs58rRaFM7OB8",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Near West, River Forest",
+      "Venue ID": "V-078",
+      "Region": "Reached out 1/4/24 to new contacts, w cc to Monica Halloran and Caroline Marinoff",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec0fXnMhU0xGSS9b",
+        "recGylmtS6KaBv2DX",
+        "recskywNSUeq9bMsQ",
+        "recueHe1A4H9OtVTT"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-104 (no date) \u2014 Interested\nE25-107 (no date) \u2014 Interested\nE25-124 (no date) \u2014 Interested\nE25-157 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "reccdfMfEmXFENlYa",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "OTHER",
+      "Venue ID": "V-099",
+      "Region": "11/11 + 11/14 outrch",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec7hN0XifWAI5W0k"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-173 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recd0dMkxiCfyaLRX",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "South-Washington Heights",
+      "Venue ID": "V-074",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recE8xY1GTaO2BYkv"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-098 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recdMhmy12MQaZcr5",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Cultivate Collective (at Academy for Global Citizenship)",
+      "Venue ID": "V-009",
+      "Region": "Chicago South (Stickney/Brighton Park)",
+      "Tech Tier": "T2",
+      "Events": [
+        "recHcyMTOAFWY94ob"
+      ],
+      "Host Intake": [
+        "recCOIZYa6qdXqRZQ"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "Chicago South",
+      "Event Summary": "E26-010 (2026-04-25) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2026",
+      "Host_Token": "ea037cea9f67751a",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/ea037cea9f67751a/",
+      "Financial_Password_Hash": "25731eb45a224a7626fd3eba8120284bfa9e6bd352fdf25f280aaa43baef060d",
+      "Financial_Password": "screening-sage-54",
+      "Packet_Password": "fern-gather-61"
+    }
+  },
+  {
+    "id": "recfnj45IXLzNtuGj",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "Lake, Bartington",
+      "Venue ID": "V-098",
+      "Region": "See above re GGBarrington",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recx2yfT3fRCG5cfY"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-155 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recgpv14hhmSaqsFR",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Irish American Heritage Center (reco from Lucinda)",
+      "Venue ID": "V-048",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recKGkhdsbZhOrn2W"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-057 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rechqx0RZdpqThBnl",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Austin",
+      "Venue ID": "V-055",
+      "Region": "CONFIRMED 3/25",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Readiness": "Needs Data",
+      "Outreach Priority": "Low",
+      "Season": "Inactive"
+    }
+  },
+  {
+    "id": "reciw3c8qEqlWDDxe",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Lincoln Park Zoo",
+      "Venue ID": "V-044",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec9WACxzTFQbfd9A"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-052 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recj4WDmPoU0trMWs",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Trinity Lutheran Church",
+      "Venue ID": "V-002",
+      "Region": "Northern Suburbs (Des Plaines)",
+      "Capacity": 120,
+      "Tech Tier": "T2",
+      "Events": [
+        "recmOmwiDmZUCKTWr"
+      ],
+      "Host Intake": [
+        "recdwRbrm4ukePkDQ"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "North Suburbs",
+      "Event Summary": "E26-002 (2026-04-23) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2026",
+      "Host_Token": "5701ef1991006118",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/5701ef1991006118/",
+      "Financial_Password_Hash": "2cbf88127e4507e6f3616a8357c46f10ff0448b527a1ad86efc60dac43d3dba4",
+      "Financial_Password": "bloom-peak-58",
+      "Packet_Password": "gather-cedar-35"
+    }
+  },
+  {
+    "id": "recjlrZrMxomLzAwF",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Midwest Film Fest?",
+      "Venue ID": "V-046",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recFpWJzms7fnj4aO"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-054 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "reckHkYlnWv3ZF9hr",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Harlem, NYC",
+      "Venue ID": "V-081",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recl9SkiHLfFSlHXd"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-112 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recki9HIQaArGd8hD",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "Cinespace",
+      "Venue ID": "V-100",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "reciefq2hrbVkMXTo"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-179 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recksH8PyDVKqCjn3",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Countryside Church UU in Palatine",
+      "Venue ID": "V-042",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recwYYob0vrEElsCM"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-046 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recl6WJOplIiZZqb1",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Euclid AVE UMC",
+      "Venue ID": "V-018",
+      "Tech Tier": "T2",
+      "Events": [
+        "recDrvUB2tOhcYniZ"
+      ],
+      "Host Intake": [
+        "recWmiPzArVZFM8mp"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Event Summary": "E26-019 (no date) \u2014 Confirmed Interest",
+      "Outreach Priority": "Urgent",
+      "Season": "2026",
+      "Host_Token": "7274dfa30a310404",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/7274dfa30a310404/",
+      "Financial_Password_Hash": "cb1d19b97e1b9903dd4f7b68fa3f2eba220f5cb7a9b0237cb936cfdb2a56d1c2",
+      "Financial_Password": "pine-river-95",
+      "Packet_Password": "reef-moss-67"
+    }
+  },
+  {
+    "id": "recmP7D0nVFnDWyyx",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Austin/Greater West Side",
+      "Venue ID": "V-072",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recAJqs70YpPG0OPD",
+        "recJVkY7sTMt82b1p",
+        "recbUbvdTR5CKiymG"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-068 (no date) \u2014 Interested\nE25-094 (no date) \u2014 Interested\nE25-095 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recmUJJMjw4Bw2dLl",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Institute of Cultural Affairs in the USA",
+      "Venue ID": "V-006",
+      "Region": "Chicago North (Uptown)",
+      "Tech Tier": "T2",
+      "Events": [
+        "recVKUh5OpKMbdvKF",
+        "recr8O4mjJpfDRJpd",
+        "recsKEYVESP7XkEXB"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "Chicago North",
+      "Event Summary": "E25-002 (2025-04-23) \u2014 Scheduled\nE25-011 (2025-04-25) \u2014 Scheduled\nE26-007 (2026-04-24) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "ef76123fe45248c9",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/ef76123fe45248c9/",
+      "Financial_Password_Hash": "d9bab003d362d1ce00e07a2e94c5cbfe1ba0762ed052b23aefce811c3f844dfb",
+      "Financial_Password": "cliff-festival-96",
+      "Packet_Password": "aspen-sage-82"
+    }
+  },
+  {
+    "id": "recmccF0PHwKrlNHn",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Bethel New Life",
+      "Venue ID": "V-007",
+      "Region": "Chicago West (Austin)",
+      "Tech Tier": "T2",
+      "Events": [
+        "recXgPjZUIeMUrMas",
+        "recdJKc1thosIRMTH"
+      ],
+      "Host Intake": [
+        "recpYlOC5OCfxjfuK"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "Chicago West",
+      "Event Summary": "E24-004 (2024-04-20) \u2014 Completed\nE26-008 (2026-04-24) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2026",
+      "Host_Token": "4ba3e6d6d5f358ec",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/4ba3e6d6d5f358ec/",
+      "Financial_Password_Hash": "f5ea6f8704d245b765e19ca88d387377b68d9e93d3da3280c526cffe6c8d9548",
+      "Financial_Password": "sage-pine-25",
+      "Packet_Password": "gather-grove-18"
+    }
+  },
+  {
+    "id": "recmiqRhYxOQri3Ek",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "Jackson Park",
+      "Venue ID": "V-076",
+      "Region": "AWAITING RESPONSE RE 4/20 @1:30p",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recXQLnlnpiXpzlWD"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-102 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "reco7qXJhGATqEFOg",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Chicago Cultural Center",
+      "Venue ID": "V-014",
+      "Region": "Chicago Central (Downtown, Loop)",
+      "Capacity": 200,
+      "Tech Tier": "T1",
+      "Events": [
+        "rec094UbWyOdoUIhn",
+        "rec24HLiK4MypKDfS",
+        "recDNXFSOFKMpszeb",
+        "recFL0bSBqGFL2nfe",
+        "recKpist0HdBaAbQH",
+        "recMQqRXrlBJFoJbs",
+        "recViXSeS27z60se3",
+        "recZVgAS49GPemZEa",
+        "recf5EiTJLgrB0mwo",
+        "recg1xtoZdhYlGvIS",
+        "recgL5SKo7dz8wMZU",
+        "recilXGtBY8cigT10",
+        "recrvKgHEbyhGKRKf",
+        "recsSxzbhravxyw07",
+        "recvcrtud1arBAcWW",
+        "recwhSM3Y7vtpFMKY"
+      ],
+      "Tech Level": "T1",
+      "Readiness": "Partial",
+      "Area": "Chicago Central",
+      "Event Summary": "E24-001 (2024-04-18) \u2014 Completed\nE24-003 (2024-04-20) \u2014 Completed\nE24-005 (2024-04-21) \u2014 Completed\nE25-010 (2025-04-25) \u2014 Scheduled\nE25-014 (2025-04-26) \u2014 Scheduled\nE25-041 (2025-04-26) \u2014 Scheduled\nE25-043 (2025-04-26) \u2014 Scheduled\nE25-125 (no date) \u2014 Interested\nE25-145 (no date) \u2014 Scheduled\nE25-148 (no date) \u2014 Scheduled\nE25-150 (no date) \u2014 Scheduled\nE25-158 (no date) \u2014 Scheduled\nE25-159 (no date) \u2014 Scheduled\nE25-169 (no date) \u2014 Interested\nE25-170 (no date) \u2014 Interested\nE26-015 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "bd0ba55394710133",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/bd0ba55394710133/",
+      "Financial_Password_Hash": "f8da8f5806dba0dfbcedea299a4a970b214a416dbbe7ed5a77222a28380f5858",
+      "Financial_Password": "moss-coral-31",
+      "Packet_Password": "ridge-meadow-15"
+    }
+  },
+  {
+    "id": "recptA91GqtmmZsho",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "OTHER: Wisconsin",
+      "Venue ID": "V-089",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recUFCFopTDOt4pEw"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-131 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recqWXD6avze3iMCh",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "Milwaukee Film Fest?",
+      "Venue ID": "V-045",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recvDHHcjwCtmXyUE"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-053 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recsHBnmKMgRRalSI",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Triton College",
+      "Venue ID": "V-008",
+      "Region": "Western Suburbs (River Grove)",
+      "Tech Tier": "T2",
+      "Events": [
+        "rec8ushxyzIzR5cuQ",
+        "reckv0SNTSM0peC3c"
+      ],
+      "Host Intake": [
+        "rec3XdFWhV1SF1mHO"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "West Suburbs",
+      "Event Summary": "E25-008 (2025-04-24) \u2014 Scheduled\nE26-009 (2026-04-24) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "0c56d79815e911af",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/0c56d79815e911af/",
+      "Financial_Password_Hash": "860ec16afa888d9ef2eafbaed9b9bd54d4142118a6149c12ac1e8cc60e288f45",
+      "Financial_Password": "stone-coral-20",
+      "Packet_Password": "dune-forage-35"
+    }
+  },
+  {
+    "id": "recsNg4JRwdbv2vsG",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "OTHER: Florida",
+      "Venue ID": "V-084",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recFBRACnitNPLs0j"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-121 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rectQ5MFpASf8x28m",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Andersonville Chamber of Commerce",
+      "Venue ID": "V-034",
+      "Region": "Chicago North (Andersonville)",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recN8GoNWzDi5nYLd"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Chicago North",
+      "Event Summary": "E25-017 (2025-04-26) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "rectvZPG9D1sXzLnB",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Lizadro Museum (gem museum), Northbrook",
+      "Venue ID": "V-028",
+      "Events": [
+        "recSrqtXilQRTJqMl",
+        "recmlaXqGbhL3NWPe"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-031 (no date) \u2014 Interested\nE26-029 (no date) \u2014 Interested",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "e6ad4e3b7c2e5d1d",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/e6ad4e3b7c2e5d1d/",
+      "Financial_Password_Hash": "3bff488a03a40f463055a1ed9a20d97e6f1d860a3f18166dd740c7e7cb6fa40d",
+      "Financial_Password": "frost-gather-97",
+      "Packet_Password": "stone-oak-45"
+    }
+  },
+  {
+    "id": "recuAPMLYrW2LqZXS",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Kehrein Center for the Arts at BlkRoom",
+      "Venue ID": "V-010",
+      "Region": "Chicago West (Garfield Park)",
+      "Tech Tier": "T2",
+      "Events": [
+        "rece7pV2ufi5WO20z",
+        "recgprSbLbIIVvIMB",
+        "recmGNFUAG3yEM5nF"
+      ],
+      "Host Intake": [
+        "recPvJpg2U8YuVBDa"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "Chicago West",
+      "Event Summary": "E24-002 (2024-04-19) \u2014 Completed\nE25-019 (2025-04-26) \u2014 Scheduled\nE26-011 (2026-04-25) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "c17225009e5b2bd7",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/c17225009e5b2bd7/",
+      "Financial_Password_Hash": "2d1a9a9601f3834708f80a6623f61dc35a2563c4cfd303fff2f44793ba5e632d",
+      "Financial_Password": "cedar-river-39",
+      "Packet_Password": "dawn-meadow-40"
+    }
+  },
+  {
+    "id": "recuAVEgddk9ZPLFs",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Launch Party - Sarabande",
+      "Venue ID": "V-029",
+      "Region": "Chicago North (Roscoe Village)",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recwZnDUu78P5F0k6"
+      ],
+      "Readiness": "Needs Data",
+      "Area": "Chicago North",
+      "Event Summary": "E25-001 (2025-04-22) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recuGfwjP4wwT1hCS",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "The Horticultural Society of New York",
+      "Venue ID": "V-043",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recWT1zz136BVotoy"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-049 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recuTI3ZRWzwcFG7F",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "South",
+      "Venue ID": "V-073",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Readiness": "Needs Data",
+      "Outreach Priority": "Low",
+      "Season": "Inactive"
+    }
+  },
+  {
+    "id": "recuxaLR1qVkVgfdW",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Oak Park Arts Center",
+      "Venue ID": "V-039",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec4PpBEYqCMmyXY3"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-037 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recvAD19CefbsjwDv",
+    "createdTime": "2026-02-15T18:53:58.000Z",
+    "fields": {
+      "Venue Name": "Broadway United Methodist Church",
+      "Venue ID": "V-012",
+      "Region": "Chicago North (East Lakeview)",
+      "Tech Tier": "T2",
+      "Events": [
+        "recM5FQN9FDcJ31XL",
+        "rectPGc6RH8ieIfFv"
+      ],
+      "Host Intake": [
+        "recTCEIcmeRxnVKPE"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "Chicago North",
+      "Event Summary": "E25-012 (2025-04-25) \u2014 Scheduled\nE26-013 (2026-04-25) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "d96d41217bde9ef0",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/d96d41217bde9ef0/",
+      "Financial_Password_Hash": "ebbcf25b545397bc96e241b6435557c4b9200950dcfbeb2edadcfcd89a0db4fe",
+      "Financial_Password": "ember-wind-82",
+      "Packet_Password": "cliff-moss-25"
+    }
+  },
+  {
+    "id": "recvO05aQEkuMbPBa",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "Funding",
+      "Venue ID": "V-062",
+      "Region": "# of Sites",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec7PDiMW2eA4Lbkt",
+        "recJy3Dje6o6PTKgP"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-078 (no date) \u2014 Scheduled\nE25-142 (no date) \u2014 Scheduled",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recvcqsdywz3qlgSR",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "North Suburbs: Park Ridge",
+      "Venue ID": "V-051",
+      "Region": "CONFIRMED 3/28",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recz6Yv3ETZ76v3ub"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-060 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recvmeL4VC5ykNz24",
+    "createdTime": "2026-02-15T18:54:00.000Z",
+    "fields": {
+      "Venue Name": "North-Lincoln Park",
+      "Venue ID": "V-057",
+      "Region": "CONFIRMED 3/26",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recFcKHM4yqcnEB2G"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-072 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "recwkZO9380Cl00EB",
+    "createdTime": "2026-02-15T18:53:57.000Z",
+    "fields": {
+      "Venue Name": "Village of Oak Park",
+      "Venue ID": "V-005",
+      "Region": "Near West Suburbs (Oak Park)",
+      "Tech Tier": "T2",
+      "Notes": "Original: Village of Oak Park at location TBD, possibly OPRF High School.",
+      "Events": [
+        "recchdoM0uLz1mDMa",
+        "rechDPfuF4wALXfZK",
+        "recoJlafVGUO5JUuJ"
+      ],
+      "Host Intake": [
+        "recTzcHQyKNNlSpwE"
+      ],
+      "Tech Level": "T2",
+      "Readiness": "Partial",
+      "Area": "West Suburbs",
+      "Event Summary": "E25-065 (no date) \u2014 Scheduled\nE25-084 (no date) \u2014 Interested\nE26-006 (2026-04-24) \u2014 Scheduled",
+      "Outreach Priority": "Urgent",
+      "Season": "2025+2026",
+      "Host_Token": "c557ec977732717f",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/c557ec977732717f/",
+      "Financial_Password_Hash": "0ae8f631094b3ea2f326c2fcc954cc9b8cd1282aea48e2423bf6a8a85830da40",
+      "Financial_Password": "canopy-linden-42",
+      "Packet_Password": "linden-harbor-11"
+    }
+  },
+  {
+    "id": "recxtCyQRPVxfWyQj",
+    "createdTime": "2026-02-15T18:53:59.000Z",
+    "fields": {
+      "Venue Name": "Village of Oak Park at Oak Park Village Hall (with Sustainability Department, Chief Sustainability Officer)",
+      "Venue ID": "V-024",
+      "Region": "Near West Suburbs (Oak Park)",
+      "Contact Info": "Lindsey Nieratka <LNieratka@oak-park.us>,",
+      "Events": [
+        "recB6OmnEpSXGvNUQ",
+        "recDlYPa4BbuS8Uye",
+        "recOJBOeSQq7GFVMu",
+        "recXsWKs47D1tgE8K",
+        "reczWEyp0atTNw1TS"
+      ],
+      "Readiness": "Partial",
+      "Area": "West Suburbs",
+      "Event Summary": "E25-003 (2025-04-23) \u2014 Scheduled\nE25-027 (no date) \u2014 Interested\nE25-091 (no date) \u2014 Interested\nE25-178 (no date) \u2014 Interested\nE26-025 (no date) \u2014 Interested",
+      "Outreach Priority": "High",
+      "Season": "2025+2026",
+      "Host_Token": "8b16fa74f3760ad5",
+      "Host_Helper_URL": "https://hosts.oneearthfilmfest.org/8b16fa74f3760ad5/",
+      "Financial_Password_Hash": "f9e32a5d9dfbcfb7cf21ea7f2638b73759dcd15a9ec2e4ec591cbb9c4a19510e",
+      "Financial_Password": "maple-reef-54",
+      "Packet_Password": "cliff-prairie-81"
+    }
+  },
+  {
+    "id": "recyas55jA4HpyoWi",
+    "createdTime": "2026-02-15T18:54:03.000Z",
+    "fields": {
+      "Venue Name": "North, North Park",
+      "Venue ID": "V-097",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "rec5UmpuU9vKPFeM9",
+        "recC5ANj5sUWzxnwJ",
+        "recQDrc6OD0qilzGk",
+        "recfzqgdPGPgLI9ZX"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-105 (no date) \u2014 Interested\nE25-154 (no date) \u2014 Interested\nE25-160 (no date) \u2014 Interested\nE25-172 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "reczYuv4Le7Mtw7Kd",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "0",
+      "Venue ID": "V-064",
+      "Region": "0",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recY6HoewmP7o2Eap"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-080 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "reczjoBnfxCoNtFHu",
+    "createdTime": "2026-02-15T18:54:02.000Z",
+    "fields": {
+      "Venue Name": "West Cook County near DuPage",
+      "Venue ID": "V-083",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recs5BL97iIDypCH3"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-120 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  },
+  {
+    "id": "reczyknhsDUjImrVy",
+    "createdTime": "2026-02-15T18:54:01.000Z",
+    "fields": {
+      "Venue Name": "NW side of Chi",
+      "Venue ID": "V-067",
+      "First OEFF Year": 2025,
+      "Notes": "Added from 2025HostVenues",
+      "Events": [
+        "recPZBKDOaOQLrXMl"
+      ],
+      "Readiness": "Needs Data",
+      "Event Summary": "E25-085 (no date) \u2014 Interested",
+      "Outreach Priority": "Low",
+      "Season": "2025"
+    }
+  }
+]
