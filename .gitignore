@@ -11,3 +11,25 @@ token-map.json
 
 # Python bytecode
 __pycache__/
+
+# App installers
+*.dmg
+
+# Rendered output (HTML source is canonical)
+*.pdf
+
+# Backup files
+*.bak
+
+# Local editor/tool config
+.obsidian/
+.claude/
+
+# Compressed archives
+context.zip
+
+# Regenerable caches
+.airtable-cache.json
+
+# Session archaeology (local reference only)
+context/
