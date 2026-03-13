@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF 2026 — Eventbrite Setup Sheet for Josh</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background: #f8f6f3;
+    color: #2c2c2c;
+    padding: 2rem;
+    line-height: 1.5;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+  }
+  .subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .dot-complete { background: #5c7c6b; }
+  .dot-needs { background: #c4873b; }
+  .dot-confirm { background: #8b6f5c; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px hsla(25, 40%, 30%, 0.08);
+    font-size: 0.85rem;
+  }
+  thead {
+    background: #3a5a4a;
+    color: #fff;
+  }
+  th {
+    padding: 0.7rem 0.6rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  td {
+    padding: 0.55rem 0.6rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #f5f2ee; }
+
+  /* Date grouping */
+  .date-row td {
+    background: #eae6df;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    color: #3a5a4a;
+  }
+
+  /* Status highlighting */
+  .todo {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    display: inline-block;
+    line-height: 1.4;
+  }
+  .todo-need {
+    background: #fef3e2;
+    color: #8a5a1e;
+    border: 1px solid #e8d0a8;
+  }
+  .todo-confirm {
+    background: #f3ede7;
+    color: #6b5340;
+    border: 1px solid #d4c4b0;
+  }
+  .todo-ok {
+    background: #e8f0eb;
+    color: #3a5a4a;
+    border: 1px solid #b8d0c0;
+  }
+
+  .price-free { color: #5c7c6b; font-weight: 600; }
+  .price-paid { color: #8a5a1e; font-weight: 600; }
+  .pending { font-style: italic; color: #888; }
+
+  .film-col { max-width: 180px; }
+  .venue-col { max-width: 160px; }
+  .addr-col { max-width: 220px; font-size: 0.8rem; color: #555; }
+
+  .summary {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px hsla(25, 40%, 30%, 0.08);
+    font-size: 0.9rem;
+  }
+  .summary h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .summary ul { padding-left: 1.2rem; }
+  .summary li { margin-bottom: 0.3rem; }
+</style>
+</head>
+<body>
+
+<h1>OEFF 2026 Eventbrite Setup</h1>
+<p class="subtitle">Pre-populated from existing event data. Josh: fill in the orange items, confirm the brown ones.</p>
+
+<div class="legend">
+  <span><span class="dot dot-complete"></span> Have what we need</span>
+  <span><span class="dot dot-needs"></span> Josh needs to provide</span>
+  <span><span class="dot dot-confirm"></span> Needs confirmation</span>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Event Name</th>
+      <th>Venue</th>
+      <th>Address</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Film</th>
+      <th>Price</th>
+      <th>Type</th>
+      <th>Rep</th>
+      <th>Josh TODO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Apr 22 -->
+    <tr class="date-row"><td colspan="11">Tuesday, April 22</td></tr>
+    <tr>
+      <td>1</td>
+      <td>Reasons for Hope — Dr. Jane Goodall</td>
+      <td class="venue-col">Columbia College - Film Row Cinema</td>
+      <td class="addr-col">1104 S Wabash, Chicago IL</td>
+      <td>6:00 PM</td>
+      <td>9:00 PM</td>
+      <td class="film-col">Reasons for Hope: Dr. Jane Goodall</td>
+      <td class="price-paid">$75 / 2 for $150</td>
+      <td>Flagship</td>
+      <td>Michael</td>
+      <td><span class="todo todo-confirm">CONFIRM: ticket tiers and pricing</span></td>
+    </tr>
+
+    <!-- Apr 23 -->
+    <tr class="date-row"><td colspan="11">Wednesday, April 23</td></tr>
+    <tr>
+      <td>2</td>
+      <td>Beyond Zero</td>
+      <td class="venue-col">Trinity Lutheran Church</td>
+      <td class="addr-col">675 E Algonquin Rd, Des Plaines IL 60016</td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col">Beyond Zero</td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: end time</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Plastic People</td>
+      <td class="venue-col">Climate Action Evanston</td>
+      <td class="addr-col">Evanston Public Library, 1703 Orrington, Evanston IL</td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col">Plastic People</td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: end time</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>TBD Film</td>
+      <td class="venue-col">Uncommon Ground</td>
+      <td class="addr-col">3800 N Clark St, Chicago IL 60613</td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col"><span class="pending">TBD</span></td>
+      <td class="price-free">Free</td>
+      <td>Flagship</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: film title + end time</span></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Drowned Land</td>
+      <td class="venue-col">Columbia College - Film Row Cinema</td>
+      <td class="addr-col">1104 S Wabash, Chicago IL</td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col"><span class="pending">Drowned Land (pending)</span></td>
+      <td class="price-paid">$75 / 2 for $150</td>
+      <td>Flagship</td>
+      <td>Michael</td>
+      <td><span class="todo todo-confirm">CONFIRM: same pricing as 4/22?</span><br><span class="todo todo-need">NEED: end time</span></td>
+    </tr>
+
+    <!-- Apr 24 -->
+    <tr class="date-row"><td colspan="11">Thursday, April 24</td></tr>
+    <tr>
+      <td>6</td>
+      <td>How to Power a City</td>
+      <td class="venue-col">Village of Oak Park</td>
+      <td class="addr-col"><span class="pending">TBD — possibly OPRF High School</span></td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col"><span class="pending">How to Power a City (pending)</span></td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: venue address + end time</span></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>How to Power a City</td>
+      <td class="venue-col">Institute of Cultural Affairs</td>
+      <td class="addr-col"><span class="pending">ICA, Uptown, Chicago IL</span></td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col"><span class="pending">How to Power a City (pending)</span></td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: venue address + end time</span></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Rooted</td>
+      <td class="venue-col">Bethel New Life</td>
+      <td class="addr-col">1140 N. Lamon, Chicago IL 60644</td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col">Rooted</td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: end time</span></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>How to Power a City</td>
+      <td class="venue-col">Triton College</td>
+      <td class="addr-col">2000 Fifth Ave, Bldg R Rm 221, River Grove IL</td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col">How to Power a City</td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: end time</span></td>
+    </tr>
+
+    <!-- Apr 25 -->
+    <tr class="date-row"><td colspan="11">Friday, April 25</td></tr>
+    <tr>
+      <td>10</td>
+      <td>Young Filmmakers Winner Short Films</td>
+      <td class="venue-col">Cultivate Collective / AGC</td>
+      <td class="addr-col">4942 W 44th St, Chicago IL 60638</td>
+      <td>1:00 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col">Young Filmmakers Winner Short Films</td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: end time</span></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>40 Acres</td>
+      <td class="venue-col">Kehrein Center / BlkRoom</td>
+      <td class="addr-col"><span class="pending">Garfield Park, Chicago IL</span></td>
+      <td>1:00 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col"><span class="pending">40 Acres (pending)</span></td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: venue address + end time</span></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>40 Acres</td>
+      <td class="venue-col">Black Girl Environmentalists</td>
+      <td class="addr-col"><span class="pending">UIC or Patagonia, 1115 W Fulton Market</span></td>
+      <td>1:00 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col"><span class="pending">40 Acres (pending)</span></td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: confirm venue + end time</span></td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>From Rails to Trails</td>
+      <td class="venue-col">Broadway United Methodist</td>
+      <td class="addr-col">3338 N Broadway St, Chicago IL 60657</td>
+      <td>6:30 PM</td>
+      <td class="pending">—</td>
+      <td class="film-col">From Rails to Trails</td>
+      <td class="price-free">Free</td>
+      <td>Community</td>
+      <td>Ana</td>
+      <td><span class="todo todo-need">NEED: end time</span></td>
+    </tr>
+
+    <!-- Apr 27 -->
+    <tr class="date-row"><td colspan="11">Sunday, April 27</td></tr>
+    <tr>
+      <td>14</td>
+      <td>Rooted</td>
+      <td class="venue-col">Dominican University</td>
+      <td class="addr-col"><span class="pending">Dominican University, River Forest IL</span></td>
+      <td class="pending">—</td>
+      <td class="pending">—</td>
+      <td class="film-col">Rooted</td>
+      <td class="price-free">Free</td>
+      <td>Community / Hybrid</td>
+      <td>Ana / Garen</td>
+      <td><span class="todo todo-need">NEED: start + end time</span><br><span class="todo todo-confirm">CONFIRM: hybrid streaming?</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="summary">
+  <h2>Asks for Josh</h2>
+  <ul>
+    <li><strong>Fill in the orange items</strong> — mostly end times and a few unconfirmed addresses</li>
+    <li><strong>Add Garen to the Eventbrite org login</strong> so he can get an API key</li>
+    <li><strong>Create one event manually</strong> as a template (description copy, image, ticket config) — Garen will match it for the batch</li>
+    <li><strong>Standard end time?</strong> If most community events run ~2 hours (e.g. 6:30–8:30), just say so and Garen will default it</li>
+  </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+{
+  "generated": "2026-03-07",
+  "tables": {
+    "Events_2026": {
+      "total": 28,
+      "field_population": {
+        "Date": 14,
+        "Time": 13,
+        "Film ID": 12,
+        "Film Title": 14,
+        "Film Status": 12,
+        "Event Tier": 20,
+        "OEFF Rep": 0,
+        "Team Contact": 15,
+        "Volunteer Needs": 0
+      },
+      "missing_date": 14,
+      "missing_film": 16
+    },
+    "Venues_2026": {
+      "total": 27,
+      "field_population": {
+        "Region": 20,
+        "Capacity": 14,
+        "Tech Level": 19,
+        "Contact Info": 2,
+        "Readiness": 27
+      }
+    },
+    "Films": {
+      "total": 16,
+      "field_population": {
+        "Film Readiness": 12,
+        "Trailer Link": 0,
+        "Caption Status": 1,
+        "Runtime_Min": 14
+      }
+    },
+    "Deliverables": {
+      "total": 54,
+      "by_status": {
+        "Not Started": 52,
+        "Delivered": 2
+      },
+      "by_type": {
+        "Slide Deck": 21,
+        "Screening Packet": 20,
+        "Survey": 6,
+        "Video Asset": 3,
+        "Marketing Asset": 4
+      },
+      "by_owner": {
+        "Erin": 25,
+        "Garen": 23,
+        "Josh": 2,
+        "Kim": 1,
+        "Sandy": 1,
+        "Cesar": 2
+      },
+      "missing_due_date": 54
+    }
+  },
+  "issues": [
+    {
+      "table": "Events",
+      "field": "Date",
+      "populated": 14,
+      "total": 28,
+      "severity": "LOW"
+    },
+    {
+      "table": "Events",
+      "field": "Time",
+      "populated": 13,
+      "total": 28,
+      "severity": "CRITICAL"
+    },
+    {
+      "table": "Events",
+      "field": "Film ID",
+      "populated": 12,
+      "total": 28,
+      "severity": "CRITICAL"
+    },
+    {
+      "table": "Events",
+      "field": "Film Title",
+      "populated": 14,
+      "total": 28,
+      "severity": "LOW"
+    },
+    {
+      "table": "Events",
+      "field": "Film Status",
+      "populated": 12,
+      "total": 28,
+      "severity": "CRITICAL"
+    },
+    {
+      "table": "Events",
+      "field": "Event Tier",
+      "populated": 20,
+      "total": 28,
+      "severity": "LOW"
+    },
+    {
+      "table": "Events",
+      "field": "OEFF Rep",
+      "populated": 0,
+      "total": 28,
+      "severity": "CRITICAL"
+    },
+    {
+      "table": "Events",
+      "field": "Team Contact",
+      "populated": 15,
+      "total": 28,
+      "severity": "LOW"
+    },
+    {
+      "table": "Events",
+      "field": "Volunteer Needs",
+      "populated": 0,
+      "total": 28,
+      "severity": "CRITICAL"
+    },
+    {
+      "table": "Venues",
+      "field": "Region",
+      "populated": 20,
+      "total": 27,
+      "severity": "LOW"
+    },
+    {
+      "table": "Venues",
+      "field": "Capacity",
+      "populated": 14,
+      "total": 27,
+      "severity": "LOW"
+    },
+    {
+      "table": "Venues",
+      "field": "Tech Level",
+      "populated": 19,
+      "total": 27,
+      "severity": "LOW"
+    },
+    {
+      "table": "Venues",
+      "field": "Contact Info",
+      "populated": 2,
+      "total": 27,
+      "severity": "CRITICAL"
+    },
+    {
+      "table": "Films",
+      "field": "Film Readiness",
+      "populated": 12,
+      "total": 16,
+      "severity": "LOW"
+    },
+    {
+      "table": "Films",
+      "field": "Trailer Link",
+      "populated": 0,
+      "total": 16,
+      "severity": "CRITICAL"
+    },
+    {
+      "table": "Films",
+      "field": "Caption Status",
+      "populated": 1,
+      "total": 16,
+      "severity": "CRITICAL"
+    }
+  ],
+  "summary": {
+    "critical_gaps": 8,
+    "low_gaps": 8,
+    "total_issues": 16
+  }
+}

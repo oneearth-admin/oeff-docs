@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!-- guards: none — gdocs-push artifact, not a web component. Inline hex colors are Google Docs formatting targets. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Host Helper Migration Plan — OEFF 2026</title>
+<style>
+/* gdocs-push styles: hex values required for Google Docs rendering fidelity */
+body {
+    font-family: 'Source Sans 3', 'Source Sans Pro', Calibri, Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.15;
+    color: #2c2c2c;
+}
+h1, h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    page-break-after: avoid;
+}
+h3, h4, h5, h6 {
+    font-family: 'Source Sans 3', 'Source Sans Pro', Calibri, Arial, sans-serif;
+    page-break-after: avoid;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    page-break-inside: avoid;
+}
+th {
+    background-color: #e3ede7;
+    font-weight: bold;
+    text-align: left;
+}
+td, th {
+    padding: 4pt 8pt;
+    border: 1pt solid #d4d0c8;
+    vertical-align: top;
+    font-size: 10pt;
+}
+code {
+    font-family: 'Source Code Pro', 'Courier New', monospace;
+    font-size: 9pt;
+    background-color: #f0ede7;
+    padding: 1pt 4pt;
+}
+pre {
+    page-break-inside: avoid;
+}
+ul, ol {
+    page-break-inside: avoid;
+}
+a {
+    color: #3960AC;
+    text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+
+<h1 style="margin-top:14pt; margin-bottom:4pt">Host Helper Migration Plan</h1>
+<p style="margin-top:0; margin-bottom:5pt">OEFF 2026 — March 9, 2026 — For Kim + team</p>
+
+<table style="width:100%;border-collapse:collapse;margin:8pt 0"><tr><td style="padding:10pt 12pt;background-color:#f0ede7;border:1pt solid #d4d0c8;vertical-align:top">
+<strong>The plan</strong>
+Replace the per-venue static HTML pages with Airtable Interface views. The public host guide site (hosts.oneearthfilmfest.org) stays exactly as-is — it serves a different purpose. Use this as an Airtable pilot: two birds, one scone.
+</td></tr></table>
+
+<table style="width:100%;border-collapse:collapse;margin:8pt 0"><tr><td style="padding:10pt 12pt;background-color:#e3ede7;border:1pt solid #a8c4b0;vertical-align:top">
+<strong>Decision needed:</strong> This changes the host experience (Airtable link instead of a custom page) and adds a light maintenance ask for Kim (updating fields hosts will see). I'd like sign-off from Kim and Ana before I build the interface. If you're good with the approach, I can have a working pilot in an afternoon.
+</td></tr></table>
+
+<p style="margin-top:8pt; margin-bottom:8pt; font-size:10pt; line-height:1.5; background-color:#f8f7f4; border:1pt solid #d4d0c8; padding:8pt 12pt">
+<strong>In this doc:</strong><br>
+1. What stays, what changes<br>
+2. What hosts have always gotten<br>
+3. Static site vs. Airtable interface<br>
+4. Why Airtable is the better path<br>
+5. Gap analysis<br>
+6. Data readiness<br>
+7. Rollout phases
+</p>
+
+
+<h2 style="margin-top:14pt; margin-bottom:4pt">1. What stays, what changes</h2>
+
+<table>
+  <tr><th>Component</th><th>Status</th></tr>
+  <tr><td>Public host guide (hosts.oneearthfilmfest.org)</td><td>Stays — general orientation, webinars, resources</td></tr>
+  <tr><td>Old Host Helper format (spreadsheet)</td><td>Stays as baseline through Phase 2 — retired when Airtable view is live</td></tr>
+  <tr><td>Per-venue static HTML helper pages</td><td>Replaced by Airtable Interface views</td></tr>
+  <tr><td>Token map + privacy lint system</td><td>Archived — reusable if needed later</td></tr>
+  <tr><td>Airtable base (venues, events, films, contacts)</td><td>Stays — data source for the interface</td></tr>
+  <tr><td>Mailmeteor email workflow</td><td>Stays — merge field changes from token URL to Airtable shared link</td></tr>
+  <tr><td>Kim's comms log + team Sheets</td><td>Stays — no change to team workflows</td></tr>
+</table>
+
+
+<h2 style="margin-top:14pt; margin-bottom:4pt">2. What hosts have always gotten</h2>
+
+<p style="margin-top:0; margin-bottom:5pt">Every year, each host receives a personalized document with their venue-specific details. In past years this was a per-venue Excel spreadsheet in the shared Drive, maintained manually by Josh and Ana.</p>
+
+<table>
+  <tr><th>Field</th><th>How hosts used it</th><th>Update cadence</th></tr>
+  <tr><td>Film assignment + runtime</td><td>Core info — what they're screening</td><td>Once</td></tr>
+  <tr><td>Event date and time</td><td>Core info</td><td>Once</td></tr>
+  <tr><td>Run of show / timeline</td><td>Day-of reference — setup through close</td><td>Once, sometimes revised</td></tr>
+  <tr><td>RSVP / ticket count</td><td>Drove marketing decisions</td><td>Daily before noon during fest week</td></tr>
+  <tr><td>Host + AV contacts</td><td>Day-of reference</td><td>Once</td></tr>
+  <tr><td>Film file download link</td><td>How hosts got their screening copy</td><td>Once (a specific cell in the per-venue spreadsheet — confidential)</td></tr>
+  <tr><td>Emergency contacts</td><td>Day-of escalation</td><td>Once</td></tr>
+</table>
+
+<p style="margin-top:0; margin-bottom:5pt">Marketing toolkit, webinar recordings, volunteer coordination, and forms were all handled separately through email and the shared Drive — not part of the Host Helper itself.</p>
+
+
+<h2 style="margin-top:14pt; margin-bottom:4pt">3. Static site vs. Airtable interface</h2>
+
+<table style="width:100%;border-collapse:collapse;margin:8pt 0"><tr><td style="width:50%;padding:8pt 10pt;border:1pt solid #d4d0c8;vertical-align:top">
+  <span>Static site</span>
+  <h3>Per-venue HTML pages</h3>
+  <p style="font-size:0.9rem; font-family: 'Source Sans 3', system-ui, sans-serif">Python script pulls data from Airtable, generates a branded HTML page per venue, deploys to Cloudflare Pages. Each host gets a unique URL. Pages have temporal states (feb/mar/apr) that show only what's relevant now.</p>
+  <p style="font-size:0.9rem; font-family: 'Source Sans 3', system-ui, sans-serif"><strong>What's built:</strong> The public host guide, the generator script, the token map, privacy lint. The per-venue pages are templated but not yet deployed to hosts.</p>
+</td><td style="width:50%;padding:8pt 10pt;border:1pt solid #d4d0c8;vertical-align:top">
+  <span>Airtable Interface</span>
+  <h3>Shared views from existing data</h3>
+  <p style="font-size:0.9rem; font-family: 'Source Sans 3', system-ui, sans-serif">Airtable Interface Designer builds a host-facing view on top of the existing OEFF base. Each host gets a shared link filtered to their venue. Data changes appear instantly. No scripts, no deployment pipeline.</p>
+  <p style="font-size:0.9rem; font-family: 'Source Sans 3', system-ui, sans-serif"><strong>What's built:</strong> The Airtable base already has all the venue, event, film, and contact data. Interface Designer is included in our current plan tier.</p>
+</td></tr></table>
+
+
+<h2 style="margin-top:14pt; margin-bottom:4pt">4. Why Airtable is the better path</h2>
+
+<h3 style="margin-top:10pt; margin-bottom:3pt">What Airtable gains</h3>
+<ul>
+  <li><strong>Live ticket counts:</strong> If wired to Eventbrite, RSVP numbers update automatically — no more daily manual entry.</li>
+  <li><strong>Instant updates:</strong> Fix a typo, add a contact, change a time — hosts see it immediately.</li>
+  <li><strong>Anyone can maintain it:</strong> No technical handoff documentation needed. If you can use Airtable, you can update host-facing data.</li>
+  <li><strong>Lower risk at festival time:</strong> Seven weeks out, a simpler system with fewer moving parts is the safer choice.</li>
+</ul>
+
+<h3 style="margin-top:10pt; margin-bottom:3pt">What Airtable gives up</h3>
+<ul>
+  <li><strong>Design control:</strong> Airtable interfaces are clean but generic — hosts won't see OEFF branding, but they will see correct, live data.</li>
+  <li><strong>Offline access:</strong> Hosts need internet to see their page. No cached/printable fallback.</li>
+  <li><strong>Temporal states:</strong> The static site showed hosts only what mattered right now (confirmed → prep → ready). Airtable can hide empty fields, but doesn't have the same progressive disclosure.</li>
+</ul>
+
+<h3 style="margin-top:10pt; margin-bottom:3pt">Why the tradeoff favors Airtable</h3>
+<p style="margin-top:0; margin-bottom:5pt">The static site requires a specific person to operate. Updating host data means: edit Airtable, run a Python script, commit the output, push to git, wait for Cloudflare to deploy. Any OEFF team member can do step one. Steps two through five require someone comfortable with a command line. If that person isn't available, host data doesn't update.</p>
+<p style="margin-top:0; margin-bottom:5pt">Airtable removes the pipeline entirely. Data lives in Airtable. Hosts see an Airtable Interface. When someone updates a field, hosts see the change. No build step, no deploy, no git. Kim, Ana, or Josh can update host-facing data directly.</p>
+
+
+<h2 style="margin-top:14pt; margin-bottom:4pt">5. Gap analysis</h2>
+
+<table>
+  <tr>
+    <th>Data / Feature</th>
+    <th>Old Helper (Excel)</th>
+    <th><span style="font-size:0.65rem">Static</span></th>
+    <th><span style="font-size:0.65rem">Airtable</span></th>
+  </tr>
+  <tr>
+    <td>Venue, date, time, film</td>
+    <td>Yes</td><td>Yes</td><td>Yes</td>
+  </tr>
+  <tr>
+    <td>Run of show / timeline</td>
+    <td>Manual</td><td>Auto-computed</td><td>Formula field or manual</td>
+  </tr>
+  <tr>
+    <td>Host + AV contacts</td>
+    <td>Yes</td><td>Yes (token-gated)</td><td>Yes (scoped view)</td>
+  </tr>
+  <tr>
+    <td>RSVP / ticket counts</td>
+    <td>Daily manual</td><td>Snapshot at build</td><td>Can be live via sync</td>
+  </tr>
+  <tr>
+    <td>Film file / screening packet</td>
+    <td>Cell 27B</td><td>Token-gated, April only</td><td>URL field, visible when populated</td>
+  </tr>
+  <tr>
+    <td>Scholarship / financial data</td>
+    <td>Separate email</td><td>Password-gated section</td><td>Separate interface or excluded</td>
+  </tr>
+  <tr>
+    <td>Emergency contacts</td>
+    <td>Phone + name</td><td>Email only (privacy lint)</td><td>Controlled by view permissions</td>
+  </tr>
+  <tr>
+    <td>Marketing assets</td>
+    <td>Separate Drive folder</td><td>Inline links, March state</td><td>URL or attachment fields</td>
+  </tr>
+  <tr>
+    <td>"Your Focus" callout</td>
+    <td>Did not exist</td><td>Yes</td><td>Rich text or header field</td>
+  </tr>
+  <tr>
+    <td>Temporal / progressive disclosure</td>
+    <td>No</td><td>Yes (feb/mar/apr)</td><td>Partial (conditional field visibility)</td>
+  </tr>
+  <tr>
+    <td>Mobile-friendly</td>
+    <td>No (Excel)</td><td>Yes, works offline</td><td>Yes, requires internet</td>
+  </tr>
+  <tr>
+    <td>Host self-service updates</td>
+    <td>Email Josh/Ana</td><td>Pre-filled Google Form</td><td>Could allow limited editing</td>
+  </tr>
+  <tr>
+    <td>Maintainable without Garen</td>
+    <td>Yes</td><td>No</td><td>Yes</td>
+  </tr>
+</table>
+
+
+<h2 style="margin-top:14pt; margin-bottom:4pt">6. Data readiness</h2>
+
+<p style="margin-top:0; margin-bottom:5pt">Regardless of front end, this is what needs to be current in Airtable before host-facing views go live.</p>
+
+<table>
+  <tr><th>Data</th><th>Status</th></tr>
+  <tr><td>Venue name, address, region</td><td>Complete (22 of 22)</td></tr>
+  <tr><td>Event date and time</td><td>Complete (22 of 22)</td></tr>
+  <tr><td>Film assignment</td><td>Complete (22 of 22)</td></tr>
+  <tr><td>Film runtime</td><td>Needs verification — drives run-of-show computation</td></tr>
+  <tr><td>Primary host contact</td><td>Partial (~15 of 22) — some venues missing name, email, or cell</td></tr>
+  <tr><td>AV / tech contact</td><td>Partial — captured where intake responses exist</td></tr>
+  <tr><td>Eventbrite event URL</td><td>14 of 22 published</td></tr>
+  <tr><td>Screening packet link</td><td>Not yet — blocked on film delivery (April)</td></tr>
+  <tr><td>Venue capacity</td><td>Partial — some corrected by intake responses</td></tr>
+  <tr><td>OEFF staff contacts</td><td>Known</td></tr>
+</table>
+
+
+<h2 style="margin-top:14pt; margin-bottom:4pt">7. Rollout phases</h2>
+
+<h3 style="margin-top:10pt; margin-bottom:3pt">Phase 1: Keep the old format as baseline</h3>
+<p style="margin-top:0; margin-bottom:5pt">The previous Host Helper (per-venue spreadsheet) is a known format that hosts have used for years. We continue using it as the default while we build the replacement. If the Airtable pilot doesn't work out, the old format covers the essentials.</p>
+<p style="margin-top:0; margin-bottom:5pt">The public host guide site (hosts.oneearthfilmfest.org) continues as-is — it serves a different purpose (general orientation, webinars, what to expect) and is already deployed.</p>
+
+<h3 style="margin-top:10pt; margin-bottom:3pt">Phase 2: Get the data right</h3>
+<p style="margin-top:0; margin-bottom:5pt">Before hosts see anything new, the underlying data needs to be current. Not everything is equally urgent.</p>
+
+<table>
+  <tr><th>Priority</th><th>Data</th><th>Why</th></tr>
+  <tr>
+    <td><strong>Urgent — we need this</strong></td>
+    <td>Host contact info (name + email) for all 22 venues</td>
+    <td>Can't send anything to hosts we can't contact</td>
+  </tr>
+  <tr>
+    <td><strong>Urgent — we need this</strong></td>
+    <td>Film runtimes verified</td>
+    <td>Drives the run-of-show timeline computation</td>
+  </tr>
+  <tr>
+    <td><strong>Urgent — hosts need this</strong></td>
+    <td>Event date, time, film assignment</td>
+    <td>Core info hosts plan around — already complete</td>
+  </tr>
+  <tr>
+    <td><strong>Urgent — hosts need this</strong></td>
+    <td>Eventbrite event URLs (remaining 8 of 22)</td>
+    <td>Hosts need to promote and share their event page</td>
+  </tr>
+  <tr>
+    <td><strong>First priorities</strong></td>
+    <td>AV / tech contact per venue</td>
+    <td>Day-of reference — partial coverage from intake responses</td>
+  </tr>
+  <tr>
+    <td><strong>First priorities</strong></td>
+    <td>Venue capacity (corrected)</td>
+    <td>Some intake responses corrected original estimates</td>
+  </tr>
+  <tr>
+    <td><strong>First priorities</strong></td>
+    <td>Run of show / timeline</td>
+    <td>Can be computed from event time + runtime once runtimes are verified</td>
+  </tr>
+  <tr>
+    <td><strong>Later</strong></td>
+    <td>Screening packet links</td>
+    <td>Blocked on film delivery pipeline — April delivery</td>
+  </tr>
+  <tr>
+    <td><strong>Later</strong></td>
+    <td>Marketing assets (poster, social kit)</td>
+    <td>Can be added as URLs when ready</td>
+  </tr>
+</table>
+
+<h3 style="margin-top:10pt; margin-bottom:3pt">Phase 3: Build and pilot the Airtable view</h3>
+<p style="margin-top:0; margin-bottom:5pt">Garen builds an Airtable Interface showing host-facing fields — venue details, film info, contacts, event page links, run of show. This is a presentation layer on top of data we're already maintaining in Airtable. It doesn't require anyone to change their current workflow.</p>
+
+<p style="margin-top:0; margin-bottom:5pt">The team's operational infrastructure stays in Google Sheets. Kim's comms log stays in Sheets. Nobody adopts Airtable as a daily tool. The interface is for hosts — a way to give them a clean, up-to-date view of their venue data without building custom pages.</p>
+
+<p style="margin-top:0; margin-bottom:5pt">This is also a pilot. If it works well this year, Airtable becomes a real option for next year's host system from the start. If it doesn't, we've learned that cheaply and the old format still works.</p>
+
+<table>
+  <tr><th>Step</th><th>Who</th><th>Effort</th><th>Type</th></tr>
+  <tr><td>Build Airtable Interface with host-facing fields</td><td>Garen</td><td>1-2 hours</td><td>One-time setup</td></tr>
+  <tr><td>Create per-venue shared links</td><td>Garen</td><td>30 min</td><td>One-time setup</td></tr>
+  <tr><td>Verify hosts can only see their own venue data</td><td>Garen</td><td>30 min</td><td>One-time setup</td></tr>
+  <tr><td>Internal review — Kim + Garen look at the view together</td><td>Kim + Garen</td><td>30 min</td><td>One-time review</td></tr>
+</table>
+
+<h3 style="margin-top:10pt; margin-bottom:3pt">Phase 4: Share with hosts, interns handle validation</h3>
+<p style="margin-top:0; margin-bottom:5pt">As venues are ready — data verified, contacts confirmed, event page published — we share their Airtable view link. This doesn't have to be all at once. Venues can be turned on as they're ready.</p>
+
+<table>
+  <tr><th>Step</th><th>Who</th><th>Effort</th><th>Type</th></tr>
+  <tr><td>Add Airtable shared links to Mailmeteor merge sheet</td><td>Kim</td><td>30 min</td><td>One-time setup</td></tr>
+  <tr><td>Test with 1-2 real hosts before broader send</td><td>Kim + Garen</td><td>1 day turnaround</td><td>One-time validation</td></tr>
+  <tr><td>Send "Your screening page is ready" emails as venues are ready</td><td>Kim</td><td>Per existing SOP</td><td>Ongoing</td></tr>
+  <tr><td>Validate venue data: contacts current, times correct, links working</td><td>Interns</td><td>Ongoing</td><td>Ongoing maintenance</td></tr>
+  <tr><td>Flag data gaps and follow up with hosts for missing info</td><td>Interns</td><td>Ongoing</td><td>Ongoing maintenance</td></tr>
+</table>
+
+<p style="margin-top:0; margin-bottom:5pt">Intern work is the detail layer — checking that every field is populated, every link works, every contact email is current. This is exactly the kind of structured, repeatable task that scales with people rather than with technical infrastructure.</p>
+
+
+<p style="margin-top:14pt; margin-bottom:5pt; font-size:10pt; color:#666">
+Prepared March 9, 2026. For discussion with Kim and team.
+</p>
+
+
+</body>
+</html>

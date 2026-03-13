@@ -1,0 +1,505 @@
+<!--
+  OEFF 2026 Venue Confirmation Table
+  For Ana/Erin review — confirm venue names, slugs, and data gaps
+  Generated: 2026-03-06
+  Push to Google Docs: gdocs push venue-confirmation-table.html
+-->
+<!-- guards: core/color, core/layout, core/typography -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OEFF 2026 — Venue List for Confirmation</title>
+<style>
+  :root {
+    /* Forest palette — OEFF domain */
+    --color-bg: oklch(0.97 0.005 100);
+    --color-surface: oklch(0.95 0.01 90);
+    --color-surface-warm: oklch(0.92 0.015 85);
+    --color-border: oklch(0.82 0.02 80);
+    --color-text: oklch(0.28 0.04 150);
+    --color-text-muted: oklch(0.50 0.04 150);
+    --color-heading: oklch(0.28 0.04 150);
+    --color-primary: oklch(0.45 0.06 150);
+    --color-accent-warm: oklch(0.55 0.12 70);
+    --color-accent-alert: oklch(0.45 0.10 25);
+    --color-tag-bg: oklch(0.92 0.04 75);
+    --color-tag-text: oklch(0.45 0.08 70);
+    --color-tag-critical-bg: oklch(0.90 0.05 25);
+    --color-tag-critical-text: oklch(0.40 0.10 25);
+    --color-success-bg: oklch(0.92 0.04 150);
+    --color-table-header-bg: oklch(0.28 0.04 150);
+    --color-table-header-text: oklch(0.97 0.005 100);
+    --color-info-bg: oklch(0.97 0.02 75);
+    --color-info-border: oklch(0.88 0.04 75);
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+
+    --space-sm: 0.75rem;
+    --space-md: 1.25rem;
+    --space-lg: 2rem;
+    --radius: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body-sans);
+    color: var(--color-text);
+    background: var(--color-bg);
+    padding: var(--space-lg);
+    line-height: 1.5;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-heading);
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    margin-bottom: var(--space-lg);
+  }
+  .context {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    font-size: 0.9375rem;
+  }
+  .context h2, .nomenclature h2, .summary h2, .action-needed h2 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    color: var(--color-heading);
+    margin-bottom: var(--space-sm);
+  }
+  .context ul { padding-left: 1.25rem; }
+  .context li { margin-bottom: 0.25rem; }
+
+  .nomenclature {
+    background: var(--color-success-bg);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    font-size: 0.9375rem;
+  }
+  .nomenclature table { width: 100%; border-collapse: collapse; }
+  .nomenclature td { padding: 0.375rem 0.75rem; vertical-align: top; }
+  .nomenclature td:first-child { font-weight: 600; white-space: nowrap; width: 140px; }
+
+  table.venues {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  table.venues th {
+    background: var(--color-table-header-bg);
+    color: var(--color-table-header-text);
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+  }
+  table.venues td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+  table.venues tr:hover { background: var(--color-surface); }
+
+  .slug { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--color-primary); }
+  .date { white-space: nowrap; }
+  .capacity { text-align: center; }
+
+  .status-confirmed { color: var(--color-text); }
+  .status-tentative {
+    color: var(--color-accent-warm);
+    font-style: italic;
+  }
+
+  .gap-tag {
+    display: inline-block;
+    background: var(--color-tag-bg);
+    color: var(--color-tag-text);
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 10px;
+    margin: 0.125rem;
+    white-space: nowrap;
+  }
+  .gap-tag.critical {
+    background: var(--color-tag-critical-bg);
+    color: var(--color-tag-critical-text);
+  }
+
+  .summary {
+    margin-top: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+  }
+
+  .action-needed {
+    margin-top: 1.5rem;
+    padding: var(--space-md);
+    background: var(--color-info-bg);
+    border: 1px solid var(--color-info-border);
+    border-radius: var(--radius);
+  }
+  .action-needed h2 { color: var(--color-accent-warm); }
+  .action-needed ol { padding-left: 1.25rem; }
+  .action-needed li { margin-bottom: 0.375rem; }
+
+  small { color: var(--color-text-muted); }
+</style>
+</head>
+<body>
+
+<h1>OEFF 2026 — Venue List</h1>
+<p class="subtitle">30 venues · Generated March 6, 2026 · For Ana + Erin confirmation</p>
+
+<div class="nomenclature">
+  <h2>What we're calling things</h2>
+  <table>
+    <tr>
+      <td>Host guide</td>
+      <td>The public site at hosts.oneearthfilmfest.org — orientation, FAQs, resources for all hosts</td>
+    </tr>
+    <tr>
+      <td>Venue page</td>
+      <td>Per-venue generated page with timeline, contacts, and logistics. Token-gated (each host gets a unique link). Replaces the old Google Sheet host helpers.</td>
+    </tr>
+    <tr>
+      <td>Host helper</td>
+      <td>The legacy per-venue Google Sheet from prior years. Archived — we pull historical data from these but don't maintain them.</td>
+    </tr>
+  </table>
+</div>
+
+<div class="context">
+  <h2>What this table is for</h2>
+  <ul>
+    <li><strong>Confirm venue names</strong> — these become the canonical names used everywhere (emails, venue pages, Airtable, Eventbrite)</li>
+    <li><strong>Review data gaps</strong> — yellow tags show what's missing per venue. Most gaps get filled by the host intake form.</li>
+    <li><strong>Flag corrections</strong> — wrong date? Venue dropped? Name changed? Mark it here.</li>
+  </ul>
+</div>
+
+<table class="venues">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Venue</th>
+      <th>Slug</th>
+      <th>Date</th>
+      <th>Capacity</th>
+      <th>Region</th>
+      <th>Data Gaps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td class="status-confirmed">Andersonville Chamber of Commerce</td>
+      <td class="slug">andersonville-chamber</td>
+      <td class="date">—</td>
+      <td class="capacity">~50</td>
+      <td>—</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag">contacts</span> <span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td class="status-confirmed">Bethel New Life</td>
+      <td class="slug">bethel-new-life</td>
+      <td class="date">4/24 · 6:30P</td>
+      <td class="capacity">120</td>
+      <td>Chicago West (Austin)</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td class="status-confirmed">Black Girl Environmentalists<br><small>at Patagonia Fulton Market</small></td>
+      <td class="slug">black-girl-environmentalists</td>
+      <td class="date">4/25 · 6:30–7P</td>
+      <td class="capacity">150</td>
+      <td>Fulton Market</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td class="status-confirmed">Broadway United Methodist Church</td>
+      <td class="slug">broadway-umc</td>
+      <td class="date">4/25 · 6:30P</td>
+      <td class="capacity">120</td>
+      <td>Chicago North (Lakeview)</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td class="status-confirmed">BUILD Chicago</td>
+      <td class="slug">build-chicago</td>
+      <td class="date">4/25 · 1P</td>
+      <td class="capacity">100</td>
+      <td>Chicago West</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td class="status-confirmed">Calumet College of St. Joseph</td>
+      <td class="slug">calumet-college</td>
+      <td class="date">—</td>
+      <td class="capacity">~75–80</td>
+      <td>Chicago South</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag">contacts</span> <span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td class="status-confirmed">Chicago Climate Action Museum</td>
+      <td class="slug">chicago-climate-museum</td>
+      <td class="date">4/24</td>
+      <td class="capacity">—</td>
+      <td>—</td>
+      <td><span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span> <span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td class="status-confirmed">Chicago Cultural Center</td>
+      <td class="slug">chicago-cultural-center</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>Chicago Central (Loop)</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td class="status-confirmed">Chicago Public Library — Harold Washington</td>
+      <td class="slug">cpl-harold-washington</td>
+      <td class="date">4/26</td>
+      <td class="capacity">—</td>
+      <td>Chicago Central (Loop)</td>
+      <td><span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span> <span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td class="status-confirmed">Chicago Public Library — Rogers Park</td>
+      <td class="slug">cpl-rogers-park</td>
+      <td class="date">4/26</td>
+      <td class="capacity">—</td>
+      <td>Rogers Park</td>
+      <td><span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span> <span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td class="status-confirmed">Climate Action Evanston</td>
+      <td class="slug">climate-action-evanston</td>
+      <td class="date">4/23</td>
+      <td class="capacity">—</td>
+      <td>Evanston</td>
+      <td><span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td class="status-confirmed">Columbia College Film Row Cinema</td>
+      <td class="slug">columbia-film-row</td>
+      <td class="date">4/22</td>
+      <td class="capacity">260</td>
+      <td>Downtown (Loop)</td>
+      <td><span class="gap-tag">address</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td class="status-confirmed">Cultivate Collective<br><small>at Academy for Global Citizenship</small></td>
+      <td class="slug">cultivate-agc</td>
+      <td class="date">—</td>
+      <td class="capacity">~150</td>
+      <td>Chicago Southwest</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag">contacts</span> <span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td class="status-confirmed">Dominican University</td>
+      <td class="slug">dominican</td>
+      <td class="date">4/24 · 6:30P</td>
+      <td class="capacity">75</td>
+      <td>River Forest</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td class="status-tentative">Epiphany Center for the Arts</td>
+      <td class="slug">epiphany</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>Chicago West</td>
+      <td><span class="gap-tag critical">TENTATIVE</span> <span class="gap-tag critical">all fields</span></td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td class="status-confirmed">Euclid Avenue UMC</td>
+      <td class="slug">euclid-umc</td>
+      <td class="date">4/24</td>
+      <td class="capacity">—</td>
+      <td>—</td>
+      <td><span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td class="status-confirmed">Go Green Park Ridge</td>
+      <td class="slug">go-green-park-ridge</td>
+      <td class="date">4/24 · 6:30P</td>
+      <td class="capacity">300</td>
+      <td>Park Ridge</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td class="status-confirmed">IIT Bronzeville</td>
+      <td class="slug">iit-bronzeville</td>
+      <td class="date">4/24 · 6:30P</td>
+      <td class="capacity">165</td>
+      <td>Chicago South (Bronzeville)</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td class="status-confirmed">Illinois Clinicians for Climate Action</td>
+      <td class="slug">il-clinicians</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>—</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td class="status-confirmed">Institute of Cultural Affairs</td>
+      <td class="slug">ica</td>
+      <td class="date">4/24 · 6:30P</td>
+      <td class="capacity">75</td>
+      <td>Chicago North (Uptown)</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td class="status-confirmed">Kehrein Center for the Arts</td>
+      <td class="slug">kehrein-center</td>
+      <td class="date">4/25</td>
+      <td class="capacity">—</td>
+      <td>Chicago West (Austin)</td>
+      <td><span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td class="status-confirmed">Loyola University Law School</td>
+      <td class="slug">loyola-law</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>—</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td class="status-confirmed">Northbrook Public Library</td>
+      <td class="slug">northbrook-library</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>Northbrook</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td class="status-confirmed">Oak Park Public Library</td>
+      <td class="slug">oak-park-library</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>Oak Park</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td class="status-confirmed">Seven Generations Ahead</td>
+      <td class="slug">seven-generations</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>—</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span> <span class="gap-tag">contacts</span></td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td class="status-confirmed">Triton College</td>
+      <td class="slug">triton-college</td>
+      <td class="date">4/24 · 6:30P</td>
+      <td class="capacity">150</td>
+      <td>River Grove</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td class="status-confirmed">Trinity Lutheran Church — Des Plaines</td>
+      <td class="slug">trinity-lutheran</td>
+      <td class="date">4/23 · 6:30P</td>
+      <td class="capacity">120</td>
+      <td>Des Plaines</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td class="status-confirmed">Uncommon Ground</td>
+      <td class="slug">uncommon-ground</td>
+      <td class="date">4/23</td>
+      <td class="capacity">50</td>
+      <td>Chicago North (Lakeview)</td>
+      <td><span class="gap-tag">tier</span></td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td class="status-confirmed">Village of Oak Park — OPRF High School</td>
+      <td class="slug">oak-park-oprf</td>
+      <td class="date">4/24 · 6:30P</td>
+      <td class="capacity">350</td>
+      <td>Oak Park</td>
+      <td><span class="gap-tag">tier</span> <span class="gap-tag">clarify venue address</span></td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td class="status-confirmed">Village of Oak Park — Village Hall</td>
+      <td class="slug">oak-park-village-hall</td>
+      <td class="date">—</td>
+      <td class="capacity">—</td>
+      <td>Oak Park</td>
+      <td><span class="gap-tag critical">date</span> <span class="gap-tag critical">address</span> <span class="gap-tag critical">capacity</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="summary">
+  <h2>Coverage snapshot</h2>
+  <p>
+    <strong>30 venues</strong> (29 confirmed, 1 tentative) ·
+    <strong>19</strong> have dates ·
+    <strong>16</strong> have capacity data ·
+    <strong>14</strong> have addresses ·
+    <strong>11</strong> intake forms completed
+  </p>
+  <p style="margin-top: 0.5rem; color: var(--color-text-muted);">
+    Capacity values without ~ are confirmed by host intake form (2026-03-06). Remaining ~ estimates are from prior-year host helpers.
+  </p>
+</div>
+
+<div class="action-needed">
+  <h2>What we need from you</h2>
+  <ol>
+    <li><strong>Confirm or correct venue names.</strong> These become the canonical names used in all communications, venue pages, and Airtable.</li>
+    <li><strong>Flag any venues that should be added or dropped.</strong> Discover Financial has been removed. Trinity Lutheran (Des Plaines) has been added.</li>
+    <li><strong>Review the red-tagged gaps.</strong> Critical gaps (date, address, capacity) block venue page generation. 11 venues have completed the intake form (2026-03-06). 19 venues still have open gaps.</li>
+    <li><strong>Confirm the three-name vocabulary:</strong> "host guide" (public site), "venue page" (per-venue generated page), "host helper" (legacy Google Sheets).</li>
+  </ol>
+</div>
+
+</body>
+</html>
