@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en" data-domain="oeff">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF Meeting Runsheet — Feb 25, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Forest scale */
+    --forest-canopy: #1a2e22;
+    --forest-understory: #2d4a3a;
+    --forest-deep: #3a5c4d;
+    --forest-sage: #5c7c6b;
+    --forest-lichen: #8aaa98;
+    --forest-mist: #c8d9ce;
+
+    /* Anchors */
+    --color-ink: #2c2825;
+    --color-ink-soft: #5c5550;
+    --color-ink-muted: #8a8580;
+    --color-cream: #f7f5f2;
+    --color-paper: #faf9f7;
+    --color-linen: #f0ede8;
+
+    /* Signals */
+    --signal-warning: #996622;
+    --signal-success: #5c8c4b;
+    --signal-info: #4b7c8c;
+
+    /* Semantic */
+    --color-primary: var(--forest-sage);
+    --color-primary-deep: var(--forest-canopy);
+    --color-primary-light: var(--forest-mist);
+    --color-text: var(--color-ink);
+    --color-text-soft: var(--color-ink-soft);
+    --color-text-muted: var(--color-ink-muted);
+    --color-ground: var(--color-cream);
+    --color-surface: var(--color-paper);
+    --color-surface-inset: var(--color-linen);
+    --color-accent: var(--forest-deep);
+    --color-accent-warm: #c4704b;
+    --color-accent-warm-bg: #f5e8e2;
+    --color-accent-warm-deep: #4a2820;
+    --color-cue-bg: #f8f0e0;
+    --color-cue-text: #5c4a1a;
+    --color-tag-disc-bg: #f8f0e0;
+    --color-tag-disc-text: #5c4a1a;
+
+    /* Typography */
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Serif 4', Georgia, serif;
+    --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.06);
+    --shadow-card: 0 1px 4px hsla(25, 40%, 30%, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text);
+    background: var(--color-ground);
+    padding: var(--space-lg);
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .runsheet-header {
+    text-align: center;
+    padding: var(--space-xl) 0 var(--space-lg);
+    border-bottom: 2px solid var(--color-primary-light);
+    margin-bottom: var(--space-xl);
+  }
+  .runsheet-header h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+    letter-spacing: 0.02em;
+    margin-bottom: var(--space-xs);
+  }
+  .runsheet-meta {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .facilitator-note {
+    margin-top: var(--space-md);
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--color-text-soft);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  /* Blocks */
+  .block {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    border-left: 4px solid var(--color-primary);
+    position: relative;
+  }
+  .block-transition {
+    border-left-color: var(--color-accent-warm);
+  }
+
+  .block-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+  }
+  .block-time {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    padding: 2px 10px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+  .block-transition .block-time {
+    color: var(--color-accent-warm);
+    background: var(--color-accent-warm-bg);
+  }
+  .block-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+  }
+  .block-transition .block-title {
+    color: var(--color-accent-warm-deep);
+  }
+  .block-people {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    width: 100%;
+    margin-top: -4px;
+  }
+
+  /* Items */
+  .items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: var(--space-sm);
+    align-items: start;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-surface-inset);
+  }
+  .item:last-child { border-bottom: none; }
+
+  .item-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    padding: 2px 0;
+    border-radius: var(--radius-sm);
+    line-height: 1.4;
+    margin-top: 1px;
+  }
+  .tag-d {
+    background: var(--color-primary-light);
+    color: var(--color-accent);
+  }
+  .tag-disc {
+    background: var(--color-tag-disc-bg);
+    color: var(--color-tag-disc-text);
+  }
+  .tag-i {
+    background: var(--color-surface-inset);
+    color: var(--color-text-muted);
+  }
+
+  .item-content {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .item-content strong {
+    color: var(--color-text);
+  }
+  .item-note {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    font-style: italic;
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+
+  /* Coaching cues */
+  .cue {
+    background: var(--color-cue-bg);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    margin-top: var(--space-md);
+    font-size: 13px;
+    color: var(--color-cue-text);
+    line-height: 1.55;
+    display: flex;
+    gap: var(--space-sm);
+    align-items: start;
+  }
+  .cue-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Transition callout */
+  .transition {
+    text-align: center;
+    padding: var(--space-md) 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .transition::before,
+  .transition::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    height: 1px;
+    background: var(--color-primary-light);
+  }
+  .transition::before { right: calc(50% + 100px); }
+  .transition::after { left: calc(50% + 100px); }
+
+  /* Pre-flight checklist */
+  .preflight {
+    background: var(--color-surface-inset);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+  .preflight h2 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .checklist li {
+    font-size: 14px;
+    display: flex;
+    align-items: start;
+    gap: var(--space-sm);
+    line-height: 1.5;
+  }
+  .check {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+    margin-bottom: var(--space-xl);
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 13px;
+    color: var(--color-text-soft);
+  }
+  .legend-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Readback section */
+  .readback {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-lg);
+    border-left: 4px solid var(--signal-success);
+  }
+  .readback h2 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+    margin-bottom: var(--space-md);
+  }
+  .readback-note {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    font-style: italic;
+  }
+  .readback-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-sm) var(--space-md);
+    font-size: 14px;
+  }
+  .readback-who {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .readback-what {
+    color: var(--color-text-soft);
+    border-bottom: 1px dashed var(--color-surface-inset);
+    padding-bottom: var(--space-sm);
+    min-height: 28px;
+  }
+
+  /* Context sidebar */
+  .context-box {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    border-left: 4px solid var(--signal-info);
+  }
+  .context-box h2 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+  .context-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .context-list li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-soft);
+    padding-left: var(--space-md);
+    position: relative;
+  }
+  .context-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal-info);
+  }
+  .context-list li strong {
+    color: var(--color-text);
+  }
+
+  /* Open loops */
+  .open-loops {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
+    border-left: 4px solid var(--signal-warning);
+  }
+  .open-loops h2 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary-deep);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 0.02em;
+  }
+  .open-loops-note {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-md);
+  }
+  .loop-item {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-soft);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-surface-inset);
+  }
+  .loop-item:last-child { border-bottom: none; }
+  .loop-item strong {
+    color: var(--color-text);
+  }
+
+  /* Budget flag */
+  .budget-flag {
+    background: var(--color-surface-inset);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    margin-top: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-soft);
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  /* Print */
+  @media print {
+    body { padding: 12px; font-size: 13px; }
+    .block { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    .preflight { background: #f5f5f5; }
+    .cue { background: #faf5e8; }
+    .readback { box-shadow: none; border: 1px solid #ddd; }
+    .context-box { box-shadow: none; border: 1px solid #ddd; }
+    .open-loops { box-shadow: none; border: 1px solid #ddd; }
+  }
+</style>
+</head>
+<body>
+
+<header class="runsheet-header">
+  <h1>OEFF Team Meeting</h1>
+  <div class="runsheet-meta">Tuesday, February 25, 2026 &middot; 8:30 &ndash; 11:00 AM</div>
+  <p class="facilitator-note">You are the through-line. You're in all four blocks. Name each transition out loud. Front-load decisions. Send numbers before the call.</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-tag tag-d">D</span> Decision needed</div>
+  <div class="legend-item"><span class="legend-tag tag-disc">Disc</span> Discussion</div>
+  <div class="legend-item"><span class="legend-tag tag-i">I</span> Info only</div>
+</div>
+
+<!-- PRE-FLIGHT -->
+<section class="preflight">
+  <h2>Pre-Flight (before 8:30)</h2>
+  <ul class="checklist">
+    <li><div class="check"></div>Kim onboarding email (v4, in Gmail Drafts) — confirm sent before 9:00</li>
+    <li><div class="check"></div>One-sentence framing of Kim's role — rehearsed, written down</li>
+    <li><div class="check"></div>Erin's contract draft — numbers verified, flagged decision points only</li>
+    <li><div class="check"></div>Garen's contract — hours math corrected (130 x $70 = $9,100, needs rebalance to hit $10K)</li>
+    <li><div class="check"></div>Kim's prefest contract — "prefestival budget" label corrected, hours reconciled ($40/hr, 48 hrs)</li>
+    <li><div class="check"></div>Host outreach email draft — open in a tab, note open decisions (copy approval, urgency language, OEFF abbreviation)</li>
+    <li><div class="check"></div>Host guide — open in a tab at hosts.oneearthfilmfest.org</li>
+    <li><div class="check"></div>Active roadmap — open, with IIT Bronzeville, Climate Action Museum, + Spill the Beans highlighted</li>
+    <li><div class="check"></div>Equipment budget number on hand: ~$5,400 remaining after contracts</li>
+    <li><div class="check"></div>Ana's program design time slots (doodle links) — confirm she has them</li>
+    <li><div class="check"></div>Google Groups — squad@ and interns@ still need to be created</li>
+  </ul>
+</section>
+
+<!-- BLOCK 1 -->
+<article class="block">
+  <div class="block-header">
+    <span class="block-time">8:30 – 9:00</span>
+    <span class="block-title">Priorities and Prep</span>
+  </div>
+  <div class="block-people">Garen, Erin, Ana</div>
+
+  <ul class="items">
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>Agree on Kim's framing.</strong> Land one sentence for how we introduce her role.
+        <div class="item-note">If Ana says "comms support" and Erin says "host liaison," Kim gets confused. Align now.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>What Kim doesn't hear today.</strong> Budget details? Staffing gaps? On-site anxiety?
+        <div class="item-note">Kim should walk away energized, not anxious. Decide the boundary.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-i">I</span>
+      <div class="item-content">
+        <strong>Quick round: what's on everyone's plate this week.</strong>
+        <div class="item-note">5 minutes max. Status, not discussion. Save depth for later blocks.</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cue">
+    <svg class="cue-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Watch for Ana expanding into experiential programming or intern roles. Park it: "Great thread — let's pick that up after Kim leaves."</span>
+  </div>
+</article>
+
+<div class="transition">Transition — Kim joins at 9:00</div>
+
+<!-- KIM CONTEXT -->
+<section class="context-box">
+  <h2>Kim Context (carry in, don't say out loud)</h2>
+  <ul class="context-list">
+    <li><strong>Rate:</strong> $40/hr (not $70 like yours). Prefest: $1,920 / 48 hrs. Fest week TBD separately.</li>
+    <li><strong>Contract language:</strong> "Coordinates with" Garen, not "reports to" — 1099 classification protection.</li>
+    <li><strong>First named task:</strong> Send next webinar reminder via Mailmeteor. You shadow the first send, she runs the second solo.</li>
+    <li><strong>Her strength:</strong> Change management professional. She'll learn by touching the system, not hearing about it. Don't over-explain.</li>
+    <li><strong>Scope boundary:</strong> Contract says "communications and coordination support." Her Claude project instructions say "organizational strategist." Watch for ambiguity — keep today's framing tight to the contract.</li>
+    <li><strong>Three docs to share at kickoff:</strong> Host Comms Plan, Starter Project Brief, Host Guide. Not twelve.</li>
+  </ul>
+</section>
+
+<!-- BLOCK 2 -->
+<article class="block block-transition">
+  <div class="block-header">
+    <span class="block-time">9:00 – 9:30</span>
+    <span class="block-title">Kim Introduction</span>
+  </div>
+  <div class="block-people">Garen, Erin, Ana, Kim</div>
+
+  <ul class="items">
+    <li class="item">
+      <span class="item-tag tag-i">I</span>
+      <div class="item-content">
+        <strong>Ana leads the welcome.</strong> OEFF's mission, where we are in the season, the vibe.
+        <div class="item-note">Let Ana do this. It signals she's the organizational leader. You complement, don't duplicate.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-i">I</span>
+      <div class="item-content">
+        <strong>You handle the operational picture.</strong> Next few weeks, what the rhythm looks like, key dates.
+        <div class="item-note">Don't over-explain the tech stack. Kim needs to know what she's doing, not how the HTML works.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>End with a concrete next step for Kim.</strong> Not "we'll be in touch."
+        <div class="item-note">Example: "I'll send you X by Thursday. Take a look, and we'll have a 30-min call Friday to walk through it."</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cue">
+    <svg class="cue-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Lead with "what" before "how." Kim wants to understand her role and impact, not your infrastructure.</span>
+  </div>
+</article>
+
+<div class="transition">Transition — Kim leaves at 9:30</div>
+
+<!-- BLOCK 3 -->
+<article class="block">
+  <div class="block-header">
+    <span class="block-time">9:30 – 10:00</span>
+    <span class="block-title">Debrief and Workflow</span>
+  </div>
+  <div class="block-people">Garen, Erin, Ana</div>
+
+  <ul class="items">
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>Host outreach email — green light.</strong> Ana approves copy, urgency language, OEFF abbreviation.
+        <div class="item-note">This has been in drafts since Feb 24. Two-way door — decide now, adjust later if needed.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>Host comms: Kim vs. Garen.</strong> Draw the line. Write it down on screen during the call.
+        <div class="item-note">Kim sends: post-meeting recaps, survey reminders, scheduling. Garen handles: mail merge infra, host guide updates, data/security.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-disc">Disc</span>
+      <div class="item-content">
+        <strong>Screening decks and creative assets.</strong> Erin's role vs. interns. Where does Erin have final eyes?
+        <div class="item-note">Time-box: 10 min. If the experiential programming thread surfaces, park it — it's a separate conversation.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-i">I</span>
+      <div class="item-content">
+        <strong>Video assets — what's ready to move now.</strong>
+        <div class="item-note">Status update only. No decisions needed unless there's a blocker.</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="cue">
+    <svg class="cue-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>You have 30 minutes and 3 items. Name the transition when Ana leaves: "Okay, Erin — let's shift into scope and contracts."</span>
+  </div>
+</article>
+
+<div class="transition">Transition — Ana leaves at 10:00</div>
+
+<!-- BLOCK 4 -->
+<article class="block">
+  <div class="block-header">
+    <span class="block-time">10:00 – 11:00</span>
+    <span class="block-title">Scope and Milestones</span>
+  </div>
+  <div class="block-people">Garen, Erin</div>
+
+  <ul class="items">
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>Erin's contract walkthrough.</strong> Numbers pre-verified. Discuss only flagged decision points.
+        <div class="item-note">Don't re-read the document live. Ask: "Did anything surprise you or feel off?"</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>On-site scope and deliverables.</strong> What's Erin's on-site role? Where does she need backup?
+        <div class="item-note">Two columns: what's locked vs. what's in the air. Make them literal — on screen or on paper.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-d">D</span>
+      <div class="item-content">
+        <strong>AV handoff — Garen won't be on-site during fest week.</strong> What does that mean for Erin's scope?
+        <div class="item-note">This is decided but may not have been formally communicated to Erin. Surface it directly, not as a buried aside. Erin needs to know what she's absorbing.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-disc">Disc</span>
+      <div class="item-content">
+        <strong>Milestones walkthrough.</strong> What's the critical path from now through fest week?
+        <div class="item-note">This is your deepest working session. Full hour, just Erin. She's direct and operational — use it.</div>
+      </div>
+    </li>
+    <li class="item">
+      <span class="item-tag tag-disc">Disc</span>
+      <div class="item-content">
+        <strong>Comms and workflow gaps.</strong> What's falling through the cracks? What needs a system that doesn't have one?
+        <div class="item-note">Open-ended by design. Erin sees things you don't. Give this room.</div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="budget-flag">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h12" stroke="currentColor" stroke-width="1.5"/></svg>
+    <span>Equipment budget remaining: ~$5,400 &middot; Erin's contract + Kim's prefest ($1,920) + Kim's fest week (TBD) come out of this.</span>
+  </div>
+
+  <div class="cue">
+    <svg class="cue-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>At 10:50, stop. Readback: who does what by when. Verbal acknowledgment from both of you.</span>
+  </div>
+</article>
+
+<!-- READBACK -->
+<section class="readback">
+  <h2>Readback — Commitments</h2>
+  <p class="readback-note">Fill in during the last 5 minutes. Each person verbally acknowledges their items.</p>
+  <div class="readback-grid">
+    <span class="readback-who">Garen</span>
+    <div class="readback-what"></div>
+    <span class="readback-who">Garen</span>
+    <div class="readback-what"></div>
+    <span class="readback-who">Garen</span>
+    <div class="readback-what"></div>
+    <span class="readback-who">Ana</span>
+    <div class="readback-what"></div>
+    <span class="readback-who">Ana</span>
+    <div class="readback-what"></div>
+    <span class="readback-who">Erin</span>
+    <div class="readback-what"></div>
+    <span class="readback-who">Erin</span>
+    <div class="readback-what"></div>
+    <span class="readback-who">Kim</span>
+    <div class="readback-what"></div>
+  </div>
+</section>
+
+<!-- OPEN LOOPS -->
+<section class="open-loops">
+  <h2>Open Loops — Not for This Meeting</h2>
+  <p class="open-loops-note">These need a home but don't belong in today's agenda. Don't let them disappear.</p>
+  <div class="loop-item"><strong>Host guide security.</strong> Ana flagged webinar recordings being technically public. Host consent not obtained. No decision made Feb 24. Follow up with Ana separately this week.</div>
+  <div class="loop-item"><strong>Experiential programming / IEC partnership.</strong> Parked, not released. Ana's intern-led experiential components per screening need a scheduled return date. Don't let "parked" become "killed."</div>
+  <div class="loop-item"><strong>Theme sign-off.</strong> "Gen We: All Together Now" won the vote but hasn't been formally confirmed by leadership. Blocks downstream design and comms work.</div>
+  <div class="loop-item"><strong>Eventbrite early-access tickets.</strong> Target: week of March 2 (5 days). 14 events published unlisted/preview. Tax settings still require manual dashboard clicks. Check status with Josh.</div>
+  <div class="loop-item"><strong>Dominican hybrid film swap.</strong> May swap <em>Rooted</em> for <em>Food 2050</em> to avoid Friday conflict. No decision recorded.</div>
+  <div class="loop-item"><strong>YFC film assets from Sandy.</strong> Due today (Feb 25). If not received, flag it.</div>
+  <div class="loop-item"><strong>Spill the Beans Coffee House.</strong> New venue for KCA screening on Chicago Ave in Austin. Needs projector/screen assessment — they have a flat screen TV but host is hoping for a projector + screen for dual viewing.</div>
+  <div class="loop-item"><strong>Google Groups.</strong> squad@ and interns@ need to be created. Quick admin task — assign to someone and set a deadline.</div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana 1:1 — Feb 24, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Source+Sans+3:wght@400;600;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Primitives — only referenced by semantic tokens */
+    --forest-50: #f0f5f1;
+    --forest-100: #dce8de;
+    --forest-200: #b8d1bc;
+    --forest-400: #6fa678;
+    --forest-600: #4a7c52;
+    --forest-700: #3a6341;
+    --forest-800: #2d4e33;
+    --forest-900: #1e3523;
+
+    /* Semantic tokens */
+    --color-primary: var(--forest-600);
+    --color-primary-light: var(--forest-100);
+    --color-primary-muted: var(--forest-50);
+    --color-primary-dark: var(--forest-800);
+    --color-primary-border: var(--forest-200);
+    --color-bg: #faf9f7;
+    --color-surface: #ffffff;
+    --color-text: #2c2c2c;
+    --color-text-muted: #6b6b6b;
+    --color-border: #e5e2dd;
+    --color-accent-warm: #c4572a;
+    --color-accent-warm-bg: #fef3ef;
+    --color-accent-amber: #a67c00;
+    --color-accent-amber-bg: #fef9ec;
+    --color-header-overlay: hsla(0, 0%, 100%, 0.15);
+    --color-header-field: hsla(0, 0%, 100%, 0.1);
+    --color-header-border: hsla(0, 0%, 100%, 0.5);
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+
+    --shadow-soft: 0 2px 8px hsla(25, 40%, 30%, 0.08);
+    --shadow-card: 0 1px 4px hsla(25, 40%, 30%, 0.06);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text);
+    background: var(--color-bg);
+    padding: 24px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: var(--color-primary-dark);
+    color: white;
+    padding: 28px 32px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 24px;
+  }
+
+  header h1 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    font-optical-sizing: auto;
+  }
+
+  header .meta {
+    font-size: 14px;
+    opacity: 0.85;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  header .countdown {
+    background: var(--color-header-overlay);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card h2 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card h2 .time-badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-muted);
+    margin: 16px 0 6px;
+  }
+
+  .card h3:first-of-type { margin-top: 8px; }
+
+  .script-block {
+    background: var(--color-primary-muted);
+    border-left: 3px solid var(--color-primary);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .script-block::before {
+    content: 'SAY';
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+
+  .need-block {
+    background: var(--color-accent-warm-bg);
+    border-left: 3px solid var(--color-accent-warm);
+    padding: 10px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .need-block::before {
+    content: 'NEED FROM ANA';
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-accent-warm);
+    margin-bottom: 4px;
+  }
+
+  .redirect-block {
+    background: var(--color-accent-amber-bg);
+    border-left: 3px solid var(--color-accent-amber);
+    padding: 10px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .redirect-block::before {
+    content: 'IF SHE TANGENTS';
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-accent-amber);
+    margin-bottom: 4px;
+  }
+
+  .context-note {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin: 6px 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--color-border);
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .links-grid a {
+    display: block;
+    font-size: 13px;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    padding: 8px 12px;
+    background: var(--color-primary-muted);
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    transition: background 0.15s;
+  }
+
+  .links-grid a:hover { background: var(--color-primary-light); }
+  .links-grid a .label { font-weight: 600; display: block; }
+  .links-grid a .desc { color: var(--color-text-muted); font-size: 12px; }
+
+  .parking-lot {
+    background: var(--color-surface);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    min-height: 120px;
+  }
+
+  .parking-lot h2 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+  }
+
+  .parking-lot p {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+  }
+
+  .parking-lot ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .parking-lot li {
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--color-border);
+    font-size: 14px;
+    min-height: 28px;
+  }
+
+  .parking-lot li:last-child { border-bottom: none; }
+
+  .tips-card {
+    background: var(--color-primary-muted);
+    border: 1px solid var(--color-primary-border);
+  }
+
+  .tips-card ul {
+    padding-left: 20px;
+    font-size: 14px;
+  }
+
+  .tips-card li { margin-bottom: 8px; }
+  .tips-card li strong { color: var(--color-primary-dark); }
+
+  .recap-card {
+    background: var(--color-primary-dark);
+    color: white;
+    border: none;
+  }
+
+  .recap-card h2 { color: white; }
+
+  .recap-card .recap-item {
+    background: var(--color-header-field);
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin: 6px 0;
+    font-size: 14px;
+  }
+
+  .recap-card .recap-item .checkbox {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-header-border);
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  .item-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  @media print {
+    body { padding: 12px; font-size: 13px; }
+    header { padding: 16px 20px; }
+    .card { break-inside: avoid; padding: 16px; }
+    .parking-lot { min-height: 80px; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    header { padding: 20px; }
+    .links-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Ana 1:1 Call Worksheet</h1>
+  <div class="meta">
+    <span>Monday, Feb 24, 2026</span>
+    <span>3:30 PM</span>
+    <span class="countdown">57 days to festival</span>
+  </div>
+</header>
+
+<!-- OPEN -->
+<div class="card">
+  <h2>Open <span class="time-badge">2 min</span></h2>
+  <div class="script-block">
+    Hey Ana -- thanks for making time. I want to keep us focused today because I know we're both juggling a lot. Three things I want to make sure we land on: the host survey, contracts, and what we're focused on tomorrow.
+  </div>
+</div>
+
+<!-- ITEM 1 -->
+<div class="card">
+  <h2><span class="item-number">1</span> Host Intake Survey <span class="time-badge">15 min</span></h2>
+
+  <h3>Context (for you, not her)</h3>
+  <div class="context-note">
+    Survey didn't go out before Host Commitment Meeting. Mail merge QC issue. Form is live and voice-aligned. Draft copy is in Ana's inbox ("Host Survey Follow-Up Timing"). You want to send it today.
+  </div>
+
+  <h3>Talking points</h3>
+  <div class="script-block">
+    First -- the host intake survey. It should have gone out before the Host Commitment Meeting and it didn't. That's on me -- I was QC'ing the mail merge and didn't want to rush something out with errors.<br><br>
+    The good news: it's ready now. I sent you a draft copy. And honestly, the timing works better as a post-call follow-up -- hosts have more context, and it frames the survey as "we heard you, tell us more" rather than pre-meeting homework.<br><br>
+    I want to send it today. Anything you want changed before it goes out?
+  </div>
+
+  <div class="need-block">
+    Go/no-go on sending today. Any additions to the survey before it ships.
+  </div>
+
+  <div class="redirect-block">
+    "Totally hear that -- can we capture that and come back to it? I want to make sure we get to contracts today."
+  </div>
+</div>
+
+<!-- ITEM 2 -->
+<div class="card">
+  <h2><span class="item-number">2</span> Contracts <span class="time-badge">20 min</span></h2>
+
+  <h3>Context (for you, not her)</h3>
+  <div class="context-note">
+    All 3 contracts finalized in Google Docs, unsigned. Budget breakdown already sent to Ana. Kim's scope questions (media flow, on-site, show-flow) are answered in the spreadsheet. Your contract has a back-pay provision (Nov 2025 forward) -- you'll need an itemized hour log within 2 weeks of signing.
+  </div>
+
+  <h3>Talking points</h3>
+  <div class="script-block">
+    Second -- contracts. All three are in Google Docs and ready for your review and signature. Mine, Erin's, and Kim's.<br><br>
+    You've already seen the budget breakdown with the milestone responsibility matrix. The contracts themselves are structurally done.<br><br>
+    What I need is a timeline for when these can be signed. We're 57 days out and Erin and Kim need the certainty to plan their work.
+  </div>
+
+  <h3>Reference links</h3>
+  <div class="links-grid">
+    <a href="https://docs.google.com/document/d/10UChvIv2is33tw3JAjq3uBHmYWprRBSeP4PxwY_CSzk/edit">
+      <span class="label">Garen's contract</span>
+      <span class="desc">$70/hr, $10K cap</span>
+    </a>
+    <a href="https://docs.google.com/document/d/1n4_ViEuMFTSoAbRjUPw0_mIVFro-5AMqNgZOtveEmbY/edit">
+      <span class="label">Erin's contract</span>
+      <span class="desc">$40/hr, $4,600 cap</span>
+    </a>
+    <a href="https://docs.google.com/document/d/1STEiBg-2WW_6lWuVCjVppkCHXXYe3TRCXfOMImdDlCw/edit">
+      <span class="label">Kim's contract</span>
+      <span class="desc">$40/hr, ~$1,920 pre-fest</span>
+    </a>
+    <a href="https://docs.google.com/spreadsheets/d/1-oopzndMeYjCVWtmW9z6i5Bp_eYl1ePdHDCm3LSw-ak">
+      <span class="label">Budget breakdown</span>
+      <span class="desc">Allocations + milestone matrix</span>
+    </a>
+  </div>
+
+  <div class="need-block">
+    A specific date for when contracts will be signed. Not "I'll look at them" -- an actual date.
+  </div>
+
+  <div class="redirect-block">
+    "Happy to walk through the budget line by line -- but can we first agree on when signatures happen, and then I'll make sure any questions are answered before that date?"
+  </div>
+</div>
+
+<!-- ITEM 3 -->
+<div class="card">
+  <h2><span class="item-number">3</span> Tomorrow's Focus <span class="time-badge">10 min</span></h2>
+
+  <h3>Context (for you, not her)</h3>
+  <div class="context-note">
+    Let her lead this one. Have her milestone doc open. She needs to feel ownership of the priorities. Your job: listen, take notes, make sure whatever she says maps to deliverables with owners.
+  </div>
+
+  <h3>Talking points</h3>
+  <div class="script-block">
+    Third -- what are we focused on tomorrow? I want to make sure we're aligned so we're not both spinning on different things.
+  </div>
+
+  <h3>Reference</h3>
+  <div class="links-grid">
+    <a href="https://docs.google.com/spreadsheets/d/1tZJ68c1EXz2K3HeJT7Osz1RU7F90_9OgMp_hKq8aOJI/edit">
+      <span class="label">Ana's Project Timeline</span>
+      <span class="desc">OEFF2026 milestones + owners</span>
+    </a>
+  </div>
+
+  <div class="need-block">
+    2-3 concrete things for tomorrow with clear ownership (who does what).
+  </div>
+
+  <div class="redirect-block">
+    "That's a great list -- can we pick the top 2 or 3? What would take the most off your plate right now?"
+  </div>
+</div>
+
+<!-- CLOSE -->
+<div class="card recap-card">
+  <h2>Close <span class="time-badge">3 min</span></h2>
+  <p style="font-size: 14px; opacity: 0.85; margin-bottom: 12px;">Recap what was decided. Read these back to her.</p>
+  <div class="recap-item"><span class="checkbox"></span> Host survey: send today / edits needed / hold</div>
+  <div class="recap-item"><span class="checkbox"></span> Contracts signed by: _______________</div>
+  <div class="recap-item"><span class="checkbox"></span> Tomorrow's focus: _______________</div>
+  <div class="recap-item"><span class="checkbox"></span> Parking lot items: follow up by email / next call</div>
+</div>
+
+<!-- PARKING LOT -->
+<div class="parking-lot">
+  <h2>Parking Lot</h2>
+  <p>Write down tangent topics here as she raises them. Shows you're listening AND keeps the call on track.</p>
+  <ul>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+  </ul>
+</div>
+
+<!-- TIPS -->
+<div class="card tips-card">
+  <h2>Coaching Notes</h2>
+  <ul>
+    <li><strong>One clean apology, then move on.</strong> Don't dwell on the survey delay. If you over-apologize, she'll feel like she needs to reassure you, which flips the energy.</li>
+    <li><strong>Redirect formula:</strong> "I want to give that the attention it deserves -- can we park it and come back?" or "That's important -- is it more urgent than contracts?"</li>
+    <li><strong>On contracts, be direct about "final."</strong> Ana's pattern is "I'll look at them" and then they sit. Frame it as helping Erin and Kim, not pressuring her.</li>
+    <li><strong>Watch for the overwhelm signal.</strong> If she says "there's so much to do" -- don't pile on. Instead: "What's the one thing that would take the most off your plate right now?"</li>
+    <li><strong>Let her lead Item 3.</strong> She needs to feel ownership. Listen, then map what she says to deliverables with names attached.</li>
+    <li><strong>She thinks out loud.</strong> Let her complete her thoughts before steering. Interrupting a verbal processor creates friction, even when you're being efficient.</li>
+  </ul>
+</div>
+
+</body>
+</html>

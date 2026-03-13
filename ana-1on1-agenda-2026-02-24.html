@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF 1:1 Agenda — Feb 24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Source+Sans+3:wght@400;600;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest-50: #f0f5f1;
+    --forest-100: #dce8de;
+    --forest-200: #b8d1bc;
+    --forest-600: #4a7c52;
+    --forest-800: #2d4e33;
+
+    --color-primary: var(--forest-600);
+    --color-primary-light: var(--forest-100);
+    --color-primary-muted: var(--forest-50);
+    --color-primary-dark: var(--forest-800);
+    --color-primary-border: var(--forest-200);
+    --color-bg: #faf9f7;
+    --color-surface: #ffffff;
+    --color-text: #2c2c2c;
+    --color-text-muted: #6b6b6b;
+    --color-border: #e5e2dd;
+    --color-accent-warm: #c4572a;
+    --color-accent-warm-bg: #fef3ef;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+
+    --shadow-card: 0 1px 4px hsla(25, 40%, 30%, 0.06);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text);
+    background: var(--color-bg);
+    padding: 24px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: var(--color-primary-dark);
+    color: white;
+    padding: 28px 32px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 24px;
+  }
+
+  header h1 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  header .meta {
+    font-size: 14px;
+    opacity: 0.85;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  header .badge {
+    background: hsla(0, 0%, 100%, 0.15);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card h2 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .item-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .card h2 .time-badge {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .card p {
+    margin-bottom: 10px;
+  }
+
+  .decision-box {
+    background: var(--color-accent-warm-bg);
+    border-left: 3px solid var(--color-accent-warm);
+    padding: 10px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+
+  .decision-box strong {
+    color: var(--color-accent-warm);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .links-list li {
+    margin-bottom: 6px;
+  }
+
+  .links-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    padding: 6px 12px;
+    background: var(--color-primary-muted);
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    transition: background 0.15s;
+  }
+
+  .links-list a:hover { background: var(--color-primary-light); }
+
+  .links-list .tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  ul.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  ul.checklist li {
+    padding: 6px 0;
+    padding-left: 28px;
+    position: relative;
+    font-size: 14px;
+  }
+
+  ul.checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+  }
+
+  .notes-area {
+    background: var(--color-primary-muted);
+    border: 1px solid var(--color-primary-border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-top: 12px;
+    min-height: 60px;
+  }
+
+  .notes-area .label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-primary);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .notes-area .lines {
+    border-bottom: 1px dotted var(--color-primary-border);
+    min-height: 24px;
+    margin-bottom: 4px;
+  }
+
+  .recap-card {
+    background: var(--color-primary-dark);
+    color: white;
+    border: none;
+  }
+
+  .recap-card h2 { color: white; }
+
+  .recap-card .recap-item {
+    background: hsla(0, 0%, 100%, 0.1);
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin: 6px 0;
+    font-size: 14px;
+  }
+
+  .recap-card .checkbox {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid hsla(0, 0%, 100%, 0.5);
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  hr.section-break {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 4px 0 12px;
+  }
+
+  @media print {
+    body { padding: 12px; font-size: 13px; }
+    header { padding: 16px 20px; }
+    .card { break-inside: avoid; padding: 16px; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    header { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>OEFF 1:1 — Ana + Garen</h1>
+  <div class="meta">
+    <span>Monday, Feb 24, 2026</span>
+    <span>3:30 PM</span>
+    <span class="badge">57 days to festival</span>
+  </div>
+</header>
+
+<!-- ITEM 1: HOST INTAKE SURVEY -->
+<div class="card">
+  <h2><span class="item-number">1</span> Host Intake Survey <span class="time-badge">10 min</span></h2>
+
+  <p>The host intake survey is ready to send. It didn't go out before the Host Commitment Meeting — Garen was QC'ing the mail merge and caught issues that needed fixing first. Draft copy is in Ana's inbox.</p>
+
+  <p>Sending it now as a post-call follow-up actually works well — hosts have more context for their answers, and it frames the survey as "we heard you, tell us more."</p>
+
+  <div class="decision-box">
+    <strong>Decision needed</strong>
+    Go/no-go on sending the survey today. Any additions or changes before it goes out?
+  </div>
+
+  <ul class="links-list">
+    <li><a href="https://docs.google.com/forms/d/1QHXvvXU9JPsKIITC50cbq77XKHReAUcC8ymKXMkboig/edit"><span class="tag">Form</span> Host Venue Intake Form (live)</a></li>
+    <li><a href="https://hosts.oneearthfilmfest.org/hosts/"><span class="tag">Site</span> Host Guide (live)</a></li>
+  </ul>
+</div>
+
+<!-- ITEM 2: CONTRACTS -->
+<div class="card">
+  <h2><span class="item-number">2</span> Contracts <span class="time-badge">15 min</span></h2>
+
+  <p>All three contractor agreements are finalized in Google Docs — Garen, Erin, and Kim. Budget breakdown with milestone responsibility matrix was sent previously.</p>
+
+  <p>With 57 days to the festival, Erin and Kim need signed agreements to plan their work and hours with confidence.</p>
+
+  <div class="decision-box">
+    <strong>Decision needed</strong>
+    When will contracts be reviewed and signed? Need a specific date.
+  </div>
+
+  <ul class="links-list">
+    <li><a href="https://docs.google.com/document/d/10UChvIv2is33tw3JAjq3uBHmYWprRBSeP4PxwY_CSzk/edit"><span class="tag">Doc</span> Garen's contract — $70/hr, $10K cap</a></li>
+    <li><a href="https://docs.google.com/document/d/1n4_ViEuMFTSoAbRjUPw0_mIVFro-5AMqNgZOtveEmbY/edit"><span class="tag">Doc</span> Erin's contract — $40/hr, $4,600 cap</a></li>
+    <li><a href="https://docs.google.com/document/d/1STEiBg-2WW_6lWuVCjVppkCHXXYe3TRCXfOMImdDlCw/edit"><span class="tag">Doc</span> Kim's contract — $40/hr, ~$1,920 pre-fest</a></li>
+    <li><a href="https://docs.google.com/spreadsheets/d/1-oopzndMeYjCVWtmW9z6i5Bp_eYl1ePdHDCm3LSw-ak"><span class="tag">Sheet</span> Budget breakdown + milestone matrix</a></li>
+  </ul>
+</div>
+
+<!-- ITEM 3: HOST HELPER SECURITY -->
+<div class="card">
+  <h2><span class="item-number">3</span> Host Page Security <span class="time-badge">10 min</span></h2>
+
+  <p>As we move host-specific information (contact details, AV setup notes, scholarship status) into the host guide, we need a plan for who can see what. Garen has prepared a recommendation.</p>
+
+  <p><strong>The short version:</strong> Two tiers of protection.</p>
+  <ul class="checklist">
+    <li><strong>Tier 1 — Unique link per venue.</strong> Each host gets their own unguessable URL (like <code>/hosts/a3f9x7k2</code>). No password needed. Protects contact info and venue-specific details from search engines and casual access.</li>
+    <li><strong>Tier 2 — Password gate for financial data.</strong> Scholarship status and amounts sit behind an additional browser-side password prompt. Only hosts who need it get the password.</li>
+  </ul>
+
+  <p style="margin-top: 10px;">No new infrastructure required. Uses the existing host guide pipeline. Right-sized for the actual risk: "not googleable, not visible to a curious stranger."</p>
+
+  <div class="decision-box">
+    <strong>Decision needed</strong>
+    Does this approach work? Any concerns before Garen builds it?
+  </div>
+
+  <ul class="links-list">
+    <li><a href="https://docs.google.com/document/d/1ujgQLAYrBq7QiBxSHZn9fpZlpuDaZvf3JK_rstbNMfw/edit"><span class="tag">Doc</span> Security recommendation (full writeup)</a></li>
+    <li><a href="https://docs.google.com/document/d/1q8oKDBOStbUmKABGubamLoBMUg4Sqlcg1pTiWI0KtTQ/edit"><span class="tag">Doc</span> Access routing table — what lives where</a></li>
+  </ul>
+</div>
+
+<!-- ITEM 4: TOMORROW'S FOCUS -->
+<div class="card">
+  <h2><span class="item-number">4</span> Tomorrow's Plan <span class="time-badge">15 min</span></h2>
+
+  <p>What are we each focused on tomorrow? Three things Garen is bringing:</p>
+
+  <ul class="checklist">
+    <li><strong>Kim intro call.</strong> Kim Pham is joining for an introductory call so she and Ana can meet and align on her first week. Kim is stepping into host communications — with the survey going out today, the timing is right for her to get oriented on incoming data.</li>
+    <li><strong>Screening schedule.</strong> Early-access tickets go to Preview Party donors the week of March 2. That makes this week the critical window for locking host-venue-timeslot assignments. Garen can have data ready to build the grid together.</li>
+    <li><strong>Sandy / YFC film assets.</strong> Due Feb 25. Also need to confirm: has anyone looped Sue (Sydney, 4pm+ availability) in on the shorts-pairing deadline and pre-recorded remarks timeline?</li>
+  </ul>
+
+  <div class="decision-box">
+    <strong>Decision needed</strong>
+    What's Ana's priority list for tomorrow? What would take the most off your plate?
+  </div>
+
+  <ul class="links-list">
+    <li><a href="https://docs.google.com/spreadsheets/d/1tZJ68c1EXz2K3HeJT7Osz1RU7F90_9OgMp_hKq8aOJI/edit"><span class="tag">Sheet</span> OEFF2026 Project Timeline (Ana's milestones)</a></li>
+  </ul>
+
+  <div class="notes-area">
+    <div class="label">Ana's priorities for tomorrow</div>
+    <div class="lines">&nbsp;</div>
+    <div class="lines">&nbsp;</div>
+    <div class="lines">&nbsp;</div>
+  </div>
+</div>
+
+<!-- ALSO ON THE RADAR -->
+<div class="card">
+  <h2>Also on the Radar</h2>
+  <p style="font-size: 14px; color: var(--color-text-muted); margin-bottom: 10px;">Not for today's call — but worth noting as active threads.</p>
+
+  <ul class="checklist">
+    <li><strong>On-site AV coverage plan.</strong> Erin and Garen syncing this week. Will have a concrete plan for Ana by Friday.</li>
+    <li><strong>Intern task flagging.</strong> Ana asked leads to color-code intern-ready tasks in the timeline. Four interns onboarded (SA, Johnny, Maria, Peter). Garen will tag tech tasks this week.</li>
+    <li><strong>Dominican / hybrid film swap.</strong> Josh's thread — Rooted conflict with Friday host sites. Food 2050 as potential replacement. Internal only.</li>
+  </ul>
+</div>
+
+<!-- RECAP -->
+<div class="card recap-card">
+  <h2>Decisions Recap</h2>
+  <p style="font-size: 14px; opacity: 0.85; margin-bottom: 12px;">Before we hang up — what did we land on?</p>
+  <div class="recap-item"><span class="checkbox"></span> Host survey: send today / edits needed / hold</div>
+  <div class="recap-item"><span class="checkbox"></span> Contracts signed by: _______________</div>
+  <div class="recap-item"><span class="checkbox"></span> Host page security: approved / needs changes / table for now</div>
+  <div class="recap-item"><span class="checkbox"></span> Tomorrow's focus: _______________</div>
+</div>
+
+</body>
+</html>

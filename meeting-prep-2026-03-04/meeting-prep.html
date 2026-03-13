@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<!-- guards: core/color, core/interaction, core/layout, core/typography -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEFF Meeting Prep — 2026-03-04</title>
+<style>
+  :root {
+    --forest-sage: oklch(0.55 0.06 155);
+    --forest-light: oklch(0.92 0.03 155);
+    --forest-muted: oklch(0.75 0.04 155);
+    --forest-deep: oklch(0.35 0.06 155);
+    --forest-hover: oklch(0.50 0.07 155);
+
+    --color-primary: var(--forest-sage);
+    --color-primary-light: var(--forest-light);
+    --color-primary-muted: var(--forest-muted);
+    --color-primary-deep: var(--forest-deep);
+    --color-primary-hover: var(--forest-hover);
+
+    --surface-0: oklch(0.99 0.005 80);
+    --surface-1: oklch(0.97 0.008 80);
+    --surface-2: oklch(0.94 0.01 80);
+    --surface-raised: oklch(1.0 0 0);
+
+    --text-primary: oklch(0.22 0.02 60);
+    --text-secondary: oklch(0.45 0.02 60);
+    --text-muted: oklch(0.60 0.02 60);
+
+    --border-default: oklch(0.88 0.01 80);
+    --border-strong: oklch(0.78 0.02 80);
+
+    --shadow-soft: 0 1px 3px hsla(25, 40%, 30%, 0.06);
+    --shadow-card: 0 2px 8px hsla(25, 40%, 30%, 0.08);
+
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Source Serif 4', Georgia, serif;
+    --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
+
+    --color-private-bg: oklch(0.96 0.04 25);
+    --color-private-border: oklch(0.80 0.08 25);
+    --color-private-label: oklch(0.50 0.08 25);
+    --color-decision-bg: oklch(0.95 0.04 90);
+    --color-decision-border: oklch(0.78 0.08 90);
+    --color-badge-blocked-bg: oklch(0.92 0.06 25);
+    --color-badge-blocked-text: oklch(0.40 0.12 25);
+    --color-badge-progress-bg: oklch(0.92 0.06 90);
+    --color-badge-progress-text: oklch(0.40 0.12 90);
+    --color-badge-decision-bg: oklch(0.90 0.06 60);
+    --color-badge-decision-text: oklch(0.35 0.10 60);
+    --color-badge-stale-bg: oklch(0.93 0.02 60);
+    --color-flag-bg: oklch(0.95 0.04 30);
+    --color-flag-border: oklch(0.70 0.10 30);
+    --color-focus-ring: oklch(0.55 0.06 155 / 0.15);
+    --color-editable-focus-bg: oklch(0.99 0.01 155 / 0.3);
+  }
+
+  @font-face { font-family: 'Fraunces'; src: local('Fraunces'); }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-primary);
+    background: var(--surface-0);
+    margin: 0;
+    padding: 0;
+  }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+  /* ── NAV ── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface-raised);
+    border-bottom: 1px solid var(--border-default);
+    box-shadow: var(--shadow-soft);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  .nav-bar h1 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-primary-deep);
+    margin: 0;
+    padding: 12px 16px 12px 0;
+    border-right: 1px solid var(--border-default);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .nav-tab {
+    font-family: var(--font-body-sans);
+    font-size: 13px;
+    padding: 12px 14px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    min-height: 44px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-tab:hover { color: var(--text-primary); }
+  .nav-tab.active {
+    color: var(--color-primary-deep);
+    border-bottom-color: var(--color-primary);
+    font-weight: 600;
+  }
+  .nav-tab .tab-num {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background: var(--surface-2);
+    font-size: 12px;
+    margin-right: 6px;
+    font-weight: 600;
+  }
+  .nav-tab.active .tab-num {
+    background: var(--color-primary);
+    color: var(--surface-raised);
+  }
+
+  .countdown {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-primary);
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 6px 12px;
+    background: var(--color-primary-light);
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+
+  /* ── PANELS ── */
+  .panel-container { padding: 24px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── SECTIONS ── */
+  .section-card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  .section-card h2 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-primary-deep);
+    margin: 0 0 4px 0;
+  }
+
+  .section-card h3 {
+    font-family: var(--font-body-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 20px 0 8px 0;
+  }
+
+  .section-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .section-card p, .section-card li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+  .section-card ul, .section-card ol {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+  .section-card li { margin-bottom: 4px; }
+
+  /* ── EDITABLE ── */
+  [contenteditable="true"] {
+    outline: none;
+    border-radius: var(--radius-sm);
+    transition: box-shadow 0.15s;
+  }
+  [contenteditable="true"]:hover {
+    box-shadow: inset 0 0 0 1px var(--border-strong);
+  }
+  [contenteditable="true"]:focus {
+    box-shadow: inset 0 0 0 2px var(--color-primary);
+    background: var(--color-editable-focus-bg);
+  }
+
+  .editable-field {
+    padding: 6px 10px;
+    min-height: 28px;
+    border: 1px dashed var(--border-default);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .editable-field:empty::before {
+    content: attr(data-placeholder);
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-default);
+    vertical-align: top;
+  }
+  th {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    background: var(--surface-1);
+    position: sticky;
+    top: 0;
+  }
+  td[contenteditable="true"] { min-width: 80px; }
+  tr:last-child td { border-bottom: none; }
+
+  .table-wrap {
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin: 12px 0;
+  }
+  .table-wrap table { margin: 0; }
+
+  /* ── ADD ROW BTN ── */
+  .add-row-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body-sans);
+    font-size: 13px;
+    color: var(--color-primary);
+    background: none;
+    border: 1px dashed var(--color-primary-muted);
+    border-radius: var(--radius-sm);
+    padding: 6px 14px;
+    cursor: pointer;
+    min-height: 44px;
+    margin-top: 8px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .add-row-btn:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+  }
+
+  /* ── DECISION CALLOUT ── */
+  .decision-box {
+    background: var(--color-decision-bg);
+    border-left: 3px solid var(--color-decision-border);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  .decision-box strong { color: var(--text-primary); }
+  .decision-box .decision-input {
+    display: block;
+    margin-top: 6px;
+    width: 100%;
+    border: 1px dashed var(--color-decision-border);
+    border-radius: var(--radius-sm);
+    padding: 6px 10px;
+    font-size: 13px;
+    min-height: 28px;
+  }
+  .decision-box .decision-input:empty::before {
+    content: "Record decision here...";
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ── PRIVATE CALLOUT ── */
+  .private-box {
+    background: var(--color-private-bg);
+    border-left: 3px solid var(--color-private-border);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .private-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-private-label);
+    margin-bottom: 6px;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  blockquote {
+    margin: 10px 0;
+    padding: 10px 16px;
+    border-left: 3px solid var(--color-primary-muted);
+    background: var(--surface-1);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  /* ── LINKS ── */
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  a:hover { border-bottom-color: var(--color-primary); }
+
+  /* ── RESOURCE TABLE ── */
+  .resource-table td:first-child { font-weight: 600; white-space: nowrap; }
+  .resource-table a { word-break: break-all; }
+
+  /* ── STATUS BADGES ── */
+  .badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+  .badge-blocked { background: var(--color-badge-blocked-bg); color: var(--color-badge-blocked-text); }
+  .badge-progress { background: var(--color-badge-progress-bg); color: var(--color-badge-progress-text); }
+  .badge-open { background: var(--surface-2); color: var(--text-secondary); }
+  .badge-decision { background: var(--color-badge-decision-bg); color: var(--color-badge-decision-text); }
+  .badge-stale { background: var(--color-badge-stale-bg); color: var(--text-muted); }
+
+  /* ── TRIAGE TABLE ── */
+  .triage-table td:first-child { font-weight: 600; }
+
+  /* ── CALIBRATION TABLE ── */
+  .calibration-table td:first-child { font-weight: 600; width: 100px; }
+
+  /* ── RESOURCE ADDER ── */
+  .resource-adder {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .resource-adder input {
+    font-family: var(--font-body-sans);
+    font-size: 13px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    min-height: 44px;
+    flex: 1;
+    min-width: 120px;
+  }
+  .resource-adder input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-focus-ring);
+  }
+  .resource-adder button {
+    font-family: var(--font-body-sans);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    min-height: 44px;
+    background: var(--color-primary);
+    color: var(--surface-raised);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .resource-adder button:hover { background: var(--color-primary-hover); }
+
+  /* ── PRINT ── */
+  @media print {
+    .nav-bar { position: static; box-shadow: none; }
+    .nav-tab { display: none; }
+    .panel { display: block !important; page-break-before: always; }
+    .panel:first-child { page-break-before: auto; }
+    .add-row-btn, .resource-adder { display: none; }
+    .section-card { box-shadow: none; border: 1px solid var(--border-default); }
+    .private-box { border: 1px solid var(--border-default); background: var(--color-private-bg); }
+    body { font-size: 12px; }
+  }
+
+  /* ── HR ── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border-default);
+    margin: 20px 0;
+  }
+
+  /* ── WORKFLOW TABLE ── */
+  .workflow-table td:nth-child(1) { width: 40px; text-align: center; font-weight: 600; }
+  .workflow-table td:nth-child(2) { width: 80px; font-weight: 600; }
+
+  .section-card .note {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  .flag-box {
+    background: var(--color-flag-bg);
+    border-left: 3px solid var(--color-flag-border);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav-bar">
+  <h1>Meeting Prep</h1>
+  <button class="nav-tab active" onclick="showPanel('josh')" id="tab-josh"><span class="tab-num">1</span>Josh/Kim/Garen</button>
+  <button class="nav-tab" onclick="showPanel('ana')" id="tab-ana"><span class="tab-num">2</span>Ana 1:1</button>
+  <button class="nav-tab" onclick="showPanel('template')" id="tab-template"><span class="tab-num">3</span>Notes Template</button>
+  <button class="nav-tab" onclick="showPanel('talking')" id="tab-talking"><span class="tab-num">4</span>Talking Points</button>
+  <button class="nav-tab" onclick="showPanel('reconcile')" id="tab-reconcile"><span class="tab-num">5</span>Open Items</button>
+  <button class="nav-tab" onclick="showPanel('erin')" id="tab-erin"><span class="tab-num">6</span>Erin Check-in</button>
+  <span class="countdown" id="countdown"></span>
+</nav>
+
+<div class="panel-container">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PANEL 1: Josh/Kim/Garen -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="panel active" id="panel-josh">
+
+  <div class="section-card">
+    <h2>Josh + Kim + Garen &mdash; Mailmeteor & Host Comms Routing</h2>
+    <div class="section-meta">
+      <strong>Date:</strong> <span contenteditable="true" class="editable-field" data-placeholder="TBD &mdash; schedule this week" style="display:inline-block; min-width: 180px;"></span>
+      &nbsp;&middot;&nbsp; <strong>Duration:</strong> 30 min
+      &nbsp;&middot;&nbsp; <strong>Goal:</strong> Role clarity on mail merge, host comms, and film comms awareness.
+    </div>
+
+    <h3>Standing Resources</h3>
+    <div class="table-wrap">
+      <table class="resource-table" id="josh-resources">
+        <thead><tr><th>Resource</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Host email content sheet</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1FbRiZWshI_v-whMrCqBGOy4HH-VsfOjmEBlGE4FCYmc/edit?gid=1320229560#gid=1320229560" target="_blank">Content sheet</a></td>
+          </tr>
+          <tr>
+            <td>OEC Active Roadmap</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1uYJw8Whx29PQ6EpxWp8sUO_wRnhDx5-p0gROnyWU7Qg/edit?gid=483348940#gid=483348940" target="_blank">Roadmap</a></td>
+          </tr>
+          <tr>
+            <td>Filmmaker merge sheet</td>
+            <td><a href="https://docs.google.com/spreadsheets/d/1eFyEiENnjiOdy5eYAVwZUpWKvtfxhdZ2L-_YlWSSxFQ/edit" target="_blank">Merge sheet</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="resource-adder">
+      <label class="sr-only" for="josh-res-name">Resource name</label>
+      <input type="text" placeholder="Resource name" id="josh-res-name" aria-label="Resource name">
+      <label class="sr-only" for="josh-res-url">Resource URL</label>
+      <input type="text" placeholder="URL" id="josh-res-url" aria-label="Resource URL">
+      <button onclick="addResource('josh-resources', 'josh-res-name', 'josh-res-url')">+ Add Resource</button>
+    </div>
+
+    <hr>
+
+    <h3>1. Mailmeteor walkthrough for Josh <span style="color:var(--text-muted)">(10 min, I)</span></h3>
+    <ul>
+      <li>What it does, how it connects to the content sheet</li>
+      <li>Kim demos the send workflow (alias setup is complete &mdash; sends from hosts@)</li>
+      <li>Sheets add-on vs Gmail plug-in &mdash; Kim shares what she's learned</li>
+      <li>Analytics/reporting: what "this went out" looks like</li>
+    </ul>
+
+    <h3>2. Send workflow + QC step <span style="color:var(--text-muted)">(10 min, D)</span></h3>
+    <p>Current state: QC is happening but inconsistently. Josh validates links &mdash; that part is working.</p>
+    <p><strong>Proposed workflow:</strong></p>
+    <div class="table-wrap">
+      <table class="workflow-table">
+        <thead><tr><th>Step</th><th>Who</th><th>What</th></tr></thead>
+        <tbody>
+          <tr><td>1. Prep</td><td>Kim</td><td>Drafts merge in content sheet, sets merge fields</td></tr>
+          <tr><td>2. QC &mdash; links</td><td>Josh</td><td>Validates all links, checks merge field accuracy, confirms recipient list</td></tr>
+          <tr><td>3. QC &mdash; copy</td><td>Garen</td><td>Reviews copy, confirms voice alignment</td></tr>
+          <tr><td>4. Send</td><td>Kim</td><td>Executes merge via Mailmeteor</td></tr>
+          <tr><td>5. Confirm</td><td>Kim</td><td>Shares send confirmation + analytics with Ana (lightweight)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="decision-box">
+      <strong>Decision needed:</strong> Does this workflow work for everyone? What's missing?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+    <div class="decision-box">
+      <strong>Decision needed:</strong> Who is the backup if Josh isn't available for QC?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+
+    <h3>3. Film comms awareness <span style="color:var(--text-muted)">(5 min, I)</span></h3>
+    <ul>
+      <li>Filmmaker outreach is in progress &mdash; confirming licensing sign-off before early access tickets</li>
+      <li>Kim benefits from understanding this flow even though it's not her send</li>
+      <li>Where film comms and host comms intersect: screening assignments, schedule changes</li>
+    </ul>
+
+    <h3>4. Calendar invite &mdash; quick fix <span style="color:var(--text-muted)">(3 min, I)</span></h3>
+    <ul>
+      <li>Wrong host names appeared (multiple people showing as Kim)</li>
+      <li>Root cause: <span contenteditable="true" class="editable-field" data-placeholder="to be confirmed in meeting" style="display:inline-block; min-width: 200px;"></span></li>
+      <li>Fix: adding a name-check to the QC step above</li>
+    </ul>
+
+    <h3>5. Close <span style="color:var(--text-muted)">(2 min)</span></h3>
+
+    <hr>
+
+    <h3>Decisions</h3>
+    <div class="table-wrap">
+      <table id="josh-decisions">
+        <thead><tr><th>Decision</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td contenteditable="true">Send workflow (prep &rarr; QC &rarr; send &rarr; confirm)</td><td contenteditable="true"></td></tr>
+          <tr><td contenteditable="true">QC backup when Josh unavailable</td><td contenteditable="true"></td></tr>
+          <tr><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addTableRow('josh-decisions', 2)">+ Add decision</button>
+
+    <h3>Action Items</h3>
+    <div class="table-wrap">
+      <table id="josh-actions">
+        <thead><tr><th>#</th><th>What</th><th>Who</th><th>By when</th></tr></thead>
+        <tbody>
+          <tr><td contenteditable="true">1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addTableRow('josh-actions', 4)">+ Add action</button>
+
+    <p class="note">Capture decisions in the table above. This is a one-off meeting &mdash; decisions roll into the Kim doc for ongoing tracking.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PANEL 2: Ana 1:1 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="panel" id="panel-ana">
+
+  <div class="section-card">
+    <h2>Ana + Garen &mdash; 1:1 Agenda</h2>
+    <div class="section-meta">
+      <strong>Date:</strong> <span contenteditable="true" class="editable-field" data-placeholder="TBD" style="display:inline-block; min-width: 180px;"></span>
+      &nbsp;&middot;&nbsp; <strong>Duration:</strong> 45&ndash;60 min
+      &nbsp;&middot;&nbsp; <strong>Goal:</strong> Clarity on what needs to happen, who owns it, and how.
+    </div>
+
+    <h3>1. Film comms &mdash; licensing sign-off before early access <span style="color:var(--text-muted)">(10 min, D)</span></h3>
+    <p>Filmmaker outreach is ready to go &mdash; template drafted, merge sheet built, Mailmeteor selected. Purpose: confirm how we're handling final licensing sign-off before early access tickets go out (target was week of March 2 &mdash; we're behind).</p>
+    <div class="decision-box">
+      <strong>Decision:</strong> Go/no-go on sending filmmaker outreach this week?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+    <div class="decision-box">
+      <strong>Decision:</strong> Minimum licensing confirmation needed before early access tickets can publish?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+    <p><a href="https://docs.google.com/spreadsheets/d/1eFyEiENnjiOdy5eYAVwZUpWKvtfxhdZ2L-_YlWSSxFQ/edit" target="_blank">Filmmaker merge sheet</a></p>
+
+    <h3>2. "Who picks up what" &mdash; role clarity doc <span style="color:var(--text-muted)">(10 min, D)</span></h3>
+    <p>The old <a href="https://docs.google.com/document/d/1aMqBruLf_S2K_y6yfEns4X6FGfqsOhZAIbdb-8UGRkM/edit" target="_blank">who-does-what doc</a> is on Garen's personal account and flagged for deletion. Needs a clean OEC replacement.</p>
+    <p><strong>Proposal:</strong> Simple table &mdash; Task | Owner | Backup | Decision rights &mdash; covering the remaining 49 days.</p>
+    <div class="decision-box">
+      <strong>Decision:</strong> Should Garen draft this and bring to Ana for review, or co-build it now?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+
+    <h3>3. Contracts + invoicing <span style="color:var(--text-muted)">(10 min, D)</span></h3>
+    <p>All three contracts finalized in Google Docs. None signed. Erin and Kim need final sign-off. Ana needs board pass.</p>
+    <div class="decision-box">
+      <strong>Decision:</strong> Specific date for board review and signature. Not "soon" &mdash; a date.
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+    <p><strong>Invoicing:</strong> Garen has submitted invoices but process isn't documented. Need agreement on: format, frequency, who approves, turnaround.</p>
+    <p>
+      <a href="https://docs.google.com/document/d/10UChvIv2is33tw3JAjq3uBHmYWprRBSeP4PxwY_CSzk/edit" target="_blank">Garen's contract</a> |
+      <a href="https://docs.google.com/document/d/1n4_ViEuMFTSoAbRjUPw0_mIVFro-5AMqNgZOtveEmbY/edit" target="_blank">Erin's</a> |
+      <a href="https://docs.google.com/document/d/1STEiBg-2WW_6lWuVCjVppkCHXXYe3TRCXfOMImdDlCw/edit" target="_blank">Kim's</a> |
+      <a href="https://docs.google.com/spreadsheets/d/1-oopzndMeYjCVWtmW9z6i5Bp_eYl1ePdHDCm3LSw-ak" target="_blank">Budget breakdown</a>
+    </p>
+
+    <h3>4. On-site / festival week support <span style="color:var(--text-muted)">(5 min, D)</span></h3>
+    <ul>
+      <li>Garen is not on-site during fest week &mdash; this is firm and known</li>
+      <li>Live captioning venues need additional video support</li>
+      <li>Interns can pick up certain pieces &mdash; needs mapping</li>
+      <li>Draft venue tier concepts exist (community vs flagship) but no support matrix yet</li>
+    </ul>
+    <div class="decision-box">
+      <strong>Decision:</strong> Assign someone to build the venue support matrix this week? (Garen drafts, Ana/Erin validate?)
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+
+    <h3>5. Open items from running notes <span style="color:var(--text-muted)">(5 min, I)</span></h3>
+    <ul>
+      <li>Host intake survey &mdash; did it go out after the Host Commitment Meeting? <span contenteditable="true" class="editable-field" data-placeholder="Status..." style="display:inline-block; min-width: 120px;"></span></li>
+      <li>Sandy / YFC film assets &mdash; were due Feb 25 <span contenteditable="true" class="editable-field" data-placeholder="Status..." style="display:inline-block; min-width: 120px;"></span></li>
+      <li>Kim's 1:1 with Ana &mdash; did it happen? <span contenteditable="true" class="editable-field" data-placeholder="Status..." style="display:inline-block; min-width: 120px;"></span></li>
+      <li>Host page security decision &mdash; approved / needs changes / tabled? <span contenteditable="true" class="editable-field" data-placeholder="Status..." style="display:inline-block; min-width: 120px;"></span></li>
+    </ul>
+
+    <h3>6. Host comms routing: Kim vs Garen vs Josh <span style="color:var(--text-muted)">(5 min, D)</span></h3>
+    <p>Following the Josh/Kim/Garen meeting, bring the agreed send workflow to Ana for sign-off:</p>
+    <ul>
+      <li>Kim sends routine host comms (Mailmeteor, from hosts@)</li>
+      <li>Josh validates links/data pre-send</li>
+      <li>Garen reviews copy/tone</li>
+      <li>Ana gets lightweight "this went out" confirmation</li>
+    </ul>
+    <div class="decision-box">
+      <strong>Decision:</strong> Does this routing work? Anything Ana wants to sign off on directly?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+
+    <h3>7. Calendar invite &mdash; wrong host names <span style="color:var(--text-muted)">(3 min, I)</span></h3>
+    <p>Multiple hosts showed up as Kim in a calendar invite. This is a system gap, not a person's mistake &mdash; the QC step before sends wasn't catching name fields.</p>
+    <p>Fix is already in progress: adding a name-check to the pre-send QC workflow (see item 6).</p>
+
+    <h3>8. Request triage &mdash; a proposal <span style="color:var(--text-muted)">(5 min, Disc)</span></h3>
+    <p>The calendar invite issue is a good example of what happens when everything moves at the same speed. When I can't tell what's today vs this-week vs next-week, I can't sequence &mdash; and that's where errors happen.</p>
+    <p><strong>Proposed three-tier triage:</strong></p>
+    <div class="table-wrap">
+      <table class="triage-table">
+        <thead><tr><th>Label</th><th>Meaning</th><th>Turnaround</th></tr></thead>
+        <tbody>
+          <tr><td>Blocking</td><td>Something breaks if this doesn't happen today</td><td>Same day</td></tr>
+          <tr><td>This week</td><td>Needs to happen but can be sequenced</td><td>By end of week</td></tr>
+          <tr><td>Next cycle</td><td>Important but not time-sensitive</td><td>Next weekly check-in</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="decision-box">
+      <strong>Decision:</strong> Can we try this for the next two weeks and see if it helps?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+
+    <hr>
+
+    <h3>Decisions</h3>
+    <div class="table-wrap">
+      <table id="ana-decisions">
+        <thead><tr><th>Decision</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addTableRow('ana-decisions', 2)">+ Add decision</button>
+
+    <h3>Action Items</h3>
+    <div class="table-wrap">
+      <table id="ana-actions">
+        <thead><tr><th>#</th><th>What</th><th>Who</th><th>By when</th></tr></thead>
+        <tbody>
+          <tr><td contenteditable="true">1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addTableRow('ana-actions', 4)">+ Add action</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PANEL 3: Notes Template -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="panel" id="panel-template">
+
+  <div class="section-card">
+    <h2>Ana + Garen &mdash; Meeting Notes (2026)</h2>
+    <p class="section-meta">Running doc. Reverse chronological. Garen maintains; Ana reviews.</p>
+
+    <h3>Standing Resources</h3>
+    <div class="table-wrap">
+      <table class="resource-table" id="template-resources">
+        <thead><tr><th>Resource</th><th>Link</th></tr></thead>
+        <tbody>
+          <tr><td>OEC Active Roadmap</td><td><a href="https://docs.google.com/spreadsheets/d/1uYJw8Whx29PQ6EpxWp8sUO_wRnhDx5-p0gROnyWU7Qg/edit?gid=483348940#gid=483348940" target="_blank">Roadmap</a></td></tr>
+          <tr><td>Host email content sheet</td><td><a href="https://docs.google.com/spreadsheets/d/1FbRiZWshI_v-whMrCqBGOy4HH-VsfOjmEBlGE4FCYmc/edit?gid=1320229560#gid=1320229560" target="_blank">Content sheet</a></td></tr>
+          <tr><td>Host guide (live site)</td><td><a href="https://hosts.oneearthfilmfest.org" target="_blank">hosts.oneearthfilmfest.org</a></td></tr>
+          <tr><td>OEFF2026 Project Timeline</td><td><a href="https://docs.google.com/spreadsheets/d/1tZJ68c1EXz2K3HeJT7Osz1RU7F90_9OgMp_hKq8aOJI/edit" target="_blank">Timeline</a></td></tr>
+          <tr><td>Budget breakdown</td><td><a href="https://docs.google.com/spreadsheets/d/1-oopzndMeYjCVWtmW9z6i5Bp_eYl1ePdHDCm3LSw-ak" target="_blank">Budget</a></td></tr>
+          <tr><td>Kim/Garen meeting notes</td><td><a href="https://docs.google.com/document/d/1C_5AuN-Glj-xnn9t_Q5nC5DB5KkxuMWLP8u5hk1X5rw/edit" target="_blank">Kim doc</a></td></tr>
+          <tr><td>2024-2025 archive</td><td><a href="https://docs.google.com/document/d/1ZAp0dczS0iYzMG_Ym50v2g3n8Iwx0RSg9Vh8kt3oU9E/edit" target="_blank">Old meeting notes</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="resource-adder">
+      <label class="sr-only" for="template-res-name">Resource name</label>
+      <input type="text" placeholder="Resource name" id="template-res-name" aria-label="Resource name">
+      <label class="sr-only" for="template-res-url">Resource URL</label>
+      <input type="text" placeholder="URL" id="template-res-url" aria-label="Resource URL">
+      <button onclick="addResource('template-resources', 'template-res-name', 'template-res-url')">+ Add Resource</button>
+    </div>
+
+    <p><strong>Festival countdown:</strong> <span contenteditable="true" class="editable-field" data-placeholder="__ days" style="display:inline-block; min-width: 60px;"></span> &mdash; Apr 22 <em>(update each meeting)</em></p>
+
+    <hr>
+
+    <h3 style="color: var(--color-primary);">Meeting Entry Template</h3>
+    <p class="note">Copy this block for each new meeting. Edit in place.</p>
+
+    <div class="section-card" style="background: var(--surface-1); margin: 16px 0; border: 1px dashed var(--border-strong);">
+      <h3 style="margin-top:0;"><span contenteditable="true" class="editable-field" data-placeholder="Date" style="display:inline-block; min-width: 100px;"></span> &mdash; <span contenteditable="true" class="editable-field" data-placeholder="Topic or Weekly Check-in" style="display:inline-block; min-width: 200px;"></span></h3>
+      <p><strong>Present:</strong> <span contenteditable="true" class="editable-field" data-placeholder="Ana, Garen" style="display:inline-block; min-width: 200px;"></span></p>
+
+      <h3>Decisions</h3>
+      <div class="table-wrap">
+        <table id="template-decisions">
+          <thead><tr><th>Decision</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addTableRow('template-decisions', 2)">+ Add decision</button>
+
+      <h3>Action Items</h3>
+      <div class="table-wrap">
+        <table id="template-actions">
+          <thead><tr><th>#</th><th>What</th><th>Who</th><th>By when</th></tr></thead>
+          <tbody>
+            <tr><td contenteditable="true">1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="add-row-btn" onclick="addTableRow('template-actions', 4)">+ Add action</button>
+
+      <h3>Notes</h3>
+      <div contenteditable="true" class="editable-field" data-placeholder="Working context &mdash; not tracked. Decisions go in the table above." style="min-height: 60px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PANEL 4: Talking Points -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="panel" id="panel-talking">
+
+  <div class="section-card">
+    <h2>Talking Points & Coaching Notes</h2>
+    <div class="private-label">Private &mdash; for Garen's eyes only</div>
+
+    <h3>Calendar invite issue (item 7)</h3>
+    <p><strong>What happened:</strong> Wrong host names appeared &mdash; multiple people showed as Kim.</p>
+    <p><strong>Frame to use:</strong> Lead with the system fix, not the error.</p>
+    <blockquote>"A few hosts got calendar invites with the wrong name. I've added a name-field check to the QC step before sends go out &mdash; should catch it going forward."</blockquote>
+    <p><strong>If Ana raises it first:</strong></p>
+    <blockquote>"Yeah, I caught that. The pre-send check wasn't catching name fields &mdash; it's fixed now."</blockquote>
+    <div class="private-box">
+      <strong>Do NOT say:</strong> "Anyone could have made this mistake." (True, but sounds defensive. The system-fix frame is stronger.)
+      <br><strong>Do NOT over-apologize.</strong> One acknowledgment, one fix, move on.
+    </div>
+
+    <hr>
+
+    <h3>ASAP pattern (item 8)</h3>
+    <p><strong>Your chosen approach:</strong> Incident-based &mdash; use the calendar invite as the opening.</p>
+    <p><strong>The bridge sentence:</strong></p>
+    <blockquote>"The invite issue is a good example of what happens when I can't tell what's today vs this-week. When everything moves at the same speed, I can't sequence well &mdash; and that's where errors happen. I have a small proposal."</blockquote>
+    <p>Then present the three-tier triage table (Blocking / This week / Next cycle).</p>
+
+    <p><strong>Calibration by directness:</strong></p>
+    <div class="table-wrap">
+      <table class="calibration-table">
+        <thead><tr><th>Level</th><th>Language</th></tr></thead>
+        <tbody>
+          <tr><td>Gentle</td><td>"I want to make sure the most urgent things get my best attention. Can we try labeling requests for a couple weeks?"</td></tr>
+          <tr><td>Direct</td><td>"When everything is marked urgent, nothing is. The invite mistake happened because I was rushing three things at once. Here's a simple triage I'd like to try."</td></tr>
+          <tr><td>Very direct</td><td>"I need you to tell me what's actually blocking vs what's this-week. Right now I can't tell, and it's causing errors. Here's what I'd propose."</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="private-box">
+      <strong>Recommended:</strong> Start with "direct." You have 6 years of trust. You can be plain.
+    </div>
+
+    <p><strong>The one-directional urgency pattern:</strong></p>
+    <p>Things flow ASAP to you but sit unreviewed on Ana's end. Don't lead with this. But if the conversation opens up:</p>
+    <blockquote>"I'd also like to set mutual turnaround expectations &mdash; if I owe you something by Thursday, I'd like to know when I can expect review back. Not to pressure, just so I can plan my week."</blockquote>
+
+    <hr>
+
+    <h3>Contracts (item 3)</h3>
+    <p><strong>The ask:</strong> A specific date for board review and signature.</p>
+    <blockquote>"All three contracts are done on my end. What's the timeline for board review? I'd like a date so Erin and Kim aren't in limbo."</blockquote>
+    <p><strong>If Ana says "soon" or "I'll get to it":</strong></p>
+    <blockquote>"I hear you &mdash; is next Friday realistic? I just want to give Erin and Kim a concrete expectation."</blockquote>
+    <div class="private-box">
+      <strong>Why this matters:</strong> 49 days out. People are working without formal terms. This protects everyone &mdash; including Ana &mdash; if anything goes sideways.
+    </div>
+
+    <hr>
+
+    <h3>On-site / festival week (item 4)</h3>
+    <p><strong>This is firm and Ana knows.</strong> So the conversation is about coverage, not negotiation.</p>
+    <blockquote>"I'm not on-site during fest week &mdash; you know that. Here's what I'm thinking for coverage: interns can handle [X], Erin covers [Y]. The venues with live captioning need additional video support &mdash; that's the gap. Can we map who covers what this week?"</blockquote>
+    <p><strong>If Ana pushes back:</strong></p>
+    <blockquote>"I understand. Let me draft the support matrix with the gaps clearly marked, and we can figure out together who fills them. I want to make sure the plan is solid before fest week, not improvised during it."</blockquote>
+
+    <hr>
+
+    <h3>The translator role</h3>
+    <div class="private-box">
+      <strong>Park this for after fest.</strong> The triage proposal is the first step toward formalizing it. If the triage works, the next conversation is: "This routing I'm doing &mdash; should we name it? It's becoming a real part of how the team works."
+      <br><br>That's a scope/contract conversation for after fest, not a pre-fest negotiation.
+    </div>
+
+    <hr>
+
+    <h3>General meeting posture</h3>
+    <ul>
+      <li><strong>Lead with proposals, not problems.</strong> Every item above has a "here's what I'd do" attached.</li>
+      <li><strong>Protect the close.</strong> Last 5 min: read back decisions, confirm action items, assign owners. Don't compress.</li>
+      <li><strong>One acknowledgment per issue, then move forward.</strong> Don't loop back.</li>
+      <li><strong>Watch for the shame spiral.</strong> If you start feeling like you're defending yourself, pause. You're not on trial. You're a 6-year partner proposing improvements to shared infrastructure.</li>
+    </ul>
+
+    <h3>Your notes</h3>
+    <div contenteditable="true" class="editable-field" data-placeholder="Add your own notes, reflections, or adjustments here..." style="min-height: 80px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PANEL 5: Open Items Reconciliation -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="panel" id="panel-reconcile">
+
+  <div class="section-card">
+    <h2>Open Items Reconciliation</h2>
+    <p class="section-meta">Merged from: Kim doc (Mar 1 + Mar 3), Ana doc (Feb 24), session open items.</p>
+
+    <h3>Belongs in Ana 1:1</h3>
+    <div class="table-wrap">
+      <table id="reconcile-ana">
+        <thead><tr><th>Item</th><th>Owner</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Contracts &mdash; board review + signature</td>
+            <td>Ana</td>
+            <td><span class="badge badge-blocked">Blocked</span></td>
+            <td contenteditable="true">All 3 finalized. Erin + Kim need final sign-off. Ana needs board pass. Need a date.</td>
+          </tr>
+          <tr>
+            <td>Film comms &mdash; licensing sign-off before early access</td>
+            <td>Garen/Ana</td>
+            <td><span class="badge badge-progress">In progress</span></td>
+            <td contenteditable="true">Merge sheet built, template drafted. Blocked on 2 filmmaker emails. Early access target was week of Mar 2 &mdash; behind.</td>
+          </tr>
+          <tr>
+            <td>Host intake survey &mdash; send or hold</td>
+            <td>Ana</td>
+            <td><span class="badge badge-decision">Decision needed</span></td>
+            <td contenteditable="true">Ready to send before Host Commitment Meeting. Mail merge QC issue caught. Draft in Ana's inbox.</td>
+          </tr>
+          <tr>
+            <td>Host page security &mdash; approved?</td>
+            <td>Ana</td>
+            <td><span class="badge badge-decision">Decision needed</span></td>
+            <td contenteditable="true">Two-tier recommendation presented. No decision recorded.</td>
+          </tr>
+          <tr>
+            <td>On-site coverage mapping</td>
+            <td>Garen</td>
+            <td><span class="badge badge-open">Not started</span></td>
+            <td contenteditable="true">Garen not on-site (firm). Interns can cover some. Live captioning venues need video support. No matrix yet.</td>
+          </tr>
+          <tr>
+            <td>Invoicing process documentation</td>
+            <td>Garen/Ana</td>
+            <td><span class="badge badge-open">Not documented</span></td>
+            <td contenteditable="true">Garen has submitted invoices. Process needs writing down: format, frequency, who approves.</td>
+          </tr>
+          <tr>
+            <td>"Who does what" &mdash; replacement doc</td>
+            <td>Garen</td>
+            <td><span class="badge badge-open">To do</span></td>
+            <td contenteditable="true">Old doc on personal account, flagged for deletion. Needs OEC replacement.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addReconcileRow('reconcile-ana')">+ Add item</button>
+
+    <hr>
+
+    <h3>Belongs in Josh/Kim/Garen meeting</h3>
+    <div class="table-wrap">
+      <table id="reconcile-josh">
+        <thead><tr><th>Item</th><th>Owner</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Send workflow &mdash; QC step formalization</td>
+            <td>Garen</td>
+            <td><span class="badge badge-open">Proposed</span></td>
+            <td contenteditable="true">Prep &rarr; QC (Josh) &rarr; Review (Garen) &rarr; Send (Kim) &rarr; Confirm. Needs agreement.</td>
+          </tr>
+          <tr>
+            <td>Calendar invite &mdash; wrong names</td>
+            <td>Garen</td>
+            <td><span class="badge badge-progress">Fix in progress</span></td>
+            <td contenteditable="true">Name-field check added to QC. Flag for awareness.</td>
+          </tr>
+          <tr>
+            <td>Mailmeteor &mdash; alias vs non-alias approach</td>
+            <td>Garen</td>
+            <td><span class="badge badge-stale">Parked</span></td>
+            <td contenteditable="true">Alias setup is done. Decision on sharing Mailmeteor with rest of team still parked.</td>
+          </tr>
+          <tr>
+            <td>Mailmeteor &mdash; follow-up schedule modification</td>
+            <td>Kim</td>
+            <td><span class="badge badge-open">Open question</span></td>
+            <td contenteditable="true">Can schedule be modified after campaign creation?</td>
+          </tr>
+          <tr>
+            <td>Mailmeteor &mdash; collaborative features</td>
+            <td>Kim</td>
+            <td><span class="badge badge-open">Open question</span></td>
+            <td contenteditable="true">Shared campaigns, team access &mdash; worth exploring.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addReconcileRow('reconcile-josh')">+ Add item</button>
+
+    <hr>
+
+    <h3>Belongs in Kim 1:1 (next meeting &mdash; Mar 3 was canceled)</h3>
+    <div class="table-wrap">
+      <table id="reconcile-kim">
+        <thead><tr><th>Item</th><th>Owner</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Schedule Garen/Kim/Ana three-way</td><td>Garen</td><td><span class="badge badge-open">Open</span></td><td contenteditable="true"></td></tr>
+          <tr><td>Provide datasets &mdash; roadmap access</td><td>Garen</td><td><span class="badge badge-open">Open</span></td><td contenteditable="true"></td></tr>
+          <tr><td>Add squad meeting link to top of Kim doc</td><td>Garen</td><td><span class="badge badge-open">Open</span></td><td contenteditable="true"></td></tr>
+          <tr><td>Finalize Kim's resource hub</td><td>Garen</td><td><span class="badge badge-open">Open</span></td><td contenteditable="true">Content exists locally. Needs gdocs push.</td></tr>
+          <tr><td>Share Airtable views with Kim</td><td>Garen</td><td><span class="badge badge-open">Open</span></td><td contenteditable="true">With caveat re: sync & migration constraints.</td></tr>
+          <tr><td>Kim contract &mdash; send for final sign-off</td><td>Garen</td><td><span class="badge badge-open">Open</span></td><td contenteditable="true">Was due Sun Mar 2.</td></tr>
+          <tr><td>Host intake form data workflow</td><td>Kim/Garen</td><td><span class="badge badge-open">To revisit</span></td><td contenteditable="true">What data do we need, what's the workflow?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addReconcileRow('reconcile-kim')">+ Add item</button>
+
+    <hr>
+
+    <h3>Stale / completed / no longer relevant</h3>
+    <div class="table-wrap">
+      <table id="reconcile-stale">
+        <thead><tr><th>Item</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Sandy / YFC film assets</td><td><span class="badge badge-stale">Unknown</span></td><td contenteditable="true">Were due Feb 25. Need to confirm if received. Ask in Ana 1:1.</td></tr>
+          <tr><td>Kim's 1:1 with Ana</td><td><span class="badge badge-stale">Unknown</span></td><td contenteditable="true">Was supposed to happen week of Mar 1. Confirm.</td></tr>
+          <tr><td>AV handoff check-in with Erin</td><td><span class="badge badge-stale">Unknown</span></td><td contenteditable="true">Was due "this week" from Feb 24. Confirm status.</td></tr>
+          <tr><td>Early-access tickets</td><td><span class="badge badge-blocked">Behind</span></td><td contenteditable="true">Target was week of Mar 2. Blocked on film comms/licensing.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <div class="flag-box">
+      <strong>Data hygiene flag:</strong> The Kim meeting notes doc has the <strong>wrong URL for the content sheet</strong> &mdash; it currently points to the Roadmap spreadsheet. Correct URL is <code>1FbRiZWshI_v-whMrCqBGOy4HH-VsfOjmEBlGE4FCYmc</code>. Fix when you next push the Kim doc.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PANEL 6: Erin Check-in -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="panel" id="panel-erin">
+
+  <div class="section-card">
+    <h2>Erin + Garen &mdash; Deliverables & Support Check-in</h2>
+    <div class="section-meta">
+      <strong>Date:</strong> <span contenteditable="true" class="editable-field" data-placeholder="TBD &mdash; schedule this week" style="display:inline-block; min-width: 180px;"></span>
+      &nbsp;&middot;&nbsp; <strong>Duration:</strong> 30 min
+      &nbsp;&middot;&nbsp; <strong>Goal:</strong> Clear picture of what's in motion, what's coming, and where Garen needs to support.
+    </div>
+
+    <h3>1. Pre-fest branded content &mdash; status check <span style="color:var(--text-muted)">(10 min, I)</span></h3>
+    <p>Deliverables due before festival week. Where does each stand?</p>
+    <div class="table-wrap">
+      <table id="erin-prefest">
+        <thead><tr><th>Deliverable</th><th>Contract hours</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Promo video</td><td>6 hrs</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          <tr><td>Welcome video (recording + edit)</td><td>4 hrs</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          <tr><td>Trailer reel assembly</td><td>4 hrs</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+          <tr><td>Sponsor acknowledgment content</td><td>3 hrs</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>What's done, what's in progress, what hasn't started?</li>
+      <li>Anything blocked on content from Ana or Cesar?</li>
+      <li>Sponsor list &mdash; does Erin have what she needs for the sponsor video?</li>
+      <li>Trailer reel: any carryover concerns from the 2025 drift issue? (SRT timing was the problem last year &mdash; want to make sure source files are clean this round)</li>
+    </ul>
+
+    <h3>2. Event capture plan &mdash; festival week <span style="color:var(--text-muted)">(5 min, I)</span></h3>
+    <p>Contract scopes 7 events at 30 hrs filming + 35 hrs editing (60-sec recap videos).</p>
+    <ul>
+      <li>Which events are confirmed for capture? <span contenteditable="true" class="editable-field" data-placeholder="List events..." style="display:inline-block; min-width: 200px;"></span></li>
+      <li>Any venue-specific constraints Erin already knows about? (lighting, access, setup time)</li>
+      <li>Equipment needs &mdash; anything Garen should budget or coordinate?</li>
+      <li>Subcontractor support &mdash; is Erin bringing anyone, or solo on all 7?</li>
+    </ul>
+
+    <h3>3. Pre-show slide deck &mdash; ownership gap <span style="color:var(--text-muted)">(5 min, D)</span></h3>
+    <p>The slide deck (per-venue pre-show package) is currently unowned. Garen owns the combined pre-show package assembly but needs Erin's assets to build it.</p>
+    <div class="decision-box">
+      <strong>Decision needed:</strong> Is Erin designing the slide template, or does this need a separate design resource?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+    <ul>
+      <li>What does Erin need from Garen to produce her assets for the package? (specs, timelines, venue list)</li>
+      <li>Timeline: these need to be done before fest week &mdash; what's realistic?</li>
+    </ul>
+
+    <h3>4. Live captioning venues &mdash; video support gap <span style="color:var(--text-muted)">(5 min, D)</span></h3>
+    <p>Some venues have live captioning, which creates additional video support needs during festival week. Garen won't be on-site.</p>
+    <div class="decision-box">
+      <strong>Decision needed:</strong> Can Erin cover video support at caption venues, or does this need someone else?
+      <div class="decision-input" contenteditable="true"></div>
+    </div>
+    <ul>
+      <li>Which venues are doing open captions / live captioning?</li>
+      <li>If it needs someone else &mdash; who? Intern, subcontractor, other?</li>
+    </ul>
+
+    <h3>5. Garen's support &mdash; what do you need from me? <span style="color:var(--text-muted)">(5 min, Disc)</span></h3>
+    <p>Garen's role relative to Erin per the contract: "coordinates with." The operations support piece (Area 2) has Erin attending squad calls, routing tasks, bridging async gaps.</p>
+    <ul>
+      <li>Is the coordination working? Are there gaps or friction?</li>
+      <li>Caption/audio QC standards &mdash; does Erin need a walkthrough? (Rev.com ordering &rarr; SRT &rarr; sync verification &rarr; burn-in for open-caption venues)</li>
+      <li>Any technical specs she needs that she doesn't have? (file formats, delivery specs, equipment)</li>
+      <li>What's the best way to hand things off day-to-day?</li>
+    </ul>
+
+    <hr>
+
+    <h3>Parking lot</h3>
+    <ul>
+      <li>Contract sign-off &mdash; Erin's agreement is finalized but not signed. (Garen raising with Ana &mdash; not Erin's action item, just awareness.)</li>
+      <li>Program design consultation (5 + 5 hrs in contract) &mdash; hasn't come up yet. Is this still expected?</li>
+      <li>Post-fest source file delivery &mdash; contract says within 5 business days of approval, format/location TBD before fest week.</li>
+    </ul>
+
+    <hr>
+
+    <h3>Action Items</h3>
+    <div class="table-wrap">
+      <table id="erin-actions">
+        <thead><tr><th>#</th><th>What</th><th>Who</th><th>By when</th></tr></thead>
+        <tbody>
+          <tr><td contenteditable="true">1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="add-row-btn" onclick="addTableRow('erin-actions', 4)">+ Add action</button>
+  </div>
+</div>
+
+</div><!-- /panel-container -->
+
+<script>
+  // ── Tab switching ──
+  function showPanel(id) {
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.getElementById('panel-' + id).classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  // ── Countdown ──
+  (function() {
+    var fest = new Date('2026-04-22T00:00:00');
+    var now = new Date();
+    var days = Math.ceil((fest - now) / (1000 * 60 * 60 * 24));
+    document.getElementById('countdown').textContent = days + ' days to fest';
+  })();
+
+  // ── Add table row ──
+  function addTableRow(tableId, cols) {
+    var tbody = document.getElementById(tableId).querySelector('tbody');
+    var tr = document.createElement('tr');
+    for (var i = 0; i < cols; i++) {
+      var td = document.createElement('td');
+      td.contentEditable = 'true';
+      if (i === 0 && cols === 4) {
+        td.textContent = tbody.rows.length + 1;
+      }
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+    var second = tr.querySelector('td:nth-child(2)');
+    if (second) second.focus();
+  }
+
+  // ── Add reconciliation row ──
+  function addReconcileRow(tableId) {
+    var tbody = document.getElementById(tableId).querySelector('tbody');
+    var tr = document.createElement('tr');
+    var cells = ['Item', 'Owner', '', 'Notes'];
+    cells.forEach(function(placeholder, i) {
+      var td = document.createElement('td');
+      if (i === 2) {
+        td.innerHTML = '<span class="badge badge-open">Open</span>';
+      } else {
+        td.contentEditable = 'true';
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+    var first = tr.querySelector('td');
+    if (first) first.focus();
+  }
+
+  // ── Add resource ──
+  function addResource(tableId, nameInputId, urlInputId) {
+    var name = document.getElementById(nameInputId).value.trim();
+    var url = document.getElementById(urlInputId).value.trim();
+    if (!name) return;
+    var tbody = document.getElementById(tableId).querySelector('tbody');
+    var tr = document.createElement('tr');
+    var tdName = document.createElement('td');
+    tdName.textContent = name;
+    var tdLink = document.createElement('td');
+    if (url) {
+      var a = document.createElement('a');
+      a.href = url.indexOf('http') === 0 ? url : 'https://' + url;
+      a.target = '_blank';
+      a.textContent = name;
+      tdLink.appendChild(a);
+    } else {
+      tdLink.textContent = '\u2014';
+    }
+    tr.appendChild(tdName);
+    tr.appendChild(tdLink);
+    tbody.appendChild(tr);
+    document.getElementById(nameInputId).value = '';
+    document.getElementById(urlInputId).value = '';
+  }
+
+  // ── Keyboard nav: Ctrl+1-5 to switch tabs ──
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '6') {
+      e.preventDefault();
+      var panels = ['josh', 'ana', 'template', 'talking', 'reconcile', 'erin'];
+      showPanel(panels[parseInt(e.key) - 1]);
+    }
+  });
+</script>
+</body>
+</html>
