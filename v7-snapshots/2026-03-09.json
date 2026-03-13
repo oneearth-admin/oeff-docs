@@ -1,0 +1,64 @@
+{
+  "date": "2026-03-09",
+  "source": "live",
+  "sheets_read": [
+    "2026HostVenues"
+  ],
+  "metrics": {
+    "hosts_total": 204,
+    "events_total": 24,
+    "events_with_film": 23,
+    "events_missing_film": 1,
+    "events_with_date": 23,
+    "events_missing_date": 1,
+    "events_film_confirmed": 23,
+    "events_film_not_confirmed": 0,
+    "events_flagship": 6,
+    "events_community": 18
+  },
+  "merge_validation": {
+    "total_sendable": 24,
+    "hosts_with_gaps": 6,
+    "hosts_ready": 18,
+    "gaps": [
+      {
+        "host": "Park Ridge Community Church (Go Green Park Ridge)",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Chicago Climate Action Museum",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Euclid Ave United Methodist Church",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Chicago Cultural Center",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Illinois Clinicians for Climate Action at TBD location or with TBD partner",
+        "missing": [
+          "Venue Contact"
+        ]
+      },
+      {
+        "host": "Seven Generations Ahead",
+        "missing": [
+          "Film Title",
+          "Screening Date",
+          "Venue Contact"
+        ]
+      }
+    ]
+  }
+}
