@@ -1,0 +1,200 @@
+<!-- guards: beautiful-first-design, oeff, core/color, core/interaction, core/layout, core/typography -->
+<!DOCTYPE html>
+<html lang="en" data-domain="forest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF Data Architecture — Shared Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest-canopy: #1a2e22;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #4a6a5a;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+      --teal: #4b7c8c;
+      --ochre: #b8863a;
+      --ochre-dark: #8a6a2a;
+      --coral-soft: #a05050;
+      --ink: #2c2825;
+      --ink-soft: #5c5550;
+      --ink-muted: #8a8580;
+      --cream: #f7f5f2;
+      --paper: #faf9f7;
+      --linen: #f0ede8;
+      --color-ground: var(--cream);
+      --color-surface: var(--paper);
+      --color-text: var(--ink);
+      --color-text-soft: var(--ink-soft);
+      --color-text-muted: var(--ink-muted);
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-dark: var(--forest-canopy);
+      --color-border: var(--forest-mist);
+      --color-surface-inset: var(--linen);
+      --color-accent-teal: var(--teal);
+      --color-accent-ochre: var(--ochre);
+      --color-accent-ochre-dark: var(--ochre-dark);
+      --color-accent-coral: var(--coral-soft);
+      --color-layer-v1: oklch(0.93 0.02 20);
+      --color-layer-v2: oklch(0.95 0.02 150);
+      --color-layer-risk: oklch(0.97 0.02 60);
+      --color-badge-green-bg: oklch(0.94 0.03 150);
+      --color-badge-ochre-bg: oklch(0.95 0.03 80);
+      --color-badge-coral-bg: oklch(0.95 0.02 20);
+      --color-risk-border: oklch(0.88 0.03 60);
+      --shadow-warm: 0 4px 20px hsla(25, 40%, 30%, 0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Source Sans 3', system-ui, sans-serif; background: var(--color-ground); color: var(--color-text); line-height: 1.6; font-size: 15px; }
+    .container { max-width: 820px; margin: 0 auto; padding: 48px 24px 96px; }
+    header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--color-border); }
+    header h1 { font-family: 'Fraunces', Georgia, serif; font-size: 32px; font-weight: 700; color: var(--color-text); margin-bottom: 4px; font-optical-sizing: auto; }
+    header .subtitle { font-family: 'Source Code Pro', monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.25em; color: var(--color-text-muted); margin-bottom: 16px; }
+    header .context { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 15px; color: var(--color-text-soft); max-width: 520px; margin: 0 auto; }
+    .date-badge { display: inline-block; font-family: 'Source Code Pro', monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; background: var(--color-primary-dark); color: white; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+    section { margin-bottom: 48px; }
+    section h2 { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 700; color: var(--color-text); margin-bottom: 4px; }
+    section .section-sub { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 14px; color: var(--color-primary); margin-bottom: 20px; }
+    section h3 { font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 16px; font-weight: 600; color: var(--color-text); margin: 24px 0 8px; }
+    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; box-shadow: var(--shadow-warm); }
+    .card-green { border-left: 4px solid var(--color-primary); }
+    .card-teal { border-left: 4px solid var(--color-accent-teal); }
+    .card-ochre { border-left: 4px solid var(--color-accent-ochre); }
+    .card-gray { border-left: 4px solid var(--color-text-muted); }
+    .card h3 { font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 15px; font-weight: 600; margin: 4px 0; }
+    .card p { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; color: var(--color-text-soft); line-height: 1.5; }
+    .card .mono { font-family: 'Source Code Pro', monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted); }
+    .decision { position: relative; overflow: hidden; }
+    .decision .number { position: absolute; top: -8px; right: 12px; font-family: 'Fraunces', Georgia, serif; font-size: 64px; font-weight: 700; color: var(--color-border); opacity: 0.4; line-height: 1; }
+    .decision blockquote { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; font-size: 14px; color: var(--color-primary-deep); border-left: 3px solid var(--color-primary); padding-left: 12px; margin-top: 8px; }
+    .decision blockquote cite { font-style: normal; font-family: 'Source Code Pro', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted); display: block; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+    th { font-family: 'Source Code Pro', monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted); text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--color-border); }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--color-surface-inset); vertical-align: top; }
+    td:first-child { font-weight: 600; }
+    .timeline-item { display: flex; gap: 16px; margin-bottom: 12px; align-items: flex-start; }
+    .timeline-date { font-family: 'Source Code Pro', monospace; font-size: 12px; font-weight: 600; color: var(--color-primary); min-width: 72px; padding-top: 2px; }
+    .timeline-content { flex: 1; }
+    .timeline-content strong { font-weight: 600; }
+    .badge { display: inline-block; font-family: 'Source Code Pro', monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 20px; margin-right: 4px; }
+    .badge-green { background: var(--color-badge-green-bg); color: var(--color-primary-deep); }
+    .badge-ochre { background: var(--color-badge-ochre-bg); color: var(--color-accent-ochre-dark); }
+    .badge-coral { background: var(--color-badge-coral-bg); color: var(--color-accent-coral); }
+    .badge-gray { background: var(--color-surface-inset); color: var(--color-text-muted); }
+    .badge-done { background: var(--color-primary); color: white; }
+    .synthesis { background: var(--color-primary-dark); color: var(--color-border); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+    .synthesis strong { color: white; }
+    .synthesis p { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; line-height: 1.6; }
+    .risk-callout { background: var(--color-layer-risk); border: 1px solid var(--color-risk-border); border-left: 4px solid var(--color-accent-ochre); border-radius: 12px; padding: 16px 20px; margin: 16px 0; }
+    .risk-callout p { font-size: 14px; }
+    @media print { body { font-size: 12px; } .container { max-width: 100%; padding: 24px; } .card { break-inside: avoid; box-shadow: none; } .synthesis { -webkit-print-color-adjust: exact; } }
+    hr { border: none; border-top: 1px solid var(--color-border); margin: 48px 0; }
+  </style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="date-badge">March 2026 · 39 days to festival</div>
+  <h1>OEFF Data Architecture</h1>
+  <div class="subtitle">Kim + Garen · Shared Reference</div>
+  <p class="context">A working document for the decisions we're making together about how OEFF's data is organized, who owns what, and why it matters for the org's future.</p>
+</header>
+<section>
+  <h2>What Changed and Why</h2>
+  <p class="section-sub">The March 13 architecture pivot, in plain language</p>
+  <p>We moved from organizing data around <strong>venues</strong> to organizing it around <strong>events</strong>. This sounds small but it changes everything downstream.</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;">
+    <div class="card" style="background: var(--color-layer-v1);"><div class="mono">Before (v1)</div><h3>Venue-Centric</h3><p>24 shared grid views, one per venue. Multi-event venues had comma-separated values. Kim couldn't edit rollup fields. 69 fields in Venues table, 29 of them formula debt.</p></div>
+    <div class="card" style="background: var(--color-layer-v2);"><div class="mono">Now (v2)</div><h3>Event-Centric</h3><p>One row per event. Flat text fields Kim can edit directly. A script assembles data from master tables. 28 fields, all readable. Per-event pages replace per-venue views.</p></div>
+  </div>
+  <div class="synthesis"><p><strong>The tradeoff we chose:</strong> v2 duplicates data (every event row has its own copy of the venue address) in exchange for editability and clarity. The assembly script can re-flatten at any time without overwriting Kim's manual edits in the 7 protected fields.</p></div>
+  <h3>The 7 protected fields</h3>
+  <p style="margin-bottom: 12px;">These are Kim's fields. The script never touches them:</p>
+  <div style="display: flex; flex-wrap: wrap; gap: 6px;"><span class="badge badge-green">Parking</span><span class="badge badge-green">Transit</span><span class="badge badge-green">WiFi</span><span class="badge badge-green">AV Notes</span><span class="badge badge-green">Volunteer Needs</span><span class="badge badge-green">Screening Packet URL</span><span class="badge badge-green">Notes</span></div>
+</section>
+<hr>
+<section>
+  <h2>Decisions We've Made</h2>
+  <p class="section-sub">7 architecture decisions from our March 13 meeting — the load-bearing walls</p>
+  <div class="card card-green decision"><div class="number">1</div><div class="mono">Decision 1</div><h3>Events as relational key</h3><p>Events are the most specific data level. Everything links through them — venues, films, contacts, dates.</p><blockquote>"The most specific our data will ever get is by event."<cite>Kim</cite></blockquote></div>
+  <div class="card card-green decision"><div class="number">2</div><div class="mono">Decision 2</div><h3>Unified Directory</h3><p>All people — hosts, filmmakers, venue contacts, sponsors — in one table with a Contact Type field. Replaces scattered contact lists.</p><blockquote>"What if we just called this table a directory?"<cite>Kim</cite></blockquote></div>
+  <div class="card card-green decision"><div class="number">3</div><div class="mono">Decision 3</div><h3>Collaborators vs. Transactional</h3><p>Mission-oriented partners vs. deliverable-based contacts. This distinction shapes how we communicate with everyone in the Directory.</p></div>
+  <div class="card card-green decision"><div class="number">4</div><div class="mono">Decision 4</div><h3>Members vs. Partners</h3><p>14k email list = members (who we work for). Active stakeholders = partners (who we work with). Clarifies the intent of every communication.</p><blockquote>"Distinguish who we work with and who we work for."<cite>Kim</cite></blockquote></div>
+  <div class="card card-green decision"><div class="number">5</div><div class="mono">Decision 5</div><h3>Per-event interface pages</h3><p>Replace 24 shared grid views with per-event Interface Designer pages. Deep links give direct edit access to a single event without scrolling through 200 rows.</p></div>
+  <div class="card card-green decision"><div class="number">6</div><div class="mono">Decision 6</div><h3>Dual venue classification</h3><p>Flagship/Community (team presence level) alongside T1–T4 (technical needs). Two separate classification systems that don't compete.</p></div>
+  <div class="card card-green decision"><div class="number">7</div><div class="mono">Decision 7</div><h3>"Events" umbrella term</h3><p>"Screenings" becomes a subtype of "events." Future-proofs the model for action fairs, concerts, panels. Full terminology conversation deferred to post-festival.</p></div>
+  <div class="synthesis"><p><strong>These are the load-bearing walls.</strong> Change one, and the sync scripts, merge sheets, and host pages all need updating. Every downstream tool we build assumes these 7 decisions hold.</p></div>
+</section>
+<hr>
+<section>
+  <h2>Why This Architecture Matters for Sustainability</h2>
+  <p class="section-sub">Research-backed reasoning for the choices we're making</p>
+  <h3>The real risk is continuity, not scale</h3>
+  <p style="margin-bottom: 16px;">OEFF won't outgrow Airtable anytime soon. What threatens the system is when someone leaves and their knowledge goes with them. The architecture should be self-documenting enough that a new contractor can operate it within a day.</p>
+  <div class="card card-teal"><h3>If Garen leaves</h3><p>At risk: script refresh, sync triage, Cloudflare deployment. Mitigated by: decision log, MANIFEST.md, the architecture map, this document.</p></div>
+  <div class="card card-teal"><h3>If Kim leaves</h3><p>At risk: daily data hygiene, comms-state updates, host relationship history. Mitigated by: per-event pages with clear fields, runbooks, field descriptions.</p></div>
+  <h3>Industry patterns we're following</h3>
+  <p style="margin-bottom: 12px;">These patterns are used by TIFF, Tribeca, Sundance, Eventival, and other film festival orgs:</p>
+  <table><tr><th>Pattern</th><th>Who uses it</th><th>Our version</th></tr><tr><td>Canonical people table + role layer</td><td>Salesforce NPSP, HubSpot</td><td>Directory table</td></tr><tr><td>Event-centric core</td><td>Eventive, SXSW, CES</td><td>v2 architecture</td></tr><tr><td>Permission by surface</td><td>Airtable best practices</td><td>Interface Designer pages</td></tr><tr><td>Source + sync contracts</td><td>Eventival, Airtable sync</td><td>Script ownership model</td></tr><tr><td>Turnover resilience</td><td>Sundance, VolunteerHub</td><td>Data Dictionary + Runbooks (needed)</td></tr></table>
+  <div class="risk-callout"><p><strong>Two patterns we haven't implemented yet:</strong> Season as a first-class entity (2027 target) and a full asset registry with version tracking (blueprint exists, 5 tables). Both are post-festival work.</p></div>
+  <h3>Anti-patterns we're actively avoiding</h3>
+  <table><tr><th>Anti-pattern</th><th>Why it matters</th></tr><tr><td>Routing via memory only</td><td>"Ask Garen" is the current routing table. If Garen's unavailable, nobody knows where data lives.</td></tr><tr><td>Silent bidirectional edits</td><td>Two systems editing the same field without ownership rules. Our fix: script-owned vs. team-editable split.</td></tr><tr><td>Copy-and-edit workflows</td><td>Data drift between copies. Our fix: one assembly script, one source of truth per field.</td></tr><tr><td>Permission shortcuts for interns</td><td>Broad editor access. Our fix: interface-only access, narrow forms.</td></tr></table>
+</section>
+<hr>
+<section>
+  <h2>Decisions to Make This Week</h2>
+  <p class="section-sub">For the Monday/Tuesday Kim + Garen meeting</p>
+  <div class="card card-ochre"><div class="mono">Decision needed</div><h3>Where do filmmaker contacts live?</h3><p>The v2 spec recommends the Directory table. But this means filmmakers share a table with hosts, venue contacts, and sponsors. The alternative is keeping a separate Film Contacts table. <strong>Recommendation:</strong> Directory with a "Filmmaker" contact type. Film-specific fields (runtime, licensing) stay on the Films table itself.</p></div>
+  <div class="card card-ochre"><div class="mono">Decision needed</div><h3>Contact Type: one field or two?</h3><p>Kim currently uses "Contact Type" for primary/secondary. But we also need Role (host, filmmaker, sponsor, venue manager). <strong>Recommendation:</strong> Split into two fields — Role (what they do) and Priority (primary/secondary for comms). Figure out the exact values when building, not before.</p></div>
+  <div class="card card-ochre"><div class="mono">Decision needed</div><h3>Schema freeze date</h3><p>Currently proposed: April 11 (11 days before festival). Only data edits after that, no field changes unless critical. <strong>Question:</strong> Does the team need more buffer? Should it be April 4 instead?</p></div>
+  <div class="card card-ochre"><div class="mono">Decision needed</div><h3>miniExtensions or Interface Designer deep links?</h3><p>Interface Designer deep links scroll to a record but don't fully isolate it. miniExtensions gives per-record public URLs but adds a paid dependency. <strong>Recommendation:</strong> Start with Interface Designer. Evaluate miniExtensions only if hosts report confusion with the current approach.</p></div>
+  <div class="card card-gray"><div class="mono">For Ana (Monday)</div><h3>Asset layer: now or post-festival?</h3><p>5 new tables (Assets, Asset Versions, Deliverables, Packet QA, Delivery Log) would formalize the screening packet pipeline. But 39 days before festival is tight. <strong>Ana's call</strong> — is this reducing risk or adding it?</p></div>
+</section>
+<hr>
+<section>
+  <h2>Critical Path to March 20</h2>
+  <p class="section-sub">Host Helper rollout target — 6 days</p>
+  <div class="timeline-item"><div class="timeline-date">Blocking</div><div class="timeline-content"><strong>Kim:</strong> Clean tracker sheet and notify Garen. <span class="badge badge-coral">Blocking everything below</span></div></div>
+  <div class="timeline-item"><div class="timeline-date">Mar 16</div><div class="timeline-content"><strong>Both:</strong> Meeting to finalize field schema. Present architecture plan to Ana.</div></div>
+  <div class="timeline-item"><div class="timeline-date">Mar 16-17</div><div class="timeline-content"><strong>Garen:</strong> Import tracker into Directory table. Build <code>assemble-event-tables.py</code>. Create Interface Designer pages.</div></div>
+  <div class="timeline-item"><div class="timeline-date">Mar 18-19</div><div class="timeline-content"><strong>Both:</strong> QA Host Helper against audit checklist. Test deep links. Update merge sheets.</div></div>
+  <div class="timeline-item"><div class="timeline-date">Mar 20</div><div class="timeline-content"><strong>Kim:</strong> Send per-event links to hosts via Mailmeteor. <span class="badge badge-done">Rollout</span></div></div>
+  <div class="risk-callout"><p><strong>Biggest risk:</strong> <code>assemble-event-tables.py</code> doesn't exist yet. It's the engine the entire v2 architecture runs on. It must be built before anything in the host-facing layer can be tested.</p></div>
+</section>
+<hr>
+<section>
+  <h2>How Data Flows</h2>
+  <p class="section-sub">The downhill principle — data flows one direction, never upstream</p>
+  <div class="card card-green" style="text-align: center; padding: 24px;">
+    <div class="mono" style="margin-bottom: 8px;">Canonical Sources</div>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;"><span class="badge badge-green">Kim's Tracker (5 tabs)</span><span class="badge badge-green">OEC Active Roadmap</span><span class="badge badge-green">Kim's Comms Tracker</span></div>
+    <div style="font-size: 24px; color: var(--color-primary); margin: 8px 0;">↓</div>
+    <div class="mono" style="margin-bottom: 8px;">Airtable Master Tables</div>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;"><span class="badge badge-gray">Events (52 fields)</span><span class="badge badge-gray">Venues (69 fields)</span><span class="badge badge-gray">Films (30 fields)</span><span class="badge badge-gray">Directory (new)</span></div>
+    <div style="font-size: 24px; color: var(--color-primary); margin: 8px 0;">↓</div>
+    <div class="mono" style="margin-bottom: 8px;">Assembly Script</div>
+    <div style="margin-bottom: 16px;"><code style="background: var(--color-surface-inset); padding: 4px 8px; border-radius: 6px; font-size: 13px;">assemble-event-tables.py</code></div>
+    <div style="font-size: 24px; color: var(--color-primary); margin: 8px 0;">↓</div>
+    <div class="mono" style="margin-bottom: 8px;">Output</div>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;"><span class="badge badge-ochre">Host Helper 2026 (28 fields)</span><span class="badge badge-ochre">Interface Designer Pages</span><span class="badge badge-ochre">Mailmeteor Merge</span></div>
+  </div>
+  <div class="synthesis"><p><strong>No data flows upstream.</strong> That's what makes the system debuggable. If something looks wrong in a host page, the answer is always in the master tables or the script — never in the output layer.</p></div>
+</section>
+<hr>
+<section>
+  <h2>What We Still Need to Build</h2>
+  <p class="section-sub">Self-documentation that protects the org after any single person leaves</p>
+  <table><tr><th>Artifact</th><th>What it does</th><th>When</th></tr><tr><td>Data Dictionary</td><td>Every field, its owner, meaning, and allowed values. Answers "what does this field mean?"</td><td>Pre-festival</td></tr><tr><td>Top 10 Runbooks</td><td>"If X fails, do Y" for critical workflows. Answers "what do I do when something breaks?"</td><td>Pre-festival</td></tr><tr><td>Integration Registry</td><td>Script path, trigger, inputs, outputs, owner, failure mode. Answers "what scripts exist and what do they do?"</td><td>Pre-festival</td></tr><tr><td>Season Closeout Checklist</td><td>Archive + validation + handoff tasks at end of festival cycle. Answers "how do we wrap up cleanly?"</td><td>Post-festival</td></tr><tr><td>Routing Rules table</td><td>Replace "ask Garen" with explicit data routing. Answers "where does this data go?"</td><td>Post-festival (team decision)</td></tr></table>
+</section>
+<hr>
+<footer style="text-align: center; padding: 24px 0; color: var(--color-text-muted); font-family: 'Source Code Pro', monospace; font-size: 12px;">
+  Generated 2026-03-14 · OEFF Architecture v2 · Kim + Garen shared reference<br>
+  Source: 7 architecture decisions (Mar 13), data-architecture-spec-v2.md, oeff-architecture-map.html
+</footer>
+</div>
+</body>
+</html>

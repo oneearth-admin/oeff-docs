@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", serif;
+  --font-sans: "Source Sans 3", sans-serif;
+  --font-serif: "Source Serif 4", serif;
+  --font-mono: "Source Code Pro", monospace;
+  
+  --color-ink: #2c2825;
+  --color-ink-soft: #5c5550;
+  --color-ink-muted: #8a8580;
+  
+  --color-paper-bg: #f7f5f2;
+  --color-paper: #faf9f7;
+  --color-paper-raised: #ffffff;
+  --color-linen: #f0ede8;
+  
+  --color-forest-sage: #4a6a5a;
+  --color-forest-mist: #c8d9ce;
+  
+  --color-layer-core: #e8f0ec;
+  --color-layer-relational: #e5eae8;
+  --color-layer-outputs: #f0ede8;
+  --color-layer-resilience: #f5f3f0;
+
+  --shadow-warm: 0 4px 20px hsla(25, 40%, 30%, 0.08);
+  --shadow-warm-lg: 0 10px 30px hsla(25, 40%, 30%, 0.12);
+  --shadow-warm-hover: 0 6px 24px hsla(25, 40%, 30%, 0.12);
+}
+
+@layer base {
+  body {
+    @apply bg-paper-bg text-ink font-sans antialiased overflow-x-hidden;
+    line-height: 1.65;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-ink;
+  }
+}
+
+.paper-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+}
+
+.card-warm {
+  @apply bg-paper rounded-xl border border-forest-mist shadow-warm transition-all duration-200 ease-out hover:border-forest-sage hover:shadow-warm-hover hover:-translate-y-px;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(0.5deg); }
+}
+
+.animate-breathe {
+  animation: breathe 8s ease-in-out infinite;
+}
+
+.sticky-nav {
+  @apply sticky top-0 z-50 bg-paper-bg/80 backdrop-blur-md border-b border-forest-mist;
+}

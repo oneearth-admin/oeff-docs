@@ -1,0 +1,1186 @@
+<!-- guards: beautiful-first-design, oeff, core/color, core/interaction, core/layout, core/typography, assets/svg-library -->
+<!DOCTYPE html>
+<html lang="en" data-domain="forest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       OEFF (Forest) — Beautiful-First Design System
+       ======================================== */
+    :root {
+      /* -- Primitives -- */
+      --forest-canopy: #1a2e22;
+      --forest-understory: #2d4a3a;
+      --forest-deep: #3a5c4d;
+      --forest-sage: #5c7c6b;
+      --forest-lichen: #8aaa98;
+      --forest-mist: #c8d9ce;
+
+      --ink: #2c2825;
+      --ink-soft: #5c5550;
+      --ink-muted: #8a8580;
+      --cream: #f7f5f2;
+      --paper: #faf9f7;
+      --linen: #f0ede8;
+
+      --signal-critical: #c44b4b;
+      --signal-warning: #996622;
+      --signal-success: #5c8c4b;
+      --signal-info: #4b7c8c;
+
+      /* -- Semantic Tokens -- */
+      --color-ground: var(--cream);
+      --color-surface: var(--paper);
+      --color-surface-raised: #ffffff;
+      --color-surface-inset: var(--linen);
+      --color-primary: var(--forest-sage);
+      --color-primary-deep: var(--forest-deep);
+      --color-primary-dark: var(--forest-canopy);
+      --color-primary-light: var(--forest-mist);
+      --color-accent: var(--forest-sage);
+      --color-text: var(--ink);
+      --color-text-soft: var(--ink-soft);
+      --color-text-muted: var(--ink-muted);
+      --color-border: var(--forest-mist);
+
+      /* -- Layer backgrounds (semantic) -- */
+      --layer-core-bg: #dce8e0;
+      --layer-relational-bg: #e8e3dd;
+      --layer-output-bg: var(--linen);
+      --layer-resilience-bg: #f5f3f0;
+
+      /* -- Badge tint backgrounds (semantic) -- */
+      --color-badge-success-bg: #e3eedf;
+      --color-badge-warning-bg: #eee8df;
+      --color-badge-caution-bg: #f0e8d8;
+      --color-badge-critical-bg: #f0dede;
+
+      --shadow-warm: hsla(25, 40%, 30%, 0.08);
+      --shadow-soft: 0 2px 8px var(--shadow-warm);
+      --shadow-medium: 0 4px 16px var(--shadow-warm);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Source Serif 4', Georgia, serif;
+      --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+      --font-mono: 'Source Code Pro', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--color-text);
+      background-color: var(--color-ground);
+      background-image: radial-gradient(circle, hsla(25, 40%, 30%, 0.005) 1px, transparent 1px);
+      background-size: 4px 4px;
+      min-height: 100vh;
+    }
+
+    /* Biophilic noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      filter: url(#paper-grain);
+      mix-blend-mode: multiply;
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--color-primary);
+    }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.25rem;
+    }
+    .page-header .org-name {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    /* ── Tab Nav ── */
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      justify-content: center;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .tab-nav button {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      background: none;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 200ms ease, border-color 200ms ease;
+      min-height: 44px;
+      min-width: 44px;
+    }
+    .tab-nav button:hover {
+      color: var(--color-text-soft);
+    }
+    .tab-nav button.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+    }
+    .tab-nav button:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
+
+    /* ── Ring Diagram (Hero Illustration) ── */
+    .ring-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .ring-hero > svg:first-of-type {
+      width: 380px;
+      height: 380px;
+    }
+    .ring-headline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--color-primary-deep);
+      text-align: center;
+      margin-top: 1rem;
+      max-width: 40ch;
+    }
+    .ring-legend {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .ring-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+    .ring-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .ring-legend-dot--core { background: var(--color-primary); }
+    .ring-legend-dot--relational { background: var(--signal-info); }
+    .ring-legend-dot--output { background: var(--color-text-muted); }
+    .ring-legend-dot--resilience { background: var(--color-primary-light); border: 1px dashed var(--color-text-muted); }
+
+    /* ── Connection Lines SVG ── */
+    #connection-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .connection-line {
+      fill: none;
+      stroke: var(--color-primary-light);
+      stroke-width: 1.5;
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+    .connection-line.visible {
+      opacity: 0.35;
+    }
+
+    /* ── Layer Sections ── */
+    .layer-section {
+      margin-bottom: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      position: relative;
+    }
+    .layer-section.core { background: var(--layer-core-bg); }
+    .layer-section.relational { background: var(--layer-relational-bg); }
+    .layer-section.output { background: var(--layer-output-bg); }
+    .layer-section.resilience {
+      background: var(--layer-resilience-bg);
+      border-left: 3px dashed var(--color-text-muted);
+    }
+    .layer-label {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .layer-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* ── Entity Cards ── */
+    .entity-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: box-shadow 200ms ease, border-color 200ms ease, transform 100ms ease;
+      min-width: 140px;
+      max-width: 220px;
+      flex: 0 1 auto;
+      min-height: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .entity-card:hover {
+      box-shadow: var(--shadow-soft);
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+    .entity-card:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+    .entity-card.selected {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-medium);
+      background: var(--color-surface);
+    }
+    .entity-card.visited {
+      opacity: 0.88;
+    }
+    .entity-card-name {
+      font-family: var(--font-body-sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+    .entity-card-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-text-soft);
+      line-height: 1.4;
+      margin-top: 3px;
+    }
+
+    /* ── Detail Panel ── */
+    .detail-overlay {
+      display: none;
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(480px, 92vw);
+      background: var(--color-surface-raised);
+      border-left: 1px solid var(--color-border);
+      box-shadow: -4px 0 24px var(--shadow-warm);
+      z-index: 100;
+      overflow-y: auto;
+      padding: 2rem 1.75rem;
+      transform: translateX(100%);
+      transition: transform 300ms ease;
+    }
+    .detail-overlay.open {
+      display: block;
+      transform: translateX(0);
+    }
+    .detail-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 200ms ease;
+    }
+    .detail-close:hover {
+      background: var(--color-surface-inset);
+    }
+    .detail-name {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 0.5rem;
+      padding-right: 48px;
+    }
+    .detail-synthesis {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      max-width: 50ch;
+    }
+    .detail-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+    .badge-layer-core { background: var(--layer-core-bg); color: var(--color-primary-deep); }
+    .badge-layer-relational { background: var(--layer-relational-bg); color: var(--color-text-soft); }
+    .badge-layer-output { background: var(--layer-output-bg); color: var(--color-text-soft); }
+    .badge-layer-resilience { background: var(--layer-resilience-bg); color: var(--color-text-muted); border: 1px dashed var(--color-text-muted); }
+    .badge-platform { background: var(--color-surface-inset); color: var(--color-text-soft); }
+    .badge-lifecycle-yoy { background: var(--color-badge-success-bg); color: var(--signal-success); }
+    .badge-lifecycle-seasonal { background: var(--color-badge-warning-bg); color: var(--signal-warning); }
+    .badge-risk-low { background: var(--color-badge-success-bg); color: var(--signal-success); }
+    .badge-risk-medium { background: var(--color-badge-caution-bg); color: var(--signal-warning); }
+    .badge-risk-high { background: var(--color-badge-critical-bg); color: var(--signal-critical); }
+
+    .detail-section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .detail-fields {
+      margin-top: 0;
+    }
+    .detail-fields summary {
+      font-family: var(--font-body-sans);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-soft);
+      cursor: pointer;
+      padding: 0.5rem 0;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .detail-fields-content {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-text-soft);
+      line-height: 1.8;
+      padding: 0.5rem 0 0.5rem 1rem;
+      border-left: 2px solid var(--color-border);
+      margin-left: 0.5rem;
+    }
+    .detail-related {
+      margin-top: 0.25rem;
+    }
+    .detail-related-link {
+      font-family: var(--font-body-sans);
+      font-size: 14px;
+      color: var(--color-primary-deep);
+      text-decoration: none;
+      cursor: pointer;
+      border-bottom: 1px solid var(--color-border);
+      transition: border-color 200ms ease;
+      display: inline-block;
+      margin-right: 1rem;
+      margin-bottom: 0.25rem;
+      padding: 2px 0;
+      min-height: 44px;
+      line-height: 44px;
+    }
+    .detail-related-link:hover {
+      border-bottom-color: var(--color-primary);
+    }
+
+    /* ── Scrim ── */
+    .scrim {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: hsla(25, 20%, 15%, 0.2);
+      z-index: 99;
+    }
+    .scrim.open { display: block; }
+
+    /* ── Tab Content Areas ── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── Platforms View ── */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .platform-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      transition: box-shadow 200ms ease;
+    }
+    .platform-card:hover {
+      box-shadow: var(--shadow-soft);
+    }
+    .platform-card h3 {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .platform-card .access-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .access-centralized { color: var(--signal-success); }
+    .access-personal { color: var(--signal-critical); }
+    .access-shared { color: var(--signal-warning); }
+    .platform-entities {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+    }
+
+    /* ── Timeline View ── */
+    .timeline {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+    .timeline-phase {
+      flex: 1;
+      min-width: 150px;
+      padding: 1.25rem 1rem;
+      border-right: 1px solid var(--color-border);
+      transition: background 200ms ease;
+    }
+    .timeline-phase:last-child { border-right: none; }
+    .timeline-phase.current {
+      background: var(--layer-core-bg);
+      border-radius: var(--radius-sm);
+    }
+    .timeline-phase h3 {
+      font-family: var(--font-body-sans);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .timeline-phase .phase-time {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-phase p {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-text-soft);
+      line-height: 1.5;
+    }
+
+    /* ── Roles View ── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .role-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+    }
+    .role-card h3 {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .role-section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .role-entity-list {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+    }
+
+    /* ── Risk View ── */
+    .risk-section {
+      margin-bottom: 1.5rem;
+    }
+    .risk-section h3 {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .risk-tag {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+    }
+    .risk-tag--low { background: var(--signal-success); }
+    .risk-tag--medium { background: var(--signal-warning); }
+    .risk-tag--high { background: var(--signal-critical); }
+    .risk-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .risk-item {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-text-soft);
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 6px 12px;
+    }
+    .risk-synthesis {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--color-text-soft);
+      max-width: 72ch;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
+      line-height: 1.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .ring-hero > svg:first-of-type { width: 280px; height: 280px; }
+      .entity-card { min-width: 120px; max-width: 100%; }
+      .page-wrap { padding: 1rem; }
+      .tab-nav { flex-wrap: wrap; }
+      .tab-nav button { padding: 0.5rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SVG Filters -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
+  <defs>
+    <filter id="paper-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="3" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="page-wrap" id="app">
+
+  <!-- Header -->
+  <header class="page-header">
+    <h1>OEFF Architecture</h1>
+    <span class="org-name">One Earth Film Festival</span>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-nav" role="tablist" aria-label="Architecture views">
+    <button role="tab" class="active" data-tab="diagram" aria-selected="true">Diagram</button>
+    <button role="tab" data-tab="platforms" aria-selected="false">Platforms</button>
+    <button role="tab" data-tab="timeline" aria-selected="false">Timeline</button>
+    <button role="tab" data-tab="roles" aria-selected="false">Roles</button>
+    <button role="tab" data-tab="risk" aria-selected="false">Risk</button>
+  </nav>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- TAB: Diagram (default)                      -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="tab-content active" id="tab-diagram" role="tabpanel">
+
+    <!-- Ring Hero -->
+    <div class="ring-hero" id="ring-hero">
+      <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Concentric ring diagram: Events at center, surrounded by Core, Relational, Output, and Resilience layers">
+        <!-- Ring bands (back to front) -->
+        <circle cx="190" cy="190" r="185" fill="var(--layer-resilience-bg)" stroke="var(--color-border)" stroke-width="1" opacity="0.7"/>
+        <circle cx="190" cy="190" r="150" fill="var(--layer-output-bg)" stroke="var(--color-border)" stroke-width="1"/>
+        <circle cx="190" cy="190" r="110" fill="var(--layer-relational-bg)" stroke="var(--color-border)" stroke-width="1"/>
+        <circle cx="190" cy="190" r="70"  fill="var(--layer-core-bg)" stroke="var(--color-primary)" stroke-width="1"/>
+        <circle cx="190" cy="190" r="32"  fill="var(--color-primary-light)" stroke="var(--color-primary)" stroke-width="1.5"/>
+
+        <!-- Center label -->
+        <text x="190" y="194" text-anchor="middle" font-family="var(--font-body-sans)" font-size="14" font-weight="700" fill="var(--color-primary-dark)">Events</text>
+
+        <!-- Ring band labels (subtle) -->
+        <text x="190" y="52" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--color-text-muted)" opacity="0.6">CORE</text>
+        <text x="190" y="88" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--color-text-muted)" opacity="0.5">RELATIONAL</text>
+        <text x="190" y="133" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--color-text-muted)" opacity="0.4">OUTPUTS</text>
+        <text x="190" y="18" text-anchor="middle" font-family="var(--font-mono)" font-size="12" fill="var(--color-text-muted)" opacity="0.35">RESILIENCE</text>
+      </svg>
+
+      <!-- Connection lines drawn here dynamically -->
+      <svg id="connection-lines"></svg>
+
+      <p class="ring-headline">Everything connects through Events</p>
+
+      <div class="ring-legend">
+        <span class="ring-legend-item"><span class="ring-legend-dot ring-legend-dot--core"></span>Core</span>
+        <span class="ring-legend-item"><span class="ring-legend-dot ring-legend-dot--relational"></span>Relational</span>
+        <span class="ring-legend-item"><span class="ring-legend-dot ring-legend-dot--output"></span>Outputs</span>
+        <span class="ring-legend-item"><span class="ring-legend-dot ring-legend-dot--resilience"></span>Resilience</span>
+      </div>
+    </div>
+
+    <!-- ── Layered Entity List ── -->
+
+    <!-- CORE -->
+    <div class="layer-section core" data-layer="core">
+      <span class="layer-label">Core</span>
+      <div class="layer-cards" id="cards-core"></div>
+    </div>
+
+    <!-- RELATIONAL -->
+    <div class="layer-section relational" data-layer="relational">
+      <span class="layer-label">Relational + Tracking</span>
+      <div class="layer-cards" id="cards-relational"></div>
+    </div>
+
+    <!-- OUTPUTS -->
+    <div class="layer-section output" data-layer="output">
+      <span class="layer-label">Stakeholder Outputs</span>
+      <div class="layer-cards" id="cards-output"></div>
+    </div>
+
+    <!-- RESILIENCE -->
+    <div class="layer-section resilience" data-layer="resilience">
+      <span class="layer-label">Resilience</span>
+      <div class="layer-cards" id="cards-resilience"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- TAB: Platforms                               -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="tab-content" id="tab-platforms" role="tabpanel">
+    <div class="platform-grid" id="platform-grid"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- TAB: Timeline                                -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="tab-content" id="tab-timeline" role="tabpanel">
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- TAB: Roles                                   -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="tab-content" id="tab-roles" role="tabpanel">
+    <div class="role-grid" id="role-grid"></div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- TAB: Risk                                    -->
+  <!-- ════════════════════════════════════════════ -->
+  <div class="tab-content" id="tab-risk" role="tabpanel">
+    <div id="risk-content"></div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<!-- Scrim for detail panel -->
+<div class="scrim" id="scrim"></div>
+
+<!-- Detail Panel -->
+<aside class="detail-overlay" id="detail-panel" role="dialog" aria-label="Entity details">
+  <button class="detail-close" id="detail-close" aria-label="Close panel">&times;</button>
+  <div id="detail-body"></div>
+</aside>
+
+<script>
+// ════════════════════════════════════════════════════════
+// ENTITY DATA — all 28 entities from the architecture map
+// ════════════════════════════════════════════════════════
+var ENTITIES = [
+  // CORE
+  { id: 'events', name: 'Events', layer: 'core', shortDesc: 'The relational hub',
+    synthesis: 'Every other table points here. Lose Events, lose the spine of the entire system.',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Venue (link), Film (link), Directory contacts (link), Date, Time, Event Type (Screening/Panel/Action Fair), Status, Eventbrite URL, Access Code',
+    related: ['directory','venues','films','sponsors','host-helper-2026','deliverables'] },
+  { id: 'directory', name: 'Directory', layer: 'core', shortDesc: 'All people in one place',
+    synthesis: 'One record per person, typed by role. Replaces the old split between Host Contacts and Film Contacts (~36 records merged).',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Name, Email, Phone, Contact Type (Host/Filmmaker/Distributor/Panelist/Volunteer Lead/AV Tech/Partner Org), Organization, Events (link), Venues (link), Films (link), Priority Level, Notes',
+    related: ['events','venues','films','assets','deliverables','delivery-log','comms-log'] },
+  { id: 'venues', name: 'Venues', layer: 'core', shortDesc: 'Physical spaces and their capabilities',
+    synthesis: 'Capacity, ADA access, AV tier, address. 56 columns of deep operational data in the tracker. The bridge between \u201cwhere\u201d and \u201chow.\u201d',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Name, Address, Capacity, ADA Accessible, AV Tier (T1-T4), Classification (Flagship/Community), Host Contact (link to Directory), Events (link), Parking, WiFi, Projector Specs, Screen Size',
+    related: ['events','directory','assets','event-media-assets'] },
+  { id: 'films', name: 'Films', layer: 'core', shortDesc: 'Titles, runtimes, licensing terms',
+    synthesis: 'The content pipeline. Outreach status, file status, delivery status, and the licensing terms that determine what we can screen where.',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Title, Runtime, Director, Distributor Contact (link to Directory), Outreach Status, File Status, Delivery Status, License Fee, License Terms, Social Handles, Premiere Status, Events (link)',
+    related: ['events','directory','assets','screening-packets','filmmaker-kits'] },
+  { id: 'sponsors', name: 'Sponsors', layer: 'core', shortDesc: 'Organizations, tiers, financial commitments',
+    synthesis: 'The funding layer. Tier classification drives logo placement, event access, and acknowledgment requirements.',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Organization, Tier, Contact (link to Directory), Commitment Amount, Status, Events (link), Logo Asset',
+    related: ['events','directory'] },
+  { id: 'members', name: 'Members', layer: 'core', shortDesc: '14k email list',
+    synthesis: 'Conceptual entity served by Mailchimp/Mailmeteor. Deferred as an Airtable table. The audience, not the infrastructure.',
+    platform: 'Mailchimp', lifecycle: 'yoy', risk: 'low',
+    fields: 'Email, Name, Subscription Date, Engagement Level, Source',
+    related: ['email-campaigns'] },
+
+  // RELATIONAL + TRACKING
+  { id: 'host-helper-2026', name: 'Host Helper 2026', layer: 'relational', shortDesc: 'Script-assembled, team-editable',
+    synthesis: 'The workhorse. 28 flat rows, one per event. 21 fields overwritten by script, 7 preserved for Kim to edit. Replaced the 3-layer rollup chain Kim couldn\u2019t touch.',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'medium',
+    fields: '28 rows. Script-owned (21): event name, date, time, venue, film, host contact, status, Eventbrite URL, etc. Team-editable (7): Setup Notes, AV Contact, Custom Instructions, Host Confirmed, Day-Of Contact, Parking Notes, Special Needs',
+    related: ['events','host-helper-pages','host-confirmations'] },
+  { id: 'assets', name: 'Assets', layer: 'relational', shortDesc: 'Master index of all files',
+    synthesis: 'Every inbound film copy, every outbound screening packet, every internal slide deck. The file ledger that prevents \u201cwhere did that poster go?\u201d',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Asset Name, Category (Inbound Film/Inbound Press/Outbound Host/Outbound Filmmaker/Internal Ops/Marketing), Type (Screening Copy/Trailer/SRT/Poster/Headshot/Slide Deck/Guide/Packet/Template), Film (link), Event (link), Venue (link), Directory Contact (link), Drive URL, Status',
+    related: ['films','events','venues','directory','asset-versions','deliverables','packet-qa'] },
+  { id: 'asset-versions', name: 'Asset Versions', layer: 'relational', shortDesc: 'QC history per file version',
+    synthesis: 'Version trail preservation. When a screening copy fails QC, the old version stays linked. Critical for post-mortem: \u201cwhich version did venue X actually screen?\u201d',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Asset (link), Version Number, QC Status (Pending/Pass/Fail/Conditional), QC Notes, Upload Date, Supersedes (self-link), File URL',
+    related: ['assets'] },
+  { id: 'deliverables', name: 'Deliverables', layer: 'relational', shortDesc: 'Packaged outputs for stakeholders',
+    synthesis: 'The assembly layer. Takes raw assets and packages them into screening packets, presenter guides, marketing kits. Many-to-many with Assets.',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Name, Type (Screening Packet/Presenter Guide/Slide Deck/Marketing Kit/Webinar Link/Screening Report), Audience (Host/Filmmaker/Internal/Partner/Press), Assets (link, many), Events (link), Status, Due Date',
+    related: ['assets','events','delivery-log','screening-packets','filmmaker-kits'] },
+  { id: 'delivery-log', name: 'Delivery Log', layer: 'relational', shortDesc: 'Who got what, when',
+    synthesis: 'Without this table, post-festival filmmaker reports require manual email archaeology. Recipient-level tracking closes that loop.',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Deliverable (link), Recipient (link to Directory), Delivery Method, Date Sent, Confirmed Receipt, Notes',
+    related: ['deliverables','directory'] },
+  { id: 'comms-log', name: 'Comms Log', layer: 'relational', shortDesc: 'Outreach tracking',
+    synthesis: 'Every outbound message tracked with RACI-style ownership. Prevents the \u201cdid someone already email them?\u201d problem that plagues small teams.',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Event (link), Contact (link to Directory), Channel (Email/Phone/In-Person), Date, Owner, Status, Notes, Thread ID',
+    related: ['events','directory','email-campaigns'] },
+  { id: 'host-confirmations', name: 'Host Confirmations', layer: 'relational', shortDesc: 'Host response tracking',
+    synthesis: 'Three automations built to track host responses. Currently not linked to Venues directly \u2014 the merge step is manual. Linkage is a known gap.',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Event (link), Host Contact, Confirmation Status, Response Date, Follow-Up Needed, Automation Status',
+    related: ['events','host-helper-2026'] },
+  { id: 'host-intake', name: 'Host Intake', layer: 'relational', shortDesc: 'Form responses from venue intake',
+    synthesis: 'Google Form responses flowing into Airtable. The first contact \u2014 venue interest, capacity, AV availability, scheduling preferences.',
+    platform: 'Google Forms', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Timestamp, Organization, Contact Name, Email, Venue Name, Capacity, AV Available, Preferred Dates, Accessibility Notes',
+    related: ['venues','directory'] },
+  { id: 'event-media-assets', name: 'Event Media Assets', layer: 'relational', shortDesc: 'Posters, stills, press photos',
+    synthesis: 'The visual layer. Posters and stills linked per-event for marketing and press use. Distinct from Assets (which tracks operational files).',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Event (link), Asset Type (Poster/Still/Press Photo), File URL, Credit Line, Usage Rights, Resolution',
+    related: ['events','venues'] },
+  { id: 'packet-qa', name: 'Packet QA', layer: 'relational', shortDesc: 'Quality checks on screening packets',
+    synthesis: 'The gate before a screening packet ships. Did the SRT sync? Is the poster the right resolution? Are the credits accurate? Catches errors before venues see them.',
+    platform: 'Airtable', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Event (link), Asset (link), Check Type, Status (Pending/Pass/Fail), Reviewer, Date, Notes',
+    related: ['events','assets','screening-packets'] },
+  { id: 'webinar-content', name: 'Webinar Content', layer: 'relational', shortDesc: 'Recorded sessions for host training',
+    synthesis: 'Host onboarding infrastructure. Recording URLs, slide decks, timestamps for key topics. Persists across seasons \u2014 new hosts watch last year\u2019s sessions.',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Title, Recording URL, Slide Deck URL, Date Recorded, Duration, Topics Covered, Presenter',
+    related: ['host-helper-pages'] },
+  { id: 'participants', name: 'Participants', layer: 'relational', shortDesc: 'Event attendees',
+    synthesis: 'Operational attendance tracking. Distinct from the 14k Members list \u2014 these are people who actually showed up at specific events.',
+    platform: 'Eventbrite', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Event (link), Name, Email, Ticket Type, Check-In Status, Source',
+    related: ['events'] },
+  { id: 'recordings', name: 'Recordings', layer: 'relational', shortDesc: 'Session recordings linked to events',
+    synthesis: 'Post-event archive. Panel recordings, Q&A sessions, filmmaker introductions. The festival\u2019s memory.',
+    platform: 'Google Drive', lifecycle: 'yoy', risk: 'low',
+    fields: 'Event (link), Recording URL, Duration, Format, Upload Date, Public/Internal',
+    related: ['events','webinar-content'] },
+  { id: 'merged-timeline', name: 'Merged Timeline', layer: 'relational', shortDesc: 'Cross-event calendar view',
+    synthesis: 'The scheduling conflict detector. Shows all events across all venues on one timeline. Critical during crunch when every hour matters.',
+    platform: 'Google Sheets', lifecycle: 'seasonal', risk: 'medium',
+    fields: 'Date, Time, Event Name, Venue, Film, Duration, Conflict Flag, Notes',
+    related: ['events','venues'] },
+
+  // STAKEHOLDER OUTPUTS
+  { id: 'host-helper-pages', name: 'Host Helper Pages', layer: 'output', shortDesc: 'Per-event pages for host venues',
+    synthesis: 'What hosts actually see. One page per event via Interface Designer, data-sourced from Host Helper 2026. The public face of all this infrastructure.',
+    platform: 'Airtable + Cloudflare', lifecycle: 'seasonal', risk: 'medium',
+    fields: 'Rendered from Host Helper 2026 table. Per-event: venue info, film info, setup checklist, AV instructions, day-of contacts, parking, special needs.',
+    related: ['host-helper-2026','webinar-content'] },
+  { id: 'screening-packets', name: 'Screening Packets', layer: 'output', shortDesc: 'Bundled deliverables for day-of operations',
+    synthesis: 'Everything a venue needs to run a screening: film copy, SRT, presenter guide, slide deck, run-of-show. Assembled from Assets + Deliverables.',
+    platform: 'Google Drive', lifecycle: 'seasonal', risk: 'medium',
+    fields: 'Assembled package: Film Copy, SRT file, Presenter Guide, Slide Deck, Run-of-Show, Contact Sheet. Linked to Events, Assets, Deliverables.',
+    related: ['assets','deliverables','films','packet-qa'] },
+  { id: 'filmmaker-kits', name: 'Filmmaker Kits', layer: 'output', shortDesc: 'License docs, reports, press assets',
+    synthesis: 'The filmmaker\u2019s takeaway. Pre-festival: license agreement, screening schedule. Post-festival: audience data, photos, host feedback. Closes the loop.',
+    platform: 'Google Drive', lifecycle: 'seasonal', risk: 'medium',
+    fields: 'License Agreement, Screening Schedule, Venue Details, Post-Festival Report (audience numbers, photos, feedback), Press Coverage Links.',
+    related: ['films','deliverables','delivery-log'] },
+  { id: 'email-campaigns', name: 'Email Campaigns', layer: 'output', shortDesc: 'Mailmeteor merge data for outreach',
+    synthesis: 'The communication multiplier. Draws from Directory + Events + Comms Log to generate personalized outreach at scale. 14k members, dozens of hosts.',
+    platform: 'Mailchimp + Mailmeteor', lifecycle: 'seasonal', risk: 'low',
+    fields: 'Campaign Name, Audience Segment, Template, Merge Fields (from Directory, Events), Send Date, Open Rate, Click Rate.',
+    related: ['members','directory','comms-log'] },
+
+  // RESILIENCE
+  { id: 'routing-rules', name: 'Routing Rules', layer: 'resilience', shortDesc: 'Where does this go?',
+    synthesis: 'Encodes routing knowledge in data, not in someone\u2019s head. Replaces \u201cask Garen\u201d as the routing table. The survivability layer.',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Rule Name, Source System, Destination System, Data Type, Frequency, Owner, Fallback Contact, Decision Log Link',
+    related: ['integration-registry','decision-log'] },
+  { id: 'integration-registry', name: 'Integration Registry', layer: 'resilience', shortDesc: 'Every script and sync documented',
+    synthesis: 'Owner, schedule, failure mode, last successful run. Enables contractor handoff: \u201cthis field is authoritative in X only.\u201d The map of the plumbing.',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Integration Name, Source Table, Destination System, Script Path, Owner, Run Cadence, Last Run, Last Success, Failure Mode, Recovery Steps',
+    related: ['routing-rules'] },
+  { id: 'seasons', name: 'Seasons', layer: 'resilience', shortDesc: 'Year/edition records for cross-season reporting',
+    synthesis: 'Prevents copied-base drift. One record per festival year enables year-over-year analysis without separate Airtable bases. The long memory.',
+    platform: 'Airtable', lifecycle: 'yoy', risk: 'low',
+    fields: 'Year, Edition Number, Festival Dates, Theme, Total Events, Total Venues, Total Films, Total Attendees, Notes',
+    related: ['events'] },
+  { id: 'decision-log', name: 'Decision Log', layer: 'resilience', shortDesc: 'Architecture decisions captured in git',
+    synthesis: 'Why things are the way they are. Linked from Routing Rules for rationale trail. When someone asks \u201cwhy did we do it this way?\u201d \u2014 this answers.',
+    platform: 'GitHub', lifecycle: 'yoy', risk: 'medium',
+    fields: 'Date, Topic, Decision, Rationale, Alternatives Considered, Project Links, Author',
+    related: ['routing-rules','integration-registry'] }
+];
+
+// ═══════ Platform data ═══════
+var PLATFORMS = [
+  { name: 'Airtable', access: 'centralized', entities: ['Events','Directory','Venues','Films','Sponsors','Host Helper 2026','Deliverables','Assets','Asset Versions','Comms Log','Host Confirmations','Webinar Content','Packet QA','Delivery Log','Event Media Assets','Routing Rules','Integration Registry','Seasons'], desc: 'Relational infrastructure. 16 active tables.' },
+  { name: 'Google Sheets', access: 'shared', entities: ['Merged Timeline','Kim\u2019s Tracker (5 tabs)','OEC Active Roadmap (16 tabs)'], desc: 'Team-facing planning + operational tracking.' },
+  { name: 'Google Drive', access: 'centralized', entities: ['Screening Packets','Filmmaker Kits','Recordings','Film Copies','Press Kits','Slide Decks'], desc: 'File storage for all inbound and outbound media.' },
+  { name: 'Eventbrite', access: 'centralized', entities: ['Participants','14 published events','Access Codes','Tax Settings'], desc: 'Ticketing and attendee data.' },
+  { name: 'Google Forms', access: 'centralized', entities: ['Host Intake','Film Intake Survey'], desc: 'Inbound data collection.' },
+  { name: 'Mailchimp / Mailmeteor', access: 'centralized', entities: ['Members (14k)','Email Campaigns','Merge Data'], desc: 'Mass communication and personalized outreach.' },
+  { name: 'Cloudflare Pages', access: 'personal', entities: ['Host Helper Pages (hosts.oneearthfilmfest.org)'], desc: 'Host guide site. Git-connected, auto-deploys.' },
+  { name: 'GitHub', access: 'personal', entities: ['Decision Log','Scripts','Sync Tooling','Architecture Docs','Host Guide Source'], desc: 'Version control for all code and decisions.' },
+  { name: 'Vimeo', access: 'centralized', entities: ['Screening Copies','Trailers'], desc: 'Video hosting for review and distribution.' }
+];
+
+// ═══════ Timeline data ═══════
+var TIMELINE_PHASES = [
+  { name: 'Off-season', time: 'May\u2013Oct', desc: 'Archive, tooling. Drive + GitHub active.', current: false },
+  { name: 'Planning', time: 'Nov\u2013Jan', desc: 'Film selection, venue outreach. Roadmap + Forms + Airtable.', current: false },
+  { name: 'Build-out', time: 'Feb\u2013Mar', desc: 'Everything assembled. ALL platforms active.', current: true },
+  { name: 'Crunch', time: 'Apr 1\u201321', desc: 'Schema frozen Apr 11. Data finalized, packets assembled.', current: false },
+  { name: 'Festival', time: 'Apr 22\u201327', desc: 'Read-only. Day-of edits only.', current: false },
+  { name: 'Wind-down', time: 'Apr 28\u2013May', desc: 'Reporting, thank-yous, season close-out.', current: false }
+];
+
+// ═══════ Role data ═══════
+var ROLES = [
+  { name: 'Executive Director', owns: 'Greenlights', edits: 'Roadmap', reads: 'All reporting views' },
+  { name: 'Technical Coordinator', owns: 'Scripts, schema, host guide, decisions', edits: 'Events, script-owned fields, Eventbrite batch', reads: 'Trackers (import source), all tables' },
+  { name: 'Host Comms Coordinator', owns: 'Tracker sheets, comms campaigns, intake', edits: 'Team-editable fields, directory, venues, comms log', reads: 'Host guide, Eventbrite links, packets' },
+  { name: 'Digital Communications', owns: 'Eventbrite events, newsletter, social', edits: 'Ticketing, access codes', reads: 'Roadmap, film/venue data' },
+  { name: 'Creative Assets', owns: 'Slide decks, video, experiential flow', edits: 'Creative assets in Drive', reads: 'Film copies, venue AV specs' },
+  { name: 'Development', owns: 'Sponsor relationships, grants', edits: 'Sponsors table', reads: 'Budget views' },
+  { name: 'Marketing/Creative', owns: 'Brand assets, social content, press', edits: 'Marketing in Drive', reads: 'Film metadata, venue photos' }
+];
+
+// ═══════ Ring zone positions ═══════
+var RING_ZONES = {
+  core: { cx: 190, cy: 190, r: 50 },
+  relational: { cx: 190, cy: 190, r: 90 },
+  output: { cx: 190, cy: 190, r: 130 },
+  resilience: { cx: 190, cy: 190, r: 168 }
+};
+
+// ═══════ State ═══════
+var selectedEntity = null;
+var visitedEntities = new Set();
+
+// ═══════ Render Cards ═══════
+function renderCards() {
+  var layers = ['core', 'relational', 'output', 'resilience'];
+  layers.forEach(function(layer) {
+    var container = document.getElementById('cards-' + layer);
+    var entities = ENTITIES.filter(function(e) { return e.layer === layer; });
+    container.innerHTML = entities.map(function(e) {
+      var classes = 'entity-card';
+      if (visitedEntities.has(e.id)) classes += ' visited';
+      if (selectedEntity === e.id) classes += ' selected';
+      return '<div class="' + classes + '" tabindex="0" data-entity="' + e.id + '" role="button" aria-label="' + e.name + ': ' + e.shortDesc + '">' +
+        '<span class="entity-card-name">' + e.name + '</span>' +
+        '<span class="entity-card-desc">' + e.shortDesc + '</span>' +
+      '</div>';
+    }).join('');
+  });
+
+  // Bind events
+  document.querySelectorAll('.entity-card').forEach(function(card) {
+    card.addEventListener('click', function() { openEntity(card.dataset.entity); });
+    card.addEventListener('keydown', function(ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openEntity(card.dataset.entity); } });
+    card.addEventListener('mouseenter', function() { drawConnectionLine(card); });
+    card.addEventListener('mouseleave', clearConnectionLines);
+  });
+}
+
+// ═══════ Connection Lines ═══════
+function drawConnectionLine(cardEl) {
+  var entityId = cardEl.dataset.entity;
+  var entity = ENTITIES.find(function(e) { return e.id === entityId; });
+  if (!entity) return;
+
+  var ringHero = document.getElementById('ring-hero');
+  var svgEl = document.getElementById('connection-lines');
+  var cardRect = cardEl.getBoundingClientRect();
+
+  var wrapRect = document.querySelector('.page-wrap').getBoundingClientRect();
+  svgEl.style.position = 'absolute';
+  svgEl.style.top = '0';
+  svgEl.style.left = '0';
+  svgEl.style.width = wrapRect.width + 'px';
+  var totalHeight = document.getElementById('tab-diagram').offsetHeight;
+  svgEl.style.height = totalHeight + 'px';
+  svgEl.style.pointerEvents = 'none';
+  svgEl.style.zIndex = '10';
+  svgEl.setAttribute('viewBox', '0 0 ' + wrapRect.width + ' ' + totalHeight);
+
+  var cardCX = cardRect.left + cardRect.width / 2 - wrapRect.left;
+  var cardCY = cardRect.top + cardRect.height / 2 - wrapRect.top;
+
+  var ringSvg = ringHero.querySelector('svg:first-of-type');
+  var ringSvgRect = ringSvg.getBoundingClientRect();
+  var ringCenterX = ringSvgRect.left + ringSvgRect.width / 2 - wrapRect.left;
+  var ringCenterY = ringSvgRect.top + ringSvgRect.height / 2 - wrapRect.top;
+
+  var zone = RING_ZONES[entity.layer];
+  var scale = ringSvgRect.width / 380;
+  var angle = Math.atan2(cardCY - ringCenterY, cardCX - ringCenterX);
+  var targetX = ringCenterX + Math.cos(angle) * zone.r * scale;
+  var targetY = ringCenterY + Math.sin(angle) * zone.r * scale;
+
+  var midY = (cardCY + targetY) / 2;
+  var cpX = (cardCX + targetX) / 2;
+
+  svgEl.innerHTML = '<path class="connection-line visible" d="M ' + cardCX + ' ' + cardCY + ' Q ' + cpX + ' ' + (midY - 30) + ' ' + targetX + ' ' + targetY + '"/>';
+}
+
+function clearConnectionLines() {
+  document.getElementById('connection-lines').innerHTML = '';
+}
+
+// ═══════ Detail Panel ═══════
+function openEntity(entityId) {
+  var entity = ENTITIES.find(function(e) { return e.id === entityId; });
+  if (!entity) return;
+
+  selectedEntity = entityId;
+  visitedEntities.add(entityId);
+
+  var layerNames = { core: 'Core', relational: 'Relational', output: 'Output', resilience: 'Resilience' };
+  var lifecycleLabel = entity.lifecycle === 'yoy' ? 'Year-over-year' : 'Seasonal';
+  var riskLabels = { low: 'Low Risk', medium: 'Medium Risk', high: 'High Risk' };
+
+  var relatedHTML = entity.related.map(function(rId) {
+    var rel = ENTITIES.find(function(e) { return e.id === rId; });
+    return rel ? '<a class="detail-related-link" data-entity="' + rId + '">' + rel.name + '</a>' : '';
+  }).join('');
+
+  document.getElementById('detail-body').innerHTML =
+    '<h2 class="detail-name">' + entity.name + '</h2>' +
+    '<p class="detail-synthesis">' + entity.synthesis + '</p>' +
+    '<div class="detail-badges">' +
+      '<span class="badge badge-layer-' + entity.layer + '">' + layerNames[entity.layer] + '</span>' +
+      '<span class="badge badge-platform">' + entity.platform + '</span>' +
+      '<span class="badge badge-lifecycle-' + (entity.lifecycle === 'yoy' ? 'yoy' : 'seasonal') + '">' + lifecycleLabel + '</span>' +
+      '<span class="badge badge-risk-' + entity.risk + '">' + riskLabels[entity.risk] + '</span>' +
+    '</div>' +
+    '<div class="detail-section-label">Fields</div>' +
+    '<details class="detail-fields">' +
+      '<summary>View field schema</summary>' +
+      '<div class="detail-fields-content">' + entity.fields + '</div>' +
+    '</details>' +
+    '<div class="detail-section-label">Related Entities</div>' +
+    '<div class="detail-related">' + relatedHTML + '</div>';
+
+  document.querySelectorAll('.detail-related-link').forEach(function(link) {
+    link.addEventListener('click', function() { openEntity(link.dataset.entity); });
+  });
+
+  document.getElementById('detail-panel').classList.add('open');
+  document.getElementById('scrim').classList.add('open');
+  renderCards();
+}
+
+function closePanel() {
+  document.getElementById('detail-panel').classList.remove('open');
+  document.getElementById('scrim').classList.remove('open');
+  selectedEntity = null;
+  renderCards();
+}
+
+document.getElementById('detail-close').addEventListener('click', closePanel);
+document.getElementById('scrim').addEventListener('click', closePanel);
+document.addEventListener('keydown', function(ev) {
+  if (ev.key === 'Escape') closePanel();
+});
+
+// ═══════ Platforms View ═══════
+function renderPlatforms() {
+  var grid = document.getElementById('platform-grid');
+  grid.innerHTML = PLATFORMS.map(function(p) {
+    var accessClass = p.access === 'centralized' ? 'access-centralized' : p.access === 'personal' ? 'access-personal' : 'access-shared';
+    var accessLabel = p.access === 'centralized' ? 'Centralized' : p.access === 'personal' ? 'Personal infra' : 'Personal \u2192 Team';
+    return '<div class="platform-card">' +
+      '<h3>' + p.name + '</h3>' +
+      '<span class="access-tag ' + accessClass + '">' + accessLabel + '</span>' +
+      '<p class="platform-entities">' + p.entities.join(', ') + '</p>' +
+    '</div>';
+  }).join('');
+}
+
+// ═══════ Timeline View ═══════
+function renderTimeline() {
+  var tl = document.getElementById('timeline');
+  tl.innerHTML = TIMELINE_PHASES.map(function(p) {
+    return '<div class="timeline-phase' + (p.current ? ' current' : '') + '">' +
+      '<h3>' + p.name + '</h3>' +
+      '<span class="phase-time">' + p.time + '</span>' +
+      '<p>' + p.desc + '</p>' +
+    '</div>';
+  }).join('');
+}
+
+// ═══════ Roles View ═══════
+function renderRoles() {
+  var grid = document.getElementById('role-grid');
+  grid.innerHTML = ROLES.map(function(r) {
+    return '<div class="role-card">' +
+      '<h3>' + r.name + '</h3>' +
+      '<div class="role-section-label">Creates / Owns</div>' +
+      '<div class="role-entity-list">' + r.owns + '</div>' +
+      '<div class="role-section-label">Edits / Maintains</div>' +
+      '<div class="role-entity-list">' + r.edits + '</div>' +
+      '<div class="role-section-label">Reads / Consumes</div>' +
+      '<div class="role-entity-list">' + r.reads + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ═══════ Risk View ═══════
+function renderRisk() {
+  var container = document.getElementById('risk-content');
+  var riskGroups = {
+    low: ENTITIES.filter(function(e) { return e.risk === 'low'; }),
+    medium: ENTITIES.filter(function(e) { return e.risk === 'medium'; }),
+    high: ENTITIES.filter(function(e) { return e.risk === 'high'; })
+  };
+
+  container.innerHTML =
+    '<div class="risk-section">' +
+      '<h3><span class="risk-tag risk-tag--low"></span> Low \u2014 Centralized org accounts</h3>' +
+      '<div class="risk-items">' + riskGroups.low.map(function(e) { return '<span class="risk-item">' + e.name + '</span>'; }).join('') + '</div>' +
+    '</div>' +
+    '<div class="risk-section">' +
+      '<h3><span class="risk-tag risk-tag--medium"></span> Medium \u2014 Shared from personal or git-backed</h3>' +
+      '<div class="risk-items">' + riskGroups.medium.map(function(e) { return '<span class="risk-item">' + e.name + '</span>'; }).join('') + '</div>' +
+    '</div>' +
+    '<div class="risk-section">' +
+      '<h3><span class="risk-tag risk-tag--high"></span> High \u2014 Personal machine only</h3>' +
+      '<div class="risk-items">' + (riskGroups.high.length ? riskGroups.high.map(function(e) { return '<span class="risk-item">' + e.name + '</span>'; }).join('') : '<span class="risk-item" style="opacity:0.5">None in current entity set (scripts, API tokens, email pipelines are infrastructure, not entities)</span>') + '</div>' +
+    '</div>' +
+    '<p class="risk-synthesis">Centralized platforms survive role changes. Personal infrastructure is the fragile layer. The Integration Registry makes personal infra legible \u2014 not centralized overnight, but documented so a successor can find it.</p>';
+}
+
+// ═══════ Tab Navigation ═══════
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-nav button').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.tab === tabId);
+    btn.setAttribute('aria-selected', btn.dataset.tab === tabId);
+  });
+  document.querySelectorAll('.tab-content').forEach(function(tc) {
+    tc.classList.toggle('active', tc.id === 'tab-' + tabId);
+  });
+}
+
+document.querySelectorAll('.tab-nav button').forEach(function(btn) {
+  btn.addEventListener('click', function() { switchTab(btn.dataset.tab); });
+});
+
+// Keyboard: 1-5 for tabs
+document.addEventListener('keydown', function(ev) {
+  var tabs = ['diagram','platforms','timeline','roles','risk'];
+  var num = parseInt(ev.key);
+  if (num >= 1 && num <= 5 && !ev.ctrlKey && !ev.metaKey && !ev.altKey) {
+    var active = document.activeElement;
+    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) return;
+    switchTab(tabs[num - 1]);
+  }
+});
+
+// ═══════ Initialize ═══════
+renderCards();
+renderPlatforms();
+renderTimeline();
+renderRoles();
+renderRisk();
+</script>
+</body>
+</html>
