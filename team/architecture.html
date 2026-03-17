@@ -1,0 +1,857 @@
+<!-- guards: beautiful-first-design, oeff -->
+<!DOCTYPE html>
+<html lang="en" data-domain="forest">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OEFF Data Architecture — Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+        --forest-canopy: #1a2e22;
+        --forest-understory: #2d4a3a;
+        --forest-deep: #3a5c4d;
+        --forest-sage: #5c7c6b;
+        --forest-lichen: #8aaa98;
+        --forest-mist: #c8d9ce;
+        --ink: #2c2825;
+        --ink-soft: #5c5550;
+        --ink-muted: #8a8580;
+        --cream: #f7f5f2;
+        --paper: #faf9f7;
+        --linen: #f0ede8;
+        --signal-critical: #c44b4b;
+        --signal-warning: #996622;
+        --signal-success: #5c8c4b;
+        --signal-info: #4b7c8c;
+    }
+
+    :root {
+        --color-ground: var(--cream);
+        --color-surface: var(--paper);
+        --color-surface-raised: #ffffff;
+        --color-surface-inset: var(--linen);
+        --color-primary: var(--forest-sage);
+        --color-primary-deep: var(--forest-deep);
+        --color-primary-dark: var(--forest-canopy);
+        --color-primary-light: var(--forest-mist);
+        --color-accent: var(--forest-sage);
+        --color-text: var(--ink);
+        --color-text-soft: var(--ink-soft);
+        --color-text-muted: var(--ink-muted);
+        --color-border: var(--forest-mist);
+        --color-compare-old: var(--signal-critical);
+        --color-compare-old-bg: var(--linen);
+        --color-compare-new: var(--signal-success);
+        --color-compare-new-bg: var(--paper);
+        --shadow-warm: hsla(25, 40%, 30%, 0.08);
+        --shadow-soft: 0 2px 8px var(--shadow-warm);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --space-xs: 0.5rem;
+        --space-sm: 0.75rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-section: 3rem;
+        --font-display: 'Fraunces', Georgia, serif;
+        --font-body: 'Source Serif 4', Georgia, serif;
+        --font-body-sans: 'Source Sans 3', system-ui, sans-serif;
+        --font-mono: 'Source Code Pro', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      filter: url(#paper-grain);
+      mix-blend-mode: multiply;
+    }
+
+    body {
+      font-family: var(--font-body-sans);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--color-text);
+      background-color: var(--color-ground);
+      padding: var(--space-lg);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      font-optical-sizing: auto;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-xs);
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-family: var(--font-body-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+
+    h3 {
+      font-family: var(--font-body-sans);
+      font-size: 1.13rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-context {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+      margin-bottom: var(--space-lg);
+      max-width: 72ch;
+    }
+
+    .section-synthesis {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      max-width: 72ch;
+    }
+
+    .report-section {
+      margin-bottom: var(--space-section);
+    }
+
+    a { color: var(--color-primary-deep); }
+    a:focus, button:focus, [tabindex]:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    /* Header */
+    .page-header {
+      margin-bottom: var(--space-section);
+      padding-bottom: var(--space-lg);
+      border-bottom: 2px solid var(--color-primary);
+    }
+    .page-header .subtitle {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      color: var(--color-text-soft);
+      max-width: 60ch;
+      margin-top: var(--space-xs);
+    }
+    .meta-bar {
+      display: flex;
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .meta-item {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+    .meta-item strong { color: var(--color-text-soft); }
+
+    /* TOC */
+    .toc {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-section);
+    }
+    .toc ol {
+      list-style: none;
+      counter-reset: toc-counter;
+      padding-left: 0;
+      columns: 2;
+      column-gap: var(--space-xl);
+    }
+    .toc li {
+      counter-increment: toc-counter;
+      margin-bottom: var(--space-xs);
+      break-inside: avoid;
+    }
+    .toc li::before {
+      content: counter(toc-counter, decimal-leading-zero) ".";
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-primary);
+      margin-right: var(--space-xs);
+    }
+    .toc a {
+      color: var(--color-text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .toc a:hover {
+      color: var(--color-primary-deep);
+      border-bottom-color: var(--color-primary);
+    }
+
+    /* Hierarchy Diagram */
+    .hierarchy {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      overflow-x: auto;
+    }
+    .hierarchy pre {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--color-text);
+      white-space: pre;
+    }
+    .hierarchy .layer-label { color: var(--color-primary); font-weight: 600; }
+    .hierarchy .entity { color: var(--color-primary-dark); font-weight: 600; }
+    .hierarchy .annotation { color: var(--color-text-muted); font-weight: 400; }
+
+    /* Compare Columns */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+    .compare-col {
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      border: 1px solid var(--color-border);
+    }
+    .compare-col.old {
+      background: var(--color-compare-old-bg);
+      border-left: 3px solid var(--color-compare-old);
+    }
+    .compare-col.new {
+      background: var(--color-compare-new-bg);
+      border-left: 3px solid var(--color-compare-new);
+    }
+    .compare-col h3 { margin-bottom: var(--space-sm); }
+    .compare-list { list-style: none; padding: 0; }
+    .compare-list li {
+      padding: var(--space-xs) 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9375rem;
+    }
+    .compare-list li:last-child { border-bottom: none; }
+
+    /* Ring Diagram */
+    .ring-diagram {
+      display: flex;
+      justify-content: center;
+      padding: var(--space-xl) 0;
+    }
+    .ring-diagram svg {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+    }
+    .ring-diagram .ring-band { stroke-width: 2; }
+    .ring-diagram .ring-label-text {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .ring-diagram .entity-tag {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 12px;
+    }
+    .ring-diagram .entity-box {
+      rx: 6; ry: 6;
+      stroke-width: 1;
+    }
+    @media (max-width: 768px) {
+      .ring-diagram { display: none; }
+    }
+
+    /* Decision Cards */
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-md);
+    }
+    .decision-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+    }
+    .decision-card .decision-number { font-family: var(--font-mono); font-size: 13px; color: var(--color-primary); font-weight: 600; }
+    .decision-card h3 { margin-top: var(--space-xs); }
+    .decision-card .detail { font-size: 0.9375rem; color: var(--color-text-soft); margin-top: var(--space-xs); }
+
+    /* Data Flow */
+    .flow-container {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      overflow-x: auto;
+    }
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .flow-node {
+      background: var(--color-surface-inset);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-xs) var(--space-md);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .flow-node.canonical { background: var(--color-primary-light); border-color: var(--color-primary); color: var(--color-primary-dark); font-weight: 600; }
+    .flow-node.assembled { border-color: var(--color-status-active, var(--signal-info)); color: var(--signal-info); font-weight: 600; }
+    .flow-node.output { border-color: var(--signal-success); color: var(--signal-success); font-weight: 600; }
+    .flow-arrow { font-size: 1.25rem; color: var(--color-text-muted); }
+    .flow-arrow-label { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-muted); }
+
+    /* Team table */
+    .team-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); margin-bottom: var(--space-lg); }
+    .team-table th { font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); background: var(--color-surface-inset); padding: var(--space-sm) var(--space-md); text-align: left; }
+    .team-table td { padding: var(--space-sm) var(--space-md); border-top: 1px solid var(--color-surface-inset); font-size: 0.9375rem; background: var(--color-surface-raised); }
+
+    /* Pattern Cards */
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-md);
+    }
+    .pattern-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+    }
+    .pattern-card .pattern-number { font-family: var(--font-mono); font-size: 12px; color: var(--color-primary); font-weight: 600; letter-spacing: 0.05em; }
+    .pattern-card h3 { margin-top: var(--space-xs); }
+    .pattern-card .evidence { font-size: 0.9375rem; color: var(--color-text-muted); margin-top: var(--space-xs); }
+
+    /* Badges */
+    .badge-platform { display: inline-block; font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: var(--radius-sm); background: var(--color-surface-inset); color: var(--color-text-soft); border: 1px solid var(--color-border); white-space: nowrap; }
+    .badge-yoy { background: var(--color-primary-light); color: var(--color-primary-dark); border-color: var(--color-primary); }
+    .badge-seasonal { background: var(--color-surface-raised); color: var(--color-text-soft); border-color: var(--color-border); }
+
+    /* Anti-pattern cards */
+    .anti-pattern { background: var(--color-surface-raised); border: 1px solid var(--color-border); border-left: 3px solid var(--signal-critical); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); margin-bottom: var(--space-sm); }
+    .anti-pattern h3 { color: var(--signal-critical); }
+    .anti-pattern .mitigation { font-size: 0.9375rem; color: var(--color-text-soft); margin-top: var(--space-xs); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body { padding: var(--space-md); }
+      h1 { font-size: 1.5rem; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .decision-grid, .pattern-grid { grid-template-columns: 1fr; }
+      .toc ol { columns: 1; }
+    }
+
+    @media print {
+      body { padding: 0; font-size: 11pt; max-width: 100%; }
+      body::before { display: none; }
+      .report-section { page-break-inside: avoid; }
+      a { color: var(--color-text); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Paper grain SVG filter -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="paper-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </svg>
+
+  <!-- ============================================ HEADER ============================================ -->
+  <header class="page-header">
+    <span class="section-label">Architecture Overview</span>
+    <h1>OEFF Data Architecture v2</h1>
+    <p class="subtitle">Events as the relational hub. Contacts with roles, not contact types. Stakeholder outputs assembled from canonical data.</p>
+    <div class="meta-bar">
+      <span class="meta-item"><strong>Festival:</strong> April 22, 2026</span>
+      <span class="meta-item"><strong>Version:</strong> High-level overview</span>
+    </div>
+  </header>
+
+  <!-- ============================================ TOC ============================================ -->
+  <nav class="toc report-section" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#core-model">The Core Data Model</a></li>
+      <li><a href="#contacts">Contacts + Roles</a></li>
+      <li><a href="#hierarchy">Architecture Rings</a></li>
+      <li><a href="#v1-v2">v1 vs v2</a></li>
+      <li><a href="#decisions">Architecture Decisions</a></li>
+      <li><a href="#flow">Data Flow</a></li>
+      <li><a href="#ownership">Ownership Model</a></li>
+      <li><a href="#lifecycle">What Persists, What Resets</a></li>
+      <li><a href="#anti-patterns">Anti-Patterns</a></li>
+      <li><a href="#resilience">Handoff Resilience</a></li>
+      <li><a href="#scale">When to Outgrow This</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================ 01. CORE MODEL ============================================ -->
+  <section id="core-model" class="report-section">
+    <span class="section-label">01. The Core Model</span>
+    <h2>Three Ideas That Shape Everything</h2>
+    <p class="section-context">The entire architecture follows from three structural decisions. Everything else&mdash;tables, scripts, interfaces, outputs&mdash;is downstream of these.</p>
+
+    <div class="decision-grid">
+      <div class="decision-card">
+        <span class="decision-number">Idea 1</span>
+        <h3>Events are the center</h3>
+        <p class="detail">An event (screening, action fair, panel) is the most specific unit of work. It links a venue, a film, contacts, a date, and a time. Everything else connects through events.</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Idea 2</span>
+        <h3>One person, many roles</h3>
+        <p class="detail">A single contact can be a host, a panelist, and a donor across different events. One record per person, with a role layer&mdash;not separate tables per function.</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Idea 3</span>
+        <h3>Canonical sources feed assembled outputs</h3>
+        <p class="detail">Master data lives in a small number of canonical tables. Stakeholder-facing outputs (host pages, screening packets, email campaigns) are assembled from those sources. Data flows one direction: downstream.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ 02. CONTACTS ============================================ -->
+  <section id="contacts" class="report-section">
+    <span class="section-label">02. Contacts + Roles</span>
+    <h2>The Data Model Decision That Matters Most</h2>
+    <p class="section-context">The instinct is to create separate tables for filmmakers, volunteers, sponsors, etc. That breaks immediately because one person can be a filmmaker <em>and</em> a panelist <em>and</em> a donor. The same organization can be a venue <em>and</em> a host <em>and</em> a sponsor.</p>
+
+    <h3>The Pattern: Junction Table</h3>
+    <div class="hierarchy">
+      <pre><span class="entity">Contacts</span>        <span class="annotation">One record per person or org &mdash; name, email, phone, org affiliation</span>
+
+<span class="entity">Roles</span>           <span class="annotation">Filmmaker, Volunteer, Sponsor, Venue Contact, Panelist, AV Tech, etc.</span>
+
+<span class="entity">Contact_Roles</span>   <span class="annotation">The junction &mdash; links a contact to one or many roles</span>
+  <span class="annotation">  + Active Year (which season this role applies to)</span>
+  <span class="annotation">  + Role Status (active, inactive, pending)</span>
+  <span class="annotation">  + Notes</span></pre>
+    </div>
+
+    <p class="section-context" style="margin-top: var(--space-lg);">This means a person who hosts one year and films the next gets <strong>one record</strong> with two role links, not two duplicate entries slowly drifting out of sync.</p>
+
+    <h3>Venues Are Entities, Not Contacts</h3>
+    <p class="section-context">A venue has properties contacts don't&mdash;address, capacity, AV tier, screening history, accessibility data. The <em>people at venues</em> are contacts with a "venue contact" role linked to a venue record. This is the distinction between an entity and its relationships.</p>
+
+    <div class="section-synthesis">
+      <strong>What this gives you:</strong> One source of truth per human/org (update email once, updated everywhere). Full history ("show me everyone who's been both a volunteer and a filmmaker"). Flexible querying ("all contacts touched by this event"). New roles added without restructuring anything.
+    </div>
+
+    <div class="section-synthesis" style="border-top: none; padding-top: 0;">
+      <strong>The tension:</strong> Spreadsheet-style databases (Airtable, NocoDB, Baserow) can model junction tables but start groaning&mdash;linked record lookups get slow, rollups nest awkwardly, and the pattern feels heavy in a grid UI. A proper relational database (PostgreSQL, SQLite) handles it natively. For OEFF's current scale (~70 contacts, ~30 events), either approach works. The data model is the same regardless of tool.
+    </div>
+  </section>
+
+  <!-- ============================================ 03. ARCHITECTURE RINGS ============================================ -->
+  <section id="hierarchy" class="report-section">
+    <span class="section-label">03. Architecture Rings</span>
+    <h2>Not a Tree &mdash; A Hub with Rings</h2>
+    <p class="section-context">The data isn't hierarchical. Contacts link to Events, Venues, Films, Assets, and Deliverables. Assets link to Films AND Events AND Venues. This is a directed graph with Events at the center.</p>
+
+    <div class="ring-diagram" aria-label="Concentric ring diagram showing Events at center, master tables in inner ring, tracking in middle ring, stakeholder outputs in outer ring, and resilience infrastructure around the perimeter.">
+      <svg viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="360" cy="360" r="350" fill="#f0ede8" stroke="#c8d9ce" class="ring-band" />
+        <circle cx="360" cy="360" r="260" fill="#faf9f7" stroke="#c8d9ce" class="ring-band" />
+        <circle cx="360" cy="360" r="160" fill="#f7f5f2" stroke="#8aaa98" class="ring-band" />
+        <circle cx="360" cy="360" r="70"  fill="#c8d9ce" stroke="#5c7c6b" class="ring-band" />
+
+        <text x="360" y="28"  text-anchor="middle" class="ring-label-text" fill="#8a8580">Resilience</text>
+        <text x="360" y="118" text-anchor="middle" class="ring-label-text" fill="#8a8580">Stakeholder Outputs</text>
+        <text x="360" y="214" text-anchor="middle" class="ring-label-text" fill="#5c7c6b">Tracking + Operations</text>
+        <text x="360" y="320" text-anchor="middle" class="ring-label-text" fill="#1a2e22">Core</text>
+
+        <!-- Core: Events hub -->
+        <text x="360" y="370" text-anchor="middle" class="entity-tag" font-weight="700" fill="#1a2e22">Events</text>
+
+        <!-- Master tables -->
+        <rect x="296" y="225" width="128" height="28" fill="#fff" stroke="#5c7c6b" class="entity-box" />
+        <text x="360" y="244" text-anchor="middle" class="entity-tag" fill="#1a2e22">Contacts + Roles</text>
+        <rect x="468" y="346" width="80" height="28" fill="#fff" stroke="#5c7c6b" class="entity-box" />
+        <text x="508" y="365" text-anchor="middle" class="entity-tag" fill="#1a2e22">Venues</text>
+        <rect x="425" y="455" width="68" height="28" fill="#fff" stroke="#5c7c6b" class="entity-box" />
+        <text x="459" y="474" text-anchor="middle" class="entity-tag" fill="#1a2e22">Films</text>
+        <rect x="218" y="455" width="96" height="28" fill="#fff" stroke="#5c7c6b" class="entity-box" />
+        <text x="266" y="474" text-anchor="middle" class="entity-tag" fill="#1a2e22">Sponsors</text>
+        <rect x="168" y="346" width="98" height="28" fill="#fff" stroke="#5c7c6b" class="entity-box" />
+        <text x="217" y="365" text-anchor="middle" class="entity-tag" fill="#1a2e22">Members</text>
+
+        <!-- Tracking + Operations -->
+        <rect x="308" y="126" width="104" height="28" fill="#fff" stroke="#4b7c8c" class="entity-box" />
+        <text x="360" y="145" text-anchor="middle" class="entity-tag" fill="#3a5c4d">Assets</text>
+        <rect x="530" y="236" width="122" height="28" fill="#fff" stroke="#4b7c8c" class="entity-box" />
+        <text x="591" y="255" text-anchor="middle" class="entity-tag" fill="#3a5c4d">Deliverables</text>
+        <rect x="544" y="430" width="120" height="28" fill="#fff" stroke="#4b7c8c" class="entity-box" />
+        <text x="604" y="449" text-anchor="middle" class="entity-tag" fill="#3a5c4d">Delivery Log</text>
+        <rect x="314" y="546" width="106" height="28" fill="#fff" stroke="#4b7c8c" class="entity-box" />
+        <text x="367" y="565" text-anchor="middle" class="entity-tag" fill="#3a5c4d">Comms Log</text>
+        <rect x="56" y="430" width="124" height="28" fill="#fff" stroke="#4b7c8c" class="entity-box" />
+        <text x="118" y="449" text-anchor="middle" class="entity-tag" fill="#3a5c4d">Asset Versions</text>
+        <rect x="460" y="156" width="130" height="28" fill="#fff" stroke="#4b7c8c" class="entity-box" />
+        <text x="525" y="175" text-anchor="middle" class="entity-tag" fill="#3a5c4d">Host Helper</text>
+        <rect x="120" y="156" width="140" height="28" fill="#fff" stroke="#4b7c8c" class="entity-box" />
+        <text x="190" y="175" text-anchor="middle" class="entity-tag" fill="#3a5c4d">Confirmations</text>
+
+        <!-- Stakeholder Outputs -->
+        <rect x="100" y="70" width="154" height="28" fill="#fff" stroke="#8a8580" class="entity-box" />
+        <text x="177" y="89" text-anchor="middle" class="entity-tag" fill="#5c5550">Host Helper Pages</text>
+        <rect x="470" y="70" width="156" height="28" fill="#fff" stroke="#8a8580" class="entity-box" />
+        <text x="548" y="89" text-anchor="middle" class="entity-tag" fill="#5c5550">Screening Packets</text>
+        <rect x="80" y="622" width="142" height="28" fill="#fff" stroke="#8a8580" class="entity-box" />
+        <text x="151" y="641" text-anchor="middle" class="entity-tag" fill="#5c5550">Filmmaker Kits</text>
+        <rect x="484" y="622" width="156" height="28" fill="#fff" stroke="#8a8580" class="entity-box" />
+        <text x="562" y="641" text-anchor="middle" class="entity-tag" fill="#5c5550">Email Campaigns</text>
+
+        <!-- Resilience -->
+        <rect x="18" y="340" width="124" height="28" fill="#f0ede8" stroke="#8a8580" class="entity-box" />
+        <text x="80" y="359" text-anchor="middle" class="entity-tag" fill="#8a8580">Routing Rules</text>
+        <rect x="568" y="340" width="140" height="28" fill="#f0ede8" stroke="#8a8580" class="entity-box" />
+        <text x="638" y="359" text-anchor="middle" class="entity-tag" fill="#8a8580">Integration Registry</text>
+      </svg>
+    </div>
+
+    <div class="hierarchy">
+      <pre><span class="layer-label">CORE</span> <span class="annotation">(persistent, year-over-year)</span>
+  <span class="entity">Events</span>             <span class="annotation">The relational hub &mdash; links venue + film + contacts + date/time</span>
+  <span class="entity">Contacts</span>           <span class="annotation">All people &mdash; one record per person</span>
+  <span class="entity">Contact_Roles</span>      <span class="annotation">Junction table &mdash; links contacts to roles with per-season metadata</span>
+  <span class="entity">Venues</span>             <span class="annotation">Physical spaces &mdash; capacity, ADA, AV, address</span>
+  <span class="entity">Films</span>              <span class="annotation">Titles, runtimes, licensing terms</span>
+  <span class="entity">Sponsors</span>           <span class="annotation">Organizations, tiers, commitments</span>
+
+<span class="layer-label">TRACKING + OPERATIONS</span> <span class="annotation">(season-specific, cross-linked to core)</span>
+  <span class="entity">Host Helper</span>        <span class="annotation">Flat per-event rows for host-facing interface pages</span>
+  <span class="entity">Assets</span>             <span class="annotation">Master index of all inbound/outbound files</span>
+  <span class="entity">Asset Versions</span>     <span class="annotation">QC history per file version</span>
+  <span class="entity">Deliverables</span>       <span class="annotation">Packaged outputs for stakeholders</span>
+  <span class="entity">Delivery Log</span>       <span class="annotation">Who got what, when</span>
+  <span class="entity">Comms Log</span>          <span class="annotation">Outreach tracking</span>
+  <span class="entity">Confirmations</span>      <span class="annotation">Host response tracking</span>
+
+<span class="layer-label">STAKEHOLDER OUTPUTS</span> <span class="annotation">(assembled from canonical data)</span>
+  <span class="entity">Host Helper Pages</span>  <span class="annotation">Per-event views for host venues</span>
+  <span class="entity">Screening Packets</span>  <span class="annotation">Bundled deliverables for day-of operations</span>
+  <span class="entity">Filmmaker Kits</span>     <span class="annotation">License docs, screening reports, press assets</span>
+  <span class="entity">Email Campaigns</span>    <span class="annotation">Merge data for outreach</span>
+
+<span class="layer-label">RESILIENCE</span> <span class="annotation">(makes the system survivable)</span>
+  <span class="entity">Routing Rules</span>      <span class="annotation">"Where does this go?" encoded in data, not in someone's head</span>
+  <span class="entity">Integration Registry</span> <span class="annotation">Every script/sync: owner, schedule, failure mode</span></pre>
+    </div>
+
+    <div class="section-synthesis">
+      <strong>Why rings, not a tree:</strong> A tree implies single-parent containment. OEFF's data has many-to-many cross-links. Contacts connect to Events, Venues, Films, Assets, and Deliverables simultaneously. The ring model shows proximity to the core (Events) without forcing a false hierarchy. Data flows outward: core feeds tracking, tracking feeds stakeholder outputs. Nothing flows back upstream.
+    </div>
+  </section>
+
+  <!-- ============================================ 04. v1 vs v2 ============================================ -->
+  <section id="v1-v2" class="report-section">
+    <span class="section-label">04. Architecture Comparison</span>
+    <h2>v1 (Venue-Centric) vs v2 (Event-Centric)</h2>
+    <p class="section-context">The venue-centric model broke when venues hosted multiple events&mdash;concatenated values, uneditable computed fields, and derived data that obscured what was actually stored.</p>
+    <div class="compare-grid">
+      <div class="compare-col old">
+        <h3>v1 &mdash; Venue-Centric</h3>
+        <ul class="compare-list">
+          <li><strong>Organizing principle:</strong> Venues</li>
+          <li><strong>Multi-event venues:</strong> Concatenated with commas</li>
+          <li><strong>Data chain:</strong> 3-layer derived fields (link &rarr; lookup &rarr; computed)</li>
+          <li><strong>Editability:</strong> Can't edit derived fields</li>
+          <li><strong>Contacts:</strong> Separate tables per contact type</li>
+          <li><strong>Debugging:</strong> Trace the derivation chain to find the source</li>
+        </ul>
+      </div>
+      <div class="compare-col new">
+        <h3>v2 &mdash; Event-Centric</h3>
+        <ul class="compare-list">
+          <li><strong>Organizing principle:</strong> Events</li>
+          <li><strong>Multi-event venues:</strong> One row per event, no ambiguity</li>
+          <li><strong>Data chain:</strong> Flat text fields, script-assembled</li>
+          <li><strong>Editability:</strong> Team edits flat fields directly</li>
+          <li><strong>Contacts:</strong> Unified with role junction table</li>
+          <li><strong>Debugging:</strong> What you see is what's stored</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-synthesis">
+      <strong>Core tradeoff:</strong> v2 duplicates data (every event row has its own copy of the venue address) in exchange for editability and clarity. The assembly script can re-flatten from canonical sources at any time without breaking manual edits in protected fields.
+    </div>
+  </section>
+
+  <!-- ============================================ 05. DECISIONS ============================================ -->
+  <section id="decisions" class="report-section">
+    <span class="section-label">05. Architecture Decisions</span>
+    <h2>8 Foundational Decisions</h2>
+    <p class="section-context">These reshape how every downstream tool relates to the data.</p>
+    <div class="decision-grid">
+      <div class="decision-card">
+        <span class="decision-number">Decision 1</span>
+        <h3>Events as relational key</h3>
+        <p class="detail">Events are the most specific data level. They link to master tables (venues, films, contacts) rather than the reverse.</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Decision 2</span>
+        <h3>Contact + Roles, not Contact Types</h3>
+        <p class="detail">One record per person/org, linked to roles through a junction table. A person holding multiple roles (host + panelist + donor) gets one record with multiple role links&mdash;not duplicate entries drifting apart.</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Decision 3</span>
+        <h3>Venues are entities, not contacts</h3>
+        <p class="detail">Venues have properties contacts don't: address, capacity, AV tier, accessibility. People at venues are contacts with a "venue contact" role linked to a venue record.</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Decision 4</span>
+        <h3>Partnership categorization</h3>
+        <p class="detail">Collaborators (mission-oriented) vs. transactional contacts (business relationship where money changes hands for a deliverable).</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Decision 5</span>
+        <h3>Members vs Partners</h3>
+        <p class="detail">14k email list = members (who we work for). Active stakeholders = partners (who we work with). Different interaction levels, different data needs.</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Decision 6</span>
+        <h3>Per-event interface pages</h3>
+        <p class="detail">Replace per-venue grid views with event-centric pages. One page per event gives direct edit access without exposing the full database. Implementation depends on tooling (Airtable Interface Designer, custom views, or a lightweight web layer).</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Decision 7</span>
+        <h3>Dual venue classification</h3>
+        <p class="detail">Flagship/Community (team presence level) alongside T1&ndash;T4 (technical needs). Two separate systems, not competing.</p>
+      </div>
+      <div class="decision-card">
+        <span class="decision-number">Decision 8</span>
+        <h3>"Events" umbrella term</h3>
+        <p class="detail">"Screenings" becomes a subtype of "events." Events covers action fairs, concerts, panels. Future-proofs the data model.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ 06. DATA FLOW ============================================ -->
+  <section id="flow" class="report-section">
+    <span class="section-label">06. Data Flow</span>
+    <h2>How Data Moves Through the System</h2>
+    <p class="section-context">Three types of data source feed the system. Validated operational data (from hands-on coordinators). Team planning data (from shared planning documents). Relational structure (from the database). Scripts bridge all three.</p>
+    <div class="flow-container">
+      <div class="flow-row">
+        <span class="flow-node canonical">Validated Ops Data</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-arrow-label">contacts, venues, AV, films</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-node canonical">Contacts + Venues + Films</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-node canonical">Team Planning</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-arrow-label">scheduling, film assignments</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-node canonical">Events</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-node canonical">Core Tables</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-arrow-label">assembly script</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-node assembled">Host Helper (flat rows)</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-node assembled">Host Helper</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-arrow-label">interface layer</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-node output">Host-facing pages</span>
+      </div>
+      <div class="flow-row">
+        <span class="flow-node assembled">Host Helper</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-arrow-label">merge export</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-node output">Email campaigns</span>
+      </div>
+    </div>
+    <div class="section-synthesis">
+      <strong>Key principle:</strong> Data flows downhill. Core tables feed events. Events feed the assembly layer. Assembly produces flat rows for stakeholder-facing outputs. No data flows upstream from outputs to core tables. Edits to canonical data trigger re-assembly; edits to protected output fields are preserved across re-runs.
+    </div>
+  </section>
+
+  <!-- ============================================ 07. OWNERSHIP ============================================ -->
+  <section id="ownership" class="report-section">
+    <span class="section-label">07. Ownership Model</span>
+    <h2>Script-Owned vs Team-Editable</h2>
+    <p class="section-context">The assembly layer has two kinds of fields. Script-owned fields are overwritten from canonical sources on every run. Team-editable fields are preserved&mdash;the script reads existing values first and only writes if blank.</p>
+    <div class="compare-grid">
+      <div class="compare-col old" style="border-left-color: var(--color-primary);">
+        <h3>Script-Owned (~21 fields)</h3>
+        <ul class="compare-list">
+          <li>Event identifiers and metadata</li>
+          <li>Film title, runtime, filmmaker contact</li>
+          <li>Screening date, time, doors</li>
+          <li>Venue name, address, capacity</li>
+          <li>Contact name, email, phone, role</li>
+          <li>Ticket URL, price, OEFF rep</li>
+          <li>Resource links (webinar, guide)</li>
+        </ul>
+      </div>
+      <div class="compare-col new" style="border-left-color: var(--signal-info);">
+        <h3>Team-Editable (~7 fields)</h3>
+        <ul class="compare-list">
+          <li>Parking instructions</li>
+          <li>Transit notes</li>
+          <li>WiFi details</li>
+          <li>AV notes</li>
+          <li>Volunteer needs</li>
+          <li>Screening packet URL</li>
+          <li>General notes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-synthesis">
+      <strong>Why this matters:</strong> This ownership contract is what makes the system safe for collaborative editing. The team can work in the output layer without risk of being overwritten, and the technical coordinator can re-assemble from canonical data without risk of losing operational notes.
+    </div>
+  </section>
+
+  <!-- ============================================ 08. LIFECYCLE ============================================ -->
+  <section id="lifecycle" class="report-section">
+    <span class="section-label">08. What Persists, What Resets</span>
+    <h2>Year-Over-Year vs Seasonal</h2>
+    <p class="section-context">Some data carries forward between festival seasons. Other data is rebuilt fresh each year.</p>
+
+    <table class="team-table">
+      <thead><tr><th>Data</th><th>Lifespan</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Contacts</strong></td><td><span class="badge-platform badge-yoy">Year-over-year</span></td><td>People persist. Their roles may change between seasons.</td></tr>
+        <tr><td><strong>Venues</strong></td><td><span class="badge-platform badge-yoy">Year-over-year</span></td><td>Physical spaces don't change. AV specs, accessibility data persist. Contact person may rotate.</td></tr>
+        <tr><td><strong>Films</strong></td><td><span class="badge-platform badge-yoy">Year-over-year</span></td><td>A film may screen again in a future year. Licensing terms are season-specific.</td></tr>
+        <tr><td><strong>Sponsors</strong></td><td><span class="badge-platform badge-yoy">Year-over-year</span></td><td>Org records persist. Tier and commitment are season-specific.</td></tr>
+        <tr><td><strong>Scripts + tooling</strong></td><td><span class="badge-platform badge-yoy">Year-over-year</span></td><td>Updated between seasons. Versioned.</td></tr>
+        <tr><td><strong>Architecture decisions</strong></td><td><span class="badge-platform badge-yoy">Year-over-year</span></td><td>Rationale persists even if implementation changes.</td></tr>
+        <tr><td><strong>Events</strong></td><td><span class="badge-platform badge-seasonal">Seasonal</span></td><td>Created fresh each year. Link to persistent venues + films + contacts.</td></tr>
+        <tr><td><strong>Host Helper</strong></td><td><span class="badge-platform badge-seasonal">Seasonal</span></td><td>Rebuilt by script each season.</td></tr>
+        <tr><td><strong>Assets + Deliverables</strong></td><td><span class="badge-platform badge-seasonal">Seasonal</span></td><td>Screening copies, packets, kits are season-specific.</td></tr>
+        <tr><td><strong>Comms campaigns</strong></td><td><span class="badge-platform badge-seasonal">Seasonal</span></td><td>New campaigns each year. Templates may carry over.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-synthesis">
+      <strong>Design principle:</strong> Contact_Roles handles the year-over-year/seasonal boundary cleanly. The contact record persists. The role link carries an "active year" field. When a new season starts, you can see historical roles without them polluting current-year views.
+    </div>
+  </section>
+
+  <!-- ============================================ 09. ANTI-PATTERNS ============================================ -->
+  <section id="anti-patterns" class="report-section">
+    <span class="section-label">09. Anti-Patterns</span>
+    <h2>5 Structural Mistakes to Avoid</h2>
+    <p class="section-context">Failure modes from festival and nonprofit data architectures. The most common ones, not the exhaustive list.</p>
+
+    <div class="anti-pattern">
+      <h3>1. Separate tables per contact type</h3>
+      <p class="mitigation"><strong>What happens:</strong> Host Contacts, Film Contacts, Panelists, Sponsors all separate. One person appears in three tables. Email gets updated in one, not the others. <strong>Fix:</strong> Contacts + Roles junction pattern.</p>
+    </div>
+    <div class="anti-pattern">
+      <h3>2. Treating assembled outputs as canonical</h3>
+      <p class="mitigation"><strong>What happens:</strong> Someone edits the host-facing page and assumes it flows back to the master data. It doesn't. <strong>Fix:</strong> Clear canonical/assembled distinction. Protected fields are labeled. Everything else is overwritten on re-assembly.</p>
+    </div>
+    <div class="anti-pattern">
+      <h3>3. Routing via memory only</h3>
+      <p class="mitigation"><strong>What happens:</strong> "Ask the technical coordinator" is the routing table. When they leave, routing knowledge leaves too. <strong>Fix:</strong> Routing Rules table that encodes "where does this go?" in data.</p>
+    </div>
+    <div class="anti-pattern">
+      <h3>4. Silent bidirectional edits</h3>
+      <p class="mitigation"><strong>What happens:</strong> Two systems editing the same field without ownership rules. Sync overwrites a human edit. <strong>Fix:</strong> Explicit script-owned vs team-editable split.</p>
+    </div>
+    <div class="anti-pattern">
+      <h3>5. Over-normalizing too early</h3>
+      <p class="mitigation"><strong>What happens:</strong> Many tiny tables with sparse usage. Junction tables for things that are actually 1:1. <strong>Fix:</strong> Add tables only for real many-to-many relationships or independent lifecycles. Every new table must answer: "what lifecycle can't a field represent?"</p>
+    </div>
+  </section>
+
+  <!-- ============================================ 10. RESILIENCE ============================================ -->
+  <section id="resilience" class="report-section">
+    <span class="section-label">10. Handoff Resilience</span>
+    <h2>What Survives Turnover</h2>
+    <p class="section-context">OEFF's main risk is continuity, not database scale. The architecture should be self-documenting enough that a new contractor can operate it within a day.</p>
+
+    <h3>Role-Based Risk Map</h3>
+    <table class="team-table">
+      <thead><tr><th>Role</th><th>Creates / Owns</th><th>Handoff Risk If Role Vacated</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Executive Director</strong></td><td>Greenlights, strategic decisions, budget</td><td>Low &mdash; decisions are documented; institutional memory is the risk</td></tr>
+        <tr><td><strong>Technical Coordinator</strong></td><td>Scripts, sync pipelines, database schema, deployment</td><td>High &mdash; personal infrastructure (API keys, deployment accounts, cron jobs)</td></tr>
+        <tr><td><strong>Host Comms Coordinator</strong></td><td>Operational data, comms campaigns, host relationships</td><td>Medium &mdash; flat tables reduce debugging burden; process knowledge is the risk</td></tr>
+        <tr><td><strong>Digital Communications</strong></td><td>Ticketing, newsletter, social media</td><td>Low &mdash; centralized platforms with org accounts</td></tr>
+        <tr><td><strong>Creative Assets</strong></td><td>Video production, slide decks, experiential flow</td><td>Low &mdash; assets live in shared Drive</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-synthesis">
+      <strong>The pattern:</strong> Centralized platforms (database, shared drive, ticketing) survive role changes. Personal infrastructure (scripts, deployment, API tokens) is the fragile layer. The Routing Rules and Integration Registry tables are designed to make personal infrastructure legible&mdash;not to centralize it overnight, but to document what exists so a successor can find it.
+    </div>
+  </section>
+
+  <!-- ============================================ 11. SCALE ============================================ -->
+  <section id="scale" class="report-section">
+    <span class="section-label">11. When to Outgrow This</span>
+    <h2>Scale Transitions</h2>
+    <p class="section-context">At OEFF's current size (~30 events, ~16 films, small seasonal team), a spreadsheet-friendly database + scripts is the right core. The question is: what triggers a move to something bigger?</p>
+
+    <table class="team-table">
+      <thead><tr><th>Trigger</th><th>What Changes</th></tr></thead>
+      <tbody>
+        <tr><td>Submission volume outgrows manual intake mapping (&gt;100/year)</td><td>Add a formal submissions platform for inbound; keep the database for ops</td></tr>
+        <tr><td>Virtual/hybrid rights windows need integrated delivery</td><td>Add a streaming/delivery platform alongside the database</td></tr>
+        <tr><td>Team grows beyond ~15 with department silos</td><td>Consider a purpose-built festival management platform</td></tr>
+        <tr><td>Grid-style database can't handle junction table complexity</td><td>Move to a relational database (PostgreSQL, SQLite) with a lightweight UI layer</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-synthesis">
+      <strong>Key insight:</strong> Workforce complexity triggers the tool transition earlier than data size in contractor-heavy teams. The Contact + Roles junction pattern is the right data model regardless of what tool implements it&mdash;it works in a grid-style database today and migrates cleanly to a relational database later. Choose the tool based on who needs to edit the data day-to-day, not on the model itself.
+    </div>
+  </section>
+
+</body>
+</html>
